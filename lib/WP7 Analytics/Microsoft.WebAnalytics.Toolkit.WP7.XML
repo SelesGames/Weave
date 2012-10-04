@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WebAnalytics.Toolkit.WP7</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.WebAnalytics.Toolkit.HandleTimePicker">
+            <summary>
+            Track a Windows Phone 7 TimePicker ValueChanged event
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>ValueChanged</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.ActionValue</term>
+            <description>the new time</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Toolkit.HandleTimePicker.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track the TimePicker ValueChanged event
+            </summary>
+            <param name="associatedObject">the associated object</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Toolkit.HandleTimePicker.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+        <member name="T:Microsoft.WebAnalytics.Toolkit.HandleDatePicker">
+            <summary>
+            Track a Windows Phone 7 DatePicker ValueChanged event
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>ValueChanged</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.ActionValue</term>
+            <description>the new date</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Toolkit.HandleDatePicker.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track the DatePicker ValueChanged event
+            </summary>
+            <param name="associatedObject">the associated object</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Toolkit.HandleDatePicker.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+    </members>
+</doc>

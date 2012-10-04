@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAnalysisDotNet.WebAnalytics.Design.Editors</name>
+    </assembly>
+    <members>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Editors.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Editors.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Editors.Properties.Resources.WebAnalysisDotNetAnalytics">
+            <summary>
+              Looks up a localized string similar to WebAnalysis.net AppStats.
+            </summary>
+        </member>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsContextMenuProvider">
+            <summary>
+            WebAnalysisDotNet Analytics Context Menu Provider
+            </summary>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsContextMenuProvider.#ctor">
+            <summary>
+            Initializes a new instance of the WebAnalysisDotNetAnalyticsContextMenuProvider class.
+            </summary>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsContextMenuProvider.OnShowHeatMap(System.Object,Microsoft.Windows.Design.Interaction.MenuActionEventArgs)">
+            <summary>
+            Show the heat map
+            </summary>
+            <param name="sender">the menu item</param>
+            <param name="e">the menu action event arguments</param>
+        </member>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryLayout">
+            <summary>
+            Interaction logic for WebAnalysisDotNetAnalyticsCategoryLayout.xaml
+            </summary>
+            <summary>
+            WebAnalysisDotNetAnalyticsCategoryLayout
+            </summary>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryLayout.#ctor">
+            <summary>
+            Initializes a new instance of the WebAnalysisDotNetAnalyticsCategoryLayout class
+            </summary>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryLayout.OnShowResults(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Show or hide the analytics results
+            </summary>
+            <param name="sender">the checkbox</param>
+            <param name="e">the routed event arguments</param>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryLayout.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryEditor">
+            <summary>
+            WebAnalysisDotNet Analytics category editor
+            </summary>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryEditor.ConsumesProperty(Microsoft.Windows.Design.PropertyEditing.PropertyEntry)">
+            <summary>
+            This consumes all "Analytics" properties
+            </summary>
+            <param name="propertyEntry">the property entry</param>
+            <returns>always true</returns>
+        </member>
+        <member name="M:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryEditor.GetImage(System.Windows.Size)">
+            <summary>
+            Gets an image
+            </summary>
+            <param name="desiredSize">desired size</param>
+            <returns>always returns null</returns>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryEditor.EditorTemplate">
+            <summary>
+            Gets a data template using the <see cref="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryLayout"/> class
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Editors.WebAnalysisDotNetAnalyticsCategoryEditor.TargetCategory">
+            <summary>
+            Gets the target category for "WebAnalysisDotNet Analytics"
+            </summary>
+        </member>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Editors.HomeButton">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAnalysisDotNet.WebAnalytics.WP7.Design</name>
+    </assembly>
+    <members>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.MetadataStore">
+            <summary>
+            Design-time metadata store
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.MetadataStore.AttributeTable">
+            <summary>
+            Gets the attribute table for metadata about the WebAnalysisDotNet.WebAnalytics assembly
+            </summary>
+        </member>
+        <member name="T:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.Analytics">
+            <summary>
+              Looks up a localized string similar to Analytics.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.CategoryDescription">
+            <summary>
+              Looks up a localized string similar to The category for the group of objects you want to track..
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.ProfileId">
+            <summary>
+              Looks up a localized string similar to Profile Id.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.ProfileIdDescription">
+            <summary>
+              Looks up a localized string similar to The Profile Id for the Google Analytics account..
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.TrackEventsUsingWADN">
+            <summary>
+              Looks up a localized string similar to Track events using WebAnalysis.net MSAF Service.
+            </summary>
+        </member>
+        <member name="P:WebAnalysisDotNet.WebAnalytics.Design.Properties.Resources.WebAnalysisDotNetAnalytics">
+            <summary>
+              Looks up a localized string similar to WebAnalysis.net AppStats.
+            </summary>
+        </member>
+    </members>
+</doc>

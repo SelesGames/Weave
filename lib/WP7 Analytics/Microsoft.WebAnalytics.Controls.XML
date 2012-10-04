@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WebAnalytics.Controls</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.WebAnalytics.Controls.HandlePanorama">
+            <summary>
+            Track a Windows Phone 7 Panorama SelectionChanged event
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>SelectionChanged</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.ActionValue</term>
+            <description>Panorama Name or Panorama.Header</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Controls.HandlePanorama.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track the Panorama.SelectionChanged event
+            </summary>
+            <param name="associatedObject">the associated object</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Controls.HandlePanorama.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+        <member name="T:Microsoft.WebAnalytics.Controls.HandlePivot">
+            <summary>
+            Track a Windows Phone 7 Panorama SelectionChanged event
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>SelectionChanged</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.ActionValue</term>
+            <description>PivotItem.Name or PivotItem.Header</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Controls.HandlePivot.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track the Pivot.SelectionChanged events
+            </summary>
+            <param name="associatedObject">the associated object</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Controls.HandlePivot.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+    </members>
+</doc>

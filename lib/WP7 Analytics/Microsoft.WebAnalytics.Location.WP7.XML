@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WebAnalytics.Location.WP7</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.WebAnalytics.Location.TrackLocation">
+            <summary>
+            Track Geo coordinate "Locations" events when triggered
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>Location</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.ActionValue</term>
+            <description>{Latitude},{Longitude}</description>
+            </item>
+            <item>
+            <term>Required Capabilities</term>
+            <description>ID_CAP_NETWORKING, ID_CAP_LOCATION</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="F:Microsoft.WebAnalytics.Location.TrackLocation.watcher">
+            <summary>
+            the geo coordinate watcher
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.#ctor">
+            <summary>
+            Initializes a new instance of the TrackLocation class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.Dispose">
+            <summary>
+            Dispose the class
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.Invoke(System.Object)">
+            <summary>
+            The trigger was invoked 
+            </summary>
+            <param name="parameter">the event parameter</param>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.OnAttached">
+            <summary>
+            Attach to the geo coordinate watcher
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.OnDetaching">
+            <summary>
+            Detach from the watcher
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Location.TrackLocation.Dispose(System.Boolean)">
+            <summary>
+            Dispose of the watcher
+            </summary>
+            <param name="disposing">true if disposing</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Location.TrackLocation.Accuracy">
+            <summary>
+            Gets or sets the position accuracy (default is Default)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Location.TrackLocation.SuppressPermissionPrompt">
+            <summary>
+            Gets or sets a value indicating whether to suppress the permission prompt
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Location.TrackLocation.Log">
+            <summary>
+            Gets or sets the Log Action 
+            </summary>
+        </member>
+    </members>
+</doc>
