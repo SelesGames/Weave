@@ -1,0 +1,29 @@
+﻿using System;
+using Ninject;
+using SelesGames;
+
+namespace Weave.NinjectKernel
+{
+    public class NinjectToServiceResolverAdapter : IServiceResolver
+    {
+        IKernel kernel;
+
+        public NinjectToServiceResolverAdapter(IKernel kernel)
+        {
+            if (kernel == null)
+                throw new ArgumentNullException("kernel can't be null");
+
+            this.kernel = kernel;
+        }
+
+        public T Get<T>()
+        {
+            return kernel.Get<T>();
+        }
+
+        public T Get<T>(string key)
+        {
+            return kernel.Get<T>(key);
+        }
+    }
+}
