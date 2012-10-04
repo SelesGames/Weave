@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>weave</RootNamespace>
+    <AssemblyName>weave.Common.Reactive</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncCtpLibrary_Phone">
+      <HintPath>..\..\lib\AsyncCtpLibrary_Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WriteableBitmapExWinPhone">
+      <HintPath>..\..\lib\WriteableBitmapExWinPhone.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Reactive\Schedulers\BackgroundTimer.cs" />
+    <Compile Include="Extension Methods\StreamExtensions.cs" />
+    <Compile Include="Extension Methods\TaskExtensions.cs" />
+    <Compile Include="DebugDisposable.cs" />
+    <Compile Include="EventPattern.cs" />
+    <Compile Include="Extension Methods\BitmapImageExtensions.cs" />
+    <Compile Include="Extension Methods\ControlsExtensions.cs" />
+    <Compile Include="Extension Methods\ICollectionExtensions.cs" />
+    <Compile Include="Extension Methods\IEnumerableExtensions.cs" />
+    <Compile Include="Extension Methods\ISchedulerExtensions.cs" />
+    <Compile Include="Extension Methods\IsolatedStorageSettingsExtensions.cs" />
+    <Compile Include="Extension Methods\LinqToXmlExtensions.cs" />
+    <Compile Include="Extension Methods\MouseEventArgExtensions.cs" />
+    <Compile Include="Extension Methods\ObservableExtensions.cs" />
+    <Compile Include="Extension Methods\ReactiveExceptionExtensions.cs" />
+    <Compile Include="Extension Methods\ReactiveExtensions.cs" />
+    <Compile Include="Extension Methods\ReactiveExtensions.Timers.cs" />
+    <Compile Include="Extension Methods\StoryboardExtensions.cs" />
+    <Compile Include="Extension Methods\UIElementExtensions.cs" />
+    <Compile Include="Extension Methods\WebRequestExtensionMethods.cs" />
+    <Compile Include="GlobalDispatcher.cs" />
+    <Compile Include="HttpWebRequestQueue.cs" />
+    <Compile Include="ImageCache.cs" />
+    <Compile Include="OSThemeHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reactive\Schedulers\Schedulers.cs" />
+    <Compile Include="Reactive\Schedulers\SingleThreadScheduler.cs" />
+    <Compile Include="Reactive\Schedulers\ViewModelBackgroundScheduler.cs" />
+    <Compile Include="WeavePage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObservableToTaskBridge\ObservableToTaskBridge.csproj">
+      <Project>{3D584FFE-5A2C-4803-A447-7A5451AFDB21}</Project>
+      <Name>ObservableToTaskBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
+      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
+      <Name>weave.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

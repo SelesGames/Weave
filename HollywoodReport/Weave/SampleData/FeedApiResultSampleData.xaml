@@ -1,0 +1,18 @@
+<weave_FeedSearch:FeedApiResult xmlns:weave_FeedSearch="clr-namespace:Weave.FeedSearchService;assembly=Weave.FeedSearchService" responseStatus="Placerat justo">
+	<weave_FeedSearch:FeedApiResult.responseData>
+		<weave_FeedSearch:ResponseData>
+			<weave_FeedSearch:ResponseData.entries>
+				<weave_FeedSearch:Entry contentSnippet="Class aenean mauris" title="Nam maecenas vestibulum" url="Aliquam curae sed"/>
+				<weave_FeedSearch:Entry contentSnippet="Adipiscing integer" title="Praesent accumsan quisque parturient" url="Curabitur donec bibendum phasellus cras"/>
+				<weave_FeedSearch:Entry contentSnippet="Vestibulum vivamus etiam fusce" title="Vestibulum aliquam dis" url="Lorem duis"/>
+				<weave_FeedSearch:Entry contentSnippet="Adipiscing parturient nunc aliquet dictumst" title="Vestibulum blandit est hac" url="Amet consequat convallis dignissim"/>
+				<weave_FeedSearch:Entry contentSnippet="Vestibulum adipiscing commodo eleifend" title="Conubia leo morbi ante" url="Elementum mus cubilia facilisi faucibus"/>
+				<weave_FeedSearch:Entry contentSnippet="Facilisis nec non per arcu" title="Fermentum nulla sed" url="Diam parturient proin sem"/>
+				<weave_FeedSearch:Entry contentSnippet="Sit habitant augue inceptos eget" title="Dapibus vestibulum" url="Nullam elit egestas aptent interdum"/>
+				<weave_FeedSearch:Entry contentSnippet="Enim vestibulum vel nam" title="Sed dis adipiscing" url="Lobortis fringilla est"/>
+				<weave_FeedSearch:Entry contentSnippet="Erat euismod parturient hac leo" title="Mus auctor nascetur habitasse" url="Vestibulum dolor"/>
+				<weave_FeedSearch:Entry contentSnippet="Feugiat gravida fames" title="Nec congue" url="Iaculis lacinia laoreet felis cursus"/>
+			</weave_FeedSearch:ResponseData.entries>
+		</weave_FeedSearch:ResponseData>
+	</weave_FeedSearch:FeedApiResult.responseData>
+</weave_FeedSearch:FeedApiResult>

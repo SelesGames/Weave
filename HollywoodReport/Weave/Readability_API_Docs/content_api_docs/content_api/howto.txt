@@ -1,0 +1,3 @@
+# To recreate the html:
+
+xsltproc json-wadl-to-html.xsl readability-content-api-rest-v1.wadl.xml > readability-content-api-rest-v1.html
