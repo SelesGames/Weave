@@ -1,0 +1,79 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ToastPromptControl">
+    
+
+    <!--Style x:Name="AppBarText" TargetType="ContentControl">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,7,0,0" />
+    </Style-->
+
+    <Style TargetType="local:PopupContainer">
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeSmall}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
+        <!--Setter Property="VerticalAlignment" Value="Top" /-->
+        <Setter Property="Overlay" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PopupContainer">
+                    <ContentControl x:Name="content" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <Style TargetType="local:ToastPrompt">
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeSmall}"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Overlay" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ToastPrompt">
+					<Grid
+						VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                        Background="{TemplateBinding Background}">
+						<StackPanel 
+							VerticalAlignment="Bottom" 
+							Margin="24, 32, 16, 5" 
+							Orientation="{TemplateBinding TextOrientation}">
+                            <StackPanel
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Bottom"
+                                Orientation="Horizontal">
+                                <Image 
+								    Width="{Binding ElementName=ToastName, Path=ActualHeight}" 
+					                Height="{Binding ElementName=ToastName, Path=ActualHeight}" 
+                                    Margin="0,0,16,0"
+								    Visibility="Collapsed"
+								    Name="ToastImage"
+                                    VerticalAlignment="Bottom"
+								    Source="{TemplateBinding ImageSource}" />
+                                <TextBlock 
+                                    Name="ToastName"
+								    Text="{TemplateBinding Title}"
+								    FontWeight="Bold"
+                                    VerticalAlignment="Bottom"
+								    Margin="0"
+                                    Padding="0" />
+                            </StackPanel>
+                            <TextBlock 
+                                Text="{TemplateBinding Message}" 
+								Margin="0"
+                                Padding="0" />
+						</StackPanel>
+					</Grid>                     
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
