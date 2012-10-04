@@ -1,0 +1,143 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"   
+	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleViewModel" 
+	x:Class="SelesGames.WP.PublisherInfoPage.PublisherInfoControl"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	mc:Ignorable="d"
+	d:DesignHeight="800" d:DesignWidth="480">
+	<UserControl.Resources>
+		<SampleData:SampleViewModel x:Key="SampleViewModel" d:IsDataSource="True"/>
+
+		<Style x:Key="AppButtonTemplate" TargetType="Button">
+			<Setter Property="Width" Value="456" />
+			<Setter Property="Height" Value="105" />
+			<Setter Property="CacheMode" Value="BitmapCache" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Margin="12,7,0,0" CacheMode="BitmapCache" Background="{StaticResource TransparentBrush}">
+							<Image Width="90" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" CacheMode="BitmapCache">
+								<Image.Source>
+									<BitmapImage UriSource="{Binding MediumImageUrl}" sg:BitmapImageHelper.IsBackgroundCreationEnabled="True" />
+								</Image.Source>
+							</Image>
+							<TextBlock x:Name="appname" Text="{Binding AppName}" FontFamily="{StaticResource PhoneFontFamilyLight}" FontSize="33.333" TextTrimming="WordEllipsis" Foreground="{TemplateBinding Foreground}" Margin="101,-7,-12,0" VerticalAlignment="Top" CacheMode="BitmapCache"/>
+							<TextBlock x:Name="category" Text="{Binding Category}" FontWeight="Bold" FontSize="18.667" FontFamily="{StaticResource PhoneFontFamilyLight}" Foreground="{TemplateBinding Foreground}" Margin="101,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="182" CacheMode="BitmapCache"/>
+							<TextBlock x:Name="price" Text="{Binding FormattedPrice}" Height="30" Foreground="{TemplateBinding Foreground}" Margin="0,38,11,0" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="22.667" FontFamily="{StaticResource PhoneFontFamilyLight}" CacheMode="BitmapCache"/>
+							<Image x:Name="rating" Source="{Binding RatingStars}" HorizontalAlignment="Right" Margin="0,62,-2,0" VerticalAlignment="Top" Stretch="None" Width="164" Height="31" CacheMode="BitmapCache" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	
+		<DataTemplate x:Key="AppTemplate">
+			<Button Style="{StaticResource AppButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="AppTap" />
+		</DataTemplate>
+
+		<Storyboard x:Name="OnPageLoadSB">
+			<DoubleAnimation Duration="0:0:0.5" From="288" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="list">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase EasingMode="EaseOut" Exponent="4"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation Duration="0:0:0.5" From="0" To="2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="list">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase EasingMode="EaseOut" Exponent="4"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+		
+		<Storyboard x:Name="OnPageExitSB">
+			<DoubleAnimation To="256" Duration="0:0:0.25" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LayoutRoot">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase EasingMode="EaseIn" Exponent="4"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+			<DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
+				<DoubleAnimation.EasingFunction>
+					<ExponentialEase EasingMode="EaseIn" Exponent="4.5"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+		
+		
+		<Style x:Key="ImageWithLabelButtonStyle" TargetType="sg:ImageWithLabelButton">
+			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+			<Setter Property="FontSize" Value="30.667"/>
+			<Setter Property="Padding" Value="{StaticResource PhoneTouchTargetOverhang}"/>
+			<Setter Property="Margin" Value="12, 0"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="sg:ImageWithLabelButton">
+						<Grid Background="Transparent">
+							<Grid Margin="{TemplateBinding Padding}">
+								<sg:Glyph Height="48" Width="48" Source="{TemplateBinding Source}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Left" />
+								<TextBlock x:Name="ContentContainer" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="60,0,0,4" />
+							</Grid>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
+		
+		<DataTemplate x:Key="ListHeaderTemplate">
+			<StackPanel x:Name="buttonHeader" Margin="0,-12,0,24" toolkit:TiltEffect.IsTiltEnabled="True">
+				<sg:ImageWithLabelButton x:Name="changelogButton" Content="changelog blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/appbar.calendar.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
+				<sg:ImageWithLabelButton x:Name="buyButton" Content="buy app blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/purchase.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
+				<sg:ImageWithLabelButton x:Name="rateAppButton" Content="rate/review  blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/heart.png" Tap="OnHeaderButtonTap" />
+				<sg:ImageWithLabelButton x:Name="twitterFollowButton" Content="twitter blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/twitter.png" Tap="OnHeaderButtonTap" />
+				<sg:ImageWithLabelButton x:Name="facebookFollowButton" Content="facebook blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/facebook.png" Tap="OnHeaderButtonTap" />
+				<TextBlock Text="OUR APPS:" Margin="24,24,24,0" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="{StaticResource PhoneSubtleBrush}" />
+			</StackPanel>
+		</DataTemplate>
+		
+		
+		<DataTemplate x:Key="ListFooterTemplate">
+			<!--StackPanel Margin="0,48,0,24" Width="480">
+				<TextBlock Margin="24,0,24,12" TextWrapping="Wrap" VerticalAlignment="Top" Text="CREDITS:" Foreground="{StaticResource TextSubtleBrush}" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+				<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Yanko Andreev, Design" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="28,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource TextBrush}"/>
+				<TextBlock TextWrapping="Wrap" Text="Seles Games, Development" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="28,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource TextBrush}"/>
+				<Grid Margin="0,12,0,0">
+					<Image Source="/Assets/DesignedbyYanko.png" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="24,0,0,0" Height="61"/>
+					<HyperlinkButton Content="info@selesgames.com" Tap="OnEmailLinkTap" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Center" Margin="-14,2,0,0" />
+					<Image Source="/Assets/SelesGames.png" Stretch="None" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,6,24,0"/>
+				</Grid>
+			</StackPanel-->
+		</DataTemplate>
+		
+	</UserControl.Resources>
+		
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleViewModel}}" RenderTransformOrigin="0.5,0.5">
+		<Grid.RenderTransform>
+			<CompositeTransform />
+		</Grid.RenderTransform>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="MORE FROM" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="seles games" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<Grid x:Name="ContentPanel" Grid.Row="1">
+			<toolkit:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" IsFlatList="True" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" ListFooterTemplate="{StaticResource ListFooterTemplate}" Background="{StaticResource TransparentBrush}" >
+				<toolkit:LongListSelector.RenderTransform>
+					<CompositeTransform />
+				</toolkit:LongListSelector.RenderTransform>
+			</toolkit:LongListSelector>
+		</Grid>
+	</Grid>
+</UserControl>
