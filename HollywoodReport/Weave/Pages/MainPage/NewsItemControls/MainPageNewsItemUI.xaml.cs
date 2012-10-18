@@ -8,20 +8,27 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SelesGames;
+using System.Reactive.Linq;
+using System.ComponentModel;
 
 namespace weave
 {
     public partial class MainPageNewsItemUI : BaseNewsItemControl, IDisposable
     {
         static Brush phoneChromeBrush, imageOutlineBrush;
+        static Thickness noImageMargin, imageMargin;
 
         BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
+
+        
 
         static MainPageNewsItemUI()
         {
             phoneChromeBrush = App.Current.Resources["PhoneChromeBrush"] as Brush;
             imageOutlineBrush = new SolidColorBrush(Color.FromArgb(255, 119, 119, 119));
+            noImageMargin = new Thickness(24, 2, 24, 12);
+            imageMargin = new Thickness(24, 2, 156, 12);
         }
 
         public MainPageNewsItemUI()
@@ -50,7 +57,7 @@ namespace weave
 
         void OptimizedInitializeComponent()
         {
-            this.Width = 480d;
+            //this.Width = 480d;
 
             //CacheMode="BitmapCache" x:Name="tiltContentControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" RenderTransformOrigin="0.5,0.5"
             this.tiltContentControl = new TiltContentControl
@@ -71,7 +78,7 @@ namespace weave
             {
                 Margin = new Thickness(24d, 2d, 0d, 12d),
                 VerticalAlignment = VerticalAlignment.Center,
-                HorizontalAlignment = HorizontalAlignment.Left,
+                //HorizontalAlignment = HorizontalAlignment.Left,
                 IsHitTestVisible = false,
                 CacheMode = new BitmapCache(),
             };
@@ -203,6 +210,8 @@ namespace weave
         protected override void SetNewsItem(NewsItem newsItem)
         {
             disp.Disposable = null;
+            var disposables = new CompositeDisposable();
+            disp.Disposable = disposables;
 
             OnLoadSB.Stop();
             OnLoadBackwardsSB.Stop();
@@ -211,7 +220,7 @@ namespace weave
             ClearExistingImage();
 
             title.Text = newsItem.Title;
-            feedName.Text = newsItem.FormattedForMainPageSourceAndDate;//newsItem.FeedSource.FeedName;
+            feedName.Text = newsItem.FormattedForMainPageSourceAndDate;
 
             var mediaTypeImageBrush = newsItem.GetMediaTypeImageBrush();
             if (mediaTypeImageBrush != null)
@@ -226,18 +235,21 @@ namespace weave
 
             if (newsItem.HasImage)
             {
-                this.textGrid.Width = 300d;
+                //this.textGrid.Width = 300d;
+                textGrid.Margin = imageMargin;
 
                 image.Opacity = 0;
                 imageRect.Visibility = Visibility.Visible;
 
-                disp.Disposable = ImageCache
+                ImageCache
                     .GetImageAsync(newsItem.ImageUrl)
-                    .SafelySubscribe(SetImage, ex => SetImage(FailImage));
+                    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
+                    .DisposeWith(disposables);
             }
             else
             {
-                this.textGrid.Width = 432d;
+                //this.textGrid.Width = 432d;
+                textGrid.Margin = noImageMargin;
                 imageRect.Visibility = Visibility.Collapsed;
             }
 
@@ -254,7 +266,21 @@ namespace weave
 
             this.grid.SetBinding(UIElement.OpacityProperty, b);
 
+            ColorByline(newsItem);
+
+            Observable.FromEventPattern<PropertyChangedEventArgs>(newsItem, "PropertyChanged")
+                .Where(o => o.EventArgs.PropertyName == "DisplayState")
+                .SafelySubscribe(o => ColorByline(newsItem))
+                .DisposeWith(disposables);
+        }
+
+        void ColorByline(NewsItem newsItem)
+        {
+            if (newsItem == null || feedName == null || mediaTypesIcon == null)
+                return;
+
             Brush brush;
+
             if (newsItem.IsFavorite)
                 brush = AppSettings.Instance.Themes.CurrentTheme.ComplementaryBrush;
             else if (newsItem.IsNew())

@@ -10,9 +10,11 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         protected LiveTileViewModel ViewModel { get; set; }
         ShellTile tile;
+        string appName;
 
-        public LiveTileNegotiatorBase(ShellTile tile)
+        public LiveTileNegotiatorBase(string appName, ShellTile tile)
         {
+            this.appName = appName;
             this.tile = tile;
         }
 
@@ -48,25 +50,9 @@ namespace Weave.LiveTile.ScheduledAgent
 
             if (ViewModel == null) return;
 
-            var frontTile = new LiveTileFront();
-            var backTile = new LiveTileBack();
+            ViewModel.AppName = appName;
 
-            frontTile.DataContext = ViewModel;
-            backTile.DataContext = ViewModel;
-
-            var frontUri = frontTile.GetLiveTileUri("front");
-            var backUri = backTile.GetLiveTileUri("back");
-
-            var newTileData = new StandardTileData
-            {
-                BackgroundImage = frontUri,
-                BackBackgroundImage = backUri,
-                BackContent = string.Empty,
-                BackTitle = string.Empty,
-                Count = null,
-                Title = string.Empty,
-            };
-
+            var newTileData = ViewModel.CreateTileData();
             tile.Update(newTileData);
         }
     }

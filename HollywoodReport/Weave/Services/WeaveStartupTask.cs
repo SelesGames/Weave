@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive;
@@ -41,6 +40,8 @@ namespace weave
             phoneAppService.Activated += (s, e) => OnActivated();
             phoneAppService.Deactivated += (s, e) => Stop();
             phoneAppService.Closing += (s, e) => Stop();
+
+            EnableLiveTileUpdatingBackgroundTask();
         }
 
 
@@ -245,7 +246,7 @@ namespace weave
         {
             weave.UI.Advertising.AdSettings.AdApplicationId = settings.AdApplicationId;
             weave.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
-            var adCollection = new weave.UI.Advertising.AdUnitCollection("http://weavestorage.blob.core.windows.net/settings/adunits", "31892");
+            var adCollection = new weave.UI.Advertising.AdUnitCollection(settings.AdUnitsUrl);
         }
 
         void InitializeNinjectKernel()
@@ -288,6 +289,26 @@ namespace weave
             var orientationService = new OrientationLockService(frame);
             orientationService.Start();
             kernel.Bind<OrientationLockService>().ToConstant(orientationService).InSingletonScope();
+        }
+
+        #endregion
+
+
+
+
+        #region Turn on Background Task that updates the Live Tiles
+
+        void EnableLiveTileUpdatingBackgroundTask()
+        {
+            var appName = settings.AppName;
+            var taskService = new PeriodicTaskService(string.Format("pts:{0}", appName.ToUpperInvariant()))
+            {
+                Description = string.Format(
+"Enables *** LIVE TILE *** updating for {0}.  If you disable this, you will lose Live Tiles for this app.", appName)
+            };
+            var regResult = taskService.TryRegister();
+            if (!regResult)
+                DebugEx.WriteLine(taskService.RegistrationException);
         }
 
         #endregion

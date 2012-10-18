@@ -26,7 +26,7 @@ namespace weave
             if (newsItem == null)
                 return;
 
-            SelesGames.Phone.TaskService.ToShareLinkTask(newsItem.Link, newsItem.Title);
+            SelesGames.Phone.TaskService.ToShareLinkTask(newsItem.Link, newsItem.Title, newsItem.Title);
         }
 
         public static void ShareToSms(this INewsItem newsItem)

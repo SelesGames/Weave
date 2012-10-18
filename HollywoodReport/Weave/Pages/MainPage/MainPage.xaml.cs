@@ -15,6 +15,7 @@ using SelesGames;
 using SelesGames.Phone;
 using Telerik.Windows.Controls;
 using weave.UI.Advertising;
+using Weave.LiveTile.ScheduledAgent;
 
 
 namespace weave
@@ -30,8 +31,8 @@ namespace weave
         ScrollViewer currentListBoxScroller;
         TrialModeAdControl adControl;
         MainPageNavigationDropDownList jumpList;
-        ApplicationBarIconButton refreshButton, fontButton;
-        ApplicationBarMenuItem lockOrientationButton, markPageReadButton, pinToStartScreenButton; 
+        ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
+        ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
 
 
@@ -46,11 +47,12 @@ namespace weave
             if (DesignerProperties.IsInDesignTool)
                 return;
 
-            refreshButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
-            fontButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+            markPageReadButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            refreshButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+            fontButton = ApplicationBar.Buttons[2] as ApplicationBarIconButton;
             lockOrientationButton = ApplicationBar.MenuItems[0] as ApplicationBarMenuItem;
             pinToStartScreenButton = ApplicationBar.MenuItems[1] as ApplicationBarMenuItem;
-            markPageReadButton = ApplicationBar.MenuItems[2] as ApplicationBarMenuItem;
+            openNavMenuButton = ApplicationBar.MenuItems[2] as ApplicationBarMenuItem;
 
             BindIsOrientationLockedToAppBar();
             this.Loaded += OnLoaded;
@@ -305,6 +307,7 @@ namespace weave
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
             pinToStartScreenButton.GetClick().Subscribe(OnPinToStartButtonPressed).DisposeWith(pageLevelDisposables);
+            openNavMenuButton.GetClick().Subscribe(ShowMenu).DisposeWith(pageLevelDisposables);
         }
 
         #endregion
@@ -390,30 +393,32 @@ namespace weave
             return !ShellTile.ActiveTiles.Any(x => x.NavigationUri.Equals(currentSource));
         }
 
-        void OnPinToStartButtonPressed()
+        async void OnPinToStartButtonPressed()
         {
-            var currentSource = this.NavigationService.CurrentSource;
+            if (vm == null)
+                return;
 
-            // Look to see if the tile already exists and if so, don't try to create again.
-            ShellTile TileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.Equals(currentSource));
-
-            // Create the tile if we didn't find it already exists.
-            if (TileToFind == null)
+            try
             {
-                // Create the tile object and set some initial properties for the tile.
-                // The Count value of 12 will show the number 12 on the front of the Tile. Valid values are 1-99.
-                // A Count value of 0 will indicate that the Count should not be displayed.
-                StandardTileData NewTileData = new StandardTileData
-                {
-                    BackgroundImage = new Uri("Red.jpg", UriKind.Relative),
-                    Title = header.ToTitleCase(),
-                    BackTitle = "Back of Tile",
-                    BackContent = "Welcome to the back of the Tile",
-                    BackBackgroundImage = new Uri("Blue.jpg", UriKind.Relative)
-                };
+                var currentSource = this.NavigationService.CurrentSource;
 
-                // Create the tile and pin it to Start. This will cause a navigation to Start and a deactivation of our application.
-                ShellTile.Create(currentSource, NewTileData);
+                // Look to see if the tile already exists and if so, don't try to create again.
+                ShellTile TileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.Equals(currentSource));
+
+                // Create the tile if we didn't find it already exists.
+                if (TileToFind == null)
+                {
+                    var liveTileVM = await vm.CreateLiveTileViewModel();
+                    var newTileData = liveTileVM.CreateTileData();
+
+                    // Create the tile and pin it to Start. This will cause a navigation to Start and a deactivation of our application.
+                    ShellTile.Create(currentSource, newTileData);
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                MessageBox.Show("Whoops!  There was a problem creating the Live Tile for this category.  Please try again later");
             }
         }
 

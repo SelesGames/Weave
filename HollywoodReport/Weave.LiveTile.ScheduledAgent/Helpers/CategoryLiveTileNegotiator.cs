@@ -11,21 +11,18 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         string categoryName;
 
-        public CategoryLiveTileNegotiator(string categoryName, ShellTile tile)
-            : base(tile)
+        public CategoryLiveTileNegotiator(string categoryName, string appName, ShellTile tile)
+            : base(appName, tile)
         {
             this.categoryName = categoryName;
         }
 
         protected async override Task InitializeViewModelAsync()
         {
-            if (string.IsNullOrEmpty(categoryName))
-                return;
-
             var dal = new Weave4DataAccessLayer();
             var feeds = await dal.GetFeedsAsync();
 
-            if (!categoryName.Equals("all news", StringComparison.OrdinalIgnoreCase))
+            if (categoryName != null && !categoryName.Equals("all news", StringComparison.OrdinalIgnoreCase))
                 feeds = feeds.OfCategory(categoryName).ToList();
 
             Trace.Output("refreshing " + categoryName);

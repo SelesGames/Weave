@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Linq;
+using System.Windows.Markup;
 using SelesGames.Phone;
 
 namespace SelesGames.WP.PublisherInfoPage
 {
+    [ContentProperty("Footer")]
     public partial class PublisherInfoControl : UserControl
     {
         Task<string> getPaidAppId;
@@ -48,6 +50,7 @@ namespace SelesGames.WP.PublisherInfoPage
             SetRateButton();
             SetTwitterButton();
             SetFacebookButton();
+            SetFooterTemplate();
         }
 
         void list_Loaded(object sender, RoutedEventArgs e)
@@ -66,9 +69,15 @@ namespace SelesGames.WP.PublisherInfoPage
             SetRateButton();
             SetTwitterButton();
             SetFacebookButton();
+
+            //footerControl = list.Descendants<ContentControl>().OfType<ContentControl>().FirstOrDefault(o => o.Name == "footerControl");
+            SetFooterTemplate();
         }
 
 
+
+
+        #region Event Handler for button taps
 
         void AppTap(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -113,6 +122,8 @@ namespace SelesGames.WP.PublisherInfoPage
         {
             TaskService.ToEmailComposeTask(To: "info@selesgames.com");
         }
+
+        #endregion
 
 
 
@@ -185,6 +196,14 @@ namespace SelesGames.WP.PublisherInfoPage
         }
 
         #endregion
+
+
+
+
+        void SetFooterTemplate()
+        {
+            list.ListFooterTemplate = FooterTemplate;
+        }
 
 
 
@@ -297,6 +316,28 @@ namespace SelesGames.WP.PublisherInfoPage
         {
             var c = (PublisherInfoControl)obj;
             c.SetFacebookButton();
+        }
+
+        #endregion
+
+
+
+
+        #region FooterTemplate
+
+        public static readonly DependencyProperty FooterTemplateProperty = DependencyProperty.Register(
+            "FooterTemplate", typeof(DataTemplate), typeof(PublisherInfoControl), new PropertyMetadata(OnFooterTemplateChanged));
+
+        public DataTemplate FooterTemplate
+        {
+            get { return (DataTemplate)GetValue(FooterTemplateProperty); }
+            set { SetValue(FooterTemplateProperty, value); }
+        }
+
+        static void OnFooterTemplateChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            var c = (PublisherInfoControl)obj;
+            c.SetFooterTemplate();
         }
 
         #endregion

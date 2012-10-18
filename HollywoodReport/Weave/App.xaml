@@ -57,7 +57,7 @@
 			<SolidColorBrush x:Key="PanoramaBackgroundBrush" Color="#FF282828" />
 			<ImageBrush x:Key="PanoramaBackgroundBrush2" ImageSource="/Assets/PanoramaBackgrounds/cypress.jpg" Stretch="None" />
 			<Thickness x:Key="PanoramaTitleMargin">10,-76,0,9</Thickness>
-			<System:String x:Key="ChangelogUrl">gsdgdfgd</System:String>
+			<System:String x:Key="ChangelogUrl">http://www.selesgames.com/windowsphone/weave/changelog.html</System:String>
 			
 		</ResourceDictionary>
 								

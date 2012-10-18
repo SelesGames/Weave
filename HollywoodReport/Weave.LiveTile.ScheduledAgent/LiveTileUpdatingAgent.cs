@@ -11,7 +11,7 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         //static volatile bool isClassInitialized;
 
-        string tileUrl;
+        string appName;
 
 
         /// <remarks>
@@ -50,13 +50,15 @@ namespace Weave.LiveTile.ScheduledAgent
         #endregion
 
 
+
+
         protected async override void OnInvoke(ScheduledTask task)
         {
             Trace.Output("starting update process");
             if (!(task is PeriodicTask))
                 return;
 
-            tileUrl = ((PeriodicTask)task).Name;
+            appName = ((PeriodicTask)task).Name.Split(new[] { "pts:" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
 
             bool isUpdateSuccessful = false;
             try
@@ -78,7 +80,7 @@ namespace Weave.LiveTile.ScheduledAgent
         async Task LoadViewModelsAsync()
         {
             var randomTile = SelectTileAtRandom();
-            var negotiator = LiveTileNegotiatorFactory.CreateFromShellTile(randomTile);
+            var negotiator = LiveTileNegotiatorFactory.CreateFromShellTile(appName, randomTile);
 
             var motherfucker = new TaskCompletionSource<object>();
             Deployment.Current.Dispatcher.BeginInvoke(() => DoUpdate(negotiator, motherfucker));

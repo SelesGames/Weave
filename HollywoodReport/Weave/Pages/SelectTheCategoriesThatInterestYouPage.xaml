@@ -1,34 +1,76 @@
 ﻿<phone:PhoneApplicationPage
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    x:Class="weave.SelectTheCategoriesThatInterestYouPage"
-	FontFamily="{StaticResource PhoneFontFamilySemiLight}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="False">
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
+	x:Class="weave.SelectTheCategoriesThatInterestYouPage"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	SupportedOrientations="Portrait" Orientation="Portrait"
+	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+	shell:SystemTray.IsVisible="False">
 	
 	<phone:PhoneApplicationPage.Resources>
+
+		<Style x:Key="ToggleCheckBoxStyle" TargetType="CheckBox">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="CheckBox">
+						<Grid Background="{StaticResource TransparentBrush}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="CheckStates">
+									<VisualState x:Name="Checked">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unchecked">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>									
+									</VisualState>
+									<VisualState x:Name="Indeterminate"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border x:Name="CheckBackground" Margin="6" BorderThickness="0" Background="{StaticResource TransparentBrush}">
+								<TextBlock Text="{Binding Name}" TextWrapping="Wrap" Margin="4,-2,3,0" VerticalAlignment="Center" FontSize="26.667"/>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		
 		<DataTemplate x:Key="CategoriesItemTemplate">
-			<Grid Width="230" Margin="5,8,5,9">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="59.563"/>
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="1" Margin="0,0,8,0" FontSize="21.333"/>
-				<CheckBox IsChecked="{Binding IsEnabled, Mode=TwoWay}" Grid.ColumnSpan="2" />
-			</Grid>
+			<CheckBox Width="226" Height="60" IsChecked="{Binding IsEnabled, Mode=TwoWay}" Grid.ColumnSpan="2" Style="{StaticResource ToggleCheckBoxStyle}" Margin="2,0,-2,0" />
 		</DataTemplate>
 	</phone:PhoneApplicationPage.Resources>
 	
 
 	<Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{Binding Source={StaticResource SampleCategories}}">
+
+		<Image Source="/Assets/rectangleGuide.png" Stretch="None" Opacity="0.4" Visibility="Collapsed"/>
 
 		<Grid x:Name="ContentGrid" >
 			<Grid.RowDefinitions>
@@ -37,17 +79,33 @@
 				<RowDefinition />
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
-			<TextBlock x:Name="ApplicationTitle" Text="welcome to weave" Style="{StaticResource PhoneTextNormalStyle}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="24" d:LayoutOverrides="Height" Margin="14,20,0,18"/>
-			<TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" Text="What are your interests?" Margin="24,18,0,12" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" />
-			<ListBox x:Name="list" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" Grid.Row="2" Margin="0,1,0,0">
+			<TextBlock x:Name="ApplicationTitle" Text="welcome to weave" Style="{StaticResource PhoneTextNormalStyle}" d:LayoutOverrides="Height" Margin="24,20,24,0" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="Segoe WP Black" Foreground="{StaticResource PhoneSubtleBrush}"/>
+			<TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" Text="What are your interests?" Margin="24,-4,0,12" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" />
+			<ListBox x:Name="list" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" Grid.Row="2" Margin="12,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="2">
 				<ListBox.ItemsPanel>
 					<ItemsPanelTemplate>
-						<toolkit:WrapPanel />
+						<toolkit:WrapPanel Orientation="Horizontal" Margin="0,24,0,96" />
 					</ItemsPanelTemplate>
 				</ListBox.ItemsPanel> 			
 			</ListBox>
-			<Button x:Name="nextButton" Content="Done" Grid.Row="3" HorizontalAlignment="Right" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Padding="16,3,16,5" Margin="0,0,24,0" FontSize="26.667" Foreground="{StaticResource PhoneAccentBrush}" />
-			<TextBlock x:Name="warning" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" Text="Select at least 1" VerticalAlignment="Center" Margin="12,0,0,0" FontSize="29.333" Foreground="{StaticResource PhoneAccentBrush}"/>
+			<Rectangle Grid.Row="3" Visibility="Collapsed">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="Black" Offset="1"/>
+						<GradientStop/>
+						<GradientStop Color="#BF000000" Offset="0.5"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<sg:FadeControl Grid.Row="3" Background="{StaticResource PhoneBackgroundBrush}" Angle="90" >
+				<sg:FadeControl.FadeStops>
+					<sg:FadeStop Offset="0" Percent="0"/>
+					<sg:FadeStop Offset="0.5" Percent="0.75"/>
+					<sg:FadeStop Offset="1" Percent="1"/>
+				</sg:FadeControl.FadeStops>
+			</sg:FadeControl>
+			<Button x:Name="nextButton" Content="done" Grid.Row="3" HorizontalAlignment="Right" Padding="16,3,16,5" Margin="0,0,12,0" Foreground="{StaticResource PhoneAccentBrush}" Background="{StaticResource PhoneBackgroundBrush}" FontFamily="Segoe WP Black" />
+			<TextBlock x:Name="warning" HorizontalAlignment="Left" Grid.Row="3" TextWrapping="Wrap" Text="select at least 1" VerticalAlignment="Center" Margin="24,0,0,0" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="Segoe WP Black"/>
 		</Grid>
 	</Grid>
 

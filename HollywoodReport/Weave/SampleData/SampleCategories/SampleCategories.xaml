@@ -7,5 +7,33 @@
   <SampleData:SampleCategories.Categories>
     <SampleData:CategoriesItem Name="Nam" IsEnabled="True" UserAdded="True" />
     <SampleData:CategoriesItem Name="Aliquam sed" IsEnabled="False" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Maecenas nam" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Aenean" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Sed dis" IsEnabled="False" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Class mauris" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Curae praesent" IsEnabled="False" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Accumsan" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Aliquam nullam" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Integer" IsEnabled="False" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Aptent auctor" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Cras est" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Nam aenean" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Maecenas" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Cras aliquam" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Mauris" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Integer praesent" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Accumsan" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Quisque" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Class bibendum" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Vivamus duis" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Sed" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Nullam" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Dis nunc" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Aliquam dictumst" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Est hac" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Eleifend" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Aptent" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Auctor leo" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Curae donec" IsEnabled="True" UserAdded="False" />
   </SampleData:SampleCategories.Categories>
 </SampleData:SampleCategories>

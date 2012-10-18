@@ -1,4 +1,5 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
@@ -10,5 +11,10 @@ namespace Weave.LiveTile.ScheduledAgent
         public string Headline { get; set; }
         public string NewCount { get; set; }
         public string ImageUrl { get; set; }
+
+        public Visibility CategoryVisibility 
+        { 
+            get { return string.IsNullOrEmpty(Category) ? Visibility.Collapsed : Visibility.Visible; } 
+        }
     }
 }

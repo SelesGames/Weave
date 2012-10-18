@@ -49,7 +49,6 @@ namespace SelesGames.Phone.Controls
             var split = 360d / NumberOfItems;
             for (int i = 0; i < NumberOfItems; i++)
             {
-                //var cc = new ContentControl {  }
                 var ellipse = new Ellipse { Style = EllipseStyle, Width = EllipseDiameter, Height = EllipseDiameter };
                 var grid = new Grid
                 {

@@ -7,15 +7,14 @@ namespace weave.UI.Advertising
 {
     public class AdUnitCollection
     {
-        string adUnitsUrl, defaultAdUnitId;
+        string adUnitsUrl;
         List<string> adUnits = new List<string>();
         static Random r = new Random();
         Task areAdUnitsSet;
 
-        public AdUnitCollection(string adUnitsUrl, string defaultAdUnitId)
+        public AdUnitCollection(string adUnitsUrl)
         {
             this.adUnitsUrl = adUnitsUrl;
-            this.defaultAdUnitId = defaultAdUnitId;
             Current = this;
         }
 
@@ -36,7 +35,7 @@ namespace weave.UI.Advertising
             if (adUnits.Count > 0)
                 return adUnits[r.Next(0, adUnits.Count)];
             else
-                return defaultAdUnitId;
+                throw new Exception("No adunits have been set in weave.UI.Advertising.AdUnitCollection");
         }
 
         async Task GetAndSetAdUnits()
@@ -47,7 +46,7 @@ namespace weave.UI.Advertising
                 var adUnits = await client.GetAdUnitsAsync(CancellationToken.None);
                 this.adUnits.AddRange(adUnits);
             }
-            catch { this.adUnits.Add(defaultAdUnitId); }
+            catch { }
         }
 
         internal static AdUnitCollection Current { get; private set; }

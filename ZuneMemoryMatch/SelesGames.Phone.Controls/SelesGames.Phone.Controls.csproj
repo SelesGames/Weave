@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BitmapImageHelper.cs" />
     <Compile Include="CircleImageButton.cs" />
+    <Compile Include="FadeControl.cs" />
     <Compile Include="Glyph.cs" />
     <Compile Include="ImageWithLabelButton.cs" />
     <Compile Include="LinqToVisualTree.cs" />

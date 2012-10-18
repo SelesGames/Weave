@@ -16,11 +16,16 @@ namespace weave
         public ObservableCollection<ObservableGroup<FeedSource, string>> FeedGroups { get; private set; }
         public string SourcesCount { get; set; }
         public bool AreThereTooManyFeeds { get; set; }
+        public string Warning { get; set; }
         public Visibility WarningVisibility { get; set; }
 
         public ManageSourcesViewModel()
         {
             WarningVisibility = Visibility.Collapsed;
+            Warning = string.Format(
+                "You have more than {0} feeds.  For performance reasons, there is a limit of {1} sources.  Please delete some now.",
+                Weave4DataAccessLayer.MaxAllowedSources,
+                Weave4DataAccessLayer.MaxAllowedSources);
             FeedGroups = new ObservableCollection<ObservableGroup<FeedSource, string>>();
             dataRepo = ServiceResolver.Get<Weave4DataAccessLayer>();
         }

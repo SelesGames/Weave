@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Phone.Shell;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using SelesGames;
 using weave.Data;
+using Weave.LiveTile.ScheduledAgent;
 
 namespace weave
 {
     public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     {
+        static string lastCategory;
+
         public int currentPage = 0;
         int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
         int numberOfPages = 1;
@@ -77,26 +82,19 @@ namespace weave
             if (tombstoneState == null)
                 return;
 
-            if (tombstoneState.MainPageCurrentPageShouldBeFlushed)
-            {
-                tombstoneState.MainPageCurrentPageShouldBeFlushed = false;
+            if (Header != lastCategory)
                 currentPage = 0;
-            }
+
             else
-            {
                 currentPage = tombstoneState.ArticleListCurrentPage;
-            }
+
+            lastCategory = Header;
         }
 
         internal void SaveTransientState()
         {
             if (tombstoneState != null)
                 tombstoneState.ArticleListCurrentPage = currentPage;
-        }
-
-        public class MainPageViewModelSavedState
-        {
-            public int CurrentPage { get; set; }
         }
 
         #endregion
@@ -166,9 +164,10 @@ namespace weave
         void InitializePageCountDisplay()
         {
             numberOfPages = (int)Math.Ceiling((double)allNews.Count / (double)pageSize);
-            if (currentPage >= numberOfPages)
+            if (currentPage >= numberOfPages || Header != lastCategory)
                 currentPage = 0;
 
+            lastCategory = Header;
             GlobalDispatcher.Current.BeginInvoke(() => PropertyChanged.Raise(this, "CurrentPageDisplay"));
         }
 
@@ -334,6 +333,57 @@ namespace weave
                 PropertyChanged.Raise(this, "ProgressBarVisibility");
             });
         }
+
+
+
+        #region Live Tile Creation
+
+        public async Task<LiveTileViewModel> CreateLiveTileViewModel()
+        {
+            var article = allNews.Where(o => o.HasImage).FirstOrDefault();
+
+            ImageSource image = null; 
+            if (article != null)
+            {
+                image = await GetImageAsync(article.ImageUrl);
+            }
+
+            return new LiveTileViewModel
+            {
+                AppName = AppSettings.Instance.AppName.ToUpperInvariant(),
+                Category = Header.ToLowerInvariant(),
+                NewCount = string.Format("0 NEW"),
+                Source = image,
+                Headline = article == null ? string.Empty : article.Title,              
+            };
+        }
+
+        protected async Task<ImageSource> GetImageAsync(string url)
+        {
+            var bitmap = new WriteableBitmap(0, 0);
+
+            var request = CreateResizerRequest(url);
+            request.AllowReadStreamBuffering = true;
+            var response = await request.GetResponseAsync();
+            using (var stream = response.GetResponseStream())
+            {
+                bitmap.SetSource(stream);
+                stream.Close();
+            }
+            return bitmap;
+        }
+
+        HttpWebRequest CreateResizerRequest(string imageUrl)
+        {
+            var url = string.Format("http://sg-imaging.cloudapp.net/api/ImageResizer?quality=50&size=200&imageUrl={0}", HttpUtility.UrlEncode(imageUrl));
+            var request = HttpWebRequest.CreateHttp(url);
+            return request;
+        }
+
+        #endregion
+
+
+
 
         public void Dispose()
         {

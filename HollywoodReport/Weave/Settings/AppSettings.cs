@@ -36,6 +36,7 @@ namespace weave
         public IsoStorageLocker<TombstoneState> TombstoneState { get; private set; }
         public string AdApplicationId { get; set; }
         public bool IsAddSupportedApp { get; set; }
+        public string AdUnitsUrl { get; set; }
         public string AssemblyName { get; set; }
         public bool IsNetworkAvailable { get; set; }
         public bool LogExceptions { get; set; }

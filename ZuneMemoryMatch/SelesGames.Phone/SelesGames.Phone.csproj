@@ -54,6 +54,7 @@
     <Compile Include="PageOrientation\PageOrientationExtensions.cs" />
     <Compile Include="PageOrientation\PhoneApplicationPageExtendedInfo.cs" />
     <Compile Include="PageOrientation\SupportedPageOrientationExtensions.cs" />
+    <Compile Include="PeriodicTaskService.cs" />
     <Compile Include="PhoneExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskService.cs" />

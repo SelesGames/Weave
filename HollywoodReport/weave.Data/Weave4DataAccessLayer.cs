@@ -10,7 +10,7 @@ namespace weave.Data
 {
     public class Weave4DataAccessLayer
     {
-        public static int MaxAllowedSources = 60;
+        public static int MaxAllowedSources = 80;
 
         readonly string[] FEEDS_KEYS = new string[] { "xFEEDS1", "xFEEDS2", "xFEEDS3" };
         readonly string NEWS_KEY = "xNEWS";

@@ -33,13 +33,18 @@
             <TextBlock x:Name="PageTitle" Text="app settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
+        <ScrollViewer Grid.Row="1">
+
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<Grid.RowDefinitions>
-        		<RowDefinition Height="582"/>
+        		<RowDefinition Height="741"/>
 				<RowDefinition Height="*"/>     	
 			</Grid.RowDefinitions>
         	<StackPanel VerticalAlignment="Bottom">
-        		<toolkit:ToggleSwitch x:Name="articleListToggle" Margin="0,0,0,-12">
+        		
+				<toolkit:ToggleSwitch x:Name="classicArticleListToggle" Header="Enable classic article list format"/>
+
+        		<toolkit:ToggleSwitch x:Name="articleListToggle">
         			<toolkit:ToggleSwitch.Header>
 				       	<StackPanel>
 		        			<TextBlock Text="Hide AppBar on Article List page" />    		
@@ -48,7 +53,7 @@
 					</toolkit:ToggleSwitch.Header>    		
 				</toolkit:ToggleSwitch>
 				
-        		<toolkit:ToggleSwitch x:Name="articleViewerToggle" Margin="0,0,0,-12">
+        		<toolkit:ToggleSwitch x:Name="articleViewerToggle">
         			<toolkit:ToggleSwitch.Header>
 				       	<StackPanel>
 		        			<TextBlock Text="Hide AppBar on Article Viewer page" />    		
@@ -57,7 +62,7 @@
 					</toolkit:ToggleSwitch.Header>    		
 				</toolkit:ToggleSwitch>
 				
-        		<toolkit:ToggleSwitch x:Name="systemTrayToggle" Margin="0,0,0,-12">
+        		<toolkit:ToggleSwitch x:Name="systemTrayToggle">
         			<toolkit:ToggleSwitch.Header>
 				       	<StackPanel>
 		        			<TextBlock Text="Show time/battery/signal at top of screen" Margin="0,0,-90,0" />    		
@@ -66,9 +71,10 @@
 					</toolkit:ToggleSwitch.Header>    		
 				</toolkit:ToggleSwitch>
 				
-				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}"/>
-				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}"/>
+				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,0,12,12"/>
+				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,12,12,36"/>
 			</StackPanel>      
 		</Grid>
+		</ScrollViewer>
     </Grid>
 </phone:PhoneApplicationPage>

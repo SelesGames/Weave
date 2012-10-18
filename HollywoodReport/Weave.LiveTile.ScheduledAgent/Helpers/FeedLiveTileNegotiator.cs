@@ -10,8 +10,8 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         Guid feedId;
 
-        public FeedLiveTileNegotiator(Guid feedId, ShellTile tile) 
-            : base(tile)
+        public FeedLiveTileNegotiator(Guid feedId, string appName, ShellTile tile) 
+            : base(appName, tile)
         {
             this.feedId = feedId;
         }

@@ -1,16 +1,16 @@
 ﻿<phone:PhoneApplicationPage
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit" 
+	xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit" 
 	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleBrowseFeedsByCategoryViewModel" 
 	x:Class="weave.Pages.Settings.BrowseFeedsByCategoryPage"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+	SupportedOrientations="Portrait" Orientation="Portrait"
+	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}">
@@ -73,25 +73,25 @@
 	</phone:PhoneApplicationPage.Resources>
  
 
-    <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{Binding Source={StaticResource SampleBrowseFeedsByCategoryViewModel}}">
-        <Grid.RowDefinitions>
-        	<RowDefinition Height="161"/>
-        	<RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+	<Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{Binding Source={StaticResource SampleBrowseFeedsByCategoryViewModel}}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="161"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-        <!--Grid x:Name="guides" Grid.RowSpan="2" Canvas.ZIndex="6">
-    		<Image Source="Screen Capture (2).jpg" Visibility="Collapsed" Stretch="Fill" Canvas.ZIndex="1" Opacity="0.5"/>
-    		<Rectangle Fill="Blue" HorizontalAlignment="Right" Width="24" Opacity="0.2"/>
-    		<Rectangle Fill="Blue" HorizontalAlignment="Left" Width="24" Opacity="0.2"/>
-    	</Grid-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="BROWSE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding Category}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+		<!--Grid x:Name="guides" Grid.RowSpan="2" Canvas.ZIndex="6">
+			<Image Source="Screen Capture (2).jpg" Visibility="Collapsed" Stretch="Fill" Canvas.ZIndex="1" Opacity="0.5"/>
+			<Rectangle Fill="Blue" HorizontalAlignment="Right" Width="24" Opacity="0.2"/>
+			<Rectangle Fill="Blue" HorizontalAlignment="Left" Width="24" Opacity="0.2"/>
+		</Grid-->
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="BROWSE" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="{Binding Category}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
 
-        <ScrollViewer x:Name="ContentPanel" Grid.Row="1">
-        	<ItemsControl ItemTemplate="{StaticResource FeedsItemTemplate}" ItemsSource="{Binding Feeds}" Margin="0,0,-12,48" Padding="0,-21,0,0"/>
+		<ScrollViewer x:Name="ContentPanel" Grid.Row="1">
+			<ItemsControl ItemTemplate="{StaticResource FeedsItemTemplate}" ItemsSource="{Binding Feeds}" Margin="0,0,-12,48" Padding="0,-21,0,0"/>
 		</ScrollViewer>
-    </Grid>
+	</Grid>
 
 </phone:PhoneApplicationPage>

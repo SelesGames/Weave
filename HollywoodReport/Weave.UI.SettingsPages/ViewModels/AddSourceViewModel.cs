@@ -298,6 +298,7 @@ namespace weave
                 Category = category,
                 Name = feed.Name,
                 Url = feed.Uri,
+                ViewType = ArticleViewingType.Mobilizer,
             };
         }
 

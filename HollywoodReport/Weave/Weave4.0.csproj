@@ -111,9 +111,6 @@
       <DependentUpon>CustomList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
-    <Compile Include="Business Objects\DateTimeDisplayFormattingExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Business Objects\NewsItemComparer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +146,7 @@
     <Compile Include="Settings\ArticleDeleteTime.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
+    <Compile Include="Settings\ArticleListFormatType.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
     <Compile Include="Settings\FontProperties.cs" />
     <Compile Include="Settings\FontSize.cs" />

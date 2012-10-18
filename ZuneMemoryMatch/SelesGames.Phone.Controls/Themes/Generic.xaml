@@ -91,4 +91,15 @@
 	</Style>
 
 
+	<Style TargetType="local:FadeControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="local:FadeControl">
+					<Rectangle x:Name="FadingElement" Fill="{TemplateBinding Background}" CacheMode="BitmapCache" d:DesignHeight="72" d:DesignWidth="72" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	
+
 </ResourceDictionary>

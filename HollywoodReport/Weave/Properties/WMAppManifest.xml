@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{2a29809e-fdf3-45b2-b76e-f6b00cd40e75}" Title="Weave" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games">
+  <App xmlns="" ProductID="{2a29809e-fdf3-45b2-b76e-f6b00cd40e75}" Title="Weave News Reader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

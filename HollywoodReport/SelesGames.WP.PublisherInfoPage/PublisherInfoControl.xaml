@@ -100,21 +100,7 @@
 				<TextBlock Text="OUR APPS:" Margin="24,24,24,0" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="{StaticResource PhoneSubtleBrush}" />
 			</StackPanel>
 		</DataTemplate>
-		
-		
-		<DataTemplate x:Key="ListFooterTemplate">
-			<!--StackPanel Margin="0,48,0,24" Width="480">
-				<TextBlock Margin="24,0,24,12" TextWrapping="Wrap" VerticalAlignment="Top" Text="CREDITS:" Foreground="{StaticResource TextSubtleBrush}" FontWeight="Bold" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-				<TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Text="Yanko Andreev, Design" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="28,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource TextBrush}"/>
-				<TextBlock TextWrapping="Wrap" Text="Seles Games, Development" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="28,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Foreground="{StaticResource TextBrush}"/>
-				<Grid Margin="0,12,0,0">
-					<Image Source="/Assets/DesignedbyYanko.png" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Left" Margin="24,0,0,0" Height="61"/>
-					<HyperlinkButton Content="info@selesgames.com" Tap="OnEmailLinkTap" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Center" Margin="-14,2,0,0" />
-					<Image Source="/Assets/SelesGames.png" Stretch="None" VerticalAlignment="Center" d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,6,24,0"/>
-				</Grid>
-			</StackPanel-->
-		</DataTemplate>
-		
+				
 	</UserControl.Resources>
 		
 	<!--LayoutRoot is the root grid where all page content is placed-->
@@ -133,7 +119,7 @@
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1">
-			<toolkit:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" IsFlatList="True" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" ListFooterTemplate="{StaticResource ListFooterTemplate}" Background="{StaticResource TransparentBrush}" >
+			<toolkit:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" IsFlatList="True" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" Background="{StaticResource TransparentBrush}" >
 				<toolkit:LongListSelector.RenderTransform>
 					<CompositeTransform />
 				</toolkit:LongListSelector.RenderTransform>

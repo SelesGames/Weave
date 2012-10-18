@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,6 +14,7 @@ namespace weave
     {
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
+        PermanentState permState;
 
 
         public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get; private set; }
@@ -42,6 +44,7 @@ namespace weave
             this.sp.Children.Remove(this.bottomButtons);
 
             scroller.Visibility = Visibility.Collapsed;
+            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
         }
 
         internal void CompleteInitialization()
@@ -50,7 +53,8 @@ namespace weave
                 Enumerable.Range(0, AppSettings.Instance.NumberOfNewsItemsPerMainPage)
                 .Select(notUsed =>
                 {
-                    var ui = new BigImageNewsItemControl { Visibility = Visibility.Collapsed };
+                    var ui = CreateNewsItemControl();
+                    ui.Visibility = Visibility.Collapsed;
                     sp.Children.Add(ui);
                     return (BaseNewsItemControl)ui;
                 })
@@ -59,6 +63,23 @@ namespace weave
             this.sp.Children.Add(this.bottomButtons);
 
             NewsItemSelected = newsItemsUI.Select(o => o.GetTap().Select(_ => Tuple.Create((object)o, o.NewsItem))).Merge();
+        }
+
+        BaseNewsItemControl CreateNewsItemControl()
+        {
+            switch (permState.ArticleListFormat)
+            {
+                case ArticleListFormatType.BigImage:
+                    return new BigImageNewsItemControl();
+
+                case ArticleListFormatType.SmallImage:
+                    return new MainPageNewsItemUI();
+
+                default:
+                    throw new Exception(string.Format(
+                        "Selected ArticleListFormat is not currently supported: {0}", 
+                        permState.ArticleListFormat.ToString()));
+            }
         }
 
         public void SetNews(List<NewsItem> news, int direction)

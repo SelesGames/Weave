@@ -23,8 +23,8 @@
 			</Rectangle.Fill>
 		</Rectangle>
 		<StackPanel Margin="8,4" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-			<TextBlock x:Name="Title" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding AppName}" TextAlignment="Right" FontSize="18.667" FontFamily="Segoe WP Black" LineStackingStrategy="BlockLineHeight" LineHeight="16.667"/>
-			<TextBlock x:Name="Category" Text="{Binding Category}" FontSize="16" Margin="0,-6,0,0" TextTrimming="WordEllipsis" Foreground="#FF9A9A9A" TextAlignment="Right" />
+			<TextBlock x:Name="Title" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="{Binding AppName}" TextAlignment="Right" FontSize="18.667" FontFamily="Segoe WP Black" LineStackingStrategy="BlockLineHeight" LineHeight="16.667" Foreground="White"/>
+			<TextBlock x:Name="Category" Text="{Binding Category}" FontSize="17.333" Margin="0,-6,0,0" TextTrimming="WordEllipsis" Foreground="#FF9A9A9A" TextAlignment="Right" Visibility="{Binding CategoryVisibility}" />
 		</StackPanel>
 	</Grid>
 </UserControl>

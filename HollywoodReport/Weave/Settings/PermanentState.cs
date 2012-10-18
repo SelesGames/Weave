@@ -19,6 +19,8 @@ namespace weave
 
         #region Settings that tweak the MainPage (aka Article List) view
 
+        public ArticleListFormatType ArticleListFormat { get; set; }
+
         public FontSize MainPageArticleListFontSize
         {
             get { return this.mainPageArticleListFontSize; }
@@ -66,6 +68,7 @@ namespace weave
         public PermanentState()
         {
             IsFirstTime = true; // start off as true
+            ArticleListFormat = ArticleListFormatType.BigImage;
             mainPageArticleListFontSize = FontSize.MediumLarge;
             mainPageArticleListFontThickness = FontThickness.Regular;
             CurrentTheme = "Day";

@@ -16,11 +16,6 @@
 	SupportedOrientations="Portrait"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800">
 
-    <phone:PhoneApplicationPage.Resources>
-
-    </phone:PhoneApplicationPage.Resources>
-
-
     <StackPanel x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleRssFeed}}">
 		<local:TiltContentControl x:Name="bigTemplate" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
 			<Grid x:Name="grid" Background="Transparent">
@@ -49,7 +44,7 @@
 			</UIElement.RenderTransform>
 
 			<Grid x:Name="grid2" Background="Transparent">
-				<StackPanel x:Name="textGrid" Margin="24,2,0,12" VerticalAlignment="Center" HorizontalAlignment="Left" Width="300" CacheMode="BitmapCache">
+				<StackPanel x:Name="textGrid" Margin="24,2,0,12" VerticalAlignment="Center" HorizontalAlignment="Left" Width="300" CacheMode="BitmapCache" Background="Red">
 					<TextBlock x:Name="title2" Text="Test this out with one line, then extend to two lines, go to three lines" FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,0,4" LineStackingStrategy="BlockLineHeight" />
 					<TextBlock x:Name="feedName2" Text="Engadget" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" FontSize="20" Margin="0,4,0,0" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" />
 					<Rectangle x:Name="mediaTypesIcon2" Fill="{StaticResource PhoneAccentBrush}" Height="32" Width="128" HorizontalAlignment="Left" Margin="0,12,0,0" >
@@ -58,6 +53,7 @@
 						</Rectangle.OpacityMask>
 					</Rectangle>
 				</StackPanel>
+				<Rectangle Fill="Beige" Opacity=".3" VerticalAlignment="Center" Height="181" Margin="24,2,156,12" />
 				<Border x:Name="imageRect" 
 					Margin="0,12,24,12" VerticalAlignment="Top" HorizontalAlignment="Right"
 					Width="120" Height="120" 

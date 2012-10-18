@@ -59,6 +59,7 @@
     <Compile Include="Helpers\LiveTileNegotiatorBase.cs" />
     <Compile Include="Helpers\LiveTileNegotiatorFactory.cs" />
     <Compile Include="Library\Trace.cs" />
+    <Compile Include="ViewModels\LiveTileViewModelExtensions.cs" />
     <Compile Include="Views\LiveTileBack.xaml.cs">
       <DependentUpon>LiveTileBack.xaml</DependentUpon>
     </Compile>
