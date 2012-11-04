@@ -47,8 +47,8 @@ namespace SelesGames.Phone
             {
                 ScheduledActionService.Add(periodicTask);
 #if DEBUG
-                if (System.Diagnostics.Debugger.IsAttached)
-                    ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(30));
+                //if (System.Diagnostics.Debugger.IsAttached)
+                //    ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(30));
 #endif
             }
             catch (InvalidOperationException exception)
