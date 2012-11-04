@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="weave.StarredNewsItemUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:local="clr-namespace:weave"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/weave;component/Resources/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:BooleanVisibilityConverter x:Key="visConverter" />
+            <Storyboard x:Name="OnLoadSB">
+            		<DoubleAnimation Duration="0:0:0.5" From="480" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="tiltContentControl">
+            			<DoubleAnimation.EasingFunction>
+            				<QuinticEase EasingMode="EaseOut"/>
+            			</DoubleAnimation.EasingFunction>
+            		</DoubleAnimation>
+            </Storyboard>            
+			<Storyboard x:Name="OnLoadBackwardsSB">
+            		<DoubleAnimation Duration="0:0:0.5" From="-480" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="tiltContentControl">
+            			<DoubleAnimation.EasingFunction>
+            				<QuinticEase EasingMode="EaseOut"/>
+            			</DoubleAnimation.EasingFunction>
+            		</DoubleAnimation>
+            </Storyboard>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    
+	<!--local:TiltContentControl x:Name="tiltContentControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" CacheMode="BitmapCache" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,48">
+		<local:TiltContentControl.RenderTransform>
+			<CompositeTransform/>
+		</local:TiltContentControl.RenderTransform>
+	        <Grid CacheMode="BitmapCache">
+	            <Grid.ColumnDefinitions>
+	                <ColumnDefinition Width="Auto"/>
+	                <ColumnDefinition />
+	                <ColumnDefinition Width="Auto"/>
+	            </Grid.ColumnDefinitions>
+	            <Grid.RowDefinitions>
+	                <RowDefinition Height="Auto" />
+	                <RowDefinition Height="Auto" />
+	                <RowDefinition Height="Auto" />
+	            </Grid.RowDefinitions>
+
+	            <Rectangle Name="sideBar" HorizontalAlignment="Left" Margin="2,10,12,8" Width="4" Fill="{StaticResource PhoneAccentBrush}" RadiusX="2" RadiusY="2" Opacity="0.85" Grid.RowSpan="3" />
+
+	            <TextBlock x:Name="title" Text="The title goes here but lets run off the text to see what it can potentially look" FontSize="{StaticResource PhoneFontSizeMediumLarge}" TextWrapping="Wrap" Margin="0,0,0,4" Grid.ColumnSpan="2" Grid.Column="1" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+	            <TextBlock x:Name="publishedDate" Text="The time of publication goes here" FontSize="20" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,12" >
+	            	<TextBlock.Foreground>
+	            		<SolidColorBrush Color="#FF888888"/>
+	            	</TextBlock.Foreground>
+	            </TextBlock>
+				
+	            <local:DynamicTextBlock x:Name="description" 
+					Text="This is the description.  It could be a good amount of text so we must cut it off when it gets too long.  An interesting article this is wouldn't you say?  I agree, we should try to fit as much text as possible, this is important people, move it move it move it!" 
+					FontSize="{StaticResource PhoneFontSizeNormal}" 
+					TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Height="222"/>
+
+					
+				<Rectangle x:Name="imageRect" Margin="6,0,8,0" Grid.Column="2"
+	                Stretch="UniformToFill" RadiusX="2" RadiusY="2" Width="222" Height="222" VerticalAlignment="Top" Stroke="#FF555555" StrokeThickness="2" Grid.Row="2" >
+					<Rectangle.Fill>
+						<ImageBrush x:Name="image" Stretch="UniformToFill" ImageSource="http://gamernode.com/upload/manager///Dan%20Crabtree/Reviews/halo-reach-beta-gameplay1285174234.jpg"/>
+					</Rectangle.Fill>
+				</Rectangle>
+					
+	            <local:FollowTheNewsButton Style="{StaticResource NoStyleButtonStyle}" Click="newsItemClicked" Grid.ColumnSpan="3"/>
+	        </Grid>
+    </local:TiltContentControl-->
+	
+	
+	<Grid CacheMode="BitmapCache" Width="400" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Name="textGrid" Grid.Column="1" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="title" Text="The title goes here but lets run off the text to see what it can potentially look like" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,6,4" />
+                <TextBlock Name="publishedDate" Text="The time of publication goes here" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="0,4,0,0" TextWrapping="Wrap" Grid.Row="1" />
+            </Grid>
+			
+		<Rectangle x:Name="imageRect" Grid.Column="2"
+                Stretch="UniformToFill" RadiusX="2" RadiusY="2" Width="90" Height="90" VerticalAlignment="Top" Margin="0,6,0,0" >
+			<Rectangle.Fill>
+				<ImageBrush x:Name="image" Stretch="UniformToFill" ImageSource="http://gamernode.com/upload/manager///Dan%20Crabtree/Reviews/halo-reach-beta-gameplay1285174234.jpg"/>
+			</Rectangle.Fill>
+		</Rectangle>
+	</Grid>
+
+</UserControl>

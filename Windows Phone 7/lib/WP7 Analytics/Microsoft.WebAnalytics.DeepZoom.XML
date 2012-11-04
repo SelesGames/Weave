@@ -1,0 +1,475 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WebAnalytics.DeepZoom</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.WebAnalytics.Media.HandleMultiScaleImage">
+            <summary>
+            Track deep zoom events
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.HandleMultiScaleImage.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track deep zoom events
+            </summary>
+            <param name="associatedObject">the MultiScaleImage</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.HandleMultiScaleImage.AddExceptionMessage(Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Add an exception message to the <codeEntityReference>P:Microsoft.WebAnalytics.AnalyticsEvent.ActionValue</codeEntityReference>
+            </summary>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.HandleMultiScaleImage.AddViewportArgs(Microsoft.WebAnalytics.AnalyticsEvent,System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Add Viewport arguments to the <codeEntityReference>P:Microsoft.WebAnalytics.AnalyticsEvent.EventArgs</codeEntityReference>
+            </summary>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="image">the multiscale image</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.HandleMultiScaleImage.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+        <member name="T:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions">
+            <summary>
+            Extensions for the MultiScaleSubImage class
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.OriginProperty">
+            <summary>
+            The origin dependency property
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.WidthProperty">
+            <summary>
+            The Width dependency property
+            </summary>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.GetBounds(System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Get the viewport bounds
+            </summary>
+            <param name="image">the multiscale sub image</param>
+            <returns>the bounds</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.SetBounds(System.Windows.Controls.MultiScaleSubImage,System.Windows.Rect)">
+            <summary>
+            Set the bounds of the image
+            </summary>
+            <param name="image">the deep zoom image</param>
+            <param name="bounds">the bounds to set the image to</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.GetOrigin(System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Get the origin
+            </summary>
+            <param name="image">the multiscale image</param>
+            <returns>the origin</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.SetOrigin(System.Windows.Controls.MultiScaleSubImage,System.Windows.Point)">
+            <summary>
+            Set the origin
+            </summary>
+            <param name="image">the multi scale sub image</param>
+            <param name="value">the origin</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.OriginChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Origin changed event handler
+            </summary>
+            <param name="obj">the multi scale sub image</param>
+            <param name="e">the dependency property changed event arguments</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.GetWidth(System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Get the image width
+            </summary>
+            <param name="image">the multi scale image</param>
+            <returns>the width in pixels</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.SetWidth(System.Windows.Controls.MultiScaleSubImage,System.Double)">
+            <summary>
+            Set the image width
+            </summary>
+            <param name="image">the multi scale image</param>
+            <param name="value">the width in pixels</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleSubImageExtensions.WidthChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Width changed event handler
+            </summary>
+            <param name="obj">the MultiScaleSubImage</param>
+            <param name="e">the dependency property changed event arguments</param>
+        </member>
+        <member name="T:Microsoft.WebAnalytics.Media.TrackMultiScaleImage">
+            <summary>
+            <img src="../media/Microsoft.WebAnalytics.Media.TrackMultiScaleImage.24x24.png"/> 
+            Track Deep Zoom Events 
+            </summary>
+            <remarks>When the MultiScaleImage.ViewPortChanged event fires, look 
+            into the Locations collection and send a LocationNear event if the 
+            centerpoint and zoom level are near a location.
+            When used with a Deep Zoom Collection, if a image with a Tag property is zoomed
+            to and the image fills the screen, then a SubImageInView event fires with the Tag in the AnalyticsEvent.ActionValue</remarks>
+        </member>
+        <member name="F:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.metadataTags">
+            <summary>
+            The metadata tags
+            </summary>
+        </member>
+        <member name="F:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.currentTag">
+            <summary>
+            The current metadata tag
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.#ctor">
+            <summary>
+            Initializes a new instance of the TrackMultiScaleImage class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.OnAttached">
+            <summary>
+            Attach events and initialize parts
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.OnDetaching">
+            <summary>
+            Detach events
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.Distance(System.Windows.Point,System.Windows.Point)">
+            <summary>
+            Use the Pythagorean Theorum to get the distance between two points
+            </summary>
+            <param name="p1">the first point</param>
+            <param name="p2">the second point</param>
+            <returns>the distance between the two points</returns>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.AssociatedObject_Loaded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Load the metadata file when the control loads
+            </summary>
+            <param name="sender">the MultiScaleImage</param>
+            <param name="e">the routed event arguments</param>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.OnDownloadStringCompleted(System.Object,System.Net.DownloadStringCompletedEventArgs)">
+            <summary>
+            Metadata has been downloaded
+            </summary>
+            <param name="sender">the WebClient</param>
+            <param name="e">the downloaded string completed event arguments</param>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.OnViewportChanged(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Viewport changed event handler
+            </summary>
+            <param name="sender">the multiscale image</param>
+            <param name="e">the routed event argument</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.Locations">
+            <summary>
+            Gets or sets the locations to track
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.TrackMultiScaleImage.Metadata">
+            <summary>
+            Gets or sets the Metadata URL created by the Deep Zoom Composer
+            </summary>
+        </member>
+        <member name="T:Microsoft.WebAnalytics.Media.MultiScaleImageLocation">
+            <summary>
+            A Deep Zoom location to track with the Silverlight Analytics Framework
+            </summary>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.#ctor">
+            <summary>
+            Initializes a new instance of the MultiScaleImageLocation class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.Name">
+            <summary>
+            Gets or sets the name to track in the AnalyticsEvent.ActionValue
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.ViewportWidth">
+            <summary>
+            Gets or sets the viewport width to compare against
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.ViewportOrigin">
+            <summary>
+            Gets or sets the Viewport origin to compare against
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.OriginTolerance">
+            <summary>
+            Gets or sets the tolerance in to compare the ViewportOrigin to the MultiScaleImage.ViewportOrigin
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.WidthTolerance">
+            <summary>
+            Gets or sets the tolerance in to compare the ViewportWidth to the MultiScaleImage.ViewportWidth
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.CenterX">
+            <summary>
+            Gets or sets the center X of the location (0-1)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.CenterY">
+            <summary>
+            Gets or sets the center Y of the location (0-1)
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.CenterTolerance">
+            <summary>
+            Gets or sets the center tolerance of the location
+            </summary>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Media.MultiScaleImageLocation.CustomProperties">
+            <summary>
+            Gets the custom properties
+            </summary>
+        </member>
+        <member name="T:Microsoft.LiveLabs.DeepZoom.ArrangeMode">
+            <summary>
+            Deep Zoom arange mode
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.ArrangeMode.Square">
+            <summary>
+            Square arrangement
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.ArrangeMode.Tight">
+            <summary>
+            Tight arrangement
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.ArrangeMode.Spiral">
+            <summary>
+            Spiral arrangement
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.ArrangeMode.Filmstrip">
+            <summary>
+            Filmstrip arrangement
+            </summary>
+        </member>
+        <member name="T:Microsoft.LiveLabs.DeepZoom.Neighbors">
+            <summary>
+            Neighbors for the sub image
+            </summary>
+        </member>
+        <member name="P:Microsoft.LiveLabs.DeepZoom.Neighbors.Up">
+            <summary>
+            Gets or sets the neighbor above
+            </summary>
+        </member>
+        <member name="P:Microsoft.LiveLabs.DeepZoom.Neighbors.Down">
+            <summary>
+            Gets or sets the neighbor below
+            </summary>
+        </member>
+        <member name="P:Microsoft.LiveLabs.DeepZoom.Neighbors.Left">
+            <summary>
+            Gets or sets the left neighbor
+            </summary>
+        </member>
+        <member name="P:Microsoft.LiveLabs.DeepZoom.Neighbors.Right">
+            <summary>
+            Gets or sets teh right neighbor
+            </summary>
+        </member>
+        <member name="T:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions">
+            <summary>
+            MultiScale image extensions
+            </summary>
+        </member>
+        <member name="F:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ClampMargin">
+            <summary>
+            Clamp Margin
+            </summary>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetViewportBounds(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the viewport bounds
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the bounding rectangle</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.SetViewportBounds(System.Windows.Controls.MultiScaleImage,System.Windows.Rect)">
+            <summary>
+            Set the viewport bounds
+            </summary>
+            <param name="msi"></param>
+            <param name="newBounds"></param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetViewportCenter(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the Viewport center
+            </summary>
+            <param name="multiScaleImage"></param>
+            <returns>the viewport center</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.SetViewportCenter(System.Windows.Controls.MultiScaleImage,System.Windows.Point)">
+            <summary>
+            Set the viewport center
+            </summary>
+            <param name="multiScaleImage">the multiscale image</param>
+            <param name="value">the centerpoint</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.CenterRectInViewport(System.Windows.Controls.MultiScaleImage,System.Windows.Rect)">
+            <summary>
+            Returns a viewport rect which shows the given rect centered in the viewport.
+            </summary>
+            <param name="msi">the MultiScaleImage</param>
+            <param name="rect">the rectange</param>
+            <returns>a viewport rectangle</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.AnimateToRect(System.Windows.Controls.MultiScaleImage,System.Windows.Rect)">
+            <summary>
+            Animate to a rectangle
+            </summary>
+            <param name="multiScaleImage">the multiscale image</param>
+            <param name="newViewportBounds">the new viewport bounds</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetSceneBounds(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the scene bounds
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the scene bounds</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetZoom1(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the zoom factor
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the zoom factor</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ClampToScreen(System.Windows.Controls.MultiScaleImage,System.Windows.Point)">
+            <summary>
+            Clamp the image to the screen
+            </summary>
+            <param name="multiScaleImage">the multi scale image</param>
+            <param name="viewportOrigin">the viewport origin</param>
+            <returns>the point result</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.HasArrangement(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Does this MSI have an arrangement?
+            </summary>
+            <param name="msi">the MultiScale Image</param>
+            <returns>true if the MSI has an arrangement</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetCurrentArrangement(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the current arrangement
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the rectangles</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.SetArrangement(System.Windows.Controls.MultiScaleImage,System.Windows.Rect[])">
+            <summary>
+            Set the arrangement
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <param name="rects">the rectangles</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetIncrementAngle(System.Double,System.Double,System.Double)">
+            <summary>
+            use law of cosines to find out the increment of the angle
+            a^2 = b^2+ c^2 - b*c*cos(alpha)
+            returned in radians
+            </summary>
+            <param name="radius1">the radius</param>
+            <param name="increment">the increment</param>
+            <param name="boundingCircle">the bounding circle</param>
+            <returns>the increment angle</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.HitTest(System.Windows.Controls.MultiScaleImage,System.Windows.Point)">
+            <summary>
+            Hit test the multiscale image
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <param name="point">the point in the Silverlight app</param>
+            <returns>the hit multi scale sub image</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.IsSubImageLarge(System.Windows.Controls.MultiScaleImage,System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Is the sub image large?
+            </summary>
+            <param name="msi">the multi scale image</param>
+            <param name="subImage">the sub image</param>
+            <returns>true if the sub image is large on the screen</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.IsSubImageFillingView(System.Windows.Controls.MultiScaleImage,System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Determines if a SubImage is filling the view
+            </summary>
+            <param name="msi">the MultiScaleImage</param>
+            <param name="subImage">the SubImage</param>
+            <returns>true if the subimage is filling the 90% of the view, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetFeaturedSubImage(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the featured sub image
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the multi scale sub image</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetCentralSubImage(System.Windows.Controls.MultiScaleImage)">
+            <summary>
+            Get the central subimage
+            </summary>
+            <param name="msi">the multiscale image</param>
+            <returns>the multiscale subimage</returns>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.GetSubImageNeighbors(System.Windows.Controls.MultiScaleImage,System.Windows.Controls.MultiScaleSubImage)">
+            <summary>
+            Get the sub image neighbors
+            </summary>
+            <param name="msi">the MultiScale Image</param>
+            <param name="subImage">the sub image</param>
+            <returns>the sub images's neighbors</returns>
+        </member>
+        <member name="T:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ViewportAnimation">
+            <summary>
+            Implements an "optimal" animated zoom/pan path between two view rectangles.
+            </summary>
+            <remarks>
+            Based on the paper "Smooth and efficient zooming and panning" by Jarke j. van Wijk and Wim A.A. Nuij
+            </remarks>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ViewportAnimation.#ctor(System.Windows.Controls.MultiScaleImage,System.Windows.Rect)">
+            <summary>
+            Initializes a new instance of the ViewportAnimation class.
+            </summary>
+            <param name="multiScaleImage">the multiscale image</param>
+            <param name="newViewportBounds">the new viewport bounds</param>
+        </member>
+        <member name="M:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ViewportAnimation.ProgressChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Progress changed event handler
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Microsoft.LiveLabs.DeepZoom.MultiScaleImageExtensions.ViewportAnimation.Progress">
+            <summary>
+            Gets or sets the progress
+            </summary>
+        </member>
+    </members>
+</doc>

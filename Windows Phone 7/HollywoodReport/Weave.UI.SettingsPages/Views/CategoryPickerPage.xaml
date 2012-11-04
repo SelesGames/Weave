@@ -1,0 +1,69 @@
+﻿<!--
+// (c) Copyright Microsoft Corporation.
+// This source is subject to the Microsoft Public License (Ms-PL).
+// Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
+// All other rights reserved.
+-->
+
+<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleCategories" 
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Class="weave.Pages.Settings.CategoryPickerPage"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480" Height="800"
+    toolkit:TiltEffect.IsTiltEnabled="True">
+
+	<phone:PhoneApplicationPage.Resources>	
+		<SampleData:SampleCategories x:Key="SampleCategories" d:IsDataSource="True"/>
+		
+		<DataTemplate x:Key="CategoriesItemTemplate">
+			<Border Background="{StaticResource TransparentBrush}">		
+				<TextBlock Text="{Binding DisplayName}" TextTrimming="WordEllipsis" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="12,4,12,6"/>
+			</Border>
+		</DataTemplate>
+	</phone:PhoneApplicationPage.Resources>
+
+	<Grid Background="{StaticResource PhoneChromeBrush}" x:Name="MainGrid" d:DataContext="{Binding Source={StaticResource SampleCategories}}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Border x:Name="HeaderTitle" Grid.Row="0" Margin="24,24,24,12" Background="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" CacheMode="BitmapCache">
+			<TextBlock
+				FontFamily="{StaticResource PhoneFontFamilySemiBold}"
+				FontSize="{StaticResource PhoneFontSizeMedium}"
+				Foreground="{StaticResource PhoneForegroundBrush}"
+				Text="Select from one of your other categories" Margin="4,8,6,4"/>
+			<UIElement.Projection>
+				<PlaneProjection RotationX="-90"/>
+			</UIElement.Projection>
+		</Border>
+
+		<ListBox
+			x:Name="Picker"
+			Grid.Row="1"
+			d:DataContext="{Binding Categories}"
+			ItemsSource="{Binding}"
+			ItemTemplate="{StaticResource CategoriesItemTemplate}"
+			toolkit:TiltEffect.IsTiltEnabled="True"
+			Margin="12,12,0,0" 
+			Tap="OnPickerTapped"/>
+		<Border Grid.Row="2" Margin="24,2,24,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{StaticResource PhoneAccentBrush}">
+			<TextBlock Text="Or type in a new category name here!" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="4,8,6,4"  />
+		</Border>
+		<TextBox Grid.Row="3" Margin="12,0,12,12" InputScope="Search" KeyUp="TextBox_KeyUp" />
+	</Grid>
+
+</phone:PhoneApplicationPage>

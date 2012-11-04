@@ -1,0 +1,13 @@
+﻿<weave:NewsItem xmlns:weave="clr-namespace:weave;assembly=weave.Data" 
+                Description="This is a sample article description.  The image above is of Sonic the Hedgehog, which was a fine game in its time.  Which was the early 90s, a time of Super Nintendo's Mario Brothers and Sega's Sonic the Hedgehog.  Which I played at Price Club." 
+                HasImage="True" 
+                ImageUrl="http://static.arstechnica.com/assets/2010/07/sonic4-waterfall-thumb-640xauto-15310.jpg" 
+                Link="Mollis praesent montes" 
+                OriginalSource="Adipiscing dignissim commodo nibh nostra" 
+                OriginalFeedUri="Accumsan aliquet blandit eros" 
+                PublishDate="Ornare elementum mus facilisis" 
+                PublishDateTime="10/06/2010 20:55:52" 
+                SortRating="219.4" 
+                Title="Sample title representing a news item.  Three lines?" 
+                FormattedForPopupsSourceAndDate="Cras aliquam aenean class mauris">
+</weave:NewsItem>

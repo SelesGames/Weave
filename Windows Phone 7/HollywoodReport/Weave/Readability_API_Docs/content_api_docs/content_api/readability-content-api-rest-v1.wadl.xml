@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="wadl_documentation.xsl"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://research.sun.com/wadl/2006/10" xsi:schemaLocation="http://research.sun.com/wadl/2006/10 wadl.xsd">
+    <doc title="Readability v1 Content API">
+        <html:h2>Introduction</html:h2>
+        <html:p>
+            The Readability Content API allows developers to interact with the article parsing featureset of Readability. This means grabbing an article's content based on a URL (or Readability article ID).
+        </html:p>
+        <html:h3>Quick Start</html:h3>
+        <html:p>
+			Here's how to pull an article's content from the Readability Content API:
+        </html:p>
+        <html:h4>Request</html:h4>
+        <html:pre>
+GET /api/content/v1/parser?url=http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/&amp;token=1b830931777ac7c2ac954e9f0d67df437175e66e
+Content-Type: application/x-www-form-urlencoded
+        </html:pre>
+        <html:h4>Response</html:h4>
+        <html:pre>
+<![CDATA[
+HTTP/1.0 200 OK
+{
+    "domain": "blog.readability.com", 
+    "author": "Richard Ziade",
+    "url": "http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/", 
+    "short_url": "http://rdd.me/kbgr5a1k",
+    "title": "Step Up & Be Heard: Readability Ideas", 
+    "total_pages": 1, 
+    "word_count": 175, 
+    "content": "<div>\n  \n<div class=\"entry\">\n\t<p>When we launched Readability [snip] ...</div>\n</div>", 
+    "date_published": "2011-02-22 00:00:00", 
+    "next_page_id": null, 
+    "rendered_pages": 1
+} 
+]]>
+        </html:pre>
+
+        <html:h3>Authentication</html:h3>
+        <html:p>
+            All requests to the Readability Content API service require an API key. For a key, please email support@readability.com. No guarantees are given as to whether we will provide a key.
+        </html:p>
+        <html:h3>Data Formats</html:h3>
+        <html:p>
+            All requests are, by default, provided as JSON. You may also pass "?format=xml" in the URL to convert this into XML data to be consumed.
+        </html:p>
+                    
+    </doc>
+    <resources base="https://readability.com/api/content/v1">
+        <resource path="">
+            <method name="GET">
+                <doc>
+                    Retrieve the base API URI - information about subresources.
+                </doc>
+                <request>
+                    <param name="Authorization" style="header" required="true"/>
+                </request>
+                <response>
+                    <representation href="#rootRepresentation"/>
+                </response>
+            </method>
+        </resource>
+        <resource path="parser">
+            <method name="GET">
+                <doc>
+                        Parse an article
+                    </doc>
+                <request>
+                    <param name="token" style="query" required="true" type="xsd:string"/>
+                    <param name="url" style="query" required="false" type="xsd:string">
+                        <doc>The URL of an article to return the content for.</doc>
+                    </param>
+                    <param name="id" style="query" required="false" type="xsd:string">
+                        <doc>The ID of an article to return the content for.</doc>
+                    </param>
+                    <param name="max_pages" style="query" required="false" type="xsd:integer">
+                        <doc>The maximum number of pages to parse and combine. Default is 25.</doc>
+                    </param>
+                </request>
+                <response>
+                    <representation href="#articleRepresentation"/>
+                    <fault href="#error_400" status="400"/>
+                    <fault href="#error_401" status="401"/>
+                    <fault href="#error_500" status="500"/>
+                </response>
+            </method>
+			<method name="POST">
+                <doc>
+					Parse the content of a URL, providing the full HTML document of the source to parse.
+                </doc>
+                <request>
+                    <param name="Content-Type" style="header" required="true" type="xsd:string">
+                        <doc>
+                            <html:p>A value of "application/x-www-form-urlencoded" must be provided.</html:p>
+                        </doc>
+                    </param>
+                    <param name="token" style="plain" required="true" type="xsd:string"/>
+                    <param name="url" style="plain" required="false" type="xsd:string">
+                        <doc>
+							<html:p>The URL of an article to return the content for. If this is not provided, id must be.</html:p>
+						</doc>
+                    </param>
+                    <param name="id" style="plain" required="false" type="xsd:string">
+                        <doc>
+							<html:p>The ID of an article to return the content for. If this is not provided, url must be.</html:p>
+						</doc>
+                    </param>
+					<param name="charset" style="plain" required="false" type="xsd:string">
+						<doc>
+							<html:p>The character set of the HTML document provided, if known. If using javascript, this chunk of cross-browser code may help you:</html:p>
+							<html:code>charSet = (document.characterSet ? document.characterSet : document.charset)</html:code>
+						</doc>
+					</param>
+					<param name="doc" style="plain" required="true" type="xsd:string">
+						<doc>
+							<html:p>The FULL HTML document of the page in question. Providing this makes for much faster responses, because we don't have to fetch the content from the server ourselves.</html:p>
+						</doc>
+					</param>
+                    <param name="max_pages" style="plain" required="false" type="xsd:integer">
+                        <doc>The maximum number of pages to parse and combine. Default is 25.</doc>
+                    </param>
+                </request>
+                <response>
+                    <representation href="#articleRepresentation"/>
+                    <fault href="#error_400" status="400"/>
+                    <fault href="#error_401" status="401"/>
+                    <fault href="#error_500" status="500"/>
+                </response>
+			</method>
+			<method name="HEAD">
+                <doc>
+					<html:p>
+                		Retrieve the Content Status of an article. This is useful if you want to save yourself from POSTing a large html document. You can do a HEAD request on the resource, and check for the status of the article in the X-Content-Status header. <html:strong>Additionally, if we've never seen the article before, we'll return a 404, which also means you should POST.</html:strong>
+					</html:p>
+                </doc>
+                <request>
+                    <param name="token" style="query" required="true" type="xsd:string" />
+                    <param name="url" style="query" required="false" type="xsd:string">
+                        <doc>The URL of an article to check.</doc>
+                    </param>
+                    <param name="id" style="query" required="false" type="xsd:string">
+                        <doc>The ID of an article to check.</doc>
+                    </param>
+                </request>
+                <response>
+					<param name="X-Content-Status" style="header" type="xsd:string">
+						<doc>
+							<html:p>The status of the content in Readability. One of:</html:p>
+							<html:dl>
+								<html:dt>INVALID</html:dt>
+								<html:dd>We were unable to parse this URL for some reason. <html:em>Recommendation: Fail</html:em></html:dd>
+								<html:dt>UNRETRIEVED</html:dt>
+								<html:dd>We know of this article, but have not yet retrieved its content, or the cache has expired. <html:em>Recommendation: POST content to us</html:em></html:dd>
+								<html:dt>PROVIDED_BY_USER</html:dt>
+								<html:dd>We have retrieved the content for this URL from at least one user. <html:em>Recommendation: POST content to us</html:em></html:dd>
+								<html:dt>VALIDATED_BY_USERS</html:dt>
+								<html:dd>We have retrieved the content for this URL from multiple users, and have validated it. <html:em>Recommendation: GET the content from us.</html:em></html:dd>
+								<html:dt>FETCHED</html:dt>
+								<html:dd>We fetched the content for this URL manually, and it has been cached. <html:em>Recommendation:GET the content from us.</html:em></html:dd>
+							</html:dl>
+						</doc>
+					</param>
+                    <fault href="#error_400" status="400"/>
+                    <fault href="#error_401" status="401"/>
+                    <fault href="#error_404" status="404"/>
+                    <fault href="#error_500" status="500"/>
+                </response>
+			</method>   
+        </resource>
+    </resources>
+    <representation id="rootRepresentation" mediaType="application/json" status="200">
+        <doc title="Example root representation.">
+            <pre class="prettyprint">
+{
+    "resources": {
+        "parser": {
+            "description": "The Content Parser Resource",
+            "href": "/api/content/v1/parser"
+        }
+    }
+}
+            </pre>
+        </doc>
+    </representation>
+    <representation id="articleRepresentation" mediaType="application/json" status="200">
+        <doc title="Example article representation.">
+            <pre class="prettyprint"><![CDATA[
+{
+    "domain": "blog.readability.com", 
+    "author": "Richard Ziade",
+    "url": "http://blog.readability.com/2011/02/step-up-be-heard-readability-ideas/", 
+    "short_url": "http://rdd.me/kbgr5a1k",
+    "title": "Step Up & Be Heard: Readability Ideas", 
+    "total_pages": 1, 
+    "word_count": 175, 
+    "content": "<div>\n  \n<div class=\"entry\">\n\t<p>When we launched Readability [snip] ...</div>\n</div>", 
+    "date_published": "2011-02-22 00:00:00", 
+    "next_page_id": null, 
+    "rendered_pages": 1
+}
+]]></pre>
+        </doc>
+    </representation>
+    <fault id="error_400" mediaType="application/json" status="400">
+        <doc title="400 Bad Request">
+            The server could not understand your request. Verify that request parameters (and content, if any) are valid.
+        </doc>
+    </fault>
+    <fault id="error_401" mediaType="application/json" status="401">
+        <doc title="401 Authorization Required">
+            <html:p>
+                Authentication failed or was not provided. Verify that you have sent valid ixDirectory credentials via HTTP Basic.
+            </html:p>
+            <html:p>A 'Www-Authenticate' challenge header will be sent with this type of error response.</html:p>
+        </doc>
+    </fault>
+    <fault id="error_403" mediaType="application/json" status="403">
+        <doc title="403 Forbidden">
+            The server understood your request and verified your credentials, but you are not allowed to perform the requested action.
+        </doc>
+    </fault>
+    <fault id="error_404" mediaType="application/json" status="404">
+        <doc title="404 Not Found">
+            The resource that you requested does not exist.
+        </doc>
+    </fault>
+    <fault id="error_500" mediaType="application/json" status="500">
+        <doc title="500 Internal Server Error">
+            An unknown error has occurred.
+        </doc>
+    </fault>
+    
+</application>

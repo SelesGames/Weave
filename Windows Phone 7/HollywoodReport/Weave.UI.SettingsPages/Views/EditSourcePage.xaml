@@ -1,0 +1,56 @@
+﻿<phone:PhoneApplicationPage 
+	x:Class="weave.EditSourcePage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleFeedSource" 
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	xmlns:loc="clr-namespace:weave"
+	SupportedOrientations="Portrait"
+	mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
+	
+	<UserControl.Resources>
+		<SampleData:SampleFeedSource x:Key="SampleFeedSource" d:IsDataSource="True"/>
+	
+		<DataTemplate x:Key="CategoriesItemTemplate">
+			<TextBlock Text="{Binding DisplayName}"/>
+		</DataTemplate>
+		
+		<DataTemplate x:Key="FullModeCategoryListPickerTemplate">
+			<TextBlock Text="{Binding DisplayName}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilyNormal}"/>
+		</DataTemplate>	
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleFeedSource}}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="161"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" DataContext="{StaticResource PanoramaTitle}" Style="{StaticResource PhoneTextNormalStyle}" Text="MANAGE"/>
+			<TextBlock x:Name="PageTitle" Text="edit" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<StackPanel>
+				<TextBlock Text="Source url" Style="{StaticResource PhoneTextSubtleStyle}"/>
+				<TextBlock x:Name="urlTextBlock" Text="{Binding Feed.FeedUri}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="12,0" Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap"/>
+				<TextBlock Margin="12,36,12,0" Foreground="{StaticResource PhoneSubtleBrush}" Text="Category"/>
+				<toolkit:ListPicker x:Name="categories" Margin="12,0" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" FullModeItemTemplate="{StaticResource FullModeCategoryListPickerTemplate}" ExpansionMode="FullScreenOnly" PickerPageUri="/Weave.UI.SettingsPages;component/Views/CategoryPickerPage.xaml" />
+				<TextBlock Text="Feed name" Margin="12,36,12,0" Foreground="{StaticResource PhoneSubtleBrush}" />
+				<TextBox x:Name="feedName" InputScope="Text" Text="{Binding Feed.FeedName, Mode=TwoWay}"/>
+				<TextBlock Text="Article viewing mode" Margin="12,72,12,0" Foreground="{StaticResource PhoneSubtleBrush}" />
+				<TextBlock Text="(ADVANCED)" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="217,-26,12,0" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" HorizontalAlignment="Right" />
+				<toolkit:ListPicker x:Name="viewMode" Margin="12,0" ItemsSource="{Binding ArticleViewingModes}" SelectedItem="{Binding SelectedArticleViewingMode, Mode=TwoWay}" IsEnabled="{Binding IsArticleViewingSelectorEnabled}" />
+			</StackPanel>        	      
+		</Grid>
+	</Grid>
+
+</phone:PhoneApplicationPage>

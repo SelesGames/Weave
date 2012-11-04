@@ -1,0 +1,77 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="weave.NewMainpage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	    xmlns:local="clr-namespace:weave"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
+	
+	<phone:PhoneApplicationPage.Resources>
+	
+			<ResourceDictionary>	
+			
+			<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/weave;component/Resources/ButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+											
+		</ResourceDictionary>										
+	</phone:PhoneApplicationPage.Resources>
+
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="161"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <Image Source="fibonnaci2.png" Stretch="Fill" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Opacity="0.185" Visibility="Collapsed">
+        	<Image.RenderTransform>
+        		<CompositeTransform ScaleY="-1"/>
+        	</Image.RenderTransform>
+        </Image>
+
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+		
+        <TextBlock x:Name="giantTitle" HorizontalAlignment="Right" TextWrapping="Wrap" 
+			Text="technology" VerticalAlignment="Top" 
+			FontFamily="{StaticResource PhoneFontFamilyLight}" 
+			Margin="0,-64,-8,0" FontSize="96" LineHeight="13.333" 
+			Opacity="0.395"/>
+    
+	        <Grid x:Name="ContentGrid" Grid.Row="2" >
+        		<local:CustomList x:Name="cl" />
+			<Image x:Name="listBitmap" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" CacheMode="BitmapCache" >
+				<Image.RenderTransform>
+					<TranslateTransform/>
+				</Image.RenderTransform>
+			</Image>
+			<local:ArticleView x:Name="detailedArticleViewer" Visibility="Collapsed" />
+        </Grid>
+	        <TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="Page 2 of 23" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeLarge}" Opacity="0.5" Margin="0,0,0,12"/>
+	        <StackPanel HorizontalAlignment="Left" Margin="12,0,0,0" Orientation="Horizontal" VerticalAlignment="Bottom">
+	        	<Button Height="84" Style="{StaticResource CircleButtonStyle}" Width="84" BorderBrush="{StaticResource PhoneAccentBrush}">
+	        		<Image Source="/Assets/Icons/appbar.allread.png" />
+	        	</Button>
+	        	<Button Height="84" Style="{StaticResource CircleButtonStyle}" Width="84" BorderBrush="{StaticResource PhoneAccentBrush}">
+	        		<Image Source="/Assets/Icons/appbar.eye.png" />
+	        	</Button>
+	        	<Button Height="84" Style="{StaticResource CircleButtonStyle}" Width="84" BorderBrush="{StaticResource PhoneAccentBrush}">
+	        		<Image Source="/Assets/Icons/appbar.favs.addto.rest.png" />
+	        	</Button>
+
+	        </StackPanel>
+
+	</Grid>
+
+</phone:PhoneApplicationPage>

@@ -1,0 +1,41 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:weave="clr-namespace:weave;assembly=weave.Common.Reactive"
+    x:Class="weave.ChangelogAndComingSoonPage" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+	d:DesignWidth="480" >
+	
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Margin="24,0">
+	<StackPanel.Resources>
+		<Style x:Key="TextBlockStyle" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap" />
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="LineHeight" Value="30.667" />
+			<Setter Property="CacheMode" Value="BitmapCache" />
+			<Setter Property="Margin" Value="0,0,0,24" />
+		</Style>
+	</StackPanel.Resources>
+	<TextBlock Text="Upcoming features (post-Mango):" FontSize="32" FontFamily="Segoe WP SemiLight" Margin="0,0,0,24" Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap" />
+	<TextBlock Text="• Google Reader importing will finally be here!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The ability to save articles will be a new key feature!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• More articles per page = less page turning!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Surprising new UI enhancements - there will be things you can do that no other WP7 news reader can do!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Toggle images on/off in the article list." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Better feed management - change what categories a feed belongs to, as well as its name." Style="{StaticResource TextBlockStyle}" />
+	<Grid Margin="0,24,0,0">
+		<Rectangle Fill="{StaticResource PhoneAccentBrush}"/>
+		<TextBlock TextWrapping="Wrap" FontSize="20" Margin="12,8,12,10"><Run Text="More upcoming features will be announced here - follow us on Twitter (@SelesGames) to get the latest news on all our apps!"/></TextBlock>
+	</Grid>
+</StackPanel>
+
+</UserControl>

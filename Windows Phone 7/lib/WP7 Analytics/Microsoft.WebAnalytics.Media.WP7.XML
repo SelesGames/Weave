@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.WebAnalytics.Media.WP7</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.WebAnalytics.Behaviors.Handlers.HandleMediaElement">
+            <summary>
+            Track a MediaElement CurrentStateChanged, MediaOpened, and MediaFailed events
+            </summary>
+            <remarks>
+            <list type="table">
+            <item>
+            <term>Platforms</term>
+            <description>Windows Phone 7, Silverlight 3, Silverlight 4, WPF</description>
+            </item>
+            <item>
+            <term>AnalyticsEvent.Name</term>
+            <description>CurrentStateChanged, MediaOpened, MediaFailed</description>
+            </item>
+            <item>
+            <term>Windows Phone 7 Required Capabilities</term>
+            <description>ID_CAP_NETWORKING, ID_CAP_MEDIALIB</description>
+            </item>
+            </list>
+            For Windows Phone 7, this is in the Microsoft.WebAnalytics.Media.WP7 assembly.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.WebAnalytics.Behaviors.Handlers.HandleMediaElement.Track(System.Windows.FrameworkElement,Microsoft.WebAnalytics.AnalyticsEvent,System.EventArgs)">
+            <summary>
+            Track the media element events
+            </summary>
+            <param name="associatedObject">the associated object</param>
+            <param name="analyticsEvent">the analytics event</param>
+            <param name="eventArgs">the event arguments</param>
+        </member>
+        <member name="P:Microsoft.WebAnalytics.Behaviors.Handlers.HandleMediaElement.Log">
+            <summary>
+            Gets or sets the event Logging method
+            </summary>
+        </member>
+    </members>
+</doc>
