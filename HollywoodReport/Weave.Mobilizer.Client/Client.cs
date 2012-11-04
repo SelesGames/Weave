@@ -7,7 +7,7 @@ namespace Weave.Mobilizer.Client
 {
     public class Client
     {
-        const string R_URL_TEMPLATE = "http://weave-mobilizer.cloudapp.net:8085/ipf?url={0}&f=json";
+        const string R_URL_TEMPLATE = "http://mobilizer.cloudapp.net/ipf?url={0}";
 
         public async Task<MobilizerResult> GetAsync(string url)
         {

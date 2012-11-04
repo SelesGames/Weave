@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Navigation;
+using System.Net;
 
 namespace weave
 {
@@ -35,8 +36,9 @@ namespace weave
 
         public static void ToBrowseFeedsByCategoryPage(this NavigationService navService, string category)
         {
+            var safeCategory = HttpUtility.UrlEncode(category);
             SafelyNavigateTo(navService, string.Format(
-                "/Weave.UI.SettingsPages;component/Views/BrowseFeedsByCategoryPage.xaml?category={0}", category));
+                "/Weave.UI.SettingsPages;component/Views/BrowseFeedsByCategoryPage.xaml?category={0}", safeCategory));
         }
     }
 }

@@ -62,6 +62,9 @@ namespace weave
             var isAppBarMinimized = permState.IsHideAppBarOnArticleListPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
+
+            if (OSThemeHelper.GetCurrentTheme() == OSTheme.Light)
+                fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)
@@ -230,10 +233,11 @@ namespace weave
             //adControl.AdHeight = 80;
             //adControl.AdWidth = 480;
             adControl.SetValue(Grid.RowProperty, 0);
+            adControl.SetValue(Grid.ColumnProperty, 1);
             adControl.PlayAnimations = true;
             adControl.Opacity = 0;
 
-            ContentGrid.Children.Add(adControl);
+            LayoutRoot.Children.Add(adControl);
             await TimeSpan.FromSeconds(1);
             adControl.Fade().From(0).To(1).Over(TimeSpan.FromSeconds(0.7)).ToStoryboard().Begin();
         }

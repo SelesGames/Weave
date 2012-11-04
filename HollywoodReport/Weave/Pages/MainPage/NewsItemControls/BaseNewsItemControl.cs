@@ -7,7 +7,7 @@ namespace weave
 {
     public abstract class BaseNewsItemControl : UserControl
     {
-        static BitmapImage failImage = new BitmapImage(new Uri("/weave;component/Assets/imageDownloadFailed.png", UriKind.Relative));
+        static BitmapImage failImage = new BitmapImage(new Uri("/weave;component/Assets/imageDownloadFailed.jpg", UriKind.Relative));
 
         public static BitmapImage FailImage
         {

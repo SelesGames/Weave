@@ -71,6 +71,8 @@ namespace weave
 
         async void OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
+            await RecoverPermanentStateAsync();
+
             new SystemTrayNavigationSetter(frame, permanentState);
 
             if (permanentState.IsFirstTime)
@@ -176,26 +178,25 @@ namespace weave
             permanentState.CurrentLoginTime = DateTime.UtcNow;
             settings.LastLoginTime = permanentState.PreviousLoginTime;
             permanentState.RunHistory.CreateNewLog();
+            FinishInitialization();
 
             if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
             {
-                FinishInitialization();
                 GlobalNavigationService.ToWelcomePage();
             }
             else
             {
-                FinishInitialization();
                 GlobalNavigationService.ToPanoramaPage();
             }
         }
 
-        async Task OnActivated()
+        void OnActivated()
         {
             settings.StartupMode = StartupMode.Activate;
 
             if (!hasBeenInitialized)
             {
-                await RecoverPermanentStateAsync();
+                RecoverPermanentStateAsync().Wait();
                 settings.LastLoginTime = permanentState.PreviousLoginTime;
                 FinishInitialization();
             }

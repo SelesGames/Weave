@@ -7,7 +7,7 @@
   <SampleData:SampleCategories.Categories>
     <SampleData:CategoriesItem Name="Nam" IsEnabled="True" UserAdded="True" />
     <SampleData:CategoriesItem Name="Aliquam sed" IsEnabled="False" UserAdded="False" />
-    <SampleData:CategoriesItem Name="Maecenas nam" IsEnabled="True" UserAdded="False" />
+    <SampleData:CategoriesItem Name="Maecenas nam testing double" IsEnabled="True" UserAdded="False" />
     <SampleData:CategoriesItem Name="Aenean" IsEnabled="True" UserAdded="False" />
     <SampleData:CategoriesItem Name="Sed dis" IsEnabled="False" UserAdded="False" />
     <SampleData:CategoriesItem Name="Class mauris" IsEnabled="True" UserAdded="False" />

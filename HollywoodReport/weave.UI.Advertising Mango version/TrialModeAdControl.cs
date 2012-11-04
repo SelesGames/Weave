@@ -1,8 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using Microsoft.Advertising;
 using Microsoft.Advertising.Mobile.UI;
 
@@ -11,12 +15,14 @@ namespace weave.UI.Advertising
     public class TrialModeAdControl : Control, IDisposable
     {
         Panel AdContainer;
+        Storyboard OnNewAdSB;
         AdControl adControl;
         AdUnitCollection adUnits;
         string keywords;
         bool isHidden = false;
         int currentFaultLevel = 0;
         bool isDisposed = false;
+        SerialDisposable sd = new SerialDisposable();
 
         public bool PlayAnimations { get; set; }
         public bool IsAdCurrentlyEngaged { get { return false; } }
@@ -34,7 +40,7 @@ namespace weave.UI.Advertising
 
             this.keywords = null;
             PlayAnimations = true;
-            MaxFaultLevel = 5;
+            MaxFaultLevel = 10;
 
             if (DesignerProperties.IsInDesignTool)
                 return;
@@ -49,10 +55,12 @@ namespace weave.UI.Advertising
             Dispose();
         }
 
-        public override void OnApplyTemplate()
+        public async override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             AdContainer = base.GetTemplateChild("AdContainer") as Panel;
+            var fe = base.GetTemplateChild("LayoutRoot") as FrameworkElement;
+            OnNewAdSB = fe.Resources["OnNewAdSB"] as Storyboard;
 
             if (DesignerProperties.IsInDesignTool)
             {
@@ -65,6 +73,7 @@ namespace weave.UI.Advertising
 
             if (AdVisibilityService.AreAdsStillBeingShownAtAll)
             {
+                await TaskEx.Delay(TimeSpan.FromSeconds(1.5));
                 CreateAd();
             }
             else
@@ -81,6 +90,7 @@ namespace weave.UI.Advertising
                 string adUnitId;
 
                 await adUnits.AreAdUnitsSet;
+                await TaskEx.Delay(TimeSpan.FromSeconds(1));
                 if (isDisposed)
                     return;
 
@@ -93,7 +103,7 @@ namespace weave.UI.Advertising
                     return;
                 }
 
-                adControl = new AdControl(appId, adUnitId, true) { IsAutoCollapseEnabled = true, Width = 480, Height = 80, BorderBrush = new SolidColorBrush(Colors.White) };
+                adControl = new AdControl(appId, adUnitId, false) { IsAutoCollapseEnabled = true, Width = 480, Height = 80, BorderBrush = new SolidColorBrush(Colors.White) };
 
                 if (this.isHidden)
                     adControl.Visibility = Visibility.Collapsed;
@@ -134,15 +144,30 @@ namespace weave.UI.Advertising
 
             adControl.IsEngagedChanged += OnAdControlIsEngagedChanged;
             adControl.ErrorOccurred += OnAdControlErrorOccurred;
+            adControl.AdRefreshed += OnAdRefreshed;
+
+            sd.Disposable = Observable
+                .Interval(TimeSpan.FromSeconds(30))
+                .ObserveOnDispatcher()
+                .Subscribe(
+                    o =>
+                    {
+                        if (adControl != null && adControl.Visibility != Visibility.Collapsed)
+                            adControl.Refresh();
+                    },
+                    exception => { ; });
         }
 
         void UnhookAdControlEvents()
         {
+            sd.Disposable = null;
+
             if (adControl == null)
                 return;
 
             adControl.IsEngagedChanged -= OnAdControlIsEngagedChanged;
             adControl.ErrorOccurred -= OnAdControlErrorOccurred;
+            adControl.AdRefreshed -= OnAdRefreshed;
         }
 
         void OnAdControlIsEngagedChanged(object sender, EventArgs e)
@@ -170,6 +195,18 @@ namespace weave.UI.Advertising
                     Dispose();
             });
         }
+
+        void OnAdRefreshed(object sender, EventArgs e)
+        {
+            currentFaultLevel = Math.Max(currentFaultLevel - 1, 0);
+
+            if (OnNewAdSB == null || !PlayAnimations)
+                return;
+
+            OnNewAdSB.Stop();
+            OnNewAdSB.Begin();
+        }
+
 
         #endregion
 
@@ -204,6 +241,7 @@ namespace weave.UI.Advertising
             isDisposed = true;
             try
             {
+                sd.Dispose();
                 this.Visibility = Visibility.Collapsed;
                 FlushAd();
                 AdVisibilityService.AdsNoLongerShown -= OnAdsNoLongerShown;

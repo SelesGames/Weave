@@ -58,7 +58,7 @@ namespace GoogleReaderConnect
         public async Task Authenticate()
         {
             string authUrl = String.Format("{0}?service={1}&Email={2}&Passwd={3}",
-                AUTH_URI, SERVICE, username, password);
+                AUTH_URI, SERVICE, HttpUtility.UrlEncode(username), password);
 
             var request = HttpWebRequest.CreateHttp(authUrl);
             try

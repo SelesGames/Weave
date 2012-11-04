@@ -362,6 +362,14 @@ namespace weave
         void OnBrowserNavigating(NavigatingEventArgs e)
         {
             var uri = e.Uri;
+            if (uri == null)
+                return;
+
+            // special youtube rule
+            var originalString = uri.OriginalString;
+            if (originalString != null && originalString.StartsWith("http://m.youtube.com/#/watch"))
+                return;
+
             e.Cancel = true;
             SelesGames.Phone.TaskService.ToInternetExplorerTask(uri);
         }

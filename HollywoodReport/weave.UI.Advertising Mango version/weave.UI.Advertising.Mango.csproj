@@ -51,6 +51,13 @@
       <HintPath>..\..\lib\Microsoft.Advertising.Mobile.UI.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />

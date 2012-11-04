@@ -54,9 +54,6 @@
     <Reference Include="AsyncCtpLibrary_Phone">
       <HintPath>..\..\lib\AsyncCtpLibrary_Phone.dll</HintPath>
     </Reference>
-    <Reference Include="dnp.Counters">
-      <HintPath>..\..\lib\dnp.Counters.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls">
       <Private>True</Private>
@@ -376,9 +373,6 @@
     <Resource Include="Assets\Icons\64x64_google.png" />
     <Resource Include="Assets\Icons\64x64_info.png" />
     <Resource Include="Assets\Icons\64x64_rss.png" />
-    <Content Include="Assets\accent2.png" />
-    <Content Include="Assets\CNNCAP.jpg" />
-    <Content Include="Assets\GoldenRatioOutline.png" />
     <Content Include="Assets\Icons\36x36_share.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -399,7 +393,6 @@
     </Content>
     <Content Include="Assets\Icons\64x64_twitter.png" />
     <Resource Include="Assets\Icons\64x64_zune.png" />
-    <Content Include="Assets\150px-Cquote2.svg.png" />
     <Content Include="Assets\Icons\48x48_ie.png" />
     <Content Include="Assets\Icons\48x48_share.png" />
     <Content Include="Assets\Icons\48x48_share_v3.png">
@@ -457,7 +450,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <DesignTimeOnly Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xsd" />
-    <Resource Include="Assets\imageDownloadFailed.png" />
     <Content Include="Assets\Icons\fontSizeIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -503,6 +495,7 @@
     <Content Include="Assets\Icons\wheel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Assets\imageDownloadFailed.jpg" />
     <Content Include="Assets\pancake-bunny.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -512,10 +505,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Assets\sendTo.png" />
-    <Content Include="Assets\PanoramaBackgrounds\cypress.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\rectangleGuide.png" />
     <Content Include="SplashScreenImage.jpg" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
