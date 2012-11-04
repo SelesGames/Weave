@@ -20,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weave.RSS", "weave.RSS\weav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weave.UI.Advertising", "weave.UI.Advertising\weave.UI.Advertising.csproj", "{BC2EC5F2-C4AB-4D7A-9A76-1C26EA4970D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxTestBedApp", "SandboxTestBedApp\SandboxTestBedApp.csproj", "{61CE5E11-371B-4C0F-B790-C04141D55A18}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weave.UI.Advertising.Mango", "weave.UI.Advertising Mango version\weave.UI.Advertising.Mango.csproj", "{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservableToTaskBridge", "ObservableToTaskBridge\ObservableToTaskBridge.csproj", "{3D584FFE-5A2C-4803-A447-7A5451AFDB21}"
@@ -152,20 +150,6 @@ Global
 		{BC2EC5F2-C4AB-4D7A-9A76-1C26EA4970D9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BC2EC5F2-C4AB-4D7A-9A76-1C26EA4970D9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BC2EC5F2-C4AB-4D7A-9A76-1C26EA4970D9}.Release|x86.ActiveCfg = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|Mixed Platforms.Deploy.0 = Release|Any CPU
-		{61CE5E11-371B-4C0F-B790-C04141D55A18}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

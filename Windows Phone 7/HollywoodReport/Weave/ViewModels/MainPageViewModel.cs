@@ -272,7 +272,7 @@ namespace weave
             if (displayedNews == null)
                 return;
             currentPagesNewsItems = displayedNews.ToList();
-            await currentPagesNewsItems.Select(o => GlobalDispatcher.Current.InvokeAsync(() => o.HasBeenViewed = true));
+            await TaskEx.WhenAll(currentPagesNewsItems.Select(o => GlobalDispatcher.Current.InvokeAsync(() => o.HasBeenViewed = true)));
             UpdateNewItemCount();
         }
 
