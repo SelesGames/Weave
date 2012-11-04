@@ -1,0 +1,687 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{10FF9361-A632-4424-9ED4-32208FAD73D4}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>weave</RootNamespace>
+    <AssemblyName>weave</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>weave.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>weave.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
+    <TokenBackgroundImageFilePath>C:\Users\Arash\Desktop\Code\Windows Phone 7 Series\HollywoodReport\HollywoodReport\Background.png</TokenBackgroundImageFilePath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AsyncCtpLibrary_Phone">
+      <HintPath>..\..\lib\AsyncCtpLibrary_Phone.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Controls">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Ninject">
+      <HintPath>..\..\lib\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Observable" />
+    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q3 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Primitives">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q3 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Core">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q3 2012\Binaries\WindowsPhone\Telerik.Windows.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\ZuneMemoryMatch\ZuneSlotMachine\Library\SilverlightToolkitExtensions.cs">
+      <Link>Library\Extension Methods\SilverlightToolkitExtensions.cs</Link>
+    </Compile>
+    <Compile Include="AnimationHelper.cs" />
+    <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\AppSettingsPage.xaml.cs">
+      <DependentUpon>AppSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Business Objects\CategoryRefreshListener.cs" />
+    <Compile Include="Business Objects\FeedRefreshListener.cs" />
+    <Compile Include="Business Objects\RefreshListenerBase.cs" />
+    <Compile Include="Business Objects\NewsItemExtensions.cs" />
+    <Compile Include="Pages\MainPage\NewsItemControls\BigImageNewsItemControl.xaml.cs">
+      <DependentUpon>BigImageNewsItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\NewsItemControls\BaseNewsItemControl.cs" />
+    <Compile Include="Pages\CustomFrame.cs" />
+    <Compile Include="Pages\DummyPage.xaml.cs">
+      <DependentUpon>DummyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebBrowser\FontSizePopup.xaml.cs">
+      <DependentUpon>FontSizePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\CustomList.xaml.cs">
+      <DependentUpon>CustomList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
+    <Compile Include="Business Objects\NewsItemComparer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Library\Extension Methods\EventHandlerExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Library\Extension Methods\PerformanceProgressBarExtensions.cs" />
+    <Compile Include="Library\TiltContentControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Library\Value Converters\StringToLocalImageBrushConverter.cs" />
+    <Compile Include="Pages\MainPage\Settings\MainPageSettingsPage.xaml.cs">
+      <DependentUpon>MainPageSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\Settings\MainPageSettingsPopup.xaml.cs">
+      <DependentUpon>MainPageSettingsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebBrowser\TileButton.xaml.cs">
+      <DependentUpon>TileButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebBrowser\ArticleNotViewableException.cs" />
+    <Compile Include="SampleData\SampleThemes\SampleThemes.xaml.cs">
+      <DependentUpon>SampleThemes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelesGamesInfoPage.xaml.cs">
+      <DependentUpon>SelesGamesInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ArticleListNavigationCorrector.cs" />
+    <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
+    <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
+    <Compile Include="Services\MostViewedHistory\RunLog.cs" />
+    <Compile Include="Services\SystemTrayNavigationSetter.cs" />
+    <Compile Include="Settings\ArticleDeleteTime.cs" />
+    <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
+    <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
+    <Compile Include="Settings\ArticleListFormatType.cs" />
+    <Compile Include="Settings\BindableMainPageFontStyle.cs" />
+    <Compile Include="Settings\FontProperties.cs" />
+    <Compile Include="Settings\FontSize.cs" />
+    <Compile Include="Settings\FontThickness.cs" />
+    <Compile Include="Settings\FontSizes.cs" />
+    <Compile Include="Settings\FontSizeProperties.cs" />
+    <Compile Include="Settings\FontThicknessExtensions.cs" />
+    <Compile Include="Settings\PermanentState.cs" />
+    <Compile Include="Settings\StandardFontSet.cs" />
+    <Compile Include="Settings\StandardThemeSet.cs" />
+    <Compile Include="Settings\Theme.cs" />
+    <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
+    <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
+    <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
+      <DependentUpon>MainPageNavigationDropDownList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Value Converters\DelegateValueConverter.cs" />
+    <Compile Include="Pages\Accounts\InstapaperAccountCredentialsPage.xaml.cs">
+      <DependentUpon>InstapaperAccountCredentialsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebBrowser\ReadabilityPage.xaml.cs">
+      <DependentUpon>ReadabilityPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xaml.cs">
+      <DependentUpon>SampleBrowseFeedsByCategoryViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xaml.cs">
+      <DependentUpon>SampleFeedLibraryViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleFeedSource\SampleFeedSource.xaml.cs">
+      <DependentUpon>SampleFeedSource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xaml.cs">
+      <DependentUpon>SampleHomePageTasks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SamplePanoBGs\SamplePanoBGs.xaml.cs">
+      <DependentUpon>SamplePanoBGs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml.cs">
+      <DependentUpon>SamplePanoramaViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ShareArticleExtensionMethods.cs" />
+    <Compile Include="Services\ToastService.cs" />
+    <Compile Include="Library\Value Converters\UppercaseConverter.cs" />
+    <Compile Include="Pages\MainPage\NewsItemControls\MainPageNewsItemUI.xaml.cs">
+      <DependentUpon>MainPageNewsItemUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Panorama\NewsItemWithImageTile3.xaml.cs">
+      <DependentUpon>NewsItemWithImageTile3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectTheCategoriesThatInterestYouPage.xaml.cs">
+      <DependentUpon>SelectTheCategoriesThatInterestYouPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleCategoriesList\SampleCategoriesList.xaml.cs">
+      <DependentUpon>SampleCategoriesList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleCategories\SampleCategories.xaml.cs">
+      <DependentUpon>SampleCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xaml.cs">
+      <DependentUpon>SampleManageFeedsPageData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\AppSettings.cs" />
+    <Compile Include="Services\GlobalNavigationService.cs" />
+    <Compile Include="Services\Instapaper\InstapaperAccount.cs" />
+    <Compile Include="Services\Instapaper\InstapaperService.cs" />
+    <Compile Include="Services\LittleWatson.cs" />
+    <Compile Include="Pages\Panorama\CategoryDisplayGrid.xaml.cs">
+      <DependentUpon>CategoryDisplayGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PanoramaInjectionService.cs" />
+    <Compile Include="SampleData\SampleFeedSources\SampleFeedSources.xaml.cs">
+      <DependentUpon>SampleFeedSources.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleRssFeed\SampleRssFeed.xaml.cs">
+      <DependentUpon>SampleRssFeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Panorama\SamplePanorama.xaml.cs">
+      <DependentUpon>SamplePanorama.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LatestNewsViewModel.cs" />
+    <Compile Include="Settings\TombstoneState.cs" />
+    <Compile Include="Services\WeaveStartupTask.cs" />
+    <Compile Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml.cs">
+      <DependentUpon>SocialShareContextMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NewsItemViewModel.cs" />
+    <Compile Include="ViewModels\PanoramaViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <DesignTimeOnly Include="SampleData\SamplePanoBGs\SamplePanoBGs.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleFeedSource\SampleFeedSource.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd" />
+    <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xsd" />
+    <Page Include="Pages\AppSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage\NewsItemControls\BigImageNewsItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DummyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignTimeOnly Include="Pages\MainPage\MainPage.Design.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <Page Include="Resources\FontSizePopupStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\PanoramaPageHubTileStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\WebBrowser\FontSizePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage\CustomList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage\Settings\MainPageSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage\Settings\MainPageSettingsPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage\MainPageNavigationDropDownList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\WebBrowser\TileButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Accounts\InstapaperAccountCredentialsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage\NewsItemControls\MainPageNewsItemUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Panorama\NewsItemWithImageTile3.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\WebBrowser\ReadabilityPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\LongListSelectorStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ListBoxStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\SelectTheCategoriesThatInterestYouPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <Page Include="Pages\Panorama\CategoryDisplayGrid.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignTimeOnly Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <Page Include="Pages\Panorama\SamplePanorama.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <ApplicationDefinition Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+    <Page Include="Pages\SelesGamesInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\64x64_google.png" />
+    <Resource Include="Assets\Icons\64x64_info.png" />
+    <Resource Include="Assets\Icons\64x64_rss.png" />
+    <Content Include="Assets\Icons\36x36_share.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\48x48_email.png" />
+    <Content Include="Assets\Icons\48x48_share_REDUX.png" />
+    <Content Include="Assets\Icons\48x48_twitter.png" />
+    <Content Include="Assets\Icons\64x64_ie.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\64x64_instapaper.png" />
+    <Resource Include="Assets\Icons\64x64_rate.png" />
+    <Content Include="Assets\Icons\64x64_share.png" />
+    <Content Include="Assets\Icons\64x64_sms.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\64x64_socialshare.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\64x64_twitter.png" />
+    <Resource Include="Assets\Icons\64x64_zune.png" />
+    <Content Include="Assets\Icons\48x48_ie.png" />
+    <Content Include="Assets\Icons\48x48_share.png" />
+    <Content Include="Assets\Icons\48x48_share_v3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\48x48_share_v4.png" />
+    <Content Include="Assets\Icons\48x48_share_v5.png" />
+    <Content Include="Assets\Icons\48x48_small_settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\48x48_big_settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.add.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.allread.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.cancel.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.check.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.eye.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.feature.search.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.heart.outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.rss.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.save.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.share.png" />
+    <Content Include="Assets\Icons\facebook.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.feature.email.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.favs.addto.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <DesignTimeOnly Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xsd" />
+    <Content Include="Assets\Icons\fontSizeIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\64x64_podcast.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\64x64_video.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\64x64_zuneDL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\podcast.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\podcast_zuneDL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\video.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\video_podcast.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\video_podcast_zuneDL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\video_zuneDL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\mediaTypeIcons\zuneDL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\SelesGames.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\sendTo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\tiny_heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\wheel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\imageDownloadFailed.jpg" />
+    <Content Include="Assets\pancake-bunny.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\selesgames_splitcolorlogo_redplay.png" />
+    <Resource Include="Assets\sg_splitcolorlogo_redplay.png" />
+    <Content Include="Assets\Icons\appbar.settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\sendTo.png" />
+    <Content Include="SplashScreenImage.jpg" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xsd" />
+    <DesignTimeOnly Include="SampleData\SampleCategoriesList\SampleCategoriesList.xsd">
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.delete.rest.light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Feeds.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <DesignTimeOnly Include="SampleData\SampleCategoriesList\SampleCategoriesList.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignData Include="SampleData\FeedApiResultSampleData.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
+    <DesignTimeOnly Include="SampleData\SampleFeedSource\SampleFeedSource.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <Page Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignTimeOnly Include="SampleData\SamplePanoBGs\SamplePanoBGs.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
+    <Page Include="SampleData\SampleThemes\SampleThemes.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Icons\appbar.back.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Icons\appbar.next.rest.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <DesignData Include="SampleData\NewsItemSampleData.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </DesignData>
+    <DesignData Include="SampleData\SampleNewsItem.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </DesignData>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
+    <Folder Include="Assets\Icons\UNUSED\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Silverlight for Windows Phone Toolkit Source &amp; Sample - Jun 2012\Microsoft.Phone.Controls.Toolkit\Microsoft.Phone.Controls.Toolkit.csproj">
+      <Project>{0754458A-7AFC-463A-B27D-2F6980522119}</Project>
+      <Name>Microsoft.Phone.Controls.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ToastPromptControl\ToastPromptControl.csproj">
+      <Project>{09AC45C7-27E8-4A39-B2C4-0031111595D5}</Project>
+      <Name>ToastPromptControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
+      <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
+      <Name>SelesGames.Phone.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone.UI\SelesGames.Phone.UI.csproj">
+      <Project>{44789FF4-AC39-4FC8-9998-1F9BFD3F97F2}</Project>
+      <Name>SelesGames.Phone.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone\SelesGames.Phone.csproj">
+      <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
+      <Name>SelesGames.Phone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
+      <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
+      <Name>SelesGames.WP.IsoStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
+      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
+      <Name>SelesGames.WP.Rest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComplementaryColors.WP7\SelesGames.ComplementaryColorsLib.csproj">
+      <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
+      <Name>SelesGames.ComplementaryColorsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
+      <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
+      <Name>SelesGames.WP.Instapaper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.WP.PublisherInfoPage\SelesGames.WP.PublisherInfoPage.csproj">
+      <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
+      <Name>SelesGames.WP.PublisherInfoPage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.Common.Reactive\weave.Common.Reactive.csproj">
+      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
+      <Name>weave.Common.Reactive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
+      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
+      <Name>weave.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.Data\weave.Data.csproj">
+      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
+      <Name>weave.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
+      <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
+      <Name>Weave.FeedLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.LiveTile.ScheduledAgent\Weave.LiveTile.ScheduledAgent.csproj">
+      <Project>{099E7718-8767-47F4-AB1C-2DF71362AD06}</Project>
+      <Name>Weave.LiveTile.ScheduledAgent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
+      <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>
+      <Name>Weave.Mobilizer.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.NinjectKernel\Weave.NinjectKernel.csproj">
+      <Project>{BABE4E4F-1FE3-4F0E-A378-03F979EB6208}</Project>
+      <Name>Weave.NinjectKernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.RSS\weave.RSS.csproj">
+      <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
+      <Name>weave.RSS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.UI.Advertising Mango version\weave.UI.Advertising.Mango.csproj">
+      <Project>{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}</Project>
+      <Name>weave.UI.Advertising.Mango</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
+      <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
+      <Name>Weave.UI.SettingsPages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>

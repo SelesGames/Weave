@@ -1,0 +1,94 @@
+<weave:NewsItem xmlns:weave="clr-namespace:weave;assembly=weave.Data" xmlns:System="clr-namespace:System;assembly=mscorlib" Description="Maecenas class curabitur vestibulum" FormattedForMainPageSourceAndDate="Sed platea" FormattedForPopupsSourceAndDate="Nibh parturient" HasBeenViewed="False" HP="79" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Nulla primis dis est" Link="Aliquam sagittis" Opacity="717.82" OriginalSource="Vestibulum vestibulum adipiscing rutrum senectus" OriginalFeedUri="Nisi hac" PublishDate="Integer proin" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Leo sociosqu" SortRating="116.6" Title="Hendrerit mus sapien" VideoUri="Nec quisque" YoutubeId="Parturient vestibulum augue dolor" ZuneAppId="Non suscipit">
+	<weave:NewsItem.FeedId>
+		<System:Guid/>
+	</weave:NewsItem.FeedId>
+	<weave:NewsItem.FeedSource>
+		<weave:FeedSource ArticleViewingType="Mobilizer" Category="Aliquam integer phasellus" Etag="Praesent curae quisque donec adipiscing" FeedName="Aenean parturient consequat vestibulum vestibulum" FeedUri="Accumsan nam convallis bibendum" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Sed dictumst mauris eleifend" MostRecentNewsItemPubDate="Dignissim elementum dis facilisis est" NewsCount="59" OldestNewsItemPubDate="Fermentum sodales fringilla viverra habitasse">
+			<weave:FeedSource.Id>
+				<System:Guid/>
+			</weave:FeedSource.Id>
+			<weave:FeedSource.News>
+				<weave:NewsItem Description="Fermentum vivamus nullam adipiscing" FormattedForMainPageSourceAndDate="Parturient duis habitasse hendrerit congue" FormattedForPopupsSourceAndDate="Cubilia vestibulum mus cursus nec" HasBeenViewed="True" HP="12" HasImage="False" IsFavorite="True" IsNew="False" ImageUrl="Non placerat nunc dapibus" Link="Dictum egestas" Opacity="764.12" OriginalSource="Arcu pulvinar proin sem" OriginalFeedUri="Per sed euismod amet ante" PublishDate="Diam sit vel senectus" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Lectus sagittis" SortRating="386.39" Title="Himenaeos sociosqu vestibulum" VideoUri="Eget libero augue feugiat" YoutubeId="Nam suscipit torquent imperdiet sed" ZuneAppId="Dolor ligula adipiscing malesuada gravida">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="Local" Category="Parturient facilisi aptent" Etag="Vestibulum aliquam etiam faucibus" FeedName="Hac habitant leo" FeedUri="Fusce aliquet lorem inceptos vestibulum" IsUpdating="False" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Blandit morbi commodo" MostRecentNewsItemPubDate="Conubia adipiscing cras interdum lobortis" NewsCount="29" OldestNewsItemPubDate="Auctor nulla fringilla nascetur pharetra"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Fames dis" FormattedForMainPageSourceAndDate="Nec volutpat eros vestibulum" FormattedForPopupsSourceAndDate="Adipiscing ultricies posuere" HasBeenViewed="False" HP="76" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Potenti non massa mauris parturient" Link="Venenatis vulputate per curabitur" Opacity="860.9" OriginalSource="Vestibulum nibh adipiscing pretium" OriginalFeedUri="Vestibulum phasellus maecenas" PublishDate="Consequat praesent nisl mollis" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Nisi metus" SortRating="960.77" Title="Sed nunc" VideoUri="Accumsan sem bibendum" YoutubeId="Dictumst morbi eleifend convallis" ZuneAppId="Sit rhoncus dignissim">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="Local" Category="Felis elit ipsum iaculis lacinia" Etag="Ultrices litora" FeedName="Laoreet penatibus est porttitor vehicula" FeedUri="Hac justo lacus enim" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Parturient erat luctus" MostRecentNewsItemPubDate="Vestibulum lorem natoque leo tincidunt" NewsCount="23" OldestNewsItemPubDate="Magnis magna mus mattis tristique"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Facilisi parturient elementum vestibulum" FormattedForMainPageSourceAndDate="Fringilla quis urna nostra" FormattedForPopupsSourceAndDate="Non habitant cras ornare" HasBeenViewed="True" HP="68" HasImage="False" IsFavorite="True" IsNew="False" ImageUrl="Duis vestibulum nunc" Link="Platea primis inceptos" Opacity="610.16" OriginalSource="Lobortis purus habitasse sapien" OriginalFeedUri="Nulla interdum amet rutrum porta" PublishDate="Per sed sociis placerat ante" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Semper nascetur hendrerit pharetra" SortRating="569.72" Title="Himenaeos taciti" VideoUri="Pulvinar sem arcu sit diam" YoutubeId="Risus imperdiet eget vestibulum elit" ZuneAppId="Enim vivamus aliquam">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="InternetExplorer" Category="Vestibulum sodales facilisis adipiscing vel" Etag="Viverra aliquam neque montes" FeedName="Integer odio nam" FeedUri="Sed quisque orci dis" IsUpdating="False" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Netus est hac pede" MostRecentNewsItemPubDate="Fermentum parturient leo mus faucibus" NewsCount="20" OldestNewsItemPubDate="Quam nec"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Tellus tempor velit adipiscing" FormattedForMainPageSourceAndDate="Est donec vestibulum tristique" FormattedForPopupsSourceAndDate="Nibh ultricies etiam" HasBeenViewed="False" HP="22" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Fusce nisi lorem nisl" Link="Commodo venenatis" Opacity="836.65" OriginalSource="Vulputate varius senectus sociosqu" OriginalFeedUri="Conubia hac" PublishDate="Nulla leo" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Morbi cubilia" SortRating="680.35" Title="Proin suscipit" VideoUri="Curabitur nunc vestibulum odio" YoutubeId="Adipiscing dapibus aenean" ZuneAppId="Orci parturient">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="LocalOnly" Category="Aliquet tempus tortor malesuada vel" Etag="Penatibus sagittis" FeedName="Porttitor erat nam" FeedUri="Eros vitae" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Tincidunt class" MostRecentNewsItemPubDate="Parturient blandit sed dis" NewsCount="43" OldestNewsItemPubDate="Curae turpis"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Vestibulum augue mauris" FormattedForMainPageSourceAndDate="Vehicula justo nunc amet volutpat" FormattedForPopupsSourceAndDate="Convallis auctor" HasBeenViewed="True" HP="27" HasImage="False" IsFavorite="True" IsNew="False" ImageUrl="Parturient maecenas praesent" Link="Lacus dignissim mus" Opacity="380.14" OriginalSource="Nec laoreet" OriginalFeedUri="Lacinia elementum ante accumsan" PublishDate="Sed facilisis arcu diam" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Non lorem per bibendum" SortRating="605.78" Title="Magna sem massa sit vestibulum" VideoUri="Congue metus" YoutubeId="Natoque vel eget" ZuneAppId="Cursus elit nam">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="Local" Category="Egestas torquent pede nullam" Etag="Aptent euismod" FeedName="Vestibulum phasellus" FeedUri="Feugiat gravida" IsUpdating="False" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Quam quis urna cras" MostRecentNewsItemPubDate="Dolor fames adipiscing consequat ultrices" NewsCount="26" OldestNewsItemPubDate="Felis iaculis duis ipsum"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Enim dictumst posuere dictum fermentum" FormattedForMainPageSourceAndDate="Hendrerit adipiscing himenaeos parturient" FormattedForPopupsSourceAndDate="Netus vestibulum sodales vestibulum" HasBeenViewed="False" HP="20" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Viverra luctus nibh nisi" Link="Nulla adipiscing porta" Opacity="385.75" OriginalSource="Malesuada nisl nunc parturient magnis" OriginalFeedUri="Purus risus velit imperdiet" PublishDate="Habitant mattis nec penatibus orci" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Mus odio" SortRating="907.68" Title="Porttitor vitae non mauris" VideoUri="Tincidunt class" YoutubeId="Tristique inceptos curae" ZuneAppId="Aliquam pede mollis">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="InternetExplorer" Category="Lectus morbi fringilla sed eleifend" Etag="Vestibulum erat dis eros" FeedName="Est potenti facilisi" FeedUri="Hac neque" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Pretium rhoncus leo" MostRecentNewsItemPubDate="Habitasse libero" NewsCount="62" OldestNewsItemPubDate="Faucibus ligula litora"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Quam montes" FormattedForMainPageSourceAndDate="Aliquam parturient platea lobortis aliquet" FormattedForPopupsSourceAndDate="Morbi vel nascetur" HasBeenViewed="True" HP="47" HasImage="False" IsFavorite="True" IsNew="False" ImageUrl="Consequat nam cras" Link="Duis sed" Opacity="525.44" OriginalSource="Dis est pharetra vestibulum vestibulum" OriginalFeedUri="Nunc amet nulla" PublishDate="Leo blandit adipiscing primis" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Placerat hac" SortRating="938.59" Title="Proin pulvinar" VideoUri="Convallis parturient vestibulum sagittis mus" YoutubeId="Senectus vestibulum nec rutrum ante" ZuneAppId="Augue non dignissim dolor arcu">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="InternetExplorer" Category="Ultricies vestibulum integer quis venenatis" Etag="Quisque per" FeedName="Vulputate interdum urna" FeedUri="Vivamus sed donec curabitur sem" IsUpdating="False" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Etiam sit vestibulum" MostRecentNewsItemPubDate="Phasellus fusce nostra adipiscing" NewsCount="80" OldestNewsItemPubDate="Lorem ornare"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Commodo adipiscing diam parturient" FormattedForMainPageSourceAndDate="Erat lacus" FormattedForPopupsSourceAndDate="Habitasse tellus egestas hendrerit euismod" HasBeenViewed="False" HP="38" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Feugiat eros gravida iaculis ultrices" Link="Nibh lacinia himenaeos vestibulum laoreet" Opacity="785.85" OriginalSource="Imperdiet tempus sem magna tortor" OriginalFeedUri="Nisi natoque tempor lorem" PublishDate="Turpis nunc posuere potenti malesuada" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Nisl massa" SortRating="944.45" Title="Pretium metus rhoncus odio" VideoUri="Sit sodales" YoutubeId="Penatibus morbi orci" ZuneAppId="Porttitor varius viverra aliquam neque">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="Mobilizer" Category="Sociosqu sapien fames semper" Etag="Eget sociis" FeedName="Conubia vestibulum vestibulum" FeedUri="Taciti elit suscipit" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Elementum facilisis per adipiscing sed" MostRecentNewsItemPubDate="Felis cubilia parturient dapibus ipsum" NewsCount="15" OldestNewsItemPubDate="Enim torquent fermentum justo fringilla"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Netus tincidunt nulla vehicula" FormattedForMainPageSourceAndDate="Tristique aliquam maecenas praesent" FormattedForPopupsSourceAndDate="Cras nam parturient" HasBeenViewed="True" HP="14" HasImage="False" IsFavorite="True" IsNew="False" ImageUrl="Vestibulum aliquet accumsan sed" Link="Vestibulum blandit dis commodo duis" Opacity="998.87" OriginalSource="Est parturient conubia nullam" OriginalFeedUri="Risus adipiscing" PublishDate="Vestibulum aptent cubilia bibendum" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Ultricies velit vitae hac nunc" SortRating="707.37" Title="Dictumst leo auctor dapibus mus" VideoUri="Eleifend egestas facilisi congue cursus" YoutubeId="Nec amet dictum non faucibus" ZuneAppId="Euismod vestibulum lectus venenatis habitant">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="InternetExplorer" Category="Aenean porta" Etag="Vestibulum integer mauris" FeedName="Adipiscing volutpat" FeedUri="Pede quam" IsUpdating="False" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Quisque quis vel parturient" MostRecentNewsItemPubDate="Vestibulum vestibulum" NewsCount="62" OldestNewsItemPubDate="Adipiscing vivamus urna purus"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+				<weave:NewsItem Description="Adipiscing feugiat class inceptos" FormattedForMainPageSourceAndDate="Diam potenti nascetur vestibulum" FormattedForPopupsSourceAndDate="Pharetra eget" HasBeenViewed="False" HP="45" HasImage="True" IsFavorite="False" IsNew="True" ImageUrl="Phasellus consequat" Link="Elit lorem" Opacity="104.89" OriginalSource="Mattis rhoncus" OriginalFeedUri="Magnis enim placerat pretium" PublishDate="Convallis dignissim mollis" PublishDateTime="08/15/2012 01:56:44" PodcastUri="Morbi mauris" SortRating="800.99" Title="Montes adipiscing" VideoUri="Nostra vel" YoutubeId="Pulvinar elementum" ZuneAppId="Facilisis erat eros ornare nam">
+					<weave:NewsItem.FeedId>
+						<System:Guid/>
+					</weave:NewsItem.FeedId>
+					<weave:NewsItem.FeedSource>
+						<weave:FeedSource ArticleViewingType="Mobilizer" Category="Libero vulputate curae ligula per" Etag="Parturient sed gravida vestibulum sem" FeedName="Donec curabitur" FeedUri="Sit iaculis litora luctus" IsUpdating="True" LastRefreshedOn="08/15/2012 01:56:44" LastModified="Interdum etiam lobortis lacinia" MostRecentNewsItemPubDate="Laoreet ante fusce" NewsCount="98" OldestNewsItemPubDate="Arcu natoque posuere"/>
+					</weave:NewsItem.FeedSource>
+				</weave:NewsItem>
+			</weave:FeedSource.News>
+		</weave:FeedSource>
+	</weave:NewsItem.FeedSource>
+</weave:NewsItem>

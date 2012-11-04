@@ -1,0 +1,49 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:weave"
+	x:Class="weave.MainPageNavigationDropDownList"
+	mc:Ignorable="d"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	d:DesignHeight="800" d:DesignWidth="480">
+	
+	<UserControl.Resources>
+		<DataTemplate x:Key="CategoriesItemTemplate">
+			<Button Click="categoryClicked" Content="{Binding Name}" Style="{StaticResource TrueTextButtonStyle}" Margin="0,0,0,-1" />
+		</DataTemplate>
+						 
+		<Storyboard x:Name="CloseSB">
+			<DoubleAnimation From="0" To="90" Duration="0:0:0.3" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
+				<DoubleAnimation.EasingFunction>
+					<QuarticEase EasingMode="EaseIn"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>
+							
+		<Storyboard x:Name="OpenSB">							
+			<DoubleAnimation From="-90" To="0" Duration="0:0:0.3" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
+				<DoubleAnimation.EasingFunction>
+					<QuarticEase EasingMode="EaseOut"/>
+				</DoubleAnimation.EasingFunction>
+			</DoubleAnimation>
+		</Storyboard>				
+	</UserControl.Resources>
+	
+	
+	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleCategories}}">
+		<Grid.Projection>
+			<PlaneProjection />
+		</Grid.Projection>
+		<Rectangle Fill="{StaticResource PhoneChromeBrush}" CacheMode="BitmapCache"/>
+		<ScrollViewer x:Name="scroller" Margin="0,0,0,12">
+			<StackPanel>
+				<TextBlock Text="Quick jump to another category:" Margin="24,12" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" CacheMode="BitmapCache" TextWrapping="Wrap"/>
+				<ListBox x:Name="categories" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}"  Margin="12,0" Style="{StaticResource NoScrollerListBoxStyle}" Padding="0,0,0,60" />
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</UserControl>

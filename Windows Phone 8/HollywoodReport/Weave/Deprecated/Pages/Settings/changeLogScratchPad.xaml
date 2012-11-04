@@ -1,0 +1,52 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:weave="clr-namespace:weave;assembly=weave.Common.Reactive"
+    x:Class="weave.ChangelogAndComingSoonPage" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+	d:DesignWidth="480" >
+	
+<StackPanel xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Margin="24,0">
+	<StackPanel.Resources>
+		<Style x:Key="TextBlockStyle" TargetType="TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap" />
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="LineHeight" Value="30.667" />
+			<Setter Property="CacheMode" Value="BitmapCache" />
+			<Setter Property="Margin" Value="0,0,0,24" />
+		</Style>
+	</StackPanel.Resources>
+	<TextBlock Text="What's new in Weave 3.5:" FontSize="32" FontFamily="Segoe WP SemiLight" Margin="0,0,0,24" Foreground="{StaticResource PhoneAccentBrush}" />
+	<TextBlock Text="• YouTube support!  Video support (mp4)!  Podcast support!  Now whenever an article has an attached YouTube, video, or podcast link, Weave will display buttons allowing for playback of video or podcast!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Video/podcast icons now show up in the article list so you can easily see which articles have extra media attached" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The Weave server has been upgraded for compatibility with a wider range of RSS/Atom feeds" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The article title now scrolls with the article body, instead of staying in place" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Article open animation has been sped up slightly" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The date format has been shortened" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="What's new in Weave 3.0:" FontSize="32" FontFamily="Segoe WP SemiLight" Margin="0,24" Foreground="{StaticResource PhoneAccentBrush}" />
+	<TextBlock Text="• All feed parsing now happens &quot;in the cloud&quot;.  End result - new news articles come in much faster than before, regardless of how many feeds and categories you have enabled" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• New article coloring:  when in the article list, all old articles will appear in your phone's accent color.  New articles however, will appear in the complementary color of your phone's accent color." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The number of new articles is now highlighted in the phone’s accent color on the top right of the article list page, above the page count." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Article list has a new UI.  The application bar at the bottom of the screen has been removed.  The ‘refresh’, ‘previous page’, and ‘next page’ buttons have all been moved to the top left side of the page.  This frees up more pixels vertically, and we feel leads to a better look overall.  Additionally, a settings button has been added to that page." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The ‘previous’ and ‘next page’ buttons are now repeater buttons - tap and hold to quickly jump ahead or backwards by more than one page." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• We've eliminated the left sidebar that appeared with each article.  We felt it was cluttered and added no extra information." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• At the bottom of the article list, after the last article of the page, we've placed the ‘mark page read’ button.  We've also added a ‘next page’ button to the right of it for close proximity to your thumb, making it easy to go to next page once you reach the end of any given page." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• The ‘settings’ button now links to a new page that lets you select amongst different preset font sizes.  You can also change the font thickness/weight." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• You also have checkboxes to toggle what actions happen when you tap on an article, giving you more control over how Weave functions." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• You can now toggle the System Tray (i.e. time, battery life, WiFi, etc.) on or off on the article list page." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• At the top of the page, you can now tap on the large category name to bring down a navigation menu that takes you directly to another category!" Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• New ‘share’ button.  Tapping it once brings up the share tiles (5 of them: Instapaper, Twitter, email, Facebook, Internet Explorer).  Aside from looking cooler, we feel this new approach is easier and faster to use." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Most animations throughout the application have been sped up." Style="{StaticResource TextBlockStyle}" />
+	<TextBlock Text="• Article closing animation has been changed to match the Mango look and feel." Style="{StaticResource TextBlockStyle}" />
+</StackPanel>
+
+</UserControl>

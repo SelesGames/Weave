@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="weave.ButtonBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    d:DesignHeight="90" d:DesignWidth="285">
+	
+	<UserControl.Resources>
+		<Thickness x:Key="TopButtonsHitBoxPadding">12,18,12,24</Thickness>
+	</UserControl.Resources>
+
+    
+	<StackPanel toolkit:TiltEffect.IsTiltEnabled="True" x:Name="buttonWrapper" Orientation="Horizontal">				
+		<Button x:Name="refreshButton" Content="/Assets/Icons/appbar.refresh.png" Height="90" Style="{StaticResource MetroCircleButtonStyle}" Width="69" BorderBrush="{StaticResource TransparentBrush}" Foreground="#FF197DAE" Padding="12,18,9,24" />
+		<Button x:Name="localSettingsButton" Content="/Assets/Icons/48x48_small_settings.png" Height="90" Style="{StaticResource MetroCircleButtonStyle}" Width="66" BorderBrush="{StaticResource TransparentBrush}" Foreground="#FF197DAE" Padding="9,18,9,24" Margin="0,0,6,0" />
+		<RepeatButton x:Name="previousPageButton" Content="/Assets/Icons/appbar.back.rest.png" Height="90" Style="{StaticResource MetroCircleButtonStyle}" Width="72" BorderBrush="#FF197DAE" Foreground="#FF197DAE" ClickMode="Release" Delay="250" Padding="{StaticResource TopButtonsHitBoxPadding}" />
+		<RepeatButton x:Name="nextPageButton" Content="/Assets/Icons/appbar.next.rest.png" Height="90" Style="{StaticResource MetroCircleButtonStyle}" Width="72" BorderBrush="#FF197DAE" Foreground="#FF197DAE" ClickMode="Release" Delay="250" Padding="{StaticResource TopButtonsHitBoxPadding}" />			
+	</StackPanel>
+
+</UserControl>

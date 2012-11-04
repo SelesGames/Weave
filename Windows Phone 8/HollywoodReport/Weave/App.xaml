@@ -1,0 +1,67 @@
+﻿<Application
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" 
+	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleRssFeed" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:local="clr-namespace:weave" 
+	xmlns:SampleData1="clr-namespace:Expression.Blend.SampleData.SampleFeedSources" 
+	xmlns:SampleData2="clr-namespace:Expression.Blend.SampleData.SampleCategories" 
+	xmlns:SampleData3="clr-namespace:Expression.Blend.SampleData.SampleHomePageTasks" 
+	xmlns:SampleData4="clr-namespace:Expression.Blend.SampleData.SampleFeedSource" 
+	xmlns:System="clr-namespace:System;assembly=mscorlib" 
+	xmlns:SampleData5="clr-namespace:Expression.Blend.SampleData.SampleBrowseFeedsByCategoryViewModel" 
+	xmlns:SampleData6="clr-namespace:Expression.Blend.SampleData.SampleFeedLibraryViewModel" 
+	xmlns:SampleData7="clr-namespace:Expression.Blend.SampleData.SamplePanoramaViewModel" 
+	xmlns:SampleData8="clr-namespace:Expression.Blend.SampleData.SampleThemes" 
+	mc:Ignorable="d" 
+	x:Class="weave.App">
+	<Application.Resources>	
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/weave;component/Resources/ListBoxStyles.xaml" />
+				<ResourceDictionary Source="/weave;component/Resources/LongListSelectorStyles.xaml"/>
+				<ResourceDictionary Source="/weave;component/Resources/ButtonStyles.xaml" />
+				<ResourceDictionary Source="/weave;component/Resources/PanoramaPageHubTileStyles.xaml"/>
+				<ResourceDictionary Source="/weave;component/Resources/FontSizePopupStyles.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+					
+					
+			<SampleData:SampleRssFeed x:Key="SampleRssFeed" d:IsDataSource="True"/>    	
+			<SampleData1:SampleFeedSources x:Key="SampleFeedSources" d:IsDataSource="True"/>
+			<SampleData2:SampleCategories x:Key="SampleCategories" d:IsDataSource="True"/>
+			<SampleData3:SampleHomePageTasks x:Key="SampleHomePageTasks" d:IsDataSource="True"/>
+			<SampleData4:SampleFeedSource x:Key="SampleFeedSource" d:IsDataSource="True"/>
+			<SampleData5:SampleBrowseFeedsByCategoryViewModel x:Key="SampleBrowseFeedsByCategoryViewModel" d:IsDataSource="True"/>
+			<SampleData6:SampleFeedLibraryViewModel x:Key="SampleFeedLibraryViewModel" d:IsDataSource="True"/>
+			<SampleData7:SamplePanoramaViewModel x:Key="SamplePanoramaViewModel" d:IsDataSource="True"/>
+			<SampleData8:SampleThemes x:Key="SampleThemes" d:IsDataSource="True"/>
+
+		
+			<SolidColorBrush x:Key="HeaderBrush" Color="White"/>
+			<SolidColorBrush x:Key="OffWhiteBackgroundBrush" Color="#FFF7F9FE"/>
+			<SolidColorBrush x:Key="BlackForegroundBrush" Color="Black"/>
+			<SolidColorBrush x:Key="WhiteForegroundBrush" Color="White"/>
+
+				
+			<!-- weave settings -->
+			<FontFamily x:Key="AppSpecificFontFamily">Segoe WP SemiLight</FontFamily>
+			<FontFamily x:Key="PanoramaTitleFontFamily">Segoe WP Light</FontFamily>	
+			<System:String x:Key="PanoramaTitle">weave</System:String>
+			<System:String x:Key="AppNameUppercase">WEAVE</System:String>
+			<System:Double x:Key="PanoramaTitleVerticalOffset">-76</System:Double>
+			<System:Double x:Key="PanoramaTitleFontSize">187</System:Double>		
+			<SolidColorBrush x:Key="PanoramaForegroundBrush" Color="White" />
+			<SolidColorBrush x:Key="PanoramaBackgroundBrush" Color="#FF282828" />
+			<Thickness x:Key="PanoramaTitleMargin">10,-76,0,9</Thickness>
+			<System:String x:Key="ChangelogUrl">http://www.selesgames.com/windowsphone/weave/changelog.html</System:String>
+			
+		</ResourceDictionary>
+								
+	</Application.Resources>
+	<Application.ApplicationLifetimeObjects>
+		<shell:PhoneApplicationService />
+	</Application.ApplicationLifetimeObjects>
+</Application>

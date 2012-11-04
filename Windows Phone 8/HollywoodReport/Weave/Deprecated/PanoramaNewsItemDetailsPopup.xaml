@@ -1,0 +1,138 @@
+﻿<UserControl 
+x:Class="weave.PanoramaNewsItemDetailsPopup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+	xmlns:local="clr-namespace:weave"
+    d:DesignHeight="800" d:DesignWidth="480">
+    
+	<UserControl.Resources>
+		<local:BooleanVisibilityConverter x:Key="visConverter" />		
+		
+		<Storyboard x:Name="OGPopupSB">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0.2"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseOut" Amplitude="0.4"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		
+		<Storyboard x:Name="OGCloseSB">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.3">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn" Amplitude="0.4"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0.2">
+					<EasingDoubleKeyFrame.EasingFunction>
+						<BackEase EasingMode="EaseIn" Amplitude="0.4"/>
+					</EasingDoubleKeyFrame.EasingFunction>
+				</EasingDoubleKeyFrame>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
+				<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="720"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="grid">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.9" Value="-310"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		
+		<Storyboard x:Name="ContentFadeInSB" >
+			<DoubleAnimation BeginTime="0:0:0.1" Duration="0:0:0.3" From="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="descriptionContainer"/>
+		</Storyboard>
+
+		<SolidColorBrush x:Key="PopupOutlineBrush" Color="#FF303030"/>
+		
+		<Style x:Key="dtbs" TargetType="TextBlock">
+			<Setter Property="CacheMode" Value="BitmapCache" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}" />
+			<Setter Property="LineHeight" Value="36" />
+			<Setter Property="Opacity" Value="0.93" />
+			<Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+			<Setter Property="FontSize" Value="24" />
+			<Setter Property="Foreground" Value="{StaticResource WhiteForegroundBrush}" />
+			<Setter Property="Margin" Value="24,0,24,24" />
+		</Style>
+		
+	</UserControl.Resources>
+    
+	<Grid x:Name="LayoutRoot" Background="{StaticResource TransparentBrush}" d:DataContext="{d:DesignData /SampleData/SampleNewsItem.xaml}">
+		<!--Rectangle x:Name="left" HorizontalAlignment="Left" Width="6" Fill="{StaticResource BlackForegroundBrush}" CacheMode="BitmapCache" Opacity="0" />
+		<Rectangle x:Name="top" Height="70" VerticalAlignment="Top" Fill="{StaticResource BlackForegroundBrush}" CacheMode="BitmapCache" Opacity="0" Margin="6,0" />
+		<Rectangle x:Name="right" HorizontalAlignment="Right" Width="6" Fill="{StaticResource BlackForegroundBrush}" CacheMode="BitmapCache" Opacity="0" />
+		<Rectangle x:Name="bottom" VerticalAlignment="Bottom" Height="78" Fill="{StaticResource BlackForegroundBrush}" CacheMode="BitmapCache" Opacity="0" Margin="6,0" /-->
+
+		<TextBlock x:Name="rectangle" CacheMode="BitmapCache" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Tap popup to close" VerticalAlignment="Top" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="0,40,14,0"/>
+
+		<Grid x:Name="grid" Margin="0,70,0,0" RenderTransformOrigin="0.5,0.5" >
+			<Grid.Projection>
+				<PlaneProjection/>
+			</Grid.Projection>
+			<Grid.RenderTransform>
+				<CompositeTransform/>
+			</Grid.RenderTransform>
+			<Rectangle Fill="{StaticResource BlackForegroundBrush}" Stroke="{StaticResource PopupOutlineBrush}" StrokeThickness="2" Opacity="0.92" CacheMode="BitmapCache" Margin="0,0,0,72" />			
+			
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition />
+					<RowDefinition Height="72" />
+				</Grid.RowDefinitions>
+				<TextBlock x:Name="title" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Margin="24,20,24,9" Foreground="{StaticResource WhiteForegroundBrush}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilyNormal}" LineStackingStrategy="BlockLineHeight" />
+				<TextBlock x:Name="timestamp" Text="{Binding FormattedForPopupsSourceAndDate}" FontSize="20" Margin="24,0,24,24" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" TextWrapping="Wrap" />
+				
+				<ScrollViewer x:Name="scroller" VerticalContentAlignment="Stretch" Grid.Row="2" Margin="0">
+					<StackPanel x:Name="descriptionContainer">
+						<Image x:Name="image" MaxHeight="360" Visibility="{Binding HasImage, Converter={StaticResource visConverter}}" Margin="24,10,24,20" CacheMode="BitmapCache">
+							<Image.Source>
+								<BitmapImage CreateOptions="BackgroundCreation" UriSource="{Binding ImageUrl}" />
+							</Image.Source>
+						</Image>
+	                    <TextBlock Name="description" Text="{Binding Description}" Style="{StaticResource dtbs}"/>
+	                    <TextBlock Name="description2" Text="{Binding Description}" Style="{StaticResource dtbs}"/>
+						<Rectangle x:Name="filler" Height="24" Width="1" Fill="Transparent" CacheMode="BitmapCache" />
+					</StackPanel>
+				</ScrollViewer>
+				<Rectangle Fill="Black" Grid.Row="3"/>
+				
+				<local:ArticleViewerAppBar x:Name="appBar" Grid.Row="3" />
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

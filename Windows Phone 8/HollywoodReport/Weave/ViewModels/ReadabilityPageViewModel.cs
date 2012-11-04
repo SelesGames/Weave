@@ -1,0 +1,117 @@
+﻿using System;
+using System.Text;
+using System.Threading.Tasks;
+using SelesGames;
+using Weave.Mobilizer.Client;
+
+namespace weave
+{
+    public class ReadabilityPageViewModel
+    {
+        Client client;
+        Formatter formatter;
+        StandardThemeSet themes;
+        FontSizes fontSizes;
+        PermanentState permState;
+
+        public NewsItem NewsItem { get; set; }
+        public ArticleViewingType LastViewingType { get; set; }
+
+        public ReadabilityPageViewModel()
+        {
+            client = new Client();
+            formatter = ServiceResolver.Get<Formatter>();
+            themes = AppSettings.Instance.Themes;
+            fontSizes = new FontSizes();
+            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+        }
+
+        public async Task<string> GetMobilizedArticleHtml()
+        {
+            if (NewsItem == null)
+                throw new ArgumentNullException("NewsItem in ReadabilityPageViewModel");
+
+            string html = null;
+
+            try
+            {
+                if (NewsItem.FeedSource != null)
+                {
+                    var articleViewingType = NewsItem.FeedSource.ArticleViewingType;
+                    LastViewingType = articleViewingType;
+                    html = await GetMobilizedHtml().ConfigureAwait(false);
+                }
+            }
+            catch 
+            {
+                html = GetExceptionHtml();
+            }
+
+            var convertedHtml = ConvertExtendedASCII(html);
+            return convertedHtml;
+        }
+
+        async Task<string> GetMobilizedHtml()
+        {
+            var theme = themes.CurrentTheme;
+
+            var foreground = theme.Text;
+            var background = theme.Background;
+            var linkColor = theme.Accent;
+
+            var source = NewsItem.FormattedForMainPageSourceAndDate;
+            var title = NewsItem.Title;
+            var link = NewsItem.Link;
+            var result = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
+            var content = result.content;
+
+            var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
+
+            var html = formatter.CreateHtml(source, title, link, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
+            return html;
+        }
+
+        string GetExceptionHtml()
+        {
+            var theme = themes.CurrentTheme;
+
+            var foreground = theme.Text;
+            var background = theme.Background;
+            var linkColor = theme.Accent;
+
+            var source = NewsItem.FormattedForMainPageSourceAndDate;
+            var title = NewsItem.Title;
+            var link = NewsItem.Link;
+            var content = string.Format("<b>Unable to mobilize this article.  Tap the link below to open the article in Internet Explorer.</b>");
+
+            var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
+            var html = formatter.CreateHtml(source, title, link, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
+            return html;
+        }
+
+
+        /// <summary>
+        /// Converts UTF-8 to Unicode
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        static string ConvertExtendedASCII(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return text;
+
+            var answer = new StringBuilder();
+            char[] s = text.ToCharArray();
+
+            foreach (char c in s)
+            {
+                if (Convert.ToInt32(c) > 127)
+                    answer.Append("&#" + Convert.ToInt32(c) + ";");
+                else
+                    answer.Append(c);
+            }
+            var result = answer.ToString();
+            return result;
+        }
+    }
+}
