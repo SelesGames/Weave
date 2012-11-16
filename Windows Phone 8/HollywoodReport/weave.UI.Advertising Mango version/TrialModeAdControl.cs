@@ -73,7 +73,7 @@ namespace weave.UI.Advertising
 
             if (AdVisibilityService.AreAdsStillBeingShownAtAll)
             {
-                await TaskEx.Delay(TimeSpan.FromSeconds(1.5));
+                await Task.Delay(TimeSpan.FromSeconds(1.5));
                 CreateAd();
             }
             else
@@ -90,7 +90,7 @@ namespace weave.UI.Advertising
                 string adUnitId;
 
                 await adUnits.AreAdUnitsSet;
-                await TaskEx.Delay(TimeSpan.FromSeconds(1));
+                await Task.Delay(TimeSpan.FromSeconds(1));
                 if (isDisposed)
                     return;
 
