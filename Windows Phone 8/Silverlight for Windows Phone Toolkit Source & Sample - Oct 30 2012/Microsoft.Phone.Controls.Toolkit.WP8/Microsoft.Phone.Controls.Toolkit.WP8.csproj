@@ -480,6 +480,7 @@
     <Compile Include="DateTimePickers\TimePickerPage.xaml.cs">
       <DependentUpon>TimePickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ListPicker\IListPickerPage.cs" />
     <Compile Include="ListPicker\ListPickerPage.xaml.cs">
       <DependentUpon>ListPickerPage.xaml</DependentUpon>
     </Compile>
@@ -585,9 +586,6 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransition.cs">
       <Link>Transitions\Transitions\TurnstileFeatherTransition.cs</Link>
     </Compile>
-    <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileFeatherTransitionMode.cs">
-      <Link>Transitions\Transitions\TurnstileFeatherTransitionMode.cs</Link>
-    </Compile>
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\Transitions\Transitions\TurnstileTransition.cs">
       <Link>Transitions\Transitions\TurnstileTransition.cs</Link>
     </Compile>
@@ -603,6 +601,7 @@
     <Compile Include="..\Microsoft.Phone.Controls.Toolkit\WrapPanel\WrapPanel.cs">
       <Link>WrapPanel\WrapPanel.cs</Link>
     </Compile>
+    <Compile Include="Transitions\Transitions\TurnstileFeatherTransitionMode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="DateTimePickers\DatePickerPage.xaml">

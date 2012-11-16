@@ -54,8 +54,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelesGames.WP.IsoStorage.Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.UI.SettingsPages", "Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj", "{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit", "..\Silverlight for Windows Phone Toolkit Source & Sample - Jun 2012\Microsoft.Phone.Controls.Toolkit\Microsoft.Phone.Controls.Toolkit.csproj", "{0754458A-7AFC-463A-B27D-2F6980522119}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleReaderConnect", "..\GoogleReaderConnect\GoogleReaderConnect\GoogleReaderConnect\GoogleReaderConnect.csproj", "{42AAA4F9-AC2A-459F-A957-325D34452138}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.LiveTile.ScheduledAgent", "Weave.LiveTile.ScheduledAgent\Weave.LiveTile.ScheduledAgent.csproj", "{099E7718-8767-47F4-AB1C-2DF71362AD06}"
@@ -67,6 +65,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelesGames.WP.UrlShortener", "SelesGames.WP.UrlShortener\SelesGames.WP.UrlShortener.csproj", "{046FCEEF-5D3A-461D-9F1D-2FA11FB2FC7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.FeedLibrary", "Weave.FeedLibrary\Weave.FeedLibrary.csproj", "{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Phone.Controls.Toolkit.WP8", "..\Silverlight for Windows Phone Toolkit Source & Sample - Oct 30 2012\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj", "{486642F0-AB94-4F28-B49C-106CA3134239}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -370,18 +370,6 @@ Global
 		{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}.Release|x86.ActiveCfg = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|ARM.ActiveCfg = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0754458A-7AFC-463A-B27D-2F6980522119}.Release|x86.ActiveCfg = Release|Any CPU
 		{42AAA4F9-AC2A-459F-A957-325D34452138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42AAA4F9-AC2A-459F-A957-325D34452138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42AAA4F9-AC2A-459F-A957-325D34452138}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -458,6 +446,22 @@ Global
 		{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}.Release|x86.ActiveCfg = Release|Any CPU
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|ARM.ActiveCfg = Debug|ARM
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|ARM.Build.0 = Debug|ARM
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|x86.ActiveCfg = Debug|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Debug|x86.Build.0 = Debug|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|ARM.ActiveCfg = Release|ARM
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|ARM.Build.0 = Release|ARM
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|Mixed Platforms.Build.0 = Release|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|x86.ActiveCfg = Release|x86
+		{486642F0-AB94-4F28-B49C-106CA3134239}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -477,10 +481,10 @@ Global
 		{65B57DB4-970E-4F57-B468-503A11D5788C} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 		{599C618B-F448-434E-9C09-5A40A7BC6441} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 		{E097DBFA-C911-49ED-9189-0ACEB2AE2976} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
-		{0754458A-7AFC-463A-B27D-2F6980522119} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 		{F1B35279-249D-4A4F-97C2-07B33C825F9D} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 		{48F5F213-E352-4B14-8DE9-80415AFA15CE} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 		{046FCEEF-5D3A-461D-9F1D-2FA11FB2FC7C} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
+		{486642F0-AB94-4F28-B49C-106CA3134239} = {48819F91-0E68-42D0-A97C-1AD8CDD75447}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = ..

@@ -21,7 +21,7 @@ namespace Microsoft.Phone.Controls
     /// <summary>
     /// Displays the list of items and allows single or multiple selection.
     /// </summary>
-    public partial class ListPickerPage : PhoneApplicationPage
+    public partial class ListPickerPage : PhoneApplicationPage, IListPickerPage
     {
         private const string StateKey_Value = "ListPickerPage_State_Value";
 
