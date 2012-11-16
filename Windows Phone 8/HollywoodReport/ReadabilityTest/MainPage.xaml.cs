@@ -90,7 +90,7 @@ namespace ReadabilityTest
 
         async void browser_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            await TaskEx.Delay(100);
+            await Task.Delay(100);
             browser.Opacity = 1d;
         }
     }

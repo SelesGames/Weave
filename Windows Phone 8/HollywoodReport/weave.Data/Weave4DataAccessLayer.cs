@@ -58,7 +58,7 @@ namespace weave.Data
 
             try
             {
-                await TaskEx.WhenAll(feedsTask, newsTask);
+                await Task.WhenAll(feedsTask, newsTask);
                 feeds = feedsTask.Result;
                 news = newsTask.Result;
             }
@@ -134,7 +134,7 @@ namespace weave.Data
             catch { }
             if (feeds == null)
             {
-                Feeds = Lazy.Create(() => TaskEx.Run(() => new List<FeedSource>()));
+                Feeds = Lazy.Create(() => Task.Run(() => new List<FeedSource>()));
                 feeds = await Feeds.Get().ConfigureAwait(false);
             }
             if (feeds.Any(feed => feed.Category == newFeed.Category && feed.FeedUri == newFeed.FeedUri))
