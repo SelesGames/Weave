@@ -30,6 +30,7 @@
     		<TextBlock Text="Meiryo UI" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="Meiryo UI"/>
     		<TextBlock Text="Georgia" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="Georgia"/>
     	</StackPanel>
+        <phone:LongListSelector />
 	</Grid>
 
 </phone:PhoneApplicationPage>
