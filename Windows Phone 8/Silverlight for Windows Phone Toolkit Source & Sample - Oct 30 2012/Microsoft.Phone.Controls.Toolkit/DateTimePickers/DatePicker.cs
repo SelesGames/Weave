@@ -5,7 +5,6 @@
 
 using System;
 using System.Globalization;
-using System.Windows;
 
 namespace Microsoft.Phone.Controls
 {

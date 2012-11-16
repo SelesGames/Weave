@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Controls.LocalizedResources;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
-using Microsoft.Phone.Controls.LocalizedResources;
 
 namespace Microsoft.Phone.Controls
 {

@@ -3,11 +3,11 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
-using Microsoft.Phone.Controls.Primitives;
 
 namespace Microsoft.Phone.Controls
 {

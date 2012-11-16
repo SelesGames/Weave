@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using SelesGames.Phone;
+using System.Threading.Tasks;
 using Telerik.Windows.Controls;
 
 namespace weave.Pages.Settings
@@ -27,7 +27,7 @@ namespace weave.Pages.Settings
             {
                 viewModel = new BrowseFeedsByCategoryViewModel(category);
                 DataContext = viewModel;
-                await TaskEx.Yield();
+                await Task.Yield();
                 await viewModel.LoadFeedsAsync();
             }
         }

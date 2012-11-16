@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using System.Reactive.Threading.Tasks;
 
 namespace Microsoft.Phone.Controls
 {

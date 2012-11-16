@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using SelesGames.Phone;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using SelesGames.Phone;
 using Telerik.Windows.Controls;
 
 namespace weave
@@ -32,7 +32,7 @@ namespace weave
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             isBackLocked = true;
-            await TaskEx.Yield();
+            await Task.Yield();
             await viewModel.LoadFeedsAsync();
             isBackLocked = false;
         }

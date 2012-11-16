@@ -67,7 +67,7 @@ namespace Microsoft.Phone.Controls
         private object _frameContentWhenOpened;
         private NavigationInTransition _savedNavigationInTransition;
         private NavigationOutTransition _savedNavigationOutTransition;
-        private ListPickerPage _listPickerPage;
+        private IListPickerPage _listPickerPage;
         private TextBlock _multipleSelectionModeSummary;
         private Border _border;
 
@@ -319,7 +319,14 @@ namespace Microsoft.Phone.Controls
 
             if ((-1 == newValueIndex) && (0 < Items.Count))
             {
-                throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
+                var source = this.ItemsSource as IList;
+                if (source == null)
+                    throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
+
+                source.Add(newValue);
+                newValueIndex = (null != newValue) ? Items.IndexOf(newValue) : -1;
+                if (-1 == newValueIndex)
+                    throw new InvalidOperationException(Properties.Resources.InvalidSelectedItem);
             }
 
             // Synchronize SelectedIndex property
@@ -545,7 +552,7 @@ namespace Microsoft.Phone.Controls
         /// <summary>
         /// Gets the selected items.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification="Want to allow this to be bound to.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Want to allow this to be bound to.")]
         public IList SelectedItems
         {
             get { return (IList)GetValue(SelectedItemsProperty); }
@@ -628,7 +635,7 @@ namespace Microsoft.Phone.Controls
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            UpdateVisualStates (true);
+            UpdateVisualStates(true);
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -996,33 +1003,14 @@ namespace Microsoft.Phone.Controls
 
         private void OnItemsPresenterHostParentSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (null != _itemsPresenterPart && null != _itemsPresenterHostPart && (e.NewSize.Width != e.PreviousSize.Width || e.NewSize.Width == 0))
+            // Pass width through the Canvas
+            if (null != _itemsPresenterPart)
             {
-                // The control size has changed and we need to update the items presenter's size as well
-                // as its host's size (the canvas).
-                UpdateItemsPresenterWidth(e.NewSize.Width);
+                _itemsPresenterPart.Width = e.NewSize.Width;
             }
 
             // Update clip to show only the selected item in Normal mode
             _itemsPresenterHostParent.Clip = new RectangleGeometry { Rect = new Rect(new Point(), e.NewSize) };
-        }
-
-        private void UpdateItemsPresenterWidth(double availableWidth)
-        {
-            // First, we clear everthing and we measure the items presenter desired size.
-            _itemsPresenterPart.Width = _itemsPresenterHostPart.Width = double.NaN;
-            _itemsPresenterPart.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-
-            // We set the host's width to the presenter's desired width only if no explicit width is set and
-            // the horizontal alignment isn't stretch (when the horizontal alignment is stretch, the canvas is
-            // automatically stretched).
-            if (double.IsNaN(Width) && HorizontalAlignment != HorizontalAlignment.Stretch)
-            {
-                _itemsPresenterHostPart.Width = _itemsPresenterPart.DesiredSize.Width;
-            }
-
-            if (availableWidth > _itemsPresenterPart.DesiredSize.Width)
-                _itemsPresenterPart.Width = availableWidth;
         }
 
         private void OnListPickerItemSizeChanged(object sender, SizeChangedEventArgs e)
@@ -1032,12 +1020,6 @@ namespace Microsoft.Phone.Controls
             if (object.Equals(ItemContainerGenerator.ItemFromContainer(container), SelectedItem))
             {
                 SizeForAppropriateView(false);
-            }
-
-            // Updates the host's width to reflect the items presenter desired width.
-            if (double.IsNaN(Width) && HorizontalAlignment != HorizontalAlignment.Stretch)
-            {
-                _itemsPresenterHostPart.Width = _itemsPresenterPart.DesiredSize.Width;
             }
         }
 
@@ -1315,12 +1297,9 @@ namespace Microsoft.Phone.Controls
             else if (null == _listPickerPage && _hasPickerPageOpen)
             {
                 _hasPickerPageOpen = false;
-                _listPickerPage = e.Content as ListPickerPage;
+                _listPickerPage = e.Content as IListPickerPage;
                 if (null != _listPickerPage)
                 {
-                    // Sets the flow direction.
-                    _listPickerPage.FlowDirection = this.FlowDirection;
-
                     // Set up the list picker page with the necesarry fields.
                     if (null != FullModeHeader)
                     {
@@ -1328,7 +1307,7 @@ namespace Microsoft.Phone.Controls
                     }
                     else
                     {
-                        _listPickerPage.HeaderText = (string) Header;
+                        _listPickerPage.HeaderText = (string)Header;
                     }
 
                     _listPickerPage.FullModeItemTemplate = FullModeItemTemplate;
@@ -1366,7 +1345,7 @@ namespace Microsoft.Phone.Controls
         private void OnFrameNavigationStoppedOrFailed(object sender, EventArgs e)
         {
             // Abort
-            ListPickerMode = ListPickerMode.Normal;
+            //ListPickerMode = ListPickerMode.Normal;
         }
     }
 }
