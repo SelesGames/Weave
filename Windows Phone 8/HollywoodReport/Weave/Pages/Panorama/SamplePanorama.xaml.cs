@@ -58,7 +58,7 @@ namespace weave
             RefreshFeedsAndStartListeningToNewNews();
             InitializeExtraPanoramaItems();
 
-            await TaskEx.Yield();
+            await Task.Yield();
 
             this.IsHitTestVisible = true;
 

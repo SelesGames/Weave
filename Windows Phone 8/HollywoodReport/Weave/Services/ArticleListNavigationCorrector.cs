@@ -35,7 +35,7 @@ namespace weave
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.Back)
                 using (var disp = lastPage as IDisposable) { }
 
-            await TaskEx.Run(() =>
+            await Task.Run(() =>
             {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();

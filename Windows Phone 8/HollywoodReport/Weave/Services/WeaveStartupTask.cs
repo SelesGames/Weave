@@ -321,7 +321,7 @@ namespace weave
 
         void Stop()
         {
-            var task = TaskEx.Run(() => StopAsync().Wait());
+            var task = Task.Run(() => StopAsync().Wait());
 
             var timeIncrement = TimeSpan.FromSeconds(0.1);
             var counter = TimeSpan.FromSeconds(0);

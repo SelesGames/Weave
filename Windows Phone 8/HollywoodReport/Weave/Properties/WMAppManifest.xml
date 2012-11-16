@@ -1,19 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{2a29809e-fdf3-45b2-b76e-f6b00cd40e75}" Title="Weave News Reader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games">
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="en" />
+  <App xmlns="" ProductID="{e27b338c-03de-42cb-b190-b237e3454096}" Title="Weave News Reader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games" PublisherID="{a35cb2ac-1be5-4dad-8f5d-f8c105f17fe3}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
-      <Capability Name="ID_CAP_IDENTITY_DEVICE"/>
-      <Capability Name="ID_CAP_IDENTITY_USER"/>
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
       <Capability Name="ID_CAP_LOCATION" />
       <Capability Name="ID_CAP_SENSORS" />
       <Capability Name="ID_CAP_MICROPHONE" />
-      <Capability Name="ID_CAP_MEDIALIB" />
       <Capability Name="ID_CAP_GAMERSERVICES" />
       <Capability Name="ID_CAP_PHONEDIALER" />
       <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" />
@@ -23,12 +26,23 @@
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="weaveToken" TaskName="_default">
-        <TemplateType5>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+        <TemplateFlip>
+          <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
           <Count>0</Count>
-          <Title />
-        </TemplateType5>
+          <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
+          <Title></Title>
+          <BackContent></BackContent>
+          <BackBackgroundImageURI></BackBackgroundImageURI>
+          <BackTitle></BackTitle>
+          <DeviceLockImageURI></DeviceLockImageURI>
+          <HasLarge>false</HasLarge>
+        </TemplateFlip>
       </PrimaryToken>
     </Tokens>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
   </App>
 </Deployment>

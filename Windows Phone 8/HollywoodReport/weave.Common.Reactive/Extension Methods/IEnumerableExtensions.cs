@@ -20,14 +20,14 @@ namespace System.Linq
                 .Select(o => o.o);
         }
 
-        public static IEnumerable<TResult> Zip<T1, T2, TResult>(this IEnumerable<T1> coll1, IEnumerable<T2> coll2, Func<T1, T2, TResult> selector)
-        {
-            var enumer1 = coll1.GetEnumerator();
-            var enumer2 = coll2.GetEnumerator();
+        //public static IEnumerable<TResult> Zip<T1, T2, TResult>(this IEnumerable<T1> coll1, IEnumerable<T2> coll2, Func<T1, T2, TResult> selector)
+        //{
+        //    var enumer1 = coll1.GetEnumerator();
+        //    var enumer2 = coll2.GetEnumerator();
 
-            while (enumer1.MoveNext() && enumer2.MoveNext())
-                yield return selector(enumer1.Current, enumer2.Current);
-        }
+        //    while (enumer1.MoveNext() && enumer2.MoveNext())
+        //        yield return selector(enumer1.Current, enumer2.Current);
+        //}
 
         public static IEnumerable<T> Do<T>(this IEnumerable<T> o, Action<T> action)
         {

@@ -148,7 +148,7 @@ namespace weave
                     {
                         //var sw = System.Diagnostics.Stopwatch.StartNew();
                         await this.GetLoaded().Take(1).ToTask();
-                        await TaskEx.Run(() => vm.OnNavigatedTo());
+                        await Task.Run(() => vm.OnNavigatedTo());
                         //sw.Stop();
                         //DebugEx.WriteLine("onnavto mvvm {0} ms", sw.ElapsedMilliseconds);
                     }
@@ -191,7 +191,7 @@ namespace weave
 
                     DataContext = this.vm;
 
-                    await TaskEx.Yield();
+                    await Task.Yield();
 
                     FinishPageInitialization();
 
@@ -365,7 +365,7 @@ namespace weave
             var newsItem = (NewsItem)tup.Item2;
             IsHitTestVisible = false;
             ZoomInSB.Begin();
-            await TaskEx.Delay(TimeSpan.FromSeconds(0.18d));
+            await Task.Delay(TimeSpan.FromSeconds(0.18d));
             GlobalNavigationService.ToWebBrowserPage(newsItem);
             IsHitTestVisible = true;
             newsItem.HasBeenViewed = true;

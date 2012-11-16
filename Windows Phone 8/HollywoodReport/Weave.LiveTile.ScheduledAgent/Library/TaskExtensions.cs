@@ -17,7 +17,7 @@ namespace System.Threading.Tasks
 
         public static Task<T> WaitNoLongerThan<T>(this Task<T> task, TimeSpan delay, CancellationToken cancelToken)
         {
-            return TaskEx.WhenAny(task, TaskEx.Delay(delay, cancelToken)).ContinueWith(o => task.Result, cancelToken);
+            return Task.WhenAny(task, Task.Delay(delay, cancelToken)).ContinueWith(o => task.Result, cancelToken);
         }
 
         public static Task WaitNoLongerThan(this Task task, int delayInMilliseconds)
@@ -32,7 +32,7 @@ namespace System.Threading.Tasks
 
         public static Task WaitNoLongerThan(this Task task, TimeSpan delay, CancellationToken cancelToken)
         {
-            return TaskEx.WhenAny(task, TaskEx.Delay(delay, cancelToken));
+            return Task.WhenAny(task, Task.Delay(delay, cancelToken));
         }
 
         //public static T WaitOnResult<T>(this Task<T> task)
@@ -53,7 +53,7 @@ namespace System.Threading.Tasks
 
         public static TaskAwaiter GetAwaiter(this IEnumerable<Task> tasks)
         {
-            return TaskEx.WhenAll(tasks).GetAwaiter();
+            return Task.WhenAll(tasks).GetAwaiter();
         }
     }
 }

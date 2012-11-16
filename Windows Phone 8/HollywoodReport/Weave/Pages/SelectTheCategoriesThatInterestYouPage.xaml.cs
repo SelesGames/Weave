@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Phone.Controls;
+using SelesGames;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Phone.Controls;
-using SelesGames;
 using Weave.FeedLibrary;
 
 namespace weave

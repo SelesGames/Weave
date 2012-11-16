@@ -19,7 +19,7 @@ namespace weave
             var tempFontSize = ServiceResolver.Get<FontSizePopup>();
             LayoutRoot.Children.Insert(0, tempAccentShare);
             LayoutRoot.Children.Insert(1, tempFontSize);
-            await TaskEx.Yield();
+            await Task.Yield();
             LayoutRoot.Children.Remove(tempFontSize);
             LayoutRoot.Children.Remove(tempAccentShare);
         }

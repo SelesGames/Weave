@@ -307,7 +307,7 @@ namespace weave
                 ShowProgressBar();
                 await refreshListener.GetRefreshed();
                 HideProgressBar();
-                await TaskEx.Yield();
+                await Task.Yield();
                 UpdateNewsList();
             }
         }

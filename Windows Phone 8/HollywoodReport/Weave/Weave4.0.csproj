@@ -11,16 +11,18 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>weave</RootNamespace>
     <AssemblyName>weave</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
-    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
-    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>weave.xap</XapFilename>
+    <XapFilename>Weave4.0_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>weave.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -28,6 +30,7 @@
     <Utf8Output>true</Utf8Output>
     <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
     <TokenBackgroundImageFilePath>C:\Users\Arash\Desktop\Code\Windows Phone 7 Series\HollywoodReport\HollywoodReport\Background.png</TokenBackgroundImageFilePath>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +42,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,27 +53,72 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>
+    </PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>
+    </PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>
+    </PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>
+    </PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncCtpLibrary_Phone">
-      <HintPath>..\..\lib\AsyncCtpLibrary_Phone.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Phone" />
-    <Reference Include="Microsoft.Phone.Controls">
-      <Private>True</Private>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
+      <HintPath>..\..\lib\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="System.Observable" />
-    <Reference Include="System.Reactive, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Windows" />
-    <Reference Include="mscorlib" />
-    <Reference Include="system" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Net" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\..\lib\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Windows.Controls.Input">
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q3 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Input.dll</HintPath>
     </Reference>
@@ -593,6 +642,10 @@
     <Folder Include="Assets\Icons\UNUSED\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Silverlight for Windows Phone Toolkit Source &amp; Sample - Oct 30 2012\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
+      <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
+      <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ToastPromptControl\ToastPromptControl.csproj">
       <Project>{09AC45C7-27E8-4A39-B2C4-0031111595D5}</Project>
       <Name>ToastPromptControl</Name>
@@ -620,6 +673,10 @@
     <ProjectReference Include="..\ComplementaryColors.WP7\SelesGames.ComplementaryColorsLib.csproj">
       <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
       <Name>SelesGames.ComplementaryColorsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObservableToTaskBridge\ObservableToTaskBridge.csproj">
+      <Project>{3D584FFE-5A2C-4803-A447-7A5451AFDB21}</Project>
+      <Name>ObservableToTaskBridge</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
       <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
@@ -670,8 +727,8 @@
       <Name>Weave.UI.SettingsPages</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
