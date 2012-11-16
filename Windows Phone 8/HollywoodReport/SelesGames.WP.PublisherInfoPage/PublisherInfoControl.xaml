@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"   
 	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleViewModel" 
@@ -119,11 +120,11 @@
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1">
-			<toolkit:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" IsFlatList="True" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" Background="{StaticResource TransparentBrush}" >
-				<toolkit:LongListSelector.RenderTransform>
+			<phone:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" Background="{StaticResource TransparentBrush}" >
+                <phone:LongListSelector.RenderTransform>
 					<CompositeTransform />
-				</toolkit:LongListSelector.RenderTransform>
-			</toolkit:LongListSelector>
+                </phone:LongListSelector.RenderTransform>
+            </phone:LongListSelector>
 		</Grid>
 	</Grid>
 </UserControl>

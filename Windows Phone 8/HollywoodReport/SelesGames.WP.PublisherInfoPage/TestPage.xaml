@@ -15,7 +15,7 @@
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot">
-		<local:PublisherInfoControl BuyText="sex" />
+		<local:PublisherInfoControl BuyText="sex" RateText="hello hi" />
 	</Grid>
  
 </phone:PhoneApplicationPage>
