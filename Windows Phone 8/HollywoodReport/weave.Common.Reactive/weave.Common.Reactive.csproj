@@ -99,9 +99,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
-    <Reference Include="WriteableBitmapExWinPhone">
-      <HintPath>..\..\lib\WriteableBitmapExWinPhone.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Reactive\Schedulers\BackgroundTimer.cs" />
