@@ -1,7 +1,6 @@
 ﻿using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Reactive.Disposables;
 
 namespace System.Windows.Media.Imaging
 {

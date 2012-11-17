@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Phone.Scheduler;
+using System;
 using System.Linq;
-using Microsoft.Phone.Scheduler;
 
 namespace SelesGames.Phone
 {

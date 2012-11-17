@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using System.Reactive;
+﻿using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace System.Windows
 {

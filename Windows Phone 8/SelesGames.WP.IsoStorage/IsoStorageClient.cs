@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.GZip;
+using System;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Threading;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.GZip;
 
 namespace SelesGames.WP.IsoStorage
 {

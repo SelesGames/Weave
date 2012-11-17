@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
+﻿
 namespace SelesGames.Instapaper
 {
     public class InstapaperAccount

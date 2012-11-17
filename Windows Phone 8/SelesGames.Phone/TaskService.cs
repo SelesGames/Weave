@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Phone.Tasks;
+﻿using Microsoft.Phone.Tasks;
+using System;
 
 namespace SelesGames.Phone
 {

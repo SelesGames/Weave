@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
 
 namespace SelesGames.Phone
 {

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using System;
 using System.Windows;
-using Microsoft.Phone.Shell;
 
 namespace SelesGames.Phone
 {
