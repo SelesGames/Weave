@@ -681,6 +681,10 @@
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
       <Name>Weave.FeedLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Weave.LiveTile.ScheduledAgent\Weave.LiveTile.ScheduledAgent.csproj">
+      <Project>{099E7718-8767-47F4-AB1C-2DF71362AD06}</Project>
+      <Name>Weave.LiveTile.ScheduledAgent</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
       <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>
       <Name>Weave.Mobilizer.Client</Name>

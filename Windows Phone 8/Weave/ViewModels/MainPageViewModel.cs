@@ -12,7 +12,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using weave.Data;
-//using Weave.LiveTile.ScheduledAgent;
+using Weave.LiveTile.ScheduledAgent;
 
 namespace weave
 {
@@ -338,25 +338,25 @@ namespace weave
 
         #region Live Tile Creation
 
-        //public async Task<LiveTileViewModel> CreateLiveTileViewModel()
-        //{
-        //    var article = allNews.Where(o => o.HasImage).FirstOrDefault();
+        public async Task<LiveTileViewModel> CreateLiveTileViewModel()
+        {
+            var article = allNews.Where(o => o.HasImage).FirstOrDefault();
 
-        //    ImageSource image = null; 
-        //    if (article != null)
-        //    {
-        //        image = await GetImageAsync(article.ImageUrl);
-        //    }
+            ImageSource image = null;
+            if (article != null)
+            {
+                image = await GetImageAsync(article.ImageUrl);
+            }
 
-        //    return new LiveTileViewModel
-        //    {
-        //        AppName = AppSettings.Instance.AppName.ToUpperInvariant(),
-        //        Category = Header.ToLowerInvariant(),
-        //        NewCount = string.Format("0 NEW"),
-        //        Source = image,
-        //        Headline = article == null ? string.Empty : article.Title,              
-        //    };
-        //}
+            return new LiveTileViewModel
+            {
+                AppName = AppSettings.Instance.AppName.ToUpperInvariant(),
+                Category = Header.ToLowerInvariant(),
+                NewCount = string.Format("0 NEW"),
+                Source = image,
+                Headline = article == null ? string.Empty : article.Title,
+            };
+        }
 
         protected async Task<ImageSource> GetImageAsync(string url)
         {

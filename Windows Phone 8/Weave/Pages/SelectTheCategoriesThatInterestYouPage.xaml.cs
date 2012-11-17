@@ -41,7 +41,7 @@ namespace weave
             nextButton.Click += (s, e) => OnNextButtonClick();
         }
 
-        async Task OnNextButtonClick()
+        async void OnNextButtonClick()
         {
             bool atLeast1Selected = CheckForAtLeast1();
             if (atLeast1Selected)

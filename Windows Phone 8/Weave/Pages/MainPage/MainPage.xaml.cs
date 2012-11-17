@@ -16,7 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
 using weave.UI.Advertising;
-//using Weave.LiveTile.ScheduledAgent;
+using Weave.LiveTile.ScheduledAgent;
 
 
 namespace weave
@@ -407,18 +407,18 @@ namespace weave
             {
                 var currentSource = this.NavigationService.CurrentSource;
 
-                //// Look to see if the tile already exists and if so, don't try to create again.
-                //ShellTile TileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.Equals(currentSource));
+                // Look to see if the tile already exists and if so, don't try to create again.
+                ShellTile TileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.Equals(currentSource));
 
-                //// Create the tile if we didn't find it already exists.
-                //if (TileToFind == null)
-                //{
-                //    var liveTileVM = await vm.CreateLiveTileViewModel();
-                //    var newTileData = liveTileVM.CreateTileData();
+                // Create the tile if we didn't find it already exists.
+                if (TileToFind == null)
+                {
+                    var liveTileVM = await vm.CreateLiveTileViewModel();
+                    var newTileData = liveTileVM.CreateTileData();
 
-                //    // Create the tile and pin it to Start. This will cause a navigation to Start and a deactivation of our application.
-                //    ShellTile.Create(currentSource, newTileData);
-                //}
+                    // Create the tile and pin it to Start. This will cause a navigation to Start and a deactivation of our application.
+                    ShellTile.Create(currentSource, newTileData);
+                }
             }
             catch (Exception ex)
             {
