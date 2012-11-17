@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace SelesGames.Rest.JsonDotNet
 {
