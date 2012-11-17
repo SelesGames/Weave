@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{63F251ED-B0F7-4DBB-8D6A-81F8D35B9D52}</ProjectGuid>
+    <ProjectGuid>{B39CDCE7-6474-4AE2-97AF-7E9D6B66E8F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelesGames.Common</RootNamespace>
-    <AssemblyName>SelesGames.Common</AssemblyName>
+    <RootNamespace>Weave.RSS</RootNamespace>
+    <AssemblyName>Weave.RSS</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -102,37 +102,46 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\EventArgs.cs">
-      <Link>EventArgs.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\DTOs\Incoming\FeedResult.cs">
+      <Link>DTOs\Incoming\FeedResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\ICollectionExtensions.cs">
-      <Link>Extension Methods\ICollectionExtensions.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\DTOs\Incoming\FeedResultExtensions.cs">
+      <Link>DTOs\Incoming\FeedResultExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\IListExtensions.cs">
-      <Link>Extension Methods\IListExtensions.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\DTOs\Incoming\NewsItem.cs">
+      <Link>DTOs\Incoming\NewsItem.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\StringExtensionMethods.cs">
-      <Link>Extension Methods\StringExtensionMethods.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\DTOs\Outgoing\FeedRequest.cs">
+      <Link>DTOs\Outgoing\FeedRequest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\StringReaderExtensions.cs">
-      <Link>Extension Methods\StringReaderExtensions.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\FeedUpdateRequest.cs">
+      <Link>FeedUpdateRequest.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\UriExtensionMethods.cs">
-      <Link>Extension Methods\UriExtensionMethods.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\FeedUpdateResponse.cs">
+      <Link>FeedUpdateResponse.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\IAnalyticsService.cs">
-      <Link>IAnalyticsService.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\Guard.cs">
+      <Link>Guard.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Lazy.cs">
-      <Link>Lazy.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\NewsItem.cs">
+      <Link>NewsItem.cs</Link>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\ServiceResolver.cs">
-      <Link>ServiceResolver.cs</Link>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\NewsServer.cs">
+      <Link>NewsServer.cs</Link>
     </Compile>
-    <Compile Include="DebugEx.cs" />
-    <Compile Include="Extension Methods\StreamExtensionMethods.cs" />
-    <Compile Include="Extension Methods\WebResponseExtensionMethods.cs" />
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\RssDateParsingHelper.cs">
+      <Link>RssDateParsingHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Windows Phone 8\weave.RSS\SyndicationDateTimeUtility.cs">
+      <Link>SyndicationDateTimeUtility.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WeaveRssServerProxy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net">
+      <HintPath>..\lib\protobuf-net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>

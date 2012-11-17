@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{63F251ED-B0F7-4DBB-8D6A-81F8D35B9D52}</ProjectGuid>
+    <ProjectGuid>{FEF7DA6F-3075-4373-8534-C9EA936042F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelesGames.Common</RootNamespace>
-    <AssemblyName>SelesGames.Common</AssemblyName>
+    <RootNamespace>SelesGames.Common.Reactive</RootNamespace>
+    <AssemblyName>SelesGames.Common.Reactive</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -100,38 +100,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
+      <Project>{63f251ed-b0f7-4dbb-8d6a-81f8d35b9d52}</Project>
+      <Name>SelesGames.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\EventArgs.cs">
-      <Link>EventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\ICollectionExtensions.cs">
-      <Link>Extension Methods\ICollectionExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\IListExtensions.cs">
-      <Link>Extension Methods\IListExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\StringExtensionMethods.cs">
-      <Link>Extension Methods\StringExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\StringReaderExtensions.cs">
-      <Link>Extension Methods\StringReaderExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Extension Methods\UriExtensionMethods.cs">
-      <Link>Extension Methods\UriExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\IAnalyticsService.cs">
-      <Link>IAnalyticsService.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\Lazy.cs">
-      <Link>Lazy.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common\ServiceResolver.cs">
-      <Link>ServiceResolver.cs</Link>
-    </Compile>
-    <Compile Include="DebugEx.cs" />
-    <Compile Include="Extension Methods\StreamExtensionMethods.cs" />
-    <Compile Include="Extension Methods\WebResponseExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
