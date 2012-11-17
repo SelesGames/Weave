@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using ProtoBuf;
 
-namespace Weave.RssAggregator.Core.DTOs.Outgoing
+namespace Weave.RSS.DTOs.Incoming
 {
-    public enum FeedResultStatus
+    internal enum FeedResultStatus
     {
         OK,
         Failed,
@@ -11,7 +11,7 @@ namespace Weave.RssAggregator.Core.DTOs.Outgoing
     }
 
     [ProtoContract]
-    public class FeedResult
+    internal class FeedResult
     {
         [ProtoMember(1)] public FeedResultStatus Status { get; set; }
         [ProtoMember(2)] public string Id { get; set; }

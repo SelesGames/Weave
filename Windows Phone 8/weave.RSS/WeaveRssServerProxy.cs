@@ -5,8 +5,8 @@ using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.GZip;
 using ProtoBuf;
-using Weave.RssAggregator.Core.DTOs.Incoming;
-using Weave.RssAggregator.Core.DTOs.Outgoing;
+using Weave.RSS.DTOs.Outgoing;
+using Weave.RSS.DTOs.Incoming;
 
 namespace weave.Services.RSS
 {

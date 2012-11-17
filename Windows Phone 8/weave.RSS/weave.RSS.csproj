@@ -92,17 +92,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Incoming\FeedRequest.cs">
-      <Link>DTOs\Outgoing\FeedRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Outgoing\FeedResult.cs">
-      <Link>DTOs\Incoming\FeedResult.cs</Link>
-    </Compile>
-    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Outgoing\NewsItem.cs">
-      <Link>DTOs\Incoming\NewsItem.cs</Link>
-    </Compile>
+    <Compile Include="DTOs\Incoming\FeedResult.cs" />
     <Compile Include="DTOs\Incoming\FeedResultExtensions.cs" />
+    <Compile Include="DTOs\Incoming\NewsItem.cs" />
+    <Compile Include="DTOs\Outgoing\FeedRequest.cs" />
     <Compile Include="FeedUpdateRequest.cs" />
+    <Compile Include="Guard.cs" />
     <Compile Include="NewsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FeedUpdateResponse.cs" />
@@ -121,12 +116,6 @@
     <Reference Include="SharpZipLib.WindowsPhone7">
       <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

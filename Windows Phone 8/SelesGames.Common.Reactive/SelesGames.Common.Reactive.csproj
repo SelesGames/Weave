@@ -93,20 +93,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Reactive\Schedulers\BackgroundTimer.cs" />
-    <Compile Include="Extension Methods\StreamExtensions.cs" />
     <Compile Include="Extension Methods\TaskExtensions.cs" />
     <Compile Include="DebugDisposable.cs" />
     <Compile Include="EventPattern.cs" />
-    <Compile Include="Extension Methods\BitmapImageExtensions.cs" />
     <Compile Include="Extension Methods\ControlsExtensions.cs" />
-    <Compile Include="Extension Methods\ICollectionExtensions.cs" />
-    <Compile Include="Extension Methods\IEnumerableExtensions.cs" />
     <Compile Include="Extension Methods\ISchedulerExtensions.cs" />
-    <Compile Include="Extension Methods\IsolatedStorageSettingsExtensions.cs" />
-    <Compile Include="Extension Methods\LinqToXmlExtensions.cs" />
-    <Compile Include="Extension Methods\MouseEventArgExtensions.cs" />
     <Compile Include="Extension Methods\ObservableExtensions.cs" />
-    <Compile Include="Extension Methods\ReactiveExceptionExtensions.cs" />
     <Compile Include="Extension Methods\ReactiveExtensions.cs" />
     <Compile Include="Extension Methods\ReactiveExtensions.Timers.cs" />
     <Compile Include="Extension Methods\StoryboardExtensions.cs" />
@@ -115,7 +107,6 @@
     <Compile Include="GlobalDispatcher.cs" />
     <Compile Include="HttpWebRequestQueue.cs" />
     <Compile Include="ImageCache.cs" />
-    <Compile Include="OSThemeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reactive\Schedulers\Schedulers.cs" />
     <Compile Include="Reactive\Schedulers\SingleThreadScheduler.cs" />

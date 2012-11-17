@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Weave.RssAggregator.Core.DTOs.Outgoing;
+using Weave.RSS.DTOs.Incoming;
 
 namespace weave.Services.RSS
 {

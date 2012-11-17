@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Weave.RssAggregator.Core.DTOs.Incoming;
-using Weave.RssAggregator.Core.DTOs.Outgoing;
+using Weave.RSS.DTOs.Incoming;
+using Weave.RSS.DTOs.Outgoing;
 
 namespace weave.Services.RSS
 {
@@ -78,14 +78,9 @@ namespace weave.Services.RSS
                     })
                     .ToList();
 
-                var sw = System.Diagnostics.Stopwatch.StartNew();
-
                 try
                 { 
                     var feedResults = await new WeaveRssServerProxy(outgoingFeedRequests).GetFeedResultsAsync().ConfigureAwait(false); 
-
-                    sw.Stop();
-                    DebugEx.WriteLine("CLIENT SIDE Weave server RT time: {0} seconds", sw.Elapsed.TotalSeconds);
 
                     foreach (var result in feedResults)
                     {
@@ -109,7 +104,6 @@ namespace weave.Services.RSS
                 }
                 catch(Exception exception)
                 {
-                    DebugEx.WriteLine(exception.ToString());
                     foreach (var shim in capturedGroup)
                     {
                         shim.TaskSource.TrySetException(exception);
@@ -167,70 +161,6 @@ namespace weave.Services.RSS
 
             return temp;
         }
-
-
-        //const int idealNewsItemsPerRequest = 50;
-        //double maxExpectedNewsItemsPerRequest = 100d;
-
-        //IEnumerable<IList<shim>> ChunkWork(IList<shim> list)
-        //{
-        //    var totalExpectedNumberOfNewsItems = 0d;
-        //    var now = DateTime.UtcNow;
-
-        //    foreach (var shim in list)
-        //    {
-        //        totalExpectedNumberOfNewsItems += getExpectedNumberOfNewsItems(shim, now);
-        //    }
-
-        //    var split = (int)Math.Floor(totalExpectedNumberOfNewsItems / idealNewsItemsPerRequest);
-
-        //    if (split == 0d)
-        //        return new List<IList<shim>> { list };
-
-        //    var take = (int)list.Count / split;
-
-        //    var temp = new List<IList<shim>>();
-
-        //    int i;
-        //    for (i = 0; i < split - 1; i++)
-        //    {
-        //        var x = list.Skip(i * take).Take(take).ToList();
-        //        if (x.Count > 0)
-        //            temp.Add(x);
-        //    }
-        //    var y = list.Skip(i * take).ToList();
-        //    if (y.Count > 0)
-        //        temp.Add(y);
-
-        //    return temp;
-        //}
-
-        //const double day0Weight = 0.3333;
-        //const double day1Weight = 0.1;
-        //const double day2Weight = 0.03333;
-
-        //double getExpectedNumberOfNewsItems(shim shim, DateTime now)
-        //{
-        //    if (shim.Feed == null)
-        //        return 0d;
-
-        //    var feed = shim.Feed;
-        //    var elapsed = now - feed.LastRefreshedOn;
-        //    var totalHours = elapsed.TotalHours;
-            
-        //    var day0 = Math.Min(totalHours, 24d);
-        //    var day1 = Math.Max(0d, Math.Min(totalHours, 48d) - 24d);
-        //    var day2 = Math.Max(0d, totalHours - 48d);
-
-        //    var expectedNumberOfNewsItems =
-        //        day0 * day0Weight +
-        //        day1 * day1Weight +
-        //        day2 * day2Weight;
-
-        //    expectedNumberOfNewsItems = Math.Min(maxExpectedNewsItemsPerRequest, expectedNumberOfNewsItems); // cap it off at expecting no more than N news items
-
-        //    return expectedNumberOfNewsItems;
-        //}
 
         #endregion
     }

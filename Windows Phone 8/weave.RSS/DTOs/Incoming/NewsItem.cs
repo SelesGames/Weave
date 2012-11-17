@@ -1,9 +1,9 @@
 ﻿using ProtoBuf;
 
-namespace Weave.RssAggregator.Core.DTOs.Outgoing
+namespace Weave.RSS.DTOs.Incoming
 {
     [ProtoContract]
-    public class NewsItem
+    internal class NewsItem
     {
         [ProtoMember(1)] public string Title { get; set; }
         [ProtoMember(2)] public string PublishDateTime { get; set; }

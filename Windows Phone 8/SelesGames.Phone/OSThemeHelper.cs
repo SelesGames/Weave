@@ -1,6 +1,7 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Media;
 
-namespace System.Windows
+namespace SelesGames.Phone
 {
     public static class OSThemeHelper
     {

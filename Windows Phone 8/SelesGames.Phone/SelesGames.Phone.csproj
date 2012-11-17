@@ -94,8 +94,10 @@
   <ItemGroup>
     <Compile Include="ApplicationBarToggleIconButtonAdapter.cs" />
     <Compile Include="ApplicationBarToggleMenuItemAdapter.cs" />
+    <Compile Include="ConvenienceExtensions.cs" />
     <Compile Include="NavigationServiceExtensions.cs" />
     <Compile Include="OrientationLockService.cs" />
+    <Compile Include="OSThemeHelper.cs" />
     <Compile Include="PageOrientation\PageOrientationExtensions.cs" />
     <Compile Include="PageOrientation\PhoneApplicationPageExtendedInfo.cs" />
     <Compile Include="PageOrientation\SupportedPageOrientationExtensions.cs" />
