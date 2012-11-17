@@ -97,13 +97,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\weave.Common.Reactive\weave.Common.Reactive.csproj">
-      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
-      <Name>weave.Common.Reactive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
+    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>weave.Common</Name>
+      <Name>SelesGames.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\weave.Common.Reactive\SelesGames.Common.Reactive.csproj">
+      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
+      <Name>SelesGames.Common.Reactive</Name>
     </ProjectReference>
     <ProjectReference Include="..\weave.Data\weave.Data.csproj">
       <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>

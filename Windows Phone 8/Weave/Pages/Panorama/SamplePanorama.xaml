@@ -7,7 +7,7 @@
 	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
 	xmlns:local="clr-namespace:weave"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-	xmlns:weave="clr-namespace:weave;assembly=weave.Common.Reactive"
+	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	x:Class="weave.SamplePanorama"

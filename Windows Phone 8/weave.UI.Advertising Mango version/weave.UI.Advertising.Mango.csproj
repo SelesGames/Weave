@@ -115,13 +115,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
+      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
+      <Name>SelesGames.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
       <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
       <Name>SelesGames.WP.Rest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>weave.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

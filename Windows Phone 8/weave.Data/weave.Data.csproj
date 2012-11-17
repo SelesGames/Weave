@@ -106,6 +106,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
+      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
+      <Name>SelesGames.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.IsoStorage.Protobuf\SelesGames.WP.IsoStorage.Protobuf.csproj">
       <Project>{E097DBFA-C911-49ED-9189-0ACEB2AE2976}</Project>
       <Name>SelesGames.WP.IsoStorage.Protobuf</Name>
@@ -113,10 +117,6 @@
     <ProjectReference Include="..\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
       <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
       <Name>SelesGames.WP.IsoStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>weave.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\weave.RSS\weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
