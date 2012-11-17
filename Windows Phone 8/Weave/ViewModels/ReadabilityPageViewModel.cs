@@ -1,7 +1,7 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Text;
 using System.Threading.Tasks;
-using SelesGames;
 using Weave.Mobilizer.Client;
 
 namespace weave

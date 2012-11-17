@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using SelesGames.Instapaper;
+using System;
 using System.Net;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using weave.Services.Instapaper;
-using SelesGames.Instapaper;
 
 namespace weave
 {

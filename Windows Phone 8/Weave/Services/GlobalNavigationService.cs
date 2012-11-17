@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Tasks;
 
 namespace weave
 {

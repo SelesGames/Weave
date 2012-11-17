@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using SelesGames.WP.IsoStorage;
+using System;
 using System.Collections.Generic;
 using System.Windows;
-using Microsoft.Phone.Shell;
-using SelesGames.WP.IsoStorage;
 using weave.Services.MostViewedHistory;
 
 namespace weave

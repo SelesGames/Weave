@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SelesGames.Instapaper;
+using System;
 using System.Windows;
-using SelesGames.Instapaper;
 
 namespace weave.Services.Instapaper
 {

@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using SelesGames;
+using System.Threading.Tasks;
 
 namespace weave
 {

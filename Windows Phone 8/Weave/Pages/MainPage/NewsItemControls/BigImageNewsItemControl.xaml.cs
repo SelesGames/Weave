@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -7,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using SelesGames;
 
 namespace weave
 {

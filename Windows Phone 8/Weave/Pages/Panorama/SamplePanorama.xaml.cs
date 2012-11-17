@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using SelesGames;
+using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Phone.Shell;
-using SelesGames;
 using Telerik.Windows.Controls;
 
 namespace weave

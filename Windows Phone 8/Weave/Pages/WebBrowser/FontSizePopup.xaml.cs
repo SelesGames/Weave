@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
@@ -6,7 +7,6 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
-using SelesGames;
 using Weave.Customizability;
 
 namespace weave

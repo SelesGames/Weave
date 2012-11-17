@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using SelesGames;
 using weave.Data;
 //using Weave.LiveTile.ScheduledAgent;
 

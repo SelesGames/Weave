@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Microsoft.Phone.Controls;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
 

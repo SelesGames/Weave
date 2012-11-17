@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using weave.Services.Instapaper;
-using SelesGames.Phone;
+﻿using weave.Services.Instapaper;
 
 namespace weave
 {
