@@ -665,10 +665,6 @@
       <Project>{09AC45C7-27E8-4A39-B2C4-0031111595D5}</Project>
       <Name>ToastPromptControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.Common.Reactive\SelesGames.Common.Reactive.csproj">
-      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
-      <Name>SelesGames.Common.Reactive</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
       <Name>Weave.Customizability</Name>

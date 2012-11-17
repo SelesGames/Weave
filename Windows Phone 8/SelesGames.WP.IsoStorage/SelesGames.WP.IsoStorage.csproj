@@ -94,7 +94,6 @@
   <ItemGroup>
     <Compile Include="DataContractIsoStorageClient.cs" />
     <Compile Include="DelegateIsoStorageClient.cs" />
-    <Compile Include="IsolatedStorageFileStreamExtensions.cs" />
     <Compile Include="IsoStorageClient.cs" />
     <Compile Include="IsoStorageLocker.cs" />
     <Compile Include="JsonIsoStorageClient.cs" />
