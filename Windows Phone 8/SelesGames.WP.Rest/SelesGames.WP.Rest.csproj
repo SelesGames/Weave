@@ -93,10 +93,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib.WindowsPhone7">
-      <HintPath>..\..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
+      <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

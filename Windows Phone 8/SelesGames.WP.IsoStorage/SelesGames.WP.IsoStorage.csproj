@@ -105,9 +105,8 @@
     <Compile Include="XmlSerializerIsoStorageClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="SharpZipLib.WindowsPhone7, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
+    <Reference Include="SharpZipLib.WindowsPhone7">
+      <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

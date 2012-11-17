@@ -96,14 +96,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
+    <ProjectReference Include="..\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
       <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
       <Name>SelesGames.WP.IsoStorage</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
-      <HintPath>..\..\lib\protobuf-net.dll</HintPath>
+      <HintPath>..\lib\protobuf-net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
