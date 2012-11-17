@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Phone.Controls;
 using Telerik.Windows.Controls;
+using Weave.Customizability;
 
 namespace weave
 {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en" />
+  <DefaultLanguage xmlns="" code="en-US" />
   <App xmlns="" ProductID="{e27b338c-03de-42cb-b190-b237e3454096}" Title="Weave News Reader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games" PublisherID="{a35cb2ac-1be5-4dad-8f5d-f8c105f17fe3}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>

@@ -302,15 +302,15 @@ namespace weave
 
         void EnableLiveTileUpdatingBackgroundTask()
         {
-            var appName = settings.AppName;
-            var taskService = new PeriodicTaskService(string.Format("pts:{0}", appName.ToUpperInvariant()))
-            {
-                Description = string.Format(
-"Enables *** LIVE TILE *** updating for {0}.  If you disable this, you will lose Live Tiles for this app.", appName)
-            };
-            var regResult = taskService.TryRegister();
-            if (!regResult)
-                DebugEx.WriteLine(taskService.RegistrationException);
+//            var appName = settings.AppName;
+//            var taskService = new PeriodicTaskService(string.Format("pts:{0}", appName.ToUpperInvariant()))
+//            {
+//                Description = string.Format(
+//"Enables *** LIVE TILE *** updating for {0}.  If you disable this, you will lose Live Tiles for this app.", appName)
+//            };
+//            var regResult = taskService.TryRegister();
+//            if (!regResult)
+//                DebugEx.WriteLine(taskService.RegistrationException);
         }
 
         #endregion

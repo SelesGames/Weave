@@ -58,27 +58,27 @@ namespace weave
                     var currentFontSize = permState.MainPageArticleListFontSize;
                     switch (currentFontSize)
                     {
-                        case weave.FontSize.Small:
+                        case Weave.Customizability.FontSize.Small:
                             this.fontSizePicker.SelectedItem = this.fontSizePicker.Items[0];
                             this.fontSizePicker.SelectedIndex = 0;
                             break;
 
-                        case weave.FontSize.Medium:
+                        case Weave.Customizability.FontSize.Medium:
                             this.fontSizePicker.SelectedItem = this.fontSizePicker.Items[1];
                             this.fontSizePicker.SelectedIndex = 1;
                             break;
 
-                        case weave.FontSize.MediumLarge:
+                        case Weave.Customizability.FontSize.MediumLarge:
                             this.fontSizePicker.SelectedItem = this.fontSizePicker.Items[2];
                             this.fontSizePicker.SelectedIndex = 2;
                             break;
 
-                        case weave.FontSize.Large:
+                        case Weave.Customizability.FontSize.Large:
                             this.fontSizePicker.SelectedItem = this.fontSizePicker.Items[3];
                             this.fontSizePicker.SelectedIndex = 3;
                             break;
 
-                        case weave.FontSize.ExtraLarge:
+                        case Weave.Customizability.FontSize.ExtraLarge:
                             this.fontSizePicker.SelectedItem = this.fontSizePicker.Items[4];
                             this.fontSizePicker.SelectedIndex = 4;
                             break;
@@ -103,24 +103,24 @@ namespace weave
             var content = item.Content.ToString();
             DebugEx.WriteLine(content);
 
-            weave.FontSize fontSize;
+            Weave.Customizability.FontSize fontSize;
 
             switch (content)
             {
                 case "small":
-                    fontSize = weave.FontSize.Small;
+                    fontSize = Weave.Customizability.FontSize.Small;
                     break;
                 case "medium":
-                    fontSize = weave.FontSize.Medium;
+                    fontSize = Weave.Customizability.FontSize.Medium;
                     break;
                 case "medium large (default)":
-                    fontSize = weave.FontSize.MediumLarge;
+                    fontSize = Weave.Customizability.FontSize.MediumLarge;
                     break;
                 case "large":
-                    fontSize = weave.FontSize.Large;
+                    fontSize = Weave.Customizability.FontSize.Large;
                     break;
                 case "extra large":
-                    fontSize = weave.FontSize.ExtraLarge;
+                    fontSize = Weave.Customizability.FontSize.ExtraLarge;
                     break;
                 default:
                     return;
@@ -143,22 +143,22 @@ namespace weave
                     var currentFontThickness = permState.MainPageArticleListFontThickness;
                     switch (currentFontThickness)
                     {
-                        case weave.FontThickness.VerySkinny:
+                        case Weave.Customizability.FontThickness.VerySkinny:
                             this.fontThicknessPicker.SelectedItem = this.fontThicknessPicker.Items[0];
                             this.fontThicknessPicker.SelectedIndex = 0;
                             break;
 
-                        case weave.FontThickness.Skinny:
+                        case Weave.Customizability.FontThickness.Skinny:
                             this.fontThicknessPicker.SelectedItem = this.fontThicknessPicker.Items[1];
                             this.fontThicknessPicker.SelectedIndex = 1;
                             break;
 
-                        case weave.FontThickness.Regular:
+                        case Weave.Customizability.FontThickness.Regular:
                             this.fontThicknessPicker.SelectedItem = this.fontThicknessPicker.Items[2];
                             this.fontThicknessPicker.SelectedIndex = 2;
                             break;
 
-                        case weave.FontThickness.Fat:
+                        case Weave.Customizability.FontThickness.Fat:
                             this.fontThicknessPicker.SelectedItem = this.fontThicknessPicker.Items[3];
                             this.fontThicknessPicker.SelectedIndex = 3;
                             break;
@@ -183,21 +183,21 @@ namespace weave
             var content = item.Content.ToString();
             DebugEx.WriteLine(content);
 
-            weave.FontThickness thickness;
+            Weave.Customizability.FontThickness thickness;
 
             switch (content)
             {
                 case "skinny":
-                    thickness = weave.FontThickness.Skinny;
+                    thickness = Weave.Customizability.FontThickness.Skinny;
                     break;
                 case "very skinny":
-                    thickness = weave.FontThickness.VerySkinny;
+                    thickness = Weave.Customizability.FontThickness.VerySkinny;
                     break;
                 case "regular (default)":
-                    thickness = weave.FontThickness.Regular;
+                    thickness = Weave.Customizability.FontThickness.Regular;
                     break;
                 case "fat":
-                    thickness = weave.FontThickness.Fat;
+                    thickness = Weave.Customizability.FontThickness.Fat;
                     break;
                 default:
                     return;

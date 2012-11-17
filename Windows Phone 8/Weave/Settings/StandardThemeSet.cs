@@ -4,14 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
+using Weave.Customizability;
 
 namespace weave
 {
-    public class StandardThemeSet : List<Theme>, INotifyPropertyChanged
+    public class StandardThemeSet : List<ReadingTheme>, INotifyPropertyChanged
     {
         PermanentState permanentState;
         int currentThemeIndex;
-        public Theme CurrentTheme { get; private set; }
+        public ReadingTheme CurrentTheme { get; private set; }
 
         public StandardThemeSet(Application app, PermanentState permanentState)
         {
@@ -29,7 +30,7 @@ namespace weave
             var isDarkTheme = backgroundBrush.Color == Colors.Black;
 
             // add metro theme
-            this.Add(new Theme
+            this.Add(new ReadingTheme
             {
                 Name = "metro",
                 TextBrush = foregroundBrush,
@@ -40,7 +41,7 @@ namespace weave
             });
 
             // add light reading theme
-            this.Add(new Theme
+            this.Add(new ReadingTheme
             {
                 Name = "day",
                 TextBrush = new SolidColorBrush(Color.FromArgb(255, 10, 10, 10)),
@@ -51,7 +52,7 @@ namespace weave
             });
 
             // add mint reading theme
-            this.Add(new Theme
+            this.Add(new ReadingTheme
             {
                 Name = "paper",
                 TextBrush = new SolidColorBrush(Color.FromArgb(255, 30, 33, 32)),
@@ -62,7 +63,7 @@ namespace weave
             });
 
             // add light reading theme
-            this.Add(new Theme
+            this.Add(new ReadingTheme
             {
                 Name = "night",
                 TextBrush = new SolidColorBrush(Color.FromArgb(255, 250, 250, 250)),

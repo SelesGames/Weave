@@ -11,12 +11,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>weave</RootNamespace>
     <AssemblyName>weave</AssemblyName>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
-    <SilverlightVersion>
-    </SilverlightVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
     </SupportedCultures>
@@ -26,11 +23,9 @@
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>weave.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
-    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <Utf8Output>true</Utf8Output>
-    <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
-    <TokenBackgroundImageFilePath>C:\Users\Arash\Desktop\Code\Windows Phone 7 Series\HollywoodReport\HollywoodReport\Background.png</TokenBackgroundImageFilePath>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <ExpressionBlendVersion>5.0.30806.60</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -184,21 +179,14 @@
     <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
     <Compile Include="Services\MostViewedHistory\RunLog.cs" />
     <Compile Include="Services\SystemTrayNavigationSetter.cs" />
-    <Compile Include="Settings\ArticleDeleteTime.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
-    <Compile Include="Settings\ArticleListFormatType.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
-    <Compile Include="Settings\FontProperties.cs" />
-    <Compile Include="Settings\FontSize.cs" />
-    <Compile Include="Settings\FontThickness.cs" />
     <Compile Include="Settings\FontSizes.cs" />
-    <Compile Include="Settings\FontSizeProperties.cs" />
     <Compile Include="Settings\FontThicknessExtensions.cs" />
     <Compile Include="Settings\PermanentState.cs" />
     <Compile Include="Settings\StandardFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
-    <Compile Include="Settings\Theme.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
@@ -681,6 +669,10 @@
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>weave.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
+      <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
+      <Name>Weave.Customizability</Name>
+    </ProjectReference>
     <ProjectReference Include="..\weave.Data\weave.Data.csproj">
       <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
       <Name>weave.Data</Name>
@@ -688,10 +680,6 @@
     <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
       <Name>Weave.FeedLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.LiveTile.ScheduledAgent\Weave.LiveTile.ScheduledAgent.csproj">
-      <Project>{099E7718-8767-47F4-AB1C-2DF71362AD06}</Project>
-      <Name>Weave.LiveTile.ScheduledAgent</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
       <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>

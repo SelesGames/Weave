@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
+using Weave.Customizability;
 
 namespace weave
 {
@@ -161,7 +162,7 @@ namespace weave
             ColorToTheme(theme);
         }
 
-        void ColorToTheme(Theme theme)
+        void ColorToTheme(ReadingTheme theme)
         {
             try
             {

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Media;
 
-namespace weave
+namespace Weave.Customizability
 {
-    public class Theme
+    public class ReadingTheme
     {
         Brush text, background, accent, complementary, subtle;
 

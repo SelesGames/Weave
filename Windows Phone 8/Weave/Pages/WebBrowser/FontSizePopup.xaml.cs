@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using SelesGames;
+using Weave.Customizability;
 
 namespace weave
 {

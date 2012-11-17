@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Weave.Customizability;
 
 namespace weave
 {
