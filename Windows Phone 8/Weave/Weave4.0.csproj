@@ -639,54 +639,6 @@
     <Folder Include="Assets\Icons\UNUSED\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Silverlight for Windows Phone Toolkit Source &amp; Sample - Oct 30 2012\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
-      <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
-      <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ToastPromptControl\ToastPromptControl.csproj">
-      <Project>{09AC45C7-27E8-4A39-B2C4-0031111595D5}</Project>
-      <Name>ToastPromptControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
-      <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
-      <Name>SelesGames.Phone.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone.UI\SelesGames.Phone.UI.csproj">
-      <Project>{44789FF4-AC39-4FC8-9998-1F9BFD3F97F2}</Project>
-      <Name>SelesGames.Phone.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone\SelesGames.Phone.csproj">
-      <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
-      <Name>SelesGames.Phone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
-      <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
-      <Name>SelesGames.WP.IsoStorage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
-      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
-      <Name>SelesGames.WP.Rest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ComplementaryColors.WP7\SelesGames.ComplementaryColorsLib.csproj">
-      <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
-      <Name>SelesGames.ComplementaryColorsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
-      <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
-      <Name>SelesGames.WP.Instapaper</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.WP.PublisherInfoPage\SelesGames.WP.PublisherInfoPage.csproj">
-      <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
-      <Name>SelesGames.WP.PublisherInfoPage</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.Common.Reactive\weave.Common.Reactive.csproj">
-      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
-      <Name>weave.Common.Reactive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>weave.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\weave.Data\weave.Data.csproj">
       <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
       <Name>weave.Data</Name>
@@ -710,10 +662,6 @@
     <ProjectReference Include="..\weave.RSS\weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>weave.RSS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.UI.Advertising Mango version\weave.UI.Advertising.Mango.csproj">
-      <Project>{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}</Project>
-      <Name>weave.UI.Advertising.Mango</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>

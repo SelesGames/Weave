@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</ProjectGuid>
+    <ProjectGuid>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelesGames.WP.PublisherInfoPage</RootNamespace>
-    <AssemblyName>SelesGames.WP.PublisherInfoPage</AssemblyName>
+    <RootNamespace>weave</RootNamespace>
+    <AssemblyName>weave.RSS</AssemblyName>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>
     </SilverlightVersion>
@@ -20,8 +20,6 @@
     <SilverlightApplication>false</SilverlightApplication>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <Utf8Output>true</Utf8Output>
-    <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -94,74 +92,35 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\lib\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpZipLib.WindowsPhone7">
+      <HintPath>..\..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Incoming\FeedRequest.cs">
+      <Link>DTOs\Outgoing\FeedRequest.cs</Link>
+    </Compile>
+    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Outgoing\FeedResult.cs">
+      <Link>DTOs\Incoming\FeedResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Weave.RssAggregator.Core\DTOs\Outgoing\NewsItem.cs">
+      <Link>DTOs\Incoming\NewsItem.cs</Link>
+    </Compile>
+    <Compile Include="DTOs\Incoming\FeedResultExtensions.cs" />
+    <Compile Include="FeedUpdateRequest.cs" />
+    <Compile Include="NewsItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublisherInfoControl.xaml.cs">
-      <DependentUpon>PublisherInfoControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PublisherInfoViewModel.cs" />
-    <Compile Include="RatingsImageBridge.cs" />
-    <Compile Include="SampleData\SampleViewModel\SampleViewModel.xaml.cs">
-      <DependentUpon>SampleViewModel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ZuneAppViewModel.cs" />
-    <Compile Include="ZuneAppViewModel.Extensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="PublisherInfoControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <DesignTimeOnly Include="SampleData\SampleViewModel\SampleViewModel.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <Page Include="TestPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Silverlight for Windows Phone Toolkit Source &amp; Sample - Oct 30 2012\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
-      <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
-      <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
-      <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
-      <Name>SelesGames.Phone.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.Phone\SelesGames.Phone.csproj">
-      <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
-      <Name>SelesGames.Phone</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ZuneMemoryMatch\SelesGames.ZestLibrary\SelesGames.ZestLibrary.csproj">
-      <Project>{F1B35279-249D-4A4F-97C2-07B33C825F9D}</Project>
-      <Name>SelesGames.ZestLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\facebook.png" />
-    <Resource Include="Assets\heart.png" />
-    <Resource Include="Assets\purchase.png" />
-    <Resource Include="Assets\twitter.png" />
-    <Resource Include="Assets\appbar.calendar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <DesignTimeOnly Include="SampleData\SampleViewModel\SampleViewModel.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Stars\0.5.png" />
-    <Resource Include="Assets\Stars\1.5.png" />
-    <Resource Include="Assets\Stars\1.png" />
-    <Resource Include="Assets\Stars\2.5.png" />
-    <Resource Include="Assets\Stars\2.png" />
-    <Resource Include="Assets\Stars\3.5.png" />
-    <Resource Include="Assets\Stars\3.png" />
-    <Resource Include="Assets\Stars\4.5.png" />
-    <Resource Include="Assets\Stars\4.png" />
-    <Resource Include="Assets\Stars\5.png" />
+    <Compile Include="FeedUpdateResponse.cs" />
+    <Compile Include="NewsServer.cs" />
+    <Compile Include="RssDateParsingHelper.cs" />
+    <Compile Include="SyndicationDateTimeUtility.cs" />
+    <Compile Include="WeaveRssServerProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

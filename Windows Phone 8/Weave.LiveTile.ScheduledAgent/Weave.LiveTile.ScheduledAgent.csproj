@@ -122,10 +122,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>weave.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\weave.Data\weave.Data.csproj">
       <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
       <Name>weave.Data</Name>
