@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Advertising;
+using Microsoft.Advertising.Mobile.UI;
+using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -7,8 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Microsoft.Advertising;
-using Microsoft.Advertising.Mobile.UI;
 
 namespace weave.UI.Advertising
 {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Clarity.Phone.Extensions;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Clarity.Phone.Extensions;
 
 namespace ToastPromptControl
 {

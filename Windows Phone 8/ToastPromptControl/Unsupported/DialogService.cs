@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using System.Reactive.Linq;
 
 namespace Clarity.Phone.Extensions
 {

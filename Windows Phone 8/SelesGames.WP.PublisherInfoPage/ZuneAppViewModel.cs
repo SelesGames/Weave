@@ -1,5 +1,5 @@
-﻿using System.Windows.Media;
-using SelesGames.ZestLibrary;
+﻿using SelesGames.ZestLibrary;
+using System.Windows.Media;
 
 namespace SelesGames.WP.PublisherInfoPage
 {

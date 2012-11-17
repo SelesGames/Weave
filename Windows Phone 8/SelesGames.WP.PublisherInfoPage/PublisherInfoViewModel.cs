@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using SelesGames.ZestLibrary;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using SelesGames.ZestLibrary;
 
 namespace SelesGames.WP.PublisherInfoPage
 {

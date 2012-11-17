@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Clarity.Phone.Extensions;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using Clarity.Phone.Extensions;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace SelesGames
 {

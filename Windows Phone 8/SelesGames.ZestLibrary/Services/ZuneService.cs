@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SelesGames.Rest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using SelesGames.Rest;
 
 namespace SelesGames.ZestLibrary
 {
