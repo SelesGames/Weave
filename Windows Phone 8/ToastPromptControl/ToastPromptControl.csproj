@@ -109,7 +109,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HollywoodReport\weave.Common\weave.Common.csproj">
+    <ProjectReference Include="..\weave.Common\weave.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>weave.Common</Name>
     </ProjectReference>
