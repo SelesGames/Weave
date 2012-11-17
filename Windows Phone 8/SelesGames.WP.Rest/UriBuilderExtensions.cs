@@ -9,16 +9,6 @@ namespace SelesGames.Rest
 {
     public static class UriBuilderExtensions
     {
-        //public static void AppendQuery(this UriBuilder uri, string query)
-        //{
-        //    var encodedQuery = HttpUtility.UrlEncode(query);
-
-        //    if (uri.Query != null && uri.Query.Length > 1)
-        //        uri.Query = uri.Query.Substring(1) + "&" + encodedQuery;
-        //    else
-        //        uri.Query = encodedQuery;
-        //}
-
         public static void AppendQuery(this UriBuilder uri, bool useEncoding, string queryFormat, params object[] args)
         {
             var encodedQuery = useEncoding ?

@@ -629,6 +629,10 @@
       <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
       <Name>SelesGames.ComplementaryColorsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
+      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
+      <Name>SelesGames.Common.Reactive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>
