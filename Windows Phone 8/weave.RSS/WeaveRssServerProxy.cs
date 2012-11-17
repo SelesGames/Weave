@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.GZip;
+using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.GZip;
-using ProtoBuf;
-using Weave.RSS.DTOs.Outgoing;
 using Weave.RSS.DTOs.Incoming;
+using Weave.RSS.DTOs.Outgoing;
 
 namespace Weave.RSS
 {
