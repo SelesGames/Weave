@@ -92,30 +92,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\ZuneCrawler.Core\Store\AppInfo.cs">
-      <Link>Store\AppInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestAppData.cs">
-      <Link>Zest\Objects\ZestAppData.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestAppDataExtensionMethods.cs">
-      <Link>Zest\Objects\ZestAppDataExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestAppReview.cs">
-      <Link>Zest\Objects\ZestAppReview.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestCategory.cs">
-      <Link>Zest\Objects\ZestCategory.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestOffer.cs">
-      <Link>Zest\Objects\ZestOffer.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Objects\ZestPublisher.cs">
-      <Link>Zest\Objects\ZestPublisher.cs</Link>
-    </Compile>
-    <Compile Include="..\ZuneCrawler.Core\Zest\Services\ZestParserExtensionMethods.cs">
-      <Link>Zest\Services\ZestParserExtensionMethods.cs</Link>
-    </Compile>
     <Compile Include="Library\LinqToXmlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppReview.cs" />
@@ -123,6 +99,14 @@
     <Compile Include="Services\AppInfo.cs" />
     <Compile Include="Services\ZuneImageService.cs" />
     <Compile Include="Services\ZuneService.cs" />
+    <Compile Include="Store\AppInfo.cs" />
+    <Compile Include="Zest\Objects\ZestAppData.cs" />
+    <Compile Include="Zest\Objects\ZestAppDataExtensionMethods.cs" />
+    <Compile Include="Zest\Objects\ZestAppReview.cs" />
+    <Compile Include="Zest\Objects\ZestCategory.cs" />
+    <Compile Include="Zest\Objects\ZestOffer.cs" />
+    <Compile Include="Zest\Objects\ZestPublisher.cs" />
+    <Compile Include="Zest\Services\ZestParserExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
