@@ -39,7 +39,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadabilityTest", "Readabil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxTestBedApp", "SandboxTestBedApp\SandboxTestBedApp.csproj", "{61CE5E11-371B-4C0F-B790-C04141D55A18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weave.RSS", "weave.RSS\weave.RSS.csproj", "{25CD2B58-6F01-49F3-ACE6-492029C05E3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.RSS", "weave.RSS\Weave.RSS.csproj", "{25CD2B58-6F01-49F3-ACE6-492029C05E3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weave.Data", "weave.Data\weave.Data.csproj", "{EC233A10-6022-42DD-9D28-9206535A8EAD}"
 EndProject

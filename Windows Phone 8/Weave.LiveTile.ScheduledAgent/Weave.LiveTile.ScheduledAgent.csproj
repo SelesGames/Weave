@@ -130,9 +130,9 @@
       <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
       <Name>weave.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.RSS\weave.RSS.csproj">
+    <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
-      <Name>weave.RSS</Name>
+      <Name>Weave.RSS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

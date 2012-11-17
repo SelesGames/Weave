@@ -693,9 +693,9 @@
       <Project>{BABE4E4F-1FE3-4F0E-A378-03F979EB6208}</Project>
       <Name>Weave.NinjectKernel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.RSS\weave.RSS.csproj">
+    <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
-      <Name>weave.RSS</Name>
+      <Name>Weave.RSS</Name>
     </ProjectReference>
     <ProjectReference Include="..\weave.UI.Advertising Mango version\weave.UI.Advertising.Mango.csproj">
       <Project>{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}</Project>
