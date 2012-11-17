@@ -133,6 +133,12 @@
     <Resource Include="css.txt" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
+      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
+      <Name>SelesGames.WP.Rest</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
