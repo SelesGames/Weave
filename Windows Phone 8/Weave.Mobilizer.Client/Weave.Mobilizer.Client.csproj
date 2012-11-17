@@ -92,13 +92,11 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Weave.Readability\ReadabilityResult.cs">
-      <Link>ReadabilityResult.cs</Link>
-    </Compile>
     <Compile Include="Client.cs" />
     <Compile Include="Formatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MobilizerResult.cs" />
+    <Compile Include="ReadabilityResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="..\ReadabilityTest\css.txt">
@@ -111,6 +109,12 @@
     <Resource Include="Templates\html_template2.txt" />
     <Resource Include="Templates\css_template.txt" />
     <Resource Include="Templates\html_template1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
+      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
+      <Name>SelesGames.WP.Rest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

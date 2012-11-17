@@ -99,8 +99,14 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.ServiceModel.Syndication">
-      <HintPath>..\..\lib\System.ServiceModel.Syndication.dll</HintPath>
+      <HintPath>..\lib\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
+      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
+      <Name>SelesGames.WP.Rest</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
