@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using SelesGames;
+using SelesGames.Phone;
+using System;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using SelesGames;
-using SelesGames.Phone;
 using Telerik.Windows.Controls;
 
 namespace weave

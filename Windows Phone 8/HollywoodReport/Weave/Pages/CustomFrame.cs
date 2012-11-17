@@ -1,9 +1,7 @@
-﻿using System.Reactive.Linq;
+﻿using SelesGames.Phone.Controls;
+using System.Reactive.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using Microsoft.Phone.Controls;
-using SelesGames.Phone.Controls;
 using Telerik.Windows.Controls;
 
 namespace weave

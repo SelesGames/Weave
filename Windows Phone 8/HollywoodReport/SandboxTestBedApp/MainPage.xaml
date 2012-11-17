@@ -12,6 +12,41 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="LongListSelectorStyle1" TargetType="phone:LongListSelector">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="phone:LongListSelector">
+                        <Grid Background="{TemplateBinding Background}" d:DesignWidth="480" d:DesignHeight="800">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="ScrollStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Scrolling">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="NotScrolling"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{TemplateBinding Padding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"/>
+                                <ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" Margin="4,0,4,0" Opacity="0" Orientation="Vertical"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -30,7 +65,7 @@
     		<TextBlock Text="Meiryo UI" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="Meiryo UI"/>
     		<TextBlock Text="Georgia" FontSize="{StaticResource PhoneFontSizeExtraLarge}" FontFamily="Georgia"/>
     	</StackPanel>
-        <phone:LongListSelector />
+        <phone:LongListSelector Style="{StaticResource LongListSelectorStyle1}" />
 	</Grid>
 
 </phone:PhoneApplicationPage>

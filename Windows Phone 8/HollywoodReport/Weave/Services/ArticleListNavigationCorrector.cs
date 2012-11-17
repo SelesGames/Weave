@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using System;
 using System.Linq;
-using Microsoft.Phone.Controls;
 using System.Reactive.Linq;
-using System.Windows;
+using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace weave
 {

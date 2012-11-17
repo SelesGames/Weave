@@ -112,13 +112,10 @@
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive">
-      <HintPath>..\..\lib\System.Reactive.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Windows.Threading, Version=1.0.10621.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\System.Reactive.Windows.Threading.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL" />
     <Reference Include="Telerik.Windows.Controls.Input">
       <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q3 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Input.dll</HintPath>
     </Reference>
@@ -673,10 +670,6 @@
     <ProjectReference Include="..\ComplementaryColors.WP7\SelesGames.ComplementaryColorsLib.csproj">
       <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
       <Name>SelesGames.ComplementaryColorsLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ObservableToTaskBridge\ObservableToTaskBridge.csproj">
-      <Project>{3D584FFE-5A2C-4803-A447-7A5451AFDB21}</Project>
-      <Name>ObservableToTaskBridge</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
       <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
