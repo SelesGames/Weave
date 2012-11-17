@@ -1,7 +1,7 @@
 ﻿using System;
 using Ninject;
 using weave.Data;
-using weave.Services.RSS;
+using Weave.RSS;
 using Weave.FeedLibrary;
 using Weave.Mobilizer.Client;
 

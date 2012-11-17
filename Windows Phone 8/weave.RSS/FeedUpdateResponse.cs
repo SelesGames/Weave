@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     public class FeedUpdateResponse
     {

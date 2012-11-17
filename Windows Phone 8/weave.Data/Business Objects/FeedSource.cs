@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
-using weave.Services.RSS;
+using Weave.RSS;
 
 namespace weave
 {
@@ -118,7 +118,7 @@ namespace weave
             if (News == null || !News.Any())
                 return;
 
-            var tryGetOldestDate = weave.Services.RSS.RssDateParsingHelper.TryGetLocalDate(date);
+            var tryGetOldestDate = Weave.RSS.RssDateParsingHelper.TryGetLocalDate(date);
             if (tryGetOldestDate.Item1)
             {
                 var oldestPubDate = tryGetOldestDate.Item2;
@@ -131,7 +131,7 @@ namespace weave
             }
         }
 
-        void AddNews(IEnumerable<weave.Services.RSS.NewsItem> newNews)
+        void AddNews(IEnumerable<Weave.RSS.NewsItem> newNews)
         {
             if (newNews == null || !newNews.Any())
                 return;
@@ -159,7 +159,7 @@ namespace weave
             }
         }
 
-        bool DoesAnyExistingNewsItemMatch(weave.Services.RSS.NewsItem newNewsItem)
+        bool DoesAnyExistingNewsItemMatch(Weave.RSS.NewsItem newNewsItem)
         {
             if (News == null || News.Count == 0)
                 return false;
@@ -167,7 +167,7 @@ namespace weave
             return News.Any(newsItem => newsItem.Title.Equals(newNewsItem.Title));
         }
 
-        NewsItem AsNewsItem(weave.Services.RSS.NewsItem o)
+        NewsItem AsNewsItem(Weave.RSS.NewsItem o)
         {
             return new NewsItem
             {

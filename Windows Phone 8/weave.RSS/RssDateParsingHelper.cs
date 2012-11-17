@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     public static class RssDateParsingHelper
     {

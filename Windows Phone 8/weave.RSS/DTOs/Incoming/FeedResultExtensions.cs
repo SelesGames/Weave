@@ -2,7 +2,7 @@
 using System.Linq;
 using Weave.RSS.DTOs.Incoming;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     internal static class FeedResultExtensions
     {

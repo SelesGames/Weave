@@ -8,7 +8,7 @@ using ProtoBuf;
 using Weave.RSS.DTOs.Outgoing;
 using Weave.RSS.DTOs.Incoming;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     internal class WeaveRssServerProxy : IDisposable
     {

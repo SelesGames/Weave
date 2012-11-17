@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Weave.RSS.DTOs.Incoming;
 using Weave.RSS.DTOs.Outgoing;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     public class NewsServer
     {

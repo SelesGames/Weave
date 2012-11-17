@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace weave.Services.RSS
+namespace Weave.RSS
 {
     public class NewsItem
     {
