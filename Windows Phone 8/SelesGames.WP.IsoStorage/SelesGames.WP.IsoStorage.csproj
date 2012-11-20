@@ -100,7 +100,6 @@
     <Compile Include="Lazy.cs" />
     <Compile Include="NLevelRolloverIsoStorageClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SafeIsoStorageFileWrapper.cs" />
     <Compile Include="XmlSerializerIsoStorageClient.cs" />
   </ItemGroup>
   <ItemGroup>
