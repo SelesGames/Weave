@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>weave.Data</RootNamespace>
-    <AssemblyName>weave.Data</AssemblyName>
+    <RootNamespace>Weave.Data</RootNamespace>
+    <AssemblyName>Weave.Data</AssemblyName>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>
     </SilverlightVersion>
@@ -97,6 +97,7 @@
     <Compile Include="Business Objects\NewsItemComparer.cs" />
     <Compile Include="Business Objects\UpdateParameters.cs" />
     <Compile Include="Business Objects\UpdateParametersComparer.cs" />
+    <Compile Include="Library\CryptoHelper.cs" />
     <Compile Include="Library\FILOQueueWrapper.cs" />
     <Compile Include="Weave4DataAccessLayer.cs" />
     <Compile Include="Business Objects\DateTimeDisplayFormattingExtensions.cs" />

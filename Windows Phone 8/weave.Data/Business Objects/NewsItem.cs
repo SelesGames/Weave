@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
-using ProtoBuf;
 
 namespace weave
 {

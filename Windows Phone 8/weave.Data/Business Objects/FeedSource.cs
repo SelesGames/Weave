@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProtoBuf;
+using Weave.Data.Library;
 using Weave.RSS;
 
 namespace weave
@@ -311,22 +312,9 @@ namespace weave
                     .OfType<string>()
                     .Aggregate(new StringBuilder(), (sb, link) => sb.Append(link))
                     .ToString();
-                var guid = ComputeHash(concatenatedNewsLinks);
+                var guid = CryptoHelper.ComputeHash(concatenatedNewsLinks);
                 return guid;
             }
-        }
-
-        // approach using MD5 and GUIDs
-        static Guid ComputeHash(string val)
-        {
-            var md5 = new System.Security.Cryptography.SHA1Managed();
-            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(val);
-            byte[] hash = md5.ComputeHash(inputBytes);
-            Array.Resize(ref hash, 16);
-            var guid = new Guid(hash);
-            //string hashString = guid.ToString("N");
-            //return hashString;
-            return guid;
         }
 
         #endregion
