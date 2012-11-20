@@ -1,6 +1,6 @@
-﻿using System.Net;
+﻿using SelesGames.Rest;
+using System.Net;
 using System.Threading.Tasks;
-using SelesGames.Rest;
 using Weave.Readability;
 
 namespace Weave.Mobilizer.Client
