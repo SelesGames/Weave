@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace SelesGames.WP.IsoStorage
+namespace SelesGames.IsoStorage
 {
     public class IsoStorageLocker<T> 
     {

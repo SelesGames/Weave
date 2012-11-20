@@ -1,5 +1,5 @@
 ﻿using SelesGames.Instapaper;
-using SelesGames.WP.IsoStorage;
+using SelesGames.IsoStorage;
 using System;
 
 namespace weave.Services.Instapaper

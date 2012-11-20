@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Serialization;
 
 
-namespace SelesGames.WP.IsoStorage
+namespace SelesGames.IsoStorage
 {
     public class XmlSerializerIsoStorageClient<T> : IsoStorageClient<T>
     {

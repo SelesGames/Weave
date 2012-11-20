@@ -1,5 +1,5 @@
-﻿using SelesGames.WP.IsoStorage;
-using SelesGames.WP.IsoStorage.Protobuf;
+﻿using SelesGames.IsoStorage;
+using SelesGames.IsoStorage.Protobuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;

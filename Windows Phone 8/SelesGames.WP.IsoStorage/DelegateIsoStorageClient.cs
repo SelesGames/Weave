@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SelesGames.WP.IsoStorage
+namespace SelesGames.IsoStorage
 {
     public class DelegateIsoStorageClient<T> : IsoStorageClient<T>
     {

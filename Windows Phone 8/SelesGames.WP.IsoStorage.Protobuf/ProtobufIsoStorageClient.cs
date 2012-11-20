@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using System.IO;
 
-namespace SelesGames.WP.IsoStorage.Protobuf
+namespace SelesGames.IsoStorage.Protobuf
 {
     public class ProtobufIsoStorageClient<T> : IsoStorageClient<T>
     {

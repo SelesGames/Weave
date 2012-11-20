@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SelesGames.WP.IsoStorage
+namespace SelesGames.IsoStorage
 {
     internal static class Lazy
     {

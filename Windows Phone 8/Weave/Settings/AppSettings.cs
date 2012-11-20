@@ -1,5 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
-using SelesGames.WP.IsoStorage;
+using SelesGames.IsoStorage;
 using System;
 using System.Collections.Generic;
 using System.Windows;

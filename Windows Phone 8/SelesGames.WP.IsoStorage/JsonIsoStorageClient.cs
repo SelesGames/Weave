@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Json;
 
-namespace SelesGames.WP.IsoStorage
+namespace SelesGames.IsoStorage
 {
     public class JsonIsoStorageClient<T> : IsoStorageClient<T>
     {
