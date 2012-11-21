@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FEF7DA6F-3075-4373-8534-C9EA936042F4}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{DA68FAD0-E9AB-4268-BE56-2F4F496F4275}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelesGames.Common.Reactive</RootNamespace>
-    <AssemblyName>SelesGames.Common.Reactive</AssemblyName>
+    <RootNamespace>Weave.Client.WinRT</RootNamespace>
+    <AssemblyName>Weave.Client.WinRT</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Weave.Client.WinRT_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -100,79 +101,115 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
+      <Project>{fef7da6f-3075-4373-8534-c9ea936042f4}</Project>
+      <Name>SelesGames.Common.Reactive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{63f251ed-b0f7-4dbb-8d6a-81f8d35b9d52}</Project>
       <Name>SelesGames.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SelesGames.Instapaper\SelesGames.Instapaper.csproj">
+      <Project>{c21bf9ee-8dd8-4022-adb9-0cf0430174fa}</Project>
+      <Name>SelesGames.Instapaper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.IsoStorage.Protobuf\SelesGames.IsoStorage.Protobuf.csproj">
+      <Project>{81643e80-188b-4d27-ad75-964df1354764}</Project>
+      <Name>SelesGames.IsoStorage.Protobuf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.IsoStorage\SelesGames.IsoStorage.csproj">
+      <Project>{30927d19-c3e5-4e16-99dc-95b6e4f6ac61}</Project>
+      <Name>SelesGames.IsoStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
+      <Project>{329cb2c2-07ae-47a9-ba4d-5043cc0a4019}</Project>
+      <Name>SelesGames.Rest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
+      <Project>{3c917cae-2cdf-4682-a239-766ae01c1e8a}</Project>
+      <Name>Weave.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
+      <Project>{548748fb-413a-4fec-b63c-6f70e4060d64}</Project>
+      <Name>Weave.FeedLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
+      <Project>{00585f95-e759-46a5-8b37-611dea3cf5bd}</Project>
+      <Name>Weave.Mobilizer.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.RSS\Weave.RSS.csproj">
+      <Project>{b39cdce7-6474-4ae2-97af-7e9d6b66e8f9}</Project>
+      <Name>Weave.RSS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\DebugDisposable.cs">
-      <Link>DebugDisposable.cs</Link>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\EventPattern.cs">
-      <Link>EventPattern.cs</Link>
+    <Compile Include="GroupedItemsPage.xaml.cs">
+      <DependentUpon>GroupedItemsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\ISchedulerExtensions.cs">
-      <Link>Extension Methods\ISchedulerExtensions.cs</Link>
+    <Compile Include="GroupDetailPage.xaml.cs">
+      <DependentUpon>GroupDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\ObservableExtensions.cs">
-      <Link>Extension Methods\ObservableExtensions.cs</Link>
+    <Compile Include="ItemDetailPage.xaml.cs">
+      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\ReactiveExtensions.cs">
-      <Link>Extension Methods\ReactiveExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\ReactiveExtensions.Timers.cs">
-      <Link>Extension Methods\ReactiveExtensions.Timers.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\TaskExtensions.cs">
-      <Link>Extension Methods\TaskExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Extension Methods\WebRequestExtensionMethods.cs">
-      <Link>Extension Methods\WebRequestExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\HttpWebRequestQueue.cs">
-      <Link>HttpWebRequestQueue.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Reactive\Schedulers\BackgroundTimer.cs">
-      <Link>Reactive\Schedulers\BackgroundTimer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Reactive\Schedulers\Schedulers.cs">
-      <Link>Reactive\Schedulers\Schedulers.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Windows Phone 8\SelesGames.Common.Reactive\Reactive\Schedulers\ViewModelBackgroundScheduler.cs">
-      <Link>Reactive\Schedulers\ViewModelBackgroundScheduler.cs</Link>
-    </Compile>
-    <Compile Include="Extension Methods\ControlsExtensions.cs" />
-    <Compile Include="Extension Methods\StoryboardExtensions.cs" />
-    <Compile Include="Extension Methods\UIElementExtensions.cs" />
-    <Compile Include="GlobalDispatcher.cs" />
-    <Compile Include="ImageCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reactive\Schedulers\SingleThreadScheduler.cs" />
+    <Compile Include="DataModel\SampleDataSource.cs" />
+    <Compile Include="Common\BindableBase.cs" />
+    <Compile Include="Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\BooleanNegationConverter.cs" />
+    <Compile Include="Common\LayoutAwarePage.cs" />
+    <Compile Include="Common\RichTextColumns.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.Reactive.Core.dll</HintPath>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="Common\ReadMe.txt" />
+    <None Include="Weave.Client.WinRT_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\SmallLogo.png" />
+    <Content Include="Assets\SplashScreen.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\LightGray.png" />
+    <Content Include="Assets\MediumGray.png" />
+    <Content Include="Assets\DarkGray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Common\StandardStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GroupedItemsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GroupDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ItemDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Windows.Threading, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=f300afd708cefcd3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\System.Reactive.Windows.Threading.dll</HintPath>
+    <Reference Include="protobuf-net">
+      <HintPath>..\lib\protobuf-net.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>
