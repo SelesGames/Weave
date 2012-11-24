@@ -138,7 +138,7 @@ namespace GoogleReaderConnect
             request.Headers["Authorization"] = String.Format("GoogleLogin auth={0}", authToken);
 
             var response = await request.GetResponseAsync().ConfigureAwait(false);
-            ParseSubscriptionListReturn(response);
+            await ParseSubscriptionListReturn(response);
         }
 
 
