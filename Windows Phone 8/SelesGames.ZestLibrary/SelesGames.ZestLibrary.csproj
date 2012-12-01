@@ -109,9 +109,9 @@
     <Compile Include="Zest\Services\ZestParserExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SelesGames.WP.Rest\SelesGames.WP.Rest.csproj">
-      <Project>{0C693526-CE86-42F6-9B61-95AC4C1EF2DE}</Project>
-      <Name>SelesGames.WP.Rest</Name>
+    <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
+      <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
+      <Name>SelesGames.Rest</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

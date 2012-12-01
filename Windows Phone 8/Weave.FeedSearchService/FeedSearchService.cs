@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.ServiceModel.Syndication;
+//using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
@@ -18,28 +18,29 @@ namespace Weave.FeedSearchService
             googleSearchClient = new JsonRestClient<FeedApiResult>();
             directSearchClient = new DelegateRestClient<FeedApiResult>(stream =>
             {
-                using (var reader = XmlReader.Create(stream))
-                {
-                    var feed = SyndicationFeed.Load(reader);
-                    var result = new FeedApiResult
-                    {
-                        responseStatus = "200",
-                        responseData = new ResponseData
-                        {
-                            entries = new List<Entry> 
-                            { 
-                                new Entry 
-                                { 
-                                    //url = feedUrl, 
-                                    title = feed.Title.Text, 
-                                    contentSnippet = feed.Description.Text,
-                                }
-                            }
-                        }
-                    };
-                    reader.Close();
-                    return result;
-                }
+                return null;
+                //using (var reader = XmlReader.Create(stream))
+                //{
+                //    var feed = SyndicationFeed.Load(reader);
+                //    var result = new FeedApiResult
+                //    {
+                //        responseStatus = "200",
+                //        responseData = new ResponseData
+                //        {
+                //            entries = new List<Entry> 
+                //            { 
+                //                new Entry 
+                //                { 
+                //                    //url = feedUrl, 
+                //                    title = feed.Title.Text, 
+                //                    contentSnippet = feed.Description.Text,
+                //                }
+                //            }
+                //        }
+                //    };
+                //    reader.Close();
+                //    return result;
+                //}
             });
         }
 
