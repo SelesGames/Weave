@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace weave.UI.Advertising
+namespace SelesGames.UI.Advertising
 {
     public class TrialModeAdControl : Control, IDisposable
     {

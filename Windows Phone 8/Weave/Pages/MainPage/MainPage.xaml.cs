@@ -15,7 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
-using weave.UI.Advertising;
+using SelesGames.UI.Advertising;
 using Weave.LiveTile.ScheduledAgent;
 
 

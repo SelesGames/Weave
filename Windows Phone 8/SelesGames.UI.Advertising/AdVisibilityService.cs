@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace weave.UI.Advertising
+namespace SelesGames.UI.Advertising
 {
     public static class AdVisibilityService
     {

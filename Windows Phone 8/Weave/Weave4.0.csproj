@@ -657,6 +657,10 @@
       <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
       <Name>SelesGames.Phone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SelesGames.UI.Advertising\SelesGames.UI.Advertising.csproj">
+      <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>
+      <Name>SelesGames.UI.Advertising</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.UI.Color\SelesGames.UI.Color.csproj">
       <Project>{416F3DD2-E884-4DB3-AE23-5E77D3E24D87}</Project>
       <Name>SelesGames.UI.Color</Name>
@@ -704,10 +708,6 @@
     <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>Weave.RSS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\weave.UI.Advertising Mango version\weave.UI.Advertising.Mango.csproj">
-      <Project>{1F126FAD-E9BE-4004-82C3-5DF09D80DB81}</Project>
-      <Name>weave.UI.Advertising.Mango</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>

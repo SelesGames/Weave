@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace weave.UI.Advertising
+namespace SelesGames.UI.Advertising
 {
     public class AdUnitCollection
     {
@@ -35,7 +35,7 @@ namespace weave.UI.Advertising
             if (adUnits.Count > 0)
                 return adUnits[r.Next(0, adUnits.Count)];
             else
-                throw new Exception("No adunits have been set in weave.UI.Advertising.AdUnitCollection");
+                throw new Exception("No adunits have been set in SelesGames.UI.Advertising.AdUnitCollection");
         }
 
         async Task GetAndSetAdUnits()

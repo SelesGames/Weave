@@ -246,9 +246,9 @@ namespace weave
 
         void InitializeAdSettings()
         {
-            weave.UI.Advertising.AdSettings.AdApplicationId = settings.AdApplicationId;
-            weave.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
-            var adCollection = new weave.UI.Advertising.AdUnitCollection(settings.AdUnitsUrl);
+            SelesGames.UI.Advertising.AdSettings.AdApplicationId = settings.AdApplicationId;
+            SelesGames.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
+            var adCollection = new SelesGames.UI.Advertising.AdUnitCollection(settings.AdUnitsUrl);
         }
 
         void InitializeNinjectKernel()
