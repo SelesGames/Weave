@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Weave.FeedLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Weave.FeedLibrary")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("39fa43ee-b71c-4897-aabe-d7aa73000370")]
+[assembly: Guid("753ae27a-87eb-4c38-827b-8202fd0903fa")]
 
 // Version information for an assembly consists of the following four values:
 //
