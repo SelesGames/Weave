@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Weave.UI.SettingsPages")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Weave.UI.SettingsPages")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d82be9a0-19e6-468d-9748-c25f4803ec79")]
+[assembly: Guid("c9788e54-62af-4f51-b48b-2c027228f82e")]
 
 // Version information for an assembly consists of the following four values:
 //
