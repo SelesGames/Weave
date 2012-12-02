@@ -1,22 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{e27b338c-03de-42cb-b190-b237e3454096}" Title="Weave News Reader" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games" PublisherID="{a35cb2ac-1be5-4dad-8f5d-f8c105f17fe3}">
-    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+  <App xmlns="" ProductID="{acc3d3f6-7875-4f36-bb8e-248375f6549e}" Title="Weave News Reader" RuntimeType="Silverlight" Version="8.0.0.0" Genre="apps.normal" Author="Seles Games" Description="Sample description" Publisher="Seles Games" PublisherID="{2db3f600-58f4-431f-8c87-ec1646af4a73}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
       <Capability Name="ID_CAP_IDENTITY_USER" />
       <Capability Name="ID_CAP_LOCATION" />
-      <Capability Name="ID_CAP_SENSORS" />
-      <Capability Name="ID_CAP_MICROPHONE" />
-      <Capability Name="ID_CAP_GAMERSERVICES" />
       <Capability Name="ID_CAP_PHONEDIALER" />
-      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
-      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
-      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
-      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
-      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" />
@@ -27,20 +20,21 @@
     <Tokens>
       <PrimaryToken TokenID="weaveToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
           <Title>
           </Title>
           <BackContent>
           </BackContent>
-          <BackBackgroundImageURI IsRelative="true" IsResource="false">
+          <BackBackgroundImageURI>
           </BackBackgroundImageURI>
           <BackTitle>
           </BackTitle>
-          <DeviceLockImageURI IsRelative="true" IsResource="false">
+          <DeviceLockImageURI>
           </DeviceLockImageURI>
-          <HasLarge>false</HasLarge>
+          <HasLarge>
+          </HasLarge>
         </TemplateFlip>
       </PrimaryToken>
     </Tokens>
