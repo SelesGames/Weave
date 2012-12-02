@@ -633,6 +633,10 @@
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SelesGames.Instapaper\SelesGames.Instapaper.csproj">
+      <Project>{60A15747-8A97-4E97-8130-132D9A1B8036}</Project>
+      <Name>SelesGames.Instapaper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
       <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
       <Name>SelesGames.Phone.Controls</Name>
@@ -648,10 +652,6 @@
     <ProjectReference Include="..\SelesGames.UI.Color\SelesGames.UI.Color.csproj">
       <Project>{416F3DD2-E884-4DB3-AE23-5E77D3E24D87}</Project>
       <Name>SelesGames.UI.Color</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
-      <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
-      <Name>SelesGames.WP.Instapaper</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
       <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
