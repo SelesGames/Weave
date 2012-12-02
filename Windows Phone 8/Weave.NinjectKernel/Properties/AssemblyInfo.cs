@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Weave.NinjectKernel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Weave.NinjectKernel")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f80ad0f2-cb31-40c5-b81a-3f20c6ce641d")]
+[assembly: Guid("c9788e54-62af-4f51-b48b-2c027228f82e")]
 
 // Version information for an assembly consists of the following four values:
 //
