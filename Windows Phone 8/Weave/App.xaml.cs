@@ -58,6 +58,7 @@ namespace weave
         {
             if (Debugger.IsAttached)
             {
+                DebugEx.WriteLine(e);
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
