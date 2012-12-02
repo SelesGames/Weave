@@ -1,7 +1,7 @@
 ﻿
 namespace Weave.Readability
 {
-    public class ReadabilityResult
+    internal class ReadabilityResult
     {
         public string author { get; set; }
         public string content { get; set; }
