@@ -94,7 +94,7 @@
   <ItemGroup>
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\VisualTreeExtensions.cs" />
-    <Compile Include="GlobalNavigationService.cs" />
+    <Compile Include="SettingsPagesNavigationService.cs" />
     <Compile Include="Common\ItemsControlExtensions.cs" />
     <Compile Include="Library\EventHandlerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

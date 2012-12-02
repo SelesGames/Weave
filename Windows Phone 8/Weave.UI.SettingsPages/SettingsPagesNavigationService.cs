@@ -5,7 +5,7 @@ using System.Net;
 
 namespace weave
 {
-    public static class GlobalNavigationService
+    public static class SettingsPagesNavigationService
     {
         public static void SafelyNavigateTo(NavigationService navService, string uri)
         {
