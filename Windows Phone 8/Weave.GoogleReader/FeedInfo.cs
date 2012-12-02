@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GoogleReaderConnect
+namespace Weave.GoogleReader
 {
     public class FeedInfo
     {

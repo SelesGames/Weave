@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using System;
 using System.Diagnostics;
 using System.Windows;
-using Microsoft.Phone.Controls;
+using Weave.GoogleReader;
 
 namespace GoogleReaderConnect
 {

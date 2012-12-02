@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace GoogleReaderConnect
+namespace Weave.GoogleReader
 {
     /// <summary>
     /// This class helps connect to the Google Reader API to pull down a users list of feeds

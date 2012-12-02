@@ -195,10 +195,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoogleReaderConnect\GoogleReaderConnect.csproj">
-      <Project>{42AAA4F9-AC2A-459F-A957-325D34452138}</Project>
-      <Name>GoogleReaderConnect</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>
@@ -226,6 +222,10 @@
     <ProjectReference Include="..\Weave.FeedSearchService\Weave.FeedSearchService.csproj">
       <Project>{E685135B-C889-4F51-96F9-69B968BEDF29}</Project>
       <Name>Weave.FeedSearchService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.GoogleReader\Weave.GoogleReader.csproj">
+      <Project>{70C30E41-27BC-4298-93E7-A6ADE7B59ED9}</Project>
+      <Name>Weave.GoogleReader</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

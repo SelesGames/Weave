@@ -103,14 +103,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="CredentialObject.cs" />
-    <Compile Include="FeedInfo.cs" />
-    <Compile Include="GoogleReader.cs" />
     <Compile Include="IsoStorageManager.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebRequestExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -138,9 +135,10 @@
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Weave.GoogleReader\Weave.GoogleReader.csproj">
+      <Project>{70C30E41-27BC-4298-93E7-A6ADE7B59ED9}</Project>
+      <Name>Weave.GoogleReader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

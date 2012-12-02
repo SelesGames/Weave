@@ -124,7 +124,7 @@ namespace weave.Pages.Settings
                 statusText.Text = "Authenticating...";
 
                 var authResult = await viewModel.AuthenticateGoogleReader();
-                if (authResult == GoogleReaderConnect.GoogleReader.AuthenticationResult.InvalidCredentials)
+                if (authResult == Weave.GoogleReader.GoogleReader.AuthenticationResult.InvalidCredentials)
                 {
                     statusText.Text = "Invalid username/password.";
                 }
