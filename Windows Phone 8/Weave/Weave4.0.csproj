@@ -625,10 +625,6 @@
     <Folder Include="Assets\Icons\UNUSED\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ComplementaryColors.WP7\SelesGames.ComplementaryColorsLib.csproj">
-      <Project>{9F9362C9-4324-4BB2-BBC6-13122ED67A02}</Project>
-      <Name>SelesGames.ComplementaryColorsLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
       <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
       <Name>SelesGames.Common.Reactive</Name>
@@ -648,6 +644,10 @@
     <ProjectReference Include="..\SelesGames.Phone\SelesGames.Phone.csproj">
       <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
       <Name>SelesGames.Phone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.UI.Color\SelesGames.UI.Color.csproj">
+      <Project>{416F3DD2-E884-4DB3-AE23-5E77D3E24D87}</Project>
+      <Name>SelesGames.UI.Color</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.Instapaper\SelesGames.WP.Instapaper.csproj">
       <Project>{599C618B-F448-434E-9C09-5A40A7BC6441}</Project>
