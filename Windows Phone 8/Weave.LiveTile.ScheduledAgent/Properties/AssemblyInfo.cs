@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Weave.LiveTile.ScheduledAgent")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Weave.LiveTile.ScheduledAgent")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2012")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4963a072-8e7b-440b-b2c5-b9061a40e8a9")]
+[assembly: Guid("c9788e54-62af-4f51-b48b-2c027228f82e")]
 
 // Version information for an assembly consists of the following four values:
 //
