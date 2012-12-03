@@ -88,6 +88,7 @@
     <Compile Include="WebBrowserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Reactive.Core, Version=2.0.20823.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Reactive.Interfaces">
       <HintPath>..\lib\System.Reactive.Interfaces.dll</HintPath>
     </Reference>

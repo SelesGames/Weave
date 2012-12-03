@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Library\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Library\Extension Methods\SilverlightToolkitExtensions.cs" />
     <Compile Include="Pages\AppSettingsPage.xaml.cs">
       <DependentUpon>AppSettingsPage.xaml</DependentUpon>
@@ -308,11 +309,11 @@
       <SubType>Designer</SubType>
     </DesignTimeOnly>
     <Page Include="Resources\FontSizePopupStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\PanoramaPageHubTileStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\WebBrowser\FontSizePopup.xaml">
@@ -356,15 +357,15 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ButtonStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\LongListSelectorStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\ListBoxStyles.xaml">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\SelectTheCategoriesThatInterestYouPage.xaml">
