@@ -16,6 +16,10 @@ namespace weave
         public CategoryDisplayGrid()
         {
             InitializeComponent();
+			
+			if (this.IsInDesignMode())
+				return;
+			
             displayers = new List<NewsItemWithImageTile3>
             {
                 // left 4
