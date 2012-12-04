@@ -134,52 +134,30 @@
     	<Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" IsHitTestVisible="False" Width="{TemplateBinding Width}"/>
     </ControlTemplate>
 
-    <Style x:Key="InternallyPaddedScrollBarStyle" TargetType="ScrollBar">
-    	<Setter Property="Background" Value="{StaticResource PhoneDisabledBrush}"/>
-    	<Setter Property="Padding" Value="1"/>
-    	<Setter Property="IsTabStop" Value="False"/>
-    	<Setter Property="MinWidth" Value="5"/>
-    	<Setter Property="MinHeight" Value="5"/>
-    	<Setter Property="IsHitTestVisible" Value="False"/>
-    	<Setter Property="Template">
+	<Style x:Key="InternallyPaddedScrollBarStyle" TargetType="ScrollBar">
+		<Setter Property="Background" Value="{StaticResource PhoneDisabledBrush}"/>
+		<Setter Property="Padding" Value="1"/>
+		<Setter Property="IsTabStop" Value="False"/>
+		<Setter Property="MinWidth" Value="5"/>
+		<Setter Property="MinHeight" Value="5"/>
+		<Setter Property="IsHitTestVisible" Value="False"/>
+		<Setter Property="Template">
     		<Setter.Value>
     			<ControlTemplate TargetType="ScrollBar">
     				<Grid>
     					<Grid x:Name="VerticalRoot" Margin="{TemplateBinding Padding}" Background="Transparent" Width="{TemplateBinding Width}">
-    						<Grid.RowDefinitions>
-    							<RowDefinition Height="Auto"/>
-    							<RowDefinition Height="Auto"/>
-    							<RowDefinition Height="Auto"/>
-    							<RowDefinition Height="*"/>
-    							<RowDefinition Height="Auto"/>
-    						</Grid.RowDefinitions>
-    						<RepeatButton x:Name="VerticalSmallDecrease" Visibility="Collapsed"/>
-    						<RepeatButton x:Name="VerticalLargeDecrease" Grid.Row="1" Template="{x:Null}" Width="0"/>
-    						<Thumb x:Name="VerticalThumb" Background="{TemplateBinding Background}" Margin="1" MinHeight="72" Grid.Row="2" Template="{StaticResource PhoneScrollbarThumb}" Width="{TemplateBinding Width}"/>
-    						<RepeatButton x:Name="VerticalLargeIncrease" Grid.Row="3" Template="{x:Null}" Width="0"/>
-    						<RepeatButton x:Name="VerticalSmallIncrease" Visibility="Collapsed"/>
+    						<Thumb x:Name="VerticalThumb" Background="{TemplateBinding Background}" Margin="1" MinHeight="72" Template="{StaticResource PhoneScrollbarThumb}" Width="{TemplateBinding Width}"/>
     					</Grid>
-    					<Grid x:Name="HorizontalRoot" Background="Transparent" Height="{TemplateBinding Height}">
-    						<Grid.ColumnDefinitions>
-    							<ColumnDefinition Width="Auto"/>
-    							<ColumnDefinition Width="Auto"/>
-    							<ColumnDefinition Width="Auto"/>
-    							<ColumnDefinition Width="*"/>
-    							<ColumnDefinition Width="Auto"/>
-    						</Grid.ColumnDefinitions>
-    						<RepeatButton x:Name="HorizontalSmallDecrease" Visibility="Collapsed"/>
-    						<RepeatButton x:Name="HorizontalLargeDecrease" Grid.Column="1" Height="0" Template="{x:Null}"/>
-    						<Thumb x:Name="HorizontalThumb" Background="{TemplateBinding Background}" Grid.Column="2" Height="{TemplateBinding Height}" Margin="1" MinWidth="72" Template="{StaticResource PhoneScrollbarThumb}"/>
-    						<RepeatButton x:Name="HorizontalLargeIncrease" Grid.Column="3" Height="0" Template="{x:Null}"/>
-    						<RepeatButton x:Name="HorizontalSmallIncrease" Visibility="Collapsed"/>
-    					</Grid>
-    				</Grid>
-    			</ControlTemplate>
-    		</Setter.Value>
-    	</Setter>
-    </Style>
+    					<Grid x:Name="HorizontalRoot" Margin="{TemplateBinding Padding}" Background="Transparent" Height="{TemplateBinding Height}">
+    						<Thumb x:Name="HorizontalThumb" Background="{TemplateBinding Background}" Margin="1" MinWidth="72" Template="{StaticResource PhoneScrollbarThumb}" Height="{TemplateBinding Height}"/>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
-    <Style x:Key="InternallyPaddedLongListSelectorStyle" TargetType="phone:LongListSelector">
+	<Style x:Key="InternallyPaddedLongListSelectorStyle" TargetType="phone:LongListSelector">
 		<Setter Property="Background" Value="Transparent"/>
 		<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 		<Setter Property="Template">
@@ -212,40 +190,5 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-
-
-    <Style x:Key="dummystyle" TargetType="phone:LongListSelector">
-    	<Setter Property="Background" Value="Transparent"/>
-    	<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-    	<Setter Property="Template">
-    		<Setter.Value>
-    			<ControlTemplate TargetType="phone:LongListSelector">
-    				<Grid Background="{TemplateBinding Background}" d:DesignWidth="480" d:DesignHeight="800">
-    					<VisualStateManager.VisualStateGroups>
-    						<VisualStateGroup x:Name="ScrollStates">
-    							<VisualStateGroup.Transitions>
-    								<VisualTransition GeneratedDuration="00:00:00.5"/>
-    							</VisualStateGroup.Transitions>
-    							<VisualState x:Name="Scrolling">
-    								<Storyboard>
-    									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
-    								</Storyboard>
-    							</VisualState>
-    							<VisualState x:Name="NotScrolling"/>
-    						</VisualStateGroup>
-    					</VisualStateManager.VisualStateGroups>
-    					<Grid Margin="{TemplateBinding Padding}">
-    						<Grid.ColumnDefinitions>
-    							<ColumnDefinition Width="*"/>
-    							<ColumnDefinition Width="auto"/>
-    						</Grid.ColumnDefinitions>
-    						<ViewportControl x:Name="ViewportControl" HorizontalContentAlignment="Stretch" VerticalAlignment="Top"/>
-    						<ScrollBar x:Name="VerticalScrollBar" Grid.Column="1" Margin="4,0,4,0" Opacity="0" Orientation="Vertical"/>
-    					</Grid>
-    				</Grid>
-    			</ControlTemplate>
-    		</Setter.Value>
-    	</Setter>
-    </Style>
 
 </ResourceDictionary>
