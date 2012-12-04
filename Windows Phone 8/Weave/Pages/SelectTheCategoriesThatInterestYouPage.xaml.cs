@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Controls;
 using SelesGames;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,7 +38,8 @@ namespace weave
                     category.IsEnabled = false;
                 };
             }
-            list.ItemsSource = categories;
+
+            list.ItemsSource = (IList)categories;
             nextButton.Click += (s, e) => OnNextButtonClick();
         }
 
@@ -50,7 +52,7 @@ namespace weave
                 var feedsToAdd = library.Feeds.Get().Where(o => enabledCategories.Contains(o.Category)).ToList();
                 var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
                 foreach (var feed in feedsToAdd)
-                    dal.AddCustomFeed(feed);
+                    await dal.AddCustomFeed(feed);
 
                 // TODO: SHOW SOME PROGRESS BAR OR SOMETHING
                 await dal.SaveFeeds();

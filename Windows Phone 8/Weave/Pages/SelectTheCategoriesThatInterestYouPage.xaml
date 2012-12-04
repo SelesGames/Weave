@@ -65,6 +65,8 @@
 		<DataTemplate x:Key="CategoriesItemTemplate">
 			<CheckBox Width="226" Height="60" IsChecked="{Binding IsEnabled, Mode=TwoWay}" Grid.ColumnSpan="2" Style="{StaticResource ToggleCheckBoxStyle}" Margin="2,0,-2,0" />
 		</DataTemplate>
+
+		<Size x:Key="GridCellSize">226,60</Size>	
 	</phone:PhoneApplicationPage.Resources>
 	
 
@@ -78,23 +80,25 @@
 				<RowDefinition Height="Auto" />
 			</Grid.RowDefinitions>
 			<TextBlock x:Name="ApplicationTitle" Text="welcome to weave" Style="{StaticResource PhoneTextNormalStyle}" d:LayoutOverrides="Height" Margin="24,20,24,0" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="Segoe WP Black" Foreground="{StaticResource PhoneSubtleBrush}"/>
-			<TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" Text="What are your interests?" Margin="24,-4,0,12" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" />
-			<ItemsControl x:Name="list" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" Grid.Row="2" Margin="12,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="2">
+			<TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" Text="What are your interests?" Margin="24,-4,0,12" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" />	
+			<phone:LongListSelector x:Name="list" 
+				Style="{StaticResource OptimizedLongListSelectorStyle}"
+				ItemTemplate="{StaticResource CategoriesItemTemplate}" 
+				ItemsSource="{Binding Categories}"
+				HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" 
+				Grid.Row="2" Grid.RowSpan="2" 
+				LayoutMode="Grid" GridCellSize="{StaticResource GridCellSize}" 
+				Margin="12,0,0,0">
+				<phone:LongListSelector.ListHeader><Canvas Height="24"></Canvas></phone:LongListSelector.ListHeader>
+				<phone:LongListSelector.ListFooter><Canvas Height="69"></Canvas></phone:LongListSelector.ListFooter>
+			</phone:LongListSelector>
+			<!--ItemsControl x:Name="list" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" Grid.Row="2" Margin="12,0,0,0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.RowSpan="2">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<toolkit:WrapPanel Orientation="Horizontal" Margin="0,24,0,0" />
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
-			</ItemsControl>
-			<Rectangle Grid.Row="3" Visibility="Collapsed">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-						<GradientStop Color="Black" Offset="1"/>
-						<GradientStop/>
-						<GradientStop Color="#BF000000" Offset="0.5"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
+			</ItemsControl-->
 			<sg:FadeControl Grid.Row="3" Background="{StaticResource PhoneBackgroundBrush}" Angle="90" >
 				<sg:FadeControl.FadeStops>
 					<sg:FadeStop Offset="0" Percent="0"/>

@@ -9,6 +9,16 @@
     <SampleData:SourcesItem Name="astronomy" NewCount="54" />
     <SampleData:SourcesItem Name="science" NewCount="298" />
     <SampleData:SourcesItem Name="television" NewCount="10" />
+    <SampleData:SourcesItem Name="Maecenas praesent" NewCount="Aenean nam sed" />
+    <SampleData:SourcesItem Name="Aliquam accumsan integer" NewCount="Bibendum cras mauris" />
+    <SampleData:SourcesItem Name="Duis dis" NewCount="Dictumst nullam aptent auctor" />
+    <SampleData:SourcesItem Name="Eleifend congue nunc amet" NewCount="Est cursus ante" />
+    <SampleData:SourcesItem Name="Facilisi arcu dictum diam" NewCount="Quisque vivamus" />
+    <SampleData:SourcesItem Name="Class eget elit" NewCount="Enim aliquam" />
+    <SampleData:SourcesItem Name="Aliquet curae hac blandit" NewCount="Commodo conubia" />
+    <SampleData:SourcesItem Name="Erat donec cubilia" NewCount="Faucibus etiam eros leo" />
+    <SampleData:SourcesItem Name="Mus nec" NewCount="Nibh habitant inceptos non" />
+    <SampleData:SourcesItem Name="Interdum dapibus fusce nisi" NewCount="Per egestas sed lectus" />
   </SampleData:SamplePanoramaViewModel.Sources>
   <SampleData:SamplePanoramaViewModel.MostViewed>
     <SampleData:MostViewedItem Name="What Would Tyler Durden Do" NewCount="4 new" Source="http://media.edge-online.com/files/imagecache/article/articles/news/EDG243_halo.jpg" />
