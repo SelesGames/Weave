@@ -88,14 +88,14 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		
-		<Grid x:Name="TitlePanel" Height="138" Grid.Row="1" Grid.Column="1">
+		<Grid x:Name="TitlePanel" Height="132" Grid.Row="1" Grid.Column="1">
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
 			<Button x:Name="panningTitle" Content="{Binding Header}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,12,12,0" Style="{StaticResource ArticleListCategorySelectButton}" Tap="OnJumpListButtonTap" />
 			<RepeatButton x:Name="previousPageButton" Content="/Assets/Icons/appbar.back.rest.png" Style="{StaticResource ArticleListRepeaterButtonStyle}" Padding="12,18,6,24" Grid.Column="1" Margin="0,11,0,0" VerticalAlignment="Top" />
 			<RepeatButton x:Name="nextPageButton" Content="/Assets/Icons/appbar.next.rest.png" Style="{StaticResource ArticleListRepeaterButtonStyle}"  Padding="6,18,12,24" Grid.Column="2" Margin="0,11,12,0" VerticalAlignment="Top" />
 			<TextBlock x:Name="newItemCount" Text="{Binding NewItemCount}" FontSize="20" CacheMode="BitmapCache" Foreground="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,93,0,0" FontWeight="Bold" FontFamily="{StaticResource PhoneFontFamilyNormal}" Grid.ColumnSpan="3" />
 			<TextBlock HorizontalAlignment="Right" Text="{Binding CurrentPageDisplay}" VerticalAlignment="Top" FontSize="20" CacheMode="BitmapCache" Margin="24,93,24,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneSubtleBrush}" Grid.ColumnSpan="3" />
-			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,12" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
+			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,6" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
 		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="36" Visibility="Collapsed">
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition /></Grid.ColumnDefinitions>
@@ -110,7 +110,7 @@
 					<TranslateTransform/>
 				</local:CustomList.RenderTransform>
 			</local:CustomList>
-			<Rectangle x:Name="fade" Height="36" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" />
+			<Rectangle x:Name="fade" Height="24" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" />
 		</Grid>
 		<Rectangle x:Name="leftBarFill" Width="72" Fill="{StaticResource PhoneAccentBrush}" Grid.RowSpan="3" Visibility="Collapsed"/>
 		<Rectangle x:Name="rightBarFill" Width="72" Fill="{StaticResource PhoneAccentBrush}" Grid.RowSpan="3" Grid.Column="2" Visibility="Collapsed"/>

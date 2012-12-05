@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Weave.RSS.DTOs.Incoming
 {
-    internal enum FeedResultStatus
+    public enum FeedResultStatus
     {
         OK,
         Failed,
@@ -11,7 +11,7 @@ namespace Weave.RSS.DTOs.Incoming
     }
 
     [ProtoContract]
-    internal class FeedResult
+    public class FeedResult
     {
         [ProtoMember(1)] public FeedResultStatus Status { get; set; }
         [ProtoMember(2)] public string Id { get; set; }

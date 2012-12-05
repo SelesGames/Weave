@@ -3,7 +3,7 @@
 namespace Weave.RSS.DTOs.Outgoing
 {
     [ProtoContract]
-    internal class FeedRequest
+    public class FeedRequest
     {
         [ProtoMember(1)] public string Id { get; set; }
         [ProtoMember(2)] public string Url { get; set; }

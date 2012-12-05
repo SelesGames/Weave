@@ -3,7 +3,7 @@
 namespace Weave.RSS.DTOs.Incoming
 {
     [ProtoContract]
-    internal class NewsItem
+    public class NewsItem
     {
         [ProtoMember(1)] public string Title { get; set; }
         [ProtoMember(2)] public string PublishDateTime { get; set; }

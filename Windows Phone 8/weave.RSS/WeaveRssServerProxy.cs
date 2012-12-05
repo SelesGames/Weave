@@ -44,6 +44,8 @@ namespace Weave.RSS
             request = HttpWebRequest.CreateHttp(SERVICE_URL);
             request.Method = "POST";
             request.ContentType = "application/json";
+            request.Accept = "application/protobuf";
+            request.Headers["Accept-Encoding"] = "gzip";
 
             var writeSerializer = new DataContractJsonSerializer(typeof(List<FeedRequest>));
 
