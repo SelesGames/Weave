@@ -136,7 +136,7 @@
 					
 		</controls:Panorama>
 		
-		<toolkit:PerformanceProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed"/>
+		<ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/>
 	</Grid>
 	
 	<phone:PhoneApplicationPage.ApplicationBar>

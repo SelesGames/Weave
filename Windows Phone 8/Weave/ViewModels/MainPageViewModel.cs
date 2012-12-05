@@ -58,6 +58,8 @@ namespace weave
             this.view = view;
             Header = header;
 
+            IsProgressBarVisible = false;
+            ProgressBarVisibility = Visibility.Collapsed;
             view.IsPreviousButtonEnabled = HasPrevious = false;
             view.IsNextButtonEnabled = HasNext = false;
             NewItemCount = "0 NEW";

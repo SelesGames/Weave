@@ -6,8 +6,6 @@
 	xmlns:local="clr-namespace:weave"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	x:Class="weave.MainPage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -97,7 +95,7 @@
 			<RepeatButton x:Name="nextPageButton" Content="/Assets/Icons/appbar.next.rest.png" Style="{StaticResource ArticleListRepeaterButtonStyle}"  Padding="6,18,12,24" Grid.Column="2" Margin="0,11,12,0" VerticalAlignment="Top" />
 			<TextBlock x:Name="newItemCount" Text="{Binding NewItemCount}" FontSize="20" CacheMode="BitmapCache" Foreground="{StaticResource PhoneAccentBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,93,0,0" FontWeight="Bold" FontFamily="{StaticResource PhoneFontFamilyNormal}" Grid.ColumnSpan="3" />
 			<TextBlock HorizontalAlignment="Right" Text="{Binding CurrentPageDisplay}" VerticalAlignment="Top" FontSize="20" CacheMode="BitmapCache" Margin="24,93,24,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneSubtleBrush}" Grid.ColumnSpan="3" />
-			<toolkit:PerformanceProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,12" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3"/>
+			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,12" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
 		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="36" Visibility="Collapsed">
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition /></Grid.ColumnDefinitions>
