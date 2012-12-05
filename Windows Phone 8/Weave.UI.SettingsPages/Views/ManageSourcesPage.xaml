@@ -39,18 +39,32 @@
 				<TextBlock Text="{Binding FeedName}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" TextTrimming="WordEllipsis" CacheMode="BitmapCache" Foreground="{StaticResource PhoneForegroundBrush}" VerticalAlignment="Center" Margin="24,0,78,3" HorizontalAlignment="Left" Tap="FeedName_Tap" />
 				<sg:CircleImageButton Width="72" Height="72" HorizontalAlignment="Right" Margin="0,0,12,0" Source="/Assets/Icons/48x48_small_settings.png" Tap="FeedSettingsButton_Tap" toolkit:TiltEffect.IsTiltEnabled="True" BorderBrush="{StaticResource TransparentBrush}"/>
 			</Grid>
-		</DataTemplate>		
+		</DataTemplate>
+		
+		<Style x:Key="FeedJumpListStyle" TargetType="phone:LongListSelector">
+			<Setter Property="ItemTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<Grid Width="480" Height="72">
+							<Border Background="{StaticResource PhoneAccentBrush}" Margin="24,6">
+								<TextBlock HorizontalAlignment="Left" Margin="10,0,10,3" TextTrimming="WordEllipsis" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneForegroundBrush}" Text="{Binding Key}"/>
+							</Border>
+						</Grid>
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>	
 	</phone:PhoneApplicationPage.Resources>
 
 	
 	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.9999">
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.add.rest.png" Text="add" Click="AddFeedButton_Click"/>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>
 
 
-	<Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot" Margin="0,0,0,72">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="161"/>
 			<RowDefinition Height="Auto"/>
@@ -73,6 +87,7 @@
 			IsGroupingEnabled="True" 
 			GroupHeaderTemplate="{StaticResource FeedGroupHeaderTemplate}" 
 			GroupFooterTemplate="{StaticResource FeedGroupFooterTemplate}" 
+			JumpListStyle="{StaticResource FeedJumpListStyle}"
 			Margin="0,-12,0,0">
 			<phone:LongListSelector.ListFooter><Canvas Height="12"/></phone:LongListSelector.ListFooter>
 		</phone:LongListSelector>
