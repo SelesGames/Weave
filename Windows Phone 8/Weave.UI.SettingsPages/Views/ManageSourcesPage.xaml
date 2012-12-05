@@ -17,11 +17,14 @@
 	
 	<phone:PhoneApplicationPage.Resources>
 		<DataTemplate x:Key="FeedGroupHeaderTemplate">
-			<Grid Width="480" Height="72" Margin="0,22,0,0">
+			<Grid Width="480" Height="72">
 				<Border Background="{StaticResource PhoneAccentBrush}" Margin="24,12">
 					<TextBlock HorizontalAlignment="Left" Margin="10,0,10,3" TextTrimming="WordEllipsis" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneForegroundBrush}" Text="{Binding Key}"/>
 				</Border>
 			</Grid>
+		</DataTemplate>
+		<DataTemplate x:Key="FeedGroupFooterTemplate">
+			<Canvas Height="22"/>
 		</DataTemplate>
 		
 		<DataTemplate x:Key="FeedItemTemplate">
@@ -62,9 +65,17 @@
 			<TextBlock x:Name="PageTitle" Text="manage" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 		
-		<TextBlock Text="{Binding Warning}" TextWrapping="Wrap" Grid.Row="1" Margin="24,-4,24,10" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" FontFamily="{StaticResource PhoneFontFamilySemiBold}" LineHeight="20.667" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding WarningVisibility}" />
+		<TextBlock Text="{Binding Warning}" TextWrapping="Wrap" Grid.Row="1" Margin="24,-4,24,22" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" FontFamily="{StaticResource PhoneFontFamilySemiBold}" LineHeight="20.667" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding WarningVisibility}" />
 		
-		<phone:LongListSelector x:Name="lls" Grid.Row="2" Style="{StaticResource LongListSelectorStyle}" ItemsSource="{Binding FeedGroups}" ItemTemplate="{StaticResource FeedItemTemplate}" GroupHeaderTemplate="{StaticResource FeedGroupHeaderTemplate}" />
+		<phone:LongListSelector x:Name="lls" 
+			Grid.Row="2" 
+			ItemsSource="{Binding FeedGroups}" ItemTemplate="{StaticResource FeedItemTemplate}" 
+			IsGroupingEnabled="True" 
+			GroupHeaderTemplate="{StaticResource FeedGroupHeaderTemplate}" 
+			GroupFooterTemplate="{StaticResource FeedGroupFooterTemplate}" 
+			Margin="0,-12,0,0">
+			<phone:LongListSelector.ListFooter><Canvas Height="12"/></phone:LongListSelector.ListFooter>
+		</phone:LongListSelector>
 	</Grid>
 	
 </phone:PhoneApplicationPage>
