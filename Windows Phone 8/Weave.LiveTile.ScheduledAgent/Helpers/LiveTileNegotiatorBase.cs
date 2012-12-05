@@ -1,8 +1,8 @@
-﻿using System.Net;
+﻿using Microsoft.Phone.Shell;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Phone.Shell;
 
 namespace Weave.LiveTile.ScheduledAgent
 {

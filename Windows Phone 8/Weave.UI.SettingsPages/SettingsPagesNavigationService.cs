@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Navigation;
 using System.Net;
+using System.Windows.Navigation;
 
 namespace weave
 {

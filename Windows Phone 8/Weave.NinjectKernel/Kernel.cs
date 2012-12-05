@@ -1,9 +1,9 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
+using System;
 using weave.Data;
-using Weave.RSS;
 using Weave.FeedLibrary;
 using Weave.Mobilizer.Client;
+using Weave.RSS;
 
 namespace Weave.NinjectKernel
 {

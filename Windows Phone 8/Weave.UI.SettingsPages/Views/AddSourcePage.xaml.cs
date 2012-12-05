@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using SelesGames.Phone;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Microsoft.Phone.Controls;
-using SelesGames.Phone;
 using Telerik.Windows.Controls;
 
 namespace weave.Pages.Settings

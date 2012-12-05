@@ -1,6 +1,6 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
 using SelesGames;
+using System;
 
 namespace Weave.NinjectKernel
 {

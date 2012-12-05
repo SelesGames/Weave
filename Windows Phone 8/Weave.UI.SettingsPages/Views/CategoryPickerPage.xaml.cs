@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Phone.Controls;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
 
 namespace weave.Pages.Settings
 {

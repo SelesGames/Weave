@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Phone.Shell;
+﻿using Microsoft.Phone.Shell;
+using System;
 
 namespace Weave.LiveTile.ScheduledAgent
 {

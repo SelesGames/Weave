@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Phone.Scheduler;
+using Microsoft.Phone.Shell;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Phone.Scheduler;
-using Microsoft.Phone.Shell;
 
 namespace Weave.LiveTile.ScheduledAgent
 {

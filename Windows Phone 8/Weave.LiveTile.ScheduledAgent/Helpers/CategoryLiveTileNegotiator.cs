@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Phone.Shell;
 using weave;
 using weave.Data;
 
