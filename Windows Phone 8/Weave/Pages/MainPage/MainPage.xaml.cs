@@ -554,7 +554,7 @@ namespace weave
 
             var imageCacheHandle = this.imageCache;
             this.imageCache = null;
-            System.Reactive.Concurrency.Scheduler.ThreadPool.SafelySchedule(() =>
+            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
             {
                 if (imageCacheHandle != null)
                 {

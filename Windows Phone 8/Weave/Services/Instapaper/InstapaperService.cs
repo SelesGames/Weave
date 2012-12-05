@@ -10,11 +10,11 @@ namespace weave.Services.Instapaper
 
         public static async void SendToInstapaper(INewsItem newsItem)
         {
-            InstapaperAccount account = null; ;
+            InstapaperAccount account = null;
 
             try
             {
-                account = InstapaperAccount2.CurrentInstapaperCredentials;
+                account = await InstapaperAccount2.Current.GetCredentials();
             }
             catch { }
 

@@ -1,43 +1,36 @@
 ﻿using SelesGames.Instapaper;
 using SelesGames.IsoStorage;
-using System;
+using System.Threading.Tasks;
 
 namespace weave.Services.Instapaper
 {
-    public static class InstapaperAccount2
+    public class InstapaperAccount2
     {
+        public static InstapaperAccount2 Current = new InstapaperAccount2();
+
         const string ISO_KEY = "instapaper_credentials";
 
-        static bool hasAttemptedToGetCredentialsFromIsoStorage = false;
-        static InstapaperAccount credentials;
-        static Lazy<InstapaperAccount> credentialsHolder;
+        InstapaperAccount credentials;
+        object sync = new object();
 
-        static InstapaperAccount2()
+        public async Task<InstapaperAccount> GetCredentials()
         {
-            credentialsHolder = new Lazy<InstapaperAccount>(() =>
+            if (credentials == null)
             {
-                var task = new DataContractIsoStorageClient<InstapaperAccount>().GetAsync(ISO_KEY, System.Threading.CancellationToken.None);
-                task.Wait();
-                return task.Result;
-            });
+                var temp = await new DataContractIsoStorageClient<InstapaperAccount>().GetAsync(ISO_KEY, System.Threading.CancellationToken.None);
+                lock (sync)
+                {
+                    if (credentials == null)
+                        credentials = temp;
+                }
+            }
+            return credentials;
         }
 
-        public static InstapaperAccount CurrentInstapaperCredentials
+        public Task SaveCredentials(InstapaperAccount credentials)
         {
-            get
-            {
-                if (!hasAttemptedToGetCredentialsFromIsoStorage)
-                {
-                    credentials = credentialsHolder.Get();
-                    hasAttemptedToGetCredentialsFromIsoStorage = true;
-                }
-                return credentials;
-            }
-            set
-            {
-                credentials = value;
-                new DataContractIsoStorageClient<InstapaperAccount>().SaveAsync(ISO_KEY, credentials, System.Threading.CancellationToken.None);
-            }
+            this.credentials = credentials;
+            return new DataContractIsoStorageClient<InstapaperAccount>().SaveAsync(ISO_KEY, credentials, System.Threading.CancellationToken.None);
         }
     }
 }

@@ -46,7 +46,8 @@ namespace weave
 
                 else if (response.StatusCode == HttpStatusCode.OK) // 200
                 {
-                    InstapaperAccount2.CurrentInstapaperCredentials = account;
+                    // TODO: add a progressbar or spinner here
+                    await InstapaperAccount2.Current.SaveCredentials(account);
                     InstapaperService.FlushAnyPendingRequests();
 
                     Dispatcher.BeginInvoke(() =>

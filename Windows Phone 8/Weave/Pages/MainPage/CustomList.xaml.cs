@@ -118,7 +118,7 @@ namespace weave
             var remainderX = tuples.Skip(animationBuffer).ToList();
 
 
-            firstX.IntroducePeriod(TimeSpan.Zero, animationDelay, DispatcherScheduler.Instance).SafelySubscribe(
+            firstX.IntroducePeriod(TimeSpan.Zero, animationDelay, DispatcherScheduler.Current).SafelySubscribe(
                 o =>
                 {
                     o.ui.NewsItem = o.newsItem;
@@ -133,7 +133,7 @@ namespace weave
                 {
                     try
                     {
-                        remainderX.IntroducePeriod(TimeSpan.Zero, TimeSpan.FromMilliseconds(12d), DispatcherScheduler.Instance).SafelySubscribe(
+                        remainderX.IntroducePeriod(TimeSpan.Zero, TimeSpan.FromMilliseconds(12d), DispatcherScheduler.Current).SafelySubscribe(
                             o =>
                             {
                                 o.ui.NewsItem = o.newsItem;
