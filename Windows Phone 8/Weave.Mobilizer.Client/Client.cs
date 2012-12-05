@@ -1,5 +1,6 @@
-﻿using SelesGames.Rest;
+﻿using SelesGames.Rest.JsonDotNet;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Weave.Readability;
 
@@ -9,13 +10,14 @@ namespace Weave.Mobilizer.Client
     {
         const string R_URL_TEMPLATE = "http://mobilizer.cloudapp.net/ipf?url={0}";
 
-        public async Task<MobilizerResult> GetAsync(string url)
+        public Task<MobilizerResult> GetAsync(string url)
         {
-            var client = new JsonRestClient<ReadabilityResult>();
+            var client = new JsonDotNetRestClient<ReadabilityResult>();
             var encodedUrl = HttpUtility.UrlEncode(url);
             var fUrl = string.Format(R_URL_TEMPLATE, encodedUrl);
-            var result = await client.GetAsync(fUrl, System.Threading.CancellationToken.None).ConfigureAwait(false);
-            return Parse(result);            
+            return client
+                .GetAsync(fUrl, CancellationToken.None)
+                .ContinueWith(t => Parse(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
         MobilizerResult Parse(ReadabilityResult result)

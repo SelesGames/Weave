@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SelesGames.Rest;
+using System;
 using System.Net;
 //using System.ServiceModel.Syndication;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
-using SelesGames.Rest;
 
 namespace Weave.FeedSearchService
 {
