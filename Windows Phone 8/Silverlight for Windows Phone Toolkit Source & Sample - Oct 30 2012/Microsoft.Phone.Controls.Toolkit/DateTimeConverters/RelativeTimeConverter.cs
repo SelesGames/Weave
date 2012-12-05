@@ -3,10 +3,10 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Microsoft.Phone.Controls.LocalizedResources;
 using System;
 using System.Globalization;
 using System.Windows.Data;
-using Microsoft.Phone.Controls.LocalizedResources;
 
 namespace Microsoft.Phone.Controls
 {

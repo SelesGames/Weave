@@ -2,6 +2,7 @@
 using Microsoft.Phone.Shell;
 using SelesGames;
 using SelesGames.Phone;
+using SelesGames.UI.Advertising;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
-using SelesGames.UI.Advertising;
 using Weave.LiveTile.ScheduledAgent;
 
 

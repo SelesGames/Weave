@@ -5,8 +5,8 @@
 
 using System;
 using System.Globalization;
-using System.Windows.Data;
 using System.Text;
+using System.Windows.Data;
 
 namespace Microsoft.Phone.Controls
 {
