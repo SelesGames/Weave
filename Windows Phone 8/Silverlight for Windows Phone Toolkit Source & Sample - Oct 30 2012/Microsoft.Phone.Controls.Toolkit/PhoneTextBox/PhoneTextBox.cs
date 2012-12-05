@@ -4,14 +4,11 @@
 // All other rights reserved.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Globalization;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Phone.Controls
 {

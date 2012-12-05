@@ -9,12 +9,12 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
+    using Microsoft.Phone.Maps.Controls;
     using System.ComponentModel;
     using System.Device.Location;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Markup;
-    using Microsoft.Phone.Maps.Controls;
 
     /// <summary>
     /// Represents a child of a map, which uses geographic coordinates to position itself.

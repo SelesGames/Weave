@@ -9,10 +9,9 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
-    using System.Collections.Generic;
+    using Microsoft.Phone.Maps.Controls;
     using System.Windows;
     using System.Windows.Controls;
-    using Microsoft.Phone.Maps.Controls;
 
     /// <summary>
     /// MapOverlayItem class

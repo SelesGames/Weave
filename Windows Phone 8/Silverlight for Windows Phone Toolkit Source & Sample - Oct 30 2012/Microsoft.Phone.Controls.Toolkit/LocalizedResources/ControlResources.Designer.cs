@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Phone.Controls.LocalizedResources {
-    using System;
-    
-    
+namespace Microsoft.Phone.Controls.LocalizedResources
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

@@ -9,6 +9,7 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
+    using Microsoft.Phone.Maps.Controls;
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -16,7 +17,6 @@ namespace Microsoft.Phone.Maps.Toolkit
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Markup;
-    using Microsoft.Phone.Maps.Controls;
 
     /// <summary>
     /// Represents a control that can be used to present a collection of items on a map.

@@ -9,13 +9,13 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
+    using Microsoft.Phone.Maps.Controls;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Windows;
-    using Microsoft.Phone.Maps.Controls;
 
     /// <summary>
     /// Class MapExtensionsChildrenChangedManager.

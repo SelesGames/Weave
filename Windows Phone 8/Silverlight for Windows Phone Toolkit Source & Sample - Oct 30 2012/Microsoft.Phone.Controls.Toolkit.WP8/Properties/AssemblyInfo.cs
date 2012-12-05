@@ -5,9 +5,8 @@
 
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Windows.Markup;
 
 // General Information about an assembly is controlled through the following 

@@ -9,9 +9,7 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
-    using System.Windows;
     using System.Windows.Markup;
-    using System.Windows.Media;
 
     /// <summary>
     /// Represents a marker for the location of a user on the map.

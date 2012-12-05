@@ -10,11 +10,9 @@
 namespace Microsoft.Phone.Maps.Toolkit
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Diagnostics;
-    using System.Windows.Controls.Primitives;
 
     /// <summary>
     /// CollectionChangedListener class.

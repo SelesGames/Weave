@@ -9,11 +9,11 @@
 
 namespace Microsoft.Phone.Maps.Toolkit
 {
+    using Microsoft.Phone.Maps.Controls;
     using System;
     using System.Collections.ObjectModel;
     using System.Device.Location;
     using System.Windows;
-    using Microsoft.Phone.Maps.Controls;
 
     /// <summary>
     /// Represents a class that can extend the capabilities of the <see cref="Map"/> class.
