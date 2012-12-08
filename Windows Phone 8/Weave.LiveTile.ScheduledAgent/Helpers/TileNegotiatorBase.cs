@@ -3,16 +3,17 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Weave.LiveTile.ScheduledAgent.ViewModels;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
-    public abstract class LiveTileNegotiatorBase
+    public abstract class TileNegotiatorBase
     {
-        protected LiveTileViewModel ViewModel { get; set; }
+        protected ITileViewModel ViewModel { get; set; }
         ShellTile tile;
         string appName;
 
-        public LiveTileNegotiatorBase(string appName, ShellTile tile)
+        public TileNegotiatorBase(string appName, ShellTile tile)
         {
             this.appName = appName;
             this.tile = tile;

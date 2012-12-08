@@ -340,7 +340,7 @@ namespace weave
 
         #region Live Tile Creation
 
-        public async Task<LiveTileViewModel> CreateLiveTileViewModel()
+        public async Task<StandardTileViewModel> CreateLiveTileViewModel()
         {
             var article = allNews.Where(o => o.HasImage).FirstOrDefault();
 
@@ -350,7 +350,7 @@ namespace weave
                 image = await GetImageAsync(article.ImageUrl);
             }
 
-            return new LiveTileViewModel
+            return new StandardTileViewModel
             {
                 AppName = AppSettings.Instance.AppName.ToUpperInvariant(),
                 Category = Header.ToLowerInvariant(),

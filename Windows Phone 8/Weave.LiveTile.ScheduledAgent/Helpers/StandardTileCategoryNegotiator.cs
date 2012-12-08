@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using weave;
 using weave.Data;
+using Weave.LiveTile.ScheduledAgent.ViewModels;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
-    public class CategoryLiveTileNegotiator : LiveTileNegotiatorBase
+    public class StandardTileCategoryNegotiator : TileNegotiatorBase
     {
         string categoryName;
 
-        public CategoryLiveTileNegotiator(string categoryName, string appName, ShellTile tile)
+        public StandardTileCategoryNegotiator(string categoryName, string appName, ShellTile tile)
             : base(appName, tile)
         {
             this.categoryName = categoryName;
@@ -46,7 +47,7 @@ namespace Weave.LiveTile.ScheduledAgent
 
             Trace.Output("image download complete");
 
-            ViewModel = new LiveTileViewModel
+            ViewModel = new StandardTileViewModel
             {
                 Category = categoryName,
                 Headline = latestNewsArticle.Title,

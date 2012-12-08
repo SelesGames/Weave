@@ -3,14 +3,15 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using weave.Data;
+using Weave.LiveTile.ScheduledAgent.ViewModels;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
-    public class FeedLiveTileNegotiator : LiveTileNegotiatorBase
+    public class StandardTileFeedNegotiator : TileNegotiatorBase
     {
         Guid feedId;
 
-        public FeedLiveTileNegotiator(Guid feedId, string appName, ShellTile tile) 
+        public StandardTileFeedNegotiator(Guid feedId, string appName, ShellTile tile) 
             : base(appName, tile)
         {
             this.feedId = feedId;
@@ -48,7 +49,7 @@ namespace Weave.LiveTile.ScheduledAgent
 
             Trace.Output("image download complete");
 
-            ViewModel = new LiveTileViewModel
+            ViewModel = new StandardTileViewModel
             {
                 Category = feed.FeedName,
                 Headline = latestNewsArticle.Title,

@@ -18,6 +18,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <ExpressionBlendVersion>5.0.31017.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -83,26 +84,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers\CategoryLiveTileNegotiator.cs" />
-    <Compile Include="Helpers\FeedLiveTileNegotiator.cs" />
+    <Compile Include="Helpers\StandardTileCategoryNegotiator.cs" />
+    <Compile Include="Helpers\StandardTileFeedNegotiator.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
     <Compile Include="Library\TaskExtensions.cs" />
     <Compile Include="Library\ToastHelper.cs" />
-    <Compile Include="Helpers\LiveTileNegotiatorBase.cs" />
+    <Compile Include="Helpers\TileNegotiatorBase.cs" />
     <Compile Include="Helpers\LiveTileNegotiatorFactory.cs" />
     <Compile Include="Library\Trace.cs" />
-    <Compile Include="ViewModels\LiveTileViewModelExtensions.cs" />
+    <Compile Include="ViewModels\CycleTileViewModel.cs" />
+    <Compile Include="ViewModels\ITileViewModel.cs" />
+    <Compile Include="ViewModels\StandardTileViewModel.cs" />
+    <Compile Include="Views\CycleTileMedium.xaml.cs">
+      <DependentUpon>CycleTileMedium.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LiveTileBack.xaml.cs">
       <DependentUpon>LiveTileBack.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LiveTileFront.xaml.cs">
       <DependentUpon>LiveTileFront.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LiveTileViewModel.cs" />
     <Compile Include="LiveTileUpdatingAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\CycleTileMedium.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\LiveTileBack.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,9 +136,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Phone">
+      <HintPath>.\Microsoft.Phone</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone.Interop">
+      <HintPath>.\Microsoft.Phone.Interop</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ApplicationIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

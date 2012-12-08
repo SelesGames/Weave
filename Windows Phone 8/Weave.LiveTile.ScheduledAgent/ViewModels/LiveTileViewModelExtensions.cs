@@ -5,7 +5,7 @@ namespace Weave.LiveTile.ScheduledAgent
 {
     public static class LiveTileViewModelExtensions
     {
-        public static StandardTileData CreateTileData(this LiveTileViewModel viewModel)
+        public static ShellTileData CreateTileData(this StandardTileViewModel viewModel)
         {
             var frontTile = new LiveTileFront();
             var backTile = new LiveTileBack();
