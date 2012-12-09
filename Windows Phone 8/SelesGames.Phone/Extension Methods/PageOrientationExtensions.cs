@@ -1,7 +1,7 @@
 ﻿
 namespace Microsoft.Phone.Controls
 {
-    public static class PhoneExtensions
+    public static class PageOrientationExtensions
     {
         public static bool IsAnyLandscape(this PageOrientation orientation)
         {

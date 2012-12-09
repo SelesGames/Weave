@@ -42,34 +42,4 @@ namespace SelesGames.Phone
                 return PageOrientation.None;
         }
     }
-
-    //internal class PhoneApplicationPageExtendedInfo
-    //{
-    //    internal PhoneApplicationPage Page { get; private set; }
-    //    internal SupportedPageOrientation OriginalSupportedOrientation { get; private set; }
-
-    //    internal static PhoneApplicationPageExtendedInfo Create(PhoneApplicationPage page)
-    //    {
-    //        return new PhoneApplicationPageExtendedInfo
-    //        {
-    //            OriginalSupportedOrientation = page.SupportedOrientations,
-    //            Page = page,
-    //        };
-    //    }
-
-    //    internal void SetSupportedOrientation(SupportedPageOrientation orientation)
-    //    {
-    //        Page.SupportedOrientations = orientation;
-    //    }
-
-    //    internal void RestoreOriginalSupportedOrientation()
-    //    {
-    //        Page.SupportedOrientations = OriginalSupportedOrientation;
-    //    }
-
-    //    internal PageOrientation GetPageOrientation()
-    //    {
-    //        return Page.Orientation;
-    //    }
-    //}
 }
