@@ -112,6 +112,11 @@ namespace System.Windows
             return Observable.FromEventPattern<GestureEventArgs>(el, "Tap");
         }
 
+        public static IObservable<EventPattern<GestureEventArgs>> GetHold(this UIElement el)
+        {
+            return Observable.FromEventPattern<GestureEventArgs>(el, "Hold");
+        }
+
         public static IObservable<EventPattern<RoutedEventArgs>> GetLoaded(this FrameworkElement frameworkElement)
         {
             return Observable.FromEventPattern<RoutedEventArgs>(frameworkElement, "Loaded");

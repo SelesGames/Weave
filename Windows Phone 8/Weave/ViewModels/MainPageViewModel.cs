@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using weave.Data;
 using Weave.LiveTile.ScheduledAgent;
+using Weave.LiveTile.ScheduledAgent.ViewModels;
 
 namespace weave
 {

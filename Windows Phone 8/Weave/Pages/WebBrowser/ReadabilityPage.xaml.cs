@@ -5,9 +5,9 @@ using SelesGames.Phone;
 using System;
 using System.Linq;
 using System.Reactive;
+using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -51,6 +51,26 @@ namespace weave
             var isAppBarMinimized = permState.IsHideAppBarOnArticleViewerPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
+
+
+            var gl = GestureService.GetGestureListener(this);
+            Observable.FromEventPattern<Microsoft.Phone.Controls.GestureEventArgs>(gl, "Hold")
+            //bool isMouseDown = false;
+            //Point startPosition = new Point();
+            //browser.GetMouseLeftButtonDown().Subscribe(e =>
+            //{
+            //    startPosition = e.EventArgs.GetPosition(browser);
+            //    isMouseDown = true;
+            //}).DisposeWith(disposables);
+            //browser.GetMouseLeftButtonUp().Subscribe(_ => isMouseDown = false).DisposeWith(disposables);
+            //browser
+            //    .GetMouseLeftButtonDown()
+            //    .Select(o => Observable.Timer(TimeSpan.FromSeconds(2), DispatcherScheduler.Current).Take(1).Select(_ => o.EventArgs.GetPosition(browser)))
+            //    .Merge()
+            //    .Select(o => new Point(o.X - startPosition.X, o.Y - startPosition.Y))
+            //    .Where(delta => isMouseDown && Math.Abs(delta.X) < 6 && Math.Abs(delta.Y) < 6)
+                .Subscribe(_ => OnBrowserLongHold())
+                .DisposeWith(disposables);
         }
 
 
@@ -305,20 +325,24 @@ namespace weave
 
             try
             {
-                if (viewModel != null &&
-                    viewModel.NewsItem != null &&
-                    viewModel.NewsItem.FeedSource != null &&
-                    (viewModel.NewsItem.FeedSource.ArticleViewingType == ArticleViewingType.InternetExplorer || viewModel.NewsItem.FeedSource.ArticleViewingType == ArticleViewingType.InternetExplorerOnly))
+                if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.FeedSource == null)
+                    return;
+
+                var articleViewType = viewModel.NewsItem.FeedSource.ArticleViewingType;
+
+                if (articleViewType == ArticleViewingType.InternetExplorer || articleViewType == ArticleViewingType.InternetExplorerOnly)
                 {
                     viewModel.LastViewingType = ArticleViewingType.InternetExplorer;
                     await browser.NavigateAsync(new Uri(viewModel.NewsItem.Link, UriKind.Absolute), null, "User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0");//User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)
                                                                                                                                                                                                          //User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 900)
                 }
-                else
+                else if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
                 {
                     var html = await viewModel.GetMobilizedArticleHtml();
                     await browser.NavigateToStringAsync(html);
                 }
+                else
+                    throw new Exception("articleViewType has an invalid value");
 
                 isHtmlDisplayed = true;
                 browser.OpacityMask = null;
@@ -385,8 +409,6 @@ namespace weave
         {
             viewModel.NewsItem.IsFavorite = true;
         }
-
-
 
 
 
@@ -495,6 +517,37 @@ namespace weave
         void EditSourceAppMenuItemClick(object sender, System.EventArgs e)
         {
             NavigationService.ToEditSourcePage(viewModel.NewsItem.FeedId.ToString());
+        }
+
+        async void OnBrowserLongHold()
+        //async void SpeakArticleAppMenuItemClick(object sender, System.EventArgs e)
+        {
+            if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.FeedSource == null)
+                return;
+
+            var articleViewType = viewModel.NewsItem.FeedSource.ArticleViewingType;
+
+            if (!(articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly))
+            {
+                MessageBox.Show("The 'Speak Article' feature only works with mobilized articles");
+                return;
+            }
+
+            var articleText = viewModel.CurrentMobilizedArticle.CreateSpokenRepresentation();
+            DebugEx.WriteLine(articleText);
+
+            foreach (var voice in Windows.Phone.Speech.Synthesis.InstalledVoices.All)
+            {
+                System.Diagnostics.Debug.WriteLine(voice.DisplayName + ", " +
+                    voice.Language + ", " +
+                    voice.Gender + ", " +
+                    voice.Description);
+                using (var text2speech = new Windows.Phone.Speech.Synthesis.SpeechSynthesizer())
+                {
+                    text2speech.SetVoice(voice);
+                    await text2speech.SpeakTextAsync("Hello world! I'm " + voice.DisplayName + ".");
+                }
+            }
         }
 
         #endregion

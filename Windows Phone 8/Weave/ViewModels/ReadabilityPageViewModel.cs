@@ -13,9 +13,11 @@ namespace weave
         StandardThemeSet themes;
         FontSizes fontSizes;
         PermanentState permState;
+        MobilizerResult mobilizerResult;
 
         public NewsItem NewsItem { get; set; }
         public ArticleViewingType LastViewingType { get; set; }
+        internal MobilizedArticle CurrentMobilizedArticle { get; private set; }
 
         public ReadabilityPageViewModel()
         {
@@ -39,11 +41,14 @@ namespace weave
                 {
                     var articleViewingType = NewsItem.FeedSource.ArticleViewingType;
                     LastViewingType = articleViewingType;
-                    html = await GetMobilizedHtml().ConfigureAwait(false);
+                    await GetMobilizerResult().ConfigureAwait(false);
+                    html = GetMobilizedHtml();
+                    CurrentMobilizedArticle = new MobilizedArticle { Title = NewsItem.Title, Content = mobilizerResult.content };
                 }
             }
             catch 
             {
+                CurrentMobilizedArticle = null;
                 html = GetExceptionHtml();
             }
 
@@ -51,7 +56,12 @@ namespace weave
             return convertedHtml;
         }
 
-        async Task<string> GetMobilizedHtml()
+        async Task GetMobilizerResult()
+        {
+            mobilizerResult = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
+        }
+
+        string GetMobilizedHtml()
         {
             var theme = themes.CurrentTheme;
 
@@ -62,8 +72,8 @@ namespace weave
             var source = NewsItem.FormattedForMainPageSourceAndDate;
             var title = NewsItem.Title;
             var link = NewsItem.Link;
-            var result = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
-            var content = result.content;
+            //var result = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
+            var content = mobilizerResult.content;
 
             var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
 

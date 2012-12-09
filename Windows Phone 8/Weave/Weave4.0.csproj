@@ -167,6 +167,7 @@
     <Compile Include="Pages\MainPage\Settings\MainPageSettingsPopup.xaml.cs">
       <DependentUpon>MainPageSettingsPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\WebBrowser\MobilizedArticle.cs" />
     <Compile Include="Pages\WebBrowser\TileButton.xaml.cs">
       <DependentUpon>TileButton.xaml</DependentUpon>
     </Compile>
