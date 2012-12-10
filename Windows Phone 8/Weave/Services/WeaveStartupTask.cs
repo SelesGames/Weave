@@ -8,7 +8,6 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,6 +28,7 @@ namespace weave
         Kernel kernel;
         Weave4DataAccessLayer dataAccessLayer;
         bool hasBeenInitialized = false;
+        string initialNavigationTarget;
 
         public WeaveStartupTask(AppSettings settings)
         {
@@ -76,43 +76,57 @@ namespace weave
                .Subscribe(OnInitialNavigating);
 
             new ArticleListNavigationCorrector(frame);
-            frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
-            frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
-            frame.Navigated += CheckForResetNavigation;
+            frame.Navigating += OnFrameNavigating;
+            frame.Navigated += OnFrameNavigated;
             frame.NavigationFailed += RootFrame_NavigationFailed;
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
         }
 
-
-        #region handle frame resets?
-
-        void CheckForResetNavigation(object sender, NavigationEventArgs e)
+        void OnFrameNavigating(object sender, NavigatingCancelEventArgs e)
         {
-            // If the app has received a 'reset' navigation, then we need to check
-            // on the next navigation to see if the page stack should be reset
-            if (e.NavigationMode == NavigationMode.Reset)
-                frame.Navigated += ClearBackStackAfterReset;
+            frame.IsHitTestVisible = false;
+
+            //// cancel navigation if this is a Reset type launch
+            //if (e.NavigationMode == NavigationMode.Reset)
+            //{
+            //    var now = DateTime.UtcNow;
+            //    if (true)//AppSettings.Instance.LastLoginTime - now > TimeSpan.FromHours(2))
+            //    {
+            //        //e.Cancel = true;
+            //        while (frame.RemoveBackEntry() != null)
+            //        {
+            //            ; // do nothing
+            //        }
+            //        e.Cancel = true;
+            //        OnInitialNavigating(EventPattern.Create(sender, e));
+            //    }
+            //    else
+            //        e.Cancel = true;
+            //}
         }
 
-        void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
+        void OnFrameNavigated(object sender, NavigationEventArgs e)
         {
-            // Unregister the event so it doesn't get called again
-            frame.Navigated -= ClearBackStackAfterReset;
-
-            // Only clear the stack for 'new' (forward) and 'refresh' navigations
-            if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
-                return;
-
-            // For UI consistency, clear the entire page stack
-            while (frame.RemoveBackEntry() != null)
-            {
-                ; // do nothing
-            }
+            frame.IsHitTestVisible = true;
         }
 
-        #endregion
+        //void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
+        //{
+        //    // Unregister the event so it doesn't get called again
+        //    frame.Navigated -= ClearBackStackAfterReset;
+
+        //    // Only clear the stack for 'new' (forward) and 'refresh' navigations
+        //    if (e.NavigationMode != NavigationMode.New && e.NavigationMode != NavigationMode.Refresh)
+        //        return;
+
+        //    // For UI consistency, clear the entire page stack
+        //    while (frame.RemoveBackEntry() != null)
+        //    {
+        //        ; // do nothing
+        //    }
+        //}
 
         void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
@@ -125,42 +139,54 @@ namespace weave
 
         async void OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
+            var firstNavigation = frame.NavigatedAsync();
+
             await RecoverPermanentStateAsync();
 
             new SystemTrayNavigationSetter(frame, permanentState);
 
-            if (permanentState.IsFirstTime)
+            if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
             {
                 frame.IsLoading = false;
                 dataAccessLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
                 dataAccessLayer.IsFirstTime = true;
+                await firstNavigation;
+                GlobalNavigationService.ToWelcomePage();
                 return;
             }
 
             frame.IsHitTestVisible = false;
-
-            var originalTargetUri = args.EventArgs.Uri;
-
-            bool shouldReroutNavigation = args.EventArgs.IsCancelable;
             int backStackRemovalCount = 0;
 
-            if (shouldReroutNavigation)
+
+            var originalTargetUri = args.EventArgs.Uri;
+            if (originalTargetUri.OriginalString == "/Pages/DummyPage.xaml")
             {
                 backStackRemovalCount = 1;
-                args.EventArgs.Cancel = true;
-
-                await Observable.FromEventPattern<NavigationEventArgs>(frame, "NavigationStopped").Take(1).ToTask();
-
-                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
+                originalTargetUri = new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative);
             }
-            else
+
+            bool shouldReroutNavigation = args.EventArgs.IsCancelable;
+
+            //if (shouldReroutNavigation)
+            //{
+            //    backStackRemovalCount = 1;
+            //    args.EventArgs.Cancel = true;
+            //    await frame.NavigationStoppedAsync();// Observable.FromEventPattern<NavigationEventArgs>(frame, "NavigationStopped").Take(1).ToTask();
+
+            //    //frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
+            //}
+            //else
+            if (!shouldReroutNavigation)
             {
                 backStackRemovalCount = 2;
-                await Observable.FromEventPattern<NavigationEventArgs>(frame, "Navigated").Take(1).ToTask();
+                await firstNavigation;
+                firstNavigation = frame.NavigatedAsync();
                 frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
+                //await frame.NavigatedAsync();
             }
 
-            await Observable.FromEventPattern<NavigationEventArgs>(frame, "Navigated").Take(1).ToTask();
+            await firstNavigation;
 
             frame.IsLoading = true;
 
@@ -202,7 +228,7 @@ namespace weave
             {
                 frame.Navigate(originalTargetUri);
             }
-            await Observable.FromEventPattern<NavigationEventArgs>(frame, "Navigated").Take(1).ToTask();
+            await frame.NavigatedAsync();// Observable.FromEventPattern<NavigationEventArgs>(frame, "Navigated").Take(1).ToTask();
 
             var page = frame.Content as PhoneApplicationPage;
             var pageLayoutComplete = page.GetLayoutUpdated().Take(1).ToTask();
@@ -297,14 +323,14 @@ namespace weave
             permanentState.RunHistory.CreateNewLog();
             FinishInitialization();
 
-            if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
-            {
-                GlobalNavigationService.ToWelcomePage();
-            }
-            else
-            {
-                GlobalNavigationService.ToPanoramaPage();
-            }
+            //if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
+            //{
+            //    GlobalNavigationService.ToWelcomePage();
+            //}
+            //else
+            //{
+            //    GlobalNavigationService.ToPanoramaPage();
+            //}
         }
 
         void OnActivated()
@@ -313,7 +339,7 @@ namespace weave
 
             if (!hasBeenInitialized)
             {
-                RecoverPermanentStateAsync().Wait();
+                Task.Run(() => RecoverPermanentStateAsync().Wait()).Wait();
                 settings.LastLoginTime = permanentState.PreviousLoginTime;
                 FinishInitialization();
             }
