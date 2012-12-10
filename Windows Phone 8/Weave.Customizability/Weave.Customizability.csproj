@@ -91,6 +91,7 @@
     <Compile Include="FontThickness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadingTheme.cs" />
+    <Compile Include="SpeakArticleVoice.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

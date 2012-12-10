@@ -192,6 +192,7 @@
     <Compile Include="Settings\FontSizes.cs" />
     <Compile Include="Settings\FontThicknessExtensions.cs" />
     <Compile Include="Settings\PermanentState.cs" />
+    <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\StandardFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />

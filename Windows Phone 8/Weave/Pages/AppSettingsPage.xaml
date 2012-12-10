@@ -16,6 +16,7 @@
 	<UserControl.Resources>
 		<local:ArticleDeleteTimesForMarkedRead x:Key="MarkedReadTimes" />
 		<local:ArticleDeleteTimesForUnread x:Key="UnreadTimes" />
+		<local:SpeakArticleVoices x:Key="Voices" />
 		<DataTemplate x:Key="ListPickerItemTemplate">
 			<TextBlock Text="{Binding Display}"/>
 		</DataTemplate>
@@ -37,7 +38,7 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<Grid.RowDefinitions>
-        		<RowDefinition Height="741"/>
+        		<RowDefinition Height="852"/>
 				<RowDefinition Height="*"/>     	
 			</Grid.RowDefinitions>
         	<StackPanel VerticalAlignment="Bottom">
@@ -72,7 +73,8 @@
 				</toolkit:ToggleSwitch>
 				
 				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,0,12,12"/>
-				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,12,12,36"/>
+				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12"/>
+				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" Margin="12,12,12,36" />
 			</StackPanel>      
 		</Grid>
 		</ScrollViewer>

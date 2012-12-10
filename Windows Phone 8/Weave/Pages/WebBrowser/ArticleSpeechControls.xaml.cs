@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace weave.Pages.WebBrowser
 {
-    public partial class ArticleSpeechControls : UserControl, IDisposable, IPopup<object>
+    public partial class ArticleSpeechControls : UserControl, IPopup<object>
     {
         public event EventHandler StopButtonPressed;
 
@@ -18,11 +18,6 @@ namespace weave.Pages.WebBrowser
             StopButtonPressed.Raise(this);
         }
 
-        public void Dispose()
-        {
-            busyIndicator.IsPlaying = false;
-        }
-
         public void BeginShow()
         {
             ShowCompleted.Raise(this);
@@ -30,11 +25,17 @@ namespace weave.Pages.WebBrowser
 
         public void BeginHide()
         {
+            busyIndicator.IsPlaying = false;
             HideCompleted.Raise(this);
         }
 
         public event EventHandler ShowCompleted;
         public event EventHandler HideCompleted;
-        public event EventHandler<EventArgs<PopupResult<object>>> ResultCompleted;
+
+        event EventHandler<EventArgs<PopupResult<object>>> IPopup<object>.ResultCompleted
+        {
+            add { throw new NotImplementedException(); }
+            remove { throw new NotImplementedException(); }
+        }
     }
 }
