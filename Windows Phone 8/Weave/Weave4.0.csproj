@@ -25,7 +25,6 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <ExpressionBlendVersion>5.0.31017.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -128,6 +127,7 @@
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
     <Compile Include="Library\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Library\Extension Methods\SilverlightToolkitExtensions.cs" />
+    <Compile Include="Library\Extension Methods\VoiceInformationExtensions.cs" />
     <Compile Include="Pages\AppSettingsPage.xaml.cs">
       <DependentUpon>AppSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -142,6 +142,9 @@
     <Compile Include="Pages\CustomFrame.cs" />
     <Compile Include="Pages\DummyPage.xaml.cs">
       <DependentUpon>DummyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WebBrowser\ArticleSpeechControls.xaml.cs">
+      <DependentUpon>ArticleSpeechControls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebBrowser\FontSizePopup.xaml.cs">
       <DependentUpon>FontSizePopup.xaml</DependentUpon>
@@ -310,6 +313,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignTimeOnly>
+    <Page Include="Pages\WebBrowser\ArticleSpeechControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\FontSizePopupStyles.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>

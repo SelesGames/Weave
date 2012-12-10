@@ -43,7 +43,13 @@ namespace weave
                     LastViewingType = articleViewingType;
                     await GetMobilizerResult().ConfigureAwait(false);
                     html = GetMobilizedHtml();
-                    CurrentMobilizedArticle = new MobilizedArticle { Title = NewsItem.Title, Content = mobilizerResult.content };
+                    CurrentMobilizedArticle = new MobilizedArticle 
+                    { 
+                        Title = NewsItem.Title, 
+                        Publication = NewsItem.FeedSource.FeedName,
+                        Date = NewsItem.PublishDate,
+                        Content = mobilizerResult.content
+                    };
                 }
             }
             catch 

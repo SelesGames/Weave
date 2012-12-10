@@ -3,11 +3,14 @@ using Microsoft.Phone.Shell;
 using SelesGames;
 using SelesGames.Phone;
 using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -51,26 +54,6 @@ namespace weave
             var isAppBarMinimized = permState.IsHideAppBarOnArticleViewerPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
-
-
-            var gl = GestureService.GetGestureListener(this);
-            Observable.FromEventPattern<Microsoft.Phone.Controls.GestureEventArgs>(gl, "Hold")
-            //bool isMouseDown = false;
-            //Point startPosition = new Point();
-            //browser.GetMouseLeftButtonDown().Subscribe(e =>
-            //{
-            //    startPosition = e.EventArgs.GetPosition(browser);
-            //    isMouseDown = true;
-            //}).DisposeWith(disposables);
-            //browser.GetMouseLeftButtonUp().Subscribe(_ => isMouseDown = false).DisposeWith(disposables);
-            //browser
-            //    .GetMouseLeftButtonDown()
-            //    .Select(o => Observable.Timer(TimeSpan.FromSeconds(2), DispatcherScheduler.Current).Take(1).Select(_ => o.EventArgs.GetPosition(browser)))
-            //    .Merge()
-            //    .Select(o => new Point(o.X - startPosition.X, o.Y - startPosition.Y))
-            //    .Where(delta => isMouseDown && Math.Abs(delta.X) < 6 && Math.Abs(delta.Y) < 6)
-                .Subscribe(_ => OnBrowserLongHold())
-                .DisposeWith(disposables);
         }
 
 
@@ -123,7 +106,7 @@ namespace weave
             if (viewModel == null || viewModel.NewsItem == null)
                 return;
 
-            var markedReadButton = ApplicationBar.MenuItems[2] as ApplicationBarMenuItem;
+            var markedReadButton = ApplicationBar.MenuItems[3] as ApplicationBarMenuItem;
 
             var bindingAdapter = new ApplicationBarToggleMenuItemAdapter(markedReadButton)
             {
@@ -519,8 +502,7 @@ namespace weave
             NavigationService.ToEditSourcePage(viewModel.NewsItem.FeedId.ToString());
         }
 
-        async void OnBrowserLongHold()
-        //async void SpeakArticleAppMenuItemClick(object sender, System.EventArgs e)
+        void SpeakArticleAppMenuItemClick(object sender, System.EventArgs e)
         {
             if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.FeedSource == null)
                 return;
@@ -533,21 +515,70 @@ namespace weave
                 return;
             }
 
-            var articleText = viewModel.CurrentMobilizedArticle.CreateSpokenRepresentation();
-            DebugEx.WriteLine(articleText);
-
-            foreach (var voice in Windows.Phone.Speech.Synthesis.InstalledVoices.All)
+            if (viewModel.CurrentMobilizedArticle == null)
             {
-                System.Diagnostics.Debug.WriteLine(voice.DisplayName + ", " +
-                    voice.Language + ", " +
-                    voice.Gender + ", " +
-                    voice.Description);
-                using (var text2speech = new Windows.Phone.Speech.Synthesis.SpeechSynthesizer())
-                {
-                    text2speech.SetVoice(voice);
-                    await text2speech.SpeakTextAsync("Hello world! I'm " + voice.DisplayName + ".");
-                }
+                MessageBox.Show("Please wait until the article has finished downloading");
+                return;
             }
+
+            var articleText = viewModel.CurrentMobilizedArticle.CreateSpokenRepresentation();
+
+            var text2speech = new Windows.Phone.Speech.Synthesis.SpeechSynthesizer();
+            var voice = Windows.Phone.Speech.Synthesis.InstalledVoices.All.GetCultureFilteredVoices("Katja").FirstOrDefault();
+            if (voice != null)
+                text2speech.SetVoice(voice);
+
+            var speechControls = new weave.Pages.WebBrowser.ArticleSpeechControls();
+            var speechControlsPopupService = new SelesGames.PopupService<object>(speechControls);
+            speechControlsPopupService.BeginShow();
+            browser.Opacity = 0.6d;
+
+            EventHandler stopButtonHandler = null;
+            EventHandler<CancelEventArgs> backKeyPressHandler = null;
+
+            stopButtonHandler = (s, e2) =>
+            {
+                speechControlsPopupService.BeginHide();
+                browser.Opacity = 1d;
+                text2speech.CancelAll();
+                speechControls.StopButtonPressed -= stopButtonHandler;
+                this.BackKeyPress -= backKeyPressHandler;
+            };
+            backKeyPressHandler = (s, e2) =>
+            {
+                e2.Cancel = true;
+                speechControlsPopupService.BeginHide();
+                browser.Opacity = 1d;
+                text2speech.CancelAll();
+                speechControls.StopButtonPressed -= stopButtonHandler;
+                this.BackKeyPress -= backKeyPressHandler;
+            };
+            speechControls.StopButtonPressed += stopButtonHandler;
+            this.BackKeyPress += backKeyPressHandler;
+
+            text2speech.SpeakTextAsync(articleText)
+                .AsTask()
+                .ContinueWith(_ =>
+                {
+                    speechControlsPopupService.BeginHide();
+                    browser.Opacity = 1d;
+                    speechControls.StopButtonPressed -= stopButtonHandler;
+                    this.BackKeyPress -= backKeyPressHandler;
+                }, 
+                CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, TaskScheduler.FromCurrentSynchronizationContext());
+
+            //foreach (var voice in Windows.Phone.Speech.Synthesis.InstalledVoices.All)
+            //{
+            //    Debug.WriteLine(voice.DisplayName + ", " +
+            //        voice.Language + ", " +
+            //        voice.Gender + ", " +
+            //        voice.Description);
+            //    using (text2speech = new Windows.Phone.Speech.Synthesis.SpeechSynthesizer())
+            //    {
+            //        text2speech.SetVoice(voice);
+            //        await text2speech.SpeakTextAsync("Hello world! I'm " + voice.DisplayName + ".");
+            //    }
+            //}
         }
 
         #endregion
@@ -557,6 +588,9 @@ namespace weave
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
+            if (PopupService.IsOpen)
+                return;
+
             IsHitTestVisible = false;
             base.OnBackKeyPress(e);
         }

@@ -5,6 +5,8 @@ namespace weave
     internal class MobilizedArticle
     {
         public string Title { get; set; }
+        public string Publication { get; set; }
+        public string Date { get; set; }
         public string Content { get; set; }
 
         public string CreateSpokenRepresentation()
@@ -13,8 +15,9 @@ namespace weave
             var content = Sanitize(Content).Trim();
 
             var fullText = string.Format(
-                "{0}.\r\n\r\n\r\n\r\n{1}",
+                "{0}.\r\n\r\nPublished by {1}.\r\n\r\n{2}",
                 title,
+                Publication,
                 content);
 
             return fullText;
