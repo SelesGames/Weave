@@ -31,11 +31,6 @@ namespace weave.Pages.WebBrowser
 
         public event EventHandler ShowCompleted;
         public event EventHandler HideCompleted;
-
-        event EventHandler<EventArgs<PopupResult<object>>> IPopup<object>.ResultCompleted
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
+        public event EventHandler<EventArgs<PopupResult<object>>> ResultCompleted;
     }
 }

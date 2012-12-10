@@ -15,7 +15,7 @@ namespace weave
         public bool IsHideAppBarOnArticleViewerPageEnabled { get; set; }
         public bool IsSystemTrayVisibleWhenPossible { get; set; }
         public weave.Services.MostViewedHistory.RunHistory RunHistory { get; set; }
-
+        public string SpeakTextVoice { get; set; }
 
 
         #region Settings that tweak the MainPage (aka Article List) view

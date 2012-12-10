@@ -27,6 +27,7 @@ namespace weave
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             markedReadList.SelectedItem = markedReadTimes.GetByDisplayName(permState.ArticleDeletionTimeForMarkedRead);
             unreadList.SelectedItem = unreadTimes.GetByDisplayName(permState.ArticleDeletionTimeForUnread);
+            voicesList.SelectedItem = voices.GetByDisplayName(permState.SpeakTextVoice);
 
             Loaded += OnLoaded;
 
@@ -66,6 +67,7 @@ namespace weave
             Unloaded += OnUnloaded;
             markedReadList.SelectionChanged += OnMarkedReadSelectionChanged;
             unreadList.SelectionChanged += OnUnreadSelectionChanged;
+            voicesList.SelectionChanged += OnVoicesListSelectionChanged;
         }
 
         void OnUnloaded(object sender, RoutedEventArgs e)
@@ -73,12 +75,15 @@ namespace weave
             Unloaded -= OnUnloaded;
             markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
             unreadList.SelectionChanged -= OnUnreadSelectionChanged;
+            voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
         }
 
         #endregion
 
 
 
+
+        #region Event Handlers
 
         void OnMarkedReadSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,6 +102,20 @@ namespace weave
 
             permState.ArticleDeletionTimeForUnread = selected.Display;
         }
+
+        void OnVoicesListSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = e.AddedItems.OfType<SpeakArticleVoice>().FirstOrDefault();
+            if (selected == null)
+                return;
+
+            permState.SpeakTextVoice = selected.DisplayName;
+        }
+
+        #endregion
+
+
+
 
         public void Dispose()
         {

@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -15,7 +16,7 @@
 			<!--Rectangle Fill="{StaticResource PhoneChromeBrush}" /-->
 			<TextBlock Text="Speaking article..." HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="12,18,0,0" />
 			<sg:RadialBusyIndicator x:Name="busyIndicator" HorizontalAlignment="Right" VerticalAlignment="Top" Width="48" Height="48" Margin="0,20,24,0" NumberOfItems="7" IsPlaying="True" />
-			<Button Content="stop" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="148" Margin="{StaticResource PhoneMargin}" Tap="OnStopButtonTapped" />
+			<Button Content="stop" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="148" Margin="{StaticResource PhoneMargin}" Tap="OnStopButtonTapped" toolkit:TiltEffect.IsTiltEnabled="True" />
 		</Grid>
 	</Grid>
 </UserControl>

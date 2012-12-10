@@ -34,6 +34,7 @@ namespace weave
         SelesGames.PopupService<Unit> fontSizePopupService;
         FontSizePopup fontSizePopup;
         SocialShareContextMenuControl socialSharePopup;
+        PermanentState permState;
 
         public ReadabilityPage()
         {
@@ -50,7 +51,7 @@ namespace weave
             fontSizePopup = ServiceResolver.Get<FontSizePopup>();
             socialSharePopup = ServiceResolver.Get<SocialShareContextMenuControl>("accent");
 
-            var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             var isAppBarMinimized = permState.IsHideAppBarOnArticleViewerPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
@@ -524,9 +525,9 @@ namespace weave
             var articleText = viewModel.CurrentMobilizedArticle.CreateSpokenRepresentation();
 
             var text2speech = new Windows.Phone.Speech.Synthesis.SpeechSynthesizer();
-            var voice = Windows.Phone.Speech.Synthesis.InstalledVoices.All.GetCultureFilteredVoices("Katja").FirstOrDefault();
-            if (voice != null)
-                text2speech.SetVoice(voice);
+            var voice = new SpeakArticleVoices().GetByDisplayName(permState.SpeakTextVoice);
+            if (voice != null && voice.Voice != null)
+                text2speech.SetVoice(voice.Voice);
 
             var speechControls = new weave.Pages.WebBrowser.ArticleSpeechControls();
             var speechControlsPopupService = new SelesGames.PopupService<object>(speechControls);

@@ -29,7 +29,7 @@ namespace SelesGames.Phone
             {
                 var hintedVoice = filtered.FirstOrDefault(o => o.DisplayName.IndexOf(nameHint, StringComparison.OrdinalIgnoreCase) > -1);
                 if (hintedVoice != null)
-                    filtered = new[] { hintedVoice };
+                    filtered = new[] { hintedVoice }.Union(filtered);
             }
 
             return filtered;
