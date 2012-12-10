@@ -15,12 +15,14 @@ namespace weave
         PermanentState permState;
         ArticleDeleteTimesForMarkedRead markedReadTimes;
         ArticleDeleteTimesForUnread unreadTimes;
+        SpeakArticleVoices voices;
 
         public AppSettingsPage()
         {
             InitializeComponent();
             markedReadTimes = Resources["MarkedReadTimes"] as ArticleDeleteTimesForMarkedRead;
             unreadTimes = Resources["UnreadTimes"] as ArticleDeleteTimesForUnread;
+            voices = Resources["Voices"] as SpeakArticleVoices;
 
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             markedReadList.SelectedItem = markedReadTimes.GetByDisplayName(permState.ArticleDeletionTimeForMarkedRead);

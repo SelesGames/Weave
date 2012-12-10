@@ -1,6 +1,7 @@
 ﻿using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Weave.Customizability;
 
@@ -14,8 +15,20 @@ namespace weave
 
         public SpeakArticleVoices()
         {
-            var voices = Windows.Phone.Speech.Synthesis.InstalledVoices.All.GetCultureFilteredVoices().Select(SpeakArticleVoice.Create);
-            this.AddRange(voices);
+            if (DesignerProperties.IsInDesignTool)
+            {
+                this.AddRange(new[] 
+                { 
+                    new SpeakArticleVoice { DisplayName = "Mock Voice 1" },
+                    new SpeakArticleVoice { DisplayName = "Mock Voice 2" },
+                    new SpeakArticleVoice { DisplayName = "Mock Voice 3" },
+                });
+            }
+            else
+            {
+                var voices = Windows.Phone.Speech.Synthesis.InstalledVoices.All.GetCultureFilteredVoices().Select(SpeakArticleVoice.Create);
+                this.AddRange(voices);
+            }
 
             SelectedVoice = defaultVoice = this.FirstOrDefault();
         }
