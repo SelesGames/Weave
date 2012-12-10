@@ -29,8 +29,6 @@ namespace weave
             unreadList.SelectedItem = unreadTimes.GetByDisplayName(permState.ArticleDeletionTimeForUnread);
             voicesList.SelectedItem = voices.GetByDisplayName(permState.SpeakTextVoice);
 
-            Loaded += OnLoaded;
-
             articleListToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleListPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });
             articleViewerToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleViewerPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });
             systemTrayToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsSystemTrayVisibleWhenPossible") { Source = permState, Mode = BindingMode.TwoWay });
@@ -55,30 +53,11 @@ namespace weave
             
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumTransition());
             SetValue(RadSlideContinuumAnimation.ApplicationHeaderElementProperty, this.PageTitle);
-        }
 
-
-
-
-        #region hook up events on loaded and unhook on unloaded
-
-        void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            Unloaded += OnUnloaded;
             markedReadList.SelectionChanged += OnMarkedReadSelectionChanged;
             unreadList.SelectionChanged += OnUnreadSelectionChanged;
             voicesList.SelectionChanged += OnVoicesListSelectionChanged;
         }
-
-        void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            Unloaded -= OnUnloaded;
-            markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
-            unreadList.SelectionChanged -= OnUnreadSelectionChanged;
-            voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
-        }
-
-        #endregion
 
 
 
@@ -119,7 +98,9 @@ namespace weave
 
         public void Dispose()
         {
-            Loaded -= OnLoaded;
+            markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
+            unreadList.SelectionChanged -= OnUnreadSelectionChanged;
+            voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
         }
     }
 }

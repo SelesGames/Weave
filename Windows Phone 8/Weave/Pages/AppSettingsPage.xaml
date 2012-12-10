@@ -24,7 +24,7 @@
 			<TextBlock Text="{Binding DisplayName}"/>
 		</DataTemplate>
 		<DataTemplate x:Key="ListPickerSpeechFullModeTemplate">
-			<TextBlock Text="{Binding DisplayName}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="{StaticResource PhoneFontSizeLarge}" />
+			<TextBlock Text="{Binding DisplayName}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="{StaticResource PhoneFontSizeLarge}" Margin="0,12" />
 		</DataTemplate>
 	</UserControl.Resources>
 
@@ -80,7 +80,7 @@
 				
 				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,0,12,12"/>
 				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12"/>
-				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" ItemsSource="{StaticResource Voices}" Margin="12,12,12,36" ItemTemplate="{StaticResource ListPickerSpeechItemTemplate}" ExpansionMode="ExpansionAllowed" FullModeHeader="Select a preferred voice for the 'Speak Article' function" FullModeItemTemplate="{StaticResource ListPickerSpeechFullModeTemplate}" />
+				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" ItemsSource="{StaticResource Voices}" Margin="12,12,12,36" ItemTemplate="{StaticResource ListPickerSpeechItemTemplate}" ExpansionMode="ExpansionAllowed" FullModeHeader="'Speak Article' preferred voice" FullModeItemTemplate="{StaticResource ListPickerSpeechFullModeTemplate}" />
 			</StackPanel>      
 		</Grid>
 		</ScrollViewer>

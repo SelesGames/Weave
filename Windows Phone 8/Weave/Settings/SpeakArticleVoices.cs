@@ -28,8 +28,8 @@ namespace weave
             {
                 var voices = Windows.Phone.Speech.Synthesis.InstalledVoices.All
                     .GetCultureFilteredVoices(nameHint: "Mark")
-                    .Select(SpeakArticleVoice.Create)
-                    .Take(4);
+                    .Select(SpeakArticleVoice.Create);
+
                 this.AddRange(voices);
             }
 
