@@ -417,7 +417,7 @@ namespace weave
                     var newTileData = liveTileVM.CreateTileData();
 
                     // Create the tile and pin it to Start. This will cause a navigation to Start and a deactivation of our application.
-                    ShellTile.Create(currentSource, newTileData);
+                    ShellTile.Create(currentSource, newTileData, true);
                 }
             }
             catch (Exception ex)

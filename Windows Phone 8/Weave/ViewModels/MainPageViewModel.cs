@@ -347,7 +347,7 @@ namespace weave
 
             return new CycleTileViewModel
             {
-                AppName = AppSettings.Instance.AppName.ToUpperInvariant(),
+                AppName = AppSettings.Instance.AppName.ToUpperInvariant() + " | " + Header.ToTitleCase(),
                 NewCount = 0,
                 ImageIsoStorageUris = imageUris,
             };
