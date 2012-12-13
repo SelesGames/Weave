@@ -84,9 +84,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers\StandardTileCategoryNegotiator.cs" />
     <Compile Include="Helpers\CycleTileCategoryNegotiator.cs" />
-    <Compile Include="Helpers\StandardTileFeedNegotiator.cs" />
+    <Compile Include="Helpers\CycleTileHelper.cs" />
     <Compile Include="Library\ImageHelper.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
     <Compile Include="Library\TaskExtensions.cs" />
@@ -96,32 +95,8 @@
     <Compile Include="Library\Trace.cs" />
     <Compile Include="ViewModels\CycleTileViewModel.cs" />
     <Compile Include="ViewModels\ITileViewModel.cs" />
-    <Compile Include="ViewModels\StandardTileViewModel.cs" />
-    <Compile Include="Views\CycleTileMedium.xaml.cs">
-      <DependentUpon>CycleTileMedium.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LiveTileBack.xaml.cs">
-      <DependentUpon>LiveTileBack.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\LiveTileFront.xaml.cs">
-      <DependentUpon>LiveTileFront.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LiveTileUpdatingAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\CycleTileMedium.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\LiveTileBack.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\LiveTileFront.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
@@ -147,9 +122,6 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Views\ApplicationIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

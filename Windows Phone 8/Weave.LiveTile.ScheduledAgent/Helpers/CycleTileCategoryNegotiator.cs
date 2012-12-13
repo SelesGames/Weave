@@ -1,9 +1,7 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using weave;
 using weave.Data;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
@@ -41,67 +39,32 @@ namespace Weave.LiveTile.ScheduledAgent
 
             var news = feeds.AllOrderedNews().ToList();
 
-            var imageUrls = new List<Uri>();
-            var startTime = DateTime.Now;
-
-            foreach (var newsItem in news.Where(o => o.HasImage))
-            {
-                var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imageUrls.Count + 1);
-                if (attempt.Item1)
-                {
-                    imageUrls.Add(attempt.Item2);
-
-                    var elapsed = DateTime.Now - startTime;
-                    if (imageUrls.Count >= 9)// || elapsed > TimeSpan.FromSeconds(15))
-                        break;
-                }
-            }
-
-            if (imageUrls.Count() < 2)
-                return;
+            var imageUrls = await news.CreateImageUrisFromNews(TimeSpan.FromSeconds(15));
 
             Trace.Output("image downloads complete");
 
             ViewModel = new CycleTileViewModel
             {
                 AppName = appName,
-                ImageIsoStorageUris = imageUrls.ToArray(),
+                ImageIsoStorageUris = imageUrls,
                 NewCount = news.Count,
             };
         }
 
-        async Task<Tuple<bool, Uri>> SaveImageAndReturnUri(string imageUrl, int index)
-        {
-            try
-            {
-                var image = await ImageHelper.GetImageAsync(imageUrl);
-                var bmp = (WriteableBitmap)image;
-                if (bmp.PixelHeight > 99 && bmp.PixelWidth > 99)
-                {
-                    var url = bmp.SaveToIsoStorage("photo" + index);
-                    return Tuple.Create(true, url);
-                }
-            }
-            catch { }
-            return Tuple.Create(false, default(Uri));
-        }
-
-        async Task<Tuple<bool, Uri>> SaveImageStreamAndReturnUri(string imageUrl, int index)
-        {
-            try
-            {
-                using (var stream = await ImageHelper.GetImageStreamAsync(imageUrl))
-                {
-                    DebugEx.WriteLine("IMAGE LENGTH: {0}", stream.Length);
-                    if (stream.Length > 4056)
-                    {
-                        var url = await stream.SaveToIsoStorage("photo" + index);
-                        return Tuple.Create(true, url);
-                    }
-                }
-            }
-            catch { }
-            return Tuple.Create(false, default(Uri));
-        }
+        //async Task<Tuple<bool, Uri>> SaveImageAndReturnUri(string imageUrl, int index)
+        //{
+        //    try
+        //    {
+        //        var image = await ImageHelper.GetImageAsync(imageUrl);
+        //        var bmp = (WriteableBitmap)image;
+        //        if (bmp.PixelHeight > 99 && bmp.PixelWidth > 99)
+        //        {
+        //            var url = bmp.SaveToIsoStorage("photo" + index);
+        //            return Tuple.Create(true, url);
+        //        }
+        //    }
+        //    catch { }
+        //    return Tuple.Create(false, default(Uri));
+        //}
     }
 }
