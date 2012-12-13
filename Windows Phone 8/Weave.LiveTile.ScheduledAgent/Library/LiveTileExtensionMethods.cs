@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -40,6 +41,25 @@ namespace Weave.LiveTile.ScheduledAgent
                 using (var stream = file.OpenFile(fullFileName, FileMode.OpenOrCreate))
                 {
                     bmp.SaveJpeg(stream, (int)newWidth, (int)newHeight, 0, 100);
+                }
+            }
+
+            var url = new Uri("isostore:" + fullFileName, UriKind.Absolute);
+            return url;
+        }
+
+        public static async Task<Uri> SaveToIsoStorage(this Stream readStream, string tempImageFileName)
+        {
+            var fullFileName = string.Format("{0}/{1}", SHARED_SHELL_CONTENT_DIR, tempImageFileName);
+
+            using (var file = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (!file.DirectoryExists(SHARED_SHELL_CONTENT_DIR))
+                    file.CreateDirectory(SHARED_SHELL_CONTENT_DIR);
+
+                using (var stream = file.OpenFile(fullFileName, FileMode.OpenOrCreate))
+                {
+                    await readStream.CopyToAsync(stream);
                 }
             }
 

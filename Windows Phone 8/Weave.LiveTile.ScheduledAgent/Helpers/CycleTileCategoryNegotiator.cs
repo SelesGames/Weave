@@ -46,13 +46,13 @@ namespace Weave.LiveTile.ScheduledAgent
 
             foreach (var newsItem in news.Where(o => o.HasImage))
             {
-                var attempt = await SaveImageAndReturnUri(newsItem.ImageUrl, imageUrls.Count + 1);
+                var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imageUrls.Count + 1);
                 if (attempt.Item1)
                 {
                     imageUrls.Add(attempt.Item2);
 
                     var elapsed = DateTime.Now - startTime;
-                    if (imageUrls.Count >= 9 || elapsed > TimeSpan.FromSeconds(15))
+                    if (imageUrls.Count >= 9)// || elapsed > TimeSpan.FromSeconds(15))
                         break;
                 }
             }
@@ -80,6 +80,24 @@ namespace Weave.LiveTile.ScheduledAgent
                 {
                     var url = bmp.SaveToIsoStorage("photo" + index);
                     return Tuple.Create(true, url);
+                }
+            }
+            catch { }
+            return Tuple.Create(false, default(Uri));
+        }
+
+        async Task<Tuple<bool, Uri>> SaveImageStreamAndReturnUri(string imageUrl, int index)
+        {
+            try
+            {
+                using (var stream = await ImageHelper.GetImageStreamAsync(imageUrl))
+                {
+                    DebugEx.WriteLine("IMAGE LENGTH: {0}", stream.Length);
+                    if (stream.Length > 4056)
+                    {
+                        var url = await stream.SaveToIsoStorage("photo" + index);
+                        return Tuple.Create(true, url);
+                    }
                 }
             }
             catch { }

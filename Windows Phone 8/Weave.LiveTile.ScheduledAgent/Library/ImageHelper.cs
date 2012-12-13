@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,6 +21,21 @@ namespace Weave.LiveTile.ScheduledAgent
                 stream.Close();
             }
             return bitmap;
+        }
+
+        public static Task<Stream> GetImageStreamAsync(string url)
+        {
+            var request = HttpWebRequest.CreateHttp(url);
+            request.AllowReadStreamBuffering = true;
+            return request.GetResponseAsync().ContinueWith(response =>
+            {
+                var httpResponse = (HttpWebResponse)response.Result;
+                if (httpResponse.StatusCode == HttpStatusCode.OK)
+                    return httpResponse.GetResponseStream();
+                else
+                    throw new WebException();
+            }, 
+            TaskContinuationOptions.OnlyOnRanToCompletion);
         }
     }
 }
