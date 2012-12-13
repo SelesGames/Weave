@@ -48,7 +48,7 @@ namespace SelesGames.Phone
                 ScheduledActionService.Add(periodicTask);
 #if LIVETILETEST
                 if (System.Diagnostics.Debugger.IsAttached)
-                    ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(30));
+                    ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(12));
 #endif
             }
             catch (InvalidOperationException exception)
