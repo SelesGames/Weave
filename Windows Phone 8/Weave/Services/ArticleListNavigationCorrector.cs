@@ -29,7 +29,8 @@ namespace weave
 
             try
             {
-                await currentPage.GetLoaded().Take(1).ToTask();
+                if (currentPage != null)
+                    await currentPage.GetLoaded().Take(1).ToTask();
             }
             catch { }
 

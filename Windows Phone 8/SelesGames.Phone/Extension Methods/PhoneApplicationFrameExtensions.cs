@@ -54,5 +54,29 @@ namespace SelesGames.Phone
 
             return tcs.Task;
         }
+
+        public static Task<NavigatingCancelEventArgs> NavigatingAsync(this PhoneApplicationFrame frame)
+        {
+            var tcs = new TaskCompletionSource<NavigatingCancelEventArgs>();
+
+            try
+            {
+                NavigatingCancelEventHandler handler = null;
+                handler = (s, e) =>
+                {
+                    frame.Navigating -= handler;
+                    tcs.TrySetResult(e);
+                };
+
+                frame.Navigating += handler;
+            }
+
+            catch (Exception ex)
+            {
+                tcs.TrySetException(ex);
+            }
+
+            return tcs.Task;
+        }
     }
 }
