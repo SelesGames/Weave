@@ -87,6 +87,7 @@
     <Compile Include="Helpers\StandardTileCategoryNegotiator.cs" />
     <Compile Include="Helpers\CycleTileCategoryNegotiator.cs" />
     <Compile Include="Helpers\StandardTileFeedNegotiator.cs" />
+    <Compile Include="Library\ImageHelper.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
     <Compile Include="Library\TaskExtensions.cs" />
     <Compile Include="Library\ToastHelper.cs" />

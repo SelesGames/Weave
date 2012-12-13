@@ -46,7 +46,7 @@ namespace SelesGames.Phone
             try
             {
                 ScheduledActionService.Add(periodicTask);
-#if LIVETILETEST
+#if DEBUG
                 if (System.Diagnostics.Debugger.IsAttached)
                     ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(12));
 #endif

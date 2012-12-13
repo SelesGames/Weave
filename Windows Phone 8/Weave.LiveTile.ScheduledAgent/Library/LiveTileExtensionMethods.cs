@@ -30,10 +30,16 @@ namespace Weave.LiveTile.ScheduledAgent
                 if (!file.DirectoryExists(SHARED_SHELL_CONTENT_DIR))
                     file.CreateDirectory(SHARED_SHELL_CONTENT_DIR);
 
+                var originalWidth = bmp.PixelWidth;
+                var originalHeight = bmp.PixelHeight;
+
+                var newWidth = 100d;
+                var scale = newWidth / originalWidth;
+                var newHeight = scale * originalHeight;
 
                 using (var stream = file.OpenFile(fullFileName, FileMode.OpenOrCreate))
                 {
-                    bmp.SaveJpeg(stream, 173, 173, 0, 100);
+                    bmp.SaveJpeg(stream, (int)newWidth, (int)newHeight, 0, 100);
                 }
             }
 
