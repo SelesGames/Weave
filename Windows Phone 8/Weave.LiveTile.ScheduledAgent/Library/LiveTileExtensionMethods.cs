@@ -18,6 +18,11 @@ namespace Weave.LiveTile.ScheduledAgent
             bmp.Render(element, null);
             bmp.Invalidate();
 
+            return bmp.SaveToIsoStorage(tempImageFileName);
+        }
+
+        public static Uri SaveToIsoStorage(this WriteableBitmap bmp, string tempImageFileName)
+        {
             var fullFileName = string.Format("{0}/{1}", SHARED_SHELL_CONTENT_DIR, tempImageFileName);
 
             using (var file = IsolatedStorageFile.GetUserStoreForApplication())

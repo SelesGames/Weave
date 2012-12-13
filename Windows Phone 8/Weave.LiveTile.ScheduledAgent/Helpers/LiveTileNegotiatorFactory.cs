@@ -11,7 +11,8 @@ namespace Weave.LiveTile.ScheduledAgent
             var uri = tile.NavigationUri.OriginalString;
 
             if (string.IsNullOrEmpty(uri) || !uri.Contains("?"))
-                return new StandardTileCategoryNegotiator(null, appName, tile);
+                //return new StandardTileCategoryNegotiator(null, appName, tile);
+                return new CycleTileCategoryNegotiator(null, appName, tile);
 
             var query = uri.Split('?')[1];
 
@@ -30,7 +31,8 @@ namespace Weave.LiveTile.ScheduledAgent
                     .Skip(1)
                     .SingleOrDefault();
 
-                return new StandardTileCategoryNegotiator(category, appName, tile);
+                //return new StandardTileCategoryNegotiator(category, appName, tile);
+                return new CycleTileCategoryNegotiator(category, appName, tile);
             }
 
             else
