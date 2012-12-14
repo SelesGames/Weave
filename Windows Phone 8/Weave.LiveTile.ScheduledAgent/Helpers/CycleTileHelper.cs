@@ -16,12 +16,18 @@ namespace Weave.LiveTile.ScheduledAgent
             foreach (var newsItem in news.Where(o => o.HasImage))
             {
                 var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imageUrls.Count + 1);
+                
+                // after we download the image and saved it to isoStorage, check to see if we've gone over the total downloadTimeLimit
+                var elapsed = DateTime.Now - startTime;
+                if (elapsed > downloadTimeLimit)
+                    break;
+
                 if (attempt.Item1)
                 {
                     imageUrls.Add(attempt.Item2);
 
-                    var elapsed = DateTime.Now - startTime;
-                    if (imageUrls.Count >= 9 || elapsed > downloadTimeLimit)
+                    // if we have 9 images, we can stop
+                    if (imageUrls.Count >= 9)
                         break;
                 }
             }
@@ -39,7 +45,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 using (var stream = await ImageHelper.GetImageStreamAsync(imageUrl))
                 {
                     DebugEx.WriteLine("IMAGE LENGTH: {0}", stream.Length);
-                    if (stream.Length > 4056)
+                    if (stream.Length > 4096)
                     {
                         var url = await stream.SaveToIsoStorage("photo" + index);
                         return Tuple.Create(true, url);
