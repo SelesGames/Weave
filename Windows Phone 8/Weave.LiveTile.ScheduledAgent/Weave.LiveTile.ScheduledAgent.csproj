@@ -85,6 +85,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helpers\CycleTileCategoryNegotiator.cs" />
+    <Compile Include="Helpers\CycleTileFeedNegotiator.cs" />
     <Compile Include="Helpers\CycleTileHelper.cs" />
     <Compile Include="Library\ImageHelper.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />

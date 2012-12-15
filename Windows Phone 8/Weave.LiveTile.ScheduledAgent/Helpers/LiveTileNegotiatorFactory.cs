@@ -19,7 +19,7 @@ namespace Weave.LiveTile.ScheduledAgent
             if (query.Contains("feedId"))
             {
                 var feedId = query.Split(new string[] { "feedId=" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                return new StandardTileFeedNegotiator(Guid.Parse(feedId), appName, tile);
+                return new CycleTileFeedNegotiator(Guid.Parse(feedId), appName, tile);
             }
 
             else if (query.Contains("mode"))

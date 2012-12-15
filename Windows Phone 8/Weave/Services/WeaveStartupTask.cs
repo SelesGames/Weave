@@ -296,11 +296,11 @@ namespace weave
 
 
 
-        async Task OnLaunching()
+        void OnLaunching()
         {
             settings.StartupMode = StartupMode.Launch;
 
-            await RecoverPermanentStateAsync();
+            Task.Run(() => RecoverPermanentStateAsync().Wait()).Wait();
 
             permanentState.PreviousLoginTime = permanentState.CurrentLoginTime;
             permanentState.CurrentLoginTime = DateTime.UtcNow;
