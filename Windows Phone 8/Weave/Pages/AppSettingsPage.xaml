@@ -44,11 +44,10 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<Grid.RowDefinitions>
-        		<RowDefinition Height="852"/>
+        		<RowDefinition Height="960"/>
 				<RowDefinition Height="*"/>     	
 			</Grid.RowDefinitions>
-        	<StackPanel VerticalAlignment="Bottom">
-        		
+        	<StackPanel VerticalAlignment="Bottom" toolkit:TiltEffect.IsTiltEnabled="True">
 				<toolkit:ToggleSwitch x:Name="classicArticleListToggle" Header="Enable classic article list format"/>
 
         		<toolkit:ToggleSwitch x:Name="articleListToggle">
@@ -80,7 +79,8 @@
 				
 				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,0,12,12"/>
 				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12"/>
-				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" ItemsSource="{StaticResource Voices}" Margin="12,12,12,36" ItemTemplate="{StaticResource ListPickerSpeechItemTemplate}" ExpansionMode="ExpansionAllowed" FullModeHeader="'Speak Article' preferred voice" FullModeItemTemplate="{StaticResource ListPickerSpeechFullModeTemplate}" />
+				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" ItemsSource="{StaticResource Voices}" Margin="12" ItemTemplate="{StaticResource ListPickerSpeechItemTemplate}" ExpansionMode="ExpansionAllowed" FullModeHeader="'Speak Article' preferred voice" FullModeItemTemplate="{StaticResource ListPickerSpeechFullModeTemplate}" />
+        		<Button Content="enable live lock screen" Margin="0,24,0,36" />
 			</StackPanel>      
 		</Grid>
 		</ScrollViewer>
