@@ -1,5 +1,7 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
+using System.Linq;
+using Windows.Phone.System.UserProfile;
 
 namespace Weave.LiveTile.ScheduledAgent.ViewModels
 {
@@ -19,6 +21,14 @@ namespace Weave.LiveTile.ScheduledAgent.ViewModels
                 Count = NewCount,
                 SmallBackgroundImage = SmallBackgroundImageUri,
             };
+        }
+
+        public void UpdateLockScreen()
+        {
+            if (ImageIsoStorageUris != null && ImageIsoStorageUris.Any() && LockScreenManager.IsProvidedByCurrentApplication)
+            {
+                LockScreen.SetImageUri(ImageIsoStorageUris.First());
+            }
         }
     }
 }

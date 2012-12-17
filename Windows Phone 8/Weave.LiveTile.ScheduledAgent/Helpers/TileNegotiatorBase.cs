@@ -53,5 +53,13 @@ namespace Weave.LiveTile.ScheduledAgent
             var newTileData = ViewModel.CreateTileData();
             tile.Update(newTileData);
         }
+
+        public void UpdateLockScreen()
+        {
+            if (tile == null) return;
+            if (ViewModel == null) return;
+
+            ViewModel.UpdateLockScreen();
+        }
     }
 }

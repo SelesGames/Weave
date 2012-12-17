@@ -10,13 +10,11 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
-using Weave.LiveTile.ScheduledAgent;
 
 
 namespace weave
@@ -131,7 +129,6 @@ namespace weave
                  new Binding("IsLocked") { Source = orientationLockService, Mode = BindingMode.TwoWay });
             bindingAdapter.DisposeWith(pageLevelDisposables);
         }
-
 
         #endregion
 

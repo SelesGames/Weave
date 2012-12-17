@@ -6,7 +6,7 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         public static void Output(string message)
         {
-            //ToastHelper.ShowToast("Weave", string.Format("{0} {1}", message, OutputMemory()), null);
+            ToastHelper.ShowToast("Weave", string.Format("{0} {1}", message, OutputMemory()), null);
         }
 
         static long mb = 1024 * 1024;

@@ -6,5 +6,6 @@ namespace Weave.LiveTile.ScheduledAgent.ViewModels
     {
         string AppName { get; set; }
         ShellTileData CreateTileData();
+        void UpdateLockScreen();
     }
 }

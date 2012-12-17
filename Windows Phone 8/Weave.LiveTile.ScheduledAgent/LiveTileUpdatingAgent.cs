@@ -97,8 +97,15 @@ namespace Weave.LiveTile.ScheduledAgent
 
         async void DoUpdate(TileNegotiatorBase ltn, TaskCompletionSource<object> motherfucker)
         {
-            await ltn.UpdateTile();            
+            await ltn.UpdateTile();
             Trace.Output("tile updated");
+
+            try
+            {
+                ltn.UpdateLockScreen();
+                Trace.Output("lock screen updated");
+            }
+            catch { }
             motherfucker.SetResult(new object());
         }
     }

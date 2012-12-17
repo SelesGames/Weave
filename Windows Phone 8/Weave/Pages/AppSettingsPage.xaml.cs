@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Windows.Phone.System.UserProfile;
 
 namespace weave
 {
@@ -57,6 +58,8 @@ namespace weave
             markedReadList.SelectionChanged += OnMarkedReadSelectionChanged;
             unreadList.SelectionChanged += OnUnreadSelectionChanged;
             voicesList.SelectionChanged += OnVoicesListSelectionChanged;
+            enableLockScreenButton.Tap += OnRequestLiveLockScreenButtonTapped;
+            Loaded += OnPageLoaded;
         }
 
 
@@ -91,6 +94,29 @@ namespace weave
             permState.SpeakTextVoice = selected.DisplayName;
         }
 
+        async void OnRequestLiveLockScreenButtonTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!LockScreenManager.IsProvidedByCurrentApplication)
+            {
+                await LockScreenManager.RequestAccessAsync();
+            }
+
+            if (LockScreenManager.IsProvidedByCurrentApplication)
+            {
+                MessageBox.Show(
+                    "Congratulations - the next time your Live Tile is updated, your Lock Screen will be updated too!",
+                    "Lock Screen updating enabled",
+                    MessageBoxButton.OK);
+                LockScreen.SetImageUri(
+                    new Uri("ms-appx:///LockScreenStub.jpg", UriKind.RelativeOrAbsolute));
+            }
+        }
+
+        void OnPageLoaded(object sender, RoutedEventArgs e)
+        {
+            enableLockScreenButton.IsEnabled = !LockScreenManager.IsProvidedByCurrentApplication;
+        }
+
         #endregion
 
 
@@ -101,6 +127,8 @@ namespace weave
             markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
             unreadList.SelectionChanged -= OnUnreadSelectionChanged;
             voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
+            enableLockScreenButton.Tap -= OnRequestLiveLockScreenButtonTapped;
+            Loaded -= OnPageLoaded;
         }
     }
 }
