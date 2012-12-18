@@ -98,7 +98,6 @@
 
 
   <Category Type="Politics">
-    <Feed Name="Breitbart">http://feeds.feedburner.com/BreitbartFeed</Feed>
     <Feed Name="CNN">http://rss.cnn.com/rss/cnn_allpolitics.rss</Feed>
     <Feed Name="Slate">http://www.slate.com/articles/news_and_politics.fulltext.all.20.rss</Feed>
     <Feed Name="The Blaze">http://www.theblaze.com/stories/feed/</Feed>
