@@ -11,6 +11,7 @@ namespace Weave.LiveTile.ScheduledAgent.ViewModels
         public Uri[] ImageIsoStorageUris { get; set; }
         public int? NewCount { get; set; }
         public Uri SmallBackgroundImageUri { get; set; }
+        public Uri RecommendedLockScreenImageUri { get; set; }
 
         public ShellTileData CreateTileData()
         {
@@ -25,10 +26,9 @@ namespace Weave.LiveTile.ScheduledAgent.ViewModels
 
         public void UpdateLockScreen()
         {
-            if (ImageIsoStorageUris != null && ImageIsoStorageUris.Any() && LockScreenManager.IsProvidedByCurrentApplication)
+            if (RecommendedLockScreenImageUri != null && LockScreenManager.IsProvidedByCurrentApplication)
             {
-                var firstUri = ImageIsoStorageUris.First();
-                LockScreen.SetImageUri(firstUri);
+                LockScreen.SetImageUri(RecommendedLockScreenImageUri);
             }
         }
     }
