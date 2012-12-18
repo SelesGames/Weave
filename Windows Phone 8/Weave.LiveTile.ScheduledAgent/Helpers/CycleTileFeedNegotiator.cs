@@ -40,6 +40,10 @@ namespace Weave.LiveTile.ScheduledAgent
             var news = feed.News.OrderByDescending(o => o.PublishDateTime).ToList();
 
             var imageUrls = await news.CreateImageUrisFromNews(TimeSpan.FromSeconds(15));
+            Uri preferredLockScreen = null;
+            var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
+            if (attempt.Item1)
+                preferredLockScreen = attempt.Item2;
 
             Trace.Output("image downloads complete");
 

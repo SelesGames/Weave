@@ -102,7 +102,10 @@ namespace Weave.LiveTile.ScheduledAgent
                 await ltn.UpdateTile();
                 Trace.Output("tile updated");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
             try
             {
                 ltn.UpdateLockScreen();

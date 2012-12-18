@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Phone.System.UserProfile;
+using Windows.Storage;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
@@ -10,25 +14,85 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         static string FILE_PATH_SCHEMA = "ms-appdata:///Local/LockScreen/";
         static string TILES_FOLDER = "LockScreen";
+        //static string SHARED_SHELL_CONTENT_DIR = "/Shared/ShellContent/";
+        string isoStorageFullFileName;
+        string lockScreenFileName;
+        MemoryStream ms;
+        Uri fullAppDataFileUri;
 
-        public async Task<Uri> SaveToIsoStorage(Stream readStream)
+        public async Task<Tuple<bool, Uri>> TryGetLocalStorageUri(Uri isoStorageFullFileName)
         {
-            var fileName = Guid.NewGuid().ToString();
+            this.isoStorageFullFileName = isoStorageFullFileName.OriginalString;
+            ms = new MemoryStream();
 
+            try
+            {
+                var canRead = await ReadFromIsoStorage();
+                if (!canRead)
+                    return Tuple.Create(false, default(Uri));
+
+                DetermineFileName();
+                await SaveToLocalStorage();
+
+                var path = string.Format("{0}{1}", FILE_PATH_SCHEMA, lockScreenFileName);
+                fullAppDataFileUri = new Uri(path, UriKind.Absolute);
+
+                return Tuple.Create(true, fullAppDataFileUri);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                return Tuple.Create(false, default(Uri));
+            }
+        }
+
+        async Task SaveToLocalStorage()
+        {
             StorageFolder tilesFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(TILES_FOLDER, CreationCollisionOption.OpenIfExists);
-            var file = await tilesFolder.CreateFileAsync(tempImageFileName, CreationCollisionOption.ReplaceExisting);
+            var file = await tilesFolder.CreateFileAsync(lockScreenFileName, CreationCollisionOption.ReplaceExisting);
 
             using (StorageStreamTransaction transaction = await file.OpenTransactedWriteAsync())
             using (var stream = transaction.Stream.AsStreamForWrite())
             {
-                await readStream.CopyToAsync(stream);
+                await ms.CopyToAsync(stream);
                 await transaction.CommitAsync();
             }
-
-            var path = string.Format("{0}{1}", FILE_PATH_SCHEMA, tempImageFileName);
-
-            var url = new Uri(path, UriKind.Absolute);
-            return url;
         }
+
+
+
+
+        #region private helper functions
+
+        public async Task<bool> ReadFromIsoStorage()
+        {
+            var isoFileName = isoStorageFullFileName.Replace("isostore:", "");
+
+            using (var file = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (!file.FileExists(isoFileName))
+                    return false;
+
+                using (var stream = file.OpenFile(isoFileName, FileMode.Open))
+                {
+                    await stream.CopyToAsync(ms);
+                    ms.Position = 0;
+                    return true;
+                }
+            }
+        }
+
+        void DetermineFileName()
+        {
+            var currentImage = LockScreen.GetImageUri();
+
+            if (currentImage.ToString().EndsWith("_A.jpg"))
+                lockScreenFileName = "LiveLockBackground_B.jpg";
+
+            else
+                lockScreenFileName = "LiveLockBackground_A.jpg";
+        }
+
+        #endregion
     }
 }

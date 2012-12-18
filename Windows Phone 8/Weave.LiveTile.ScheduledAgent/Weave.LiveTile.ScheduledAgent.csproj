@@ -87,6 +87,7 @@
     <Compile Include="Helpers\CycleTileCategoryNegotiator.cs" />
     <Compile Include="Helpers\CycleTileFeedNegotiator.cs" />
     <Compile Include="Helpers\CycleTileHelper.cs" />
+    <Compile Include="Helpers\LockScreenSavingClient.cs" />
     <Compile Include="Library\ImageHelper.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
     <Compile Include="Library\TaskExtensions.cs" />
