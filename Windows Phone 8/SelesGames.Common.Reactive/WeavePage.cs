@@ -70,7 +70,7 @@ namespace weave
                             try
                             {
                                 //Observable.Start(() =>
-                                DispatcherScheduler.Instance.Schedule(() =>
+                                DispatcherScheduler.Current.Schedule(() =>
                                 {
                                     try
                                     {

@@ -38,7 +38,7 @@ namespace weave
     public class ImageCache // : IDisposable
     {
         object syncHandle = new object();
-        HttpWebRequestQueue requestQueue = new HttpWebRequestQueue(4, DispatcherScheduler.Instance, Schedulers.ImageDownloaderScheduler);
+        HttpWebRequestQueue requestQueue = new HttpWebRequestQueue(4, DispatcherScheduler.Current, Schedulers.ImageDownloaderScheduler);
 
         Queue<KeyValuePair<string, BitmapImageWithDisposeHandle>> queueCache;
         int queueLimit;
