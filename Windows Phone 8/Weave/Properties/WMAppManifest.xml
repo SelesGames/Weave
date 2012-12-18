@@ -10,7 +10,7 @@
       <Capability Name="ID_CAP_IDENTITY_USER" />
       <Capability Name="ID_CAP_LOCATION" />
       <Capability Name="ID_CAP_PHONEDIALER" />
-      <Capability Name="ID_CAP_SPEECH_RECOGNITION"/>
+      <Capability Name="ID_CAP_SPEECH_RECOGNITION" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="Pages/DummyPage.xaml" />
@@ -21,14 +21,26 @@
     <Tokens>
       <PrimaryToken TokenID="weaveToken" TaskName="_default">
         <TemplateCycle>
-          <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\CycleTileSmall.png</SmallImageURI>
           <Title>Weave</Title>
+          <Photo01ImageURI IsRelative="true" IsResource="false">Assets\Tiles\Cycle1.png</Photo01ImageURI>
+          <Photo02ImageURI IsRelative="true" IsResource="false">Assets\Tiles\Cycle2.png</Photo02ImageURI>
+          <Photo03ImageURI IsRelative="true" IsResource="false"/>
+          <Photo04ImageURI IsRelative="true" IsResource="false"/>
+          <Photo05ImageURI IsRelative="true" IsResource="false"/>
+          <Photo06ImageURI IsRelative="true" IsResource="false"/>
+          <Photo07ImageURI IsRelative="true" IsResource="false"/>
+          <Photo08ImageURI IsRelative="true" IsResource="false"/>
+          <Photo09ImageURI IsRelative="true" IsResource="false"/>
           <Count>0</Count>
           <HasLarge>True</HasLarge>
-          <DeviceLockImageURI IsRelative="true" IsResource="false"></DeviceLockImageURI>
+          <DeviceLockImageURI IsRelative="true" IsResource="false">Assets\Tiles\lock_screen_placeholder.jpg</DeviceLockImageURI>
         </TemplateCycle>
       </PrimaryToken>
     </Tokens>
+    <Extensions>
+      <Extension ExtensionName="LockScreen_Background" ConsumerID="{111DFF24-AA15-4A96-8006-2BFF8122084F}" TaskID="_default" />
+    </Extensions>
     <ScreenResolutions>
       <ScreenResolution Name="ID_RESOLUTION_WVGA" />
       <ScreenResolution Name="ID_RESOLUTION_WXGA" />

@@ -27,7 +27,8 @@ namespace Weave.LiveTile.ScheduledAgent.ViewModels
         {
             if (ImageIsoStorageUris != null && ImageIsoStorageUris.Any() && LockScreenManager.IsProvidedByCurrentApplication)
             {
-                LockScreen.SetImageUri(ImageIsoStorageUris.First());
+                var firstUri = ImageIsoStorageUris.First();
+                LockScreen.SetImageUri(firstUri);
             }
         }
     }

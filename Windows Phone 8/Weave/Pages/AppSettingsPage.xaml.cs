@@ -96,19 +96,25 @@ namespace weave
 
         async void OnRequestLiveLockScreenButtonTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            if (!LockScreenManager.IsProvidedByCurrentApplication)
+            try
             {
-                await LockScreenManager.RequestAccessAsync();
-            }
+                if (!LockScreenManager.IsProvidedByCurrentApplication)
+                {
+                    var result = await LockScreenManager.RequestAccessAsync();
+                    if (result == LockScreenRequestResult.Denied)
+                        return;
 
-            if (LockScreenManager.IsProvidedByCurrentApplication)
+                    MessageBox.Show(
+                        "Congratulations - the next time your Live Tile is updated, your Lock Screen will be updated too!",
+                        "Lock Screen updating enabled",
+                        MessageBoxButton.OK);
+                    LockScreen.SetImageUri(
+                        new Uri("ms-appx:///Assets/Tiles/lock_screen_placeholder.jpg", UriKind.RelativeOrAbsolute));
+                }
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Congratulations - the next time your Live Tile is updated, your Lock Screen will be updated too!",
-                    "Lock Screen updating enabled",
-                    MessageBoxButton.OK);
-                LockScreen.SetImageUri(
-                    new Uri("ms-appx:///LockScreenStub.jpg", UriKind.RelativeOrAbsolute));
+                DebugEx.WriteLine(ex);
             }
         }
 

@@ -105,7 +105,10 @@ namespace Weave.LiveTile.ScheduledAgent
                 ltn.UpdateLockScreen();
                 Trace.Output("lock screen updated");
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
             motherfucker.SetResult(new object());
         }
     }
