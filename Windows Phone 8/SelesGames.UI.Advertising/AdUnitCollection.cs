@@ -46,7 +46,10 @@ namespace SelesGames.UI.Advertising
                 var adUnits = await client.GetAdUnitsAsync(CancellationToken.None);
                 this.adUnits.AddRange(adUnits);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
         }
 
         internal static AdUnitCollection Current { get; private set; }
