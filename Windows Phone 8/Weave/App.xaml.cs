@@ -32,15 +32,15 @@ namespace weave
             var settings = new AppSettings
             {
                 AppName = "Weave",
-                VersionNumber = "4.0",
-                IsTrial = new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
+                VersionNumber = "8.0",
+                IsTrial = false,//new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
                 CanSelectInitialCategories = true,
                 AssemblyName = "weave",
                 LogExceptions = true,
 
                 #region Ad Units
 
-                IsAddSupportedApp = false,
+                IsAddSupportedApp = true,
                 AdApplicationId = "7e2d7892-037b-422b-bf91-7931d602864b",
                 AdUnitsUrl = "http://weavestorage.blob.core.windows.net/settings/adunits?xsf=" + r,
 
