@@ -28,7 +28,6 @@ namespace weave
         Kernel kernel;
         Weave4DataAccessLayer dataAccessLayer;
         bool hasBeenInitialized = false;
-        string initialNavigationTarget;
 
         public WeaveStartupTask(AppSettings settings)
         {
@@ -63,63 +62,25 @@ namespace weave
                 return;
 
             frame = new CustomFrame();
-            frame.HoldNavigationUntilExitTransitionIsFinished = false;
-
             GlobalNavigationService.CurrentFrame = frame;
 
             Observable
                 .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
                 .Take(1)
-                .Subscribe(OnInitialNavigated);
+                .Subscribe(_ => settings.CurrentApplication.RootVisual = frame);
+
+            Observable
+               .FromEventPattern<NavigatingCancelEventArgs>(frame, "Navigating")
+               .Take(1)
+               .Subscribe(OnInitialNavigating);
 
             new ArticleListNavigationCorrector(frame);
-            frame.Navigating += OnFrameNavigating;
-            frame.Navigated += OnFrameNavigated;
+            frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
+            frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
             frame.NavigationFailed += RootFrame_NavigationFailed;
-            frame.NavigationStopped += OnNavigationStopped;
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
-        }
-
-        void OnNavigationStopped(object sender, NavigationEventArgs e)
-        {
-            Debug.WriteLine(e);
-        }
-
-        void OnFrameNavigating(object sender, NavigatingCancelEventArgs e)
-        {
-            frame.IsHitTestVisible = false;
-        }
-
-        bool wasRelaunched = false;
-
-        void OnFrameNavigated(object sender, NavigationEventArgs e)
-        {
-            frame.IsHitTestVisible = true;
-
-            // cancel navigation if this is a Reset type launch
-            if (e.NavigationMode == NavigationMode.Reset)
-            {
-                // have to set 'HoldNavigationUntilExitTransitionIsFinished' back to false in the case where you want a fresh launch experience
-                frame.HoldNavigationUntilExitTransitionIsFinished = false;
-                wasRelaunched = true;
-                frame.Navigated += ClearBackStackAfterReset;
-            }
-        }
-
-        void ClearBackStackAfterReset(object sender, NavigationEventArgs e)
-        {
-            // Unregister the event so it doesn't get called again
-            frame.Navigated -= ClearBackStackAfterReset;
-
-            // Only clear the stack for 'new' (forward) and 'refresh' navigations
-            //if (e.NavigationMode != NavigationMode.New)
-            //    return;
-
-            // For UI consistency, clear the entire page stack
-            while (frame.RemoveBackEntry() != null) ;
-            OnInitialNavigated(EventPattern.Create(sender, e));
         }
 
         void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -131,43 +92,44 @@ namespace weave
             }
         }
 
-        async void OnInitialNavigated(EventPattern<NavigationEventArgs> args)
+        async void OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
-            settings.CurrentApplication.RootVisual = frame;
             await RecoverPermanentStateAsync();
+
             new SystemTrayNavigationSetter(frame, permanentState);
 
-            if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
+            if (permanentState.IsFirstTime)
             {
                 frame.IsLoading = false;
                 dataAccessLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
                 dataAccessLayer.IsFirstTime = true;
-                GlobalNavigationService.ToWelcomePage();
-                await frame.NavigatedAsync();
-                while (frame.RemoveBackEntry() != null) ;
                 return;
             }
 
             frame.IsHitTestVisible = false;
-            int backStackRemovalCount = 0;
-
 
             var originalTargetUri = args.EventArgs.Uri;
-            if (originalTargetUri.OriginalString == "/Pages/DummyPage.xaml" || originalTargetUri.OriginalString == "/weave;component/Pages/DummyPage.xaml")
+
+            bool shouldReroutNavigation = args.EventArgs.IsCancelable;
+            int backStackRemovalCount = 0;
+
+            if (shouldReroutNavigation)
             {
                 backStackRemovalCount = 1;
-                originalTargetUri = new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative);
+                args.EventArgs.Cancel = true;
+
+                await frame.NavigationStoppedAsync();
+
+                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
             }
-
-
-            // if the initial navigation is Back then it must have been tombstoned
-            if (args.EventArgs.NavigationMode == NavigationMode.Back)
+            else
             {
                 backStackRemovalCount = 2;
-                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
                 await frame.NavigatedAsync();
+                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
             }
 
+            await frame.NavigatedAsync();
 
             frame.IsLoading = true;
 
@@ -201,20 +163,15 @@ namespace weave
                 return;
             }
 
-            var nextNav = frame.NavigatedAsync();
             if (areThereTooManyFeeds)
             {
                 frame.Navigate(new Uri("/Weave.UI.SettingsPages;component/Views/ManageSourcesPage.xaml", UriKind.Relative));
             }
             else
             {
-                //if (wasRelaunched)
-                //    frame.Navigate(originalTargetUri);
                 frame.Navigate(originalTargetUri);
             }
-            await nextNav;// frame.NavigatedAsync();
-
-            frame.HoldNavigationUntilExitTransitionIsFinished = true;
+            await frame.NavigatedAsync();
 
             var page = frame.Content as PhoneApplicationPage;
             var pageLayoutComplete = page.GetLayoutUpdated().Take(1).ToTask();
@@ -225,6 +182,7 @@ namespace weave
             await pageLayoutComplete;
 
             frame.IsLoading = false;
+
             frame.IsHitTestVisible = true;
         }
 
@@ -307,6 +265,15 @@ namespace weave
             settings.LastLoginTime = permanentState.PreviousLoginTime;
             permanentState.RunHistory.CreateNewLog();
             FinishInitialization();
+
+            if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
+            {
+                GlobalNavigationService.ToWelcomePage();
+            }
+            else
+            {
+                GlobalNavigationService.ToPanoramaPage();
+            }
         }
 
         void OnActivated()
@@ -467,14 +434,14 @@ namespace weave
                 DebugEx.WriteLine("******************* SAVED TOMBSTONESTATE");
                 await AppSettings.Instance.PermanentState.Save();
                 DebugEx.WriteLine("******************* SAVED PERMANENTSTATE");
-                                
+
                 var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
                 await dal.SaveOnExit();
                 DebugEx.WriteLine("******************* SAVED FEEDS AND NEWS");
 
                 stoppedSuccessfully = true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 DebugEx.WriteLine("Exception on exit: {0}", e);
             }
