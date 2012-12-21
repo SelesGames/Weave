@@ -210,7 +210,6 @@ namespace weave
         {
             InitializeAdControl();
             InitializeCustomListAndImageCache();
-            InitializeFlickHandling();
             InitializeButtonEventHandlers();
             InitializeJumpList();
             pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
@@ -264,47 +263,10 @@ namespace weave
 
 
 
-        #region Initialize Touch Swiping/Flicking handling
-
-        void InitializeFlickHandling()
-        {
-            var gestureListener = GestureService.GetGestureListener(ContentGrid);
-
-            Observable.FromEventPattern<FlickGestureEventArgs>(
-                e => gestureListener.Flick += e,
-                e => gestureListener.Flick -= e)
-                .SafelySubscribe(o => GestureListener_Flick(o.Sender, o.EventArgs))
-                .DisposeWith(pageLevelDisposables);
-        }
-
-        void GestureListener_Flick(object sender, FlickGestureEventArgs e)
-        {
-            if (vm == null)
-                return;
-
-            if (e.Direction != System.Windows.Controls.Orientation.Horizontal)
-                return;
-
-            var velocity = e.HorizontalVelocity;
-
-            if (velocity < -750)
-                OnNextPage();
-
-            else if (velocity > 700)
-                OnPreviousPage();
-        }
-
-        #endregion
-
-
-
-
         #region Initialize all button handlers on page (refresh, next/previous page, font, mark page read)
 
         void InitializeButtonEventHandlers()
         {
-            previousPageButton.GetClick().Subscribe(OnPreviousPage).DisposeWith(pageLevelDisposables);
-            nextPageButton.GetClick().Subscribe(OnNextPage).DisposeWith(pageLevelDisposables);
             refreshButton.GetClick().Where(_ => vm != null).Subscribe(() => vm.ManualRefresh()).DisposeWith(pageLevelDisposables);
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
@@ -439,61 +401,14 @@ namespace weave
 
         #region Page Change logic
 
-        public bool IsPreviousButtonEnabled
-        {
-            get { return this.previousPageButton.IsEnabled; }
-            set { this.previousPageButton.IsEnabled = this.cl.IsPreviousIndicatorEnabled = value; }
-        }
-
-        public bool IsNextButtonEnabled
-        {
-            get { return this.nextPageButton.IsEnabled; }
-            set { this.nextPageButton.IsEnabled = this.cl.IsNextIndicatorEnabled = value; }
-        }
-
-        void OnPreviousPage()
-        {
-            if (vm != null && vm.HasPrevious)
-            {
-                PreparePageChangeAnimation(PageChangeAnimateDirection.Previous);
-                vm.CurrentPage--;
-            }
-        }
-
-        void OnNextPage()
-        {
-            if (vm != null && vm.HasNext)
-            {
-                PreparePageChangeAnimation(PageChangeAnimateDirection.Next);
-                vm.CurrentPage++;
-            }
-        }
-
-        enum PageChangeAnimateDirection
-        {
-            Previous,
-            Next
-        }
-
-
-
-
-        #region Page Change animation helpers
-
         bool isInPageChangeAnimation = false;
 
-        void PreparePageChangeAnimation(PageChangeAnimateDirection direction)
+        void PreparePageChangeAnimation()
         {
             if (isInPageChangeAnimation)
                 return;
 
             isInPageChangeAnimation = true;
-
-            if (direction == PageChangeAnimateDirection.Previous)
-                previousPageStartSB.Begin();
-
-            else if (direction == PageChangeAnimateDirection.Next)
-                nextPageStartSB.Begin();
         }
 
         internal void CompletePageChangeAnimation(List<NewsItem> source, int direction = 0)
@@ -511,11 +426,6 @@ namespace weave
             cl.SetNews(source, direction);
             cl.Visibility = Visibility.Visible;
         }
-
-        #endregion
-
-
-
 
         #endregion
 
