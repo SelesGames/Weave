@@ -119,6 +119,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dnp.Counters">
+      <HintPath>..\lib\dnp.Counters.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
