@@ -44,11 +44,9 @@
 			<GradientStop Offset="1" Color="#00FFFFFF"/>
 		</LinearGradientBrush>
 
-		<ig:ImageCache x:Key="cache"/>
-
 		<DataTemplate x:Key="BigNewsItemTemplate">
-			<local:BigImageNewsItemControl NewsItem="{Binding}" ImageCache="{StaticResource cache}" Tap="OnListItemTap" />
-			<!--StackPanel x:Name="stack" Margin="12,0">
+			<!--local:BigImageNewsItemControl NewsItem="{Binding}" Tap="OnListItemTap" /-->
+			<StackPanel x:Name="stack" Margin="12,0">
 				<StackPanel.RenderTransform>
 					<CompositeTransform/>
 				</StackPanel.RenderTransform>
@@ -67,12 +65,12 @@
 					<Border x:Name="imageWrapper" VerticalAlignment="Top" Height="244" CacheMode="BitmapCache" Background="{StaticResource PhoneChromeBrush}" Margin="12,0" RenderTransformOrigin="0.5,0.5" >
 						<Image x:Name="image" HorizontalAlignment="Center" VerticalAlignment="Center" CacheMode="BitmapCache" Stretch="UniformToFill">
 							<Image.Source>
-								<BitmapImage DecodePixelHeight="244" UriSource="http://ladygeek.com/wp-content/uploads/2012/11/halo-4-1.jpg" sg:BitmapImageHelper.IsBackgroundCreationEnabled="True" />
+								<BitmapImage UriSource="{Binding ImageUrl}" sg:BitmapImageHelper.IsBackgroundCreationEnabled="True" />
 							</Image.Source>
 						</Image>
 					</Border>
 				</local:TiltContentControl>
-			</StackPanel-->
+			</StackPanel>
 		</DataTemplate>
 				
 	</phone:PhoneApplicationPage.Resources>
@@ -108,11 +106,6 @@
 		</Grid>
 
 		<Grid x:Name="ContentGrid" Grid.Column="1" Grid.Row="2" Background="{StaticResource TransparentBrush}">
-			<local:CustomList x:Name="cl" Visibility="Collapsed">
-				<local:CustomList.RenderTransform>
-					<TranslateTransform/>
-				</local:CustomList.RenderTransform>
-			</local:CustomList>
 			<phone:LongListSelector x:Name="lls" ItemsSource="{Binding News}" ItemTemplate="{StaticResource BigNewsItemTemplate}" />
 			<Rectangle x:Name="fade" Height="24" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" />
 		</Grid>

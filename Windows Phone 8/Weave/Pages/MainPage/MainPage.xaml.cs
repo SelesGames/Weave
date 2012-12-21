@@ -26,8 +26,6 @@ namespace weave
         string mode = null;
         MainPageViewModel vm;
 
-        ImageCache imageCache;
-        ScrollViewer currentListBoxScroller;
         TrialModeAdControl adControl;
         MainPageNavigationDropDownList jumpList;
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
@@ -64,7 +62,19 @@ namespace weave
 
             if (OSThemeHelper.GetCurrentTheme() == OSTheme.Light)
                 fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
+
+            lls.CorrectForFocusBug(this);
         }
+
+        //void lls_ItemRealized(object sender, ItemRealizationEventArgs e)
+        //{
+        //    if (e.ItemKind == LongListSelectorItemKind.Item)
+        //    {
+        //        var container = e.Container;
+        //        var context = container.DataContext;
+        //        DebugEx.WriteLine("{0}, {1}", container, context);
+        //    }
+        //}
 
         void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -209,7 +219,6 @@ namespace weave
         void FinishPageInitialization()
         {
             InitializeAdControl();
-            InitializeCustomListAndImageCache();
             InitializeButtonEventHandlers();
             InitializeJumpList();
             pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
@@ -237,25 +246,6 @@ namespace weave
             LayoutRoot.Children.Add(adControl);
             await TimeSpan.FromSeconds(1);
             adControl.Fade().From(0).To(1).Over(TimeSpan.FromSeconds(0.7)).ToStoryboard().Begin();
-        }
-
-        #endregion
-
-
-
-
-        #region Initialize Custom List and Image Cache
-        
-        void InitializeCustomListAndImageCache()
-        {
-            this.cl.CompleteInitialization();
-
-            this.imageCache = new ImageCache();
-            this.cl.SetImageCache(imageCache);
-
-            this.currentListBoxScroller = cl.scroller;
-
-            SubscribeToNewsItemClicked();
         }
 
         #endregion
@@ -312,13 +302,6 @@ namespace weave
 
 
         #region NewsItem click and dismissal handling
-
-        void SubscribeToNewsItemClicked()
-        {
-            cl.NewsItemSelected
-                .Subscribe(OnNewsItemClicked)
-                .DisposeWith(pageLevelDisposables);
-        }
 
         async void OnNewsItemClicked(System.Tuple<object, NewsItem> tup)
         {
@@ -421,15 +404,6 @@ namespace weave
 
         internal void CompletePageChangeAnimation(List<NewsItem> source, int direction = 0)
         {
-            if (this.imageCache != null)
-                imageCache.Flush();
-
-            if (this.currentListBoxScroller != null)
-                currentListBoxScroller.ScrollToVerticalOffset(0);
-
-            //cl.SetNews(source, direction);
-            //cl.Visibility = Visibility.Visible;
-
             lls.ItemsSource = source;
         }
 
@@ -460,21 +434,9 @@ namespace weave
         {
             this.pageLevelDisposables.Dispose();
 
-            using (this.cl)
             using (this.vm)
             using (this.adControl)
             { }
-
-            var imageCacheHandle = this.imageCache;
-            this.imageCache = null;
-            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
-            {
-                if (imageCacheHandle != null)
-                {
-                    imageCacheHandle.Flush();
-                    imageCacheHandle = null;
-                }
-            });
 
             Observable.Timer(TimeSpan.FromSeconds(1)).Take(1).SafelySubscribe(() =>
             {
