@@ -14,7 +14,7 @@ namespace weave
 
         public AppSettings()
         {
-            NumberOfNewsItemsPerMainPage = 16;
+            NumberOfNewsItemsPerMainPage = int.MaxValue;
 
             PermanentState = new IsoStorageLocker<PermanentState>(
                 PERMA_STATE,

@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using weave.Data;
@@ -58,8 +57,6 @@ namespace weave
 
             IsProgressBarVisible = false;
             ProgressBarVisibility = Visibility.Collapsed;
-            view.IsPreviousButtonEnabled = HasPrevious = false;
-            view.IsNextButtonEnabled = HasNext = false;
             NewItemCount = "0 NEW";
 
             dataLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
@@ -112,8 +109,6 @@ namespace weave
         {
             InitializeAllNews();
             UpdateNewItemCount();
-            InitializePageCountDisplay();
-            ReevaluateNextAndPreviousButtonsVisibilities();
             InitializeNewsForCurrentPage();
         }
 
@@ -161,21 +156,6 @@ namespace weave
             GlobalDispatcher.Current.BeginInvoke(() => NewItemCount = newItemCount.ToString() + " NEW");
         }
 
-        void InitializePageCountDisplay()
-        {
-            numberOfPages = (int)Math.Ceiling((double)allNews.Count / (double)pageSize);
-            if (currentPage >= numberOfPages || Header != lastCategory)
-                currentPage = 0;
-
-            lastCategory = Header;
-            GlobalDispatcher.Current.BeginInvoke(() => PropertyChanged.Raise(this, "CurrentPageDisplay"));
-        }
-
-        public string CurrentPageDisplay
-        {
-            get { return string.Format("PAGE {0} OF {1}", currentPage + 1, numberOfPages); }
-        }
-
         public string NewItemCount
         {
             get { return newItemCount; }
@@ -196,62 +176,6 @@ namespace weave
                 previouslyDisplayedNews = displayedNews;
             }
         }
-
-
-
-
-        #region Page Change Logic
-
-        void ReevaluateNextAndPreviousButtonsVisibilities()
-        {
-            HasPrevious = (currentPage - 1) >= 0;
-            HasNext = currentPage + 1 < Math.Ceiling((double)allNews.Count / (double)pageSize);
-            GlobalDispatcher.Current.BeginInvoke(() =>
-            {
-                view.IsPreviousButtonEnabled = HasPrevious;
-                view.IsNextButtonEnabled = HasNext;
-            });
-        }
-
-
-        internal bool HasPrevious { get; private set; }
-        internal bool HasNext { get; private set; }
-
-
-        int lastPageLastTimeItWasSet = -1;
-        SerialDisposable pageChangeHandle = new SerialDisposable();
-
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                if (value >= 0 && value < numberOfPages)
-                {
-                    currentPage = value;
-                    ReevaluateNextAndPreviousButtonsVisibilities();
-                    PropertyChanged.Raise(this, "CurrentPageDisplay");
-                    pageChangeHandle.Disposable = Observable.Timer(TimeSpan.FromMilliseconds(200), scheduler).Take(1).Subscribe(notUsed =>
-                    {
-                        displayedNews = allNews.Skip(pageSize * currentPage).Take(pageSize).ToList();
-                        previouslyDisplayedNews = displayedNews;
-
-                        if (currentPage >= lastPageLastTimeItWasSet) // we moved forward
-                            GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, 1));
-
-                        else
-                            GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, -1));
-
-                        lastPageLastTimeItWasSet = currentPage;
-                    });
-                }
-            }
-        }
-
-        #endregion
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -277,6 +201,8 @@ namespace weave
         }
 
         #endregion
+
+
 
 
         internal void ManualRefresh()
@@ -359,9 +285,6 @@ namespace weave
         public void Dispose()
         {
             disposables.Dispose();
-
-            if (this.pageChangeHandle != null)
-                this.pageChangeHandle.Dispose();
 
             if (this.subscriptionHandle != null)
                 this.subscriptionHandle.Dispose();

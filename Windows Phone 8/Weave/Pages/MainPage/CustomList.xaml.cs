@@ -51,7 +51,7 @@ namespace weave
         internal void CompleteInitialization()
         {
             newsItemsUI =
-                Enumerable.Range(0, AppSettings.Instance.NumberOfNewsItemsPerMainPage)
+                Enumerable.Range(0, 5)//AppSettings.Instance.NumberOfNewsItemsPerMainPage)
                 .Select(notUsed =>
                 {
                     var ui = CreateNewsItemControl();

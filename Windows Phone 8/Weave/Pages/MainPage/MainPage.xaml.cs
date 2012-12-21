@@ -331,6 +331,23 @@ namespace weave
             newsItem.HasBeenViewed = true;
         }
 
+        async void OnNewsItemClicked(NewsItem newsItem)
+        {
+            IsHitTestVisible = false;
+            ZoomInSB.Begin();
+            await Task.Delay(TimeSpan.FromSeconds(0.18d));
+            GlobalNavigationService.ToWebBrowserPage(newsItem);
+            IsHitTestVisible = true;
+            newsItem.HasBeenViewed = true;
+        }
+
+        void OnListItemTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var context = (sender as FrameworkElement).DataContext as NewsItem;
+            if (context != null)
+                OnNewsItemClicked(context);
+        }
+
         #endregion
 
 
@@ -401,30 +418,19 @@ namespace weave
 
         #region Page Change logic
 
-        bool isInPageChangeAnimation = false;
-
-        void PreparePageChangeAnimation()
-        {
-            if (isInPageChangeAnimation)
-                return;
-
-            isInPageChangeAnimation = true;
-        }
 
         internal void CompletePageChangeAnimation(List<NewsItem> source, int direction = 0)
         {
-            isInPageChangeAnimation = false;
-            this.nextPageStartSB.Stop();
-            this.previousPageStartSB.Stop();
-
             if (this.imageCache != null)
                 imageCache.Flush();
 
             if (this.currentListBoxScroller != null)
                 currentListBoxScroller.ScrollToVerticalOffset(0);
 
-            cl.SetNews(source, direction);
-            cl.Visibility = Visibility.Visible;
+            //cl.SetNews(source, direction);
+            //cl.Visibility = Visibility.Visible;
+
+            lls.ItemsSource = source;
         }
 
         #endregion

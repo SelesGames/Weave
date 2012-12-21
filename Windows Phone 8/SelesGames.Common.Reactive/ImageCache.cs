@@ -90,6 +90,10 @@ namespace weave
             #endregion
         }
 
+        public ImageCache()
+            : this(int.MaxValue)
+        { }
+
         public void Flush()
         {
             requestQueue.Flush();
