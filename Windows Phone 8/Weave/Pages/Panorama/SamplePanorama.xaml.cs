@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Shell;
 using SelesGames;
+using SelesGames.Phone;
 using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
@@ -53,7 +54,11 @@ namespace weave
         protected async override void OnPageLoad(WeaveNavigationEventArgs navigationEventArgs)
         {
             if (AppSettings.Instance.LogExceptions)
-                LittleWatson.CheckForPreviousException();
+                LittleWatson.LogPreviousExceptionIfPresent(loggedError =>
+                    SelesGames.Phone.TaskService.ToEmailComposeTask(
+                        To: "info@selesgames.com",
+                        Subject: string.Format("{0} problem report (version {1})", AppSettings.Instance.AppName, AppSettings.Instance.VersionNumber),
+                        Body: loggedError));
 
             RefreshFeedsAndStartListeningToNewNews();
             InitializeExtraPanoramaItems();

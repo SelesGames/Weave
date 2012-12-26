@@ -1,7 +1,7 @@
 ﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using SelesGames.Phone;
 using System;
-using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,13 +12,9 @@ namespace weave
     {
         public static PhoneApplicationFrame CurrentFrame { get; set; }
 
-        public static void SafelyNavigateTo(string uri)
-        {
-            try
-            {
-                CurrentFrame.Navigate(new Uri(uri, UriKind.Relative));
-            }
-            catch (Exception ex) { Debug.WriteLine(ex); }
+        static void SafelyNavigateTo(string uri)
+        {         
+            CurrentFrame.TryNavigate(uri);
         }
 
         public static void ToPanoramaPage()

@@ -293,7 +293,6 @@
     <Compile Include="Services\GlobalNavigationService.cs" />
     <Compile Include="Services\Instapaper\InstapaperAccount.cs" />
     <Compile Include="Services\Instapaper\InstapaperService.cs" />
-    <Compile Include="Services\LittleWatson.cs" />
     <Compile Include="Pages\Panorama\CategoryDisplayGrid.xaml.cs">
       <DependentUpon>CategoryDisplayGrid.xaml</DependentUpon>
     </Compile>

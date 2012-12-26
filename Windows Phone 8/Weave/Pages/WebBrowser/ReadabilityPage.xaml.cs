@@ -212,7 +212,7 @@ namespace weave
                     PlayMode = TransitionPlayMode.Simultaneously, 
                     Orientation = System.Windows.Controls.Orientation.Horizontal 
                 });
-            NavigationService.SafelyGoBackIfPossible();
+            NavigationService.TryGoBack();
         }
 
         void OnRightSwipe()
@@ -235,7 +235,7 @@ namespace weave
                 // Check to see if the article was not displayable due to an Exception.  If so, go back to previous page.
                 if (isArticleNonDisplayable)
                 {
-                    NavigationService.SafelyGoBackIfPossible();
+                    NavigationService.TryGoBack();
                     return;
                 }
 
@@ -244,7 +244,7 @@ namespace weave
                     var isViewModelInit = await InitializeViewModelAsync();
                     if (!isViewModelInit)
                     {
-                        NavigationService.SafelyGoBackIfPossible();
+                        NavigationService.TryGoBack();
                         return;
                     }
                     else
@@ -260,7 +260,7 @@ namespace weave
             catch(Exception ex)
             {
                 DebugEx.WriteLine(ex);
-                NavigationService.SafelyGoBackIfPossible();
+                NavigationService.TryGoBack();
             }
         }
 

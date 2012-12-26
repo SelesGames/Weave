@@ -72,7 +72,7 @@ namespace weave
             Observable
                .FromEventPattern<NavigatingCancelEventArgs>(frame, "Navigating")
                .Take(1)
-               .Subscribe(OnInitialNavigating);
+               .Subscribe(OnInitialNavigatingWrapper);
 
             new ArticleListNavigationCorrector(frame);
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
@@ -92,7 +92,24 @@ namespace weave
             }
         }
 
-        async void OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
+        async void OnInitialNavigatingWrapper(EventPattern<NavigatingCancelEventArgs> args)
+        {
+            try
+            {
+                await OnInitialNavigating(args);
+            }
+            catch (Exception ex)
+            {
+                // these sort of exceptions are ok to ignore
+                if (ex.Message == "Navigation is not allowed when the task is not in the foreground.")
+                    return;
+                else
+                    throw ex;
+            }
+        }
+
+
+        async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
             await RecoverPermanentStateAsync();
 
@@ -120,13 +137,13 @@ namespace weave
 
                 await frame.NavigationStoppedAsync();
 
-                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
+                frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             }
             else
             {
                 backStackRemovalCount = 2;
                 await frame.NavigatedAsync();
-                frame.Navigate(new Uri("/weave;component/Pages/DummyPage.xaml", UriKind.Relative));
+                frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             }
 
             await frame.NavigatedAsync();
@@ -165,11 +182,11 @@ namespace weave
 
             if (areThereTooManyFeeds)
             {
-                frame.Navigate(new Uri("/Weave.UI.SettingsPages;component/Views/ManageSourcesPage.xaml", UriKind.Relative));
+                frame.TryNavigate("/Weave.UI.SettingsPages;component/Views/ManageSourcesPage.xaml");
             }
             else
             {
-                frame.Navigate(originalTargetUri);
+                frame.TryNavigate(originalTargetUri);
             }
             await frame.NavigatedAsync();
 
@@ -309,7 +326,7 @@ namespace weave
             settings.CurrentApplication.UnhandledException += (s, e) =>
             {
                 if (settings.LogExceptions)
-                    LittleWatson.ReportException(e.ExceptionObject, string.Empty);
+                    LittleWatson.LogException(e.ExceptionObject, string.Empty);
             };
 
 

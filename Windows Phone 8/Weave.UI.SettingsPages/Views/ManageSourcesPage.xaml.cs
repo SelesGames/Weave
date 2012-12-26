@@ -60,7 +60,7 @@ namespace weave
             {
                 e.Cancel = true;
                 await t;
-                NavigationService.SafelyGoBackIfPossible();
+                NavigationService.TryGoBack();
             }
         }
 

@@ -173,7 +173,7 @@ namespace weave.Pages.Settings
             {
                 e.Cancel = true;
                 await t;
-                NavigationService.SafelyGoBackIfPossible();
+                NavigationService.TryGoBack();
             }
         }
     }
