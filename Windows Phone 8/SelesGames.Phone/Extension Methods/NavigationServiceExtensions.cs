@@ -18,7 +18,7 @@ namespace SelesGames.Phone
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex); 
+                System.Diagnostics.Debug.WriteLine(ex); 
 #endif
                 result = ex;
             }
@@ -47,7 +47,7 @@ namespace SelesGames.Phone
             catch (Exception ex) 
             {
 #if DEBUG
-                Debug.WriteLine(ex); 
+                System.Diagnostics.Debug.WriteLine(ex); 
 #endif
                 result = ex;
             }
@@ -77,7 +77,7 @@ namespace SelesGames.Phone
             catch (Exception ex)
             {
 #if DEBUG
-                Debug.WriteLine(ex); 
+                System.Diagnostics.Debug.WriteLine(ex); 
 #endif
                 result = ex;
             }
