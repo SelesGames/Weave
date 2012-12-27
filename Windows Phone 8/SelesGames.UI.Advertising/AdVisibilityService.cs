@@ -12,7 +12,7 @@ namespace SelesGames.UI.Advertising
         {
             get
             {
-                if (!(AdSettings.IsAddSupportedApp && AreThereAdUnitsDefined()))
+                if (!(AdSettings.IsAddSupportedApp))
                     return false;
 
                 if (numberOfTimesAdsShown >= AdSettings.MaxAdsPerSession)
@@ -20,14 +20,6 @@ namespace SelesGames.UI.Advertising
 
                 return true;
             }
-        }
-
-        static bool AreThereAdUnitsDefined()
-        {
-            return
-                AdSettings.AdApplicationId != null/* &&
-                AdSettings.AdUnits != null &&
-                AdSettings.AdUnits.Count > 0*/;
         }
 
         public static void AdEngaged()

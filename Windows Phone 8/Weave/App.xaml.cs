@@ -41,8 +41,7 @@ namespace weave
                 #region Ad Units
 
                 IsAddSupportedApp = true,
-                AdApplicationId = "7e2d7892-037b-422b-bf91-7931d602864b",
-                AdUnitsUrl = "http://weavestorage.blob.core.windows.net/settings/adunits?xsf=" + r,
+                AdUnitsUrl = "http://weave.blob.core.windows.net/settings/sampleSettings.json?xsf=" + r,
 
                 #endregion
 

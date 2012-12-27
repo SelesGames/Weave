@@ -4,10 +4,8 @@ using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading;
@@ -182,26 +180,62 @@ namespace weave
 
         #region Initialize Touch Swiping/Flicking handling
 
+        //void InitializeFlickHandling()
+        //{
+        //    var gestureListener = GestureService.GetGestureListener(LayoutRoot);
+
+        //    Observable.FromEventPattern<FlickGestureEventArgs>(
+        //        e => gestureListener.Flick += e,
+        //        e => gestureListener.Flick -= e)
+        //        .Where(o => o.EventArgs.Direction == System.Windows.Controls.Orientation.Horizontal)
+        //        .Select(o => o.EventArgs.HorizontalVelocity)
+        //        .SafelySubscribe(OnHorizontalSwipe)
+        //        .DisposeWith(disposables);
+        //}
+
         void InitializeFlickHandling()
         {
-            var gestureListener = GestureService.GetGestureListener(LayoutRoot);
+            //Microsoft.Xna.Framework.Input.Touch.TouchPanel.EnabledGestures = Microsoft.Xna.Framework.Input.Touch.GestureType.Flick;
+            LayoutRoot.AddHandler(
+                UIElement.ManipulationCompletedEvent,
+                new EventHandler<System.Windows.Input.ManipulationCompletedEventArgs>(OnManipulationCompleted), true);
+            //var gestureListener = GestureService.GetGestureListener(swipePanel);
 
-            Observable.FromEventPattern<FlickGestureEventArgs>(
-                e => gestureListener.Flick += e,
-                e => gestureListener.Flick -= e)
-                .Where(o => o.EventArgs.Direction == System.Windows.Controls.Orientation.Horizontal)
-                .Select(o => o.EventArgs.HorizontalVelocity)
-                .SafelySubscribe(OnHorizontalSwipe)
-                .DisposeWith(disposables);
+            //Observable.FromEventPattern<FlickGestureEventArgs>(
+            //    e => gestureListener.Flick += e,
+            //    e => gestureListener.Flick -= e)
+            //    .SafelySubscribe(o => GestureListener_Flick(o.Sender, o.EventArgs))
+            //    .DisposeWith(pageLevelDisposables);
         }
 
-        void OnHorizontalSwipe(double velocity)
+
+
+        void OnManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
-            if (velocity > 700)
-                OnLeftSwipe();
-            else if (velocity < -700)
-                OnRightSwipe();
-        }
+            // flicks always finish on interia
+            if (!e.IsInertial)
+                return;
+
+            var finalHorizontalVelocity = e.FinalVelocities.LinearVelocity.X;
+            var absoluteVerticalMotion = Math.Abs(e.TotalManipulation.Translation.Y);
+
+            if (absoluteVerticalMotion < 46d)
+            {
+                if (finalHorizontalVelocity < -750)
+                    OnRightSwipe();
+                else if (finalHorizontalVelocity > 750)
+                    OnLeftSwipe();
+            }
+            //DebugEx.WriteLine("************ **********  horizontal velocity = {0}, total vertical motion: {1}", finalHorizontalVelocity, absoluteVerticalMotion);
+        } 
+
+        //void OnHorizontalSwipe(double velocity)
+        //{
+        //    if (velocity > 700)
+        //        OnLeftSwipe();
+        //    else if (velocity < -700)
+        //        OnRightSwipe();
+        //}
 
         void OnLeftSwipe()
         {

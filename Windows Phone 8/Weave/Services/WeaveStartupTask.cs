@@ -349,9 +349,7 @@ namespace weave
 
         void InitializeAdSettings()
         {
-            SelesGames.UI.Advertising.AdSettings.AdApplicationId = settings.AdApplicationId;
             SelesGames.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
-            var adCollection = new SelesGames.UI.Advertising.AdUnitCollection(settings.AdUnitsUrl);
         }
 
         void InitializeNinjectKernel()
@@ -371,6 +369,11 @@ namespace weave
             kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
 
             kernel.Bind<MainPageNavigationDropDownList>().ToSelf().InSingletonScope();
+
+            kernel.Bind<SelesGames.UI.Advertising.AdControlFactory>().ToMethod(_ =>
+                new SelesGames.UI.Advertising.AdControlFactory(settings.AdUnitsUrl))
+                .InSingletonScope();
+
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
         }
 

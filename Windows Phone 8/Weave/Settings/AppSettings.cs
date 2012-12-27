@@ -34,7 +34,6 @@ namespace weave
         public int NumberOfNewsItemsPerMainPage { get; set; }
         public IsoStorageLocker<PermanentState> PermanentState { get; private set; }
         public IsoStorageLocker<TombstoneState> TombstoneState { get; private set; }
-        public string AdApplicationId { get; set; }
         public bool IsAddSupportedApp { get; set; }
         public string AdUnitsUrl { get; set; }
         public string AssemblyName { get; set; }

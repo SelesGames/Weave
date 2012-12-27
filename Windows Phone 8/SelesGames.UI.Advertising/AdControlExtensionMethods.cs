@@ -4,12 +4,12 @@ namespace SelesGames.UI.Advertising
 {
     public static class AdControlExtensionMethods
     {
-        public static TrialModeAdControl AddAdControlIfRelevant(this Panel panel, bool playAnimations = false)
+        public static SwitchingAdControl AddAdControlIfRelevant(this Panel panel, AdControlFactory factory, string keywords = null, bool playAnimations = false)
         {
             if (!AdVisibilityService.AreAdsStillBeingShownAtAll)
                 return null;
 
-            var adControl = new TrialModeAdControl { PlayAnimations = playAnimations };
+            var adControl = new SwitchingAdControl(factory, keywords) { PlayAnimations = playAnimations };
 
             panel.Children.Add(adControl);
             return adControl;

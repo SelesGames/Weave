@@ -1,9 +1,5 @@
-﻿using Microsoft.Advertising;
-using Microsoft.Advertising.Mobile.UI;
-using System;
+﻿using System;
 using System.ComponentModel;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,31 +8,31 @@ using System.Windows.Media.Animation;
 
 namespace SelesGames.UI.Advertising
 {
-    public class TrialModeAdControl : Control, IDisposable
+    public class SwitchingAdControl : Control, IDisposable
     {
         Panel AdContainer;
         Storyboard OnNewAdSB;
-        AdControl adControl;
-        AdUnitCollection adUnits;
+        IAdControlAdapter adControl;
+        AdControlFactory factory;
         string keywords;
         bool isHidden = false;
         int currentFaultLevel = 0;
         bool isDisposed = false;
-        SerialDisposable sd = new SerialDisposable();
 
         public bool PlayAnimations { get; set; }
         public bool IsAdCurrentlyEngaged { get { return false; } }
         public int MaxFaultLevel { get; set; }
 
-        public TrialModeAdControl(string keywords)
-            : this()
+        public SwitchingAdControl(AdControlFactory factory, string keywords)
+            : this(factory)
         {
+            this.factory = factory;
             this.keywords = keywords;
         }
 
-        public TrialModeAdControl()
+        public SwitchingAdControl(AdControlFactory factory)
         {
-            DefaultStyleKey = typeof(TrialModeAdControl);
+            DefaultStyleKey = typeof(SwitchingAdControl);
 
             this.keywords = null;
             PlayAnimations = true;
@@ -45,8 +41,6 @@ namespace SelesGames.UI.Advertising
             if (DesignerProperties.IsInDesignTool)
                 return;
 
-            this.adUnits = AdUnitCollection.Current;
-
             AdVisibilityService.AdsNoLongerShown += OnAdsNoLongerShown;
         }
 
@@ -54,6 +48,11 @@ namespace SelesGames.UI.Advertising
         {
             Dispose();
         }
+
+
+
+
+        #region OnApplyTemplate
 
         public async override void OnApplyTemplate()
         {
@@ -82,37 +81,29 @@ namespace SelesGames.UI.Advertising
             }
         }
 
-        async void CreateAd()
+        #endregion
+
+
+
+
+        async void CreateAd(bool advanceToNextProvider = false)
         {
             try
             {
-                string appId;
-                string adUnitId;
-
-                await adUnits.AreAdUnitsSet;
                 await Task.Delay(TimeSpan.FromSeconds(1));
                 if (isDisposed)
                     return;
 
-                adUnitId = adUnits.GetRandomAdUnit();
-                appId = AdSettings.AdApplicationId;
-
-                if (string.IsNullOrEmpty(adUnitId) || string.IsNullOrEmpty(appId))
-                {
-                    Dispose();
-                    return;
-                }
-
-                adControl = new AdControl(appId, adUnitId, false) { IsAutoCollapseEnabled = true, Width = 480, Height = 80, BorderBrush = new SolidColorBrush(Colors.White) };
+                adControl = await factory.CreateAdControl(keywords);
 
                 if (this.isHidden)
-                    adControl.Visibility = Visibility.Collapsed;
+                    adControl.Control.Visibility = Visibility.Collapsed;
 
-                if (!string.IsNullOrEmpty(this.keywords))
-                    adControl.Keywords = keywords;
-
-                HookAdControlEvents();
-                AdContainer.Children.Add(adControl);
+                adControl.AdClicked += OnAdClicked;
+                adControl.AdRefreshed += OnAdRefreshed;
+                adControl.AdError += OnAdControlErrorOccurred;
+                
+                AdContainer.Children.Add(adControl.Control);
             }
             catch (Exception e)
             {
@@ -123,11 +114,18 @@ namespace SelesGames.UI.Advertising
 
         void FlushAd()
         {
-            UnhookAdControlEvents();
+            if (adControl == null)
+                return;
 
-            if (AdContainer.Children.Contains(adControl))
+            adControl.AdClicked -= OnAdClicked;
+            adControl.AdRefreshed -= OnAdRefreshed;
+            adControl.AdError -= OnAdControlErrorOccurred; 
+            
+            adControl.Dispose();
+
+            if (adControl.Control != null && AdContainer.Children.Contains(adControl.Control))
             {
-                AdContainer.Children.Remove(adControl);
+                AdContainer.Children.Remove(adControl.Control);
                 adControl = null;
             }
         }
@@ -137,62 +135,11 @@ namespace SelesGames.UI.Advertising
 
         #region Ad Control Event Handling
 
-        void HookAdControlEvents()
-        {
-            if (adControl == null)
-                return;
-
-            adControl.IsEngagedChanged += OnAdControlIsEngagedChanged;
-            adControl.ErrorOccurred += OnAdControlErrorOccurred;
-            adControl.AdRefreshed += OnAdRefreshed;
-
-            sd.Disposable = Observable
-                .Interval(TimeSpan.FromSeconds(30))
-                .ObserveOnDispatcher()
-                .Subscribe(
-                    o =>
-                    {
-                        if (adControl != null && adControl.Visibility != Visibility.Collapsed)
-                            adControl.Refresh();
-                    },
-                    exception => { ; });
-        }
-
-        void UnhookAdControlEvents()
-        {
-            sd.Disposable = null;
-
-            if (adControl == null)
-                return;
-
-            adControl.IsEngagedChanged -= OnAdControlIsEngagedChanged;
-            adControl.ErrorOccurred -= OnAdControlErrorOccurred;
-            adControl.AdRefreshed -= OnAdRefreshed;
-        }
-
-        void OnAdControlIsEngagedChanged(object sender, EventArgs e)
+        void OnAdClicked(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke(() =>
             {
-                if (adControl.IsEngaged)
-                {
-                    AdVisibilityService.AdEngaged();
-                }
-            });
-        }
-
-        void OnAdControlErrorOccurred(object sender, AdErrorEventArgs e)
-        {
-            var error = string.Format("Ad ErrorCode: {0}, Exception: {1}", e.ErrorCode, e.Error);
-            DebugEx.WriteLine(error);
-            Dispatcher.BeginInvoke(() =>
-            {
-                FlushAd();
-                currentFaultLevel++;
-                if (currentFaultLevel < MaxFaultLevel)
-                    CreateAd();
-                else
-                    Dispose();
+                AdVisibilityService.AdEngaged();
             });
         }
 
@@ -207,19 +154,36 @@ namespace SelesGames.UI.Advertising
             OnNewAdSB.Begin();
         }
 
+        void OnAdControlErrorOccurred(object sender, EventArgs<Exception> e)
+        {
+            var error = string.Format("Ad Exception: {0}", e.Item);
+            DebugEx.WriteLine(error);
+            Dispatcher.BeginInvoke(() =>
+            {
+                FlushAd();
+                currentFaultLevel++;
+                if (currentFaultLevel < MaxFaultLevel)
+                    CreateAd();
+                else
+                    Dispose();
+            });
+        }
+
         #endregion
 
 
 
 
+        #region toggle AdControl visibility 
+        
         public void ShowAdControl()
         {
             if (!isHidden)
                 return;
 
             isHidden = false;
-            if (adControl != null)
-                adControl.Visibility = Visibility.Visible;
+            if (adControl != null && adControl.Control != null)
+                adControl.Control.Visibility = Visibility.Visible;
         }
 
         public void HideAdControl()
@@ -228,9 +192,14 @@ namespace SelesGames.UI.Advertising
                 return;
 
             isHidden = true;
-            if (adControl != null)
-                adControl.Visibility = Visibility.Collapsed;
+            if (adControl != null && adControl.Control != null)
+                adControl.Control.Visibility = Visibility.Collapsed;
         }
+
+        #endregion
+
+
+
 
         public void Dispose()
         {
@@ -240,7 +209,6 @@ namespace SelesGames.UI.Advertising
             isDisposed = true;
             try
             {
-                sd.Dispose();
                 this.Visibility = Visibility.Collapsed;
                 FlushAd();
                 AdVisibilityService.AdsNoLongerShown -= OnAdsNoLongerShown;

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using Telerik.Windows.Controls;
 
 
@@ -28,7 +29,7 @@ namespace weave
 
         ImageCache imageCache;
         ScrollViewer currentListBoxScroller;
-        TrialModeAdControl adControl;
+        SwitchingAdControl adControl;
         MainPageNavigationDropDownList jumpList;
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
@@ -202,7 +203,7 @@ namespace weave
             catch (Exception exception)
             {
                 DebugEx.WriteLine("exception in MainPage onnavto, {0}", exception);
-                NavigationService.SafelyGoBackIfPossible();
+                NavigationService.TryGoBack();
             }
         }
 
@@ -226,7 +227,7 @@ namespace weave
             if (!AdVisibilityService.AreAdsStillBeingShownAtAll)
                 return;
 
-            adControl = new TrialModeAdControl(this.header);
+            adControl = new SwitchingAdControl(ServiceResolver.Get<AdControlFactory>(), this.header);
             //adControl.AdMargin = new Thickness(0);
             //adControl.AdHeight = 80;
             //adControl.AdWidth = 480;
@@ -268,31 +269,56 @@ namespace weave
 
         void InitializeFlickHandling()
         {
-            var gestureListener = GestureService.GetGestureListener(ContentGrid);
+            //Microsoft.Xna.Framework.Input.Touch.TouchPanel.EnabledGestures = Microsoft.Xna.Framework.Input.Touch.GestureType.Flick;
+            ContentGrid.AddHandler(
+                UIElement.ManipulationCompletedEvent, 
+                new EventHandler<ManipulationCompletedEventArgs>(OnContentGridManipulationCompleted), true);
+            //var gestureListener = GestureService.GetGestureListener(swipePanel);
 
-            Observable.FromEventPattern<FlickGestureEventArgs>(
-                e => gestureListener.Flick += e,
-                e => gestureListener.Flick -= e)
-                .SafelySubscribe(o => GestureListener_Flick(o.Sender, o.EventArgs))
-                .DisposeWith(pageLevelDisposables);
+            //Observable.FromEventPattern<FlickGestureEventArgs>(
+            //    e => gestureListener.Flick += e,
+            //    e => gestureListener.Flick -= e)
+            //    .SafelySubscribe(o => GestureListener_Flick(o.Sender, o.EventArgs))
+            //    .DisposeWith(pageLevelDisposables);
         }
 
-        void GestureListener_Flick(object sender, FlickGestureEventArgs e)
+
+
+        void OnContentGridManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
-            if (vm == null)
+            // flicks always finish on interia
+            if (!e.IsInertial)
                 return;
 
-            if (e.Direction != System.Windows.Controls.Orientation.Horizontal)
-                return;
+            var finalHorizontalVelocity = e.FinalVelocities.LinearVelocity.X;
+            var absoluteVerticalMotion = Math.Abs(e.TotalManipulation.Translation.Y);
 
-            var velocity = e.HorizontalVelocity;
+            if (absoluteVerticalMotion < 46d)
+            {
+                if (finalHorizontalVelocity < -750)
+                    OnNextPage();
+                else if (finalHorizontalVelocity > 750)
+                    OnPreviousPage();
+            }
+            //DebugEx.WriteLine("************ **********  horizontal velocity = {0}, total vertical motion: {1}", finalHorizontalVelocity, absoluteVerticalMotion);
+        } 
 
-            if (velocity < -750)
-                OnNextPage();
+        //void GestureListener_Flick(object sender, FlickGestureEventArgs e)
+        //{
+        //    if (vm == null)
+        //        return;
 
-            else if (velocity > 700)
-                OnPreviousPage();
-        }
+        //    if (e.Direction != System.Windows.Controls.Orientation.Horizontal)
+        //        return;
+
+        //    var velocity = e.HorizontalVelocity;
+
+        //    if (velocity < -750)
+        //        OnNextPage();
+
+        //    else if (velocity > 700)
+        //        OnPreviousPage();
+        //}
 
         #endregion
 
