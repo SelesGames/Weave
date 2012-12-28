@@ -20,6 +20,11 @@ namespace Weave.LiveTile.ScheduledAgent
             this.appName = appName;
         }
 
+        string CreateImagePrefix()
+        {
+            return string.Format("{0}+{1}+photo", appName, categoryName);
+        }
+
         protected async override Task InitializeViewModelAsync()
         {
             var dal = new Weave4DataAccessLayer();
@@ -39,7 +44,8 @@ namespace Weave.LiveTile.ScheduledAgent
 
             var news = feeds.AllOrderedNews().ToList();
 
-            var imageUrls = await news.CreateImageUrisFromNews(TimeSpan.FromSeconds(15));
+            var imagePrefix = CreateImagePrefix();
+            var imageUrls = await news.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
             Uri preferredLockScreen = null;
             var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
             if (attempt.Item1)

@@ -340,7 +340,8 @@ namespace weave
 
         public async Task<CycleTileViewModel> CreateLiveTileViewModel()
         {
-            var imageUris = await allNews.CreateImageUrisFromNews(TimeSpan.FromSeconds(3));
+            var temp = Guid.NewGuid().ToString() + "photo";
+            var imageUris = await allNews.CreateImageUrisFromNews(temp, TimeSpan.FromSeconds(3));
 
             return new CycleTileViewModel
             {

@@ -8,14 +8,14 @@ namespace Weave.LiveTile.ScheduledAgent
 {
     public static class CycleTileHelper
     {
-        public static async Task<Uri[]> CreateImageUrisFromNews(this IEnumerable<NewsItem> news, TimeSpan downloadTimeLimit)
+        public static async Task<Uri[]> CreateImageUrisFromNews(this IEnumerable<NewsItem> news, string imagePrefix, TimeSpan downloadTimeLimit)
         {
             var imageUrls = new List<Uri>();
             var startTime = DateTime.Now;
 
             foreach (var newsItem in news.Where(o => o.HasImage))
             {
-                var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imageUrls.Count + 1);
+                var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imagePrefix, imageUrls.Count + 1);
                 
                 // after we download the image and saved it to isoStorage, check to see if we've gone over the total downloadTimeLimit
                 var elapsed = DateTime.Now - startTime;
@@ -38,7 +38,7 @@ namespace Weave.LiveTile.ScheduledAgent
             return imageUrls.ToArray();
         }
 
-        static async Task<Tuple<bool, Uri>> SaveImageStreamAndReturnUri(string imageUrl, int index)
+        static async Task<Tuple<bool, Uri>> SaveImageStreamAndReturnUri(string imageUrl, string imagePrefix, int index)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 {
                     if (stream.Length > 4096)
                     {
-                        var url = await stream.SaveToIsoStorage("photo" + index);
+                        var url = await stream.SaveToIsoStorage(imagePrefix + index);
                         return Tuple.Create(true, url);
                     }
                 }

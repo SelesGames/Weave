@@ -10,11 +10,18 @@ namespace Weave.LiveTile.ScheduledAgent
     public class CycleTileFeedNegotiator : TileNegotiatorBase
     {
         Guid feedId;
+        string appName;
 
         public CycleTileFeedNegotiator(Guid feedId, string appName, ShellTile tile) 
             : base(appName, tile)
         {
+            this.appName = appName;
             this.feedId = feedId;
+        }
+
+        string CreateImagePrefix()
+        {
+            return string.Format("{0}+{1}+photo", appName, feedId);
         }
 
         protected async override Task InitializeViewModelAsync()
@@ -39,7 +46,8 @@ namespace Weave.LiveTile.ScheduledAgent
 
             var news = feed.News.OrderByDescending(o => o.PublishDateTime).ToList();
 
-            var imageUrls = await news.CreateImageUrisFromNews(TimeSpan.FromSeconds(15));
+            var imagePrefix = CreateImagePrefix();
+            var imageUrls = await news.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
             Uri preferredLockScreen = null;
             var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
             if (attempt.Item1)
