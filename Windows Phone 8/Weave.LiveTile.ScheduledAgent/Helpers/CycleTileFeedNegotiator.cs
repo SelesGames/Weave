@@ -26,6 +26,8 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
+            string feedName;
+
             if (feedId == null)
                 return;
 
@@ -35,6 +37,8 @@ namespace Weave.LiveTile.ScheduledAgent
             var feed = feeds.FirstOrDefault(o => feedId.Equals(o.Id));
             if (feed == null)
                 return;
+
+            feedName = feed.FeedName;
 
             Trace.Output("refreshing feed: " + feed.FeedName);
 
@@ -60,6 +64,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 ImageIsoStorageUris = imageUrls,
                 NewCount = news.Count,
                 RecommendedLockScreenImageUri = preferredLockScreen,
+                AppName = appName + " " + feedName.ToTitleCase(),
             };
         }
     }

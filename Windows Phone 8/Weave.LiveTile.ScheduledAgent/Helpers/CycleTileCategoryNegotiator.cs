@@ -58,6 +58,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 ImageIsoStorageUris = imageUrls,
                 NewCount = news.Count,
                 RecommendedLockScreenImageUri = preferredLockScreen,
+                AppName = appName + " " + categoryName.ToTitleCase(),
             };
         }
 

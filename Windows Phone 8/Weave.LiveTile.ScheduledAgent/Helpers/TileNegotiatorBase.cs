@@ -48,7 +48,7 @@ namespace Weave.LiveTile.ScheduledAgent
 
             if (ViewModel == null) return;
 
-            ViewModel.AppName = appName;
+            //ViewModel.AppName = appName;
 
             var newTileData = ViewModel.CreateTileData();
             tile.Update(newTileData);

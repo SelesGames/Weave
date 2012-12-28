@@ -345,7 +345,7 @@ namespace weave
 
             return new CycleTileViewModel
             {
-                AppName = AppSettings.Instance.AppName.ToUpperInvariant() + " | " + Header.ToTitleCase(),
+                AppName = AppSettings.Instance.AppName.ToUpperInvariant() + " " + Header.ToTitleCase(),
                 SmallBackgroundImageUri = new Uri(@"Assets\Tiles\CycleTileSmall.png", UriKind.Relative),
                 NewCount = 0,
                 ImageIsoStorageUris = imageUris,
