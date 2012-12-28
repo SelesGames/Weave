@@ -218,6 +218,7 @@
     <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
     <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
     <Compile Include="Services\MostViewedHistory\RunLog.cs" />
+    <Compile Include="Services\SwipeGestureHelper.cs" />
     <Compile Include="Services\SystemTrayNavigationSetter.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using Telerik.Windows.Controls;
 
 
@@ -34,7 +33,7 @@ namespace weave
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
-
+        SwipeGestureHelper swipeHelper;
 
 
 
@@ -269,56 +268,18 @@ namespace weave
 
         void InitializeFlickHandling()
         {
-            //Microsoft.Xna.Framework.Input.Touch.TouchPanel.EnabledGestures = Microsoft.Xna.Framework.Input.Touch.GestureType.Flick;
-            ContentGrid.AddHandler(
-                UIElement.ManipulationCompletedEvent, 
-                new EventHandler<ManipulationCompletedEventArgs>(OnContentGridManipulationCompleted), true);
-            //var gestureListener = GestureService.GetGestureListener(swipePanel);
-
-            //Observable.FromEventPattern<FlickGestureEventArgs>(
-            //    e => gestureListener.Flick += e,
-            //    e => gestureListener.Flick -= e)
-            //    .SafelySubscribe(o => GestureListener_Flick(o.Sender, o.EventArgs))
-            //    .DisposeWith(pageLevelDisposables);
+            swipeHelper = new SwipeGestureHelper(LayoutRoot);
+            swipeHelper.Swipe += OnSwipe;
+            swipeHelper.DisposeWith(pageLevelDisposables);
         }
 
-
-
-        void OnContentGridManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
+        void OnSwipe(object sender, SwipeGestureHelper.SwipeEventArgs e)
         {
-            // flicks always finish on interia
-            if (!e.IsInertial)
-                return;
-
-            var finalHorizontalVelocity = e.FinalVelocities.LinearVelocity.X;
-            var absoluteVerticalMotion = Math.Abs(e.TotalManipulation.Translation.Y);
-
-            if (absoluteVerticalMotion < 46d)
-            {
-                if (finalHorizontalVelocity < -750)
-                    OnNextPage();
-                else if (finalHorizontalVelocity > 750)
-                    OnPreviousPage();
-            }
-            //DebugEx.WriteLine("************ **********  horizontal velocity = {0}, total vertical motion: {1}", finalHorizontalVelocity, absoluteVerticalMotion);
-        } 
-
-        //void GestureListener_Flick(object sender, FlickGestureEventArgs e)
-        //{
-        //    if (vm == null)
-        //        return;
-
-        //    if (e.Direction != System.Windows.Controls.Orientation.Horizontal)
-        //        return;
-
-        //    var velocity = e.HorizontalVelocity;
-
-        //    if (velocity < -750)
-        //        OnNextPage();
-
-        //    else if (velocity > 700)
-        //        OnPreviousPage();
-        //}
+            if (e.Direction == SwipeGestureHelper.SwipeDirection.Left)
+                OnPreviousPage();
+            else if (e.Direction == SwipeGestureHelper.SwipeDirection.Right)
+                OnNextPage();
+        }
 
         #endregion
 
@@ -574,6 +535,9 @@ namespace weave
             using (this.vm)
             using (this.adControl)
             { }
+
+            if (swipeHelper != null)
+                swipeHelper.Swipe -= OnSwipe;
 
             var imageCacheHandle = this.imageCache;
             this.imageCache = null;
