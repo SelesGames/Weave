@@ -38,7 +38,7 @@ namespace weave
         {
             InitializeComponent();
 
-            browser.Opacity = 0d;
+            browser.SoftCollapse();
             browser.IsScriptEnabled = true;
             opacityMask = browser.OpacityMask;
             HideLoadingIndicators();
@@ -336,7 +336,7 @@ namespace weave
         async Task DisplayArticleContent()
         {
             //IsHitTestVisible = false;
-            browser.Opacity = 0d;
+            browser.SoftCollapse();
             browser.OpacityMask = opacityMask;
             ShowLoadingIndicators();
             setArticleHandle.Disposable = null;
@@ -364,6 +364,7 @@ namespace weave
 
                 isHtmlDisplayed = true;
                 browser.OpacityMask = null;
+                browser.IsHitTestVisible = true;
 
                 await LoadingOutSB.BeginWithNotification().ToTask();
                 setArticleHandle.Disposable = browser.GetNavigating().Subscribe(OnBrowserNavigating);
