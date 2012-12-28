@@ -8,8 +8,8 @@
 	mc:Ignorable="d">
 
 	<Style TargetType="local:SwitchingAdControl">
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
+		<Setter Property="Background" Value="{StaticResource PhoneChromeBrush}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource PhoneSubtleBrush}"/>
 		<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 		<Setter Property="Padding" Value="0"/>
 		<Setter Property="Width" Value="480" />
@@ -22,29 +22,29 @@
 							<Storyboard x:Name="OnNewAdSB">
 								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="LayoutRoot">
 									<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.51">
+									<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.95">
 										<EasingDoubleKeyFrame.EasingFunction>
 											<CubicEase EasingMode="EaseOut"/>
 										</EasingDoubleKeyFrame.EasingFunction>
 									</EasingDoubleKeyFrame>
-									<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.51"/>
+									<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.95"/>
 									<EasingDoubleKeyFrame KeyTime="0:0:4" Value="1">
 										<EasingDoubleKeyFrame.EasingFunction>
-											<ElasticEase EasingMode="EaseOut"/>
+											<ElasticEase EasingMode="EaseOut" Oscillations="2"/>
 										</EasingDoubleKeyFrame.EasingFunction>
 									</EasingDoubleKeyFrame>
 								</DoubleAnimationUsingKeyFrames>
 								<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="LayoutRoot">
 									<EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-									<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.51">
+									<EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.95">
 										<EasingDoubleKeyFrame.EasingFunction>
 											<CubicEase EasingMode="EaseOut"/>
 										</EasingDoubleKeyFrame.EasingFunction>
 									</EasingDoubleKeyFrame>
-									<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.51"/>
+									<EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.95"/>
 									<EasingDoubleKeyFrame KeyTime="0:0:4" Value="1">
 										<EasingDoubleKeyFrame.EasingFunction>
-											<ElasticEase EasingMode="EaseOut"/>
+											<ElasticEase EasingMode="EaseOut" Oscillations="2"/>
 										</EasingDoubleKeyFrame.EasingFunction>
 									</EasingDoubleKeyFrame>
 								</DoubleAnimationUsingKeyFrames>
@@ -53,7 +53,11 @@
 						<Border.RenderTransform>
 							<CompositeTransform />
 						</Border.RenderTransform>
-						<Grid x:Name="AdContainer" Margin="{TemplateBinding Padding}" />
+						<Grid x:Name="AdContainer" Margin="{TemplateBinding Padding}">
+							<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CacheMode="BitmapCache" BorderThickness="1">
+								<TextBlock Text="Did you know: by viewing a single ad, the remainder of your session is ad-free?" Margin="24,0" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" />
+							</Border>
+						</Grid>
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>

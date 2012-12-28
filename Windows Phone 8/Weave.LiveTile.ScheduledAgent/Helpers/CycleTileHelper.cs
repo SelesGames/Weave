@@ -44,7 +44,6 @@ namespace Weave.LiveTile.ScheduledAgent
             {
                 using (var stream = await ImageHelper.GetImageStreamAsync(imageUrl))
                 {
-                    DebugEx.WriteLine("IMAGE LENGTH: {0}", stream.Length);
                     if (stream.Length > 4096)
                     {
                         var url = await stream.SaveToIsoStorage("photo" + index);

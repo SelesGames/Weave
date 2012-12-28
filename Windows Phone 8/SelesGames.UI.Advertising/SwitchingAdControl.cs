@@ -18,6 +18,7 @@ namespace SelesGames.UI.Advertising
         bool isHidden = false;
         int currentFaultLevel = 0;
         bool isDisposed = false;
+        readonly TimeSpan INITIAL_AD_DISPLAY_DELAY = TimeSpan.FromSeconds(3);
 
         public bool PlayAnimations { get; set; }
         public bool IsAdCurrentlyEngaged { get { return false; } }
@@ -72,7 +73,7 @@ namespace SelesGames.UI.Advertising
 
             if (AdVisibilityService.AreAdsStillBeingShownAtAll)
             {
-                await Task.Delay(TimeSpan.FromSeconds(1.5));
+                await Task.Delay(INITIAL_AD_DISPLAY_DELAY);
                 CreateAd();
             }
             else
@@ -90,7 +91,6 @@ namespace SelesGames.UI.Advertising
         {
             try
             {
-                await Task.Delay(TimeSpan.FromSeconds(1));
                 if (isDisposed)
                     return;
 
@@ -102,7 +102,8 @@ namespace SelesGames.UI.Advertising
                 adControl.AdClicked += OnAdClicked;
                 adControl.AdRefreshed += OnAdRefreshed;
                 adControl.AdError += OnAdControlErrorOccurred;
-                
+
+                adControl.Control.Opacity = 0d;
                 AdContainer.Children.Add(adControl.Control);
             }
             catch (Exception e)
@@ -145,6 +146,7 @@ namespace SelesGames.UI.Advertising
 
         void OnAdRefreshed(object sender, EventArgs e)
         {
+            adControl.Control.Opacity = 1d;
             currentFaultLevel = Math.Max(currentFaultLevel - 1, 0);
 
             if (OnNewAdSB == null || !PlayAnimations)

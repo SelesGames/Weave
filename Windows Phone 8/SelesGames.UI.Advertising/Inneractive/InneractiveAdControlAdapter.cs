@@ -1,16 +1,18 @@
 ﻿using Inneractive.Nokia.Ad;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace SelesGames.UI.Advertising.Inneractive
 {
-    public class InneractiveAdControlAdapter : IAdControlAdapter
+    internal class InneractiveAdControlAdapter : IAdControlAdapter
     {
-        InneractiveAd adControl;
+        UIElement adControlWrapper;
 
-        public InneractiveAdControlAdapter(InneractiveAd adControl)
+        public InneractiveAdControlAdapter(UIElement adControlWrapper)
         {
-            this.adControl = adControl;
+            this.adControlWrapper = adControlWrapper;
+            var grid = new Grid();
 
             InneractiveAd.AdClicked += OnAdClicked;
             InneractiveAd.AdReceived += OnAdRefreshed;
@@ -48,7 +50,7 @@ namespace SelesGames.UI.Advertising.Inneractive
 
         public UIElement Control
         {
-            get { return adControl; }
+            get { return adControlWrapper; }
         }
 
         public event EventHandler AdClicked;

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace SelesGames.UI.Advertising.Microsoft
 {
-    public class MicrosoftAdControlAdapter : IAdControlAdapter
+    internal class MicrosoftAdControlAdapter : IAdControlAdapter
     {
         AdControl adControl;
         SerialDisposable sd = new SerialDisposable();

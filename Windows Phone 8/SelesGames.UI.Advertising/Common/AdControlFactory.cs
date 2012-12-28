@@ -1,11 +1,16 @@
 ﻿using Inneractive.Nokia.Ad;
 using Microsoft.Advertising.Mobile.UI;
+using Microsoft.Devices;
 using SelesGames.Rest;
 using SelesGames.UI.Advertising.Inneractive;
 using SelesGames.UI.Advertising.Microsoft;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
+using MSD = Microsoft.Devices;
 
 namespace SelesGames.UI.Advertising
 {
@@ -42,10 +47,22 @@ namespace SelesGames.UI.Advertising
             var appId = adSettings.Microsoft.AppId;
             var adUnitId = adSettings.Microsoft.GetRandomAdUnit();
 
+            if (MSD.Environment.DeviceType == DeviceType.Emulator)
+            {
+                appId = "test_client";
+                adUnitId = "Image480_80";
+            }
+
             if (string.IsNullOrEmpty(appId)) throw new ArgumentException("appId in AdControlFactory.CreateMicrosoft");
             if (string.IsNullOrEmpty(adUnitId)) throw new ArgumentException("adUnitId in AdControlFactory.CreateMicrosoft");
 
-            var adControl = new AdControl(appId, adUnitId, false) { IsAutoCollapseEnabled = true, Width = 480, Height = 80, BorderBrush = new SolidColorBrush(Colors.White) };
+            var adControl = new AdControl(appId, adUnitId, false) 
+            { 
+                IsAutoCollapseEnabled = true, 
+                Width = 480, 
+                Height = 80, 
+                BorderBrush = null//new SolidColorBrush(Colors.White) 
+            };
 
             if (!string.IsNullOrEmpty(keywords))
                 adControl.Keywords = keywords;
@@ -55,17 +72,31 @@ namespace SelesGames.UI.Advertising
 
         IAdControlAdapter CreateInneractive(string keywords = null)
         {
-            var adControl = new InneractiveAd("SelesGames_Weave_WP", InneractiveAd.IaAdType.IaAdType_Banner, 30)
+            if (adSettings == null || adSettings.Inneractive == null) throw new ArgumentNullException("in AdControlFactory.CreateMicrosoft");
+
+            var appId = adSettings.Inneractive.AppId;
+
+            var grid = new Grid
             {
                 Width = 480,
                 Height = 80,
-                BorderBrush = new SolidColorBrush(Colors.White)
             };
 
+            var optionalParams = new Dictionary<InneractiveAd.IaOptionalParams,string>();
             if (!string.IsNullOrEmpty(keywords))
-                adControl.Keywords = keywords;
+                optionalParams.Add(InneractiveAd.IaOptionalParams.Key_Keywords, keywords);
 
-            return new InneractiveAdControlAdapter(adControl);
+            InneractiveAd.DisplayAd(appId, global::Inneractive.Ad.InneractiveAd.IaAdType.IaAdType_Banner, grid, 30, optionalParams);
+
+            //var adControl = new InneractiveAd("SelesGames_Weave_WP", InneractiveAd.IaAdType.IaAdType_Banner, 30)
+            //{
+            //    Width = 480,
+            //    Height = 80,
+            //    BorderBrush = new SolidColorBrush(Colors.White)
+            //};
+
+
+            return new InneractiveAdControlAdapter(grid);
         }
     }
 }
