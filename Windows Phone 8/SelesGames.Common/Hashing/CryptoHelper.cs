@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Weave.Data.Library
+namespace SelesGames.Common.Hashing
 {
-    internal class CryptoHelper
+    public class CryptoHelper
     {
         // approach using MD5 and GUIDs
         public static Guid ComputeHash(string val)
