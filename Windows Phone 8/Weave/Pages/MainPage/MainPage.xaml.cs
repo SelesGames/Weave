@@ -404,6 +404,14 @@ namespace weave
                     ShellTile.Create(currentSource, newTileData, true);
                 }
             }
+            catch (InvalidOperationException ex)
+            {
+                DebugEx.WriteLine(ex);
+                if (ex.Message == "image count")
+                    MessageBox.Show("We can only make a Live Tile out of a news source that has at least 2 images in it!");
+                else
+                    MessageBox.Show("Whoops!  There was a problem creating the Live Tile for this category.  Please try again later");
+            }
             catch (Exception ex)
             {
                 DebugEx.WriteLine(ex);

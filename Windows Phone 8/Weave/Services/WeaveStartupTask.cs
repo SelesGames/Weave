@@ -3,6 +3,7 @@ using Microsoft.Phone.Shell;
 using SelesGames;
 using SelesGames.Phone;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -17,6 +18,7 @@ using weave.Data;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
+using weave.Services;
 
 namespace weave
 {
@@ -28,6 +30,7 @@ namespace weave
         Kernel kernel;
         Weave4DataAccessLayer dataAccessLayer;
         bool hasBeenInitialized = false;
+        Uri initialNavigationUri = null;
 
         public WeaveStartupTask(AppSettings settings)
         {
@@ -111,7 +114,10 @@ namespace weave
 
         async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
+            initialNavigationUri = args.EventArgs.Uri;
+
             await RecoverPermanentStateAsync();
+            ClearUpdateCountOnAllTiles();
 
             new SystemTrayNavigationSetter(frame, permanentState);
 
@@ -325,8 +331,16 @@ namespace weave
 
             settings.CurrentApplication.UnhandledException += (s, e) =>
             {
+                var ex = e.ExceptionObject;
+
+                if (ex == null)
+                    return;
+
+                if (ex is InvalidOperationException && ex.Message == "Navigation is not allowed when the task is not in the foreground.")
+                    return;
+
                 if (settings.LogExceptions)
-                    LittleWatson.LogException(e.ExceptionObject, string.Empty);
+                    LittleWatson.LogException(ex, string.Empty);
             };
 
 
@@ -412,11 +426,32 @@ namespace weave
             var taskService = new PeriodicTaskService(string.Format("pts:{0}", appName.ToUpperInvariant()))
             {
                 Description = string.Format(
-"Enables *** LIVE TILE *** updating for {0}.  If you disable this, you will lose Live Tiles for this app.", appName)
+#if DEBUG
+                "DEMO LIVE TILE WEAVE UPDATING.", appName)
+#else
+                "Enables *** LIVE TILE *** updating for {0}.  If you disable this, you will lose Live Tiles for this app.", appName)
+#endif
             };
             var regResult = taskService.TryRegister();
             if (!regResult)
                 DebugEx.WriteLine(taskService.RegistrationException);
+        }
+
+        void ClearUpdateCountOnAllTiles()
+        {
+            if (initialNavigationUri == null)
+                return;
+
+            var tiles = (IEnumerable<ShellTile>)ShellTile.ActiveTiles.ToList();
+
+            if (!initialNavigationUri.Equals(new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative)))
+                tiles = tiles.Where(o => o.NavigationUri.Equals(initialNavigationUri));
+
+            foreach (var tile in tiles)
+            {
+                var tileData = new CycleTileData { Count = 0 };
+                tile.Update(tileData);
+            }
         }
 
         #endregion

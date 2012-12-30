@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using SelesGames.Common.Hashing;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,9 @@ namespace Weave.LiveTile.ScheduledAgent
 
         string CreateImagePrefix()
         {
-            return string.Format("{0}+{1}+photo", appName, feedId);
+            var appNameWithCategory = string.Format("{0}{1}", appName, feedId);
+            var hashed = CryptoHelper.ComputeHash(appNameWithCategory);
+            return string.Format("{0}.photo", hashed);
         }
 
         protected async override Task InitializeViewModelAsync()
@@ -42,7 +45,11 @@ namespace Weave.LiveTile.ScheduledAgent
 
             Trace.Output("refreshing feed: " + feed.FeedName);
 
+#if DEBUG
+            feed.ResetFeed();
+#endif
             feed.RefreshNews();
+
             await feed.CurrentRefresh;
 
             if (feed.News == null || !feed.News.Any())

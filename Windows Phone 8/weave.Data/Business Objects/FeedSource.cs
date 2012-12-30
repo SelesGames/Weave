@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Weave.Data.Library;
 using Weave.RSS;
 
 namespace weave
@@ -255,6 +254,14 @@ namespace weave
         }
 
 
+#if DEBUG
+        public void ResetFeed()
+        {
+            ResetUpdateState();
+            RecalculateNewsHash();
+            SaveToUpdateHistory();
+        }
+#endif
 
 
         #region Helper functions to aid in initialized the News with what was recovered from isostorage
@@ -312,7 +319,7 @@ namespace weave
                     .OfType<string>()
                     .Aggregate(new StringBuilder(), (sb, link) => sb.Append(link))
                     .ToString();
-                var guid = CryptoHelper.ComputeHash(concatenatedNewsLinks);
+                var guid = SelesGames.Common.Hashing.CryptoHelper.ComputeHash(concatenatedNewsLinks);
                 return guid;
             }
         }

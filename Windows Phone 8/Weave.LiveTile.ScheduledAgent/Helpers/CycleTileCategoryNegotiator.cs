@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using SelesGames.Common.Hashing;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,17 +13,22 @@ namespace Weave.LiveTile.ScheduledAgent
     {
         string categoryName;
         string appName;
+        string tileTitle;
 
         public CycleTileCategoryNegotiator(string categoryName, string appName, ShellTile tile)
             : base(appName, tile)
         {
-            this.categoryName = categoryName;
+            this.categoryName = System.Net.HttpUtility.UrlDecode(categoryName);
             this.appName = appName;
+            this.tileTitle = categoryName == null ?
+                appName : appName + " " + this.categoryName.ToTitleCase();
         }
 
         string CreateImagePrefix()
         {
-            return string.Format("{0}+{1}+photo", appName, categoryName);
+            var appNameWithCategory = string.Format("{0}{1}", appName, categoryName);
+            var hashed = CryptoHelper.ComputeHash(appNameWithCategory);
+            return string.Format("{0}.photo", hashed);
         }
 
         protected async override Task InitializeViewModelAsync()
@@ -37,7 +43,12 @@ namespace Weave.LiveTile.ScheduledAgent
 
             FeedSource.NewsServer.BeginFeedUpdateBatch();
             foreach (var feed in feeds)
+            {
+#if DEBUG
+                feed.ResetFeed();
+#endif
                 feed.RefreshNews();
+            }
             FeedSource.NewsServer.EndFeedUpdateBatch();
 
             await feeds.Select(o => o.CurrentRefresh);
@@ -58,7 +69,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 ImageIsoStorageUris = imageUrls,
                 NewCount = news.Count,
                 RecommendedLockScreenImageUri = preferredLockScreen,
-                AppName = appName + " " + categoryName.ToTitleCase(),
+                AppName = tileTitle,
             };
         }
 

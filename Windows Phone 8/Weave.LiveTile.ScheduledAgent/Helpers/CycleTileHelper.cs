@@ -51,7 +51,10 @@ namespace Weave.LiveTile.ScheduledAgent
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
             return Tuple.Create(false, default(Uri));
         }
     }

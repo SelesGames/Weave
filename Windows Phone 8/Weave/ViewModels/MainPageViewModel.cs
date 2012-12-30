@@ -340,8 +340,12 @@ namespace weave
 
         public async Task<CycleTileViewModel> CreateLiveTileViewModel()
         {
+            var newsWithImages = allNews.Where(o => o.HasImage).ToList();
+            if (newsWithImages.Count < 2)
+                throw new InvalidOperationException("image count");
+
             var temp = Guid.NewGuid().ToString() + "photo";
-            var imageUris = await allNews.CreateImageUrisFromNews(temp, TimeSpan.FromSeconds(3));
+            var imageUris = await newsWithImages.CreateImageUrisFromNews(temp, TimeSpan.FromSeconds(3));
 
             return new CycleTileViewModel
             {
