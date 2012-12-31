@@ -55,7 +55,7 @@
 						</Border.RenderTransform>
 						<Grid x:Name="AdContainer" Margin="{TemplateBinding Padding}">
 							<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CacheMode="BitmapCache" BorderThickness="1">
-								<TextBlock Text="Did you know:  by viewing a single ad, the remainder of your session is ad-free?" Margin="24,0" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" />
+								<TextBlock Text="Did you know:  view an ad, and the remainder of your session is ad-free?" Margin="24,0" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilySemiBold}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" />
 							</Border>
 						</Grid>
 					</Border>

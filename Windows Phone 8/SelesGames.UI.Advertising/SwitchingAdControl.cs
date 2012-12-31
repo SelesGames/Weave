@@ -18,7 +18,7 @@ namespace SelesGames.UI.Advertising
         bool isHidden = false;
         int currentFaultLevel = 0;
         bool isDisposed = false;
-        readonly TimeSpan INITIAL_AD_DISPLAY_DELAY = TimeSpan.FromSeconds(3);
+        readonly TimeSpan INITIAL_AD_DISPLAY_DELAY = TimeSpan.FromSeconds(2.5);
 
         public bool PlayAnimations { get; set; }
         public bool IsAdCurrentlyEngaged { get { return false; } }

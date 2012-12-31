@@ -41,7 +41,7 @@ namespace weave
                 }
             }
 
-            dnp.Counter.EnableMemoryCounter = true;
+            //dnp.Counter.EnableMemoryCounter = true;
 
             Debug.WriteLine("\r\n*******************\r\nMAIN GUI THREAD HAPPENING ON {0}\r\n*******************\r\n", Thread.CurrentThread.ManagedThreadId);
             this.IsHitTestVisible = false;

@@ -97,15 +97,6 @@
   </Category>
 
 
-  <Category Type="Politics">
-    <Feed Name="CNN">http://rss.cnn.com/rss/cnn_allpolitics.rss</Feed>
-    <Feed Name="Slate">http://www.slate.com/articles/news_and_politics.fulltext.all.20.rss</Feed>
-    <Feed Name="The Blaze">http://www.theblaze.com/stories/feed/</Feed>
-    <Feed Name="The Daily Beast">http://feeds.feedburner.com/thedailybeast/politics</Feed>
-    <Feed Name="The New Yorker">http://www.newyorker.com/online/blogs/newsdesk/rss.xml</Feed>
-  </Category>
-
-
   <Category Type="Programming">
     <Feed Name="Coding4Fun">http://blogs.msdn.com/b/coding4fun/rss.aspx</Feed>
     <Feed Name="Coding Horror">http://feeds.feedburner.com/codinghorror</Feed>
