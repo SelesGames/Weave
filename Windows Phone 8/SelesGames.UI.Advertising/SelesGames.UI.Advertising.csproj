@@ -92,6 +92,9 @@
     <Reference Include="Microsoft.Advertising.Mobile.UI">
       <HintPath>..\lib\Microsoft.Advertising.Mobile.UI</HintPath>
     </Reference>
+    <Reference Include="SOMAWP8">
+      <HintPath>..\lib\SOMAWP8.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive.Core">
       <HintPath>..\lib\System.Reactive.Core.dll</HintPath>
     </Reference>
@@ -113,8 +116,11 @@
     <Compile Include="Common\IAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdSettings.cs" />
+    <Compile Include="Common\AdSettingsBase.cs" />
     <Compile Include="Microsoft\MicrosoftAdControlAdapter.cs" />
     <Compile Include="Microsoft\MicrosoftAdSettings.cs" />
+    <Compile Include="Smaato\SmaatoAdControlAdapter.cs" />
+    <Compile Include="Smaato\SmaatoAdSettings.cs" />
     <Compile Include="SwitchingAdControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,16 +1,8 @@
-﻿using Inneractive.Nokia.Ad;
-using Microsoft.Advertising.Mobile.UI;
-using Microsoft.Devices;
-using SelesGames.Rest;
-using SelesGames.UI.Advertising.Inneractive;
-using SelesGames.UI.Advertising.Microsoft;
+﻿using SelesGames.Rest;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media;
-using MSD = Microsoft.Devices;
 
 namespace SelesGames.UI.Advertising
 {
@@ -18,6 +10,8 @@ namespace SelesGames.UI.Advertising
     {
         readonly string adSettingsUrl;// = "http://weave.blob.core.windows.net/settings/sampleSettings.json";
         Common.AdSettings adSettings;
+        IEnumerator<AdSettingsBase> adSettingsEnumerator;
+        bool isInitialized = false;
 
         public AdControlFactory(string adSettingsUrl)
         {
@@ -26,77 +20,76 @@ namespace SelesGames.UI.Advertising
 
         async Task InitializeAsync()
         {
-            if (adSettings == null)
+            if (isInitialized == false)
             {
                 var client = new JsonRestClient<Common.AdSettings>();
                 adSettings = await client.GetAsync(adSettingsUrl, System.Threading.CancellationToken.None);
+                ResetEnumerator();
+                isInitialized = true;
             }
+        }
+
+        public void ResetEnumerator()
+        {
+            adSettingsEnumerator = adSettings
+                .AsEnumerable()
+                .Select(o => Tuple.Create(o, o.FaultToleranceCount))
+                .RepeatEnumerable()
+                .Wrap()
+                .GetEnumerator();
         }
 
         public async Task<IAdControlAdapter> CreateAdControl(string keywords = null)
         {
             await InitializeAsync();
-            return CreateMicrosoft(keywords);
-            //return CreateInneractive(keywords);
+
+            if (adSettingsEnumerator == null || !adSettingsEnumerator.MoveNext())
+                throw new InvalidOperationException("no adSettings have been set in AdControlFactory.CreateAdControl");
+
+            var currentSelectedSetting = adSettingsEnumerator.Current;
+            return currentSelectedSetting.CreateAdControl(keywords);
         }
+    }
 
-        IAdControlAdapter CreateMicrosoft(string keywords = null)
+    public static class IEnumerableExtensions
+    {
+        public static IEnumerable<T> RepeatEnumerable<T>(this IEnumerable<Tuple<T, int>> o)
         {
-            if (adSettings == null || adSettings.Microsoft == null) throw new ArgumentNullException("in AdControlFactory.CreateMicrosoft");
+            if (o == null)
+                throw new ArgumentNullException("parameter in IEnumerableExtensions.Wrap");
 
-            var appId = adSettings.Microsoft.AppId;
-            var adUnitId = adSettings.Microsoft.GetRandomAdUnit();
+            if (!o.Any())
+                yield break;
 
-            if (MSD.Environment.DeviceType == DeviceType.Emulator)
+            var enumerator = o.GetEnumerator();
+
+            while (enumerator.MoveNext())
             {
-                appId = "test_client";
-                adUnitId = "Image480_80";
+                var current = enumerator.Current;
+
+                for (int i = 0; i < current.Item2; i++)
+                    yield return current.Item1;
             }
-
-            if (string.IsNullOrEmpty(appId)) throw new ArgumentException("appId in AdControlFactory.CreateMicrosoft");
-            if (string.IsNullOrEmpty(adUnitId)) throw new ArgumentException("adUnitId in AdControlFactory.CreateMicrosoft");
-
-            var adControl = new AdControl(appId, adUnitId, false) 
-            { 
-                IsAutoCollapseEnabled = true, 
-                Width = 480, 
-                Height = 80, 
-                BorderBrush = null//new SolidColorBrush(Colors.White) 
-            };
-
-            if (!string.IsNullOrEmpty(keywords))
-                adControl.Keywords = keywords;
-
-            return new MicrosoftAdControlAdapter(adControl);
         }
 
-        IAdControlAdapter CreateInneractive(string keywords = null)
+        public static IEnumerable<T> Wrap<T>(this IEnumerable<T> o)
         {
-            if (adSettings == null || adSettings.Inneractive == null) throw new ArgumentNullException("in AdControlFactory.CreateMicrosoft");
+            if (o == null)
+                throw new ArgumentNullException("parameter in IEnumerableExtensions.Wrap");
 
-            var appId = adSettings.Inneractive.AppId;
+            if (!o.Any())
+                yield break;
 
-            var grid = new Grid
+            var enumerator = o.GetEnumerator();
+
+            while (enumerator != null)
             {
-                Width = 480,
-                Height = 80,
-            };
-
-            var optionalParams = new Dictionary<InneractiveAd.IaOptionalParams,string>();
-            if (!string.IsNullOrEmpty(keywords))
-                optionalParams.Add(InneractiveAd.IaOptionalParams.Key_Keywords, keywords);
-
-            InneractiveAd.DisplayAd(appId, global::Inneractive.Ad.InneractiveAd.IaAdType.IaAdType_Banner, grid, 30, optionalParams);
-
-            //var adControl = new InneractiveAd("SelesGames_Weave_WP", InneractiveAd.IaAdType.IaAdType_Banner, 30)
-            //{
-            //    Width = 480,
-            //    Height = 80,
-            //    BorderBrush = new SolidColorBrush(Colors.White)
-            //};
-
-
-            return new InneractiveAdControlAdapter(grid);
+                while (enumerator.MoveNext())
+                {
+                    yield return enumerator.Current;
+                }
+                enumerator = o.GetEnumerator();
+            }
         }
     }
 }

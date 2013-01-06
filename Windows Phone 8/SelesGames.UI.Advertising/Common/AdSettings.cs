@@ -1,5 +1,8 @@
 ﻿using SelesGames.UI.Advertising.Inneractive;
 using SelesGames.UI.Advertising.Microsoft;
+using SelesGames.UI.Advertising.Smaato;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SelesGames.UI.Advertising.Common
 {
@@ -7,5 +10,20 @@ namespace SelesGames.UI.Advertising.Common
     {
         public MicrosoftAdSettings Microsoft { get; set; }
         public InneractiveAdSettings Inneractive { get; set; }
+        public SmaatoAdSettings Smaato { get; set; }
+
+        public IEnumerable<AdSettingsBase> AsEnumerable()
+        {
+            return new AdSettingsBase[] 
+            {
+                //Microsoft,
+                //Inneractive,
+                Smaato,
+            }
+            .OfType<AdSettingsBase>()
+            .Where(o => o.Enabled)
+            .OrderBy(o => o.ExecutionOrder)
+            .ToList();
+        }
     }
 }
