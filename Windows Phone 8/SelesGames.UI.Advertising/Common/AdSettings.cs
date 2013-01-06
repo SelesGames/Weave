@@ -16,8 +16,8 @@ namespace SelesGames.UI.Advertising.Common
         {
             return new AdSettingsBase[] 
             {
-                //Microsoft,
-                //Inneractive,
+                Microsoft,
+                Inneractive,
                 Smaato,
             }
             .OfType<AdSettingsBase>()

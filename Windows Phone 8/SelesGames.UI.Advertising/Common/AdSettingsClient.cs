@@ -9,6 +9,8 @@ namespace SelesGames.UI.Advertising.Common
         Lazy<Task<AdSettings>> initializer;
         string adSettingsUrl;
 
+        public Task<AdSettings> AdSettings { get { return initializer.Get(); } }
+
         public AdSettingsClient(string adSettingsUrl)
         {
             this.adSettingsUrl = adSettingsUrl;

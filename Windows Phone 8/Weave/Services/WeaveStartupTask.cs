@@ -384,8 +384,8 @@ namespace weave
 
             kernel.Bind<MainPageNavigationDropDownList>().ToSelf().InSingletonScope();
 
-            kernel.Bind<SelesGames.UI.Advertising.AdControlFactory>().ToMethod(_ =>
-                new SelesGames.UI.Advertising.AdControlFactory(settings.AdUnitsUrl))
+            kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
+                new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
                 .InSingletonScope();
 
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
