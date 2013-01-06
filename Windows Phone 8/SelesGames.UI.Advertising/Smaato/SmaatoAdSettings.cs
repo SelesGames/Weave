@@ -15,17 +15,21 @@ namespace SelesGames.UI.Advertising.Smaato
             {
                 Pub = publisherId,
                 Adspace = adspaceId,
-                AdSpaceHeight = 80,
-                AdSpaceWidth = 480,
+                //AdSpaceHeight = 80,
+                //AdSpaceWidth = 480,
                 LocationUseOK = false,
                 AdInterval = 30,
                 Width = 480,
                 Height = 80,
                 ShowErrors = true,
+                PopupAd = true,
             };
 
             if (!string.IsNullOrEmpty(keywords))
+            {
                 adControl.Kws = keywords;
+                adControl.Qs = keywords;
+            }
 
             adControl.StartAds();
 

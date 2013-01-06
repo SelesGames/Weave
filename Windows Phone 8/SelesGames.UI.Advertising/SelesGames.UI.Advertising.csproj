@@ -113,10 +113,12 @@
     <Compile Include="AdSettings.cs" />
     <Compile Include="AdVisibilityService.cs" />
     <Compile Include="Common\AdSettings.cs" />
+    <Compile Include="Common\AdSettingsClient.cs" />
     <Compile Include="Common\IAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdSettings.cs" />
     <Compile Include="Common\AdSettingsBase.cs" />
+    <Compile Include="Library\IEnumerableExtensions.cs" />
     <Compile Include="Microsoft\MicrosoftAdControlAdapter.cs" />
     <Compile Include="Microsoft\MicrosoftAdSettings.cs" />
     <Compile Include="Smaato\SmaatoAdControlAdapter.cs" />
