@@ -118,6 +118,7 @@
     <Compile Include="Extension Methods\ConvenienceExtensions.cs" />
     <Compile Include="Extension Methods\NavigationServiceExtensions.cs" />
     <Compile Include="Extension Methods\PhoneApplicationFrameExtensions.cs" />
+    <Compile Include="Extension Methods\ShellTileExtensions.cs" />
     <Compile Include="LittleWatson.cs" />
     <Compile Include="OrientationLockService.cs" />
     <Compile Include="OSThemeHelper.cs" />

@@ -18,7 +18,6 @@ using weave.Data;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
-using weave.Services;
 
 namespace weave
 {
@@ -450,7 +449,7 @@ namespace weave
             foreach (var tile in tiles)
             {
                 var tileData = new CycleTileData { Count = 0 };
-                tile.Update(tileData);
+                tile.TryUpdate(tileData);
             }
         }
 
