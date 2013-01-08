@@ -92,6 +92,12 @@
     <Reference Include="Microsoft.Advertising.Mobile.UI">
       <HintPath>..\lib\Microsoft.Advertising.Mobile.UI</HintPath>
     </Reference>
+    <Reference Include="MobFox.Ads">
+      <HintPath>..\lib\MobFox.Ads.dll</HintPath>
+    </Reference>
+    <Reference Include="MobFox.Ads.LocationAware">
+      <HintPath>..\lib\MobFox.Ads.LocationAware.dll</HintPath>
+    </Reference>
     <Reference Include="SOMAWP8">
       <HintPath>..\lib\SOMAWP8.dll</HintPath>
     </Reference>
@@ -121,6 +127,8 @@
     <Compile Include="Library\IEnumerableExtensions.cs" />
     <Compile Include="Microsoft\MicrosoftAdControlAdapter.cs" />
     <Compile Include="Microsoft\MicrosoftAdSettings.cs" />
+    <Compile Include="MobFox\MobFoxAdControlAdapter.cs" />
+    <Compile Include="MobFox\MobFoxAdSettings.cs" />
     <Compile Include="Smaato\SmaatoAdControlAdapter.cs" />
     <Compile Include="Smaato\SmaatoAdSettings.cs" />
     <Compile Include="SwitchingAdControl.cs" />
