@@ -14,13 +14,17 @@ namespace SelesGames.UI.Advertising.MobFox
             var adControl = new LocationAwareAdControl
             {
                 PublisherID = publisherId,
-                AlwaysShowAdsWhenDebuggerAttached = true,
+                AlwaysShowAdsWhenDebuggerAttached = false,
                 AutoRotate = true,
                 Interval = TimeSpan.FromSeconds(30),
                 ShowAdsOnlyInTrial = false,
                 Width = 480,
                 Height = 80,
             };
+
+#if DEBUG
+            adControl.TestMode = true;
+#endif
 
             return new MobFoxAdControlAdapter(adControl);
         }

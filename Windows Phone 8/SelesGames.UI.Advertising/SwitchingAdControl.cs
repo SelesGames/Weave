@@ -162,7 +162,11 @@ namespace SelesGames.UI.Advertising
             DebugEx.WriteLine(error);
             Dispatcher.BeginInvoke(() =>
             {
-                FlushAd();
+                try
+                {
+                    FlushAd();
+                }
+                catch { }
                 currentFaultLevel++;
                 if (currentFaultLevel < MaxFaultLevel)
                     CreateAd();

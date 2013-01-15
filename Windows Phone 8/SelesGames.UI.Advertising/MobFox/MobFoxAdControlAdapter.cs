@@ -61,6 +61,8 @@ namespace SelesGames.UI.Advertising.MobFox
             adControl.AdEngaged -= OnAdClicked;
             adControl.NewAd -= OnAdRefreshed;
             adControl.NoAd -= OnAdFailed;
+
+            adControl.Dispose();
         }
     }
 }

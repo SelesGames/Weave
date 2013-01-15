@@ -83,6 +83,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdDuplex.WindowsPhone">
+      <HintPath>..\lib\AdDuplex.WindowsPhone.dll</HintPath>
+    </Reference>
     <Reference Include="Inneractive.Ad">
       <HintPath>..\lib\Inneractive.Ad.dll</HintPath>
     </Reference>
@@ -91,6 +94,9 @@
     </Reference>
     <Reference Include="Microsoft.Advertising.Mobile.UI">
       <HintPath>..\lib\Microsoft.Advertising.Mobile.UI</HintPath>
+    </Reference>
+    <Reference Include="MillennialMedia.WP7.SDK">
+      <HintPath>..\lib\MillennialMedia.WP7.SDK.dll</HintPath>
     </Reference>
     <Reference Include="MobFox.Ads">
       <HintPath>..\lib\MobFox.Ads.dll</HintPath>
@@ -115,6 +121,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdDuplex\AdDuplexAdControlAdapter.cs" />
+    <Compile Include="AdDuplex\AdDuplexAdSettings.cs" />
     <Compile Include="Common\AdControlFactory.cs" />
     <Compile Include="AdSettings.cs" />
     <Compile Include="AdVisibilityService.cs" />

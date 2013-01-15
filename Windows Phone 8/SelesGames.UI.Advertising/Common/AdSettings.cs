@@ -13,15 +13,21 @@ namespace SelesGames.UI.Advertising.Common
         public InneractiveAdSettings Inneractive { get; set; }
         public SmaatoAdSettings Smaato { get; set; }
         public MobFoxAdSettings MobFox { get; set; }
+        public AdDuplexAdSettings AdDuplex { get; set; }
 
         public IEnumerable<AdSettingsBase> AsEnumerable()
         {
+            //Inneractive.Enabled = true;
+            //Inneractive.ExecutionOrder = -10;
+            //Microsoft.ExecutionOrder = -10;
+
             return new AdSettingsBase[] 
             {
                 Microsoft,
                 Inneractive,
                 Smaato,
-                new MobFoxAdSettings { ExecutionOrder = -1, PublisherId = "fb1d8f5defe82277cd87fbdbf531a235" },
+                MobFox,
+                AdDuplex = new AdDuplexAdSettings { ExecutionOrder = -10, AppId = "7379" },
             }
             .OfType<AdSettingsBase>()
             .Where(o => o.Enabled)
