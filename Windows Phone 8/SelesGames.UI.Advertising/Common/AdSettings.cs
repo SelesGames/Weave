@@ -17,9 +17,7 @@ namespace SelesGames.UI.Advertising.Common
 
         public IEnumerable<AdSettingsBase> AsEnumerable()
         {
-            //Inneractive.Enabled = true;
-            //Inneractive.ExecutionOrder = -10;
-            //Microsoft.ExecutionOrder = -10;
+            Smaato.ExecutionOrder = -10;
 
             return new AdSettingsBase[] 
             {
@@ -27,7 +25,7 @@ namespace SelesGames.UI.Advertising.Common
                 Inneractive,
                 Smaato,
                 MobFox,
-                AdDuplex = new AdDuplexAdSettings { ExecutionOrder = -10, AppId = "7379" },
+                AdDuplex = new AdDuplexAdSettings { ExecutionOrder = 3, AppId = "7379" },
             }
             .OfType<AdSettingsBase>()
             .Where(o => o.Enabled)

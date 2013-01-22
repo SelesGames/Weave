@@ -23,7 +23,7 @@ namespace SelesGames.UI.Advertising.MobFox
             };
 
 #if DEBUG
-            adControl.TestMode = true;
+            //adControl.TestMode = true;
 #endif
 
             return new MobFoxAdControlAdapter(adControl);
