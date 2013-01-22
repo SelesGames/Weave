@@ -79,8 +79,9 @@ namespace Weave.RSS
                     .ToList();
 
                 try
-                { 
-                    var feedResults = await new WeaveRssServerProxy(outgoingFeedRequests).GetFeedResultsAsync().ConfigureAwait(false); 
+                {
+                    var client = new WeaveRssServerProxy();
+                    var feedResults = await client.GetFeedResultsAsync(outgoingFeedRequests).ConfigureAwait(false); 
 
                     foreach (var result in feedResults)
                     {
@@ -149,14 +150,14 @@ namespace Weave.RSS
 
         #region Chunking/Batching feed code
 
-        int batchSize = 20;
+        int batchSize = 12;
         IEnumerable<IList<shim>> ChunkWork(IList<shim> list)
         {
             List<IList<shim>> temp = new List<IList<shim>>();
 
             for (int i = 0; (i * batchSize) < list.Count; i++)
             {
-                temp.Add(list.Skip(i * 20).Take(batchSize).ToList());
+                temp.Add(list.Skip(i * batchSize).Take(batchSize).ToList());
             }
 
             return temp;
