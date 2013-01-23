@@ -28,7 +28,7 @@ namespace Weave.RSS
 
         public async Task<List<FeedResult>> GetFeedResultsAsync(List<FeedRequest> outgoingFeedRequests)
         {
-            var client = new SelesGames.Rest.Protobuf.ProtobufRestClient();
+            var client = new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
             var results = await client.PostAsync<List<FeedRequest>, List<FeedResult>>(SERVICE_URL, outgoingFeedRequests, CancellationToken.None);
             return results;
         }
