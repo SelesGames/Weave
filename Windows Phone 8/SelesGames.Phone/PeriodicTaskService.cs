@@ -46,7 +46,7 @@ namespace SelesGames.Phone
             try
             {
                 ScheduledActionService.Add(periodicTask);
-#if DEBUG
+#if BGTASKTEST 
                 ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(2));
 #endif
             }
