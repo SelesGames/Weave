@@ -19,8 +19,8 @@ namespace SelesGames.UI.Advertising.Common
 
         async Task<AdSettings> GetAdSettings()
         {
-            var client = new JsonRestClient<AdSettings>();
-            var adSettings = await client.GetAsync(adSettingsUrl, System.Threading.CancellationToken.None);
+            var client = new JsonRestClient();
+            var adSettings = await client.GetAsync<AdSettings>(adSettingsUrl, System.Threading.CancellationToken.None);
             return adSettings;
         }
     }

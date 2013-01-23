@@ -11,12 +11,12 @@ namespace Weave.FeedSearchService
 {
     public class FeedSearchService
     {
-        RestClient<FeedApiResult> googleSearchClient, directSearchClient;
+        RestClient googleSearchClient, directSearchClient;
 
         public FeedSearchService()
         {
-            googleSearchClient = new JsonRestClient<FeedApiResult>();
-            directSearchClient = new DelegateRestClient<FeedApiResult>(stream =>
+            googleSearchClient = new JsonRestClient();
+            directSearchClient = new DelegateRestClient(stream =>
             {
                 using (var reader = XmlReader.Create(stream))
                 {
@@ -64,7 +64,7 @@ namespace Weave.FeedSearchService
         // Call the RSS url directly, extract it's name and description
         async Task<FeedApiResult> DirectSearchForFeed(string feedUrl, CancellationToken cancelToken)
         {
-            var result = await directSearchClient.GetAsync(feedUrl, cancelToken);
+            var result = await directSearchClient.GetAsync<FeedApiResult>(feedUrl, cancelToken);
             foreach (var entry in result.responseData.entries)
                 entry.url = feedUrl;
             return result;
@@ -77,7 +77,7 @@ namespace Weave.FeedSearchService
                 "http://ajax.googleapis.com/ajax/services/feed/find?q={0}&v=1.0",
                 HttpUtility.UrlEncode(searchString));
 
-            var result = await googleSearchClient.GetAsync(url, cancelToken);
+            var result = await googleSearchClient.GetAsync<FeedApiResult>(url, cancelToken);
             return result;
         }
     }

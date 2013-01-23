@@ -84,6 +84,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DelegateRestClient.cs" />
+    <Compile Include="Headers.cs" />
     <Compile Include="JsonRestClient.cs" />
     <Compile Include="LinqToXmlRestClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

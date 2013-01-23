@@ -12,11 +12,11 @@ namespace Weave.Mobilizer.Client
 
         public Task<MobilizerResult> GetAsync(string url)
         {
-            var client = new JsonDotNetRestClient<ReadabilityResult>();
+            var client = new JsonDotNetRestClient();
             var encodedUrl = HttpUtility.UrlEncode(url);
             var fUrl = string.Format(R_URL_TEMPLATE, encodedUrl);
             return client
-                .GetAsync(fUrl, CancellationToken.None)
+                .GetAsync<ReadabilityResult>(fUrl, CancellationToken.None)
                 .ContinueWith(t => Parse(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
         }
 
