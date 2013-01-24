@@ -11,11 +11,8 @@ using ICSharpCode.SharpZipLib.GZip;
 
 namespace SelesGames.Rest
 {
-    public abstract class RestClient
+    public abstract class RestClient : BaseRestClient
     {
-        public bool UseGzip { get; set; }
-        public Headers Headers { get; set; }
-
         public RestClient()
         {
             Headers = new Headers();

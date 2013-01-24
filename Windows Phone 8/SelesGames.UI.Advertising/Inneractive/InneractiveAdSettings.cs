@@ -22,7 +22,7 @@ namespace SelesGames.UI.Advertising.Inneractive
             if (!string.IsNullOrEmpty(keywords))
                 optionalParams.Add(InneractiveAd.IaOptionalParams.Key_Keywords, keywords);
 
-            InneractiveAd.DisplayAd(appId, global::Inneractive.Ad.InneractiveAd.IaAdType.IaAdType_Banner, grid, 30, optionalParams);
+            InneractiveAd.DisplayAd(appId, global::Inneractive.Ad.InneractiveAd.IaAdType.IaAdType_Banner, grid, DisplayTime, optionalParams);
 
             //var adControl = new InneractiveAd("SelesGames_Weave_WP", InneractiveAd.IaAdType.IaAdType_Banner, 30)
             //{

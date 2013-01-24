@@ -16,7 +16,7 @@ namespace SelesGames.UI.Advertising.MobFox
                 PublisherID = publisherId,
                 AlwaysShowAdsWhenDebuggerAttached = false,
                 AutoRotate = true,
-                Interval = TimeSpan.FromSeconds(30),
+                Interval = TimeSpan.FromSeconds(DisplayTime),
                 ShowAdsOnlyInTrial = false,
                 Width = 480,
                 Height = 80,

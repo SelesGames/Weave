@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace SelesGames.UI.Advertising.Smaato
+namespace SelesGames.UI.Advertising.AdDuplex
 {
     internal class AdDuplexAdControlAdapter : IAdControlAdapter
     {

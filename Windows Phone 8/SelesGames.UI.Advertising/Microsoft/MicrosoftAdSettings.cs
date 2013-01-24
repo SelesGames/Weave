@@ -46,7 +46,7 @@ namespace SelesGames.UI.Advertising.Microsoft
             if (!string.IsNullOrEmpty(keywords))
                 adControl.Keywords = keywords;
 
-            return new MicrosoftAdControlAdapter(adControl);
+            return new MicrosoftAdControlAdapter(adControl, DisplayTime);
         }
     }
 }

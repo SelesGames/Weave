@@ -12,7 +12,7 @@ namespace SelesGames.UI.Advertising.Microsoft
         AdControl adControl;
         SerialDisposable sd = new SerialDisposable();
 
-        public MicrosoftAdControlAdapter(AdControl adControl)
+        public MicrosoftAdControlAdapter(AdControl adControl, int adRefreshTimeInSeconds)
         {
             if (adControl == null)
                 throw new ArgumentNullException("adControl in MicrosoftAdControlAdapter.contructor");
@@ -24,7 +24,7 @@ namespace SelesGames.UI.Advertising.Microsoft
             adControl.ErrorOccurred += OnAdControlErrorOccurred;
 
             sd.Disposable = Observable
-                .Interval(TimeSpan.FromSeconds(30))
+                .Interval(TimeSpan.FromSeconds(adRefreshTimeInSeconds))
                 .ObserveOnDispatcher()
                 .Subscribe(
                     o =>

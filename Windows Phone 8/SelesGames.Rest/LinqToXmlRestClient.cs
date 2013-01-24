@@ -5,10 +5,8 @@ using System.Xml.Linq;
 
 namespace SelesGames.Rest
 {
-    public class LinqToXmlRestClient<T>
+    public class LinqToXmlRestClient<T> : BaseRestClient
     {
-        public bool UseGzip { get; set; }
-
         public Task<T> GetAndParseAsync(string url, Func<XElement, T> parser, CancellationToken cancellationToken)
         {
             var client = new DelegateRestClient(stream =>

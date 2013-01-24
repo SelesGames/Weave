@@ -1,5 +1,6 @@
-﻿
-namespace SelesGames.UI.Advertising.Smaato
+﻿using AdDuplex;
+
+namespace SelesGames.UI.Advertising.AdDuplex
 {
     public class AdDuplexAdSettings : AdSettingsBase
     {
@@ -7,10 +8,10 @@ namespace SelesGames.UI.Advertising.Smaato
 
         public override IAdControlAdapter CreateAdControl(string keywords)
         {
-            var adControl = new AdDuplex.AdControl
+            var adControl = new AdControl
             {
                 AppId = AppId,
-                RefreshInterval = 30,
+                RefreshInterval = DisplayTime,
                 Width = 480,
                 Height = 80,
             };

@@ -19,12 +19,10 @@ namespace SelesGames.UI.Advertising.Smaato
                 //AdSpaceHeight = 80,  // DONT SET THIS
                 //AdSpaceWidth = 480,  // DONT SET THIS
                 LocationUseOK = true,
-                AdInterval = 30,
-                //Width = 478,
-                //Height = 78,
+                AdInterval = DisplayTime,
                 ShowErrors = false,  // SET TO FALSE ALWAYS FOR PRODUCTION
                 PopupAd = false,     // SET TO FALSE ALWAYS - HIDES ADS AFTER 10 SECONDS
-                PopupAdDuration = 30,
+                //PopupAdDuration = DisplayTime,
                 VerticalAlignment = VerticalAlignment.Stretch,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 VerticalContentAlignment = VerticalAlignment.Stretch,

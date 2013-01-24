@@ -22,7 +22,6 @@ namespace SelesGames.UI.Advertising
                 var adSettings = await client.AdSettings;
 
                 adSettingsEnumerator = adSettings
-                    .AsEnumerable()
                     .Select(o => Tuple.Create(o, o.FaultToleranceCount))
                     .RepeatEnumerable()
                     .Wrap()
