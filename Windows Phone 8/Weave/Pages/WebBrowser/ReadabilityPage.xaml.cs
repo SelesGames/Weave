@@ -92,8 +92,8 @@ namespace weave
 
             var bindingAdapter = new ApplicationBarToggleMenuItemAdapter(orientationLockButton) 
             {
-                CheckedText = "turn off phone tilt helper",
-                UncheckedText = "turn on phone tilt helper",
+                CheckedText = "turn off \"soft\" rotation lock",
+                UncheckedText = "turn on \"soft\" rotation lock",
                 IsChecked = orientationLockService.IsLocked,
             };
             bindingAdapter.SetBinding(ApplicationBarToggleMenuItemAdapter.IsCheckedProperty,
