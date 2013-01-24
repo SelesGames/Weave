@@ -133,7 +133,6 @@
     <Compile Include="Common\AdControlFactory.cs" />
     <Compile Include="AdSettings.cs" />
     <Compile Include="AdVisibilityService.cs" />
-    <Compile Include="Common\AdSettings.cs" />
     <Compile Include="Common\AdSettingsClient.cs" />
     <Compile Include="Common\IAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />

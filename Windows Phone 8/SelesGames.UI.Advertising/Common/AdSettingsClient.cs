@@ -1,11 +1,9 @@
-﻿using SelesGames.Rest;
-using System;
-using System.Net;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Linq;
+using SelesGames.Rest;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SelesGames.UI.Advertising.Common
 {
@@ -13,26 +11,34 @@ namespace SelesGames.UI.Advertising.Common
     {
         Lazy<Task<IEnumerable<AdSettingsBase>>> initializer;
         string adSettingsUrl;
+        IDictionary<string, Type> registeredProviders;
 
         public Task<IEnumerable<AdSettingsBase>> AdSettings { get { return initializer.Get(); } }
 
-        public AdSettingsClient(string adSettingsUrl)
+        public AdSettingsClient(string adSettingsUrl, bool loadDefault = true)
         {
             this.adSettingsUrl = adSettingsUrl;
+            this.registeredProviders = new Dictionary<string, Type>();
+
+            if (loadDefault)
+            {
+                Register("Microsoft", typeof(SelesGames.UI.Advertising.Microsoft.MicrosoftAdSettings));
+                Register("AdDuplex", typeof(SelesGames.UI.Advertising.AdDuplex.AdDuplexAdSettings));
+                Register("Smaato", typeof(SelesGames.UI.Advertising.Smaato.SmaatoAdSettings));
+                Register("MobFox", typeof(SelesGames.UI.Advertising.MobFox.MobFoxAdSettings));
+                Register("Inneractive", typeof(SelesGames.UI.Advertising.Inneractive.InneractiveAdSettings));
+            }
+
             initializer = Lazy.Create(GetAdSettings);
+        }
+
+        public void Register(string propertyName, Type type)
+        {
+            registeredProviders.Add(propertyName, type);
         }
 
         async Task<IEnumerable<AdSettingsBase>> GetAdSettings()
         {
-            var registered = new[] 
-            { 
-                Tuple.Create("Microsoft", typeof(SelesGames.UI.Advertising.Microsoft.MicrosoftAdSettings)),
-                Tuple.Create("AdDuplex", typeof(SelesGames.UI.Advertising.AdDuplex.AdDuplexAdSettings)),
-                Tuple.Create("Smaato", typeof(SelesGames.UI.Advertising.Smaato.SmaatoAdSettings)),
-                Tuple.Create("MobFox", typeof(SelesGames.UI.Advertising.MobFox.MobFoxAdSettings)),
-                Tuple.Create("Inneractive", typeof(SelesGames.UI.Advertising.Inneractive.InneractiveAdSettings)),
-            }.ToDictionary(o => o.Item1, o => o.Item2);
-
             List<AdSettingsBase> adSettingsVals = new List<AdSettingsBase>();
 
             var client = new RestStringClient();
@@ -41,21 +47,19 @@ namespace SelesGames.UI.Advertising.Common
             JObject jo = JObject.Parse(stringResult);
             foreach (var item in jo)
             {
-                var key = item.Key;
-                var stringRep = item.Value.ToString();
-                var type = registered[key];
-                var serialized = JsonConvert.DeserializeObject(stringRep, type);
-                var asb = (AdSettingsBase)serialized;
-                adSettingsVals.Add(asb);
+                try
+                {
+                    var key = item.Key;
+                    var stringRep = item.Value.ToString();
+                    var type = registeredProviders[key];
+                    var serialized = JsonConvert.DeserializeObject(stringRep, type);
+                    var asb = (AdSettingsBase)serialized;
+                    adSettingsVals.Add(asb);
+                }
+                catch { }
             }
 
             return adSettingsVals;
-
-
-
-            //var client = new JsonRestClient();
-            //var adSettings = await client.GetAsync<AdSettings>(adSettingsUrl, System.Threading.CancellationToken.None);
-            //return adSettings;
         }
     }
 }
