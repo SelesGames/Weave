@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.Phone.System.UserProfile;
 using Windows.Storage;
 
 namespace Weave.LiveTile.ScheduledAgent
@@ -49,6 +45,10 @@ namespace Weave.LiveTile.ScheduledAgent
         async Task SaveToLocalStorage()
         {
             StorageFolder tilesFolder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(TILES_FOLDER, CreationCollisionOption.OpenIfExists);
+
+            foreach (var existingFile in await tilesFolder.GetFilesAsync())
+                await existingFile.DeleteAsync();
+
             var file = await tilesFolder.CreateFileAsync(lockScreenFileName, CreationCollisionOption.ReplaceExisting);
 
             using (StorageStreamTransaction transaction = await file.OpenTransactedWriteAsync())
@@ -84,13 +84,14 @@ namespace Weave.LiveTile.ScheduledAgent
 
         void DetermineFileName()
         {
-            var currentImage = LockScreen.GetImageUri();
+            //var currentImage = LockScreen.GetImageUri();
 
-            if (currentImage.ToString().EndsWith("_A.jpg"))
-                lockScreenFileName = "LiveLockBackground_B.jpg";
+            //if (currentImage.ToString().EndsWith("_A.jpg"))
+            //    lockScreenFileName = "LiveLockBackground_B.jpg";
 
-            else
-                lockScreenFileName = "LiveLockBackground_A.jpg";
+            //else
+            //    lockScreenFileName = "LiveLockBackground_A.jpg";
+            lockScreenFileName = Guid.NewGuid().ToString() + ".jpg";
         }
 
         #endregion

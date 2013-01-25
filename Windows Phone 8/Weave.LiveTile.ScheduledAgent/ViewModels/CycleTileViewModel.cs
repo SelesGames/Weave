@@ -1,6 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
-using System.Linq;
 using Windows.Phone.System.UserProfile;
 
 namespace Weave.LiveTile.ScheduledAgent.ViewModels
