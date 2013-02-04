@@ -2,22 +2,32 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SelesGames.UI.Advertising.Inneractive
 {
     internal class InneractiveAdControlAdapter : IAdControlAdapter
     {
-        UIElement adControlWrapper;
+        InneractiveAd adControl;
+        Border adControlWrapper;
 
-        public InneractiveAdControlAdapter(UIElement adControlWrapper)
+        public InneractiveAdControlAdapter(InneractiveAd adControl)
         {
-            this.adControlWrapper = adControlWrapper;
-            var grid = new Grid();
+            this.adControl = adControl;
 
-            InneractiveAd.AdClicked += OnAdClicked;
-            InneractiveAd.AdReceived += OnAdRefreshed;
-            InneractiveAd.DefaultAdReceived += OnAdRefreshed;
-            InneractiveAd.AdFailed += OnAdFailed;  
+            adControlWrapper = new Border
+            {
+                BorderBrush = new SolidColorBrush { Color = Colors.White },
+                Background = Application.Current.Resources["PhoneChromeBrush"] as Brush,
+                BorderThickness = new Thickness(1),
+            };
+            adControlWrapper.Child = adControl;
+
+
+            adControl.AdClicked += OnAdClicked;
+            adControl.AdReceived += OnAdRefreshed;
+            adControl.DefaultAdReceived += OnAdRefreshed;
+            adControl.AdFailed += OnAdFailed;  
         }
 
 
@@ -59,10 +69,10 @@ namespace SelesGames.UI.Advertising.Inneractive
 
         public void Dispose()
         {
-            InneractiveAd.AdClicked -= OnAdClicked;
-            InneractiveAd.AdReceived -= OnAdRefreshed;
-            InneractiveAd.DefaultAdReceived -= OnAdRefreshed;
-            InneractiveAd.AdFailed -= OnAdFailed;  
+            adControl.AdClicked -= OnAdClicked;
+            adControl.AdReceived -= OnAdRefreshed;
+            adControl.DefaultAdReceived -= OnAdRefreshed;
+            adControl.AdFailed -= OnAdFailed;  
         }
     }
 }
