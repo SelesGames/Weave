@@ -129,8 +129,10 @@
     <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdSettings.cs" />
     <Compile Include="Common\AdSettingsBase.cs" />
+    <Compile Include="Library\DebugEx.cs" />
     <Compile Include="Library\EventArgs.cs" />
     <Compile Include="Library\IEnumerableExtensions.cs" />
+    <Compile Include="Library\Lazy.cs" />
     <Compile Include="Microsoft\MicrosoftAdControlAdapter.cs" />
     <Compile Include="Microsoft\MicrosoftAdSettings.cs" />
     <Compile Include="Smaato\SmaatoAdControlAdapter.cs" />
@@ -145,10 +147,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SelesGames
+namespace SelesGames.UI.Advertising
 {
     public class EventArgs<T> : EventArgs
     {
