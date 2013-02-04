@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</ProjectGuid>
+    <ProjectGuid>{57829D03-1D27-4FC2-BE5A-6FD51AACBC71}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SelesGames.UI.Advertising</RootNamespace>
-    <AssemblyName>SelesGames.UI.Advertising</AssemblyName>
+    <RootNamespace>SelesGames.UI.Advertising.MobFox</RootNamespace>
+    <AssemblyName>SelesGames.UI.Advertising.MobFox</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -83,78 +83,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdDuplex.WindowsPhone">
-      <HintPath>..\lib\AdDuplex.WindowsPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="Inneractive.Ad">
-      <HintPath>..\lib\Inneractive.Ad.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Advertising.Mobile">
-      <HintPath>..\lib\Microsoft.Advertising.Mobile</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Advertising.Mobile.UI">
-      <HintPath>..\lib\Microsoft.Advertising.Mobile.UI</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SOMAWP8">
-      <HintPath>..\lib\SOMAWP8.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Core">
-      <HintPath>..\lib\System.Reactive.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Interfaces">
-      <HintPath>..\lib\System.Reactive.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Linq">
-      <HintPath>..\lib\System.Reactive.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Windows.Threading">
-      <HintPath>..\lib\System.Reactive.Windows.Threading.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AdDuplex\AdDuplexAdControlAdapter.cs" />
-    <Compile Include="AdDuplex\AdDuplexAdSettings.cs" />
-    <Compile Include="Common\AdControlFactory.cs" />
-    <Compile Include="AdSettings.cs" />
-    <Compile Include="AdVisibilityService.cs" />
-    <Compile Include="Common\AdSettingsClient.cs" />
-    <Compile Include="Common\IAdControlAdapter.cs" />
-    <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />
-    <Compile Include="Inneractive\InneractiveAdSettings.cs" />
-    <Compile Include="Common\AdSettingsBase.cs" />
-    <Compile Include="Library\EventArgs.cs" />
-    <Compile Include="Library\IEnumerableExtensions.cs" />
-    <Compile Include="Microsoft\MicrosoftAdControlAdapter.cs" />
-    <Compile Include="Microsoft\MicrosoftAdSettings.cs" />
-    <Compile Include="Smaato\SmaatoAdControlAdapter.cs" />
-    <Compile Include="Smaato\SmaatoAdSettings.cs" />
-    <Compile Include="SwitchingAdControl.cs" />
+    <Compile Include="MobFoxAdControlAdapter.cs" />
+    <Compile Include="MobFoxAdSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <ProjectReference Include="..\SelesGames.UI.Advertising\SelesGames.UI.Advertising.csproj">
+      <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>
+      <Name>SelesGames.UI.Advertising</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
-      <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
-      <Name>SelesGames.Rest</Name>
-    </ProjectReference>
+    <Reference Include="MobFox.Ads">
+      <HintPath>..\lib\MobFox.Ads.dll</HintPath>
+    </Reference>
+    <Reference Include="MobFox.Ads.LocationAware">
+      <HintPath>..\lib\MobFox.Ads.LocationAware.dll</HintPath>
+    </Reference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SOMAWP8;
+using System.Windows;
 
 namespace SelesGames.UI.Advertising.Smaato
 {
@@ -12,7 +13,7 @@ namespace SelesGames.UI.Advertising.Smaato
             var publisherId = PublisherId;
             var adspaceId = AdspaceId;
 
-            var adControl = new SOMAWP8.SomaAdViewer
+            var adControl = new SomaAdViewer
             {
                 Pub = publisherId,
                 Adspace = adspaceId,
@@ -37,7 +38,7 @@ namespace SelesGames.UI.Advertising.Smaato
 
             adControl.StartAds();
 
-            return new Smaato.SmaatoAdControlAdapter(adControl);
+            return new SmaatoAdControlAdapter(adControl);
         }
     }
 }
