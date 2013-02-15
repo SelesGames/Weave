@@ -32,7 +32,7 @@ namespace weave
             var settings = new AppSettings
             {
                 AppName = "Weave",
-                VersionNumber = "8.0.2",
+                VersionNumber = "8.0.3",
                 IsTrial = false,//new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
                 CanSelectInitialCategories = true,
                 AssemblyName = "weave",
@@ -41,7 +41,7 @@ namespace weave
                 #region Ad Units
 
                 IsAddSupportedApp = true,
-                AdUnitsUrl = "http://weave.blob.core.windows.net/settings/adSettings.json?xsf=" + r,
+                AdUnitsUrl = "http://weave.blob.core.windows.net/settings/weaveAdSettings.json?xsf=" + r,
 
                 #endregion
 

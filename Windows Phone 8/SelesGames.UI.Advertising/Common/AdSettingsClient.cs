@@ -25,7 +25,6 @@ namespace SelesGames.UI.Advertising.Common
                 Register("Microsoft", typeof(SelesGames.UI.Advertising.Microsoft.MicrosoftAdSettings));
                 Register("AdDuplex", typeof(SelesGames.UI.Advertising.AdDuplex.AdDuplexAdSettings));
                 Register("Smaato", typeof(SelesGames.UI.Advertising.Smaato.SmaatoAdSettings));
-                Register("MobFox", typeof(SelesGames.UI.Advertising.MobFox.MobFoxAdSettings));
                 Register("Inneractive", typeof(SelesGames.UI.Advertising.Inneractive.InneractiveAdSettings));
             }
 
@@ -58,6 +57,13 @@ namespace SelesGames.UI.Advertising.Common
                 }
                 catch { }
             }
+
+            ///// REMOVE!!!
+            //var set = adSettingsVals.OfType<Inneractive.InneractiveAdSettings>().Single();
+            //set.Enabled = true;
+            //adSettingsVals.Remove(set);
+            //adSettingsVals.Insert(0, set);
+            /////
 
             return adSettingsVals;
         }
