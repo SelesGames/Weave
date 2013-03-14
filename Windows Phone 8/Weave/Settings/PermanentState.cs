@@ -7,6 +7,7 @@ namespace weave
     public class PermanentState : INotifyPropertyChanged
     {
         public bool IsFirstTime { get; set; }
+        public UserInfo User { get; set; }
         public DateTime PreviousLoginTime { get; set; }
         public DateTime CurrentLoginTime { get; set; }
         public string ArticleDeletionTimeForMarkedRead { get; set; }
@@ -79,6 +80,7 @@ namespace weave
             IsHideAppBarOnArticleViewerPageEnabled = false;
             IsSystemTrayVisibleWhenPossible = false;
             RunHistory = new Services.MostViewedHistory.RunHistory();
+            User = UserInfo.CreateNewUser();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -225,6 +225,7 @@
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\StandardFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
+    <Compile Include="Settings\UserInfo.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">

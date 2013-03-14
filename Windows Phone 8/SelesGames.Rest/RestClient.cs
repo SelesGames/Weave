@@ -76,6 +76,32 @@ namespace SelesGames.Rest
             return ReadObjectFromWebResponse<TResult>((HttpWebResponse)response);
         }
 
+        public async Task<bool> PostAsync<TPost>(string url, TPost obj, CancellationToken cancelToken)
+        {
+            var request = HttpWebRequest.CreateHttp(url);
+            request.Method = "POST";
+
+            if (!string.IsNullOrEmpty(Headers.ContentType))
+                request.ContentType = Headers.ContentType;
+
+            if (!string.IsNullOrEmpty(Headers.Accept))
+                request.Accept = Headers.Accept;
+
+            if (UseGzip)
+                request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
+
+            using (var requestStream = await request.GetRequestStreamAsync().ConfigureAwait(false))
+            {
+                cancelToken.ThrowIfCancellationRequested();
+                WriteObject(requestStream, obj);
+                requestStream.Close();
+            }
+
+            var response = await request.GetResponseAsync().ConfigureAwait(false);
+            var httpResponse = (HttpWebResponse)response;
+            return httpResponse.StatusCode == HttpStatusCode.Created;        
+        }
+
 
 
 

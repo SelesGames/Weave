@@ -218,6 +218,11 @@ namespace weave
             NavigationService.ToManageSourcesPage();
         }
 
+        void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+        	// TODO: Add event handler implementation here.
+        }
+
         #endregion
     }
 }
