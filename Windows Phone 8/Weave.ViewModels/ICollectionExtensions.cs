@@ -13,6 +13,12 @@ namespace Weave.ViewModels
 
             where TOrder : IComparable
         {
+            if (sourceList == null)
+                throw new ArgumentNullException("sourceList in OrderedUniqueInsert");
+
+            if (insertItems == null)
+                return;
+
             var newEntryIndex = 0;
 
             IList<T> proper;
@@ -52,6 +58,12 @@ namespace Weave.ViewModels
 
             where TOrder : IComparable
         {
+            if (sourceList == null)
+                throw new ArgumentNullException("sourceList in OrderedDescendingUniqueInsert");
+
+            if (insertItems == null)
+                return;
+
             var newEntryIndex = 0;
 
             IList<T> proper;
