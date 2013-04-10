@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ArticleViewingType.cs" />
     <Compile Include="Feed.cs" />
+    <Compile Include="ICollectionExtensions.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="NewsCollectionViewModel.cs" />
     <Compile Include="NewsItem.cs" />

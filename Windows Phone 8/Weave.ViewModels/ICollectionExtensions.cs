@@ -36,6 +36,13 @@ namespace Weave.ViewModels
                     newEntryIndex++;
                 }
             }
+
+            // add any remaining items to the end of the list
+            for (; newEntryIndex < proper.Count; newEntryIndex++)
+            {
+                var current = proper[newEntryIndex];
+                sourceList.Add(current);
+            }
         }
 
         public static void OrderedDescendingUniqueInsert<T, TOrder>(this IList<T> sourceList,
@@ -67,6 +74,13 @@ namespace Weave.ViewModels
                     sourceList.Insert(i, current);
                     newEntryIndex++;
                 }
+            }
+
+            // add any remaining items to the end of the list
+            for (; newEntryIndex < proper.Count; newEntryIndex++)
+            {
+                var current = proper[newEntryIndex];
+                sourceList.Add(current);
             }
         }
     }
