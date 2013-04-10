@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using Microsoft.WindowsAzure.MobileServices;
 using SelesGames;
 using SelesGames.Phone;
 using System;
@@ -218,9 +219,20 @@ namespace weave
             NavigationService.ToManageSourcesPage();
         }
 
-        void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-        	// TODO: Add event handler implementation here.
+            try
+            {
+                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
+                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                var userId = mobileUser.UserId;
+            }
+            catch (InvalidOperationException)
+            {
+                //message = "You must log in. Login Required";
+            }
+            var accountClient = new Weave.Services.Account.Client();
+            
         }
 
         #endregion

@@ -119,6 +119,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Azure.Zumo.WindowsPhone8.Managed">
+      <HintPath>..\..\..\Weave.Cloud\lib\Microsoft.Azure.Zumo.WindowsPhone8.Managed.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
@@ -749,6 +752,10 @@
     <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>Weave.RSS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Services.Account\Weave.Services.Account.csproj">
+      <Project>{27ADDDF2-61C8-482C-9E85-188BEB61C738}</Project>
+      <Name>Weave.Services.Account</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
