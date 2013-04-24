@@ -1,6 +1,5 @@
 ﻿using SelesGames.Rest;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Weave.UserFeedAggregator.Contracts;
@@ -9,7 +8,7 @@ using Outgoing = Weave.UserFeedAggregator.DTOs.ServerOutgoing;
 
 namespace Weave.UserFeedAggregator.Client
 {
-    public class Client : IServiceClient
+    public class Client : IWeaveUserService
     {
         /// PRODUCTION
         /// ****************************
@@ -18,70 +17,112 @@ namespace Weave.UserFeedAggregator.Client
 
 
 
-        #region User management
+        #region User creation
 
-        public async Task<Outgoing.UserInfo> AddUserAndReturnNewNews(Incoming.UserInfo incomingUser)
+        public async Task<Outgoing.UserInfo> AddUserAndReturnUserInfo(Incoming.UserInfo incomingUser)
         {
             string append = "create";
-            var url = string.Format("{0}", append);
+            var url = SERVICE_URL + append;
 
             var client = CreateClient();
             var result = await client.PostAsync<Incoming.UserInfo, Outgoing.UserInfo>(url, incomingUser, CancellationToken.None);
             return result;
         }
 
-        //[HttpGet]
-        //public async Task<Outgoing.UserInfo> GetUserInfoWithNoNews(Guid userId)
-        //{
-        //    var user = await userRepo.Get(userId);
-        //    foreach (var feed in user.Feeds)
-        //        feed.News = null;
+        #endregion
 
-        //    var userBO = ConvertToBusinessObject(user);
-        //    var outgoing = ConvertToOutgoing(userBO);
-        //    return outgoing;
-        //}
 
-        //[HttpGet]
-        //public async Task<Outgoing.UserInfo> GetUserInfoWithRefreshedNewsCount(Guid userId)
-        //{
-        //    var user = await userRepo.Get(userId);
-        //    var userBO = ConvertToBusinessObject(user);
-        //    await userBO.RefreshAllFeeds();
-        //    user = ConvertToDataStore(userBO);
-        //    await userRepo.Save(user);
-            
-        //    foreach (var feed in user.Feeds)
-        //        feed.News = null;
 
-        //    userBO = ConvertToBusinessObject(user);
-        //    var outgoing = ConvertToOutgoing(userBO);
-        //    return outgoing;
-        //}
 
-        public async Task<Outgoing.UserInfo> RefreshAndReturnNews(Guid userId)
+        #region Get Basic User Info (suitable for panorama home screen)
+
+        public async Task<Outgoing.UserInfo> GetUserInfo(Guid userId, bool refresh = false)
         {
-            string append = "refresh_all";
-            var url = string.Format("{0}?userId={1}", append, userId);
+            string append = "info";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("refresh", refresh)
+                .ToString();
+
 
             var client = CreateClient();
             var result = await client.GetAsync<Outgoing.UserInfo>(url, CancellationToken.None);
             return result;
         }
 
-        /// <summary>
-        /// Refresh only some of the feeds for a given user, then return the full UserInfo graph.
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="feedIds">The ids of the feeds to refresh</param>
-        /// <returns>UserInfo graph</returns>
-        public async Task<Outgoing.UserInfo> RefreshAndReturnNews(Guid userId, List<Guid> feedIds)
+        #endregion
+
+
+
+
+        #region Get News for User (either by category or feedId)
+
+        public async Task<Outgoing.UserNews> GetNews(Guid userId, string category, bool refresh = false, int skip = 0, int take = 10)
         {
-            string append = "refresh";
-            var url = string.Format("{0}?userId={1}", append, userId);
+            string append = "news";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("category", category)
+                .AddParameter("refresh", refresh)
+                .ToString();
 
             var client = CreateClient();
-            var result = await client.PostAsync<List<Guid>, Outgoing.UserInfo>(url, feedIds, CancellationToken.None);
+            var result = await client.GetAsync<Outgoing.UserNews>(url, CancellationToken.None);
+            return result;
+        }
+
+        public async Task<Outgoing.UserNews> GetNews(Guid userId, Guid feedId, bool refresh = false, int skip = 0, int take = 10)
+        {
+            string append = "news";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("refresh", refresh)
+                .ToString();
+
+            var client = CreateClient();
+            var result = await client.GetAsync<Outgoing.UserNews>(url, CancellationToken.None);
+            return result;
+        }
+
+        #endregion
+
+
+
+
+        #region Get Featured (for Live Tile) News for User (either by category or feedId)
+
+        public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, string category, int? take, bool refresh = false)
+        {
+            int takeCount = take.Value;
+
+            string append = "news";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("category", category)
+                .AddParameter("take", takeCount)
+                .AddParameter("refresh", refresh)
+                .ToString();
+
+            var client = CreateClient();
+            var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
+            return result;
+        }
+
+        public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, Guid feedId, int? take, bool refresh = false)
+        {
+            int takeCount = take.Value;
+
+            string append = "news";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("take", takeCount)
+                .AddParameter("refresh", refresh)
+                .ToString();
+
+            var client = CreateClient();
+            var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
             return result;
         }
 
@@ -92,7 +133,7 @@ namespace Weave.UserFeedAggregator.Client
 
         #region Feed management
 
-        public async Task AddFeed(Guid userId, Incoming.Feed feed)
+        public async Task AddFeed(Guid userId, Incoming.NewFeed feed)
         {
             string append = "add_feed";
             var url = string.Format("{0}?userId={1}", append, userId);
@@ -110,7 +151,7 @@ namespace Weave.UserFeedAggregator.Client
             await client.GetAsync<object>(url, CancellationToken.None);
         }
 
-        public async Task UpdateFeed(Guid userId, Incoming.Feed feed)
+        public async Task UpdateFeed(Guid userId, Incoming.UpdatedFeed feed)
         {
             string append = "update_feed";
             var url = string.Format("{0}?userId={1}", append, userId);

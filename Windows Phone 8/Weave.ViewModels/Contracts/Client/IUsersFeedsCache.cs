@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Weave.ViewModels
+namespace Weave.ViewModels.Contracts.Client
 {
     public interface IUsersFeedsCache
     {

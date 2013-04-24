@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -84,8 +85,8 @@ namespace weave
             {
                 Converter = new DelegateValueConverter(value =>
                     {
-                        var displayState = (weave.NewsItem.ColoringDisplayState)value;
-                        return (displayState == weave.NewsItem.ColoringDisplayState.Viewed) ? 0.6d : 1d;
+                        var displayState = (NewsItem.ColoringDisplayState)value;
+                        return (displayState == NewsItem.ColoringDisplayState.Viewed) ? 0.6d : 1d;
                     },
                     null),
                 Source = newsItem

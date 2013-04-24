@@ -81,6 +81,25 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
+
+		<Style x:Key="SmallAccountButtonTemplate" TargetType="sg:ImageWithLabelButton">
+			<Setter Property="CacheMode" Value="BitmapCache" />
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontFamily" Value="{StaticResource AppSpecificFontFamily}"/>
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="sg:ImageWithLabelButton">
+						<Border Background="{TemplateBinding Background}">
+							<Grid Margin="{TemplateBinding Padding}">
+								<sg:Glyph Source="{TemplateBinding Source}" Foreground="{TemplateBinding Foreground}" Width="48" Height="48" Margin="0,0,0,8" />
+								<TextBlock Text="{TemplateBinding Content}" Style="{StaticResource MenuTextStyle}" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="0,0,0,8" HorizontalAlignment="Center" />
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 		
 		<DataTemplate x:Key="MostViewedItemTemplate">
 			<Button Style="{StaticResource MostViewedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnMostViewedTapped" />
@@ -105,7 +124,7 @@
 		</Grid-->
 		
 		<controls:Panorama x:Name="pano" Title="{StaticResource PanoramaTitle}" Foreground="{StaticResource PanoramaForegroundBrush}" Background="{StaticResource PanoramaBackgroundBrush}" FontFamily="{StaticResource AppSpecificFontFamily}">										
-			<controls:PanoramaItem x:Name="Menu" Margin="0,-14,0,0" >
+			<controls:PanoramaItem x:Name="Menu" Margin="0,-29,0,0" >
 				<Grid Margin="12,0">
 					<ItemsControl x:Name="mostViewed" Margin="46,0,-12,0" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" VerticalAlignment="Top" HorizontalAlignment="Left" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
 					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Bottom" Margin="-12,0,0,18">
@@ -124,8 +143,18 @@
 			<controls:PanoramaItem x:Name="Featured_News" Orientation="Horizontal" CacheMode="{x:Null}" Margin="0,-14,0,0" Header="latest articles" >
 				<local:CategoryDisplayGrid x:Name="cat1" Height="460" Width="828" VerticalAlignment="Top" Margin="12,0,0,0" News="{Binding LatestNews}" />			
 			</controls:PanoramaItem>
+
+			<controls:PanoramaItem x:Name="Account" Header="account" Margin="0,-14,0,0">
+				<Grid x:Name="accountRoot" Margin="12.6,0,0,0">
+					<toolkit:WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,76,0,0">
+						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,0,12,12" Tap="OnLoginButtonTap" />
+						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="120" Height="120" Margin="0,0,12,12" Style="{StaticResource SmallAccountButtonTemplate}" Source="/Assets/Icons/tiny_heart.png" Content="favorites" />
+						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="120" Height="120" Margin="0,0,12,12" Style="{StaticResource SmallAccountButtonTemplate}" Content="read" Source="/Assets/Icons/appbar.eye.png" />
+					</toolkit:WrapPanel>
+				</Grid>
+			</controls:PanoramaItem>
 			
-			<controls:PanoramaItem x:Name="Categories" Header="{x:Null}" >
+			<controls:PanoramaItem x:Name="Categories" Header="{x:Null}" Margin="0,-14,0,0">
 				<ScrollViewer Style="{StaticResource ScrollViewerWithScrollBarOnLeftStyle}" Margin="0,-24,0,0">
 					<StackPanel Margin="0,24,0,96">
 						<TextBlock Text="sources" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" FontFamily="{StaticResource AppSpecificFontFamily}" Margin="10,-40,0,8" />
@@ -135,7 +164,6 @@
 			</controls:PanoramaItem>
 					
 		</controls:Panorama>
-		
 		<ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/>
 	</Grid>
 	

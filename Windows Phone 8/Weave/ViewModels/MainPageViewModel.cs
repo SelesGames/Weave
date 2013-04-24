@@ -8,9 +8,9 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using weave.Data;
 using Weave.LiveTile.ScheduledAgent;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -21,7 +21,7 @@ namespace weave
         public int currentPage = 0;
         int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
         int numberOfPages = 1;
-        List<FeedSource> feeds;
+        //List<Feed> feeds;
         List<NewsItem> allNews;
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
@@ -29,9 +29,8 @@ namespace weave
         SerialDisposable subscriptionHandle = new SerialDisposable();
         SerialDisposable progressBarVisHandle = new SerialDisposable();
         CompositeDisposable disposables = new CompositeDisposable();
-        Weave4DataAccessLayer dataLayer;
         TombstoneState tombstoneState;
-        RefreshListenerBase refreshListener;
+        BaseNewsCollectionViewModel newsCollectionVM;
 
         internal OperatingMode currentOperatingMode;
 
@@ -61,8 +60,6 @@ namespace weave
             view.IsPreviousButtonEnabled = HasPrevious = false;
             view.IsNextButtonEnabled = HasNext = false;
             NewItemCount = "0 NEW";
-
-            dataLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
         }
 
         public async Task InitializeAsync()
@@ -104,7 +101,7 @@ namespace weave
 
         public void OnNavigatedTo()
         {
-            InitializeRelevantFeedsAndSubscribeToUpdates();
+            InitializeNewsCollectionVM();
             UpdateNewsList();
         }
 
@@ -117,27 +114,20 @@ namespace weave
             InitializeNewsForCurrentPage();
         }
 
-        void InitializeRelevantFeedsAndSubscribeToUpdates()
+        void InitializeNewsCollectionVM()
         {
-            var tFeeds = dataLayer.Feeds.Get().WaitOnResult();
-
             if (currentOperatingMode == OperatingMode.Category)
             {
-                if (Header.Equals("all news", StringComparison.OrdinalIgnoreCase))
-                    feeds = tFeeds.ToList();
-                else
-                    feeds = tFeeds.OfCategory(Header).ToList();
-
-                refreshListener = new CategoryRefreshListener(Header);
+                newsCollectionVM = new NewsCollectionCategoryViewModel(Header);
             }
             else if (currentOperatingMode == OperatingMode.Feed)
             {
-                feeds = tFeeds.Where(o => FeedId.Equals(o.Id)).ToList();
-                refreshListener = new FeedRefreshListener(FeedId);
+                newsCollectionVM = new NewsCollectionFeedViewModel(FeedId);
             }
             else if (currentOperatingMode == OperatingMode.Favorites)
             {
-                feeds = null;
+                throw new Exception("shit");
+                //feeds = null;
             }
         }
 
@@ -145,13 +135,13 @@ namespace weave
         {
             if (currentOperatingMode == OperatingMode.Category || currentOperatingMode == OperatingMode.Feed)
             {
-                allNews = feeds.AllOrderedNews().Distinct(NewsItemComparer.Instance).ToList();
+                allNews = newsCollectionVM.News.ToList();
             }
-            else if (currentOperatingMode == OperatingMode.Favorites)
-            {
-                var tFeeds = dataLayer.Feeds.Get().WaitOnResult();
-                allNews = tFeeds.AllNews().Where(o => o.IsFavorite).OrderByDescending(o => o.PublishDateTime).ToList();
-            }
+            //else if (currentOperatingMode == OperatingMode.Favorites)
+            //{
+            //    var tFeeds = dataLayer.Feeds.Get().WaitOnResult();
+            //    allNews = tFeeds.AllNews().Where(o => o.IsFavorite).OrderByDescending(o => o.PublishDateTime).ToList();
+            //}
         }
 
         void UpdateNewItemCount()
@@ -281,35 +271,23 @@ namespace weave
 
         internal void ManualRefresh()
         {
-            scheduler.SafelySchedule(() => refresh(_ => true));
+            scheduler.SafelySchedule(() => refresh());//_ => true));
         }
 
         internal void AutoRefresh()
         {
-            var now = DateTime.UtcNow;
-            scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
+            ManualRefresh();
+            //var now = DateTime.UtcNow;
+            //scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
         }
 
-        async Task refresh(Func<FeedSource, bool> predicate)
+        async Task refresh()//Func<FeedSource, bool> predicate)
         {
-            if (feeds == null)
-                return;
-
-            FeedSource.NewsServer.BeginFeedUpdateBatch();
-            foreach (var feed in feeds.Where(predicate))
-                feed.RefreshNews();
-            FeedSource.NewsServer.EndFeedUpdateBatch();
-
-            var task = refreshListener.GetRefreshed();
-
-            if (!task.IsCompleted)
-            {
-                ShowProgressBar();
-                await refreshListener.GetRefreshed();
-                HideProgressBar();
-                await Task.Yield();
-                UpdateNewsList();
-            }
+            ShowProgressBar();
+            await newsCollectionVM.RefreshNews();
+            HideProgressBar();
+            await Task.Yield();
+            UpdateNewsList();
         }
 
         void ShowProgressBar()

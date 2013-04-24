@@ -81,8 +81,8 @@ namespace SelesGames.WP.PublisherInfoPage
 
         void AppTap(object sender, System.Windows.RoutedEventArgs e)
         {
-            var app = ((Button)sender).DataContext as ZuneAppViewModel;
-            TaskService.ToMarketplaceDetailTask(app.AppId);
+            //var app = ((Button)sender).DataContext as ZuneAppViewModel;
+            //TaskService.ToMarketplaceDetailTask(app.AppId);
         }
 
         async void OnHeaderButtonTap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -37,7 +38,7 @@ namespace weave
             isBackLocked = false;
         }
 
-        protected async override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             base.OnBackKeyPress(e);
 
@@ -51,16 +52,6 @@ namespace weave
             {
                 e.Cancel = true;
                 MessageBox.Show("You need to delete some sources before exiting this page", "TOO MANY SOURCES", MessageBoxButton.OK);
-            }
-
-            var t = viewModel.SaveChanges();
-            if (t.IsCompleted)
-                return;
-            else
-            {
-                e.Cancel = true;
-                await t;
-                NavigationService.TryGoBack();
             }
         }
 
@@ -89,7 +80,7 @@ namespace weave
         void FeedName_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var element = sender as FrameworkElement;
-            var feed = element.DataContext as FeedSource;
+            var feed = element.DataContext as Feed;
 
             if (feed == null)
                 return;
@@ -97,17 +88,26 @@ namespace weave
             NavigationService.ToEditSourcePage(feed.Id.ToString());
         }
 
-        void MenuItem_Click(object sender, RoutedEventArgs e)
+        async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)sender;
-            var feed = menuItem.DataContext as FeedSource;
+            var feed = menuItem.DataContext as Feed;
             var selectedOption = menuItem.Header.ToString();
 
             if (selectedOption.Equals("edit", StringComparison.OrdinalIgnoreCase))
                 NavigationService.ToEditSourcePage(feed.Id.ToString());
 
             else if (selectedOption.Equals("remove", StringComparison.OrdinalIgnoreCase))
-                viewModel.DeleteSource(feed);
+            {
+                try
+                {
+                    await viewModel.DeleteSource(feed);
+                }
+                catch 
+                { 
+                    // do something here 
+                }
+            }
         }
 
         void AddFeedButton_Click(object sender, EventArgs e)

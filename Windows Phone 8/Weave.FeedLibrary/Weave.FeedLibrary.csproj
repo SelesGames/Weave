@@ -97,9 +97,9 @@
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
-      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
-      <Name>Weave.Data</Name>
+    <ProjectReference Include="..\Weave.ViewModels\Weave.ViewModels.csproj">
+      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
+      <Name>Weave.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

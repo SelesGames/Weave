@@ -1,20 +1,19 @@
-﻿using SelesGames;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using weave.Data;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public class ManageSourcesViewModel : INotifyPropertyChanged
     {
-        Weave4DataAccessLayer dataRepo;
+        IUsersFeedsCache feedsCache;
 
-        public ObservableCollection<ObservableGroup<FeedSource, string>> FeedGroups { get; private set; }
+        public ObservableCollection<ObservableGroup<Feed, string>> FeedGroups { get; private set; }
         public string SourcesCount { get; set; }
         public bool AreThereTooManyFeeds { get; set; }
         public string Warning { get; set; }
@@ -25,22 +24,22 @@ namespace weave
             WarningVisibility = Visibility.Collapsed;
             Warning = string.Format(
                 "You have more than {0} feeds.  For performance reasons, there is a limit of {1} sources.  Please delete some now.",
-                Weave4DataAccessLayer.MaxAllowedSources,
-                Weave4DataAccessLayer.MaxAllowedSources);
-            FeedGroups = new ObservableCollection<ObservableGroup<FeedSource, string>>();
-            dataRepo = ServiceResolver.Get<Weave4DataAccessLayer>();
+                100,//Weave4DataAccessLayer.MaxAllowedSources,
+                100);//Weave4DataAccessLayer.MaxAllowedSources);
+
+            FeedGroups = new ObservableCollection<ObservableGroup<Feed, string>>();
         }
 
         public async Task LoadFeedsAsync()
         {
             FeedGroups.Clear();
 
-            var feeds = await dataRepo.Feeds.Get();
+            var feeds = await feedsCache.Get();
 
             var groupedFeeds = feeds
                 .GroupBy(o => o.Category)
                 .OrderBy(o => o.Key)
-                .Select(group => new ObservableGroup<FeedSource, string>(Uppercase(group.Key), group.OrderBy(o => o.FeedName)))
+                .Select(group => new ObservableGroup<Feed, string>(Uppercase(group.Key), group.OrderBy(o => o.Name)))
                 .ToList();
 
             var noCategories = groupedFeeds.SingleOrDefault(o => o.Key == null);
@@ -61,7 +60,7 @@ namespace weave
         {
             var feeds = FeedGroups.SelectMany(o => o).ToList();
             SourcesCount = string.Format("({0})", feeds.Count);
-            AreThereTooManyFeeds = feeds.AreThereTooManyFeeds();
+            AreThereTooManyFeeds = feeds.Count > 100;// feeds.AreThereTooManyFeeds();
             WarningVisibility = AreThereTooManyFeeds ? Visibility.Visible : Visibility.Collapsed;
             PropertyChanged.Raise(this, "SourcesCount");
             PropertyChanged.Raise(this, "WarningVisibility");
@@ -75,17 +74,12 @@ namespace weave
                 return p.ToUpperInvariant();
         }
 
-        public void DeleteSource(FeedSource feed)
+        public async Task DeleteSource(Feed feed)
         {
-            dataRepo.DeleteFeed(feed);
+            await feedsCache.Remove(feed);
             foreach (var group in FeedGroups)
                 group.Remove(feed);
             ReevaluateNumberOfFeeds();
-        }
-
-        public async Task SaveChanges()
-        {
-            await dataRepo.SaveFeeds();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

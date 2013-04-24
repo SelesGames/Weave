@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using weave.Data;
+//using weave.Data;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
@@ -27,7 +27,7 @@ namespace weave
         PermanentState permanentState;
         CustomFrame frame;
         Kernel kernel;
-        Weave4DataAccessLayer dataAccessLayer;
+        //Weave4DataAccessLayer dataAccessLayer;
         bool hasBeenInitialized = false;
         Uri initialNavigationUri = null;
 
@@ -123,8 +123,8 @@ namespace weave
             if (permanentState.IsFirstTime)
             {
                 frame.IsLoading = false;
-                dataAccessLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
-                dataAccessLayer.IsFirstTime = true;
+                //dataAccessLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
+                //dataAccessLayer.IsFirstTime = true;
                 return;
             }
 

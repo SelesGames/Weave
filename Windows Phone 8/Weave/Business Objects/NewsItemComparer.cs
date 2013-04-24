@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -7,7 +8,7 @@ namespace weave
     {
         public bool Equals(NewsItem x, NewsItem y)
         {
-            return x.Title.Equals(y.Title) && RelaxedDateTimeEquality(x.PublishDateTime, y.PublishDateTime);
+            return x.Title.Equals(y.Title) && RelaxedDateTimeEquality(x.LocalDateTime, y.LocalDateTime);
         }
 
         public int GetHashCode(NewsItem obj)

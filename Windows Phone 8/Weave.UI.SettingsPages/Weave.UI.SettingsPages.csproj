@@ -200,10 +200,6 @@
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
       <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
-      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
-      <Name>Weave.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
       <Name>Weave.FeedLibrary</Name>
@@ -215,6 +211,14 @@
     <ProjectReference Include="..\Weave.GoogleReader\Weave.GoogleReader.csproj">
       <Project>{70C30E41-27BC-4298-93E7-A6ADE7B59ED9}</Project>
       <Name>Weave.GoogleReader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.User\Weave.User.csproj">
+      <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
+      <Name>Weave.User</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.ViewModels\Weave.ViewModels.csproj">
+      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
+      <Name>Weave.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

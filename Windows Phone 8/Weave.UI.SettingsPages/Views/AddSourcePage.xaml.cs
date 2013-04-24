@@ -85,21 +85,21 @@ namespace weave.Pages.Settings
             busyIndicator.CollapseAndStopAnimation();
         }
 
-        void OnSearchToggleTapped(object sender, System.Windows.RoutedEventArgs e)
+        async void OnSearchToggleTapped(object sender, System.Windows.RoutedEventArgs e)
         {
             var source = (AddSourceViewModel.Source)((FrameworkElement)sender).DataContext;
             if (!source.IsAdded)
-                viewModel.AddFeed(source);
+                await viewModel.AddFeed(source);
             else
-                viewModel.RemoveFeed(source);
+                await viewModel.RemoveFeed(source);
         }
 
-        void OnSearchResultTextTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        async void OnSearchResultTextTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var source = (AddSourceViewModel.Source)((FrameworkElement)sender).DataContext;
             if (!source.IsAdded)
             {
-                viewModel.AddFeed(source);
+                await viewModel.AddFeed(source);
             }
             else if (source.IsAdded && source.Feed != null)
             {
@@ -158,7 +158,6 @@ namespace weave.Pages.Settings
 
         async Task SaveAllNewFeeds()
         {
-            await viewModel.SaveSearchResults();
             await viewModel.SaveGReaderFeeds();
         }
 

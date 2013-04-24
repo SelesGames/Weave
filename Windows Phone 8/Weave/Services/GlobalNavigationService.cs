@@ -5,6 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -46,7 +47,7 @@ namespace weave
 
         public static void ToWebBrowserPage(NewsItem newsItem)
         {
-            if (newsItem == null || newsItem.FeedSource == null)
+            if (newsItem == null || newsItem.Feed == null)
                 return;
 
             var vm = new ReadabilityPageViewModel { NewsItem = newsItem };

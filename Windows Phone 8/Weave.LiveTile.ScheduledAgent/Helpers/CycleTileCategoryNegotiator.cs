@@ -3,9 +3,8 @@ using SelesGames.Common.Hashing;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using weave;
-using weave.Data;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
@@ -14,6 +13,7 @@ namespace Weave.LiveTile.ScheduledAgent
         string categoryName;
         string appName;
         string tileTitle;
+        IViewModelRepository serviceClient;
 
         public CycleTileCategoryNegotiator(string categoryName, string appName, ShellTile tile)
             : base(appName, tile)
@@ -33,27 +33,7 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
-            var dal = new Weave4DataAccessLayer();
-            var feeds = await dal.GetFeedsAsync();
-
-            if (categoryName != null && !categoryName.Equals("all news", StringComparison.OrdinalIgnoreCase))
-                feeds = feeds.OfCategory(categoryName).ToList();
-
-            Trace.Output("refreshing " + categoryName);
-
-            FeedSource.NewsServer.BeginFeedUpdateBatch();
-            foreach (var feed in feeds)
-            {
-#if DEBUG
-                feed.ResetFeed();
-#endif
-                feed.RefreshNews();
-            }
-            FeedSource.NewsServer.EndFeedUpdateBatch();
-
-            await feeds.Select(o => o.CurrentRefresh);
-
-            var news = feeds.AllOrderedNews().ToList();
+            var news = await serviceClient.GetFeaturedNews(categoryName, 15, refresh: true);
 
             var imagePrefix = CreateImagePrefix();
             var imageUrls = await news.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
@@ -67,7 +47,7 @@ namespace Weave.LiveTile.ScheduledAgent
             ViewModel = new CycleTileViewModel
             {
                 ImageIsoStorageUris = imageUrls,
-                NewCount = news.Count,
+                NewCount = news.Count(),
                 RecommendedLockScreenImageUri = preferredLockScreen,
                 AppName = tileTitle,
             };

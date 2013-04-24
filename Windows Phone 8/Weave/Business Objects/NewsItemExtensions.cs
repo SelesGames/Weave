@@ -1,4 +1,5 @@
-﻿
+﻿using Weave.ViewModels;
+
 namespace weave
 {
     public static class NewsItemExtensions

@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Weave.Mobilizer.Client;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -37,16 +38,16 @@ namespace weave
 
             try
             {
-                if (NewsItem.FeedSource != null)
+                if (NewsItem.Feed != null)
                 {
-                    var articleViewingType = NewsItem.FeedSource.ArticleViewingType;
+                    var articleViewingType = NewsItem.Feed.ArticleViewingType;
                     LastViewingType = articleViewingType;
                     await GetMobilizerResult().ConfigureAwait(false);
                     html = GetMobilizedHtml();
                     CurrentMobilizedArticle = new MobilizedArticle 
                     { 
-                        Title = NewsItem.Title, 
-                        Publication = NewsItem.FeedSource.FeedName,
+                        Title = NewsItem.Title,
+                        Publication = NewsItem.Feed.Name,
                         Date = NewsItem.PublishDate,
                         Content = mobilizerResult.content
                     };

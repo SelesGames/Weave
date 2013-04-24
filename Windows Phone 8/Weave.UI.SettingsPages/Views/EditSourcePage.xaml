@@ -45,7 +45,7 @@
 				<TextBlock Margin="12,36,12,0" Foreground="{StaticResource PhoneSubtleBrush}" Text="Category"/>
 				<toolkit:ListPicker x:Name="categories" Margin="12,0" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" FullModeItemTemplate="{StaticResource FullModeCategoryListPickerTemplate}" ExpansionMode="FullScreenOnly" PickerPageUri="/Weave.UI.SettingsPages;component/Views/CategoryPickerPage.xaml" />
 				<TextBlock Text="Feed name" Margin="12,36,12,0" Foreground="{StaticResource PhoneSubtleBrush}" />
-				<TextBox x:Name="feedName" InputScope="Text" Text="{Binding Feed.FeedName, Mode=TwoWay}"/>
+				<TextBox x:Name="feedName" InputScope="Text" Text="{Binding Feed.Name, Mode=TwoWay}"/>
 				<TextBlock Text="Article viewing mode" Margin="12,72,12,0" Foreground="{StaticResource PhoneSubtleBrush}" />
 				<TextBlock Text="(ADVANCED)" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="217,-26,12,0" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" HorizontalAlignment="Right" />
 				<toolkit:ListPicker x:Name="viewMode" Margin="12,0" ItemsSource="{Binding ArticleViewingModes}" SelectedItem="{Binding SelectedArticleViewingMode, Mode=TwoWay}" IsEnabled="{Binding IsArticleViewingSelectorEnabled}" />

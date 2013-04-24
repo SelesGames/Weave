@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using weave.Data;
 
 namespace weave
 {
     public class PanoramaViewModel
     {
-        Weave4DataAccessLayer dal;
         IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
         public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; set; }
@@ -18,8 +16,6 @@ namespace weave
 
         public PanoramaViewModel()
         {
-            dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-
             Sources = new ObservableCollection<CategoryOrLooseFeedViewModel>();
             MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
         }

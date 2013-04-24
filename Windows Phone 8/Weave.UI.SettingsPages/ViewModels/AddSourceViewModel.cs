@@ -6,23 +6,23 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using weave.Data;
 using Weave.FeedLibrary;
 using Weave.FeedSearchService;
 using Weave.GoogleReader;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public class AddSourceViewModel : INotifyPropertyChanged
     {
-        Weave4DataAccessLayer dataRepo;
+        IUsersFeedsCache feedsCache;
 
         public AddSourceViewModel()
         {
             Categories = new ObservableCollection<Category>();
             SearchResults = new ObservableCollection<Source>();
             SearchPrompt = "Search by a topic, or a website name, or even type in the RSS url directly (don't forget the http://)!";
-            dataRepo = ServiceResolver.Get<Weave4DataAccessLayer>();
         }
 
 
@@ -76,7 +76,7 @@ namespace weave
                 set { isAdded = value; PropertyChanged.Raise(this, "IsAdded"); }
             }
             bool isAdded;
-            public FeedSource Feed { get; set; }
+            public Feed Feed { get; set; }
 
             public override bool Equals(object obj)
             {
@@ -135,10 +135,9 @@ namespace weave
                 var sources = response.responseData.entries.Select(Parse).ToList();
 
                 // load the users enabled feeds that match the search string
-                var dataRepo = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                var enabledFeeds = await dataRepo.Feeds.Get();
+                var enabledFeeds = await feedsCache.Get();
                 var enabledSources = enabledFeeds
-                    .Where(o => o.FeedName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
+                    .Where(o => o.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
                     .Select(ParseEnabledFeed)
                     .ToList();
 
@@ -146,7 +145,7 @@ namespace weave
                 var library = ServiceResolver.Get<ExpandedLibrary>();
                 var temp = await library.Feeds.Get();
                 var librarySources = temp
-                    .Where(o => o.FeedName.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
+                    .Where(o => o.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
                     .Select(ParseLibraryFeed)
                     .ToList();
 
@@ -166,27 +165,22 @@ namespace weave
             }
         }
 
-        public async Task SaveSearchResults()
-        {
-            await dataRepo.SaveFeeds();
-        }
-
         public async Task AddFeed(Source source)
         {
             source.IsAdded = true;
             var feed = Parse(source);
-            await dataRepo.AddCustomFeed(feed);
+            await feedsCache.Add(feed);
             source.Feed = feed;
         }
 
-        public void RemoveFeed(Source source)
+        public async Task RemoveFeed(Source source)
         {
             source.IsAdded = false;
             var feed = source.Feed;
             if (feed == null)
                 return;
 
-            dataRepo.DeleteFeed(feed);
+            await feedsCache.Remove(feed);
             source.Feed = null;
         }
 
@@ -206,12 +200,12 @@ namespace weave
             };
         }
 
-        Source ParseEnabledFeed(FeedSource feed)
+        Source ParseEnabledFeed(Feed feed)
         {
             return new Source
             {
-                Name = feed.FeedName,
-                Url = feed.FeedUri,
+                Name = feed.Name,
+                Url = feed.Uri,
                 Category = feed.Category,
                 ViewType = feed.ArticleViewingType,
                 IsAdded = true,
@@ -219,26 +213,26 @@ namespace weave
             };
         }
 
-        Source ParseLibraryFeed(FeedSource feed)
+        Source ParseLibraryFeed(Feed feed)
         {
             return new Source
             {
-                Name = feed.FeedName,
-                Url = feed.FeedUri,
+                Name = feed.Name,
+                Url = feed.Uri,
                 Category = feed.Category,
                 ViewType = feed.ArticleViewingType,
                 IsAdded = false,
             };
         }
 
-        FeedSource Parse(Source source)
+        Feed Parse(Source source)
         {
-            return new FeedSource
+            return new Feed
             {
-                FeedName = source.Name,
-                FeedUri = source.Url,
+                Name = source.Name,
+                Uri = source.Url,
                 Category = source.Category,
-                ArticleViewingType = source.ViewType,
+                ArticleViewingType = (ArticleViewingType)source.ViewType,
             };
         }
 
@@ -278,14 +272,10 @@ namespace weave
             if (gReaderFeeds == null || !gReaderFeeds.Any())
                 return;
 
-            var dataRepo = ServiceResolver.Get<weave.Data.Weave4DataAccessLayer>();
-            var existingFeeds = await dataRepo.Feeds.Get();
+            var existingFeeds = await feedsCache.Get();
             var newFeeds = gReaderFeeds.Select(Parse).Except(existingFeeds).ToList();
 
-            foreach (var feed in newFeeds)
-                await dataRepo.AddCustomFeed(feed);
-
-            await dataRepo.SaveFeeds();
+            await feedsCache.BatchChange(newFeeds, null);
         }
 
         Source Parse(FeedInfo feed)
@@ -293,6 +283,7 @@ namespace weave
             string category = null;
             if (feed.Categories != null && feed.Categories.Any())
                 category = feed.Categories.First();
+
             return new Source
             {
                 Category = category,

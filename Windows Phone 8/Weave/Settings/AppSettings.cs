@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using weave.Services.MostViewedHistory;
+using Weave.ViewModels;
 
 namespace weave
 {

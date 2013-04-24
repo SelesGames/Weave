@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using weave;
+using Weave.ViewModels;
 
 namespace Weave.LiveTile.ScheduledAgent
 {

@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using weave.Data;
 using Weave.FeedLibrary;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public class BrowseFeedsByCategoryViewModel
     {
         string category;
-        List<FeedSource> existingFeeds;
+        IEnumerable<Weave.ViewModels.Feed> existingFeeds;
         List<Feed> snapshotOfEnabledFeeds;
-        Weave4DataAccessLayer dataRepo;
+        IUsersFeedsCache feedsCache;
 
 
 
@@ -34,6 +35,7 @@ namespace weave
 
 
 
+
         public string Category
         {
             get { return category.ToLower(); }
@@ -45,20 +47,20 @@ namespace weave
         {
             this.category = category;
             Feeds = new ObservableCollection<Feed>();
-            dataRepo = ServiceResolver.Get<weave.Data.Weave4DataAccessLayer>();
+            //dataRepo = ServiceResolver.Get<weave.Data.Weave4DataAccessLayer>();
         }
 
         public async Task LoadFeedsAsync()
         {
             Feeds.Clear();
 
-            existingFeeds = await dataRepo.Feeds.Get();
+            existingFeeds = await feedsCache.Get();
 
             var library = ServiceResolver.Get<ExpandedLibrary>();
             var temp = await library.Feeds.Get();
             var feeds = temp           
                 .OfCategory(category)
-                .OrderBy(o => o.FeedName)
+                .OrderBy(o => o.Name)
                 .Select(Parse)
                 .OfType<Feed>()
                 .ToList();
@@ -71,51 +73,57 @@ namespace weave
             snapshotOfEnabledFeeds = Feeds.Where(o => o.IsEnabled).ToList();
         }
 
-        Feed Parse(FeedSource feed)
-        {
-            if (string.IsNullOrEmpty(feed.FeedUri))
-                return null;
-
-            return new Feed
-            {
-                Name = feed.FeedName,
-                Image = null,
-                Uri = feed.FeedUri,
-                IsEnabled = existingFeeds.Any(o => o.FeedUri.Equals(feed.FeedUri, StringComparison.OrdinalIgnoreCase)),
-                ViewType = feed.ArticleViewingType,
-            };
-        }
-
         public async Task SaveChanges()
         {
             var currentlyEnabledFeeds = Feeds.Where(o => o.IsEnabled).ToList();
-            var newlyEnabledFeeds = currentlyEnabledFeeds.Except(snapshotOfEnabledFeeds).ToList();
+            var newlyEnabledFeeds = currentlyEnabledFeeds.Except(snapshotOfEnabledFeeds).Select(Parse).OfType<Weave.ViewModels.Feed>().ToList();
             var newlyDisabledFeeds = snapshotOfEnabledFeeds.Except(currentlyEnabledFeeds).ToList();
 
             if (newlyEnabledFeeds.Count == 0 && newlyDisabledFeeds.Count == 0)
                 return;
 
             var newlyDisabledFeedSources = newlyDisabledFeeds
-                .Select(o => existingFeeds.FirstOrDefault(x => x.FeedUri.Equals(o.Uri, StringComparison.OrdinalIgnoreCase)))
+                .Select(o => existingFeeds.FirstOrDefault(x => x.Uri.Equals(o.Uri, StringComparison.OrdinalIgnoreCase)))
+                .OfType<Weave.ViewModels.Feed>()
                 .ToList();
 
-            foreach (var feed in newlyEnabledFeeds)
-            {
-                await dataRepo.AddCustomFeed(new FeedSource
-                {
-                    FeedName = feed.Name,
-                    FeedUri = feed.Uri,
-                    Category = category,
-                    ArticleViewingType = feed.ViewType,
-                });
-            }
-
-            foreach (var feed in newlyDisabledFeedSources)
-            {
-                await dataRepo.DeleteFeed(feed);
-            }
-
-            await dataRepo.SaveFeeds();
+            await feedsCache.BatchChange(newlyEnabledFeeds, newlyDisabledFeedSources);
         }
+
+
+
+
+        #region parse to and fro
+
+        Feed Parse(Weave.ViewModels.Feed feed)
+        {
+            if (string.IsNullOrEmpty(feed.Uri))
+                return null;
+
+            return new Feed
+            {
+                Name = feed.Name,
+                Image = null,
+                Uri = feed.Uri,
+                IsEnabled = existingFeeds.Any(o => o.Uri.Equals(feed.Uri, StringComparison.OrdinalIgnoreCase)),
+                ViewType = feed.ArticleViewingType,
+            };
+        }
+
+        Weave.ViewModels.Feed Parse(Feed feed)
+        {
+            if (string.IsNullOrEmpty(feed.Uri))
+                return null;
+
+            return new Weave.ViewModels.Feed
+            {
+                Name = feed.Name,
+                Uri = feed.Uri, 
+                Category = category,
+                ArticleViewingType = feed.ViewType,
+            };
+        }
+
+        #endregion
     }
 }

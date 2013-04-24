@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using weave;
+using Weave.ViewModels;
 
 namespace Weave.FeedLibrary
 {
@@ -13,7 +13,7 @@ namespace Weave.FeedLibrary
     {
         string libraryUrl;
 
-        public Lazy<Task<List<FeedSource>>> Feeds { get; private set; }
+        public Lazy<Task<List<Feed>>> Feeds { get; private set; }
 
         public ExpandedLibrary(string libraryUrl)
         {
@@ -26,22 +26,22 @@ namespace Weave.FeedLibrary
 
         #region Load Feeds and Categories XML files
 
-        async Task<List<FeedSource>> GetFeedsFromWeb()
+        async Task<List<Feed>> GetFeedsFromWeb()
         {
-            var client = new LinqToXmlRestClient<List<FeedSource>> { UseGzip = true };
+            var client = new LinqToXmlRestClient<List<Feed>> { UseGzip = true };
             var feeds = await client.GetAndParseAsync(libraryUrl, Parse, CancellationToken.None);
             return feeds;
         }
 
-        List<FeedSource> Parse(XElement doc)
+        List<Feed> Parse(XElement doc)
         {
             return doc.Descendants("Feed")
                 .Select(feed =>
-                    new FeedSource
+                    new Feed
                     {
                         Category = feed.Parent.Attribute("Type").ValueOrDefault(),
-                        FeedName = feed.Attribute("Name").ValueOrDefault(),
-                        FeedUri = feed.ValueOrDefault(),
+                        Name = feed.Attribute("Name").ValueOrDefault(),
+                        Uri = feed.ValueOrDefault(),
                         ArticleViewingType = ParseArticleViewingType(feed),
                     })
                 .ToList();

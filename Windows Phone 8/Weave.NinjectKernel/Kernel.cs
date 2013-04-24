@@ -20,7 +20,7 @@ namespace Weave.NinjectKernel
         {
             base.AddComponents();
 
-            Bind<NewsServer>().ToSelf().InSingletonScope();
+            //Bind<NewsServer>().ToSelf().InSingletonScope();
             Bind<Weave4DataAccessLayer>().ToSelf().InSingletonScope();
 
             Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(assemblyName)).InTransientScope();

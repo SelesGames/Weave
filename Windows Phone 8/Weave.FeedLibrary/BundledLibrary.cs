@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using weave;
+using Weave.ViewModels;
 
 namespace Weave.FeedLibrary
 {
@@ -11,7 +12,7 @@ namespace Weave.FeedLibrary
         const string FILE = "Feeds.xml";
         string assemblyName;
 
-        public Lazy<List<FeedSource>> Feeds { get; private set; }
+        public Lazy<List<Feed>> Feeds { get; private set; }
 
         public BundledLibrary(string assemblyName)
         {
@@ -24,17 +25,17 @@ namespace Weave.FeedLibrary
 
         #region Load Feeds and Categories XML files
 
-        List<FeedSource> GetFeedsFromXmlFile()
+        List<Feed> GetFeedsFromXmlFile()
         {
             var fileName = string.Format("/{0};component/{1}", this.assemblyName, FILE);
             var doc = XDocument.Load(fileName);
             var xmlFeeds = doc.Descendants("Feed")
                 .Select(feed =>
-                    new FeedSource
+                    new Feed
                     {
                         Category = feed.Parent.Attribute("Type").ValueOrDefault(),
-                        FeedName = feed.Attribute("Name").ValueOrDefault(),
-                        FeedUri = feed.ValueOrDefault(),
+                        Name = feed.Attribute("Name").ValueOrDefault(),
+                        Uri = feed.ValueOrDefault(),
                         ArticleViewingType = ParseArticleViewingType(feed),
                     })
                 .ToList();

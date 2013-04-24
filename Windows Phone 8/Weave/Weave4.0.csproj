@@ -157,15 +157,13 @@
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Library\Extension Methods\ICollectionExtensions.cs" />
     <Compile Include="Library\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Library\Extension Methods\SilverlightToolkitExtensions.cs" />
     <Compile Include="Library\Extension Methods\VoiceInformationExtensions.cs" />
     <Compile Include="Pages\AppSettingsPage.xaml.cs">
       <DependentUpon>AppSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business Objects\CategoryRefreshListener.cs" />
-    <Compile Include="Business Objects\FeedRefreshListener.cs" />
-    <Compile Include="Business Objects\RefreshListenerBase.cs" />
     <Compile Include="Business Objects\NewsItemExtensions.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\BigImageNewsItemControl.xaml.cs">
       <DependentUpon>BigImageNewsItemControl.xaml</DependentUpon>
@@ -228,8 +226,8 @@
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\StandardFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
-    <Compile Include="Settings\UserInfo.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
+    <Compile Include="ViewModels\NewsCollectionViewModel.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
       <DependentUpon>MainPageNavigationDropDownList.xaml</DependentUpon>
@@ -677,6 +675,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Cloud\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
+      <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
+      <Name>Weave.UserFeedAggregator.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
       <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
       <Name>SelesGames.Common.Reactive</Name>
@@ -729,10 +731,6 @@
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
       <Name>Weave.Customizability</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
-      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
-      <Name>Weave.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
       <Name>Weave.FeedLibrary</Name>
@@ -760,6 +758,22 @@
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
       <Name>Weave.UI.SettingsPages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UserFeedAggregator.Client\Weave.UserFeedAggregator.Client.csproj">
+      <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
+      <Name>Weave.UserFeedAggregator.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
+      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
+      <Name>Weave.UserFeedAggregator.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.User\Weave.User.csproj">
+      <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
+      <Name>Weave.User</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.ViewModels\Weave.ViewModels.csproj">
+      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
+      <Name>Weave.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

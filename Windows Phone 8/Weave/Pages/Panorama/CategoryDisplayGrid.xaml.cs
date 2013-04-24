@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -16,10 +17,10 @@ namespace weave
         public CategoryDisplayGrid()
         {
             InitializeComponent();
-			
-			if (this.IsInDesignMode())
-				return;
-			
+            
+            if (this.IsInDesignMode())
+                return;
+            
             displayers = new List<NewsItemWithImageTile3>
             {
                 // left 4

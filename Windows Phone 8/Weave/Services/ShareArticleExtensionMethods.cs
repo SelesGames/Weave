@@ -1,4 +1,5 @@
 ﻿using weave.Services.Instapaper;
+using Weave.ViewModels;
 
 namespace weave
 {

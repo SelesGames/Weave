@@ -1,9 +1,10 @@
-﻿using SelesGames;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -12,13 +13,13 @@ namespace weave
         const string ARTICLEVIEWMODE_MOBILIZER = "Mobilizer";
         const string ARTICLEVIEWMODE_IE = "Internet Explorer";
 
-
+        IUsersFeedsCache feedsCache;
         bool suppressShittyJeffWilcoxCode = false;
 
         // prevents the SelectedArticleViewingMode Property from changing the underlying ArticleViewingMode of the feed
         bool suppressMyOwnShittyCode = false;
 
-        public FeedSource Feed { get; set; }
+        public Feed Feed { get; set; }
         public ObservableCollection<DisplayableCategory> Categories { get; private set; }
         public ObservableCollection<string> ArticleViewingModes { get; private set; }
 
@@ -78,8 +79,7 @@ namespace weave
             Categories.Clear();
             suppressShittyJeffWilcoxCode = false;
 
-            var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-            var feeds = await dal.Feeds.Get();
+            var feeds = await feedsCache.Get();
 
             var feed = feeds.Where(o => o.Id == feedId).SingleOrDefault();
             if (feed == null)

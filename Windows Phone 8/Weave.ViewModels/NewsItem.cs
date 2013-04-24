@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using Weave.ViewModels.Extensions;
 
 namespace Weave.ViewModels
 {
@@ -24,7 +22,16 @@ namespace Weave.ViewModels
 
         public DateTime LocalDateTime
         {
-            get { return publishDateTime; }
+            get { return DateTime.Now; }
+            set
+            {
+
+            }
+        }
+
+        public DateTime UniversalDateTime
+        {
+            get { return DateTime.UtcNow; }
             set
             {
 
@@ -76,12 +83,12 @@ namespace Weave.ViewModels
 
         public double SortRating
         {
-            get { return CalculateSortRating(PublishDateTime); }
+            get { return CalculateSortRating(UniversalDateTime); }
         }
 
         static double CalculateSortRating(DateTime dateTime)
         {
-            double elapsedHours = (DateTime.Now - dateTime).TotalHours;
+            double elapsedHours = (DateTime.UtcNow - dateTime).TotalHours;
             if (elapsedHours <= 0)
                 elapsedHours = 0.0001;
             double value = 1d / elapsedHours;
@@ -100,14 +107,14 @@ namespace Weave.ViewModels
 
         public string PublishDate
         {
-            get { return PublishDateTime.ElapsedTime(); }
+            get { return LocalDateTime.ElapsedTime(); }
         }
 
         public string FormattedForMainPageSourceAndDate
         {
             get
             {
-                return string.Format("{0} • {1}", Feed.Name, PublishDateTime.ElapsedTime());
+                return string.Format("{0} • {1}", Feed.Name, LocalDateTime.ElapsedTime());
             }
         }
 

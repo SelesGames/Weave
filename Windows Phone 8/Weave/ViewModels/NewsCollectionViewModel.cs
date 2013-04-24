@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Weave.ViewModels.Contracts.Client;
 
 namespace Weave.ViewModels
 {
     public abstract class BaseNewsCollectionViewModel
     {
         List<Guid> feedIds;
-        protected IUserCache serviceClient;
+        protected IViewModelRepository serviceClient;
         protected Guid userId;
 
         public ObservableCollection<NewsItem> News { get; private set; }

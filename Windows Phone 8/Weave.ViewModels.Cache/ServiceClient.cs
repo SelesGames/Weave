@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.UserFeedAggregator.Contracts;
+using Weave.ViewModels.Contracts.Client;
 using Incoming = Weave.UserFeedAggregator.DTOs.ServerIncoming;
 using Outgoing = Weave.UserFeedAggregator.DTOs.ServerOutgoing;
 
 
 namespace Weave.ViewModels.Cache
 {
-    public class ServiceClient : IUserCache
+    public class ServiceClient : IViewModelRepository
     {
-        IServiceClient innerClient;
+        IWeaveUserService innerClient;
         Guid userId;
 
-        public ServiceClient(Guid userId, IServiceClient innerClient)
+        public ServiceClient(Guid userId, IWeaveUserService innerClient)
         {
             this.userId = userId;
             this.innerClient = innerClient;
@@ -30,6 +31,18 @@ namespace Weave.ViewModels.Cache
         {
             var userNews = await innerClient.GetNews(userId, feedId, refresh, skip, take);
             return CreateDistinctAndOrdered(userNews);
+        }
+
+        public async Task<IList<NewsItem>> GetFeaturedNews(string category, int take, bool refresh = false)
+        {
+            var featuredNews = await innerClient.GetFeaturedNews(userId, category, take, refresh);
+            return CreateOrdered(featuredNews);
+        }
+
+        public async Task<IList<NewsItem>> GetFeaturedNews(Guid feedId, int take, bool refresh = false)
+        {
+            var featuredNews = await innerClient.GetFeaturedNews(userId, feedId, take, refresh);
+            return CreateOrdered(featuredNews);
         }
 
         public Task AddFeed(Feed feed)
@@ -58,6 +71,10 @@ namespace Weave.ViewModels.Cache
         }
 
 
+
+
+        #region Helper methods
+
         IList<NewsItem> CreateDistinctAndOrdered(Outgoing.UserNews userNews)
         {
             var allNews = userNews.Feeds
@@ -69,6 +86,19 @@ namespace Weave.ViewModels.Cache
 
             return allNews;
         }
+
+        IList<NewsItem> CreateOrdered(Outgoing.LiveTileNewsList liveTileNewsList)
+        {
+            var allNews = liveTileNewsList.Feeds
+                .SelectMany(o => o.News
+                    .Select(n => Convert(n, o)))
+                .OrderBy(o => o.LocalDateTime)
+                .ToList();
+
+            return allNews;
+        }
+
+        #endregion
 
 
 

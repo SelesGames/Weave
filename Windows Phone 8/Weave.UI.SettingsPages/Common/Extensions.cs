@@ -19,37 +19,37 @@ namespace Microsoft.Phone.Controls
     {
         private const string ExternalAddress = "app://external/";
 
-        /// <summary>
-        /// Inverts a Matrix. The Invert functionality on the Matrix type is 
-        /// internal to the framework only. Since Matrix is a struct, an out 
-        /// parameter must be presented.
-        /// </summary>
-        /// <param name="m">The Matrix object.</param>
-        /// <param name="outputMatrix">The matrix to return by an output 
-        /// parameter.</param>
-        /// <returns>Returns a value indicating whether the type was 
-        /// successfully inverted. If the determinant is 0.0, then it cannot 
-        /// be inverted and the original instance will remain untouched.</returns>
-        public static bool Invert(this Matrix m, out Matrix outputMatrix)
-        {
-            double determinant = m.M11 * m.M22 - m.M12 * m.M21;
-            if (determinant == 0.0)
-            {
-                outputMatrix = m;
-                return false;
-            }
+        ///// <summary>
+        ///// Inverts a Matrix. The Invert functionality on the Matrix type is 
+        ///// internal to the framework only. Since Matrix is a struct, an out 
+        ///// parameter must be presented.
+        ///// </summary>
+        ///// <param name="m">The Matrix object.</param>
+        ///// <param name="outputMatrix">The matrix to return by an output 
+        ///// parameter.</param>
+        ///// <returns>Returns a value indicating whether the type was 
+        ///// successfully inverted. If the determinant is 0.0, then it cannot 
+        ///// be inverted and the original instance will remain untouched.</returns>
+        //public static bool Invert(this Matrix m, out Matrix outputMatrix)
+        //{
+        //    double determinant = m.M11 * m.M22 - m.M12 * m.M21;
+        //    if (determinant == 0.0)
+        //    {
+        //        outputMatrix = m;
+        //        return false;
+        //    }
 
-            Matrix matCopy = m;
-            m.M11 = matCopy.M22 / determinant;
-            m.M12 = -1 * matCopy.M12 / determinant;
-            m.M21 = -1 * matCopy.M21 / determinant;
-            m.M22 = matCopy.M11 / determinant;
-            m.OffsetX = (matCopy.OffsetY * matCopy.M21 - matCopy.OffsetX * matCopy.M22) / determinant;
-            m.OffsetY = (matCopy.OffsetX * matCopy.M12 - matCopy.OffsetY * matCopy.M11) / determinant;
+        //    Matrix matCopy = m;
+        //    m.M11 = matCopy.M22 / determinant;
+        //    m.M12 = -1 * matCopy.M12 / determinant;
+        //    m.M21 = -1 * matCopy.M21 / determinant;
+        //    m.M22 = matCopy.M11 / determinant;
+        //    m.OffsetX = (matCopy.OffsetY * matCopy.M21 - matCopy.OffsetX * matCopy.M22) / determinant;
+        //    m.OffsetY = (matCopy.OffsetX * matCopy.M12 - matCopy.OffsetY * matCopy.M11) / determinant;
 
-            outputMatrix = m;
-            return true;
-        }
+        //    outputMatrix = m;
+        //    return true;
+        //}
 
         /// <summary>
         /// An implementation of the Contains member of string that takes in a 
@@ -93,21 +93,21 @@ namespace Microsoft.Phone.Controls
             return (ExternalAddress == uri.ToString());
         }
 
-        /// <summary>
-        /// Registers a property changed callback for a given property.
-        /// </summary>
-        /// <param name="element">The element registering the notification</param>
-        /// <param name="propertyName">Property name to register</param>
-        /// <param name="callback">Callback function</param>
-        /// <remarks>This allows a child to be notified of when a property declared in its parent is changed.</remarks>
-        public static void RegisterNotification(this FrameworkElement element, string propertyName, PropertyChangedCallback callback)  
-        {
-            DependencyProperty prop = DependencyProperty.RegisterAttached("Notification" + propertyName,  
-                                                                          typeof(object),
-                                                                          typeof(FrameworkElement),  
-                                                                          new PropertyMetadata(callback));  
+        ///// <summary>
+        ///// Registers a property changed callback for a given property.
+        ///// </summary>
+        ///// <param name="element">The element registering the notification</param>
+        ///// <param name="propertyName">Property name to register</param>
+        ///// <param name="callback">Callback function</param>
+        ///// <remarks>This allows a child to be notified of when a property declared in its parent is changed.</remarks>
+        //public static void RegisterNotification(this FrameworkElement element, string propertyName, PropertyChangedCallback callback)  
+        //{
+        //    DependencyProperty prop = DependencyProperty.RegisterAttached("Notification" + propertyName,  
+        //                                                                  typeof(object),
+        //                                                                  typeof(FrameworkElement),  
+        //                                                                  new PropertyMetadata(callback));  
           
-            element.SetBinding(prop, new Binding(propertyName) { Source = element });  
-        }  
+        //    element.SetBinding(prop, new Binding(propertyName) { Source = element });  
+        //}  
     }
 }

@@ -19,15 +19,15 @@ namespace weave
             return feeds.Where(o => categoryName.Equals(o.Category, StringComparison.OrdinalIgnoreCase));
         }
 
-        public static IEnumerable<NewsItem> AllNews(this IEnumerable<FeedSource> feeds)
-        {
-            return feeds.Where(o => o.News != null).SelectMany(o => o.News);
-        }
+        //public static IEnumerable<NewsItem> AllNews(this IEnumerable<FeedSource> feeds)
+        //{
+        //    return feeds.Where(o => o.News != null).SelectMany(o => o.News);
+        //}
 
-        public static IEnumerable<NewsItem> AllOrderedNews(this IEnumerable<FeedSource> feeds)
-        {
-            return feeds.AllNews().OrderByDescending(o => o.PublishDateTime);
-        }
+        //public static IEnumerable<NewsItem> AllOrderedNews(this IEnumerable<FeedSource> feeds)
+        //{
+        //    return feeds.AllNews().OrderByDescending(o => o.PublishDateTime);
+        //}
 
         public static bool AreThereTooManyFeeds(this IEnumerable<FeedSource> feeds)
         {

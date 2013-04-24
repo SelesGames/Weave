@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Telerik.Windows.Controls;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -17,7 +18,6 @@ namespace weave
     {
         PanoramaViewModel vm;
         LatestNewsViewModel vm2;
-        RefreshListenerBase currentRefreshListener;
 
         public SamplePanorama()
         {
@@ -127,11 +127,6 @@ namespace weave
                     progressBar.Visibility = Visibility.Collapsed;
                 }
             }
-        }
-
-        void InitializeCurrentRefreshListener()
-        {
-            currentRefreshListener = new CategoryRefreshListener("all news");
         }
 
 
