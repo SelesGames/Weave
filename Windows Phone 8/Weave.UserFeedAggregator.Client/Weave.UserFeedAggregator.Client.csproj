@@ -87,7 +87,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Cloud\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
+      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
+      <Name>Weave.UserFeedAggregator.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
       <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
       <Name>Weave.UserFeedAggregator.DTOs</Name>
     </ProjectReference>
@@ -98,10 +102,6 @@
     <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
-      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
-      <Name>Weave.UserFeedAggregator.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

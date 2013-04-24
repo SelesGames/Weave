@@ -126,7 +126,7 @@ namespace weave
 
 
             //<ImageBrush x:Name="image" Stretch="UniformToFill" ImageSource="http://gamernode.com/upload/manager///Dan%20Crabtree/Reviews/halo-reach-beta-gameplay1285174234.jpg"/>
-            this.image = new Image
+            this.image = new System.Windows.Controls.Image
             {
                 Stretch = Stretch.UniformToFill,
                 HorizontalAlignment = HorizontalAlignment.Center,

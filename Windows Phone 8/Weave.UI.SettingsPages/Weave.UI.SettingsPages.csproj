@@ -216,10 +216,6 @@
       <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
       <Name>Weave.User</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.ViewModels\Weave.ViewModels.csproj">
-      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
-      <Name>Weave.ViewModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd">

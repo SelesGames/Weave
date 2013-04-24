@@ -160,19 +160,19 @@ namespace weave
             var dummyPage = frame.Content as DummyPage;
             await dummyPage.LayoutPopups();
 
-            dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
+            //dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
 
             var markedReadTimes = new ArticleDeleteTimesForMarkedRead();
             var unreadTimes = new ArticleDeleteTimesForUnread();
 
-            dataAccessLayer.OldMarkedReadNewsElapsedThreshold = markedReadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForMarkedRead).Span;
-            dataAccessLayer.OldUnreadNewsElapsedThreshold = unreadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForUnread).Span;
+            //dataAccessLayer.OldMarkedReadNewsElapsedThreshold = markedReadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForMarkedRead).Span;
+            //dataAccessLayer.OldUnreadNewsElapsedThreshold = unreadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForUnread).Span;
 
             bool wereFeedsRecovered = false;
             bool areThereTooManyFeeds = false;
             try
             {
-                var feeds = await dataAccessLayer.Feeds.Get();
+                //var feeds = await dataAccessLayer.Feeds.Get();
                 wereFeedsRecovered = true;
                 areThereTooManyFeeds = feeds.AreThereTooManyFeeds();
             }

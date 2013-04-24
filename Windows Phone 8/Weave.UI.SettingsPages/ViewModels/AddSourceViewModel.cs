@@ -16,7 +16,7 @@ namespace weave
 {
     public class AddSourceViewModel : INotifyPropertyChanged
     {
-        IUsersFeedsCache feedsCache;
+        IUserCache cache;
 
         public AddSourceViewModel()
         {
@@ -135,7 +135,7 @@ namespace weave
                 var sources = response.responseData.entries.Select(Parse).ToList();
 
                 // load the users enabled feeds that match the search string
-                var enabledFeeds = await feedsCache.Get();
+                var enabledFeeds = cache.Get().Feeds;
                 var enabledSources = enabledFeeds
                     .Where(o => o.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
                     .Select(ParseEnabledFeed)
@@ -169,7 +169,7 @@ namespace weave
         {
             source.IsAdded = true;
             var feed = Parse(source);
-            await feedsCache.Add(feed);
+            await cache.Get().AddFeed(feed);
             source.Feed = feed;
         }
 
@@ -180,7 +180,7 @@ namespace weave
             if (feed == null)
                 return;
 
-            await feedsCache.Remove(feed);
+            await cache.Get().RemoveFeed(feed);
             source.Feed = null;
         }
 
@@ -272,7 +272,7 @@ namespace weave
             if (gReaderFeeds == null || !gReaderFeeds.Any())
                 return;
 
-            var existingFeeds = await feedsCache.Get();
+            var existingFeeds = cache.Get().Feeds;
             var newFeeds = gReaderFeeds.Select(Parse).Except(existingFeeds).ToList();
 
             await feedsCache.BatchChange(newFeeds, null);

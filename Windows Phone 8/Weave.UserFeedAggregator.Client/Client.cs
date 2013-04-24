@@ -1,5 +1,6 @@
 ﻿using SelesGames.Rest;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Weave.UserFeedAggregator.Contracts;
@@ -136,7 +137,9 @@ namespace Weave.UserFeedAggregator.Client
         public async Task AddFeed(Guid userId, Incoming.NewFeed feed)
         {
             string append = "add_feed";
-            var url = string.Format("{0}?userId={1}", append, userId);
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .ToString();
 
             var client = CreateClient();
             await client.PostAsync(url, feed, CancellationToken.None);
@@ -145,7 +148,10 @@ namespace Weave.UserFeedAggregator.Client
         public async Task RemoveFeed(Guid userId, Guid feedId)
         {
             string append = "remove_feed";
-            var url = string.Format("{0}?userId={1}&feedId={2}", append, userId, feedId);
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .ToString();
 
             var client = CreateClient();
             await client.GetAsync<object>(url, CancellationToken.None);
@@ -154,10 +160,23 @@ namespace Weave.UserFeedAggregator.Client
         public async Task UpdateFeed(Guid userId, Incoming.UpdatedFeed feed)
         {
             string append = "update_feed";
-            var url = string.Format("{0}?userId={1}", append, userId);
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .ToString();
 
             var client = CreateClient();
             await client.PostAsync(url, feed, CancellationToken.None);
+        }
+
+        public async Task BatchChange(Guid userId, Incoming.BatchFeedChange changeSet)
+        {
+            string append = "batch_change";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .ToString();
+
+            var client = CreateClient();
+            await client.PostAsync(url, changeSet, CancellationToken.None);
         }
 
         #endregion
@@ -183,7 +202,17 @@ namespace Weave.UserFeedAggregator.Client
 
             var client = CreateClient();
             await client.GetAsync<object>(url, CancellationToken.None);
+        }
 
+        public async Task MarkArticlesSoftRead(Guid userId, List<Guid> newsItemIds)
+        {
+            string append = "soft_read";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .ToString();
+
+            var client = CreateClient();
+            await client.PostAsync(url, newsItemIds, CancellationToken.None);
         }
 
         #endregion

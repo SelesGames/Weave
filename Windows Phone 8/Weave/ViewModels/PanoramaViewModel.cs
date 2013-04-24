@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public class PanoramaViewModel
     {
+        IUsersFeedsCache cache;
         IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
         public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; set; }
@@ -22,7 +25,7 @@ namespace weave
 
         public async Task LoadSourcesAsync()
         {
-            var feeds = await dal.Feeds.Get();
+            var feeds = await cache.Get();
             var sources = feeds.GetAllSources().ToList();
 
             bool areItemsNew = !Enumerable.SequenceEqual(sources, previousSources);
@@ -45,7 +48,7 @@ namespace weave
 
         public async Task LoadMostViewedAsync()
         {
-            var feeds = await dal.Feeds.Get();
+            var feeds = await cache.Get();
 
             var temp = new List<CategoryOrLooseFeedViewModel>();
 

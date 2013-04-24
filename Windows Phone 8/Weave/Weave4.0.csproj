@@ -675,7 +675,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Cloud\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
+      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
+      <Name>Weave.UserFeedAggregator.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
       <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
       <Name>Weave.UserFeedAggregator.DTOs</Name>
     </ProjectReference>
@@ -763,17 +767,9 @@
       <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
       <Name>Weave.UserFeedAggregator.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
-      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
-      <Name>Weave.UserFeedAggregator.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.User\Weave.User.csproj">
       <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
       <Name>Weave.User</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.ViewModels\Weave.ViewModels.csproj">
-      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
-      <Name>Weave.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

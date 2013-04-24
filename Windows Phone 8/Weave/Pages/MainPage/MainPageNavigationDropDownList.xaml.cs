@@ -7,11 +7,13 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public partial class MainPageNavigationDropDownList : UserControl, IDisposable, IPopup<CategoryOrLooseFeedViewModel>
     {
+        IUsersFeedsCache cache;
         ObservableCollection<CategoryOrLooseFeedViewModel> categoriesSource = new ObservableCollection<CategoryOrLooseFeedViewModel>();
         List<CategoryOrLooseFeedViewModel> lastSetOfSources = new List<CategoryOrLooseFeedViewModel>();
         CompositeDisposable disposables = new CompositeDisposable();
@@ -53,8 +55,7 @@ namespace weave
         {
             scroller.ScrollToVerticalOffset(0d);
 
-            var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-            var feeds = await dal.Feeds.Get();
+            var feeds = await cache.Get();
             var sources = feeds.GetAllSources().ToList();
 
             if (lastSetOfSources.Except(sources).Any() || sources.Except(lastSetOfSources).Any())

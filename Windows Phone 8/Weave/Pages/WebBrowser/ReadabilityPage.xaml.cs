@@ -17,11 +17,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Weave.UserFeedAggregator.Contracts;
+using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public partial class ReadabilityPage : PhoneApplicationPage, IDisposable
     {
+        IUsersFeedsCache cache;
         ReadabilityPageViewModel viewModel;
         bool isHtmlDisplayed = false;
         bool isArticleNonDisplayable = false;
@@ -268,7 +272,7 @@ namespace weave
         {
             get
             {
-                return viewModel.NewsItem.FeedSource != null && viewModel.LastViewingType != viewModel.NewsItem.FeedSource.ArticleViewingType;
+                return viewModel.NewsItem.Feed != null && viewModel.LastViewingType != viewModel.NewsItem.Feed.ArticleViewingType;
             }
         }
 
@@ -279,10 +283,10 @@ namespace weave
             if (vm == null || vm.NewsItem == null)
                 return false;
 
-            if (vm.NewsItem.FeedSource == null)
+            if (vm.NewsItem.Feed == null)
             {
-                var feeds = await ServiceResolver.Get<weave.Data.Weave4DataAccessLayer>().Feeds.Get();
-                vm.NewsItem.FeedSource = feeds.Single(o => o.Id.Equals(vm.NewsItem.FeedId));
+                var feeds = await cache.Get();
+                vm.NewsItem.Feed = feeds.Single(o => o.Id.Equals(vm.NewsItem.Feed.Id));
             }
 
             viewModel = new ReadabilityPageViewModel { NewsItem = vm.NewsItem };
@@ -299,10 +303,10 @@ namespace weave
 
             try
             {
-                if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.FeedSource == null)
+                if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.Feed == null)
                     return;
 
-                var articleViewType = viewModel.NewsItem.FeedSource.ArticleViewingType;
+                var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
 
                 if (articleViewType == ArticleViewingType.InternetExplorer || articleViewType == ArticleViewingType.InternetExplorerOnly)
                 {
@@ -491,15 +495,15 @@ namespace weave
 
         void EditSourceAppMenuItemClick(object sender, System.EventArgs e)
         {
-            NavigationService.ToEditSourcePage(viewModel.NewsItem.FeedId.ToString());
+            NavigationService.ToEditSourcePage(viewModel.NewsItem.Feed.Id.ToString());
         }
 
         void SpeakArticleAppMenuItemClick(object sender, System.EventArgs e)
         {
-            if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.FeedSource == null)
+            if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.Feed == null)
                 return;
 
-            var articleViewType = viewModel.NewsItem.FeedSource.ArticleViewingType;
+            var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
 
             if (!(articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly))
             {
