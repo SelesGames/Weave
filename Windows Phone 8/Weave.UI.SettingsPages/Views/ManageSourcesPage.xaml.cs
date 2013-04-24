@@ -1,5 +1,4 @@
 ﻿using Microsoft.Phone.Controls;
-using SelesGames.Phone;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,7 +33,7 @@ namespace weave
         {
             isBackLocked = true;
             await Task.Yield();
-            await viewModel.LoadFeedsAsync();
+            viewModel.LoadFeedsAsync();
             isBackLocked = false;
         }
 

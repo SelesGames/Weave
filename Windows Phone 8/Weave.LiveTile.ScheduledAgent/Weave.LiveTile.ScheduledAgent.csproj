@@ -101,6 +101,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
+      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
+      <Name>Weave.ViewModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>

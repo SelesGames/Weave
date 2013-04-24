@@ -137,40 +137,40 @@ namespace Expression.Blend.SampleData.SampleFeedSource
 			}
 		}
 
-		private string _FeedName = string.Empty;
+		private string _Name = string.Empty;
 
-		public string FeedName
+		public string Name
 		{
 			get
 			{
-				return this._FeedName;
+				return this._Name;
 			}
 
 			set
 			{
-				if (this._FeedName != value)
+				if (this._Name != value)
 				{
-					this._FeedName = value;
-					this.OnPropertyChanged("FeedName");
+					this._Name = value;
+					this.OnPropertyChanged("Name");
 				}
 			}
 		}
 
-		private string _FeedUri = string.Empty;
+		private string _Uri = string.Empty;
 
-		public string FeedUri
+		public string Uri
 		{
 			get
 			{
-				return this._FeedUri;
+				return this._Uri;
 			}
 
 			set
 			{
-				if (this._FeedUri != value)
+				if (this._Uri != value)
 				{
-					this._FeedUri = value;
-					this.OnPropertyChanged("FeedUri");
+					this._Uri = value;
+					this.OnPropertyChanged("Uri");
 				}
 			}
 		}

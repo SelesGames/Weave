@@ -1,8 +1,8 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
@@ -13,7 +13,7 @@ namespace weave
         const string ARTICLEVIEWMODE_MOBILIZER = "Mobilizer";
         const string ARTICLEVIEWMODE_IE = "Internet Explorer";
 
-        IUsersFeedsCache feedsCache;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
         bool suppressShittyJeffWilcoxCode = false;
 
         // prevents the SelectedArticleViewingMode Property from changing the underlying ArticleViewingMode of the feed
@@ -73,13 +73,13 @@ namespace weave
             IsArticleViewingSelectorEnabled = false;
         }
 
-        public async Task LoadDataAsync(Guid feedId)
+        public void LoadDataAsync(Guid feedId)
         {
             suppressShittyJeffWilcoxCode = true;
             Categories.Clear();
             suppressShittyJeffWilcoxCode = false;
 
-            var feeds = await feedsCache.Get();
+            var feeds = userCache.Get().Feeds;
 
             var feed = feeds.Where(o => o.Id == feedId).SingleOrDefault();
             if (feed == null)

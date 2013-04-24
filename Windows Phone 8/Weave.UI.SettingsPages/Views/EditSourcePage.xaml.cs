@@ -29,13 +29,13 @@ namespace weave
             catch { }
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             try
             {
                 var feedIdString = this.NavigationContext.QueryString["feedId"];
                 var feedId = Guid.Parse(feedIdString);
-                await viewModel.LoadDataAsync(feedId);
+                viewModel.LoadDataAsync(feedId);
             }
             catch(Exception ex)
             {

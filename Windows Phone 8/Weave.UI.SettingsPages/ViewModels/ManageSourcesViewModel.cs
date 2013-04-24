@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SelesGames;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace weave
 {
     public class ManageSourcesViewModel : INotifyPropertyChanged
     {
-        IUsersFeedsCache feedsCache;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
         public ObservableCollection<ObservableGroup<Feed, string>> FeedGroups { get; private set; }
         public string SourcesCount { get; set; }
@@ -30,11 +31,11 @@ namespace weave
             FeedGroups = new ObservableCollection<ObservableGroup<Feed, string>>();
         }
 
-        public async Task LoadFeedsAsync()
+        public void LoadFeedsAsync()
         {
             FeedGroups.Clear();
 
-            var feeds = await feedsCache.Get();
+            var feeds = userCache.Get().Feeds;
 
             var groupedFeeds = feeds
                 .GroupBy(o => o.Category)
@@ -76,7 +77,7 @@ namespace weave
 
         public async Task DeleteSource(Feed feed)
         {
-            await feedsCache.Remove(feed);
+            await userCache.Get().RemoveFeed(feed);
             foreach (var group in FeedGroups)
                 group.Remove(feed);
             ReevaluateNumberOfFeeds();
