@@ -47,8 +47,8 @@ namespace weave
             Debug.WriteLine("\r\n*******************\r\nMAIN GUI THREAD HAPPENING ON {0}\r\n*******************\r\n", Thread.CurrentThread.ManagedThreadId);
             this.IsHitTestVisible = false;
 
-            vm.LoadMostViewedAsync().Wait(); ;
-            vm.LoadSourcesAsync().Wait();
+            vm.LoadMostViewedAsync();
+            vm.LoadSourcesAsync();
             SetValue(RadTransitionControl.TransitionProperty, new RadTileTransition { PlayMode = TransitionPlayMode.Manual });
         }
 
@@ -75,10 +75,10 @@ namespace weave
             this.NavigatedTo.Subscribe(OnSubsequentNavigatedTo);
         }
 
-        async void OnSubsequentNavigatedTo()
+        void OnSubsequentNavigatedTo()
         {
             ApplicationBar.IsVisible = (pano.SelectedItem == Categories);
-            await vm.LoadSourcesAsync();
+            vm.LoadSourcesAsync();
         }
 
         void OnPanoSelectionChanged()

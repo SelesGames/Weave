@@ -683,6 +683,10 @@
       <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
       <Name>Weave.UserFeedAggregator.DTOs</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
+      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
+      <Name>Weave.ViewModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
       <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
       <Name>SelesGames.Common.Reactive</Name>

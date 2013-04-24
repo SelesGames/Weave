@@ -13,7 +13,7 @@ namespace weave
 {
     public partial class MainPageNavigationDropDownList : UserControl, IDisposable, IPopup<CategoryOrLooseFeedViewModel>
     {
-        IUsersFeedsCache cache;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
         ObservableCollection<CategoryOrLooseFeedViewModel> categoriesSource = new ObservableCollection<CategoryOrLooseFeedViewModel>();
         List<CategoryOrLooseFeedViewModel> lastSetOfSources = new List<CategoryOrLooseFeedViewModel>();
         CompositeDisposable disposables = new CompositeDisposable();
@@ -51,11 +51,11 @@ namespace weave
             //ResultCompleted.Raise(this, PopupResult.Create(catVM));
         }
 
-        public async Task RefreshCategories()
+        public void RefreshCategories()
         {
             scroller.ScrollToVerticalOffset(0d);
 
-            var feeds = await cache.Get();
+            var feeds = userCache.Get().Feeds;
             var sources = feeds.GetAllSources().ToList();
 
             if (lastSetOfSources.Except(sources).Any() || sources.Except(lastSetOfSources).Any())

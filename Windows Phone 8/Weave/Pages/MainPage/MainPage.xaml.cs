@@ -307,10 +307,10 @@ namespace weave
 
         #region Initialize Jump List for navigation to other categories
 
-        async Task InitializeJumpList()
+        void InitializeJumpList()
         {
             jumpList = ServiceResolver.Get<MainPageNavigationDropDownList>();
-            await jumpList.RefreshCategories();
+            jumpList.RefreshCategories();
             jumpList.HighlightCurrentCategory(this.vm.Header);
         }
 

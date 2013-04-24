@@ -25,7 +25,7 @@ namespace weave
 {
     public partial class ReadabilityPage : PhoneApplicationPage, IDisposable
     {
-        IUsersFeedsCache cache;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
         ReadabilityPageViewModel viewModel;
         bool isHtmlDisplayed = false;
         bool isArticleNonDisplayable = false;
@@ -285,7 +285,7 @@ namespace weave
 
             if (vm.NewsItem.Feed == null)
             {
-                var feeds = await cache.Get();
+                var feeds = userCache.Get().Feeds;
                 vm.NewsItem.Feed = feeds.Single(o => o.Id.Equals(vm.NewsItem.Feed.Id));
             }
 

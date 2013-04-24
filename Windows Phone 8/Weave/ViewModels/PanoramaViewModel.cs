@@ -11,7 +11,7 @@ namespace weave
 {
     public class PanoramaViewModel
     {
-        IUsersFeedsCache cache;
+        IUserCache userCache;
         IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
         public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; set; }
@@ -23,9 +23,9 @@ namespace weave
             MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
         }
 
-        public async Task LoadSourcesAsync()
+        public void LoadSourcesAsync()
         {
-            var feeds = await cache.Get();
+            var feeds = userCache.Get().Feeds;
             var sources = feeds.GetAllSources().ToList();
 
             bool areItemsNew = !Enumerable.SequenceEqual(sources, previousSources);
@@ -46,9 +46,9 @@ namespace weave
         //    await Sources.Select(o => o.UpdateNewsCountAfterRefreshAsync());
         //}
 
-        public async Task LoadMostViewedAsync()
+        public void LoadMostViewedAsync()
         {
-            var feeds = await cache.Get();
+            var feeds = userCache.Get().Feeds;
 
             var temp = new List<CategoryOrLooseFeedViewModel>();
 
@@ -91,7 +91,7 @@ namespace weave
                 }
                 else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
                 {
-                    firstNewsItem = feeds.Where(x => x.FeedName.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Take(1).AllOrderedNews().FirstOrDefault(x => x.HasImage);
+                    firstNewsItem = feeds.Where(x => x.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Take(1).AllOrderedNews().FirstOrDefault(x => x.HasImage);
                 }
                 if (firstNewsItem != null && firstNewsItem.HasImage)
                     o.Source = firstNewsItem.ImageUrl;
