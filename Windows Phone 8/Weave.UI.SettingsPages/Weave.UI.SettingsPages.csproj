@@ -216,10 +216,6 @@
       <Project>{70C30E41-27BC-4298-93E7-A6ADE7B59ED9}</Project>
       <Name>Weave.GoogleReader</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.User\Weave.User.csproj">
-      <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
-      <Name>Weave.User</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd">
