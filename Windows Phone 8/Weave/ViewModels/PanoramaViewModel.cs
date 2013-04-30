@@ -1,5 +1,4 @@
-﻿using SelesGames;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -48,7 +47,8 @@ namespace weave
 
         public void LoadMostViewedAsync()
         {
-            var feeds = userCache.Get().Feeds;
+            var user = userCache.Get();
+            var feeds = user.Feeds;
 
             var temp = new List<CategoryOrLooseFeedViewModel>();
 
@@ -80,20 +80,20 @@ namespace weave
 
             foreach (var o in temp)
             {
-                NewsItem firstNewsItem = null;
+                CategoryOrFeedTeaserImage firstNewsItem = null;
 
                 if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
                 {
                     if (o.Name != null && o.Name.Equals("all news", StringComparison.OrdinalIgnoreCase))
-                        firstNewsItem = feeds.AllOrderedNews().FirstOrDefault(x => x.HasImage);
+                        firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.Category == null);
                     else
-                        firstNewsItem = feeds.OfCategory(o.Name).AllOrderedNews().FirstOrDefault(x => x.HasImage);
+                        firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.Category.Equals(o.Name, StringComparison.OrdinalIgnoreCase));
                 }
                 else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
                 {
-                    firstNewsItem = feeds.Where(x => x.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Take(1).AllOrderedNews().FirstOrDefault(x => x.HasImage);
+                    firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.FeedId == o.FeedId);
                 }
-                if (firstNewsItem != null && firstNewsItem.HasImage)
+                if (firstNewsItem != null && !string.IsNullOrEmpty(firstNewsItem.ImageUrl))
                     o.Source = firstNewsItem.ImageUrl;
 
                 MostViewed.Add(o);

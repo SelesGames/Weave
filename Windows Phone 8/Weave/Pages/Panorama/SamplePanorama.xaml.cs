@@ -90,13 +90,13 @@ namespace weave
         {
             await TimeSpan.FromSeconds(0.3);
             this.cat1.NewsItemClicked.Subscribe(ShowDetailed);
-            await vm2.RefreshNewsAsync();
+            //await vm2.RefreshNewsAsync();
 
-            if (currentRefreshListener == null)
-                InitializeCurrentRefreshListener();
+            //if (currentRefreshListener == null)
+            //    InitializeCurrentRefreshListener();
 
-            await currentRefreshListener.GetRefreshed();
-            await vm2.RefreshNewsAsync();
+            //await currentRefreshListener.GetRefreshed();
+            //await vm2.RefreshNewsAsync();
         }
 
         async Task RefreshFeedsAndStartListeningToNewNews()
@@ -110,18 +110,18 @@ namespace weave
                     progressBar.IsIndeterminate = true;
                     progressBar.Visibility = Visibility.Visible;
 
-                    var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                    var feeds = await dal.Feeds.Get();
+                    //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
+                    //var feeds = await dal.Feeds.Get();
 
-                    FeedSource.NewsServer.BeginFeedUpdateBatch();
-                    foreach (var feed in feeds)
-                        feed.RefreshNews();
-                    FeedSource.NewsServer.EndFeedUpdateBatch();
+                    //FeedSource.NewsServer.BeginFeedUpdateBatch();
+                    //foreach (var feed in feeds)
+                    //    feed.RefreshNews();
+                    //FeedSource.NewsServer.EndFeedUpdateBatch();
 
 
-                    if (currentRefreshListener == null)
-                        InitializeCurrentRefreshListener();
-                    await currentRefreshListener.GetRefreshed();
+                    //if (currentRefreshListener == null)
+                    //    InitializeCurrentRefreshListener();
+                    //await currentRefreshListener.GetRefreshed();
 
                     progressBar.IsIndeterminate = false;
                     progressBar.Visibility = Visibility.Collapsed;

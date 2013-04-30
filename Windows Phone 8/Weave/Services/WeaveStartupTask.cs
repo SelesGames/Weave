@@ -174,7 +174,7 @@ namespace weave
             {
                 //var feeds = await dataAccessLayer.Feeds.Get();
                 wereFeedsRecovered = true;
-                areThereTooManyFeeds = feeds.AreThereTooManyFeeds();
+               // areThereTooManyFeeds = feeds.AreThereTooManyFeeds();
             }
             catch { }
 
@@ -489,8 +489,8 @@ namespace weave
                 await AppSettings.Instance.PermanentState.Save();
                 DebugEx.WriteLine("******************* SAVED PERMANENTSTATE");
 
-                var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                await dal.SaveOnExit();
+                //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
+                //await dal.SaveOnExit();
                 DebugEx.WriteLine("******************* SAVED FEEDS AND NEWS");
 
                 stoppedSuccessfully = true;

@@ -189,7 +189,11 @@ namespace Weave.UserFeedAggregator.Client
         public async Task MarkArticleRead(Guid userId, Guid feedId, Guid newsItemId)
         {
             string append = "mark_read";
-            var url = string.Format("{0}?userId={1}&feedId={2}&newsItemId={3}", append, userId, feedId, newsItemId);
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("newsItemId", newsItemId)
+                .ToString();
 
             var client = CreateClient();
             await client.GetAsync<object>(url, CancellationToken.None);
@@ -198,7 +202,11 @@ namespace Weave.UserFeedAggregator.Client
         public async Task MarkArticleUnread(Guid userId, Guid feedId, Guid newsItemId)
         {
             string append = "mark_unread";
-            var url = string.Format("{0}?userId={1}&feedId={2}&newsItemId={3}", append, userId, feedId, newsItemId);
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("newsItemId", newsItemId)
+                .ToString();
 
             var client = CreateClient();
             await client.GetAsync<object>(url, CancellationToken.None);
@@ -213,6 +221,19 @@ namespace Weave.UserFeedAggregator.Client
 
             var client = CreateClient();
             await client.PostAsync(url, newsItemIds, CancellationToken.None);
+        }
+
+        public async Task FavoriteArticle(Guid userId, Guid feedId, Guid newsItemId)
+        {
+            string append = "add_favorite";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("newsItemId", newsItemId)
+                .ToString();
+
+            var client = CreateClient();
+            await client.GetAsync<object>(url, CancellationToken.None);
         }
 
         #endregion

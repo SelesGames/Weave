@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Weave.FeedLibrary;
+using Weave.ViewModels;
 
 namespace weave
 {
@@ -50,12 +51,12 @@ namespace weave
             {
                 var enabledCategories = categories.Where(o => o.IsEnabled).Select(o => o.Name).ToList();
                 var feedsToAdd = library.Feeds.Get().Where(o => enabledCategories.Contains(o.Category)).ToList();
-                var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                foreach (var feed in feedsToAdd)
-                    await dal.AddCustomFeed(feed);
+                //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
+                //foreach (var feed in feedsToAdd)
+                //    await dal.AddCustomFeed(feed);
 
-                // TODO: SHOW SOME PROGRESS BAR OR SOMETHING
-                await dal.SaveFeeds();
+                //// TODO: SHOW SOME PROGRESS BAR OR SOMETHING
+                //await dal.SaveFeeds();
 
                 GlobalNavigationService.ToPanoramaPage();
             }
