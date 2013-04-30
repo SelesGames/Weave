@@ -226,6 +226,7 @@
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\StandardFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
+    <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
     <Compile Include="ViewModels\NewsCollectionViewModel.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />

@@ -58,7 +58,7 @@ namespace Weave.UserFeedAggregator.Client
 
         #region Get News for User (either by category or feedId)
 
-        public async Task<Outgoing.UserNews> GetNews(Guid userId, string category, bool refresh = false, int skip = 0, int take = 10)
+        public async Task<Outgoing.NewsList> GetNews(Guid userId, string category, bool refresh = false, int skip = 0, int take = 10)
         {
             string append = "news";
             var url = new UriBuilder(SERVICE_URL + append)
@@ -68,11 +68,11 @@ namespace Weave.UserFeedAggregator.Client
                 .ToString();
 
             var client = CreateClient();
-            var result = await client.GetAsync<Outgoing.UserNews>(url, CancellationToken.None);
+            var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
 
-        public async Task<Outgoing.UserNews> GetNews(Guid userId, Guid feedId, bool refresh = false, int skip = 0, int take = 10)
+        public async Task<Outgoing.NewsList> GetNews(Guid userId, Guid feedId, bool refresh = false, int skip = 0, int take = 10)
         {
             string append = "news";
             var url = new UriBuilder(SERVICE_URL + append)
@@ -82,7 +82,7 @@ namespace Weave.UserFeedAggregator.Client
                 .ToString();
 
             var client = CreateClient();
-            var result = await client.GetAsync<Outgoing.UserNews>(url, CancellationToken.None);
+            var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
 

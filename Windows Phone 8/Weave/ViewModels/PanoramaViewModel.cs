@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace weave
 {
     public class PanoramaViewModel
     {
-        IUserCache userCache;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
         IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
         public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; set; }

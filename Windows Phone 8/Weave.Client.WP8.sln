@@ -75,8 +75,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortablePackageLoader", "Po
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.User", "Weave.User\Weave.User.csproj", "{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Portable", "Common.Portable\Common.Portable.csproj", "{51994B9D-3C44-47A5-96AD-550B4F74401F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.UserFeedAggregator.Contracts", "..\..\Weave.Portable\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj", "{02F3363F-7B0F-4C5F-9123-B388F2870C35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.UserFeedAggregator.DTOs", "..\..\Weave.Portable\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj", "{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}"
@@ -86,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.ViewModels", "..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj", "{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.ViewModels.Repository", "..\..\Weave.Portable\Weave.ViewModels.Repository\Weave.ViewModels.Repository.csproj", "{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Portable", "..\..\Weave.Portable\Common.Portable\Common.Portable.csproj", "{51994B9D-3C44-47A5-96AD-550B4F74401F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -691,18 +691,6 @@ Global
 		{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}.Release|ARM.ActiveCfg = Release|Any CPU
 		{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}.Release|x86.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|Any CPU.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|Any CPU.Build.0 = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|ARM.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|x86.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|x86.ActiveCfg = Release|Any CPU
 		{02F3363F-7B0F-4C5F-9123-B388F2870C35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02F3363F-7B0F-4C5F-9123-B388F2870C35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02F3363F-7B0F-4C5F-9123-B388F2870C35}.Debug|ARM.ActiveCfg = Debug|Any CPU
@@ -763,6 +751,18 @@ Global
 		{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}.Release|x86.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|Any CPU.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|Any CPU.Build.0 = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|ARM.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.LiveTileTest|x86.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{51994B9D-3C44-47A5-96AD-550B4F74401F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
