@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -8,9 +9,7 @@ namespace Weave.ViewModels
 {
     public abstract class BaseNewsCollectionViewModel
     {
-        List<Guid> feedIds;
-        protected IViewModelRepository serviceClient;
-        protected Guid userId;
+        protected IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
         public ObservableCollection<NewsItem> News { get; private set; }
         public int NewArticleCount { get; set; }
@@ -36,7 +35,8 @@ namespace Weave.ViewModels
 
         public override async Task RefreshNews()
         {
-            var news = await serviceClient.GetNews(category, true);
+            var user = userCache.Get();
+            var news = await user.GetNewsForCategory(category, true);
             base.News.OrderedDescendingUniqueInsert(news, o => o.LocalDateTime);
         }
     }
@@ -52,7 +52,8 @@ namespace Weave.ViewModels
 
         public override async Task RefreshNews()
         {
-            var news = await serviceClient.GetNews(feedId, true);
+            var user = userCache.Get();
+            var news = await user.GetNewsForFeed(feedId, true);
             base.News.OrderedDescendingUniqueInsert(news, o => o.LocalDateTime);
         }
     }

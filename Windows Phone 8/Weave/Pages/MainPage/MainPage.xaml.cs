@@ -147,7 +147,7 @@ namespace weave
                     {
                         //var sw = System.Diagnostics.Stopwatch.StartNew();
                         await this.GetLoaded().Take(1).ToTask();
-                        await Task.Run(() => vm.OnNavigatedTo());
+                        await vm.OnNavigatedTo();
                         //sw.Stop();
                         //DebugEx.WriteLine("onnavto mvvm {0} ms", sw.ElapsedMilliseconds);
                     }

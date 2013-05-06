@@ -1,5 +1,4 @@
-﻿using SelesGames;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace weave
         public int currentPage = 0;
         int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
         int numberOfPages = 1;
-        //List<Feed> feeds;
+
         List<NewsItem> allNews;
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
@@ -65,7 +64,7 @@ namespace weave
         public async Task InitializeAsync()
         {
             await RecoverSavedTombstoneState();
-            OnNavigatedTo();
+            await OnNavigatedTo();
         }
 
 
@@ -99,9 +98,10 @@ namespace weave
 
 
 
-        public void OnNavigatedTo()
+        public async Task OnNavigatedTo()
         {
             InitializeNewsCollectionVM();
+            await newsCollectionVM.RefreshNews();
             UpdateNewsList();
         }
 

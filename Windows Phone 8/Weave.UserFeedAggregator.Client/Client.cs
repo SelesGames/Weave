@@ -223,7 +223,7 @@ namespace Weave.UserFeedAggregator.Client
             await client.PostAsync(url, newsItemIds, CancellationToken.None);
         }
 
-        public async Task FavoriteArticle(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task AddFavorite(Guid userId, Guid feedId, Guid newsItemId)
         {
             string append = "add_favorite";
             var url = new UriBuilder(SERVICE_URL + append)
@@ -234,6 +234,11 @@ namespace Weave.UserFeedAggregator.Client
 
             var client = CreateClient();
             await client.GetAsync<object>(url, CancellationToken.None);
+        }
+
+        public Task RemoveFavorite(Guid userId, Guid feedId, Guid newsItemId)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
