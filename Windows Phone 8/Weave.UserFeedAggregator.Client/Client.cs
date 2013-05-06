@@ -13,7 +13,7 @@ namespace Weave.UserFeedAggregator.Client
     {
         /// PRODUCTION
         /// ****************************
-        const string SERVICE_URL = "http://weave2.cloudapp.net/api/Weave";
+        const string SERVICE_URL = "http://weave-user.cloudapp.net/api/user/";
 
 
 

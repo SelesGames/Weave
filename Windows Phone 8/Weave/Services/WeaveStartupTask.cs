@@ -18,6 +18,9 @@ using System.Windows.Navigation;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
+using Weave.Viewmodels.Cache;
+using Weave.ViewModels.Contracts.Client;
+using Weave.ViewModels.Repository;
 
 namespace weave
 {
@@ -30,6 +33,7 @@ namespace weave
         //Weave4DataAccessLayer dataAccessLayer;
         bool hasBeenInitialized = false;
         Uri initialNavigationUri = null;
+        StandardUserCache userCache;
 
         public WeaveStartupTask(AppSettings settings)
         {
@@ -113,6 +117,8 @@ namespace weave
 
         async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
+            permanentState.IsFirstTime = false;
+
             initialNavigationUri = args.EventArgs.Uri;
 
             await RecoverPermanentStateAsync();
@@ -159,6 +165,15 @@ namespace weave
 
             var dummyPage = frame.Content as DummyPage;
             await dummyPage.LayoutPopups();
+
+            try
+            {
+                await userCache.RefreshUser(true);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
 
             //dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
 
@@ -288,6 +303,8 @@ namespace weave
             permanentState.RunHistory.CreateNewLog();
             FinishInitialization();
 
+            permanentState.IsFirstTime = false;
+
             if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
             {
                 GlobalNavigationService.ToWelcomePage();
@@ -386,6 +403,13 @@ namespace weave
             kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
                 new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
                 .InSingletonScope();
+
+            userCache = new StandardUserCache(
+                new StandardRepository(
+                    Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a"),
+                    new Weave.UserFeedAggregator.Client.Client()));
+
+            kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
 
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
         }

@@ -257,9 +257,9 @@ namespace weave
 #if DEBUG
         public void ResetFeed()
         {
-            ResetUpdateState();
-            RecalculateNewsHash();
-            SaveToUpdateHistory();
+            //ResetUpdateState();
+            //RecalculateNewsHash();
+            //SaveToUpdateHistory();
         }
 #endif
 

@@ -14,13 +14,15 @@ namespace weave
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
         IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
-        public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; set; }
-        public ObservableCollection<CategoryOrLooseFeedViewModel> MostViewed { get; set; }
+        public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; private set; }
+        public ObservableCollection<CategoryOrLooseFeedViewModel> MostViewed { get; private set; }
+        public LatestNewsViewModel LatestNews { get; private set; }
 
         public PanoramaViewModel()
         {
             Sources = new ObservableCollection<CategoryOrLooseFeedViewModel>();
             MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
+            LatestNews = new LatestNewsViewModel();
         }
 
         public void LoadSourcesAsync()
@@ -38,13 +40,7 @@ namespace weave
             }
         }
 
-        //public async Task RefreshUpdateNewsCountForAllSourcesAsync()
-        //{
-        //    if (Sources == null)
-        //        return;
-
-        //    await Sources.Select(o => o.UpdateNewsCountAfterRefreshAsync());
-        //}
+        static Random r = new Random();
 
         public void LoadMostViewedAsync()
         {
@@ -81,27 +77,34 @@ namespace weave
 
             foreach (var o in temp)
             {
-                CategoryOrFeedTeaserImage firstNewsItem = null;
+                string pic = null;
 
                 if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
                 {
+                    List<Feed> eligibleFeeds;
+
                     if (o.Name != null && o.Name.Equals("all news", StringComparison.OrdinalIgnoreCase))
-                        firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.Category == null);
+                        eligibleFeeds = feeds.ToList();
                     else
-                        firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.Category.Equals(o.Name, StringComparison.OrdinalIgnoreCase));
+                        eligibleFeeds = feeds.OfCategory(o.Name).ToList();
                 }
                 else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
                 {
-                    firstNewsItem = user.TeaserImages.FirstOrDefault(x => x.FeedId == o.FeedId);
+                    pic = feeds.Where(x => x.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Select(z=> z.TeaserImageUrl).FirstOrDefault();
                 }
-                if (firstNewsItem != null && !string.IsNullOrEmpty(firstNewsItem.ImageUrl))
-                    o.Source = firstNewsItem.ImageUrl;
+                o.Source = pic;
 
                 MostViewed.Add(o);
             }
 
             sw.Stop();
             DebugEx.WriteLine("most viewed took {0} ms to figure out", sw.ElapsedMilliseconds);
+        }
+
+        public void LoadLatestNews()
+        {
+            var user = userCache.Get();
+            LatestNews.LatestNews = user.LatestNews;
         }
     }
 }

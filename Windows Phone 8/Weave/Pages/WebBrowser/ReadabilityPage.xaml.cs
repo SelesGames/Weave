@@ -17,7 +17,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
-using Weave.UserFeedAggregator.Contracts;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 

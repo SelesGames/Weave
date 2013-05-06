@@ -680,9 +680,9 @@
       <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
       <Name>Weave.UserFeedAggregator.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.DTOs\Weave.UserFeedAggregator.DTOs.csproj">
-      <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
-      <Name>Weave.UserFeedAggregator.DTOs</Name>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels.Repository\Weave.ViewModels.Repository.csproj">
+      <Project>{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}</Project>
+      <Name>Weave.ViewModels.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>

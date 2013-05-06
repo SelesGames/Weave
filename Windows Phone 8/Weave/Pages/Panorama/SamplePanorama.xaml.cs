@@ -17,7 +17,6 @@ namespace weave
     public partial class SamplePanorama : WeavePage
     {
         PanoramaViewModel vm;
-        LatestNewsViewModel vm2;
 
         public SamplePanorama()
         {
@@ -27,9 +26,8 @@ namespace weave
                 return;
 
             vm = new PanoramaViewModel();
-            vm2 = new LatestNewsViewModel();
             this.DataContext = vm;
-            this.cat1.DataContext = vm2;
+            this.cat1.DataContext = vm.LatestNews;
 
             if (AppSettings.Instance.StartupMode == StartupMode.Launch)
             {
@@ -90,6 +88,7 @@ namespace weave
         {
             await TimeSpan.FromSeconds(0.3);
             this.cat1.NewsItemClicked.Subscribe(ShowDetailed);
+            vm.LoadLatestNews();
             //await vm2.RefreshNewsAsync();
 
             //if (currentRefreshListener == null)
