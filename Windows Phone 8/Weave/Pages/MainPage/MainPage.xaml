@@ -88,7 +88,7 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		
-		<Grid x:Name="TitlePanel" Height="132" Grid.Row="1" Grid.Column="1">
+		<Grid x:Name="TitlePanel" Height="132" Grid.Row="1" Grid.Column="1" Visibility="Collapsed">
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
 			<Button x:Name="panningTitle" Content="{Binding Header}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,12,12,0" Style="{StaticResource ArticleListCategorySelectButton}" Tap="OnJumpListButtonTap" />
 			<RepeatButton x:Name="previousPageButton" Content="/Assets/Icons/appbar.back.rest.png" Style="{StaticResource ArticleListRepeaterButtonStyle}" Padding="12,18,6,24" Grid.Column="1" Margin="0,11,0,0" VerticalAlignment="Top" />
@@ -97,7 +97,7 @@
 			<TextBlock HorizontalAlignment="Right" Text="{Binding CurrentPageDisplay}" VerticalAlignment="Top" FontSize="20" CacheMode="BitmapCache" Margin="24,93,24,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneSubtleBrush}" Grid.ColumnSpan="3" />
 			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,6" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
-		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="36" Visibility="Collapsed">
+		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="36">
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition /></Grid.ColumnDefinitions>
 			<TextBlock Text="{Binding Header}" Margin="24,0,0,0" TextTrimming="WordEllipsis" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}" HorizontalAlignment="Left" CacheMode="BitmapCache"/>
 			<TextBlock Grid.Column="1" Text="{Binding NewItemCount}" FontSize="{StaticResource PhoneFontSizeNormal}" CacheMode="BitmapCache" Margin="12,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" />

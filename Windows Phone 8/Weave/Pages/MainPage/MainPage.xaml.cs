@@ -95,24 +95,24 @@ namespace weave
                 bottomBarFill.Visibility = Visibility.Visible;
                 leftBarFill.Visibility = Visibility.Collapsed;
                 rightBarFill.Visibility = Visibility.Collapsed;
-                TitlePanel.Visibility = Visibility.Visible;
-                MinTitlePanel.Visibility = Visibility.Collapsed;
+                //TitlePanel.Visibility = Visibility.Visible;
+                //MinTitlePanel.Visibility = Visibility.Collapsed;
             }
             else if (Orientation == PageOrientation.LandscapeLeft)
             {
                 rightBarFill.Visibility = Visibility.Visible;
                 leftBarFill.Visibility = Visibility.Collapsed;
                 bottomBarFill.Visibility = Visibility.Collapsed;
-                TitlePanel.Visibility = Visibility.Collapsed;
-                MinTitlePanel.Visibility = Visibility.Visible;
+                //TitlePanel.Visibility = Visibility.Collapsed;
+                //MinTitlePanel.Visibility = Visibility.Visible;
             }
             else if (Orientation == PageOrientation.LandscapeRight)
             {
                 leftBarFill.Visibility = Visibility.Visible;
                 rightBarFill.Visibility = Visibility.Collapsed;
                 bottomBarFill.Visibility = Visibility.Collapsed;
-                TitlePanel.Visibility = Visibility.Collapsed;
-                MinTitlePanel.Visibility = Visibility.Visible;
+                //TitlePanel.Visibility = Visibility.Collapsed;
+                //MinTitlePanel.Visibility = Visibility.Visible;
             }
         }
 

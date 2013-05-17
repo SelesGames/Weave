@@ -86,6 +86,21 @@ namespace weave
             bindingAdapter.SetBinding(ApplicationBarToggleIconButtonAdapter.IsCheckedProperty,
                  new Binding("IsFavorite") { Source = viewModel.NewsItem, Mode = BindingMode.TwoWay });
             bindingAdapter.DisposeWith(disposables);
+            bindingAdapter.IsCheckedChanged += bindingAdapter_IsCheckedChanged;
+            Disposable.Create(() => bindingAdapter.IsCheckedChanged -= bindingAdapter_IsCheckedChanged).DisposeWith(disposables);
+        }
+
+        async void bindingAdapter_IsCheckedChanged(object sender, EventArgs e)
+        {
+            var adapter = (ApplicationBarToggleIconButtonAdapter)sender;
+            if (adapter.IsChecked)
+            {
+                await userCache.Get().AddFavorite(viewModel.NewsItem);
+            }
+            else
+            {
+                await userCache.Get().RemoveFavorite(viewModel.NewsItem);
+            }
         }
 
         void BindIsOrientationLockedToAppBar()

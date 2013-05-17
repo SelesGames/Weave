@@ -6,6 +6,11 @@ namespace SelesGames.Phone
 {
     public class ApplicationBarToggleIconButtonAdapter : FrameworkElement, IDisposable
     {
+        public event EventHandler IsCheckedChanged;
+
+
+
+
         #region Dependency Properties
 
 
@@ -135,7 +140,12 @@ namespace SelesGames.Phone
         static void OnIsCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue != e.OldValue)
-                ((ApplicationBarToggleIconButtonAdapter)d).UpdateDisplay();
+            {
+                var adapter = (ApplicationBarToggleIconButtonAdapter)d;
+                adapter.UpdateDisplay();
+                if (adapter.IsCheckedChanged != null)
+                    adapter.IsCheckedChanged(adapter, EventArgs.Empty);
+            }
         }
 
         #endregion
