@@ -84,7 +84,7 @@ namespace weave
             if (feed == null)
                 return;
 
-            NavigationService.ToEditSourcePage(feed.Id.ToString());
+            NavigationService.ToEditSourcePage(feed);
         }
 
         async void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -94,7 +94,7 @@ namespace weave
             var selectedOption = menuItem.Header.ToString();
 
             if (selectedOption.Equals("edit", StringComparison.OrdinalIgnoreCase))
-                NavigationService.ToEditSourcePage(feed.Id.ToString());
+                NavigationService.ToEditSourcePage(feed);
 
             else if (selectedOption.Equals("remove", StringComparison.OrdinalIgnoreCase))
             {

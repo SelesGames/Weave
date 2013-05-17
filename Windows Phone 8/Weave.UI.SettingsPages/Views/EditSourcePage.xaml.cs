@@ -1,14 +1,18 @@
 ﻿using Microsoft.Phone.Controls;
+using SelesGames;
+using SelesGames.Phone;
 using System;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
+using Weave.ViewModels.Helpers;
 
 namespace weave
 {
     public partial class EditSourcePage : PhoneApplicationPage
     {
         EditSourceViewModel viewModel;
+        ViewModelLocator viewModelLocator = ServiceResolver.Get<ViewModelLocator>();
 
         public EditSourcePage()
         {
@@ -41,6 +45,22 @@ namespace weave
             {
                 DebugEx.WriteLine(ex);
                 OnPageError(); 
+            }
+        }
+
+        protected override async void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+
+            var t = viewModel.SaveChanges();
+            if (t.IsCompleted)
+                return;
+            else
+            {
+                e.Cancel = true;
+                await t;
+                if (NavigationService.TryGoBack() == null)
+                    viewModelLocator.Pop();
             }
         }
     }

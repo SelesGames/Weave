@@ -284,7 +284,7 @@ namespace weave
 
             if (newsItem.IsFavorite)
                 brush = AppSettings.Instance.Themes.CurrentTheme.ComplementaryBrush;
-            else if (newsItem.IsNew())
+            else if (newsItem.IsDisplayedAsNew)
                 brush = AppSettings.Instance.Themes.CurrentTheme.AccentBrush;
             else
                 brush = AppSettings.Instance.Themes.CurrentTheme.SubtleBrush;

@@ -20,6 +20,7 @@ using Weave.FeedLibrary;
 using Weave.NinjectKernel;
 using Weave.Viewmodels.Cache;
 using Weave.ViewModels.Contracts.Client;
+using Weave.ViewModels.Helpers;
 using Weave.ViewModels.Repository;
 
 namespace weave
@@ -410,6 +411,8 @@ namespace weave
                     new Weave.UserFeedAggregator.Client.Client()));
 
             kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
+
+            kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
 
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
         }

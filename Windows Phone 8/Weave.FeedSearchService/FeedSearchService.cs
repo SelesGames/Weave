@@ -15,7 +15,7 @@ namespace Weave.FeedSearchService
 
         public FeedSearchService()
         {
-            googleSearchClient = new JsonRestClient();
+            googleSearchClient = new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient();
             directSearchClient = new DelegateRestClient(stream =>
             {
                 using (var reader = XmlReader.Create(stream))

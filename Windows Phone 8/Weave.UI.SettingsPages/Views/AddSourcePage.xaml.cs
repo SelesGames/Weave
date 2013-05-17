@@ -104,7 +104,7 @@ namespace weave.Pages.Settings
             else if (source.IsAdded && source.Feed != null)
             {
                 SetValue(RadContinuumAnimation.ContinuumElementProperty, sender);
-                NavigationService.ToEditSourcePage(source.Feed.Id.ToString());
+                NavigationService.ToEditSourcePage(source.Feed);
             }
         }
 

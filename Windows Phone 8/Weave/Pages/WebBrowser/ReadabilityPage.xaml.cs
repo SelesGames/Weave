@@ -494,7 +494,7 @@ namespace weave
 
         void EditSourceAppMenuItemClick(object sender, System.EventArgs e)
         {
-            NavigationService.ToEditSourcePage(viewModel.NewsItem.Feed.Id.ToString());
+            NavigationService.ToEditSourcePage(viewModel.NewsItem.Feed);
         }
 
         void SpeakArticleAppMenuItemClick(object sender, System.EventArgs e)

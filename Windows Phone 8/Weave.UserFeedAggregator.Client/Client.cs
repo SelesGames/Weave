@@ -58,30 +58,43 @@ namespace Weave.UserFeedAggregator.Client
 
         #region Get News for User (either by category or feedId)
 
-        public async Task<Outgoing.NewsList> GetNews(Guid userId, string category, bool refresh = false, int skip = 0, int take = 10)
+        public async Task<Outgoing.NewsList> GetNews(Guid userId,  string category, bool refresh = false, bool markEntry = false, int skip = 0, int take = 10, DTOs.NewsItemType type = DTOs.NewsItemType.Any, bool requireImage = false)
         {
             string append = "news";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("category", category)
                 .AddParameter("refresh", refresh)
+                .AddParameter("markEntry", markEntry)
+                .AddParameter("skip", skip)
+                .AddParameter("take", take)
+                .AddParameter("type", (int)type)
+                .AddParameter("requireImage", requireImage)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
+            System.Diagnostics.Debug.WriteLine("Calling {0}", url);
             var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
 
-        public async Task<Outgoing.NewsList> GetNews(Guid userId, Guid feedId, bool refresh = false, int skip = 0, int take = 10)
+        public async Task<Outgoing.NewsList> GetNews(Guid userId, Guid feedId, bool refresh = false, bool markEntry = false, int skip = 0, int take = 10, DTOs.NewsItemType type = DTOs.NewsItemType.Any, bool requireImage = false)
         {
             string append = "news";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("refresh", refresh)
+                .AddParameter("markEntry", markEntry)
+                .AddParameter("skip", skip)
+                .AddParameter("take", take)
+                .AddParameter("type", (int)type)
+                .AddParameter("requireImage", requireImage)
                 .ToString();
 
             var client = CreateClient();
+            System.Diagnostics.Debug.WriteLine("Calling {0}", url);
             var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
@@ -93,39 +106,39 @@ namespace Weave.UserFeedAggregator.Client
 
         #region Get Featured (for Live Tile) News for User (either by category or feedId)
 
-        public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, string category, int? take, bool refresh = false)
-        {
-            int takeCount = take.Value;
+        //public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, string category, int? take, bool refresh = false)
+        //{
+        //    int takeCount = take.Value;
 
-            string append = "news";
-            var url = new UriBuilder(SERVICE_URL + append)
-                .AddParameter("userId", userId)
-                .AddParameter("category", category)
-                .AddParameter("take", takeCount)
-                .AddParameter("refresh", refresh)
-                .ToString();
+        //    string append = "news";
+        //    var url = new UriBuilder(SERVICE_URL + append)
+        //        .AddParameter("userId", userId)
+        //        .AddParameter("category", category)
+        //        .AddParameter("take", takeCount)
+        //        .AddParameter("refresh", refresh)
+        //        .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
-            return result;
-        }
+        //    var client = CreateClient();
+        //    var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
+        //    return result;
+        //}
 
-        public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, Guid feedId, int? take, bool refresh = false)
-        {
-            int takeCount = take.Value;
+        //public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, Guid feedId, int? take, bool refresh = false)
+        //{
+        //    int takeCount = take.Value;
 
-            string append = "news";
-            var url = new UriBuilder(SERVICE_URL + append)
-                .AddParameter("userId", userId)
-                .AddParameter("feedId", feedId)
-                .AddParameter("take", takeCount)
-                .AddParameter("refresh", refresh)
-                .ToString();
+        //    string append = "news";
+        //    var url = new UriBuilder(SERVICE_URL + append)
+        //        .AddParameter("userId", userId)
+        //        .AddParameter("feedId", feedId)
+        //        .AddParameter("take", takeCount)
+        //        .AddParameter("refresh", refresh)
+        //        .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
-            return result;
-        }
+        //    var client = CreateClient();
+        //    var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
+        //    return result;
+        //}
 
         #endregion
 
@@ -133,6 +146,17 @@ namespace Weave.UserFeedAggregator.Client
 
 
         #region Feed management
+
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId)
+        {
+            string append = "feeds";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .ToString();
+
+            var client = CreateClient();
+            return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
+        }
 
         public async Task AddFeed(Guid userId, Incoming.NewFeed feed)
         {
@@ -249,6 +273,7 @@ namespace Weave.UserFeedAggregator.Client
         RestClient CreateClient()
         {
             return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
+            //return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
         }
     }
 }

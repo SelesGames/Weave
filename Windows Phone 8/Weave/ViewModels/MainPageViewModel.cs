@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,21 +8,98 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using Weave.LiveTile.ScheduledAgent;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
+    public class AsyncNewsList
+    {
+        public Func<Task<List<NewsItem>>> News { get; set; }
+    }
+
+    public class PagedNews
+    {
+        NewsList currentNewsList;
+        List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
+        BaseNewsCollectionViewModel vm;
+
+        public int PageSize { get; private set; }
+        public int NumberOfPagesToTakeAtATime { get; private set; }
+        public int PageCount { get; private set; }
+        public int TotalNewsCount { get; private set; }
+        public int NewNewsCount { get; private set; }
+
+        public PagedNews(BaseNewsCollectionViewModel vm, int pageSize, int numberOfPagesToTakeAtATime)
+        {
+            this.vm = vm;
+            PageSize = pageSize;
+            NumberOfPagesToTakeAtATime = numberOfPagesToTakeAtATime;
+        }
+
+        public async Task Refresh()
+        {
+            var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
+            var awaitHandle = vm.GetNewsList(false, true, 0, takeAmount);
+            currentNewsList = await awaitHandle;
+            PageCount = currentNewsList.GetPageCount(PageSize);
+            TotalNewsCount = currentNewsList.TotalNewsCount;
+            NewNewsCount = currentNewsList.NewNewsCount;
+
+            for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
+            {
+                var skipMult = j;
+                var t = new AsyncNewsList
+                {
+                    News = () => Task.FromResult(currentNewsList.News.Skip(skipMult * PageSize).Take(PageSize).ToList()),
+                };
+
+                newsLists.Add(t);
+            }
+
+            Chunk();
+        }
+
+        void Chunk()
+        {
+            for (int i = NumberOfPagesToTakeAtATime; i < PageCount; i += NumberOfPagesToTakeAtATime)
+            {
+                var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
+                var skipAmount = i * PageSize;
+                var load = Lazy.Create(() => vm.GetNewsList(false, false, skipAmount, takeAmount));
+
+                for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
+                {
+                    var skipMult = j;
+                    var t = new AsyncNewsList
+                    {
+                        News = async () => (await load.Get()).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
+                    };
+
+                    newsLists.Add(t);
+                }
+            }
+        }
+
+        public AsyncNewsList GetNewsFuncForPage(int page)
+        {
+            return newsLists[page];
+        }
+    }
+
+
     public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     {
         static string lastCategory;
 
         public int currentPage = 0;
-        int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
+        //int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
         int numberOfPages = 1;
 
-        List<NewsItem> allNews;
+        //List<NewsItem> allNews;
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
         MainPage view;
@@ -29,7 +107,8 @@ namespace weave
         SerialDisposable progressBarVisHandle = new SerialDisposable();
         CompositeDisposable disposables = new CompositeDisposable();
         TombstoneState tombstoneState;
-        BaseNewsCollectionViewModel newsCollectionVM;
+
+        PagedNews pageNews;
 
         internal OperatingMode currentOperatingMode;
 
@@ -98,24 +177,28 @@ namespace weave
 
 
 
-        public async Task OnNavigatedTo()
+        public async Task OnNavigatedTo(NavigationMode navMode = NavigationMode.New)
         {
-            InitializeNewsCollectionVM();
-            await newsCollectionVM.RefreshNews();
-            UpdateNewsList();
+            if (navMode == NavigationMode.Forward || navMode == NavigationMode.New)
+            {
+                InitializeNewsCollectionVM();
+                await pageNews.Refresh();
+                await UpdateNewsList();
+            }
         }
 
-        void UpdateNewsList()
+        async Task UpdateNewsList()
         {
-            InitializeAllNews();
             UpdateNewItemCount();
             InitializePageCountDisplay();
             ReevaluateNextAndPreviousButtonsVisibilities();
-            InitializeNewsForCurrentPage();
+            await InitializeNewsForCurrentPage();
         }
 
         void InitializeNewsCollectionVM()
         {
+            BaseNewsCollectionViewModel newsCollectionVM = null;
+
             if (currentOperatingMode == OperatingMode.Category)
             {
                 newsCollectionVM = new NewsCollectionCategoryViewModel(Header);
@@ -129,31 +212,19 @@ namespace weave
                 throw new Exception("shit");
                 //feeds = null;
             }
-        }
 
-        void InitializeAllNews()
-        {
-            if (currentOperatingMode == OperatingMode.Category || currentOperatingMode == OperatingMode.Feed)
-            {
-                allNews = newsCollectionVM.News.ToList();
-            }
-            //else if (currentOperatingMode == OperatingMode.Favorites)
-            //{
-            //    var tFeeds = dataLayer.Feeds.Get().WaitOnResult();
-            //    allNews = tFeeds.AllNews().Where(o => o.IsFavorite).OrderByDescending(o => o.PublishDateTime).ToList();
-            //}
+            pageNews = new PagedNews(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
         }
 
         void UpdateNewItemCount()
         {
-            var newItemCount = allNews.Where(o => o.IsNew()).Count();
-
+            var newItemCount = pageNews.NewNewsCount;
             GlobalDispatcher.Current.BeginInvoke(() => NewItemCount = newItemCount.ToString() + " NEW");
         }
 
         void InitializePageCountDisplay()
         {
-            numberOfPages = (int)Math.Ceiling((double)allNews.Count / (double)pageSize);
+            numberOfPages = pageNews.PageCount;
             if (currentPage >= numberOfPages || Header != lastCategory)
                 currentPage = 0;
 
@@ -173,9 +244,11 @@ namespace weave
         }
         string newItemCount;
 
-        void InitializeNewsForCurrentPage()
+        async Task InitializeNewsForCurrentPage()
         {
-            var refreshedNews = allNews.Skip(pageSize * currentPage).Take(pageSize).ToList();
+            var x = pageNews.GetNewsFuncForPage(currentPage);
+            //var t = x.News();
+            var refreshedNews = await x.News();// allNews.Skip(pageSize * currentPage).Take(pageSize).ToList();
 
             bool areItemsNew = !Enumerable.SequenceEqual(refreshedNews, previouslyDisplayedNews, NewsItemComparer.Instance);
 
@@ -195,7 +268,7 @@ namespace weave
         void ReevaluateNextAndPreviousButtonsVisibilities()
         {
             HasPrevious = (currentPage - 1) >= 0;
-            HasNext = currentPage + 1 < Math.Ceiling((double)allNews.Count / (double)pageSize);
+            HasNext = currentPage + 1 < Math.Ceiling((double)pageNews.TotalNewsCount / (double)pageNews.PageSize);
             GlobalDispatcher.Current.BeginInvoke(() =>
             {
                 view.IsPreviousButtonEnabled = HasPrevious;
@@ -221,9 +294,25 @@ namespace weave
                     currentPage = value;
                     ReevaluateNextAndPreviousButtonsVisibilities();
                     PropertyChanged.Raise(this, "CurrentPageDisplay");
-                    pageChangeHandle.Disposable = Observable.Timer(TimeSpan.FromMilliseconds(200), scheduler).Take(1).Subscribe(notUsed =>
+                    pageChangeHandle.Disposable = Observable.Timer(TimeSpan.FromMilliseconds(200), scheduler).Take(1).Subscribe(async notUsed =>
                     {
-                        displayedNews = allNews.Skip(pageSize * currentPage).Take(pageSize).ToList();
+                        bool showProgressBars = false;
+                        var x = pageNews.GetNewsFuncForPage(currentPage);
+                        var z = x.News();
+
+                        if (!z.IsCompleted)
+                            showProgressBars = true;
+
+                        List<NewsItem> news = new List<NewsItem>();
+                        try
+                        {
+                            news = await z;
+                        }
+                        catch (Exception ex)
+                        {
+                            DebugEx.WriteLine(ex);
+                        }
+                        displayedNews = news;
                         previouslyDisplayedNews = displayedNews;
 
                         if (currentPage >= lastPageLastTimeItWasSet) // we moved forward
@@ -274,17 +363,17 @@ namespace weave
             scheduler.SafelySchedule(() => refresh());//_ => true));
         }
 
-        internal void AutoRefresh()
-        {
-            ManualRefresh();
-            //var now = DateTime.UtcNow;
-            //scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
-        }
+        //internal void AutoRefresh()
+        //{
+        //    ManualRefresh();
+        //    //var now = DateTime.UtcNow;
+        //    //scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
+        //}
 
         async Task refresh()//Func<FeedSource, bool> predicate)
         {
             ShowProgressBar();
-            await newsCollectionVM.RefreshNews();
+            await pageNews.Refresh();// newsCollectionVM.RefreshNews();
             HideProgressBar();
             await Task.Yield();
             UpdateNewsList();
@@ -318,7 +407,7 @@ namespace weave
 
         public async Task<CycleTileViewModel> CreateLiveTileViewModel()
         {
-            var newsWithImages = allNews.Where(o => o.HasImage).ToList();
+            var newsWithImages = displayedNews.Where(o => o.HasImage).ToList();
             if (newsWithImages.Count < 2)
                 throw new InvalidOperationException("image count");
 

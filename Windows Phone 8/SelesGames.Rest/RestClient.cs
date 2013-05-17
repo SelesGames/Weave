@@ -18,6 +18,16 @@ namespace SelesGames.Rest
             Headers = new Headers();
         }
 
+        public Task GetAsync(string url, CancellationToken cancellationToken)
+        {
+#if NET40
+            var request = (HttpWebRequest)HttpWebRequest.Create(url);
+#else
+            var request = HttpWebRequest.CreateHttp(url);
+#endif
+            return request.GetResponseAsync();
+        }
+
         public Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
         {
 #if NET40
@@ -37,10 +47,12 @@ namespace SelesGames.Rest
                     task =>
                     {
                         var response = (HttpWebResponse)task.Result;
-                        if (response.StatusCode != HttpStatusCode.OK)
-                            throw new WebException(string.Format("Status code: {0}", response.StatusCode), null, WebExceptionStatus.UnknownError, response);
-
-                        return ReadObjectFromWebResponse<T>(response);
+                        if (response.StatusCode == HttpStatusCode.OK)
+                            return ReadObjectFromWebResponse<T>(response);
+                        else
+                            return default(T);
+                        
+                        throw new WebException(string.Format("Status code: {0}", response.StatusCode), null, WebExceptionStatus.UnknownError, response);
                     },
                     cancellationToken,
                     TaskContinuationOptions.OnlyOnRanToCompletion, 

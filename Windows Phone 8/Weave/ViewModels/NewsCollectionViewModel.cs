@@ -1,7 +1,5 @@
 ﻿using SelesGames;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Weave.ViewModels.Contracts.Client;
 
@@ -11,33 +9,22 @@ namespace Weave.ViewModels
     {
         protected IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
-        public ObservableCollection<NewsItem> News { get; private set; }
-        public int NewArticleCount { get; set; }
-        public int UnreadCount { get; set; }
-        public int TotalArticleCount { get; set; }
-
-        public BaseNewsCollectionViewModel()
-        {
-            this.News = new ObservableCollection<NewsItem>();
-        }
-
-        public abstract Task RefreshNews();
+        public abstract Task<NewsList> GetNewsList(bool refresh = false, bool markEntry = false, int skip = 0, int take = 10);
     }
 
     public class NewsCollectionCategoryViewModel : BaseNewsCollectionViewModel
     {
         string category;
 
-        public NewsCollectionCategoryViewModel(string category) 
+        public NewsCollectionCategoryViewModel(string category)
         {
             this.category = category;
         }
 
-        public override async Task RefreshNews()
+        public override Task<NewsList> GetNewsList(bool refresh = false, bool markEntry = false, int skip = 0, int take = 10)
         {
             var user = userCache.Get();
-            var news = await user.GetNewsForCategory(category, true);
-            base.News.OrderedDescendingUniqueInsert(news, o => o.LocalDateTime);
+            return user.GetNewsForCategory(category, refresh, markEntry, skip, take);
         }
     }
 
@@ -45,16 +32,15 @@ namespace Weave.ViewModels
     {
         Guid feedId;
 
-        public NewsCollectionFeedViewModel(Guid feedId) 
+        public NewsCollectionFeedViewModel(Guid feedId)
         {
             this.feedId = feedId;
         }
 
-        public override async Task RefreshNews()
+        public override Task<NewsList> GetNewsList(bool refresh = false, bool markEntry = false, int skip = 0, int take = 10)
         {
             var user = userCache.Get();
-            var news = await user.GetNewsForFeed(feedId, true);
-            base.News.OrderedDescendingUniqueInsert(news, o => o.LocalDateTime);
+            return user.GetNewsForFeed(feedId, refresh, markEntry, skip, take);
         }
     }
 }

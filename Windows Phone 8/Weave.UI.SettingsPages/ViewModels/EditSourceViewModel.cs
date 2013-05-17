@@ -3,8 +3,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
+using Weave.ViewModels.Helpers;
 
 namespace weave
 {
@@ -14,6 +16,8 @@ namespace weave
         const string ARTICLEVIEWMODE_IE = "Internet Explorer";
 
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        ViewModelLocator viewModelLocator = ServiceResolver.Get<ViewModelLocator>();
+
         bool suppressShittyJeffWilcoxCode = false;
 
         // prevents the SelectedArticleViewingMode Property from changing the underlying ArticleViewingMode of the feed
@@ -81,7 +85,7 @@ namespace weave
 
             var feeds = userCache.Get().Feeds;
 
-            var feed = feeds.Where(o => o.Id == feedId).SingleOrDefault();
+            var feed = (Feed)viewModelLocator.Get(feedId.ToString());// feeds.Where(o => o.Id == feedId).SingleOrDefault();
             if (feed == null)
                 throw new Exception(string.Format("No Feed found with ID {0}", feedId));
 
@@ -111,6 +115,11 @@ namespace weave
                 IsArticleViewingSelectorEnabled = false;
             else
                 IsArticleViewingSelectorEnabled = true;
+        }
+
+        public async Task SaveChanges()
+        {
+            await userCache.Get().UpdateFeed(Feed);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

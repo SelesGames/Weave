@@ -147,7 +147,7 @@ namespace weave
                     {
                         //var sw = System.Diagnostics.Stopwatch.StartNew();
                         await this.GetLoaded().Take(1).ToTask();
-                        await vm.OnNavigatedTo();
+                        await vm.OnNavigatedTo(e.NavigationMode);
                         //sw.Stop();
                         //DebugEx.WriteLine("onnavto mvvm {0} ms", sw.ElapsedMilliseconds);
                     }
@@ -197,7 +197,7 @@ namespace weave
                     await TimeSpan.FromSeconds(0.4);
 
                     await vm.InitializeAsync();
-                    vm.AutoRefresh();
+                    //vm.AutoRefresh();
                 }
             }
             catch (Exception exception)

@@ -164,7 +164,6 @@
     <Compile Include="Pages\AppSettingsPage.xaml.cs">
       <DependentUpon>AppSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Business Objects\NewsItemExtensions.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\BigImageNewsItemControl.xaml.cs">
       <DependentUpon>BigImageNewsItemControl.xaml</DependentUpon>
     </Compile>

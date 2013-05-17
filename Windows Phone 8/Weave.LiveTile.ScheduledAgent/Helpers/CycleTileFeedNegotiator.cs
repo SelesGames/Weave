@@ -30,10 +30,10 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
-            var news = await serviceClient.GetFeaturedNews(feedId, 15, refresh: true);
+            var news = await serviceClient.GetNews(feedId, refresh: true, take: 15, type: Weave.ViewModels.NewsItemType.New, requireImage: true);
 
             var imagePrefix = CreateImagePrefix();
-            var imageUrls = await news.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
+            var imageUrls = await news.News.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
             Uri preferredLockScreen = null;
             var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
             if (attempt.Item1)
@@ -44,7 +44,7 @@ namespace Weave.LiveTile.ScheduledAgent
             ViewModel = new CycleTileViewModel
             {
                 ImageIsoStorageUris = imageUrls,
-                NewCount = news.Count(),
+                NewCount = news.NewNewsCount,
                 RecommendedLockScreenImageUri = preferredLockScreen,
                 AppName = appName + " " + "temp",//feedName.ToTitleCase(),
             };
