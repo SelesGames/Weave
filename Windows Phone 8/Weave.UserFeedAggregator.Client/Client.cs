@@ -105,54 +105,42 @@ namespace Weave.UserFeedAggregator.Client
 
 
 
-        #region Get Featured (for Live Tile) News for User (either by category or feedId)
-
-        //public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, string category, int? take, bool refresh = false)
-        //{
-        //    int takeCount = take.Value;
-
-        //    string append = "news";
-        //    var url = new UriBuilder(SERVICE_URL + append)
-        //        .AddParameter("userId", userId)
-        //        .AddParameter("category", category)
-        //        .AddParameter("take", takeCount)
-        //        .AddParameter("refresh", refresh)
-        //        .ToString();
-
-        //    var client = CreateClient();
-        //    var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
-        //    return result;
-        //}
-
-        //public async Task<Outgoing.LiveTileNewsList> GetFeaturedNews(Guid userId, Guid feedId, int? take, bool refresh = false)
-        //{
-        //    int takeCount = take.Value;
-
-        //    string append = "news";
-        //    var url = new UriBuilder(SERVICE_URL + append)
-        //        .AddParameter("userId", userId)
-        //        .AddParameter("feedId", feedId)
-        //        .AddParameter("take", takeCount)
-        //        .AddParameter("refresh", refresh)
-        //        .ToString();
-
-        //    var client = CreateClient();
-        //    var result = await client.GetAsync<Outgoing.LiveTileNewsList>(url, CancellationToken.None);
-        //    return result;
-        //}
-
-        #endregion
-
-
-
-
         #region Feed management
 
-        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId)
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, bool refresh = false)
         {
             string append = "feeds";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
+                .AddParameter("refresh", refresh)
+                .AddParameter("blah", Guid.NewGuid())
+                .ToString();
+
+            var client = CreateClient();
+            return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
+        }
+
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, string category, bool refresh = false)
+        {
+            string append = "feeds";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("category", category)
+                .AddParameter("refresh", refresh)
+                .AddParameter("blah", Guid.NewGuid())
+                .ToString();
+
+            var client = CreateClient();
+            return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
+        }
+
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, Guid feedId, bool refresh = false)
+        {
+            string append = "feeds";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("refresh", refresh)
                 .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
