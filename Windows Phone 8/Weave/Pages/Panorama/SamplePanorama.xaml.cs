@@ -154,7 +154,6 @@ namespace weave
             if (newsItem == null)
                 return;
 
-            newsItem.HasBeenViewed = true;
             SetValue(RadTileAnimation.ContainerToAnimateProperty, this.cat1.LayoutRoot);
             GlobalNavigationService.ToWebBrowserPage(newsItem);
         }

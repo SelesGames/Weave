@@ -3,8 +3,9 @@
 //      changes to this file can cause errors.
 namespace Expression.Blend.SampleData.SampleCategories
 {
+	using System; 
 
-    // To significantly reduce the sample data footprint in your production application, you can set
+// To significantly reduce the sample data footprint in your production application, you can set
 // the DISABLE_SAMPLE_DATA conditional compilation constant and disable sample data at runtime.
 #if DISABLE_SAMPLE_DATA
 	internal class SampleCategories { }
@@ -117,6 +118,25 @@ namespace Expression.Blend.SampleData.SampleCategories
 				{
 					this._UserAdded = value;
 					this.OnPropertyChanged("UserAdded");
+				}
+			}
+		}
+
+		private double _NewArticleCount = 0;
+
+		public double NewArticleCount
+		{
+			get
+			{
+				return this._NewArticleCount;
+			}
+
+			set
+			{
+				if (this._NewArticleCount != value)
+				{
+					this._NewArticleCount = value;
+					this.OnPropertyChanged("NewArticleCount");
 				}
 			}
 		}

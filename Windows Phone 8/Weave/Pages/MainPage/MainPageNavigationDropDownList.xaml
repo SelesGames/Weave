@@ -4,6 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:weave"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	x:Class="weave.MainPageNavigationDropDownList"
 	mc:Ignorable="d"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -12,8 +13,34 @@
 	d:DesignHeight="800" d:DesignWidth="480">
 	
 	<UserControl.Resources>
+		
+		<Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed"/>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border Background="{StaticResource TransparentBrush}">
+								<Grid x:Name="ContentContainer" Height="60">
+									<TextBlock Text="{Binding NewArticleCount}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="86,0,12,-3" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+								</Grid>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
 		<DataTemplate x:Key="CategoriesItemTemplate">
-			<Button Click="categoryClicked" Content="{Binding Name}" Style="{StaticResource TrueTextButtonStyle}" Margin="0,0,0,-1" />
+			<Button Click="categoryClicked" Margin="0,0,0,-1" Style="{StaticResource ButtonStyle}" toolkit:TiltEffect.IsTiltEnabled="True" />
 		</DataTemplate>
 						 
 		<Storyboard x:Name="CloseSB">
@@ -35,15 +62,24 @@
 	
 	
 	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleCategories}}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="161"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 		<Grid.Projection>
 			<PlaneProjection />
 		</Grid.Projection>
-		<Rectangle Fill="{StaticResource PhoneChromeBrush}" CacheMode="BitmapCache"/>
-		<ScrollViewer x:Name="scroller" Margin="0,0,0,12">
+
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" DataContext="{StaticResource PanoramaTitle}" Style="{StaticResource PhoneTextNormalStyle}" Text="MANAGE"/>
+			<TextBlock x:Name="PageTitle" Text="sources" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<ScrollViewer x:Name="scroller" Margin="0,0,0,12" Grid.Row="1">
 			<StackPanel>
-				<TextBlock Text="Quick jump to another category:" Margin="24,12" Foreground="{StaticResource PhoneAccentBrush}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" CacheMode="BitmapCache" TextWrapping="Wrap"/>
 				<ListBox x:Name="categories" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}"  Margin="12,0" Style="{StaticResource NoScrollerListBoxStyle}" Padding="0,0,0,60" />
 			</StackPanel>
 		</ScrollViewer>
+		<!--Image Grid.RowSpan="2" Source="/Assets/AlignmentGrid.png" Stretch="Fill"/-->
 	</Grid>
 </UserControl>

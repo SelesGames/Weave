@@ -161,7 +161,7 @@ namespace weave
                     if (NavigationContext.QueryString.ContainsKey("header"))
                     {
                         header = NavigationContext.QueryString["header"];
-                        panningTitle.Content = header;
+                        //panningTitle.Content = header;
                     }
                     if (NavigationContext.QueryString.ContainsKey("mode"))
                     {
@@ -291,8 +291,8 @@ namespace weave
 
         void InitializeButtonEventHandlers()
         {
-            previousPageButton.GetClick().Subscribe(OnPreviousPage).DisposeWith(pageLevelDisposables);
-            nextPageButton.GetClick().Subscribe(OnNextPage).DisposeWith(pageLevelDisposables);
+            //previousPageButton.GetClick().Subscribe(OnPreviousPage).DisposeWith(pageLevelDisposables);
+            //nextPageButton.GetClick().Subscribe(OnNextPage).DisposeWith(pageLevelDisposables);
             refreshButton.GetClick().Where(_ => vm != null).Subscribe(() => vm.ManualRefresh()).DisposeWith(pageLevelDisposables);
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
@@ -354,7 +354,6 @@ namespace weave
             await Task.Delay(TimeSpan.FromSeconds(0.18d));
             GlobalNavigationService.ToWebBrowserPage(newsItem);
             IsHitTestVisible = true;
-            newsItem.HasBeenViewed = true;
         }
 
         #endregion
@@ -435,17 +434,17 @@ namespace weave
 
         #region Page Change logic
 
-        public bool IsPreviousButtonEnabled
-        {
-            get { return this.previousPageButton.IsEnabled; }
-            set { this.previousPageButton.IsEnabled = this.cl.IsPreviousIndicatorEnabled = value; }
-        }
+        //public bool IsPreviousButtonEnabled
+        //{
+        //    get { return this.previousPageButton.IsEnabled; }
+        //    set { this.previousPageButton.IsEnabled = this.cl.IsPreviousIndicatorEnabled = value; }
+        //}
 
-        public bool IsNextButtonEnabled
-        {
-            get { return this.nextPageButton.IsEnabled; }
-            set { this.nextPageButton.IsEnabled = this.cl.IsNextIndicatorEnabled = value; }
-        }
+        //public bool IsNextButtonEnabled
+        //{
+        //    get { return this.nextPageButton.IsEnabled; }
+        //    set { this.nextPageButton.IsEnabled = this.cl.IsNextIndicatorEnabled = value; }
+        //}
 
         void OnPreviousPage()
         {

@@ -91,6 +91,7 @@ namespace Weave.UserFeedAggregator.Client
                 .AddParameter("take", take)
                 .AddParameter("type", (int)type)
                 .AddParameter("requireImage", requireImage)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
@@ -152,13 +153,14 @@ namespace Weave.UserFeedAggregator.Client
             string append = "feeds";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
             return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
         }
 
-        public async Task AddFeed(Guid userId, Incoming.NewFeed feed)
+        public Task<Outgoing.Feed> AddFeed(Guid userId, Incoming.NewFeed feed)
         {
             string append = "add_feed";
             var url = new UriBuilder(SERVICE_URL + append)
@@ -166,7 +168,7 @@ namespace Weave.UserFeedAggregator.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.PostAsync(url, feed, CancellationToken.None);
+            return client.PostAsync<Incoming.NewFeed, Outgoing.Feed>(url, feed, CancellationToken.None);
         }
 
         public async Task RemoveFeed(Guid userId, Guid feedId)
@@ -175,6 +177,7 @@ namespace Weave.UserFeedAggregator.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
@@ -217,6 +220,7 @@ namespace Weave.UserFeedAggregator.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
@@ -230,6 +234,7 @@ namespace Weave.UserFeedAggregator.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();
@@ -254,6 +259,7 @@ namespace Weave.UserFeedAggregator.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
             var client = CreateClient();

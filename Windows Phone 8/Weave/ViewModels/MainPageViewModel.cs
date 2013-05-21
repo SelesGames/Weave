@@ -23,7 +23,6 @@ namespace weave
 
     public class PagedNews
     {
-        NewsList currentNewsList;
         List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
         BaseNewsCollectionViewModel vm;
 
@@ -43,11 +42,10 @@ namespace weave
         public async Task Refresh()
         {
             var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
-            var awaitHandle = vm.GetNewsList(false, true, 0, takeAmount);
-            currentNewsList = await awaitHandle;
+            var currentNewsList = await vm.GetNewsList(false, true, 0, takeAmount);
             PageCount = currentNewsList.GetPageCount(PageSize);
-            TotalNewsCount = currentNewsList.TotalNewsCount;
-            NewNewsCount = currentNewsList.NewNewsCount;
+            TotalNewsCount = currentNewsList.TotalArticleCount;
+            NewNewsCount = currentNewsList.NewArticleCount;
 
             for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
             {
@@ -99,7 +97,6 @@ namespace weave
         //int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
         int numberOfPages = 1;
 
-        //List<NewsItem> allNews;
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
         MainPage view;
@@ -107,6 +104,7 @@ namespace weave
         SerialDisposable progressBarVisHandle = new SerialDisposable();
         CompositeDisposable disposables = new CompositeDisposable();
         TombstoneState tombstoneState;
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
         PagedNews pageNews;
 
@@ -135,8 +133,8 @@ namespace weave
 
             IsProgressBarVisible = false;
             ProgressBarVisibility = Visibility.Collapsed;
-            view.IsPreviousButtonEnabled = HasPrevious = false;
-            view.IsNextButtonEnabled = HasNext = false;
+            //view.IsPreviousButtonEnabled = HasPrevious = false;
+            //view.IsNextButtonEnabled = HasNext = false;
             NewItemCount = "0 NEW";
         }
 
@@ -269,11 +267,11 @@ namespace weave
         {
             HasPrevious = (currentPage - 1) >= 0;
             HasNext = currentPage + 1 < Math.Ceiling((double)pageNews.TotalNewsCount / (double)pageNews.PageSize);
-            GlobalDispatcher.Current.BeginInvoke(() =>
-            {
-                view.IsPreviousButtonEnabled = HasPrevious;
-                view.IsNextButtonEnabled = HasNext;
-            });
+            //GlobalDispatcher.Current.BeginInvoke(() =>
+            //{
+                //view.IsPreviousButtonEnabled = HasPrevious;
+                //view.IsNextButtonEnabled = HasNext;
+            //});
         }
 
 
@@ -346,12 +344,10 @@ namespace weave
 
         async Task markCurrentPageRead()
         {
-            List<NewsItem> currentPagesNewsItems;
-
             if (displayedNews == null)
                 return;
-            currentPagesNewsItems = displayedNews.ToList();
-            await currentPagesNewsItems.Select(o => GlobalDispatcher.Current.InvokeAsync(() => o.HasBeenViewed = true));
+
+            await userCache.Get().MarkArticlesSoftRead(displayedNews);
             UpdateNewItemCount();
         }
 

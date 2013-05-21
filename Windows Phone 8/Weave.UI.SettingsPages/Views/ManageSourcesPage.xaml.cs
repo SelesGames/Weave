@@ -32,8 +32,7 @@ namespace weave
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             isBackLocked = true;
-            await Task.Yield();
-            viewModel.LoadFeedsAsync();
+            await viewModel.LoadFeeds();
             isBackLocked = false;
         }
 

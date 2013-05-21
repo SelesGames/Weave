@@ -44,7 +44,7 @@ namespace Weave.LiveTile.ScheduledAgent
             ViewModel = new CycleTileViewModel
             {
                 ImageIsoStorageUris = imageUrls,
-                NewCount = news.NewNewsCount,
+                NewCount = news.NewArticleCount,
                 RecommendedLockScreenImageUri = preferredLockScreen,
                 AppName = appName + " " + "temp",//feedName.ToTitleCase(),
             };

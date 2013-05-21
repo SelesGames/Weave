@@ -87,6 +87,9 @@ namespace weave
                         eligibleFeeds = feeds.ToList();
                     else
                         eligibleFeeds = feeds.OfCategory(o.Name).ToList();
+
+                    // TODO: RANDOMLY SELECT ONE FEED TO DISPLAY
+                    pic = eligibleFeeds.First().TeaserImageUrl;
                 }
                 else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
                 {

@@ -1,5 +1,7 @@
-﻿using weave.Services.Instapaper;
+﻿using SelesGames;
+using weave.Services.Instapaper;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -49,7 +51,9 @@ namespace weave
                 return;
 
             if (newsItem is NewsItem)
-                ((NewsItem)newsItem).HasBeenViewed = true;
+            {
+                ServiceResolver.Get<IUserCache>().Get().MarkArticleRead(((NewsItem)newsItem));
+            }
 
             GlobalNavigationService.ToInternetExplorer(newsItem);
         }

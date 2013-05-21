@@ -266,6 +266,7 @@ namespace weave
                 {
                     await DisplayArticleContent();
                     SetValue(RadTransitionControl.TransitionProperty, new RadContinuumAndSlideTransition { PlayMode = TransitionPlayMode.Simultaneously });
+                    BeginMarkReadTimer();
                 }
             }
             catch(Exception ex)
@@ -273,6 +274,19 @@ namespace weave
                 DebugEx.WriteLine(ex);
                 NavigationService.TryGoBack();
             }
+        }
+
+        void BeginMarkReadTimer()
+        {
+            Observable.Timer(TimeSpan.FromSeconds(3)).ObserveOnDispatcher().Subscribe(async _ =>
+            {
+                try
+                {
+                    await userCache.Get().MarkArticleRead(viewModel.NewsItem);
+                }
+                catch { }
+            })
+            .DisposeWith(disposables);
         }
 
         void CompleteInitialization()
@@ -349,13 +363,24 @@ namespace weave
             {
                 isArticleNonDisplayable = true;
                 DebugEx.WriteLine(ex);
-                SelesGames.Phone.TaskService.ToInternetExplorerTask(viewModel.NewsItem.Link);
+                DisplayInInternetExplorer();
+
                 try
                 {
                     if (NavigationService.CanGoBack)
                         NavigationService.GoBack();
                 }catch { }
             }
+        }
+
+        void DisplayInInternetExplorer()
+        {
+            try
+            {
+                userCache.Get().MarkArticleRead(viewModel.NewsItem);
+                SelesGames.Phone.TaskService.ToInternetExplorerTask(viewModel.NewsItem.Link);
+            }
+            catch { }
         }
 
         void ShowLoadingIndicators()

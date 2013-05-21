@@ -7,36 +7,11 @@ namespace weave
     {
         public string Name { get; set; }
         public Guid FeedId { get; set; }
-        public string NewCount { get; set; }
+        public string NewArticleCount { get; set; }
         public string Source { get; set; }
         public CategoryOrFeedType Type { get; set; }
 
-        //public async Task UpdateNewsCountAfterRefreshAsync()
-        //{
-        //    RefreshListenerBase refreshListener;
 
-        //    if (Type == CategoryOrFeedType.Category)
-        //        refreshListener = new CategoryRefreshListener(Name);
-        //    else if (Type == CategoryOrFeedType.Feed)
-        //        refreshListener = new FeedRefreshListener(FeedId);
-        //    else
-        //        throw new Exception("unexpected value for CategoryOrFeedType");
-
-        //    var refreshed = refreshListener.GetRefreshed();
-
-        //    if (!refreshed.IsCompleted)
-        //    {
-        //        // show progress bar
-        //        await refreshed;
-        //        // hide progress bar
-        //    }
-        //    var newCount = refreshListener.GetNewCount();
-        //    if (newCount > 0)
-        //        NewCount = newCount.ToString();
-        //    else
-        //        NewCount = null;
-        //    PropertyChanged.Raise(this, "NewCount");
-        //}
 
         public override bool Equals(object obj)
         {

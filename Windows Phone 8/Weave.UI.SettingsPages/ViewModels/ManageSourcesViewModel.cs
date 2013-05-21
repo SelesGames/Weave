@@ -13,6 +13,7 @@ namespace weave
     public class ManageSourcesViewModel : INotifyPropertyChanged
     {
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
 
         public ObservableCollection<ObservableGroup<Feed, string>> FeedGroups { get; private set; }
         public string SourcesCount { get; set; }
@@ -29,13 +30,17 @@ namespace weave
                 100);//Weave4DataAccessLayer.MaxAllowedSources);
 
             FeedGroups = new ObservableCollection<ObservableGroup<Feed, string>>();
+            user = userCache.Get();
         }
 
-        public void LoadFeedsAsync()
+        public async Task LoadFeeds()
         {
+            if (user.ShouldRefreshFeedsInfo())
+                await user.RefreshFeedsInfo();
+
             FeedGroups.Clear();
 
-            var feeds = userCache.Get().Feeds;
+            var feeds = user.Feeds;
 
             var groupedFeeds = feeds
                 .GroupBy(o => o.Category)
