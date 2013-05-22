@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using Telerik.Windows.Controls;
 using Weave.ViewModels;
 
@@ -30,11 +31,12 @@ namespace weave
         ImageCache imageCache;
         ScrollViewer currentListBoxScroller;
         SwitchingAdControl adControl;
-        MainPageNavigationDropDownList jumpList;
+        //MainPageNavigationDropDownList jumpList;
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
         SwipeGestureHelper swipeHelper;
+        MenuMode currentMenuMode = MenuMode.Hidden;
 
 
 
@@ -43,6 +45,10 @@ namespace weave
         public MainPage()
         {
             InitializeComponent();
+            MinTitlePanel.RenderTransform = new CompositeTransform();
+            ContentGrid.RenderTransform = new CompositeTransform();
+            cl.RenderTransform = new CompositeTransform();
+            SourcesList.RenderTransform = new CompositeTransform();
 
             if (DesignerProperties.IsInDesignTool)
                 return;
@@ -213,7 +219,7 @@ namespace weave
             InitializeCustomListAndImageCache();
             InitializeFlickHandling();
             InitializeButtonEventHandlers();
-            InitializeJumpList();
+            //InitializeJumpList();
             pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
         }
 
@@ -307,12 +313,12 @@ namespace weave
 
         #region Initialize Jump List for navigation to other categories
 
-        void InitializeJumpList()
-        {
-            jumpList = ServiceResolver.Get<MainPageNavigationDropDownList>();
-            jumpList.RefreshCategories();
-            jumpList.HighlightCurrentCategory(this.vm.Header);
-        }
+        //void InitializeJumpList()
+        //{
+        //    jumpList = ServiceResolver.Get<MainPageNavigationDropDownList>();
+        //    jumpList.RefreshCategories();
+        //    jumpList.HighlightCurrentCategory(this.vm.Header);
+        //}
 
         #endregion
 
@@ -321,15 +327,37 @@ namespace weave
 
         #region DropDown menu event handling
 
-        void OnJumpListButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            ShowMenu();
-        }
+        //void OnJumpListButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    ShowMenu();
+        //}
 
         void ShowMenu()
         {
-            var popup = new SelesGames.PopupService<CategoryOrLooseFeedViewModel>(jumpList);
-            popup.BeginShow();
+            if (currentMenuMode == MenuMode.Displayed)
+                return;
+
+            currentMenuMode = MenuMode.Displayed;
+            MinTitlePanel.IsHitTestVisible = false;
+            ContentGrid.IsHitTestVisible = false;
+            HideCategoriesListSB.Stop();
+            ShowCategoriesListSB.Begin();
+            ApplicationBar.IsVisible = false;
+            //var popup = new SelesGames.PopupService<CategoryOrLooseFeedViewModel>(jumpList);
+            //popup.BeginShow();
+        }
+
+        void HideMenu()
+        {
+            if (currentMenuMode == MenuMode.Hidden)
+                return;
+
+            currentMenuMode = MenuMode.Hidden;
+            MinTitlePanel.IsHitTestVisible = true;
+            ContentGrid.IsHitTestVisible = true;
+            ShowCategoriesListSB.Stop();
+            HideCategoriesListSB.Begin();
+            ApplicationBar.IsVisible = true;
         }
 
         #endregion
@@ -453,11 +481,19 @@ namespace weave
                 PreparePageChangeAnimation(PageChangeAnimateDirection.Previous);
                 vm.CurrentPage--;
             }
+            else if (currentMenuMode == MenuMode.Hidden)
+            {
+                ShowMenu();
+            }
         }
 
         void OnNextPage()
         {
-            if (vm != null && vm.HasNext)
+            if (currentMenuMode == MenuMode.Displayed)
+            {
+                HideMenu();
+            }
+            else if (vm != null && vm.HasNext)
             {
                 PreparePageChangeAnimation(PageChangeAnimateDirection.Next);
                 vm.CurrentPage++;
@@ -468,6 +504,12 @@ namespace weave
         {
             Previous,
             Next
+        }
+
+        enum MenuMode
+        {
+            Displayed,
+            Hidden
         }
 
 

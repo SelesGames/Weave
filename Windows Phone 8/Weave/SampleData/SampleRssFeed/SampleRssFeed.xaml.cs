@@ -3,8 +3,9 @@
 //      changes to this file can cause errors.
 namespace Expression.Blend.SampleData.SampleRssFeed
 {
+	using System; 
 
-    // To significantly reduce the sample data footprint in your production application, you can set
+// To significantly reduce the sample data footprint in your production application, you can set
 // the DISABLE_SAMPLE_DATA conditional compilation constant and disable sample data at runtime.
 #if DISABLE_SAMPLE_DATA
 	internal class SampleRssFeed { }
@@ -44,25 +45,6 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 			get
 			{
 				return this._News;
-			}
-		}
-
-		private Category _Category = new Category();
-
-		public Category Category
-		{
-			get
-			{
-				return this._Category;
-			}
-
-			set
-			{
-				if (this._Category != value)
-				{
-					this._Category = value;
-					this.OnPropertyChanged("Category");
-				}
 			}
 		}
 
@@ -123,13 +105,13 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 			}
 		}
 
-		private JumpList _JumpList = new JumpList();
+		private Categories _Categories = new Categories();
 
-		public JumpList JumpList
+		public Categories Categories
 		{
 			get
 			{
-				return this._JumpList;
+				return this._Categories;
 			}
 		}
 	}
@@ -303,7 +285,7 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 		}
 	}
 
-	public class Category : System.ComponentModel.INotifyPropertyChanged
+	public class CategoriesItem : System.ComponentModel.INotifyPropertyChanged
 	{
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
@@ -333,41 +315,28 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 				}
 			}
 		}
-	}
 
-	public class JumpListItem : System.ComponentModel.INotifyPropertyChanged
-	{
-		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+		private double _NewArticleCount = 0;
 
-		protected virtual void OnPropertyChanged(string propertyName)
-		{
-			if (this.PropertyChanged != null)
-			{
-				this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-			}
-		}
-
-		private string _Name = string.Empty;
-
-		public string Name
+		public double NewArticleCount
 		{
 			get
 			{
-				return this._Name;
+				return this._NewArticleCount;
 			}
 
 			set
 			{
-				if (this._Name != value)
+				if (this._NewArticleCount != value)
 				{
-					this._Name = value;
-					this.OnPropertyChanged("Name");
+					this._NewArticleCount = value;
+					this.OnPropertyChanged("NewArticleCount");
 				}
 			}
 		}
 	}
 
-	public class JumpList : System.Collections.ObjectModel.ObservableCollection<JumpListItem>
+	public class Categories : System.Collections.ObjectModel.ObservableCollection<CategoriesItem>
 	{ 
 	}
 #endif
