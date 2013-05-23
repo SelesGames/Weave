@@ -31,7 +31,7 @@ namespace weave
         ImageCache imageCache;
         ScrollViewer currentListBoxScroller;
         SwitchingAdControl adControl;
-        //MainPageNavigationDropDownList jumpList;
+
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
@@ -101,24 +101,18 @@ namespace weave
                 bottomBarFill.Visibility = Visibility.Visible;
                 leftBarFill.Visibility = Visibility.Collapsed;
                 rightBarFill.Visibility = Visibility.Collapsed;
-                //TitlePanel.Visibility = Visibility.Visible;
-                //MinTitlePanel.Visibility = Visibility.Collapsed;
             }
             else if (Orientation == PageOrientation.LandscapeLeft)
             {
                 rightBarFill.Visibility = Visibility.Visible;
                 leftBarFill.Visibility = Visibility.Collapsed;
                 bottomBarFill.Visibility = Visibility.Collapsed;
-                //TitlePanel.Visibility = Visibility.Collapsed;
-                //MinTitlePanel.Visibility = Visibility.Visible;
             }
             else if (Orientation == PageOrientation.LandscapeRight)
             {
                 leftBarFill.Visibility = Visibility.Visible;
                 rightBarFill.Visibility = Visibility.Collapsed;
                 bottomBarFill.Visibility = Visibility.Collapsed;
-                //TitlePanel.Visibility = Visibility.Collapsed;
-                //MinTitlePanel.Visibility = Visibility.Visible;
             }
         }
 
@@ -167,7 +161,6 @@ namespace weave
                     if (NavigationContext.QueryString.ContainsKey("header"))
                     {
                         header = NavigationContext.QueryString["header"];
-                        //panningTitle.Content = header;
                     }
                     if (NavigationContext.QueryString.ContainsKey("mode"))
                     {
@@ -220,7 +213,6 @@ namespace weave
             InitializeCustomListAndImageCache();
             InitializeFlickHandling();
             InitializeButtonEventHandlers();
-            //InitializeJumpList();
             pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
         }
 
@@ -298,8 +290,6 @@ namespace weave
 
         void InitializeButtonEventHandlers()
         {
-            //previousPageButton.GetClick().Subscribe(OnPreviousPage).DisposeWith(pageLevelDisposables);
-            //nextPageButton.GetClick().Subscribe(OnNextPage).DisposeWith(pageLevelDisposables);
             refreshButton.GetClick().Where(_ => vm != null).Subscribe(() => vm.ManualRefresh()).DisposeWith(pageLevelDisposables);
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
@@ -312,26 +302,7 @@ namespace weave
 
 
 
-        #region Initialize Jump List for navigation to other categories
-
-        //void InitializeJumpList()
-        //{
-        //    jumpList = ServiceResolver.Get<MainPageNavigationDropDownList>();
-        //    jumpList.RefreshCategories();
-        //    jumpList.HighlightCurrentCategory(this.vm.Header);
-        //}
-
-        #endregion
-
-
-
-
         #region DropDown menu event handling
-
-        //void OnJumpListButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        //{
-        //    ShowMenu();
-        //}
 
         void ShowMenu()
         {
@@ -344,8 +315,6 @@ namespace weave
             HideCategoriesListSB.Stop();
             ShowCategoriesListSB.Begin();
             ApplicationBar.IsVisible = false;
-            //var popup = new SelesGames.PopupService<CategoryOrLooseFeedViewModel>(jumpList);
-            //popup.BeginShow();
         }
 
         void HideMenu()
@@ -462,18 +431,6 @@ namespace weave
 
 
         #region Page Change logic
-
-        //public bool IsPreviousButtonEnabled
-        //{
-        //    get { return this.previousPageButton.IsEnabled; }
-        //    set { this.previousPageButton.IsEnabled = this.cl.IsPreviousIndicatorEnabled = value; }
-        //}
-
-        //public bool IsNextButtonEnabled
-        //{
-        //    get { return this.nextPageButton.IsEnabled; }
-        //    set { this.nextPageButton.IsEnabled = this.cl.IsNextIndicatorEnabled = value; }
-        //}
 
         void OnPreviousPage()
         {
