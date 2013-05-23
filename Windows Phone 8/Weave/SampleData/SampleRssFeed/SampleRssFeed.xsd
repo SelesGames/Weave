@@ -37,6 +37,6 @@
   </xs:complexType>
   <xs:complexType name="CategoriesItem">
     <xs:attribute name="Name" type="xs:string" />
-    <xs:attribute blend:FormatParameters="4" name="NewArticleCount" type="xs:double" />
+    <xs:attribute blend:FormatParameters="4" name="NewArticleCountText" type="xs:double" />
   </xs:complexType>
 </xs:schema>

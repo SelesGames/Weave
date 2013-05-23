@@ -20,6 +20,6 @@
     <xs:attribute blend:FormatParameters="2,8" name="Name" type="xs:string" />
     <xs:attribute name="IsEnabled" type="xs:boolean" />
     <xs:attribute name="UserAdded" type="xs:boolean" />
-    <xs:attribute blend:FormatParameters="4" name="NewArticleCount" type="xs:double" />
+    <xs:attribute blend:FormatParameters="4" name="NewArticleCountText" type="xs:double" />
   </xs:complexType>
 </xs:schema>

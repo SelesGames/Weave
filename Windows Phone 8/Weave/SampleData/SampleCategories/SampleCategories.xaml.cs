@@ -122,21 +122,21 @@ namespace Expression.Blend.SampleData.SampleCategories
 			}
 		}
 
-		private double _NewArticleCount = 0;
+		private double _NewArticleCountText = 0;
 
-		public double NewArticleCount
+		public double NewArticleCountText
 		{
 			get
 			{
-				return this._NewArticleCount;
+				return this._NewArticleCountText;
 			}
 
 			set
 			{
-				if (this._NewArticleCount != value)
+				if (this._NewArticleCountText != value)
 				{
-					this._NewArticleCount = value;
-					this.OnPropertyChanged("NewArticleCount");
+					this._NewArticleCountText = value;
+					this.OnPropertyChanged("NewArticleCountText");
 				}
 			}
 		}

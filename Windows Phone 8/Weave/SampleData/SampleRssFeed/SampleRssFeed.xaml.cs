@@ -48,6 +48,16 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 			}
 		}
 
+		private Categories _Categories = new Categories();
+
+		public Categories Categories
+		{
+			get
+			{
+				return this._Categories;
+			}
+		}
+
 		private string _Header = string.Empty;
 
 		public string Header
@@ -102,16 +112,6 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 					this._NewItemCount = value;
 					this.OnPropertyChanged("NewItemCount");
 				}
-			}
-		}
-
-		private Categories _Categories = new Categories();
-
-		public Categories Categories
-		{
-			get
-			{
-				return this._Categories;
 			}
 		}
 	}
@@ -285,6 +285,10 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 		}
 	}
 
+	public class Categories : System.Collections.ObjectModel.ObservableCollection<CategoriesItem>
+	{ 
+	}
+
 	public class CategoriesItem : System.ComponentModel.INotifyPropertyChanged
 	{
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
@@ -316,28 +320,24 @@ namespace Expression.Blend.SampleData.SampleRssFeed
 			}
 		}
 
-		private double _NewArticleCount = 0;
+		private double _NewArticleCountText = 0;
 
-		public double NewArticleCount
+		public double NewArticleCountText
 		{
 			get
 			{
-				return this._NewArticleCount;
+				return this._NewArticleCountText;
 			}
 
 			set
 			{
-				if (this._NewArticleCount != value)
+				if (this._NewArticleCountText != value)
 				{
-					this._NewArticleCount = value;
-					this.OnPropertyChanged("NewArticleCount");
+					this._NewArticleCountText = value;
+					this.OnPropertyChanged("NewArticleCountText");
 				}
 			}
 		}
-	}
-
-	public class Categories : System.Collections.ObjectModel.ObservableCollection<CategoriesItem>
-	{ 
 	}
 #endif
 }

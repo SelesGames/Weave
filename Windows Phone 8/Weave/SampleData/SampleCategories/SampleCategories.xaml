@@ -5,35 +5,35 @@
 -->
 <SampleData:SampleCategories xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleCategories" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
   <SampleData:SampleCategories.Categories>
-    <SampleData:CategoriesItem Name="all news" IsEnabled="True" UserAdded="True" NewArticleCount="1750" />
-    <SampleData:CategoriesItem Name="technology" IsEnabled="False" UserAdded="False" NewArticleCount="9310" />
-    <SampleData:CategoriesItem Name="abcdef ghijk lmnop qrstuvwx yz hijk" IsEnabled="True" UserAdded="False" NewArticleCount="8062" />
-    <SampleData:CategoriesItem Name="sports" IsEnabled="True" UserAdded="False" NewArticleCount="7866" />
-    <SampleData:CategoriesItem Name="CELL PHONES" IsEnabled="False" UserAdded="False" NewArticleCount="6903" />
-    <SampleData:CategoriesItem Name="WINDOWS PHONE" IsEnabled="True" UserAdded="False" NewArticleCount="9602" />
-    <SampleData:CategoriesItem Name="CELEBRITY GOSSIP" IsEnabled="False" UserAdded="False" NewArticleCount="7317" />
-    <SampleData:CategoriesItem Name="WHAT WOULD TYLER DURDEN DO" IsEnabled="True" UserAdded="False" NewArticleCount="7713" />
-    <SampleData:CategoriesItem Name="what would tyler durden do" IsEnabled="True" UserAdded="False" NewArticleCount="7608" />
-    <SampleData:CategoriesItem Name="Integer" IsEnabled="False" UserAdded="False" NewArticleCount="7183" />
-    <SampleData:CategoriesItem Name="Aptent auctor" IsEnabled="True" UserAdded="False" NewArticleCount="5692" />
-    <SampleData:CategoriesItem Name="Cras est" IsEnabled="True" UserAdded="False" NewArticleCount="7662" />
-    <SampleData:CategoriesItem Name="Nam aenean" IsEnabled="True" UserAdded="False" NewArticleCount="7478" />
-    <SampleData:CategoriesItem Name="Maecenas" IsEnabled="True" UserAdded="False" NewArticleCount="2323" />
-    <SampleData:CategoriesItem Name="Cras aliquam" IsEnabled="True" UserAdded="False" NewArticleCount="7843" />
-    <SampleData:CategoriesItem Name="Mauris" IsEnabled="True" UserAdded="False" NewArticleCount="4685" />
-    <SampleData:CategoriesItem Name="Integer praesent" IsEnabled="True" UserAdded="False" NewArticleCount="2982" />
-    <SampleData:CategoriesItem Name="Accumsan" IsEnabled="True" UserAdded="False" NewArticleCount="8873" />
-    <SampleData:CategoriesItem Name="Quisque" IsEnabled="True" UserAdded="False" NewArticleCount="6666" />
-    <SampleData:CategoriesItem Name="Class bibendum" IsEnabled="True" UserAdded="False" NewArticleCount="1100" />
-    <SampleData:CategoriesItem Name="Vivamus duis" IsEnabled="True" UserAdded="False" NewArticleCount="6928" />
-    <SampleData:CategoriesItem Name="Sed" IsEnabled="True" UserAdded="False" NewArticleCount="7647" />
-    <SampleData:CategoriesItem Name="Nullam" IsEnabled="True" UserAdded="False" NewArticleCount="8216" />
-    <SampleData:CategoriesItem Name="Dis nunc" IsEnabled="True" UserAdded="False" NewArticleCount="4837" />
-    <SampleData:CategoriesItem Name="Aliquam dictumst" IsEnabled="True" UserAdded="False" NewArticleCount="6007" />
-    <SampleData:CategoriesItem Name="Est hac" IsEnabled="True" UserAdded="False" NewArticleCount="4149" />
-    <SampleData:CategoriesItem Name="Eleifend" IsEnabled="True" UserAdded="False" NewArticleCount="4528" />
-    <SampleData:CategoriesItem Name="Aptent" IsEnabled="True" UserAdded="False" NewArticleCount="3377" />
-    <SampleData:CategoriesItem Name="Auctor leo" IsEnabled="True" UserAdded="False" NewArticleCount="4021" />
-    <SampleData:CategoriesItem Name="Curae donec" IsEnabled="True" UserAdded="False" NewArticleCount="4864" />
+    <SampleData:CategoriesItem Name="all news" IsEnabled="True" UserAdded="True" NewArticleCountText="1750" />
+    <SampleData:CategoriesItem Name="technology" IsEnabled="False" UserAdded="False" NewArticleCountText="9310" />
+    <SampleData:CategoriesItem Name="abcdef ghijk lmnop qrstuvwx yz hijk" IsEnabled="True" UserAdded="False" NewArticleCountText="8062" />
+    <SampleData:CategoriesItem Name="sports" IsEnabled="True" UserAdded="False" NewArticleCountText="7866" />
+    <SampleData:CategoriesItem Name="CELL PHONES" IsEnabled="False" UserAdded="False" NewArticleCountText="6903" />
+    <SampleData:CategoriesItem Name="WINDOWS PHONE" IsEnabled="True" UserAdded="False" NewArticleCountText="9602" />
+    <SampleData:CategoriesItem Name="CELEBRITY GOSSIP" IsEnabled="False" UserAdded="False" NewArticleCountText="7317" />
+    <SampleData:CategoriesItem Name="WHAT WOULD TYLER DURDEN DO" IsEnabled="True" UserAdded="False" NewArticleCountText="7713" />
+    <SampleData:CategoriesItem Name="what would tyler durden do" IsEnabled="True" UserAdded="False" NewArticleCountText="7608" />
+    <SampleData:CategoriesItem Name="Integer" IsEnabled="False" UserAdded="False" NewArticleCountText="7183" />
+    <SampleData:CategoriesItem Name="Aptent auctor" IsEnabled="True" UserAdded="False" NewArticleCountText="5692" />
+    <SampleData:CategoriesItem Name="Cras est" IsEnabled="True" UserAdded="False" NewArticleCountText="7662" />
+    <SampleData:CategoriesItem Name="Nam aenean" IsEnabled="True" UserAdded="False" NewArticleCountText="7478" />
+    <SampleData:CategoriesItem Name="Maecenas" IsEnabled="True" UserAdded="False" NewArticleCountText="2323" />
+    <SampleData:CategoriesItem Name="Cras aliquam" IsEnabled="True" UserAdded="False" NewArticleCountText="7843" />
+    <SampleData:CategoriesItem Name="Mauris" IsEnabled="True" UserAdded="False" NewArticleCountText="4685" />
+    <SampleData:CategoriesItem Name="Integer praesent" IsEnabled="True" UserAdded="False" NewArticleCountText="2982" />
+    <SampleData:CategoriesItem Name="Accumsan" IsEnabled="True" UserAdded="False" NewArticleCountText="8873" />
+    <SampleData:CategoriesItem Name="Quisque" IsEnabled="True" UserAdded="False" NewArticleCountText="6666" />
+    <SampleData:CategoriesItem Name="Class bibendum" IsEnabled="True" UserAdded="False" NewArticleCountText="1100" />
+    <SampleData:CategoriesItem Name="Vivamus duis" IsEnabled="True" UserAdded="False" NewArticleCountText="6928" />
+    <SampleData:CategoriesItem Name="Sed" IsEnabled="True" UserAdded="False" NewArticleCountText="7647" />
+    <SampleData:CategoriesItem Name="Nullam" IsEnabled="True" UserAdded="False" NewArticleCountText="8216" />
+    <SampleData:CategoriesItem Name="Dis nunc" IsEnabled="True" UserAdded="False" NewArticleCountText="4837" />
+    <SampleData:CategoriesItem Name="Aliquam dictumst" IsEnabled="True" UserAdded="False" NewArticleCountText="6007" />
+    <SampleData:CategoriesItem Name="Est hac" IsEnabled="True" UserAdded="False" NewArticleCountText="4149" />
+    <SampleData:CategoriesItem Name="Eleifend" IsEnabled="True" UserAdded="False" NewArticleCountText="4528" />
+    <SampleData:CategoriesItem Name="Aptent" IsEnabled="True" UserAdded="False" NewArticleCountText="3377" />
+    <SampleData:CategoriesItem Name="Auctor leo" IsEnabled="True" UserAdded="False" NewArticleCountText="4021" />
+    <SampleData:CategoriesItem Name="Curae donec" IsEnabled="True" UserAdded="False" NewArticleCountText="4864" />
   </SampleData:SampleCategories.Categories>
 </SampleData:SampleCategories>
