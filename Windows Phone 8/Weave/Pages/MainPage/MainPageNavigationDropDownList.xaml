@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:local="clr-namespace:weave"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	x:Class="weave.MainPageNavigationDropDownList"
@@ -13,37 +14,12 @@
 	d:DesignHeight="800" d:DesignWidth="480">
 	
 	<UserControl.Resources>
-		
-		<!--Style x:Key="ButtonStyle" TargetType="Button">
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Grid Background="Transparent">
-							<VisualStateManager.VisualStateGroups>
-								<VisualStateGroup x:Name="CommonStates">
-									<VisualState x:Name="Normal"/>
-									<VisualState x:Name="MouseOver"/>
-									<VisualState x:Name="Pressed"/>
-									<VisualState x:Name="Disabled"/>
-								</VisualStateGroup>
-							</VisualStateManager.VisualStateGroups>
-							<Border Background="{StaticResource TransparentBrush}" Padding="0,16">
-								<Grid x:Name="ContentContainer">
-									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="12,0,0,0" VerticalAlignment="Center"/>
-									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="86,0,12,-3" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" VerticalAlignment="Center" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-								</Grid>
-							</Border>
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style-->
-
+	
 		<Style x:Key="ButtonStyle" TargetType="Button">
 			<Setter Property="Template">
 				<Setter.Value>
 					<ControlTemplate TargetType="Button">
-						<Grid Background="Transparent">
+						<Grid>
 							<VisualStateManager.VisualStateGroups>
 								<VisualStateGroup x:Name="CommonStates">
 									<VisualState x:Name="Normal"/>
@@ -52,8 +28,8 @@
 									<VisualState x:Name="Disabled"/>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
-							<Border Background="{StaticResource TransparentBrush}" Padding="0,20,0,15">
-								<Grid x:Name="ContentContainer">
+							<Border Padding="0,20,0,15" Background="{TemplateBinding Background}">
+								<Grid x:Name="ContentContainer" HorizontalAlignment="Left">
 									<Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
 									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="12,0" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
 									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-1,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
@@ -66,24 +42,16 @@
 		</Style>
 
 		<DataTemplate x:Key="CategoriesItemTemplate">
-			<Button Click="categoryClicked" Margin="0,0,0,-1" Style="{StaticResource ButtonStyle}" toolkit:TiltEffect.IsTiltEnabled="True" />
+			<Grid Margin="0,0,-13,0">
+				<Rectangle x:Name="selectionFill" Fill="{StaticResource PhoneAccentBrush}" Visibility="Collapsed" Opacity=".2" />
+				<Button Style="{StaticResource ButtonStyle}" toolkit:TiltEffect.IsTiltEnabled="True" Margin="12,0" HorizontalAlignment="Left" Tap="Button_Tap" />
+			</Grid>
 		</DataTemplate>
-						 
-		<Storyboard x:Name="CloseSB">
-			<DoubleAnimation From="0" To="90" Duration="0:0:0.3" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
-				<DoubleAnimation.EasingFunction>
-					<QuarticEase EasingMode="EaseIn"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-		</Storyboard>
-							
-		<Storyboard x:Name="OpenSB">							
-			<DoubleAnimation From="-90" To="0" Duration="0:0:0.3" Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationX)" Storyboard.TargetName="LayoutRoot">
-				<DoubleAnimation.EasingFunction>
-					<QuarticEase EasingMode="EaseOut"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-		</Storyboard>				
+
+		<DataTemplate x:Key="ListFooterTemplate">
+			<Grid Height="24"/>
+		</DataTemplate>
+		
 	</UserControl.Resources>
 	
 	
@@ -92,20 +60,13 @@
 			<RowDefinition Height="161"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<Grid.Projection>
-			<PlaneProjection />
-		</Grid.Projection>
 
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
 			<TextBlock x:Name="ApplicationTitle" DataContext="{StaticResource PanoramaTitle}" Style="{StaticResource PhoneTextNormalStyle}" Text="MANAGE"/>
 			<TextBlock x:Name="PageTitle" Text="sources" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
-		<ScrollViewer x:Name="scroller" Margin="0,0,0,12" Grid.Row="1">
-			<StackPanel>
-				<ListBox x:Name="categories" ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}"  Margin="12,0" Style="{StaticResource NoScrollerListBoxStyle}" Padding="0,0,0,60" />
-			</StackPanel>
-		</ScrollViewer>
-		<!--Image Grid.RowSpan="2" Source="/Assets/AlignmentGrid.png" Stretch="Fill"/-->
+		<phone:LongListSelector Grid.Row="1" ItemsSource="{Binding Categories}" ItemTemplate="{StaticResource CategoriesItemTemplate}" ListFooterTemplate="{StaticResource ListFooterTemplate}" />
+		<!--Image Grid.RowSpan="2" Source="/Assets/AlignmentGrid.png" Stretch="Fill" Visibility="Collapsed"/-->
 	</Grid>
 </UserControl>

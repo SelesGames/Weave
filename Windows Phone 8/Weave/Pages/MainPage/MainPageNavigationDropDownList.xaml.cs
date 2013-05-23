@@ -2,19 +2,19 @@
 
 namespace weave
 {
-    public partial class MainPageNavigationDropDownList : UserControl//, IDisposable, IPopup<CategoryOrLooseFeedViewModel>
+    public partial class MainPageNavigationDropDownList : UserControl
     {
         public MainPageNavigationDropDownList()
         {
             InitializeComponent();
         }
 
-        void categoryClicked(object sender, System.Windows.RoutedEventArgs e)
+        void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var vm  = (sender as Button).DataContext as CategoryOrLooseFeedViewModel;
             OnCategorySelected(vm);
         }
-
+        
         void OnCategorySelected(CategoryOrLooseFeedViewModel catVM)
         {
             if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
