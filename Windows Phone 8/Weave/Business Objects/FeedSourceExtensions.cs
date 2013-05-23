@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Weave.ViewModels;
 
@@ -6,6 +7,50 @@ namespace weave
 {
     public static class FeedSourceExtensions
     {
+        public static IEnumerable<CategoryOrLooseFeedViewModel> GetAllSources(this IEnumerable<Feed> feeds, Func<string, string> categoryCasing, Func<string, string> feedCasing)
+        {
+            var groupedFeeds = feeds.GroupBy(o => o.Category).ToList();
+
+            var categories = groupedFeeds
+                .Where(o => !string.IsNullOrEmpty(o.Key))
+                .Select(o =>
+                    new CategoryOrLooseFeedViewModel
+                    {
+                        Name = categoryCasing(o.Key),
+                        Type = CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category,
+                        NewArticleCount = o.Sum(x => x.NewArticleCount)
+                    })
+                .OrderBy(o => o.Name);
+
+            var looseFeeds = groupedFeeds
+                .Where(o => string.IsNullOrEmpty(o.Key))
+                .SelectMany(o => o)
+                .Where(o => o.Name != null)
+                .Select(o =>
+                    new CategoryOrLooseFeedViewModel
+                    {
+                        Name = feedCasing(o.Name),
+                        Type = CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed,
+                        FeedId = o.Id,
+                        NewArticleCount = o.NewArticleCount
+                    })
+                .OrderBy(o => o.Name);
+
+            var sources = new List<CategoryOrLooseFeedViewModel>();
+
+            sources.Add(
+                new CategoryOrLooseFeedViewModel 
+                { 
+                    Name = categoryCasing("all news"), 
+                    Type = CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category,
+                    NewArticleCount = feeds.Sum(o => o.NewArticleCount)
+                });
+
+            sources.AddRange(categories.Union(looseFeeds));
+
+            return sources;
+        }
+
         public static IEnumerable<CategoryOrLooseFeedViewModel> GetAllSources(this IEnumerable<Feed> feeds)
         {
             var categories = feeds.UniqueCategoryNames()

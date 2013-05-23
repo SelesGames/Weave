@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -11,12 +12,12 @@ using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
-    public partial class MainPageNavigationDropDownList : UserControl, IDisposable, IPopup<CategoryOrLooseFeedViewModel>
+    public partial class MainPageNavigationDropDownList : UserControl//, IDisposable, IPopup<CategoryOrLooseFeedViewModel>
     {
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
-        ObservableCollection<CategoryOrLooseFeedViewModel> categoriesSource = new ObservableCollection<CategoryOrLooseFeedViewModel>();
-        List<CategoryOrLooseFeedViewModel> lastSetOfSources = new List<CategoryOrLooseFeedViewModel>();
-        CompositeDisposable disposables = new CompositeDisposable();
+        //IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        //ObservableCollection<CategoryOrLooseFeedViewModel> categoriesSource = new ObservableCollection<CategoryOrLooseFeedViewModel>();
+        //List<CategoryOrLooseFeedViewModel> lastSetOfSources = new List<CategoryOrLooseFeedViewModel>();
+        //CompositeDisposable disposables = new CompositeDisposable();
 
         public MainPageNavigationDropDownList()
         {
@@ -25,7 +26,7 @@ namespace weave
             if (this.IsInDesignMode())
                 return;
 
-            this.categories.ItemsSource = categoriesSource;
+            //this.categories.ItemsSource = categoriesSource;
         }
 
         void categoryClicked(object sender, System.Windows.RoutedEventArgs e)
@@ -47,59 +48,59 @@ namespace weave
                 GlobalNavigationService.ToMainPage(feed, catVM.FeedId);
             }
 
-            BeginHide();
+            //BeginHide();
             //ResultCompleted.Raise(this, PopupResult.Create(catVM));
         }
 
-        public void RefreshCategories()
-        {
-            scroller.ScrollToVerticalOffset(0d);
+        //public void RefreshCategories()
+        //{
+        //    scroller.ScrollToVerticalOffset(0d);
 
-            var feeds = userCache.Get().Feeds;
-            var sources = feeds.GetAllSources().ToList();
+        //    var feeds = userCache.Get().Feeds;
+        //    var sources = feeds.GetAllSources().ToList();
 
-            if (lastSetOfSources.Except(sources).Any() || sources.Except(lastSetOfSources).Any())
-            {
-                lastSetOfSources = sources;
-                categoriesSource.Clear();
-                categoriesSource.SetSource(sources);
-            }
-        }
+        //    if (lastSetOfSources.Except(sources).Any() || sources.Except(lastSetOfSources).Any())
+        //    {
+        //        lastSetOfSources = sources;
+        //        categoriesSource.Clear();
+        //        categoriesSource.SetSource(sources);
+        //    }
+        //}
 
-        public void HighlightCurrentCategory(string category)
-        {
-            if (this.categories.Items.Contains(category))
-                this.categories.SelectedItem = category;
-        }
-
-
-
-
-        #region IPopup Methods
-
-        public event EventHandler ShowCompleted;
-        public event EventHandler HideCompleted;
-        public event EventHandler<EventArgs<PopupResult<CategoryOrLooseFeedViewModel>>> ResultCompleted;
-
-        public void BeginShow()
-        {
-            CloseSB.Stop();
-            OpenSB.BeginWithNotification().Take(1).Subscribe(_ => ShowCompleted.Raise(this)).DisposeWith(disposables);
-        }
-
-        public void BeginHide()
-        {
-            CloseSB.BeginWithNotification().Take(1).Subscribe(_ => HideCompleted.Raise(this)).DisposeWith(disposables);
-        }
-
-        #endregion
+        //public void HighlightCurrentCategory(string category)
+        //{
+        //    if (this.categories.Items.Contains(category))
+        //        this.categories.SelectedItem = category;
+        //}
 
 
 
 
-        public void Dispose()
-        {
-            disposables.Dispose();
-        }
+        //#region IPopup Methods
+
+        //public event EventHandler ShowCompleted;
+        //public event EventHandler HideCompleted;
+        //public event EventHandler<EventArgs<PopupResult<CategoryOrLooseFeedViewModel>>> ResultCompleted;
+
+        //public void BeginShow()
+        //{
+        //    CloseSB.Stop();
+        //    OpenSB.BeginWithNotification().Take(1).Subscribe(_ => ShowCompleted.Raise(this)).DisposeWith(disposables);
+        //}
+
+        //public void BeginHide()
+        //{
+        //    CloseSB.BeginWithNotification().Take(1).Subscribe(_ => HideCompleted.Raise(this)).DisposeWith(disposables);
+        //}
+
+        //#endregion
+
+
+
+
+        //public void Dispose()
+        //{
+        //    disposables.Dispose();
+        //}
     }
 }

@@ -203,6 +203,7 @@ namespace weave
                     await TimeSpan.FromSeconds(0.4);
 
                     await vm.InitializeAsync();
+                    vm.RefreshCategories();
                     //vm.AutoRefresh();
                 }
             }

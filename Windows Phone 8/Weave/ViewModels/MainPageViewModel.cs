@@ -1,6 +1,7 @@
 ﻿using SelesGames;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Concurrency;
@@ -423,6 +424,28 @@ namespace weave
 
 
 
+        List<CategoryOrLooseFeedViewModel> lastSetOfSources = new List<CategoryOrLooseFeedViewModel>();
+        public ObservableCollection<CategoryOrLooseFeedViewModel> Categories { get; private set; }
+
+        public void RefreshCategories()
+        {
+            //scroller.ScrollToVerticalOffset(0d);
+
+            var feeds = userCache.Get().Feeds;
+            var sources = feeds.GetAllSources(o => o.ToUpper(), o => o).ToList();
+
+            if (lastSetOfSources.Except(sources).Any() || sources.Except(lastSetOfSources).Any())
+            {
+                lastSetOfSources = sources;
+                Categories = new ObservableCollection<CategoryOrLooseFeedViewModel>(sources);
+
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Categories"));
+
+                //categoriesSource.Clear();
+                //categoriesSource.SetSource(sources);
+            }
+        }
 
         public void Dispose()
         {

@@ -43,6 +43,7 @@ namespace Weave.UserFeedAggregator.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("refresh", refresh)
+                .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
 

@@ -44,6 +44,8 @@
 			<SolidColorBrush x:Key="BlackForegroundBrush" Color="Black"/>
 			<SolidColorBrush x:Key="WhiteForegroundBrush" Color="White"/>
 
+			<FontFamily x:Key="PhoneFontFamilyBlack">Segoe WP Black</FontFamily>
+
 
 			<!-- weave settings -->
 			<FontFamily x:Key="AppSpecificFontFamily">Segoe WP SemiLight</FontFamily>

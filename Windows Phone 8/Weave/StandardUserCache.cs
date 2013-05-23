@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
-namespace Weave.Viewmodels.Cache
+namespace Weave.ViewModels.Cache
 {
     public class StandardUserCache : IUserCache
     {

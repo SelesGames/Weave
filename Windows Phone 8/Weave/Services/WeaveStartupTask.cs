@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
-using Weave.Viewmodels.Cache;
+using Weave.ViewModels.Cache;
 using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Helpers;
 using Weave.ViewModels.Repository;

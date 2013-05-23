@@ -14,6 +14,31 @@
 	
 	<UserControl.Resources>
 		
+		<!--Style x:Key="ButtonStyle" TargetType="Button">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed"/>
+									<VisualState x:Name="Disabled"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border Background="{StaticResource TransparentBrush}" Padding="0,16">
+								<Grid x:Name="ContentContainer">
+									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="12,0,0,0" VerticalAlignment="Center"/>
+									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="86,0,12,-3" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" VerticalAlignment="Center" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+								</Grid>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style-->
+
 		<Style x:Key="ButtonStyle" TargetType="Button">
 			<Setter Property="Template">
 				<Setter.Value>
@@ -27,10 +52,11 @@
 									<VisualState x:Name="Disabled"/>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
-							<Border Background="{StaticResource TransparentBrush}">
-								<Grid x:Name="ContentContainer" Height="60">
-									<TextBlock Text="{Binding NewArticleCount}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="12,0,0,0" VerticalAlignment="Center"/>
-									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="86,0,12,-3" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" VerticalAlignment="Center" FontWeight="Bold" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+							<Border Background="{StaticResource TransparentBrush}" Padding="0,20,0,15">
+								<Grid x:Name="ContentContainer">
+									<Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="12,0" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-1,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
 								</Grid>
 							</Border>
 						</Grid>
