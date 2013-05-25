@@ -108,12 +108,13 @@ namespace Weave.UserFeedAggregator.Client
 
         #region Feed management
 
-        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, bool refresh = false)
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, bool refresh = false, bool nested = false)
         {
             string append = "feeds";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("refresh", refresh)
+                .AddParameter("nested", nested)
                 .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
@@ -121,13 +122,14 @@ namespace Weave.UserFeedAggregator.Client
             return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
         }
 
-        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, string category, bool refresh = false)
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, string category, bool refresh = false, bool nested = false)
         {
             string append = "feeds";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("category", category)
                 .AddParameter("refresh", refresh)
+                .AddParameter("nested", nested)
                 .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
@@ -135,13 +137,14 @@ namespace Weave.UserFeedAggregator.Client
             return client.GetAsync<Outgoing.FeedsInfoList>(url, CancellationToken.None);
         }
 
-        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, Guid feedId, bool refresh = false)
+        public Task<Outgoing.FeedsInfoList> GetFeeds(Guid userId, Guid feedId, bool refresh = false, bool nested = false)
         {
             string append = "feeds";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("refresh", refresh)
+                .AddParameter("nested", nested)
                 .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 

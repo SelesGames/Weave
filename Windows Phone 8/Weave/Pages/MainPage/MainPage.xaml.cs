@@ -26,7 +26,10 @@ namespace weave
         bool isPageInitialized = false;
         string header = null;
         string mode = null;
+        Guid? feedId = null;
+
         MainPageViewModel vm;
+        MainPageSourceListViewModel vmSourcesList;
 
         ImageCache imageCache;
         ScrollViewer currentListBoxScroller;
@@ -145,18 +148,13 @@ namespace weave
                     ZoomInSB.Stop();
                     if (vm != null)
                     {
-                        //var sw = System.Diagnostics.Stopwatch.StartNew();
                         await this.GetLoaded().Take(1).ToTask();
                         await vm.OnNavigatedTo(e.NavigationMode);
-                        //sw.Stop();
-                        //DebugEx.WriteLine("onnavto mvvm {0} ms", sw.ElapsedMilliseconds);
                     }
                 }
                 else
                 {
                     isPageInitialized = true;
-
-                    Guid? feedId = null;
 
                     if (NavigationContext.QueryString.ContainsKey("header"))
                     {
@@ -172,32 +170,19 @@ namespace weave
                         feedId = Guid.Parse(NavigationContext.QueryString["feedId"]);
                     }
 
-                    var permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
-                    var tallyer = permstate.RunHistory.GetActiveLog();
-                    tallyer.Tally(header);
-
-                    this.vm = new MainPageViewModel(this, header);
-                    if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
-                        vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Category;
-                    if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
-                    {
-                        vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Feed;
-                        vm.FeedId = feedId.Value;
-                    }
-                    if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
-                        vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
-
-                    DataContext = this.vm;
-
-                    await Task.Yield();
+                    //CreateViewModel();
+                    //await Task.Yield();
 
                     FinishPageInitialization();
 
-                    await TimeSpan.FromSeconds(0.4);
+                    CreateViewModel();
+                    vmSourcesList = new MainPageSourceListViewModel();
+                    SourcesList.DataContext = vmSourcesList;
+
+                    //await TimeSpan.FromSeconds(0.4);
 
                     await vm.InitializeAsync();
-                    vm.RefreshCategories();
-                    //vm.AutoRefresh();
+                    vmSourcesList.RefreshCategories();
                 }
             }
             catch (Exception exception)
@@ -207,19 +192,40 @@ namespace weave
             }
         }
 
-        void FinishPageInitialization()
+        void CreateViewModel()
         {
-            InitializeAdControl();
-            InitializeCustomListAndImageCache();
-            InitializeFlickHandling();
-            InitializeButtonEventHandlers();
-            pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
+            var permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            var tallyer = permstate.RunHistory.GetActiveLog();
+            tallyer.Tally(header);
+
+            this.vm = new MainPageViewModel(this, header);
+            if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
+                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Category;
+            if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
+            {
+                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Feed;
+                vm.FeedId = feedId.Value;
+            }
+            if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
+                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
+
+            DataContext = this.vm;
         }
 
 
 
 
-        #region Initialize the Ad Control when necessary
+        #region DELAYED PAGE INTIALIZATION - performed on initial page navigation.  This delayed form of initialization allows for faster intial page draw when navigating to this page
+
+        void FinishPageInitialization()
+        {
+            InitializeAdControl();
+            InitializeCustomListAndImageCache();
+            InitializeTouchSwipingHandling();
+            InitializeApplicationBarButtonEventHandlers();
+            InitializeNavMenuHandlers();
+            pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
+        }
 
         async void InitializeAdControl()
         {
@@ -239,13 +245,6 @@ namespace weave
             await TimeSpan.FromSeconds(1);
             adControl.Fade().From(0).To(1).Over(TimeSpan.FromSeconds(0.7)).ToStoryboard().Begin();
         }
-
-        #endregion
-
-
-
-
-        #region Initialize Custom List and Image Cache
         
         void InitializeCustomListAndImageCache()
         {
@@ -259,14 +258,7 @@ namespace weave
             SubscribeToNewsItemClicked();
         }
 
-        #endregion
-
-
-
-
-        #region Initialize Touch Swiping/Flicking handling
-
-        void InitializeFlickHandling()
+        void InitializeTouchSwipingHandling()
         {
             swipeHelper = new SwipeGestureHelper(LayoutRoot);
             swipeHelper.Swipe += OnSwipe;
@@ -281,20 +273,57 @@ namespace weave
                 OnNextPage();
         }
 
-        #endregion
-
-
-
-
-        #region Initialize all button handlers on page (refresh, next/previous page, font, mark page read)
-
-        void InitializeButtonEventHandlers()
+        /// <summary>
+        /// Initialize all button handlers on page (refresh, next/previous page, font, mark page read)
+        /// </summary>
+        void InitializeApplicationBarButtonEventHandlers()
         {
             refreshButton.GetClick().Where(_ => vm != null).Subscribe(() => vm.ManualRefresh()).DisposeWith(pageLevelDisposables);
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
             pinToStartScreenButton.GetClick().Subscribe(OnPinToStartButtonPressed).DisposeWith(pageLevelDisposables);
             openNavMenuButton.GetClick().Subscribe(ShowMenu).DisposeWith(pageLevelDisposables);
+        }
+
+        void InitializeNavMenuHandlers()
+        {
+            SourcesList.ItemSelected += SourcesList_ItemSelected;
+        }
+
+        void SourcesList_ItemSelected(object sender, CategoryOrFeedEventArgs e)
+        {
+            var catVM = e.Selected;
+            if (catVM == null)
+                return;
+
+            string header = null;
+            string mode = null;
+            Guid? feedId = null;
+
+            header = catVM.Name;
+
+            if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
+            {
+                mode = "category";
+            }
+            else if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
+            {
+                mode = "feed";
+                feedId = catVM.FeedId;
+            }
+
+            if (mode == this.mode && header == this.header)
+                HideMenu();
+            else
+            {
+                this.header = header;
+                this.mode = mode;
+                this.feedId = feedId;
+
+                CreateViewModel();
+                vm.InitializeAsync().ContinueWith(_ => Dispatcher.BeginInvoke(() => vmSourcesList.RefreshCategories()));
+                HideMenu();
+            }
         }
 
         #endregion

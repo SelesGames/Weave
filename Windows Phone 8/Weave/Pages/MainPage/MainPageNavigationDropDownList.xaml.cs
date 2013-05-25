@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace weave
 {
@@ -9,24 +10,39 @@ namespace weave
             InitializeComponent();
         }
 
+        public event EventHandler<CategoryOrFeedEventArgs> ItemSelected;
+
         void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var vm  = (sender as Button).DataContext as CategoryOrLooseFeedViewModel;
-            OnCategorySelected(vm);
+            //OnCategorySelected(vm);
+            if (ItemSelected != null && vm != null)
+                ItemSelected(this, new CategoryOrFeedEventArgs(vm));
         }
         
-        void OnCategorySelected(CategoryOrLooseFeedViewModel catVM)
+        //void OnCategorySelected(CategoryOrLooseFeedViewModel catVM)
+        //{
+        //    if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
+        //    {
+        //        var category = catVM.Name;
+
+        //        GlobalNavigationService.ToMainPage(category, "category");
+        //    }
+        //    else if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
+        //    {
+        //        var feed = catVM.Name;
+        //        GlobalNavigationService.ToMainPage(feed, catVM.FeedId);
+        //    }
+        //}
+    }
+
+    public class CategoryOrFeedEventArgs : EventArgs
+    {
+        public CategoryOrLooseFeedViewModel Selected { get; private set; }
+
+        public CategoryOrFeedEventArgs(CategoryOrLooseFeedViewModel selected)
         {
-            if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
-            {
-                var category = catVM.Name;
-                GlobalNavigationService.ToMainPage(category, "category");
-            }
-            else if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
-            {
-                var feed = catVM.Name;
-                GlobalNavigationService.ToMainPage(feed, catVM.FeedId);
-            }
+            Selected = selected;
         }
     }
 }

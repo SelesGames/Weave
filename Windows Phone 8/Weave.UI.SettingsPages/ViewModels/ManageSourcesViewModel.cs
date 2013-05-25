@@ -48,12 +48,12 @@ namespace weave
                 .Select(group => new ObservableGroup<Feed, string>(Uppercase(group.Key), group.OrderBy(o => o.Name)))
                 .ToList();
 
-            var noCategories = groupedFeeds.SingleOrDefault(o => o.Key == null);
-            if (noCategories != null)
+            var looseFeeds = groupedFeeds.SingleOrDefault(o => o.Key == null);
+            if (looseFeeds != null)
             {
-                groupedFeeds.Remove(noCategories);
-                noCategories.Key = "CATEGORY: NONE";
-                groupedFeeds.Add(noCategories);
+                groupedFeeds.Remove(looseFeeds);
+                looseFeeds.Key = "CATEGORY: NONE";
+                groupedFeeds.Add(looseFeeds);
             }
 
             foreach (var group in groupedFeeds)
@@ -64,9 +64,9 @@ namespace weave
 
         void ReevaluateNumberOfFeeds()
         {
-            var feeds = FeedGroups.SelectMany(o => o).ToList();
-            SourcesCount = string.Format("({0})", feeds.Count);
-            AreThereTooManyFeeds = feeds.Count > 100;// feeds.AreThereTooManyFeeds();
+            var feedCount = FeedGroups.SelectMany(o => o).Count();
+            SourcesCount = string.Format("({0})", feedCount);
+            AreThereTooManyFeeds = feedCount > 100;// feeds.AreThereTooManyFeeds();
             WarningVisibility = AreThereTooManyFeeds ? Visibility.Visible : Visibility.Collapsed;
             PropertyChanged.Raise(this, "SourcesCount");
             PropertyChanged.Raise(this, "WarningVisibility");
