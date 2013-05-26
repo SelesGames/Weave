@@ -31,13 +31,20 @@ namespace SelesGames.Rest.JsonDotNet
 
         protected override void WriteObject<T>(Stream writeStream, T obj)
         {
-            throw new NotImplementedException();
-            //var serializer = JsonSerializer.Create(SerializerSettings);
-            //using (var streamReader = new StreamReader(stream, Encoding))
-            //using (var jsonTextReader = new JsonTextReader(streamReader))
-            //{
-            //    return serializer.Deserialize<T>(jsonTextReader);
-            //}
+            var serializer = JsonSerializer.Create(SerializerSettings);
+
+            using (var ms = new MemoryStream())
+            using (var streamWriter = new StreamWriter(ms, Encoding))
+            using (var jsonTextWriter = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(jsonTextWriter, obj);
+                jsonTextWriter.Flush();
+
+                ms.Position = 0;
+                ms.CopyTo(writeStream);
+
+                jsonTextWriter.Close();
+            }
         }
     }
 }
