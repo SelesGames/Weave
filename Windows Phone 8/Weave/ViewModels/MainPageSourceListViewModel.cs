@@ -27,7 +27,9 @@ namespace weave
 
         void Merge(List<CategoryOrLooseFeedViewModel> sources)
         {
-            throw new System.NotImplementedException();
+            Categories.Clear();
+            foreach (var source in sources)
+                Categories.Add(source);
         }
     }
 }

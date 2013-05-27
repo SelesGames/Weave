@@ -46,7 +46,6 @@ namespace Weave.UserFeedAggregator.Client
                 .AddParameter("blah", Guid.NewGuid())
                 .ToString();
 
-
             var client = CreateClient();
             var result = await client.GetAsync<Outgoing.UserInfo>(url, CancellationToken.None);
             return result;
@@ -270,8 +269,8 @@ namespace Weave.UserFeedAggregator.Client
 
         RestClient CreateClient()
         {
-            return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
-            //return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
+            //return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
+            return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
         }
     }
 }
