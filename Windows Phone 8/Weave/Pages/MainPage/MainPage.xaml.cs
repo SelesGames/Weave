@@ -35,11 +35,12 @@ namespace weave
         ScrollViewer currentListBoxScroller;
         SwitchingAdControl adControl;
 
-        ApplicationBarIconButton refreshButton, fontButton, markPageReadButton;
+        ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, addSourceButton, searchSourceButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
         SwipeGestureHelper swipeHelper;
         MenuMode currentMenuMode = MenuMode.Hidden;
+        IApplicationBar mainAppBar, sourcesListAppBar;
 
 
 
@@ -56,14 +57,6 @@ namespace weave
             if (DesignerProperties.IsInDesignTool)
                 return;
 
-            markPageReadButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
-            refreshButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
-            fontButton = ApplicationBar.Buttons[2] as ApplicationBarIconButton;
-            lockOrientationButton = ApplicationBar.MenuItems[0] as ApplicationBarMenuItem;
-            pinToStartScreenButton = ApplicationBar.MenuItems[1] as ApplicationBarMenuItem;
-            openNavMenuButton = ApplicationBar.MenuItems[2] as ApplicationBarMenuItem;
-
-            BindIsOrientationLockedToAppBar();
             this.Loaded += OnLoaded;
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumAndSlideTransition());
 
@@ -72,8 +65,42 @@ namespace weave
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
 
+            CreateMainAppBar();
+            CreateSourcesListAppBar();
+            BindIsOrientationLockedToAppBar();
+
             if (OSThemeHelper.GetCurrentTheme() == OSTheme.Light)
                 fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
+        }
+
+        void CreateMainAppBar()
+        {
+            mainAppBar = ApplicationBar;
+            markPageReadButton = ApplicationBar.Buttons[0] as ApplicationBarIconButton;
+            refreshButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
+            fontButton = ApplicationBar.Buttons[2] as ApplicationBarIconButton;
+            lockOrientationButton = ApplicationBar.MenuItems[0] as ApplicationBarMenuItem;
+            pinToStartScreenButton = ApplicationBar.MenuItems[1] as ApplicationBarMenuItem;
+            openNavMenuButton = ApplicationBar.MenuItems[2] as ApplicationBarMenuItem;
+        }
+
+        void CreateSourcesListAppBar()
+        {
+            sourcesListAppBar = new ApplicationBar
+            {
+                BackgroundColor = mainAppBar.BackgroundColor,
+                ForegroundColor = mainAppBar.ForegroundColor,
+                Mode = mainAppBar.Mode,
+                Opacity = mainAppBar.Opacity,
+                IsMenuEnabled = mainAppBar.IsMenuEnabled,
+                IsVisible = mainAppBar.IsVisible,
+            };
+
+            searchSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.feature.search.rest.png", UriKind.Relative)) { Text = "search" };
+            addSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.add.rest.png", UriKind.Relative)) { Text = "add" };
+
+            sourcesListAppBar.Buttons.Add(searchSourceButton);
+            sourcesListAppBar.Buttons.Add(addSourceButton);
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)
@@ -343,7 +370,7 @@ namespace weave
             ContentGrid.IsHitTestVisible = false;
             HideCategoriesListSB.Stop();
             ShowCategoriesListSB.Begin();
-            ApplicationBar.IsVisible = false;
+            ApplicationBar = sourcesListAppBar;
         }
 
         void HideMenu()
@@ -356,7 +383,7 @@ namespace weave
             ContentGrid.IsHitTestVisible = true;
             ShowCategoriesListSB.Stop();
             HideCategoriesListSB.Begin();
-            ApplicationBar.IsVisible = true;
+            ApplicationBar = mainAppBar;
         }
 
         #endregion

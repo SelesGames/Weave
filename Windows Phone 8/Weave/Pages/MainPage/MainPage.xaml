@@ -180,7 +180,7 @@
 		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneChromeColor}" ForegroundColor="White">
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.check.rest.png" Text="page read" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.refresh.png" Text="refresh" />
-			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/fontSizeIcon.png" Text="font"  />
+			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/fontSizeIcon.png" Text="font" />
 			<shell:ApplicationBar.MenuItems>
 				<shell:ApplicationBarMenuItem Text="partial lock orientation" />
 				<shell:ApplicationBarMenuItem Text="pin to start screen" />
