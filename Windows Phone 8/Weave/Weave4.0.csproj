@@ -228,7 +228,10 @@
     <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
     <Compile Include="ViewModels\MainPageSourceListViewModel.cs" />
-    <Compile Include="ViewModels\NewsCollectionViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\BaseNewsCollectionViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\NewsCollectionCategoryViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\NewsCollectionFeedViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\PagedNews.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
       <DependentUpon>MainPageNavigationDropDownList.xaml</DependentUpon>
@@ -299,7 +302,7 @@
     <Compile Include="Pages\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\MainPageViewModel.cs" />
     <Compile Include="Services\PanoramaInjectionService.cs" />
     <Compile Include="SampleData\SampleFeedSources\SampleFeedSources.xaml.cs">
       <DependentUpon>SampleFeedSources.xaml</DependentUpon>
