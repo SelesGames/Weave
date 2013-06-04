@@ -107,7 +107,7 @@ namespace weave
             if (navMode == NavigationMode.Forward || navMode == NavigationMode.New)
             {
                 InitializeNewsCollectionVM();
-                await pageNews.Refresh();
+                await pageNews.Refresh(refresh: true, markEntry: true);
                 await UpdateNewsList();
             }
         }
@@ -172,8 +172,8 @@ namespace weave
         async Task InitializeNewsForCurrentPage()
         {
             var x = pageNews.GetNewsFuncForPage(currentPage);
-            //var t = x.News();
-            var refreshedNews = await x.News();// allNews.Skip(pageSize * currentPage).Take(pageSize).ToList();
+
+            var refreshedNews = await x.News();
 
             bool areItemsNew = !Enumerable.SequenceEqual(refreshedNews, previouslyDisplayedNews, NewsItemComparer.Instance);
 
@@ -194,11 +194,6 @@ namespace weave
         {
             HasPrevious = (currentPage - 1) >= 0;
             HasNext = currentPage + 1 < Math.Ceiling((double)pageNews.TotalNewsCount / (double)pageNews.PageSize);
-            //GlobalDispatcher.Current.BeginInvoke(() =>
-            //{
-                //view.IsPreviousButtonEnabled = HasPrevious;
-                //view.IsNextButtonEnabled = HasNext;
-            //});
         }
 
 
@@ -293,13 +288,13 @@ namespace weave
         //    //scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
         //}
 
-        async Task refresh()//Func<FeedSource, bool> predicate)
+        async Task refresh()
         {
             ShowProgressBar();
-            await pageNews.Refresh();// newsCollectionVM.RefreshNews();
+            await pageNews.Refresh(refresh: true, markEntry: false);
             HideProgressBar();
             await Task.Yield();
-            UpdateNewsList();
+            await UpdateNewsList();
         }
 
         void ShowProgressBar()
