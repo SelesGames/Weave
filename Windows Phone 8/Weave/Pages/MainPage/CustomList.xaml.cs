@@ -77,6 +77,9 @@ namespace weave
                 case ArticleListFormatType.SmallImage:
                     return new MainPageNewsItemUI();
 
+                case ArticleListFormatType.Card:
+                    return new CardNewsItemControl();
+
                 default:
                     throw new Exception(string.Format(
                         "Selected ArticleListFormat is not currently supported: {0}", 

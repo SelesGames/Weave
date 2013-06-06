@@ -157,6 +157,9 @@
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\MainPage\NewsItemControls\CardNewsItemControl.xaml.cs">
+      <DependentUpon>CardNewsItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Library\Extension Methods\ICollectionExtensions.cs" />
     <Compile Include="Library\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Library\Extension Methods\SilverlightToolkitExtensions.cs" />
@@ -333,6 +336,10 @@
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xsd" />
+    <Page Include="Pages\MainPage\NewsItemControls\CardNewsItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AppSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

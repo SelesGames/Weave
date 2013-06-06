@@ -1,4 +1,5 @@
-﻿<local:BaseNewsItemControl x:Class="weave.BigImageNewsItemControl"
+﻿<local:BaseNewsItemControl
+	x:Class="weave.CardNewsItemControl"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +12,7 @@
 	Foreground="{StaticResource PhoneForegroundBrush}"
 	d:DesignWidth="480">
 	
-	<local:BaseNewsItemControl.Resources>
+	<UserControl.Resources>
 		<QuinticEase x:Key="quinticOut" EasingMode="EaseOut"/>
 		<Storyboard x:Name="OnLoadSB">
 			<DoubleAnimation Duration="0:0:0.5" From="480" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="stack" EasingFunction="{StaticResource quinticOut}"/>
@@ -27,25 +28,34 @@
 				</DoubleAnimation.EasingFunction>
 			</DoubleAnimation>
 		</Storyboard>
-	</local:BaseNewsItemControl.Resources>
+	</UserControl.Resources>
 	
-	<StackPanel x:Name="stack" d:DataContext="{d:DesignData /SampleData/NewsItemSampleData.xaml}" Margin="12,0">
-		<StackPanel.RenderTransform>
+	<Grid x:Name="stack" d:DataContext="{d:DesignData /SampleData/NewsItemSampleData.xaml}">
+		<UIElement.RenderTransform>
 			<CompositeTransform/>
-		</StackPanel.RenderTransform>
-		<local:TiltContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,12">
-			<StackPanel x:Name="grid" Background="Transparent" CacheMode="BitmapCache" Margin="12,0">
-				<TextBlock x:Name="title" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="0,0,0,4" LineStackingStrategy="BlockLineHeight" Text="{Binding Title}" FontSize="26.667" IsHitTestVisible="False" />
-				<TextBlock x:Name="feedName" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Top" Margin="0,-2" TextWrapping="Wrap" Text="{Binding FormattedForMainPageSourceAndDate}" IsHitTestVisible="False" />
-				<Rectangle x:Name="mediaTypesIcon" Fill="{StaticResource PhoneAccentBrush}" Height="32" Width="128" HorizontalAlignment="Left" Margin="0,12,0,0" IsHitTestVisible="False" >
+		</UIElement.RenderTransform>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Border Margin="12,0" Grid.RowSpan="2" BorderThickness="1" Background="White" BorderBrush="#FFD8D8D8" />
+
+		<local:TiltContentControl HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="12,0">
+			<StackPanel x:Name="grid" Background="Transparent" CacheMode="BitmapCache" Margin="0,0,0,12">
+				<Border Background="{StaticResource PhoneChromeBrush}" Margin="3,1,3,0">
+					<TextBlock x:Name="feedName" Foreground="White" Text="{Binding FormattedForMainPageSourceAndDate}" IsHitTestVisible="False" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="9,2,9,5" TextTrimming="WordEllipsis"/>
+				</Border>
+				<TextBlock x:Name="title" TextWrapping="Wrap" Margin="12,6,12,0" LineStackingStrategy="BlockLineHeight" Text="{Binding Title}" FontSize="26.667" IsHitTestVisible="False" Foreground="#FF0C0C0C" />
+				<Rectangle x:Name="mediaTypesIcon" Fill="{StaticResource PhoneAccentBrush}" Height="32" Width="128" HorizontalAlignment="Left" Margin="12,10,12,0" IsHitTestVisible="False" Visibility="Collapsed" >
 					<Rectangle.OpacityMask>
 						<ImageBrush Stretch="Uniform" ImageSource="/Assets/Icons/mediaTypeIcons/podcast_zuneDL.png"/>
 					</Rectangle.OpacityMask>
 				</Rectangle>
 			</StackPanel>
 		</local:TiltContentControl>
-		<local:TiltContentControl x:Name="imageTilt" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,12">
-			<Border x:Name="imageWrapper" VerticalAlignment="Top" Height="244" CacheMode="BitmapCache" Background="{StaticResource PhoneChromeBrush}" Margin="12,0" RenderTransformOrigin="0.5,0.5" >
+		<local:TiltContentControl x:Name="imageTilt" Grid.Row="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="12,0">
+			<Border x:Name="imageWrapper" Height="300" CacheMode="BitmapCache" Margin="3,0" RenderTransformOrigin="0.5,0.5" >
 				<Image x:Name="image" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center" CacheMode="BitmapCache">
 					<Image.Source>
 						<BitmapImage UriSource="http://gamernode.com/upload/manager///Dan%20Crabtree/Reviews/halo-reach-beta-gameplay1285174234.jpg" sg:BitmapImageHelper.IsBackgroundCreationEnabled="True" />
@@ -53,5 +63,5 @@
 				</Image>
 			</Border>
 		</local:TiltContentControl>
-	</StackPanel>
+	</Grid>
 </local:BaseNewsItemControl>

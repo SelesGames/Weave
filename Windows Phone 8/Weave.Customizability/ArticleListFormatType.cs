@@ -6,6 +6,8 @@ namespace Weave.Customizability
         SmallImage,
         BigImage,
         TextOnly,
-        Tiles
+        Tiles,
+        Card,
+        Flip
     }
 }

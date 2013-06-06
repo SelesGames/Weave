@@ -12,12 +12,12 @@ using Weave.ViewModels;
 
 namespace weave
 {
-    public partial class BigImageNewsItemControl : BaseNewsItemControl, IDisposable
+    public partial class CardNewsItemControl : BaseNewsItemControl, IDisposable
     {
         BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
 
-        public BigImageNewsItemControl()
+        public CardNewsItemControl()
         {
             InitializeComponent();
 
@@ -34,10 +34,11 @@ namespace weave
             this.title.SetBinding(TextBlock.FontSizeProperty, bindingSource.TitleSizeBinding);
             this.title.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);
 
-            this.feedName.SetBinding(TextBlock.FontSizeProperty, bindingSource.PublicationLineSizeBinding);
-            this.feedName.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);
+            //this.feedName.SetBinding(TextBlock.FontSizeProperty, bindingSource.PublicationLineSizeBinding);
+            //this.feedName.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);
 
-            this.SetBinding(FrameworkElement.MarginProperty, bindingSource.MainPageNewsItemMarginBinding);
+            //this.SetBinding(FrameworkElement.MarginProperty, bindingSource.MainPageNewsItemMarginBinding);
+            this.Margin = new Thickness(0, 12, 0, 12);
         }
 
         protected override void SetNewsItem(NewsItem newsItem)
@@ -72,6 +73,7 @@ namespace weave
                 imageWrapper.Visibility = Visibility.Visible;
                 imageTilt.Visibility = Visibility.Visible;
 
+
                 ImageCache
                     .GetImageAsync(newsItem.ImageUrl)
                     .SafelySubscribe(SetImage, ex => SetImage(FailImage))
@@ -79,17 +81,17 @@ namespace weave
             }
             else
             {
-                imageTilt.Visibility = Visibility.Collapsed;
                 imageWrapper.Visibility = Visibility.Collapsed;
+                imageTilt.Visibility = Visibility.Collapsed;
             }
 
             Binding b = new Binding("DisplayState")
             {
                 Converter = new DelegateValueConverter(value =>
-                    {
-                        var displayState = (NewsItem.ColoringDisplayState)value;
-                        return (displayState == NewsItem.ColoringDisplayState.Viewed) ? 0.6d : 1d;
-                    },
+                {
+                    var displayState = (NewsItem.ColoringDisplayState)value;
+                    return (displayState == NewsItem.ColoringDisplayState.Viewed) ? 0.6d : 1d;
+                },
                     null),
                 Source = newsItem
             };
@@ -119,7 +121,7 @@ namespace weave
             else
                 brush = AppSettings.Instance.Themes.CurrentTheme.SubtleBrush;
 
-            feedName.Foreground = brush;
+            //feedName.Foreground = brush;
             mediaTypesIcon.Fill = brush;
         }
 
