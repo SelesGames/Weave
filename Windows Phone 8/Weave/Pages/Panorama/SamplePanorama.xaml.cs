@@ -213,22 +213,22 @@ namespace weave
             GlobalNavigationService.ToMainPage("favorites", "favorites");
         }
 
+        void manageSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
+            NavigationService.ToManageSourcesPage();
+        }
+
         void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
             GlobalNavigationService.ToAppSettingsPage();
         }
 
-        //void moreAppsButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        //{
-        //    SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menu);
-        //    GlobalNavigationService.ToSelesGamesInfoPage();
-        //}
-
-        void manageSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        void OnInfoAppBarButtonClicked(object sender, System.EventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
-            NavigationService.ToManageSourcesPage();
+            GlobalNavigationService.ToSelesGamesInfoPage();
         }
 
         async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -243,8 +243,7 @@ namespace weave
             {
                 //message = "You must log in. Login Required";
             }
-            var accountClient = new Weave.Services.Account.Client();
-            
+            var accountClient = new Weave.Services.Account.Client();    
         }
 
         #endregion
