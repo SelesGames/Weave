@@ -10,108 +10,42 @@
 	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
 	x:Class="weave.SamplePanorama"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
 	Orientation="Portrait"
 	shell:SystemTray.IsVisible="False">
-	<UserControl.Resources>
-	
-		<Style x:Key="MenuTextStyle" TargetType="TextBlock">
-			<Setter Property="Foreground" Value="{StaticResource PanoramaForegroundBrush}"/>
-			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
-			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraLarge}"/>
-		</Style>
+	<weave:WeavePage.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/MosaicHubTileStyles.xaml" />
+				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/PanoButtonStyles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		
+			<Style x:Key="PanoramaItemStyle" TargetType="phone:PanoramaItem">
+				<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+				<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+				<Setter Property="Margin" Value="0,-45,0,0"/>
+			</Style>
 				
-		<Style x:Key="CategoryOrFeedButtonTemplate" TargetType="Button">
-			<Setter Property="CacheMode" Value="BitmapCache" />
-			<Setter Property="Foreground" Value="{StaticResource PanoramaForegroundBrush}"/>
-			<Setter Property="FontFamily" Value="{StaticResource AppSpecificFontFamily}"/>
-			<Setter Property="HorizontalAlignment" Value="Left" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Border HorizontalAlignment="Left" Background="{StaticResource TransparentBrush}" Height="52">
-							<TextBlock Text="{Binding Name}" Margin="11,3,12,6" CacheMode="BitmapCache" TextTrimming="WordEllipsis" Style="{StaticResource MenuTextStyle}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}"/>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+			<ItemsPanelTemplate x:Key="WrapPanelTemplate"><toolkit:WrapPanel /></ItemsPanelTemplate>
 
-		<DataTemplate x:Key="CategoryItemTemplate">
-			<Button Style="{StaticResource CategoryOrFeedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnCategoryTapped" />
-		</DataTemplate>
+			<DataTemplate x:Key="MostViewedItemTemplate">
+				<Button Style="{StaticResource MostViewedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnMostViewedTapped" />
+			</DataTemplate>
 
-		<Style x:Key="ImageWithLabelButtonStyle" TargetType="sg:ImageWithLabelButton">
-			<Setter Property="CacheMode" Value="BitmapCache" />
-			<Setter Property="Foreground" Value="{StaticResource PanoramaForegroundBrush}"/>
-			<Setter Property="FontFamily" Value="{StaticResource AppSpecificFontFamily}"/>
-			<Setter Property="HorizontalAlignment" Value="Left" />
-			<Setter Property="Padding" Value="12,6" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="sg:ImageWithLabelButton">
-						<Border HorizontalAlignment="Left" Background="{StaticResource TransparentBrush}">
-							<Grid Margin="{TemplateBinding Padding}" Height="62">
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="Auto"/>
-									<ColumnDefinition />
-								</Grid.ColumnDefinitions>
-								<Rectangle Fill="{StaticResource PhoneAccentBrush}" Width="62" Height="62"/>
-								<sg:Glyph Source="{TemplateBinding Source}" Foreground="{TemplateBinding Foreground}" Width="48" Height="48" />
-								<TextBlock Text="{TemplateBinding Content}" CacheMode="BitmapCache" Style="{StaticResource MenuTextStyle}" VerticalAlignment="Center" Grid.Column="1" Margin="18,-11,0,-6"/>
-							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		
-		<ItemsPanelTemplate x:Key="WrapPanelTemplate">
-			<toolkit:WrapPanel />
-		</ItemsPanelTemplate>
-		
-		<Style x:Key="MostViewedButtonTemplate" TargetType="Button">
-			<Setter Property="Margin" Value="0,0,12,12" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<toolkit:HubTile Source="{Binding Source}" Title="{Binding Name}" Notification="{Binding NewCount}" GroupTag="mostviewed" Style="{StaticResource HomePageHubTileStyle}"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<Style x:Key="SmallAccountButtonTemplate" TargetType="sg:ImageWithLabelButton">
-			<Setter Property="CacheMode" Value="BitmapCache" />
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="FontFamily" Value="{StaticResource AppSpecificFontFamily}"/>
-			<Setter Property="Padding" Value="0" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="sg:ImageWithLabelButton">
-						<Border Background="{TemplateBinding Background}">
-							<Grid Margin="{TemplateBinding Padding}">
-								<sg:Glyph Source="{TemplateBinding Source}" Foreground="{TemplateBinding Foreground}" Width="48" Height="48" Margin="0,0,0,8" />
-								<TextBlock Text="{TemplateBinding Content}" Style="{StaticResource MenuTextStyle}" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeNormal}" Margin="0,0,0,8" HorizontalAlignment="Center" />
-							</Grid>
-						</Border>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		
-		<DataTemplate x:Key="MostViewedItemTemplate">
-			<Button Style="{StaticResource MostViewedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnMostViewedTapped" />
-		</DataTemplate>
+			<!--DataTemplate x:Key="CategoryItemTemplate">
+				<Button Style="{StaticResource CategoryOrFeedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnCategoryTapped" />
+			</DataTemplate-->
 						
-	</UserControl.Resources>
+		</ResourceDictionary>
+
+	</weave:WeavePage.Resources>
 		
 	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SamplePanoramaViewModel}}">
 		
-		<!--Grid x:Name="guides" IsHitTestVisible="False" Canvas.ZIndex="1" Opacity="0.5">
-			<Image Height="800" Source="/Assets/CNNCAP.jpg" Stretch="Fill" Width="480" Canvas.ZIndex="2" Opacity="0.2" Margin="0,92,0,-92" Visibility="Collapsed"/>
-			<Image Source="/Assets/rectangleGuide.png" Width="480" Height="800" Opacity="0.15"/>
+		<!--Grid x:Name="guides" IsHitTestVisible="False" Canvas.ZIndex="1">
+			<Image Source="/Assets/AlignmentGrid.png" Width="480" Height="800"/>
 			<Grid Name="panoLines" Margin="0,-14,0,0">
 				<Rectangle Fill="#FFF4F4F5" Height="1" VerticalAlignment="Top" Margin="0,127,0,0"/>
 				<Rectangle Fill="#FFF4F4F5" Height="1" VerticalAlignment="Top" Margin="0,258,0,0"/>
@@ -123,53 +57,71 @@
 			<Rectangle Fill="#FF2DFF00" Height="24" Name="Bottom24" VerticalAlignment="Bottom" Opacity="0.5" />
 		</Grid-->
 		
-		<controls:Panorama x:Name="pano" Title="{StaticResource PanoramaTitle}" Foreground="{StaticResource PanoramaForegroundBrush}" Background="{StaticResource PanoramaBackgroundBrush}" FontFamily="{StaticResource AppSpecificFontFamily}">										
-			<controls:PanoramaItem x:Name="Menu" Margin="0,-29,0,0" >
+		<phone:Panorama x:Name="pano" Foreground="{StaticResource PanoramaForegroundBrush}" Background="{StaticResource PanoramaBackgroundBrush}" FontFamily="{StaticResource AppSpecificFontFamily}" Title=" ">										
+			<phone:PanoramaItem x:Name="Menu" Margin="0,-60,0,0" Style="{StaticResource PanoramaItemStyle}" >
 				<Grid Margin="12,0">
-					<ItemsControl x:Name="mostViewed" Margin="46,0,-12,0" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" VerticalAlignment="Top" HorizontalAlignment="Left" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
-					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Bottom" Margin="-12,0,0,18">
-						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap"/>
-						<sg:ImageWithLabelButton Content="app settings" Source="/Assets/Icons/48x48_small_settings.png" Style="{StaticResource ImageWithLabelButtonStyle}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="settingsButtonTap"/>
-						<sg:ImageWithLabelButton Content="info" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/SelesGames.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="moreAppsButtonTap"/>
-					</StackPanel>
 					<TextBlock HorizontalAlignment="Left" Text="MOST VIEWED" VerticalAlignment="Top" FontFamily="Segoe WP Black" RenderTransformOrigin="0,0.5" Margin="19,-33,0,0" FontSize="45.333" Foreground="#F4FFFFFF">
 						<TextBlock.RenderTransform>
 							<CompositeTransform Rotation="90"/>
 						</TextBlock.RenderTransform>
 					</TextBlock>
+					<ItemsControl x:Name="mostViewed" Margin="46,0,-12,0" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" VerticalAlignment="Top" HorizontalAlignment="Left" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
+					<telerikPrimitives:RadMosaicHubTile 
+						x:Name="mosaicHubTile" 
+						Title="all sources" 
+						ImageSources="{Binding Feeds}" 
+						HorizontalAlignment="Left" 
+						Height="156" 
+						VerticalAlignment="Top" 
+						Margin="46,336,0,0" 
+						Width="324" 
+						Style="{StaticResource RadMosaicHubTileStyle1}" 
+						FontFamily="Segoe WP Black" 
+						FontSize="45.333" 
+						Foreground="#F4FFFFFF"/>
 				</Grid>
-			</controls:PanoramaItem>
+			</phone:PanoramaItem>
 					
-			<controls:PanoramaItem x:Name="Featured_News" Orientation="Horizontal" CacheMode="{x:Null}" Margin="0,-14,0,0" Header="latest articles" >
-				<local:CategoryDisplayGrid x:Name="cat1" Height="460" Width="828" VerticalAlignment="Top" Margin="12,0,0,0" News="{Binding LatestNews}" />			
-			</controls:PanoramaItem>
-
-			<controls:PanoramaItem x:Name="Account" Header="account" Margin="0,-14,0,0">
-				<Grid x:Name="accountRoot" Margin="12.6,0,0,0">
-					<toolkit:WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,76,0,0">
-						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,0,12,12" Tap="OnLoginButtonTap" />
-						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="120" Height="120" Margin="0,0,12,12" Style="{StaticResource SmallAccountButtonTemplate}" Source="/Assets/Icons/tiny_heart.png" Content="favorites" />
-						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="120" Height="120" Margin="0,0,12,12" Style="{StaticResource SmallAccountButtonTemplate}" Content="read" Source="/Assets/Icons/appbar.eye.png" />
-					</toolkit:WrapPanel>
+			<phone:PanoramaItem x:Name="Featured_News" Orientation="Horizontal" CacheMode="{x:Null}" Header="latest articles" Style="{StaticResource PanoramaItemStyle}" Padding="0,-18,0,0" >
+				<Grid>
+					<local:CategoryDisplayGrid x:Name="cat1" Height="460" Width="828" VerticalAlignment="Top" Margin="12,0,0,0" News="{Binding LatestNews}" />			
+					<Button Content="all news" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource TrueTextButtonStyle}" Margin="0,448,-12,0" />
 				</Grid>
-			</controls:PanoramaItem>
+			</phone:PanoramaItem>
+
+			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
+				<Grid x:Name="accountRoot">
+					<toolkit:WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,0,12,12" Tap="OnLoginButtonTap" />				
+					</toolkit:WrapPanel>
+					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" Margin="0,198,0,0">
+						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap"/>
+						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap"/>
+						<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
+					</StackPanel>
+				</Grid>
+			</phone:PanoramaItem>
 			
-			<controls:PanoramaItem x:Name="Categories" Header="{x:Null}" Margin="0,-14,0,0">
+			<!--controls:PanoramaItem x:Name="Categories" Header="{x:Null}" Margin="0,-14,0,0">
 				<ScrollViewer Style="{StaticResource ScrollViewerWithScrollBarOnLeftStyle}" Margin="0,-24,0,0">
 					<StackPanel Margin="0,24,0,96">
 						<TextBlock Text="sources" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" FontFamily="{StaticResource AppSpecificFontFamily}" Margin="10,-40,0,8" />
 						<ItemsControl x:Name="categoriesContainer" ItemsSource="{Binding Sources}" ItemTemplate="{StaticResource CategoryItemTemplate}" />
 					</StackPanel>
 				</ScrollViewer>
-			</controls:PanoramaItem>
+			</controls:PanoramaItem-->
 					
-		</controls:Panorama>
+		</phone:Panorama>
 		<ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/>
+		<TextBlock IsHitTestVisible="False" HorizontalAlignment="Left" TextWrapping="Wrap" Text="weave" VerticalAlignment="Top" Foreground="{StaticResource PanoramaForegroundBrush}" Margin="24,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Style="{StaticResource PanoramaItemHeaderTextStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+		<TextBlock IsHitTestVisible="False" HorizontalAlignment="Left" TextWrapping="Wrap" Text="NEWS READER" VerticalAlignment="Top" Foreground="{StaticResource PanoramaForegroundBrush}" Margin="25,44,0,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Style="{StaticResource PanoramaItemHeaderTextStyle}" FontSize="18.667" Opacity="0.5" CharacterSpacing="-76"/>
 	</Grid>
 	
-	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar Opacity="0.99" ForegroundColor="White" BackgroundColor="#CC000000" IsMenuEnabled="False" IsVisible="False">
-			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.rss.png" Text="manage" Click="OnManageFeedAppBarButtonClicked"  />
+	<weave:WeavePage.ApplicationBar>
+		<shell:ApplicationBar Opacity="0.99" ForegroundColor="White" BackgroundColor="#CC000000" IsMenuEnabled="False" Mode="Minimized">
+			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/SelesGames.png" Text="info"/>
+			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/48x48_small_settings.png" Text="settings" Click="OnSettingsAppBarButtonClicked"/>
 		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
+	</weave:WeavePage.ApplicationBar>
+
 </weave:WeavePage>

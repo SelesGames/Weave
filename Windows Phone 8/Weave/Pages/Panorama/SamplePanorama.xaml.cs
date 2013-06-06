@@ -1,6 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
 using Microsoft.WindowsAzure.MobileServices;
-using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Diagnostics;
@@ -9,6 +8,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
 using Weave.ViewModels;
 
@@ -46,8 +47,19 @@ namespace weave
             this.IsHitTestVisible = false;
 
             vm.LoadMostViewedAsync();
-            vm.LoadSourcesAsync();
+            vm.LoadFeeds();
+            //vm.LoadSourcesAsync();
             SetValue(RadTransitionControl.TransitionProperty, new RadTileTransition { PlayMode = TransitionPlayMode.Manual });
+
+            mosaicHubTile.CreateImageSource = o => CreateImageSourceFromFeed(o as Feed);
+        }
+
+        ImageSource CreateImageSourceFromFeed(Feed feed)
+        {
+            if (feed == null)
+                return null;
+
+            return new BitmapImage(new Uri(feed.TeaserImageUrl, UriKind.Absolute));
         }
 
         protected async override void OnPageLoad(WeaveNavigationEventArgs navigationEventArgs)
@@ -75,13 +87,14 @@ namespace weave
 
         void OnSubsequentNavigatedTo()
         {
-            ApplicationBar.IsVisible = (pano.SelectedItem == Categories);
-            vm.LoadSourcesAsync();
+            //ApplicationBar.IsVisible = (pano.SelectedItem == Categories);
+            //vm.LoadSourcesAsync();
+            mosaicHubTile.IsFrozen = false;
         }
 
         void OnPanoSelectionChanged()
         {
-            ApplicationBar.IsVisible = (pano.SelectedItem == Categories);
+            ApplicationBar.Mode = (pano.SelectedItem == Account) ? ApplicationBarMode.Default : ApplicationBarMode.Minimized;
         }
 
         async Task OnFirstFeaturedNewsPanoItemLoad()
@@ -166,7 +179,7 @@ namespace weave
 
         void OnCategoryTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            SetValue(RadTileAnimation.ContainerToAnimateProperty, this.categoriesContainer);
+            //SetValue(RadTileAnimation.ContainerToAnimateProperty, this.categoriesContainer);
             ApplicationBar.IsVisible = false;
             ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
         }
@@ -194,19 +207,25 @@ namespace weave
             GlobalNavigationService.ToMainPage("favorites", "favorites");
         }
 
-        void settingsButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        void readButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menu);
+            GlobalNavigationService.ToMainPage("favorites", "favorites");
+        }
+
+        void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)
+        {
+            SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
             GlobalNavigationService.ToAppSettingsPage();
         }
 
-        void moreAppsButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menu);
-            GlobalNavigationService.ToSelesGamesInfoPage();
-        }
+        //void moreAppsButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menu);
+        //    GlobalNavigationService.ToSelesGamesInfoPage();
+        //}
 
-        void OnManageFeedAppBarButtonClicked(object sender, System.EventArgs e)
+        void manageSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
             NavigationService.ToManageSourcesPage();

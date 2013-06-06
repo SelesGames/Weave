@@ -3,8 +3,9 @@
 //      changes to this file can cause errors.
 namespace Expression.Blend.SampleData.SamplePanoramaViewModel
 {
+	using System; 
 
-    // To significantly reduce the sample data footprint in your production application, you can set
+// To significantly reduce the sample data footprint in your production application, you can set
 // the DISABLE_SAMPLE_DATA conditional compilation constant and disable sample data at runtime.
 #if DISABLE_SAMPLE_DATA
 	internal class SamplePanoramaViewModel { }
@@ -54,6 +55,16 @@ namespace Expression.Blend.SampleData.SamplePanoramaViewModel
 			get
 			{
 				return this._MostViewed;
+			}
+		}
+
+		private Feeds _Feeds = new Feeds();
+
+		public Feeds Feeds
+		{
+			get
+			{
+				return this._Feeds;
 			}
 		}
 	}
@@ -182,6 +193,42 @@ namespace Expression.Blend.SampleData.SamplePanoramaViewModel
 				{
 					this._Source = value;
 					this.OnPropertyChanged("Source");
+				}
+			}
+		}
+	}
+
+	public class Feeds : System.Collections.ObjectModel.ObservableCollection<FeedsItem>
+	{ 
+	}
+
+	public class FeedsItem : System.ComponentModel.INotifyPropertyChanged
+	{
+		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+		protected virtual void OnPropertyChanged(string propertyName)
+		{
+			if (this.PropertyChanged != null)
+			{
+				this.PropertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+			}
+		}
+
+		private string _TeaserImageUrl = string.Empty;
+
+		public string TeaserImageUrl
+		{
+			get
+			{
+				return this._TeaserImageUrl;
+			}
+
+			set
+			{
+				if (this._TeaserImageUrl != value)
+				{
+					this._TeaserImageUrl = value;
+					this.OnPropertyChanged("TeaserImageUrl");
 				}
 			}
 		}

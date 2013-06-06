@@ -24,6 +24,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -336,6 +337,14 @@
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xsd" />
+    <Page Include="Pages\Panorama\Resources\PanoButtonStyles.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Panorama\Resources\MosaicHubTileStyles.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MainPage\NewsItemControls\CardNewsItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

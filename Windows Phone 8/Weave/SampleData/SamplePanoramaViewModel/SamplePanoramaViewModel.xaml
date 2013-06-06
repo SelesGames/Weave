@@ -26,4 +26,13 @@
     <SampleData:MostViewedItem Name="All News" NewCount="1450 new" Source="http://media.edge-online.com/files/imagecache/article/articles/news/EDG243_halo.jpg" />
     <SampleData:MostViewedItem Name="Engadget" NewCount="0 new" Source="http://media.edge-online.com/files/imagecache/article/articles/news/EDG243_halo.jpg" />
   </SampleData:SamplePanoramaViewModel.MostViewed>
+  <SampleData:SamplePanoramaViewModel.Feeds>
+    <SampleData:FeedsItem TeaserImageUrl="http://ts1.mm.bing.net/th?id=H.4933299212453388&amp;pid=1.7&amp;w=233&amp;h=176&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts2.mm.bing.net/th?id=H.4577504160776873&amp;pid=1.7&amp;w=297&amp;h=188&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts3.mm.bing.net/th?id=H.4796057867190574&amp;pid=1.7&amp;w=192&amp;h=181&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts4.mm.bing.net/th?id=H.4819736009049067&amp;pid=1.7&amp;w=297&amp;h=188&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts4.mm.bing.net/th?id=H.4819736009049071&amp;pid=1.7&amp;w=297&amp;h=188&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts1.mm.bing.net/th?id=H.4720517980094860&amp;pid=1.7&amp;w=297&amp;h=188&amp;c=7&amp;rs=1" />
+    <SampleData:FeedsItem TeaserImageUrl="http://ts2.mm.bing.net/th?id=H.4765318800280037&amp;pid=1.7&amp;w=297&amp;h=188&amp;c=7&amp;rs=1" />
+  </SampleData:SamplePanoramaViewModel.Feeds>
 </SampleData:SamplePanoramaViewModel>
