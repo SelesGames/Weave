@@ -1164,6 +1164,11 @@
             Identifies the <c cref="P:Telerik.Windows.Controls.RadCalendar.GridLinesBrush"/> dependency property.
             </summary>
         </member>
+        <member name="F:Telerik.Windows.Controls.RadCalendar.GridLinesThicknessProperty">
+            <summary>
+            Identifies the <c cref="P:Telerik.Windows.Controls.RadCalendar.GridLinesThickness"/> dependency property.
+            </summary>
+        </member>
         <member name="M:Telerik.Windows.Controls.RadCalendar.#ctor">
             <summary>
                 Initializes a new instance of the RadCalendar class.
@@ -1207,6 +1212,13 @@
             </summary>
             <param name="newBrush">The new brush.</param>
             <param name="oldBrush">The old brush.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadCalendar.OnGridLinesThicknessChanged(System.Double,System.Double)">
+            <summary>
+            A virtual method that is called when the <see cref="P:Telerik.Windows.Controls.RadCalendar.GridLinesThickness"/> property changes.
+            </summary>
+            <param name="newThickness">The new thickness.</param>
+            <param name="oldThickness">The old thickness.</param>
         </member>
         <member name="M:Telerik.Windows.Controls.RadCalendar.IsDateSelectable(System.DateTime)">
             <summary>
@@ -1616,6 +1628,12 @@
         <member name="P:Telerik.Windows.Controls.RadCalendar.GridLinesBrush">
             <summary>
             Gets or sets the color for the grid lines. The lines that separate
+            the different time units.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadCalendar.GridLinesThickness">
+            <summary>
+            Gets or sets the width for the grid lines. The lines that separate
             the different time units.
             </summary>
         </member>
@@ -2131,6 +2149,38 @@
             the type of the editor associated with a boolean property in <see cref="T:Telerik.Windows.Controls.RadDataForm"/>.
             </summary>
         </member>
+        <member name="T:Telerik.Windows.Controls.DataForm.CustomEditorAttribute">
+            <summary>
+            Represents a CLR attribute which can be used to define a custom editor for a given property
+            on an object used in a <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.DataForm.CustomEditorAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.DataForm.CustomEditorAttribute"/> class.
+            </summary>
+            <param name="editorRootType">Type of the editor root.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.DataForm.CustomEditorAttribute.#ctor(System.Type,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.DataForm.CustomEditorAttribute"/> class.
+            </summary>
+            <param name="editorRootType">Type of the editor root.</param>
+            <param name="valueDelegateType">Type of the value delegate.</param>
+        </member>
+        <member name="P:Telerik.Windows.Controls.DataForm.CustomEditorAttribute.EditorRootType">
+            <summary>
+            Gets or sets the type of the <see cref="T:System.Windows.FrameworkElement"/> which
+            represents the root of the custom editor.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.DataForm.CustomEditorAttribute.ValueDelegateType">
+            <summary>
+            Gets or sets the type of the <see cref="T:Telerik.Windows.Controls.DataForm.ICustomEditorValueDelegate"/> implementation
+            that is used to compose the value of the custom editor for synchronizing on the data object
+            set as CurrentItem on the correposnding <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.DataForm.DateTimeEditorTypeAttribute">
             <summary>
             Allows to specify what type of input field will be created
@@ -2385,6 +2435,13 @@
         <member name="M:Telerik.Windows.Controls.DataForm.DataFormField.Validate">
             <summary>
             Called by the owning <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance before
+            committing the currently input values.
+            </summary>
+            <returns>True if the validation succeeds; false otherwise.</returns>
+        </member>
+        <member name="M:Telerik.Windows.Controls.DataForm.DataFormField.ValidateAsync">
+            <summary>
+            Called asynchronously by the owning <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance before
             committing the currently input values.
             </summary>
             <returns>True if the validation succeeds; false otherwise.</returns>
@@ -2975,6 +3032,24 @@
             A <see cref="T:Telerik.Windows.Controls.RadDatePicker"/> and <see cref="T:Telerik.Windows.Controls.RadTimePicker"/> will be created for the property.
             </summary>
         </member>
+        <member name="T:Telerik.Windows.Controls.DataForm.PropertyIterationMode">
+            <summary>
+            Defines the modes for <see cref="T:Telerik.Windows.Controls.RadDataForm"/> iterating properties exposed by
+            the object set to the <see cref="P:Telerik.Windows.Controls.RadDataForm.CurrentItem"/> property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.DataForm.PropertyIterationMode.FlattenHierarchy">
+            <summary>
+            All public properties exposed by the current item, including the inherited ones, will
+            be considered when creating the editors.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.DataForm.PropertyIterationMode.DefiningOnly">
+            <summary>
+            All public properties exposed by the type of the current item will be considered when
+            creating the editors.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.ValidationMode">
             <summary>
             Defines the different modes in which
@@ -3010,6 +3085,32 @@
         <member name="F:Telerik.Windows.Controls.ValidationSummaryMode.Form">
             <summary>
             Validation information is displayed in a layout panel above all fields in the <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.CommittingDataFieldEventArgs">
+            <summary>
+            Contains information about the <see cref="T:Telerik.Windows.Controls.CommittingDataFieldEventArgs"/>.
+            Can be used to prevent a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> from being committed.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.CommittingDataFieldEventArgs.#ctor(Telerik.Windows.Controls.DataForm.DataFormField)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.CommittingDataFieldEventArgs"/> class.
+            </summary>
+            <param name="targetField">The target field.</param>
+        </member>
+        <member name="P:Telerik.Windows.Controls.CommittingDataFieldEventArgs.TargetField">
+            <summary>
+            Gets the target field.
+            </summary>
+            <value>
+            The target field.
+            </value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.CommittingDataFieldEventArgs.Value">
+            <summary>
+            The value that is being committed to the corresponding property on the
+            business entity.
             </summary>
         </member>
         <member name="T:Telerik.Windows.Controls.DataFieldCreatedEventArgs">
@@ -3072,6 +3173,16 @@
             </summary>
             <value>The associated field.</value>
         </member>
+        <member name="T:Telerik.Windows.Controls.DataForm.CommittingDataFieldEventHandler">
+            <summary>
+            Defines the signature of handlers of the <see cref="E:CommittingDataFieldAsync"/> event.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.DataForm.ValidatingDataFieldEventHandler">
+            <summary>
+            Defines the signature of handlers of the <see cref="E:ValidatingDataFieldAsync"/> event.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs">
             <summary>
             Contains information about <see cref="E:Telerik.Windows.Controls.RadDataForm.ValidatingDataField"/> event.
@@ -3117,6 +3228,11 @@
             Identifies the <see cref="P:Telerik.Windows.Controls.DataField.ErrorInfoMessage"/> dependency property.
             </summary>
         </member>
+        <member name="F:Telerik.Windows.Controls.DataField.IsEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.DataField.IsEnabled"/> dependency property.
+            </summary>
+        </member>
         <member name="M:Telerik.Windows.Controls.DataField.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.DataField"/> class.
@@ -3129,9 +3245,14 @@
             to which this <see cref="T:Telerik.Windows.Controls.DataField"/> instance corresponds.
             </summary>
         </member>
+        <member name="P:Telerik.Windows.Controls.DataField.IsEnabled">
+            <summary>
+            Gets or sets a value that indicates if this button is enabled.
+            </summary>
+        </member>
         <member name="P:Telerik.Windows.Controls.DataField.Validators">
             <summary>
-            Gets
+            Gets the list of validators.
             </summary>
         </member>
         <member name="P:Telerik.Windows.Controls.DataField.EditorStyles">
@@ -3232,63 +3353,37 @@
             <param name="value">The value.</param>
             <returns></returns>
         </member>
-        <member name="T:Telerik.Windows.Controls.FieldRelation">
-            <summary>
-            Represents a field relation. A field relation is a <see cref="T:System.Windows.Data.Binding"/>
-            between given properties of two fields.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.SourceField">
-            <summary>
-            Gets or sets the source field of the relation.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.SourceFieldProperty">
-            <summary>
-            Gets or sets the name of the property on the
-            source field editor which will be target of the binding.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.TargetField">
-            <summary>
-            Gets or sets the target field of the relation.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.TargetFieldProperty">
-            <summary>
-            Gets or sets the name of the property on the
-            target field editor which will be target of the binding.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.Converter">
-            <summary>
-            Gets or sets an implementation of the <see cref="T:System.Windows.Data.IValueConverter"/> interface
-            that is used to convert values between the two binding properties.
-            </summary>
-        </member>
-        <member name="P:Telerik.Windows.Controls.FieldRelation.ConverterParameter">
-            <summary>
-            Gets or sets an object representing the parameter
-            used by the <see cref="T:System.Windows.Data.IValueConverter"/>.
-            </summary>
-        </member>
-        <member name="T:Telerik.Windows.Controls.DataFormValidator">
-            <summary>
-            Represents an object used to validate the input for a given
-            <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
-            </summary>
-        </member>
-        <member name="M:Telerik.Windows.Controls.DataFormValidator.Validate(Telerik.Windows.Controls.ValidatingDataFieldEventArgs)">
-            <summary>
-            Called to validate a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> instance.
-            </summary>
-            <param name="args">An instance of the <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> class that holds information about the validation event.</param>
-        </member>
         <member name="T:Telerik.Windows.Controls.RadDataForm">
             <summary>
             Represents a data form control that automatically generates its input fields based
             on the public properties of a data object set as current item.
             </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.CommitAsync">
+            <summary>
+            Commits all data changes by saving the values to the
+            corresponding properties of the <see cref="P:Telerik.Windows.Controls.RadDataForm.CurrentItem"/> asynchronously.
+            Used only when the <see cref="P:Telerik.Windows.Controls.RadDataForm.ValidationMode"/> property
+            is set to be Manual.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.ValidateAsync">
+            <summary>
+            Performs an asynchronous validation of the input of each editor in the
+            current <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.OnCommittingDataFieldAsync(Telerik.Windows.Controls.CommittingDataFieldEventArgs)">
+            <summary>
+            Raises the <see cref="E:CommittingDataFieldAsync"/> event asynchronously.
+            </summary>
+            <param name="args">The <see cref="T:Telerik.Windows.Controls.CommittingDataFieldEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.OnValidatingDataFieldAsync(Telerik.Windows.Controls.ValidatingDataFieldEventArgs)">
+            <summary>
+            Raises the <see cref="E:ValidatingDataField"/> event asynchronously.
+            </summary>
+            <param name="args">The <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="F:Telerik.Windows.Controls.RadDataForm.ApplicationBarInfoProperty">
             <summary>
@@ -3308,6 +3403,16 @@
         <member name="F:Telerik.Windows.Controls.RadDataForm.ValidationModeProperty">
             <summary>
             Identifies the <see cref="P:Telerik.Windows.Controls.RadDataForm.ValidationMode"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadDataForm.PropertyIterationModeProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.RadDataForm.ValidationMode"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadDataForm.EditorCreationModeProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.RadDataForm.EditorCreationMode"/> dependency property.
             </summary>
         </member>
         <member name="F:Telerik.Windows.Controls.RadDataForm.CommitModeProperty">
@@ -3358,6 +3463,12 @@
             is set to be Manual.
             </summary>
         </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.Validate">
+            <summary>
+            Performs validation of the input of each editor in the
+            current <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
         <member name="M:Telerik.Windows.Controls.RadDataForm.FindFieldByPropertyName(System.String)">
             <summary>
             Retrieves an instance of the <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> class
@@ -3386,6 +3497,12 @@
             Raises the <see cref="E:ValidatingDataField"/> event.
             </summary>
             <param name="args">The <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.OnCommittingDataField(Telerik.Windows.Controls.CommittingDataFieldEventArgs)">
+            <summary>
+            Raises the <see cref="E:CommittingDataFieldAsync"/> event.
+            </summary>
+            <param name="args">The <see cref="T:Telerik.Windows.Controls.CommittingDataFieldEventArgs"/> instance containing the event data.</param>
         </member>
         <member name="M:Telerik.Windows.Controls.RadDataForm.CreateEditorProvider">
             <summary>
@@ -3432,6 +3549,22 @@
             <param name="args">An instance of the <see cref="T:Telerik.Windows.Controls.DataFieldCreatedEventArgs"/> class
             that contains information about the event.</param>
         </member>
+        <member name="M:Telerik.Windows.Controls.RadDataForm.OnCurrentItemChanged(System.Object,System.Object)">
+            <summary>
+            Called when the object set to the <see cref="P:Telerik.Windows.Controls.RadDataForm.CurrentItem"/>
+            property is changed.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadDataForm.ValidatingDataFieldAsync">
+            <summary>
+            Fires when a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> is beign validated asynchronously.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadDataForm.CommittingDataFieldAsync">
+            <summary>
+            Fires when a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> is being committed asynchronously.
+            </summary>
+        </member>
         <member name="E:Telerik.Windows.Controls.RadDataForm.RetrievingAttribute">
             <summary>
             Fires when a CLR attribute is retrieved for a property.
@@ -3462,6 +3595,11 @@
         <member name="E:Telerik.Windows.Controls.RadDataForm.ValidatingDataField">
             <summary>
             Fires when a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> is being validated.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadDataForm.CommittingDataField">
+            <summary>
+            Fires when a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> is being comitted.
             </summary>
         </member>
         <member name="E:Telerik.Windows.Controls.RadDataForm.DataFieldValueChanged">
@@ -3498,6 +3636,12 @@
             Gets or sets a value from the <see cref="P:Telerik.Windows.Controls.RadDataForm.CommitMode"/>
             enum which determines when editor values are stored on the 
             corresponding business object set as a <see cref="P:Telerik.Windows.Controls.RadDataForm.CurrentItem"/>.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadDataForm.PropertyIterationMode">
+            <summary>
+            Determines how the public properties exposed by the object set to the <see cref="P:Telerik.Windows.Controls.RadDataForm.CurrentItem"/>
+            property will be iterated.
             </summary>
         </member>
         <member name="P:Telerik.Windows.Controls.RadDataForm.ApplicationBarInfo">
@@ -3557,6 +3701,63 @@
             <c>True</c> if this instance is properly templated; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="T:Telerik.Windows.Controls.FieldRelation">
+            <summary>
+            Represents a field relation. A field relation is a <see cref="T:System.Windows.Data.Binding"/>
+            between given properties of two fields.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.SourceField">
+            <summary>
+            Gets or sets the source field of the relation.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.SourceFieldProperty">
+            <summary>
+            Gets or sets the name of the property on the
+            source field editor which will be target of the binding.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.TargetField">
+            <summary>
+            Gets or sets the target field of the relation.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.TargetFieldProperty">
+            <summary>
+            Gets or sets the name of the property on the
+            target field editor which will be target of the binding.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.Converter">
+            <summary>
+            Gets or sets an implementation of the <see cref="T:System.Windows.Data.IValueConverter"/> interface
+            that is used to convert values between the two binding properties.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.FieldRelation.ConverterParameter">
+            <summary>
+            Gets or sets an object representing the parameter
+            used by the <see cref="T:System.Windows.Data.IValueConverter"/>.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.DataFormValidator">
+            <summary>
+            Represents an object used to validate the input for a given
+            <see cref="T:Telerik.Windows.Controls.RadDataForm"/> instance.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.DataFormValidator.Validate(Telerik.Windows.Controls.ValidatingDataFieldEventArgs)">
+            <summary>
+            Called to validate a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> instance.
+            </summary>
+            <param name="args">An instance of the <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> class that holds information about the validation event.</param>
+        </member>
+        <member name="E:Telerik.Windows.Controls.DataFormValidator.ValidateAsync">
+            <summary>
+            Fires when the validator is called asynchronously.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.DataForm.DataFormValidatorCombinator">
             <summary>
             Represents a group of <see cref="T:Telerik.Windows.Controls.DataFormValidator"/> instances that are used to validate
@@ -3579,6 +3780,12 @@
         <member name="M:Telerik.Windows.Controls.DataForm.DataFormValidatorCombinator.Validate(Telerik.Windows.Controls.ValidatingDataFieldEventArgs)">
             <summary>
             Called to validate a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> instance.
+            </summary>
+            <param name="args">An instance of the <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> class that holds information about the validation event.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.DataForm.DataFormValidatorCombinator.ValidateAsync(Telerik.Windows.Controls.ValidatingDataFieldEventArgs)">
+            <summary>
+            Called to asynchronously validate a <see cref="T:Telerik.Windows.Controls.DataForm.DataFormField"/> instance.
             </summary>
             <param name="args">An instance of the <see cref="T:Telerik.Windows.Controls.ValidatingDataFieldEventArgs"/> class that holds information about the validation event.</param>
         </member>

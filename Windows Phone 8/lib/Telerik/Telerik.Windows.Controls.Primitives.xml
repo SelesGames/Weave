@@ -1542,6 +1542,31 @@
             </summary>
             <param name="context">The context that holds information about the animation.</param>
         </member>
+        <member name="M:Telerik.Windows.Controls.ContextMenu.ContextMenuOpenAnimation.OnEnded">
+            <summary>
+            Raises the Telerik.Windows.Controls.RadAnimation.Ended event.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.ContextMenuOpenFailedReason">
+            <summary>
+            Reasons for whic RadContextMenu may fail to open.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.ContextMenuOpenFailedReason.Unloaded">
+            <summary>
+            The context menu was unloaded before it finished opening.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.ContextMenuOpenFailedReason.PageNotFound">
+            <summary>
+            The root PhoneApplicationPage is missing.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.ContextMenuOpenFailedReason.PageClosed">
+            <summary>
+            The user closed the page by going back.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.ContextMenuOpeningEventArgs">
             <summary>
             Event arguments for RadContextMenu's opening event.
@@ -1556,6 +1581,22 @@
         <member name="P:Telerik.Windows.Controls.ContextMenuOpeningEventArgs.FocusedElement">
             <summary>
             Get the UIElement which is focused under RadContextMenu.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.OpenFailedEventArgs">
+            <summary>
+            Event arguments for the OpenFailed event of <see cref="T:Telerik.Windows.Controls.RadContextMenu"/>.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.OpenFailedEventArgs.#ctor(Telerik.Windows.Controls.ContextMenuOpenFailedReason)">
+            <summary>
+            Creates a new instance of the OpenFailedEventArgs class.
+            </summary>
+            <param name="reason">The reason for the open failure.</param>
+        </member>
+        <member name="P:Telerik.Windows.Controls.OpenFailedEventArgs.Reason">
+            <summary>
+            Gets the reason of the open failure.
             </summary>
         </member>
         <member name="T:Telerik.Windows.Controls.OpenGesture">
@@ -1771,6 +1812,11 @@
         <member name="E:Telerik.Windows.Controls.RadContextMenu.Closed">
             <summary>
             Fires right after the context menu has closed.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadContextMenu.OpenFailed">
+            <summary>
+            Fired if <see cref="T:Telerik.Windows.Controls.RadContextMenu"/> fails to open.
             </summary>
         </member>
         <member name="P:Telerik.Windows.Controls.RadContextMenu.PortraitAlignment">
@@ -2471,6 +2517,16 @@
             <summary>
             Identifies the <see cref="P:Telerik.Windows.Controls.RadDataBoundListBox.IsPullToRefreshEnabled"/> dependency property.
             </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadDataBoundListBox.StopPullToRefreshLoading(System.Boolean,System.Boolean)">
+            <summary>
+            Stops the loading indicator in the pull-to-refresh element and hides the element by updating
+            the last refresh time if required. By default the DateTime.Now value is used but by using the UpdateRefreshTime
+            method a different DateTime value can be provided.
+            </summary>
+            <param name="animate">Indicates whether the pull to refresh indicator will be hidden
+            by animating it.</param>
+            <param name="updateRefreshLabel">Indicates whether the refresh label is updated.</param>
         </member>
         <member name="M:Telerik.Windows.Controls.RadDataBoundListBox.StopPullToRefreshLoading(System.Boolean)">
             <summary>
@@ -3260,13 +3316,6 @@
             When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate" />. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
             </summary>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadExpanderControl.OnLoaded(System.Object,System.Windows.RoutedEventArgs)">
-            <summary>
-            Occurs when a System.Windows.FrameworkElement has been constructed and added to the object tree.
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
         <member name="M:Telerik.Windows.Controls.RadExpanderControl.OnTap(System.Windows.Input.GestureEventArgs)">
             <summary>
             Called before the <see cref="E:System.Windows.UIElement.Tap" /> event
@@ -3280,6 +3329,15 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Telerik.Windows.Controls.RadExpanderControl.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Provides the behavior for the Measure pass of Windows Phone layout. Classes can override this method to define their own Measure pass behavior.
+            </summary>
+            <param name="availableSize">The available size that this object can give to child objects. Infinity (<see cref="F:System.Double.PositiveInfinity" />) can be specified as a value to indicate that the object will size to whatever content is available.</param>
+            <returns>
+            The size that this object determines it needs during layout, based on its calculations of the allocated sizes for child objects; or based on other considerations, such as a fixed container size.
+            </returns>
+        </member>
         <member name="M:Telerik.Windows.Controls.RadExpanderControl.ArrangeOverride(System.Windows.Size)">
             <summary>
             Provides the behavior for the Arrange pass of Silverlight layout. Classes
@@ -3290,6 +3348,13 @@
             <returns>
             The actual size that is used after the element is arranged in layout.
             </returns>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadExpanderControl.OnContentChanged(System.Object,System.Object)">
+            <summary>
+            Called when the value of the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property changes.
+            </summary>
+            <param name="oldContent">The old value of the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property.</param>
+            <param name="newContent">The new value of the <see cref="P:System.Windows.Controls.ContentControl.Content" /> property.</param>
         </member>
         <member name="E:Telerik.Windows.Controls.RadExpanderControl.ExpandedStateChanging">
             <summary>
@@ -4520,7 +4585,7 @@
             This class defines a type of a MessageBox that contains an input field for a password or for a plain text.
             </summary>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Object,Telerik.Windows.Controls.MessageBoxButtons,System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs})">
+        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Object,Telerik.Windows.Controls.MessageBoxButtons,System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs},System.Action{System.Windows.Input.KeyEventArgs})">
             <summary>
             Shows RadInputPrompt.
             </summary>
@@ -4535,8 +4600,9 @@
             <param name="horizontalAlignment">The horizontal alignment of the input promt on the device page.</param>
             <param name="verticalAlignment">The vertical alignment of the input promt on the device page.</param>
             <param name="closedHandler">A callback that will be invoked when the input prompt closes.</param>
+            <param name="keyDownHandler">A callback that will be invoked when a key is pressed.</param>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Collections.Generic.IEnumerable{System.Object},System.Object,System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs})">
+        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Collections.Generic.IEnumerable{System.Object},System.Object,System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs},System.Action{System.Windows.Input.KeyEventArgs})">
             <summary>
             Shows RadInputPrompt.
             </summary>
@@ -4551,8 +4617,9 @@
             <param name="horizontalAlignment">The horizontal alignment of the input promt on the device page.</param>
             <param name="verticalAlignment">The vertical alignment of the input promt on the device page.</param>
             <param name="closedHandler">A callback that will be invoked when the input prompt closes.</param>
+            <param name="keyDownHandler">A callback that will be invoked when a key is pressed.</param>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Windows.DataTemplate,System.Object,System.Collections.Generic.IEnumerable{System.Object},System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs})">
+        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Windows.DataTemplate,System.Object,System.Collections.Generic.IEnumerable{System.Object},System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs},System.Action{System.Windows.Input.KeyEventArgs})">
             <summary>
             Shows RadInputPrompt.
             </summary>
@@ -4568,8 +4635,9 @@
             <param name="horizontalAlignment">The horizontal alignment of the input promt on the device page.</param>
             <param name="verticalAlignment">The vertical alignment of the input promt on the device page.</param>
             <param name="closedHandler">A callback that will be invoked when the input prompt closes.</param>
+            <param name="keyDownHandler">A callback that will be invoked when a key is pressed.</param>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Windows.Controls.ControlTemplate,System.Object,System.Collections.Generic.IEnumerable{System.Object},System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs})">
+        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Show(System.Windows.Controls.ControlTemplate,System.Object,System.Collections.Generic.IEnumerable{System.Object},System.Object,Telerik.Windows.Controls.InputMode,System.Windows.Style,System.Object,System.Boolean,System.Boolean,System.Windows.HorizontalAlignment,System.Windows.VerticalAlignment,System.Action{Telerik.Windows.Controls.InputPromptClosedEventArgs},System.Action{System.Windows.Input.KeyEventArgs})">
             <summary>
             Shows RadInputPrompt.
             </summary>
@@ -4585,6 +4653,13 @@
             <param name="horizontalAlignment">The horizontal alignment of the input promt on the device page.</param>
             <param name="verticalAlignment">The vertical alignment of the input promt on the device page.</param>
             <param name="closedHandler">A callback that will be invoked when the input prompt closes.</param>
+            <param name="keyDownHandler">A callback that will be invoked when a key is pressed.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadInputPrompt.Close(System.Int32)">
+            <summary>
+            Closes the CurrentInputPrompt as if the specified with selected button index was pressed.
+            </summary>
+            <param name="selectedButtonIndex">Index of the selected button.</param>
         </member>
         <member name="T:Telerik.Windows.Controls.InputPrompt.RadInputPromptControl">
             <summary>
@@ -5803,7 +5878,7 @@
         </member>
         <member name="P:Telerik.Windows.Controls.Reminders.ReminderBase`1.AreFurtherRemindersSkipped">
             <summary>
-            Gets a value indicating whether the end user has skipped further reminders.
+            Gets or sets a value indicating whether further reminders will be skipped.
             </summary>
         </member>
         <member name="P:Telerik.Windows.Controls.Reminders.ReminderBase`1.PersistedData">
@@ -5847,6 +5922,11 @@
         <member name="P:Telerik.Windows.Controls.RadRateApplicationReminder.MessageBoxInfo">
             <summary>
             Gets or sets the message box info.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadRateApplicationReminder.SkipFurtherRemindersOnYesPressed">
+            <summary>
+            Gets or sets a value indicating whether further reminders will be skipped after yes is pressed.
             </summary>
         </member>
         <member name="T:Telerik.Windows.Controls.Reminders.Trial.TrialReminderDataModel">
@@ -6475,6 +6555,11 @@
             Gets the initial (starting) distance between the two touch points.
             </summary>
         </member>
+        <member name="P:Telerik.Windows.Controls.Gestures.TwoTouchPointGesture.PreviousDistance">
+            <summary>
+            Gets the previous distance between the two touch points.
+            </summary>
+        </member>
         <member name="P:Telerik.Windows.Controls.Gestures.TwoTouchPointGesture.Distance">
             <summary>
             Gets the current distance between the two touch points.
@@ -6494,6 +6579,11 @@
         <member name="P:Telerik.Windows.Controls.Gestures.PinchGesture.Scale">
             <summary>
             Gets a value representing the scale ration between the current and the start distance of the two touch points.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Gestures.PinchGesture.RelativeScale">
+            <summary>
+            Gets a value representing the scale ration between the current and previous distances of the two touch points.
             </summary>
         </member>
         <member name="T:Telerik.Windows.Controls.Gestures.TapGesture">
@@ -7202,6 +7292,16 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Telerik.Windows.Controls.RadSlideView.OnSlideAnimationStarted">
+            <summary>
+            Fires the <see cref="E:Telerik.Windows.Controls.RadSlideView.SlideAnimationStarted"/> event.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadSlideView.OnSlideAnimationCompleted">
+            <summary>
+            Fires the <see cref="E:Telerik.Windows.Controls.RadSlideView.SlideAnimationCompleted"/> event.
+            </summary>
+        </member>
         <member name="M:Telerik.Windows.Controls.RadSlideView.CreateManipulationBehavior">
             <summary>
             Creates the core <see cref="T:Telerik.Windows.Controls.SlideView.SlideViewManipulationBehavior"/> depending on the current <see cref="P:Telerik.Windows.Controls.RadSlideView.TransitionMode"/> value.
@@ -7268,6 +7368,16 @@
         <member name="E:Telerik.Windows.Controls.RadSlideView.SelectionChanged">
             <summary>
             Occurs when the <see cref="P:Telerik.Windows.Controls.RadSlideView.SelectedItem"/> property has changed.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadSlideView.SlideAnimationStarted">
+            <summary>
+            Occurs when the slide animation started.
+            </summary>
+        </member>
+        <member name="E:Telerik.Windows.Controls.RadSlideView.SlideAnimationCompleted">
+            <summary>
+            Occurs when the slide animation completed.
             </summary>
         </member>
         <member name="E:Telerik.Windows.Controls.RadSlideView.RefreshRequested">
@@ -7664,7 +7774,7 @@
         </member>
         <member name="T:Telerik.Windows.Controls.PhoneTextBox.TextBoxActionButton">
             <summary>
-            Represents an ImageButton which is part of the RadTextBox and has additional states to provide better user experience.
+            Represents an ImageButton which is part of the <see cref="T:Telerik.Windows.Controls.RadTextBox"/> or <see cref="T:Telerik.Windows.Controls.RadPasswordBox"/> and has additional states to provide better user experience.
             </summary>
         </member>
         <member name="M:Telerik.Windows.Controls.PhoneTextBox.TextBoxActionButton.#ctor">
@@ -7675,6 +7785,16 @@
         <member name="M:Telerik.Windows.Controls.PhoneTextBox.TextBoxActionButton.OnApplyTemplate">
             <summary>
             Builds the visual tree for the <see cref="T:System.Windows.Controls.Button"/> when a new template is applied.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.PhoneTextBox.TextBoxSecondaryButton">
+            <summary>
+            Represents an ImageButton which is part of the <see cref="T:Telerik.Windows.Controls.RadTextBox"/> or <see cref="T:Telerik.Windows.Controls.RadPasswordBox"/> and has a custom default style.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.PhoneTextBox.TextBoxSecondaryButton.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.PhoneTextBox.TextBoxSecondaryButton"/> class.
             </summary>
         </member>
         <member name="T:Telerik.Windows.Controls.PhoneTextBox.TextToVisibilityConverter">

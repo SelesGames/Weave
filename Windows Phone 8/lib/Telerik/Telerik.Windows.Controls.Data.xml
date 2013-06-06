@@ -625,7 +625,7 @@
             <see cref="T:Telerik.Windows.Controls.RadJumpList"/> is reclaimed by garbage collection.
             </summary>
         </member>
-        <member name="M:Telerik.Windows.Controls.RadJumpList.ReceiveEvent(System.Object,System.EventArgs)">
+        <member name="M:Telerik.Windows.Controls.RadJumpList.Telerik#Windows#Data#IWeakEventListener#ReceiveEvent(System.Object,System.EventArgs)">
             <summary>
             Receives the event.
             </summary>

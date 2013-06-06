@@ -4,6 +4,2221 @@
         <name>Telerik.Windows.Controls.DataVisualization</name>
     </assembly>
     <members>
+        <member name="T:Telerik.Windows.Controls.Barcode.BarcodeBase">
+            <summary>
+            This is the base class for all bar code type controls.
+            </summary>            
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.BarcodeBase.TextProperty">
+            <summary>
+            Identifies the BarcodeText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.BarcodeBase.RestrictAspectRatioProperty">
+            <summary>
+            Identifies the RestrictAspectRatio dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.BarcodeBase.ShowChecksumProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.Barcode.BarcodeBase.ShowChecksum"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.BarcodeBase.RenderChecksumProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.Barcode.BarcodeBase.RenderChecksum"/> dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.OnApplyTemplate">
+            <summary>
+            Overrides the OnApplyTemplate method.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.TextChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the Text property was changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.RestrictAspectRatioChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the RestrictAspectRatio property was changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.ShowChecksumChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the ShowChecksum property was changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.RenderChecksumChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the RenderChecksum property is changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.SetGridDimensions(System.Double,System.Windows.Size,System.Windows.Controls.Grid,System.Double,System.Double)">
+            <summary>
+            This method sets the dimensions of the barcode.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.GetTrailingZeros(System.String)">
+            <summary>
+            This method gets all trailing zeros in a string.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.BarcodeBase.GetLeadingZeros(System.String)">
+            <summary>
+            This method gets all leading zeros in a string.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.RestrictAspectRatio">
+            <summary>
+            Gets or sets a boolean value, indicating whether the aspect ratio should be preserved or not.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.Text">
+            <summary>
+            Gets or sets the Text entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.ShowChecksum">
+            <summary>
+            Gets or sets the ShowChecksum.
+            </summary>        
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.RenderChecksum">
+            <summary>
+            Gets or sets the RenderChecksum.
+            </summary>        
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.DefaultBarContainer">
+            <summary>
+            Gets or sets the defaultBarContainer.
+            </summary>        
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.Checksum">
+            <summary>
+            This is the checksum, calculated on the barcode.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.BarcodeBase.BarcodeEncodedText">
+            <summary>
+            This is the encoded text.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D">
+            <summary>
+            This class is the class responsible for decoding all one-dimensional bar codes.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.DecoderBase">
+            <summary>
+            This is the base class for all decoding classes.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.DecoderBase.EncodedData">
+            <summary>
+            This is the encoded data for the code, which will later be matched against one of the encoding tables.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.DecoderBase.ImageStream">
+            <summary>
+            This is the ImageStream for the code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.DecoderBase.OriginalColorCurrentPixel">
+            <summary>
+            This represents the original color of the module or segment.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the Decoder1D class.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.PixelMatrix">
+            <summary>
+            This is the pixel matrix, generated by reading the uploaded image.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.LargestSegmentGroup">
+            <summary>
+            This is the group, which contains the most elements.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.SingleSegmentGroupsList">
+            <summary>
+            This is a list of single segment groups.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.SingleSegmentList">
+            <summary>
+            This is a list of one pixel wide segments, which will be interpreted to determine the encoded image.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.Decoder1D.ModulesList1D">
+            <summary>
+            This is a property, which represents the modules in the barcode in sequential order, based on their width.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.ModuleColor.Dark">
+            <summary>
+            Black module.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CodeTypes.BarcodeReader.ModuleColor.Light">
+            <summary>
+            White module .
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.CheckMSI">
+            <summary>
+            An enumeration of checksum types for MSI code type.
+            </summary>    
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CheckMSI.Modulo10">
+            <summary>
+            Modulo 10, the default.
+            </summary>    
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CheckMSI.Modulo11">
+            <summary>
+            Modulo11.
+            </summary>    
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CheckMSI.Modulo1010">
+            <summary>
+            Two modulo 10 checksums.
+            </summary>    
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.CheckMSI.Modulo1110">
+            <summary>
+            Modulo 11 and modulo 10 checksums.
+            </summary>    
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code11">
+            <summary>
+            This is the Code11 declaration.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Symbology1D">
+            <summary>
+            This is the base class for all simple barcodes, such as Code39, and Code128.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.SymbologyBase">
+            <summary>
+            This is the base class for the barcodes, outlining the core logic.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.SymbologyBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.SymbologyBase"/> class.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.SymbologyBase.CalculateCheckSum">
+            <summary>
+            This determines whether a checksum should be generated for the code.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Symbology1D.GapChar">
+            <summary>
+            GapChar.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Symbology1D.BarChar">
+            <summary>
+            BarChar.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Symbology1D.CheckSum">
+            <summary>
+            This is the checksum for the code.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Code11.Prefix">
+            <summary>
+            Prefix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Code11.Suffix">
+            <summary>
+            Suffix.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code11.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code11.EncodingTable">
+            <summary>
+            This property returns the encoding table for the code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code128">
+            <summary>
+            This is the Code39 declaration.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Code128"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128.ValidateValue(System.String)">
+            <summary>
+            This method validates the text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128.GetIndices(System.String)">
+            <summary>
+            Gets the indices for the text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128.GetIndices(System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets the indices for the text.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code128.EncodingTable">
+            <summary>
+            This property returns the encoding table for the code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code128A">
+            <summary>
+            Code128 class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128A.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Code128A"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128A.GetIndices(System.String)">
+            <summary>
+            Gets the indices for the text.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code128A.Charset">
+            <summary>
+            This property returns the character set/table for the code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code128B">
+            <summary>
+            Code12B class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128B.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Code128B"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128B.GetIndices(System.String)">
+            <summary>
+            Gets the indices for the text.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code128B.Charset">
+            <summary>
+            This property returns the character set/table for the code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code128C">
+            <summary>
+            Code128C class.
+            </summary>    
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128C.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Code128C"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code128C.GetIndices(System.String)">
+            <summary>
+            Gets the indices for the text.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code128C.CodeSet">
+            <summary>
+            This property returns the character set/table for the code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code25Interleaved.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code25Standard.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Code25Standard.EncodingTable">
+            <summary>
+            This property returns the encoding table for the code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Code39">
+            <summary>
+            This is the Code39 declaration.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Code39.Prefix">
+            <summary>
+            Prefix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Code39.Suffix">
+            <summary>
+            Suffix.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code39.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Code39"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code39.GenerateGeometry(System.String)">
+            <summary>
+            Generates the geometry for the class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Code93.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Codabar.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.CodeMSI.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.CodeMSI.ValidateValue(System.String)">
+            <summary>
+            This method validates the text of the barcode.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.EAN13">
+            <summary>
+            This is the EAN13 Barcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Product1D">
+            <summary>
+            This is the Base Class for EAN UPC codes.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Product1D.Padding">
+            <summary>
+            Padding.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.Product1D.charset">
+            <summary>
+            Charset.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Product1D.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Product1D"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Product1D.GetSymbols(System.String,System.Int32)">
+            <summary>
+            Gets the symbols for any code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Product1D.GetChecksum(System.String)">
+            <summary>
+            Calculates the checksum for the code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.SingleBarWidth">
+            <summary>
+            Gets or sets the LeadingBarWidth.
+            </summary>
+            <value>The LeadingBarWidth.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.StartStopBarBarWidth">
+            <summary>
+            Gets or sets the LeadingBarWidth.
+            </summary>
+            <value>The LeadingBarWidth.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.LeftPartWidth">
+            <summary>
+            Gets or sets the MainPart1Width.
+            </summary>
+            <value>The MainPart1Width.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.RightPartWidth">
+            <summary>
+            Gets or sets the MainPart2Width.
+            </summary>
+            <value>The MainPart2Width.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.MiddleBarWidth">
+            <summary>
+            Gets or sets the MiddleBarWidth.
+            </summary>
+            <value>The MiddleBarWidth.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.BorderBarWidth">
+            <summary>
+            Gets or sets the EmptyBarWidth.
+            </summary>
+            <value>The EmptyBarWidth.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.SecondaryPartWidth">
+            <summary>
+            Gets or sets the SecondaryPartWidth.
+            </summary>
+            <value>The SecondaryPartWidth.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.LeadingTextboxText">
+            <summary>
+            Gets or sets the LeadingTextboxText.
+            </summary>
+            <value>The LeadingTextboxText.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.LeftTextboxText">
+            <summary>
+            Gets or sets the MainPart1TextboxText.
+            </summary>
+            <value>The MainPart1TextboxText.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.RightTextboxText">
+            <summary>
+            Gets or sets the MainPart2TextboxText.
+            </summary>
+            <value>The MainPart2TextboxText.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.EndTextboxText">
+            <summary>
+            Gets or sets the EndTextboxText.
+            </summary>
+            <value>The EndTextboxText.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.Product1D.SecondaryTextboxText">
+            <summary>
+            Gets or sets the SecondaryTextboxText.
+            </summary>
+            <value>The SecondaryTextboxText.</value>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.Prefix">
+            <summary>
+            Prefix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.Suffix">
+            <summary>
+            Suffix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.Center">
+            <summary>
+            Center code.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.Right">
+            <summary>
+            Right.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.parity">
+            <summary>
+            Parity.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN13.encoding">
+            <summary>
+            Encoding.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.EAN13"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.GenerateGeometry(System.String)">
+            <summary>
+            Generates the geometry for the code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.GetHeadText(System.String)">
+            <summary>
+            Gets the first part of the text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.GetEncoding(System.String)">
+            <summary>
+            Gets the encoding for the code type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.ValidateValue(System.String)">
+            <summary>
+            Validates the value.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.SetTextboxValues(System.String)">
+            <summary>
+            Sets the textbox values.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.GetLeftText(System.String)">
+            <summary>
+            Gets the left part of the text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN13.GetRightText(System.String)">
+            <summary>
+            Sets the right part of the text.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.EAN13.Parity">
+            <summary>
+            Exposes the parity property.
+            </summary>      
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.EAN13.Encoding">
+            <summary>
+            Exposes the encoding property.
+            </summary>      
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.EAN8">
+            <summary>
+            This is the EAN8 Barcode type.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN8.Left">
+            <summary>
+            Left.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN8.Right">
+            <summary>
+            Right.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN8.Prefix">
+            <summary>
+            Prefix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN8.Suffix">
+            <summary>
+            Suffix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.EAN8.Center">
+            <summary>
+            Center.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN8.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.EAN8"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN8.GenerateGeometry(System.String)">
+            <summary>
+            Generates the geometry for the code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.EAN8.GetEncoding(System.String)">
+            <summary>
+            Gets the encoding for the code type.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.ByteMode">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.Cluster">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:PDF417ClassLibrary.Cluster.#ctor(System.Int32,System.Boolean,System.Int32)">
+            <summary>
+            Initializes a new instance of the Cluster class.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.EncodingMode">
+            <summary>
+            The Mode Property determines the type of data acceptable.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.EncodingMode.Auto">
+            <summary>
+            Not set currently.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.EncodingMode.Byte">
+            <summary>
+            Byte Mode.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.EncodingMode.Text">
+            <summary>
+            Allows Text.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.EncodingMode.Numeric">
+            <summary>
+            Allows numbers.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.ErrorCorrectionGenerator">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.NumericMode">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.PDF417Encoder">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:PDF417ClassLibrary.PDF417Encoder.PopulateMatrix(System.String,System.Int32,PDF417ClassLibrary.EncodingMode,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:PDF417Encoder"/> class.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.TextMode">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:PDF417ClassLibrary.TextModeDefinitionEntry">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:PDF417ClassLibrary.TextModeDefinitionEntry.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the TextModeDefinitionEntry class.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.TextSubModes.Alpha">
+            <summary>
+            Byte Mode.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.TextSubModes.Lower">
+            <summary>
+            Allows Text.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.TextSubModes.Mixed">
+            <summary>
+            Allows numbers.
+            </summary>
+        </member>
+        <member name="F:PDF417ClassLibrary.TextSubModes.Punctuation">
+            <summary>
+            Not set currently.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.Postnet">
+            <summary>
+            This is the post net declaration.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.Postnet"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.ValidateValue(System.String)">
+            <summary>
+            Validates the code value.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.GenerateGeometry(System.String)">
+            <summary>
+            Gets the geometry for the code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.GetEncoding(System.String)">
+            <summary>
+            Gets the encoding for the code type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.GetChecksum(System.String)">
+            <summary>
+            Gets the checksum for the code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.Postnet.GetChecksum(System.String,System.Int32)">
+            <summary>
+            Gets the checksum for the code.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.CodeWordsBlockInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.CodeWordsBlockInfo"/> class.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.CodeWordsBlockInfo.CodeWordsPerBlock">
+            <summary>
+            Gets or sets the CodeWordsPerBlock.
+            </summary>
+            <value>The CodeWordsPerBlock.</value>
+        </member>
+        <member name="P:QRClassLibrary.CodeWordsBlockInfo.FirstBlockCount">
+            <summary>
+            Gets or sets the FirstBlockCount.
+            </summary>
+            <value>The FirstBlockCount.</value>
+        </member>
+        <member name="P:QRClassLibrary.CodeWordsBlockInfo.FirstDataCodeWords">
+            <summary>
+            Gets or sets the FirstDataCodeWords.
+            </summary>
+            <value>The FirstBlockCount.</value>
+        </member>
+        <member name="P:QRClassLibrary.CodeWordsBlockInfo.SecondBlockCount">
+            <summary>
+            Gets or sets the SecondBlockCount.
+            </summary>
+            <value>The SecondBlockCount.</value>
+        </member>
+        <member name="P:QRClassLibrary.CodeWordsBlockInfo.SecondBlockCodeWords">
+            <summary>
+            Gets or sets the SecondBlockCodeWords.
+            </summary>
+            <value>The SecondBlockCodeWords.</value>
+        </member>
+        <member name="M:QRClassLibrary.DataCapacityIndexer.#ctor(System.Int32,QRClassLibrary.Modes.ErrorCorrectionLevel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.DataCapacityIndexer"/> class.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.DataCapacityIndexer.Version">
+            <summary>
+            Gets or sets the Version.
+            </summary>
+            <value>The Version.</value>
+        </member>
+        <member name="P:QRClassLibrary.DataCapacityIndexer.ErrorCorrection">
+            <summary>
+            Gets or sets the ErrorCorrection.
+            </summary>
+            <value>The ErrorCorrection.</value>
+        </member>
+        <member name="T:QRClassLibrary.CP437_DOSLatinUS">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ECIBase">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.ECIBase.UnicodeValues">
+            <summary>
+            Gets or sets the UnicodeValues.
+            </summary>
+            <value>The UnicodeValues.</value>
+        </member>
+        <member name="P:QRClassLibrary.ECIBase.EncodedValues">
+            <summary>
+            Gets or sets the EncodedValues.
+            </summary>
+            <value>The EncodedValues.</value>
+        </member>
+        <member name="M:QRClassLibrary.CP437_DOSLatinUS.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.CP437_DOSLatinUS"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO646US">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO646US.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO646US"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_1">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_1"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_11Thai">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_11Thai.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_11Thai"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_13">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_13.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_13"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_15">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_15.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_15"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_1Eng">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_1Eng.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_1Eng"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_2ECEuropean">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_2ECEuropean.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_2ECEuropean"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_3Latin">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_3Latin.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_3Latin"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_4Baltic">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_4Baltic.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_4Baltic"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_5Cyrillic">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_5Cyrillic.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_5Cyrillic"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_6Arabic">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_6Arabic.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_6Arabic"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_7Greek">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_7Greek.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_7Greek"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_8Hebrew">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_8Hebrew.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_8Hebrew"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ISO8859_9Turkish">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ISO8859_9Turkish.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.ISO8859_9Turkish"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Windows1250">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.Windows1250.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.Windows1250"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Windows1251">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.Windows1251.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.Windows1251"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Windows1252">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.Windows1252.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.Windows1252"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Windows1256">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.Windows1256.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.Windows1256"/> class.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.Symbology2D.CharSet">
+            <summary>
+            Gets or sets the CharSet.
+            </summary>
+            <value>The CharSet.</value>
+        </member>
+        <member name="P:QRClassLibrary.Symbology2D.Encoding">
+            <summary>
+            Gets or sets the Encoding.
+            </summary>
+            <value>The Encoding.</value>
+        </member>
+        <member name="M:QRClassLibrary.AlphaNumeric.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.AlphaNumeric"/> class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.ByteMode">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.ByteMode.#ctor">
+            <summary>
+            Initializes a new instance of the ByteMode class.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.KanjiMode">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.KanjiMode.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.KanjiMode"/> class.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.KanjiMode.EncodeData(System.String)">
+            <summary>
+            This method encodes the data for the Kanji Mode.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.KanjiMode.ValidateData(System.String)">
+            <summary>
+            Validates the data,  to ensure no invalid characters are present.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Modes">
+            <summary>
+            These are the modes available for the QR control.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Modes.CodeMode">
+            <summary>
+            Determines the type of code, such as Numeric, Alphanumeric, Byte or Kanji.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.CodeMode.Byte">
+            <summary>
+            Byte Mode.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.CodeMode.Numeric">
+            <summary>
+            Allows Numbers [0-9].
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.CodeMode.Alphanumeric">
+            <summary>
+            Allows characters or numbers.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.CodeMode.Kanji">
+            <summary>
+            Kanji Mode.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Modes.ErrorCorrectionLevel">
+            <summary>
+            Determines how much data is available for error correction.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ErrorCorrectionLevel.L">
+            <summary>
+            Low.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ErrorCorrectionLevel.M">
+            <summary>
+            Medium.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ErrorCorrectionLevel.Q">
+            <summary>
+            Quartile.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ErrorCorrectionLevel.H">
+            <summary>
+            High.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Modes.ECIMode">
+            <summary>
+            Determines the Extended Channel Interpretation mode, which allows for encoding of characters from other sets.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_7">
+            <summary>
+            ECI 9.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_6">
+            <summary>
+            ECI 8.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_5">
+            <summary>
+            ECI 7.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_4">
+            <summary>
+            ECI 6.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_3">
+            <summary>
+            ECI 5.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_2">
+            <summary>
+            ECI 4.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_1En">
+            <summary>
+            ECI 3.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.CP437">
+            <summary>
+            ECI 2.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_1">
+            <summary>
+            ECI 1.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_8">
+            <summary>
+            ECI 10.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_9">
+            <summary>
+            ECI 11.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_11">
+            <summary>
+            ECI 13.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_13">
+            <summary>
+            ECI 15.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO8859_15">
+            <summary>
+            ECI 17.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.Windows1250">
+            <summary>
+            ECI 21.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.Windows1251">
+            <summary>
+            ECI 22.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.Windows1252">
+            <summary>
+            ECI 23.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.Windows1256">
+            <summary>
+            ECI 24.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.ECIMode.ISO646US">
+            <summary>
+            ECI 27.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Modes.FNC1Mode">
+            <summary>
+            Signifies application of special formatting to the code data.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.FNC1Mode.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.FNC1Mode.FNC1FirstPosition">
+            <summary>
+            FNC 1 in first position.
+            </summary>
+        </member>
+        <member name="F:QRClassLibrary.Modes.FNC1Mode.FNC1SecondPosition">
+            <summary>
+            FNC 1 in second position.
+            </summary>
+        </member>
+        <member name="T:QRClassLibrary.Numeric">
+            <summary>
+            TODO: Update summary.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.Numeric.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.Numeric"/> class.
+            </summary>
+        </member>
+        <member name="M:QRClassLibrary.QRCode.#ctor(QRClassLibrary.Modes.CodeMode,System.Int32,QRClassLibrary.Modes.ErrorCorrectionLevel,QRClassLibrary.Modes.ECIMode,QRClassLibrary.Modes.FNC1Mode,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:QRClassLibrary.QRCode"/> class.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.QRCode.BinaryMatrix">
+            <summary>
+            This is the true/false values representing each module in the QR code.
+            </summary>
+        </member>
+        <member name="P:QRClassLibrary.QRCode.FilledValuesMatrix">
+            <summary>
+            This is a matrix, reflecting the filled modules/positions in the QR code matrix.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.UPCA">
+            <summary>
+            This is the UPCA Barcode type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.GetEncoding(System.String)">
+            <summary>
+            Gets the encoding for this code type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.GetTailText(System.String)">
+            <summary>
+            Gets last section text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.ValidateValue(System.String)">
+            <summary>
+            Validates the code text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.SetTextboxValues(System.String)">
+            <summary>
+            Sets the textbox values.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.GetLeftText(System.String)">
+            <summary>
+            Gets left part text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCA.GetRightText(System.String)">
+            <summary>
+            Gets right part text.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.UPCE">
+            <summary>
+            This is the UPCE Barcode type.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.UPCE.Prefix">
+            <summary>
+            Prefix.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.UPCE.Suffix">
+            <summary>
+            Suffix.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.Barcode.UPCE"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GenerateGeometry(System.String)">
+            <summary>
+            Generates the geometry for the code type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GetEncoding(System.String)">
+            <summary>
+            Encodes the data.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GetHeadText(System.String)">
+            <summary>
+            Gets head text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GetTailText(System.String)">
+            <summary>
+            Gets tail text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GetLeftText(System.String)">
+            <summary>
+            Gets left text.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.ValidateValueUPCA(System.String)">
+            <summary>
+            Validates the value.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.GetSymbols(System.String)">
+            <summary>
+            Gets symbols if needed.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.SetTextboxValues(System.String)">
+            <summary>
+            Sets textbox values.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCE.ValidateValue(System.String)">
+            <summary>
+            Validates the value.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCSupplement2.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.Barcode.UPCSupplement5.GenerateGeometry(System.String)">
+            <summary>
+            This method generates the geometry for each segment of the control.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.ISupportLeadingText.LeadingText">
+            <summary>
+            Gets or sets leading text for the barcode.
+            </summary>
+            <value>The leading text.</value>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.ISupportTrailingText.TrailingText">
+            <summary>
+            Gets or sets leading text for the barcode.
+            </summary>
+            <value>The leading text.</value>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase">
+            <summary>
+            This is the base class for all multi section bar codes. These are codes, which
+            consist of more than one section, such as EAN13, UPCA.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.TrailingGeometryProperty">
+            <summary>
+            Identifies the TrailingGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.StartGeometryProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.StartGeometry"/> dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.MiddleGeometryProperty">
+            <summary>
+            Identifies the MiddleGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.LeftGeometryProperty">
+            <summary>
+            Identifies the  LeftGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.RightGeometryProperty">
+            <summary>
+            Identifies the RightGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.LeftTextProperty">
+            <summary>
+            Identifies the LeftText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.RightTextProperty">
+            <summary>
+            Identifies the RightText dependency property.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.LeftText">
+            <summary>
+            Gets or sets the LeftText.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.TrailingGeometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.RightText">
+            <summary>
+            Gets or sets the RightText.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.StartGeometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.MiddleGeometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.LeftGeometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.MultiSectionBarcodeBase.RightGeometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode11">
+            <summary>
+            Code 11 is a high-density numeric-only bar code. 
+            It is discrete and able to encode the numbers 0 through 9, the dash symbol (-), and start/stop characters.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.Barcode.SingleSectionBarcodeBase">
+            <summary>
+            This is the base class for all one section codes.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.SingleSectionBarcodeBase.GeometryProperty">
+            <summary>
+            Identifies the  LeftGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.Barcode.SingleSectionBarcodeBase.FullTextProperty">
+            <summary>
+            Identifies the BarcodeText dependency property.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.SingleSectionBarcodeBase.Geometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.Barcode.SingleSectionBarcodeBase.FullText">
+            <summary>
+            Gets or sets the Text resulting from adding the checksum and other elements.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode11.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode11"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode11.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code11 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode11.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode128">
+            <summary>
+            RadBarcode128 is a control which encodes alphanumeric characters into a series of bars.
+            It is of variable  length, and accepts numbers, upper and lower case characters. It also
+            includes an obligatory MOD 103 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode128"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode128A">
+            <summary>
+            RadBarcode128A is a control which encodes alphanumeric characters into a series of bars.    
+            It is of variable  length, and accepts upper case and ASCII control characters. It also
+            includes an obligatory MOD 103 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128A.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode128A"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128A.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128A.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode128A type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode128B">
+            <summary>
+            RadBarcode128A is a control which encodes alphanumeric characters into a series of bars.    
+            It is of variable  length, and accepts upper case and lower case characters. It also
+            includes an obligatory MOD 103 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128B.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode128B"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128B.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128B.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode128B type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode128C">
+            <summary>
+            RadBarcode128A is a control which encodes alphanumeric characters into a series of bars.    
+            It is of variable  length and uses a double-density code for numerical values, thus producing a shorter BarCode as a result. 
+            It also includes an obligatory MOD 103 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128C.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode128C"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128C.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode128C.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode128C type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode25Interleaved">
+            <summary>
+            Interleaved 2 of 5 is a higher-density numeric bar code based upon the Standard 2 of 5. 
+            Interleaved 2 of 5 encodes any even number of numeric characters in the widths of the bars and spaces of the bar code. 
+            Unlike Standard 2 of 5, which only encodes information in the width of the bars, 
+            Interleaved 2 of 5 encodes data in the width of both the bars and spaces. 
+            This allows Interleaved 2 of 5 to achieve a somewhat higher density.
+            The code is called "interleaved" because the first numeric data is encoded in the first 5 bars 
+            while the second numeric data is encoded in the first 5 spaces that separate the first 5 bars. 
+            Thus the first 5 bars and spaces actually encode two characters. 
+            This is also why the bar code can only encode an even number of data elements.    
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Interleaved.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode25Interleaved"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Interleaved.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode25Interleaved type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Interleaved.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode25Standard">
+            <summary>
+            Standard 2 of 5 is a low-density numeric bar code. The spaces in the barcode exist only to separate the bars themselves. 
+            Additionally, a bar may either be wide or narrow, a wide bar generally being 3 times as wide as a narrow bar. 
+            The exact size of the spaces is not critical, but is generally the same width as a narrow bar.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Standard.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode25Standard"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Standard.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code11 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode25Standard.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode39">
+            <summary>
+            RadBarcode39 is a control which encodes alphanumeric characters into a series of bars.
+            It is of variable length and accepts uppercase letters, as well as numbers. 
+            It includes an optional Mod 43 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode39"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code39 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode39 type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode39Extended">
+            <summary>
+            RadBarcode39Extended is a control which encodes alphanumeric characters into a series of bars.
+            It is of variable length and accepts uppercase letters, as well as numbers. 
+            It includes an optional Mod 43 checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39Extended.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode39Extended"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39Extended.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code39 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode39Extended.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode39Extended type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode93">
+            <summary>
+            Code 93 was designed to complement and improve upon Code 39. 
+            Code 93 is similar in that it, like Code 39, can represent the full ASCII character 
+            set by using combinations of 2 characters. 
+            It differs in that Code 93 is a continuous barcode and produces denser code. It also encodes 47 characters compared to Code 39's 43 characters.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode93"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code93 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcode93Extended">
+            <summary>
+            This is an extended version of code 93, which includes a bigger character set.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93Extended.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcode93Extended"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93Extended.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code93 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcode93Extended.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeCodebar">
+            <summary>
+            Coda bar is a discrete, self-checking bar code that may encode 16 different characters, plus an additional 4 start/stop characters.     
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeCodebar.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeCodebar"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeCodebar.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code11 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeCodebar.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeEAN13">
+            <summary>
+            RadBarcodeEAN13 is a control which encodes numbers into a series of bars.
+            It is of fixed length, of 12 digits, and accepts numbers. 
+            It includes a checksum.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeEAN13.LeadingTextProperty">
+            <summary>
+            Identifies the LeadingText dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN13.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeEAN13"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN13.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN13.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcodeEAN13 type.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeEAN13.LeadingText">
+            <summary>
+            Gets or sets the LeadingText.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeEAN8">
+            <summary>
+            RadBarcodeEAN8 is a control which encodes numbers into a series of bars.
+            It is of fixed length, of 7 digits, and accepts numbers only. 
+            It includes a checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN8.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeEAN8"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN8.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcode128 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeEAN8.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcodeEAN8 type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeMSI">
+            <summary>
+            MSI is a continuous, non-self-checking bar code. The length of an MSI bar code is variable.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeMSI.ChecksumTypeProperty">
+            <summary>
+            Identifies the  LeftGeometry dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeMSI.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeMSI"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeMSI.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcodeMSI type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeMSI.ChecksumTypeChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the ChecksumType property is changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeMSI.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeMSI.ChecksumType">
+            <summary>
+            Gets or sets the ChecksumType.
+            </summary>
+            <value>The ChecksumType.</value>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodePDF417">
+            <summary>
+            RadBarcodePDF417 is a 2D barcode. It has three modes - Byte, Text and Numeric.    
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodePDF417.TextProperty">
+            <summary>
+            Identifies the BarcodeText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodePDF417.EncodingModeProperty">
+            <summary>
+            Identifies the ModeProperty dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodePDF417.ErrorCorrectionLevelProperty">
+            <summary>
+            Identifies the ErrorCorrectionLevel dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePDF417.#ctor">
+            <summary>
+            Initializes a new instance of the RadBarcodePDF417 class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePDF417.OnApplyTemplate">
+            <summary>
+            Overrides the OnApplyTemplate method.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePDF417.ControlPropertyChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the Text property is changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePDF417.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Called to re-measure a control.
+            </summary>
+            <param name="availableSize">The maximum size that the method can return.</param>
+            <returns>The size of the control, up to the maximum specified by constraint.</returns>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodePDF417.Text">
+            <summary>
+            Gets or sets the Text entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodePDF417.EncodingMode">
+            <summary>
+            Gets or sets the Mode entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodePDF417.ErrorCorrectionLevel">
+            <summary>
+            Gets or sets the error correction Level entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodePDF417.DefaultBarContainer">
+            <summary>
+            Gets or sets the defaultBarContainer.
+            </summary>        
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodePDF417.PDF417Image">
+            <summary>
+            Gets or sets the PDF417 Image.
+            </summary>        
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodePostnet">
+            <summary>
+            This is a control which encodes numbers into a series of bars.
+            It is of variable length and accepts numbers only. 
+            It includes a checksum.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePostnet.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodePostnet"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePostnet.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for the barcode.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodePostnet.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for the bar code.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeQR">
+            <summary>
+            RadBarcodeQR is a 2D barcode, which encodes data. There are 40 versions
+            of the code, with four different error correction levels. 
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.GeometryProperty">
+            <summary>
+            Identifies the  GeometryProperty dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.TextProperty">
+            <summary>
+            Identifies the BarcodeText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.ModeProperty">
+            <summary>
+            Identifies the ModeProperty dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.VersionProperty">
+            <summary>
+            Identifies the Version dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.ErrorCorrectionLevelProperty">
+            <summary>
+            Identifies the ErrorCorrectionLevel dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.ECIProperty">
+            <summary>
+            Identifies the ECI dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.FNC1Property">
+            <summary>
+            Identifies the FNC1 dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeQR.ApplicationIndicatorProperty">
+            <summary>
+            Identifies the ApplicationIndicator dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeQR.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeQR"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeQR.OnApplyTemplate">
+            <summary>
+            Overrides the OnApplyTemplate method.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeQR.ControlPropertyChangedHandler(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Called when the Text property was changed.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="eventArgs">The <see cref="T:System.Windows.DependencyPropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeQR.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Called to re-measure a control.
+            </summary>
+            <param name="availableSize">The maximum size that the method can return.</param>
+            <returns>The size of the control, up to the maximum specified by constraint.</returns>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.Text">
+            <summary>
+            Gets or sets the Text entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.Mode">
+            <summary>
+            Gets or sets the Mode entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.Version">
+            <summary>
+            Gets or sets the Version entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.ErrorCorrectionLevel">
+            <summary>
+            Gets or sets the error correction Level entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.ECI">
+            <summary>
+            Gets or sets the ECI entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.FNC1">
+            <summary>
+            Gets or sets the FNC1 entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.ApplicationIndicator">
+            <summary>
+            Gets or sets the ApplicationIndicator entered by the user.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.DefaultBarContainer">
+            <summary>
+            Gets or sets the defaultBarContainer.
+            </summary>        
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeQR.QRCodeImage">
+            <summary>
+            Gets or sets the QRCode Image.
+            </summary>        
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeUPCA">
+            <summary>
+            UPCA is a barcode which consists of 12 digits, one of which is a checksum.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCA.LeadingTextProperty">
+            <summary>
+            Identifies the LeadingText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCA.TrailingTextProperty">
+            <summary>
+            Identifies the RightText dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCA.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeUPCA"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCA.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcodeUPCA type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCA.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcodeUPCA type.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCA.LeadingText">
+            <summary>
+            Gets or sets the LeadingText.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCA.TrailingText">
+            <summary>
+            Gets or sets the TrailingText.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeUPCE">
+            <summary>
+            RadBarcodeEAN8 is a control which encodes numbers into a series of bars.
+            It is of fixed length, of 7 digits, and accepts numbers only. 
+            It includes a checksum, for a total of 8 characters in the code.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCE.GeometryProperty">
+            <summary>
+            Identifies the  LeftGeometry dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCE.LeadingTextProperty">
+            <summary>
+            Identifies the LeadingText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCE.FullTextProperty">
+            <summary>
+            Identifies the LeftText dependency property.
+            </summary>
+        </member>
+        <member name="F:Telerik.Windows.Controls.RadBarcodeUPCE.TrailingTextProperty">
+            <summary>
+            Identifies the TrailingText dependency property.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCE.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeUPCE"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCE.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a RadBarcodeUPCE type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCE.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcodeUPCE type.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCE.LeadingText">
+            <summary>
+            Gets or sets the LeadingText.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCE.TrailingText">
+            <summary>
+            Gets or sets the TrailingText.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCE.Geometry">
+            <summary>
+            This property supports the RadBarcode infrastructure and is not intended to be used directly from your code.
+            </summary>
+        </member>
+        <member name="P:Telerik.Windows.Controls.RadBarcodeUPCE.FullText">
+            <summary>
+            Gets or sets the FullText.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeUPCSupplement2">
+            <summary>
+            A two digit supplementary code.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeUPCSupplement2"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement2.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code11 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement2.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
+        <member name="T:Telerik.Windows.Controls.RadBarcodeUPCSupplement5">
+            <summary>
+            A 5 digit supplementary UPC code.    
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement5.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.RadBarcodeUPCSupplement5"/> class.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement5.CreatePathFigures">
+            <summary>
+            Creates a path figure collection for a Code11 type.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.RadBarcodeUPCSupplement5.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Creates a path figure collection for a RadBarcode type.
+            </summary>
+        </member>
         <member name="T:Telerik.Windows.Controls.AdditionalMeasuresCollection`1">
             <summary>
             This collection is used insider RadBulletGraph and contains the additional comparative measures.
