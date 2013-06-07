@@ -14,7 +14,6 @@ namespace SelesGames.WP.PublisherInfoPage
         Task<string> getPaidAppId;
         string publisherName;
         PublisherInfoViewModel viewModel;
-        Button changelogButton, buyButton, rateButton, twitterButton, facebookButton;
 
         public string PublisherName
         {
@@ -40,7 +39,7 @@ namespace SelesGames.WP.PublisherInfoPage
         public PublisherInfoControl()
         {
             InitializeComponent();
-            list.Loaded += list_Loaded;
+            //footer.Loaded += footer_Loaded;
         }
 
         public override void OnApplyTemplate()
@@ -50,27 +49,6 @@ namespace SelesGames.WP.PublisherInfoPage
             SetRateButton();
             SetTwitterButton();
             SetFacebookButton();
-            SetFooterTemplate();
-        }
-
-        void list_Loaded(object sender, RoutedEventArgs e)
-        {
-            list.Loaded -= list_Loaded;
-            var llsHeader = list.Descendants<StackPanel>().OfType<StackPanel>().FirstOrDefault(o => o.Name == "buttonHeader");
-            var buttons = llsHeader.Descendants<Button>().OfType<Button>().ToList();
-            changelogButton = buttons[0];
-            buyButton = buttons[1];
-            rateButton = buttons[2];
-            twitterButton = buttons[3];
-            facebookButton = buttons[4];
-
-            SetChangelogButton();
-            SetBuyButton();
-            SetRateButton();
-            SetTwitterButton();
-            SetFacebookButton();
-
-            //footerControl = list.Descendants<ContentControl>().OfType<ContentControl>().FirstOrDefault(o => o.Name == "footerControl");
             SetFooterTemplate();
         }
 
@@ -202,7 +180,7 @@ namespace SelesGames.WP.PublisherInfoPage
 
         void SetFooterTemplate()
         {
-            list.ListFooterTemplate = FooterTemplate;
+            footer.ContentTemplate = FooterTemplate;
         }
 
 

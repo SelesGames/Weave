@@ -88,27 +88,6 @@
     <Compile Include="RssDateParsingHelper.cs" />
     <Compile Include="SyndicationDateTimeUtility.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\lib\protobuf-net.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpZipLib.WindowsPhone7">
-      <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SelesGames.Rest.Protobuf\SelesGames.Rest.Protobuf.csproj">
-      <Project>{92538D48-A044-4BD6-A969-2CB5C0A2169A}</Project>
-      <Name>SelesGames.Rest.Protobuf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
-      <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
-      <Name>SelesGames.Rest</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />

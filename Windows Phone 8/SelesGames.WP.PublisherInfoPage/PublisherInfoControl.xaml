@@ -89,18 +89,6 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		
-		
-		<DataTemplate x:Key="ListHeaderTemplate">
-			<StackPanel x:Name="buttonHeader" Margin="0,-12,0,24" toolkit:TiltEffect.IsTiltEnabled="True">
-				<sg:ImageWithLabelButton x:Name="changelogButton" Content="changelog blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/appbar.calendar.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
-				<sg:ImageWithLabelButton x:Name="buyButton" Content="buy app blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/purchase.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
-				<sg:ImageWithLabelButton x:Name="rateAppButton" Content="rate/review  blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/heart.png" Tap="OnHeaderButtonTap" />
-				<sg:ImageWithLabelButton x:Name="twitterFollowButton" Content="twitter blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/twitter.png" Tap="OnHeaderButtonTap" />
-				<sg:ImageWithLabelButton x:Name="facebookFollowButton" Content="facebook blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/facebook.png" Tap="OnHeaderButtonTap" />
-				<TextBlock Text="OUR APPS:" Margin="24,24,24,0" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="{StaticResource PhoneSubtleBrush}" />
-			</StackPanel>
-		</DataTemplate>
 				
 	</UserControl.Resources>
 		
@@ -120,11 +108,20 @@
 		</StackPanel>
 
 		<Grid x:Name="ContentPanel" Grid.Row="1">
-			<phone:LongListSelector x:Name="list" ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" Grid.Row="1" RenderTransformOrigin="0.5,0.5" ListHeader="{Binding}" ListHeaderTemplate="{StaticResource ListHeaderTemplate}" ListFooter="{Binding}" Background="{StaticResource TransparentBrush}" >
-                <phone:LongListSelector.RenderTransform>
-					<CompositeTransform />
-                </phone:LongListSelector.RenderTransform>
-            </phone:LongListSelector>
+			<ScrollViewer>
+				<StackPanel>
+					<StackPanel x:Name="buttonHeader" Margin="0,-12,0,24" toolkit:TiltEffect.IsTiltEnabled="True">
+						<sg:ImageWithLabelButton x:Name="changelogButton" Content="changelog blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/appbar.calendar.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
+						<sg:ImageWithLabelButton x:Name="buyButton" Content="buy app blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/purchase.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
+						<sg:ImageWithLabelButton x:Name="rateButton" Content="rate/review  blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/heart.png" Tap="OnHeaderButtonTap" />
+						<sg:ImageWithLabelButton x:Name="twitterButton" Content="twitter blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/twitter.png" Tap="OnHeaderButtonTap" />
+						<sg:ImageWithLabelButton x:Name="facebookButton" Content="facebook blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/facebook.png" Tap="OnHeaderButtonTap" />
+					</StackPanel>
+					<!--TextBlock Text="OUR APPS:" Margin="24,24,24,0" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMediumLarge}" Foreground="{StaticResource PhoneSubtleBrush}" />
+					<ItemsControl ItemsSource="{Binding Results}" ItemTemplate="{StaticResource AppTemplate}" /-->
+					<ContentPresenter x:Name="footer" />
+				</StackPanel>
+			</ScrollViewer>
 		</Grid>
 	</Grid>
 </UserControl>
