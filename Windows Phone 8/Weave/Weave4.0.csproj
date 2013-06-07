@@ -130,6 +130,10 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
       <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\lib\Ninject.dll</HintPath>
     </Reference>
@@ -468,7 +472,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\64x64_google.png" />
-    <Resource Include="Assets\Icons\64x64_info.png" />
+    <Content Include="Assets\Icons\64x64_info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Assets\Icons\64x64_rss.png" />
     <Content Include="Assets\Icons\36x36_share.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
