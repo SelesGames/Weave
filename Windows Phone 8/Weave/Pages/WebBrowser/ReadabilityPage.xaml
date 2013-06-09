@@ -31,13 +31,13 @@
 		<Rectangle x:Name="fill" Fill="#FFF2F2F2" Grid.Column="1" />
 		<sg:RadialBusyIndicator x:Name="BusyIndicator"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="48" Height="48" IsPlaying="True" NumberOfItems="7" />
 		<phone:WebBrowser x:Name="browser" OpacityMask="Red" Opacity="0" Grid.Column="1" />
-		<Rectangle x:Name="leftBarFill" Width="72" Fill="{StaticResource PhoneAccentBrush}" Visibility="Collapsed"/>
-		<Rectangle x:Name="rightBarFill" Width="72" Fill="{StaticResource PhoneAccentBrush}" Grid.Column="2" Visibility="Collapsed"/>
-		<Rectangle x:Name="bottomBarFill" Height="30" Fill="{StaticResource PhoneAccentBrush}" Grid.Row="1" Grid.Column="1"/>
+		<Rectangle x:Name="leftBarFill" Width="72" Fill="{StaticResource PhoneBackgroundBrush}" Visibility="Collapsed"/>
+		<Rectangle x:Name="rightBarFill" Width="72" Fill="{StaticResource PhoneBackgroundBrush}" Grid.Column="2" Visibility="Collapsed"/>
+		<Rectangle x:Name="bottomBarFill" Height="30" Fill="{StaticResource PhoneBackgroundBrush}" Grid.Row="1" Grid.Column="1"/>
 	</Grid>
 
 	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneAccentColor}" ForegroundColor="White">
+		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneBackgroundColor}" ForegroundColor="White">
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.heart.png" Text="favorite" Click="favoriteButton_Click" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.share.png" Text="send to" Click="shareButton_Click" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/fontSizeIcon.png" Text="font" Click="fontButton_Click" />
