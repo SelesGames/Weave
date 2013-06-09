@@ -49,6 +49,7 @@ namespace weave
         public MainPage()
         {
             InitializeComponent();
+            SourcesList.Visibility = Visibility.Visible;
             MinTitlePanel.RenderTransform = new CompositeTransform();
             ContentGrid.RenderTransform = new CompositeTransform();
             cl.RenderTransform = new CompositeTransform();
@@ -197,6 +198,16 @@ namespace weave
                         feedId = Guid.Parse(NavigationContext.QueryString["feedId"]);
                     }
 
+                    if (mode == "sources")
+                    {
+                        ShowMenuNoAnimation();
+                    }
+                    else
+                    {
+                        HideMenuNoAnimation();
+                    }
+
+
                     //CreateViewModel();
                     //await Task.Yield();
 
@@ -208,7 +219,9 @@ namespace weave
 
                     //await TimeSpan.FromSeconds(0.4);
 
-                    await vm.InitializeAsync();
+                    if (vm != null)
+                        await vm.InitializeAsync();
+
                     vmSourcesList.RefreshCategories();
                 }
             }
@@ -221,6 +234,13 @@ namespace weave
 
         void CreateViewModel()
         {
+            if (string.IsNullOrWhiteSpace(header))
+            {
+                DataContext = null;
+                this.vm = null;
+                return;
+            }
+
             var permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             var tallyer = permstate.RunHistory.GetActiveLog();
             tallyer.Tally(header);
@@ -360,6 +380,15 @@ namespace weave
 
         #region DropDown menu event handling
 
+        void ShowMenuNoAnimation()
+        {
+            currentMenuMode = MenuMode.Displayed;
+            MinTitlePanel.SoftCollapse();
+            ContentGrid.SoftCollapse();
+            SourcesList.SoftMakeVisible();
+            ApplicationBar = sourcesListAppBar;
+        }
+
         void ShowMenu()
         {
             if (currentMenuMode == MenuMode.Displayed)
@@ -368,9 +397,19 @@ namespace weave
             currentMenuMode = MenuMode.Displayed;
             MinTitlePanel.IsHitTestVisible = false;
             ContentGrid.IsHitTestVisible = false;
+            SourcesList.SoftMakeVisible();
             HideCategoriesListSB.Stop();
             ShowCategoriesListSB.Begin();
             ApplicationBar = sourcesListAppBar;
+        }
+
+        void HideMenuNoAnimation()
+        {
+            currentMenuMode = MenuMode.Hidden;
+            SourcesList.SoftCollapse();;
+            MinTitlePanel.SoftMakeVisible();
+            ContentGrid.SoftMakeVisible();
+            ApplicationBar = mainAppBar;
         }
 
         void HideMenu()
@@ -379,6 +418,7 @@ namespace weave
                 return;
 
             currentMenuMode = MenuMode.Hidden;
+            SourcesList.IsHitTestVisible = false;
             MinTitlePanel.IsHitTestVisible = true;
             ContentGrid.IsHitTestVisible = true;
             ShowCategoriesListSB.Stop();
@@ -503,7 +543,7 @@ namespace weave
 
         void OnNextPage()
         {
-            if (currentMenuMode == MenuMode.Displayed)
+            if (vm != null && currentMenuMode == MenuMode.Displayed)
             {
                 HideMenu();
             }

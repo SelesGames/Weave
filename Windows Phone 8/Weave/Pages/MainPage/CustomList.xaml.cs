@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Weave.Customizability;
 using Weave.ViewModels;
 
@@ -17,6 +18,8 @@ namespace weave
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
         PermanentState permState;
+
+        Brush transparentBrush; 
 
 
         public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get; private set; }
@@ -36,6 +39,7 @@ namespace weave
         public CustomList()
         {
             InitializeComponent();
+            transparentBrush = scroller.Background;
 
             if (this.IsInDesignMode())
                 return;
@@ -47,6 +51,8 @@ namespace weave
 
             scroller.Visibility = Visibility.Collapsed;
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState.ArticleListFormat = Weave.Customizability.ArticleListFormatType.Card;
+            ApplyTheme();
         }
 
         internal void CompleteInitialization()
@@ -65,6 +71,18 @@ namespace weave
             this.sp.Children.Add(this.bottomButtons);
 
             NewsItemSelected = newsItemsUI.Select(o => o.GetTap().Select(_ => Tuple.Create((object)o, o.NewsItem))).Merge();
+        }
+
+        public void ApplyTheme()
+        {
+            if (permState.ArticleListFormat == ArticleListFormatType.Card)
+            {
+                scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
+            }
+            else
+            {
+                scroller.Background = transparentBrush;
+            }
         }
 
         BaseNewsItemControl CreateNewsItemControl()
