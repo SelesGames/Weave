@@ -78,7 +78,8 @@
 						Style="{StaticResource RadMosaicHubTileStyle1}" 
 						FontFamily="Segoe WP Black" 
 						FontSize="45.333" 
-						Foreground="#F4FFFFFF"/>
+						Foreground="#F4FFFFFF"
+						Tap="allSourcesButtonTap"/>
 				</Grid>
 			</phone:PanoramaItem>
 					

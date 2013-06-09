@@ -225,6 +225,12 @@ namespace weave
             GlobalNavigationService.ToMainPage("all news", "category");
         }
 
+        void allSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            SetValue(RadTileAnimation.ContainerToAnimateProperty, mosaicHubTile);
+            GlobalNavigationService.ToMainPage(null, "sources");
+        }
+
         void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, null);
