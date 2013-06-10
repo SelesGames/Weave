@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Weave.Customizability;
+﻿using Weave.Customizability;
 
 namespace weave
 {
-    public class StandardFontSet : List<FontProperties>
+    public class ArticleFontSet : FontSet
     {
-        public StandardFontSet()
+        public ArticleFontSet()
         {
             this.AddRange(new[] 
             { 
@@ -22,12 +20,6 @@ namespace weave
                 new FontProperties("Calibri"), 
                 //new FontProperties("Trebuchet MS"), 
             });
-        }
-
-        public FontProperties GetByFontName(string fontName)
-        {
-            var matching = this.SingleOrDefault(o => o.FontName == fontName);
-            return matching;
         }
     }
 }
