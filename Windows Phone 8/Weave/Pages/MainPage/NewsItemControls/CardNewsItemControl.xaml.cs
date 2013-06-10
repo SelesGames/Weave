@@ -32,7 +32,7 @@ namespace weave
             bindingSource = ServiceResolver.Get<BindableMainPageFontStyle>();
 
             this.title.SetBinding(TextBlock.FontSizeProperty, bindingSource.TitleSizeBinding);
-            this.title.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);
+            this.title.SetBinding(TextBlock.FontFamilyProperty, bindingSource.FontFamilyBinding);
 
             //this.feedName.SetBinding(TextBlock.FontSizeProperty, bindingSource.PublicationLineSizeBinding);
             //this.feedName.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);

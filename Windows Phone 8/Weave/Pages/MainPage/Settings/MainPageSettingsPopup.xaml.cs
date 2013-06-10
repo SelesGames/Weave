@@ -34,10 +34,10 @@ namespace weave
             InitializeFontThicknessPicker();
 
             this.title.SetBinding(TextBlock.FontSizeProperty, this.bindingSource.TitleSizeBinding);
-            this.title.SetBinding(TextBlock.FontFamilyProperty, this.bindingSource.ThicknessBinding);
+            this.title.SetBinding(TextBlock.FontFamilyProperty, this.bindingSource.FontFamilyBinding);
 
             this.description.SetBinding(TextBlock.FontSizeProperty, this.bindingSource.DescriptionSizeBinding);
-            this.description.SetBinding(TextBlock.FontFamilyProperty, this.bindingSource.ThicknessBinding);
+            this.description.SetBinding(TextBlock.FontFamilyProperty, this.bindingSource.FontFamilyBinding);
             this.description.SetBinding(TextBlock.LineHeightProperty, this.bindingSource.LineHeightBinding);
 
             this.publishedDate.SetBinding(TextBlock.FontSizeProperty, this.bindingSource.PublicationLineSizeBinding);
@@ -55,7 +55,7 @@ namespace weave
             Observable.FromEventPattern<SelectionChangedEventArgs>(this.fontSizePicker, "SelectionChanged").Take(1)
                 .Subscribe(() =>
                 {
-                    var currentFontSize = permState.MainPageArticleListFontSize;
+                    var currentFontSize = permState.ArticleListFontSize;
                     switch (currentFontSize)
                     {
                         case Weave.Customizability.FontSize.Small:
@@ -126,7 +126,7 @@ namespace weave
                     return;
             }
 
-            permState.MainPageArticleListFontSize = fontSize;
+            permState.ArticleListFontSize = fontSize;
         }
 
         #endregion

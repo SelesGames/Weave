@@ -13,41 +13,48 @@ namespace weave
     {
         PermanentState permstate;
         FontSizes fontSizes;
+        FontSet fontSet;
 
         public BindableMainPageFontStyle()
         {
             permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             fontSizes = new FontSizes();
+            fontSet = new ArticleListFontSet();
 
             Observable.FromEventPattern<PropertyChangedEventArgs>(permstate, "PropertyChanged").Select(o => o.EventArgs.PropertyName).Subscribe(property =>
             {
-                if (property == "MainPageArticleListFontSize")
+                if (property == "ArticleListFontSize")
                 {
                     RefreshCurrentFontSizeAttributes();
                 }
 
-                else if (property == "MainPageArticleListFontThickness")
+                else if (property == "ArticleListFontName")
                 {
-                    this.FontThickness = permstate.MainPageArticleListFontThickness.ToFontFamily();
-                    PropertyChanged.Raise(this, "FontThickness");
+                    RefreshCurrentFontFamily();
                 }
             });
 
             RefreshCurrentFontSizeAttributes();
 
-            this.FontThickness = permstate.MainPageArticleListFontThickness.ToFontFamily();
+            var font = fontSet.GetByFontName(permstate.ArticleListFontName);
+            this.FontFamily = font.FontFamily;
 
+            this.FontFamilyBinding = new Binding("FontFamily") { Source = this };
             this.TitleSizeBinding = new Binding("FontTitleSize") { Source = this };
             this.DescriptionSizeBinding = new Binding("FontDescriptionSize") { Source = this };
             this.LineHeightBinding = new Binding("FontLineHeight") { Source = this };
             this.PublicationLineSizeBinding = new Binding("FontPublicationLineSize") { Source = this };
-            this.ThicknessBinding = new Binding("FontThickness") { Source = this };
             this.MainPageNewsItemMarginBinding = new Binding("MainPageNewsItemMargin") { Source = this };
         }
 
+
+
+
+        #region when the Article List Font Size changes, propogate those changes to various size settings
+
         void RefreshCurrentFontSizeAttributes()
         {
-            var fontSet = fontSizes.SingleOrDefault(o => o.Id == permstate.MainPageArticleListFontSize);
+            var fontSet = fontSizes.SingleOrDefault(o => o.Id == permstate.ArticleListFontSize);
             if (fontSet == null)
                 return;
 
@@ -64,20 +71,40 @@ namespace weave
             PropertyChanged.Raise(this, "MainPageNewsItemMargin");
         }
 
+        #endregion
+
+
+
+
+        #region When Article List Font Family changes, propagate change to the Binding
+
+        void RefreshCurrentFontFamily()
+        {
+            var font = fontSet.GetByFontName(permstate.ArticleListFontName);
+            this.FontFamily = font.FontFamily;
+            PropertyChanged.Raise(this, "FontFamily");
+        }
+
+        #endregion
+
+
+
+
+        public FontFamily FontFamily { get; set; }
+        internal Binding FontFamilyBinding { get; private set; }
+
+
         public double FontTitleSize { get; set; }
         public double FontDescriptionSize { get; set; }
         public double FontLineHeight { get; set; }
         public double FontPublicationLineSize { get; set; }
-        public FontFamily FontThickness { get; set; }
         public Thickness MainPageNewsItemMargin { get; set; }
-
 
         internal Binding TitleSizeBinding { get; private set; }
         internal Binding DescriptionSizeBinding { get; private set; }
         internal Binding LineHeightBinding { get; private set; }
         internal Binding PublicationLineSizeBinding { get; private set; }
-        internal Binding ThicknessBinding { get; private set; }
-        internal Binding MainPageNewsItemMarginBinding { get; set; }
+        internal Binding MainPageNewsItemMarginBinding { get; private set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -38,11 +38,21 @@ namespace Weave.Customizability
             set { subtle = value; Subtle = GetRGBHexFromBrush(value); }
         }
 
-        public string Text { get; set; }
-        public string Background { get; set; }
-        public string Accent { get; set; }
-        public string Complementary { get; set; }
-        public string Subtle { get; set; }
+
+
+
+        #region String reprsentations of the RGB values - intended for use in HTML
+
+        public string Text { get; private set; }
+        public string Background { get; private set; }
+        public string Accent { get; private set; }
+        public string Complementary { get; private set; }
+        public string Subtle { get; private set; }
+
+        #endregion
+
+
+
 
         static string GetRGBHexFromBrush(Brush brush)
         {

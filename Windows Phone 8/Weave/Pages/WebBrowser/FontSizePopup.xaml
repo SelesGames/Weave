@@ -46,7 +46,7 @@
 			</Grid>
 		</DataTemplate>
 		<weave:FontSizes x:Key="FontSizes" />
-		<weave:StandardFontSet x:Key="Fonts" />
+		<weave:ArticleFontSet x:Key="Fonts" />
 		<SolidColorBrush x:Key="SubtleBrush" Color="#BFFFFFFF"/>
 		<SolidColorBrush x:Key="ForegroundBrush" Color="White"/>
 	</UserControl.Resources>

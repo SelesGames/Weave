@@ -88,7 +88,6 @@
     <Compile Include="FontProperties.cs" />
     <Compile Include="FontSize.cs" />
     <Compile Include="FontSizeProperties.cs" />
-    <Compile Include="FontThickness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadingTheme.cs" />
     <Compile Include="SpeakArticleVoice.cs" />

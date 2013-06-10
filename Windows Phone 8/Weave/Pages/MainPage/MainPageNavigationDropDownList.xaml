@@ -32,7 +32,7 @@
 								<Grid x:Name="ContentContainer" HorizontalAlignment="Left">
 									<Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
 									<TextBlock Text="{Binding Name}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="12,0" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-1,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
+									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-2,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
 								</Grid>
 							</Border>
 						</Grid>
@@ -62,7 +62,7 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" DataContext="{StaticResource PanoramaTitle}" Style="{StaticResource PhoneTextNormalStyle}" Text="MANAGE"/>
+			<TextBlock x:Name="ApplicationTitle" DataContext="{StaticResource PanoramaTitle}" Style="{StaticResource PhoneTextNormalStyle}" Text="{StaticResource AppNameUppercase}"/>
 			<TextBlock x:Name="PageTitle" Text="sources" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 

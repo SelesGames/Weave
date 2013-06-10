@@ -100,8 +100,20 @@ namespace weave
             searchSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.feature.search.rest.png", UriKind.Relative)) { Text = "search" };
             addSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.add.rest.png", UriKind.Relative)) { Text = "add" };
 
+            searchSourceButton.GetClick().Subscribe(o => OnSearchSourceClick()).DisposeWith(this.pageLevelDisposables);
+            addSourceButton.GetClick().Subscribe(o => OnAddSourceButtonClick()).DisposeWith(this.pageLevelDisposables);
+
             sourcesListAppBar.Buttons.Add(searchSourceButton);
             sourcesListAppBar.Buttons.Add(addSourceButton);
+        }
+
+        void OnSearchSourceClick()
+        {
+            NavigationService.ToAddSourcePage();
+        }
+        void OnAddSourceButtonClick()
+        {
+            NavigationService.ToAddSourcePage();
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)

@@ -5,6 +5,9 @@ using Weave.Customizability;
 
 namespace weave
 {
+    /// <summary>
+    /// Used to set FontSize for both the Article List text and the Article text
+    /// </summary>
     public class FontSizes : List<FontSizeProperties>
     {
         public FontSizes()

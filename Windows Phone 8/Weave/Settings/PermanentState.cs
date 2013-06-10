@@ -26,33 +26,33 @@ namespace weave
 
         public ArticleListFormatType ArticleListFormat { get; set; }
 
-        public FontSize MainPageArticleListFontSize
+        public FontSize ArticleListFontSize
         {
-            get { return this.mainPageArticleListFontSize; }
+            get { return this.articleListFontSize; }
             set
             {
-                if (this.mainPageArticleListFontSize != value)
+                if (this.articleListFontSize != value)
                 {
-                    this.mainPageArticleListFontSize = value;
-                    PropertyChanged.Raise(this, "MainPageArticleListFontSize");
+                    this.articleListFontSize = value;
+                    PropertyChanged.Raise(this, "ArticleListFontSize");
                 }
             }
         }
-        FontSize mainPageArticleListFontSize;
+        FontSize articleListFontSize;
 
-        public FontThickness MainPageArticleListFontThickness
+        public string ArticleListFontName
         {
-            get { return this.mainPageArticleListFontThickness; }
+            get { return this.articleListFontName; }
             set
             {
-                if (this.mainPageArticleListFontThickness != value)
+                if (this.articleListFontName != value)
                 {
-                    this.mainPageArticleListFontThickness = value;
-                    PropertyChanged.Raise(this, "MainPageArticleListFontThickness");
+                    this.articleListFontName = value;
+                    PropertyChanged.Raise(this, "ArticleFontName");
                 }
             }
         }
-        FontThickness mainPageArticleListFontThickness;
+        string articleListFontName;
 
         #endregion
 
@@ -73,9 +73,10 @@ namespace weave
         public PermanentState()
         {
             IsFirstTime = true; // start off as true
-            ArticleListFormat = ArticleListFormatType.BigImage;
-            mainPageArticleListFontSize = FontSize.MediumLarge;
-            mainPageArticleListFontThickness = FontThickness.Regular;
+            ArticleListFormat = ArticleListFormatType.Card;
+            ArticleListFontSize = FontSize.Large;
+            ArticleListFontName = "Segoe WP";
+            //mainPageArticleListFontThickness = FontThickness.Regular;
             CurrentTheme = "Day";
             ArticleViewFontSize = FontSize.Medium;
             ArticleViewFontName = "Segoe WP";

@@ -15,7 +15,7 @@ namespace weave
     {
         PermanentState permanentState;
         FontSizes fontSizes;
-        StandardFontSet fonts;
+        ArticleFontSet fonts;
         CompositeDisposable disposables = new CompositeDisposable();
 
         public event EventHandler<EventArgs<FontSizeProperties>> FontSizeChanged;
@@ -27,7 +27,7 @@ namespace weave
             themeName.SetBinding(TextBlock.TextProperty, new Binding("CurrentTheme.Name") { Source = AppSettings.Instance.Themes });
             permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             fontSizes = Resources["FontSizes"] as FontSizes;
-            fonts = Resources["Fonts"] as StandardFontSet;
+            fonts = Resources["Fonts"] as ArticleFontSet;
             fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleViewFontSize);
             fontSelector.SelectedItem = fonts.GetByFontName(permanentState.ArticleViewFontName);
 #if DEBUG

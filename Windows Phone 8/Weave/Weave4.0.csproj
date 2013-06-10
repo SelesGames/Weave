@@ -162,6 +162,9 @@
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\MainPage\Settings\FontAndThemePopup.xaml.cs">
+      <DependentUpon>FontAndThemePopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\CardNewsItemControl.xaml.cs">
       <DependentUpon>CardNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -227,11 +230,12 @@
     <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
+    <Compile Include="Settings\FontSets\ArticleListFontSet.cs" />
+    <Compile Include="Settings\FontSets\FontSet.cs" />
     <Compile Include="Settings\FontSizes.cs" />
-    <Compile Include="Settings\FontThicknessExtensions.cs" />
     <Compile Include="Settings\PermanentState.cs" />
     <Compile Include="Settings\SpeakArticleVoices.cs" />
-    <Compile Include="Settings\StandardFontSet.cs" />
+    <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
@@ -341,6 +345,10 @@
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xsd" />
+    <Page Include="Pages\MainPage\Settings\FontAndThemePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Panorama\Resources\PanoButtonStyles.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
