@@ -48,7 +48,7 @@ namespace weave
                 if (this.articleListFontName != value)
                 {
                     this.articleListFontName = value;
-                    PropertyChanged.Raise(this, "ArticleFontName");
+                    PropertyChanged.Raise(this, "ArticleListFontName");
                 }
             }
         }

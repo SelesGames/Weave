@@ -94,7 +94,7 @@
 				</Rectangle.Fill>
 			</Rectangle>
 			<TextBlock Text="List item font size" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False" CacheMode="BitmapCache"/>
-			<TextBlock Text="Reading theme" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="12,17,24,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsHitTestVisible="False" CacheMode="BitmapCache"/>
+			<TextBlock Text="List format" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="12,17,24,0" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsHitTestVisible="False" CacheMode="BitmapCache"/>
 			<TextBlock Text="List item font" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,17,0,0" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" IsHitTestVisible="False" CacheMode="BitmapCache" Foreground="{StaticResource SubtleBrush}"/>
 		</Grid>
 	</Grid>

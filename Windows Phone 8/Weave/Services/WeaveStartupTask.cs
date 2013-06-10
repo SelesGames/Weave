@@ -387,7 +387,7 @@ namespace weave
         {
             kernel = new Kernel(settings.AssemblyName);
 
-            kernel.Bind<MainPageSettingsPopup>().ToSelf().InSingletonScope();
+            //kernel.Bind<MainPageSettingsPopup>().ToSelf().InSingletonScope();
             kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
 
             kernel.Bind<SocialShareContextMenuControl>().ToSelf().InSingletonScope().Named("accent")
@@ -397,9 +397,11 @@ namespace weave
                     o.Background = settings.Themes.CurrentTheme.AccentBrush;
                 });
             kernel.Bind<FontSizePopup>().ToSelf().InSingletonScope();
+            kernel.Bind<FontAndThemePopup>().ToSelf().InSingletonScope();
+
             kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
 
-            kernel.Bind<MainPageNavigationDropDownList>().ToSelf().InSingletonScope();
+            //kernel.Bind<MainPageNavigationDropDownList>().ToSelf().InSingletonScope();
 
             kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
                 new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))

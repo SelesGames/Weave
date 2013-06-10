@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
@@ -42,7 +43,8 @@ namespace weave
         MenuMode currentMenuMode = MenuMode.Hidden;
         IApplicationBar mainAppBar, sourcesListAppBar;
 
-
+        SelesGames.PopupService<Unit> fontSizePopupService;
+        FontAndThemePopup fontSizePopup;
 
         #region Constructor
 
@@ -72,6 +74,9 @@ namespace weave
 
             if (OSThemeHelper.GetCurrentTheme() == OSTheme.Light)
                 fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
+
+            fontSizePopup = ServiceResolver.Get<FontAndThemePopup>();
+
         }
 
         void CreateMainAppBar()
@@ -532,7 +537,16 @@ namespace weave
 
         void LaunchLocalSettingsPopup()
         {
-            GlobalNavigationService.ToMainPageSettingsPage();
+            //GlobalNavigationService.ToMainPageSettingsPage();
+            if (PopupService.IsOpen)
+                return;
+
+            fontSizePopupService = new SelesGames.PopupService<System.Reactive.Unit>(fontSizePopup);
+            fontSizePopupService.BeginShow();
+            //Observable.FromEventPattern<EventArgs<FontSizeProperties>>(fontSizePopup, "FontSizeChanged")
+            //    .Subscribe(o => OnFontSizeChanged(fontSizePopup, o.EventArgs)).DisposeWith(disposables);
+            //Observable.FromEventPattern<EventArgs<FontProperties>>(fontSizePopup, "FontChanged")
+            //    .Subscribe(o => OnFontChanged(fontSizePopup, o.EventArgs)).DisposeWith(disposables);
         }
 
 
@@ -631,6 +645,15 @@ namespace weave
         {
             if (vm != null)
                 vm.SaveTransientState();
+        }
+
+        protected override void OnBackKeyPress(CancelEventArgs e)
+        {
+            if (PopupService.IsOpen)
+                return;
+
+            IsHitTestVisible = false;
+            base.OnBackKeyPress(e);
         }
 
         #endregion

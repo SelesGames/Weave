@@ -15,7 +15,7 @@ namespace weave
     {
         PermanentState permanentState;
         FontSizes fontSizes;
-        ArticleFontSet fonts;
+        ArticleListFontSet fonts;
         CompositeDisposable disposables = new CompositeDisposable();
 
         public event EventHandler<EventArgs<FontSizeProperties>> FontSizeChanged;
@@ -27,9 +27,9 @@ namespace weave
             themeName.SetBinding(TextBlock.TextProperty, new Binding("CurrentTheme.Name") { Source = AppSettings.Instance.Themes });
             permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             fontSizes = Resources["FontSizes"] as FontSizes;
-            fonts = Resources["Fonts"] as ArticleFontSet;
-            fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleViewFontSize);
-            fontSelector.SelectedItem = fonts.GetByFontName(permanentState.ArticleViewFontName);
+            fonts = Resources["Fonts"] as ArticleListFontSet;
+            fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleListFontSize);
+            fontSelector.SelectedItem = fonts.GetByFontName(permanentState.ArticleListFontName);
 #if DEBUG
             grid.SizeChanged += new System.Windows.SizeChangedEventHandler(grid_SizeChanged);
 #endif
@@ -82,7 +82,7 @@ namespace weave
                 return;
 
             FontSizeChanged.Raise(this, newItem);
-            permanentState.ArticleViewFontSize = newItem.Id;
+            permanentState.ArticleListFontSize = newItem.Id;
         }
 
         void fontSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -92,7 +92,7 @@ namespace weave
                 return;
 
             FontChanged.Raise(this, newItem);
-            permanentState.ArticleViewFontName = newItem.FontName;
+            permanentState.ArticleListFontName = newItem.FontName;
         }
 
         public void Dispose()

@@ -204,12 +204,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Library\Value Converters\StringToLocalImageBrushConverter.cs" />
-    <Compile Include="Pages\MainPage\Settings\MainPageSettingsPage.xaml.cs">
-      <DependentUpon>MainPageSettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MainPage\Settings\MainPageSettingsPopup.xaml.cs">
-      <DependentUpon>MainPageSettingsPopup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\WebBrowser\MobilizedArticle.cs" />
     <Compile Include="Pages\WebBrowser\TileButton.xaml.cs">
       <DependentUpon>TileButton.xaml</DependentUpon>
@@ -392,14 +386,6 @@
     <Page Include="Pages\MainPage\CustomList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\MainPage\Settings\MainPageSettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MainPage\Settings\MainPageSettingsPopup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage\MainPageNavigationDropDownList.xaml">
       <SubType>Designer</SubType>
