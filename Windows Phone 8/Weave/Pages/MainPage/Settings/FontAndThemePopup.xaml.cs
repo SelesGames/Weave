@@ -24,6 +24,10 @@ namespace weave
         public FontAndThemePopup()
         {
             InitializeComponent();
+
+            if (this.IsInDesignMode())
+                return;
+
             themeName.SetBinding(TextBlock.TextProperty, new Binding("CurrentTheme.Name") { Source = AppSettings.Instance.Themes });
             permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             fontSizes = Resources["FontSizes"] as FontSizes;

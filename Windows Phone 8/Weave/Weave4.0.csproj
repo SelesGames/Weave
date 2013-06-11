@@ -223,6 +223,7 @@
     <Compile Include="Services\SystemTrayNavigationSetter.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
     <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
+    <Compile Include="Settings\ArticleListFormats.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
     <Compile Include="Settings\FontSets\ArticleListFontSet.cs" />
     <Compile Include="Settings\FontSets\FontSet.cs" />

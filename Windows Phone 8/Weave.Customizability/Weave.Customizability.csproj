@@ -84,6 +84,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ArticleDeleteTime.cs" />
+    <Compile Include="ArticleListFormatProperties.cs" />
     <Compile Include="ArticleListFormatType.cs" />
     <Compile Include="FontProperties.cs" />
     <Compile Include="FontSize.cs" />
