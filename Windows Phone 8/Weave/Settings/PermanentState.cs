@@ -24,7 +24,19 @@ namespace weave
 
         #region Settings that tweak the MainPage (aka Article List) view
 
-        public ArticleListFormatType ArticleListFormat { get; set; }
+        public ArticleListFormatType ArticleListFormat
+        {
+            get { return this.articleListFormat; }
+            set
+            {
+                if (this.articleListFormat != value)
+                {
+                    this.articleListFormat = value;
+                    PropertyChanged.Raise(this, "ArticleListFormat");
+                }
+            }
+        }
+        ArticleListFormatType articleListFormat;
 
         public FontSize ArticleListFontSize
         {

@@ -32,6 +32,11 @@ namespace weave
                 {
                     RefreshCurrentFontFamily();
                 }
+
+                else if (property == "ArticleListFormat")
+                {
+                    RefreshNewsItemStyle();
+                }
             });
 
             RefreshCurrentFontSizeAttributes();
@@ -45,6 +50,7 @@ namespace weave
             this.LineHeightBinding = new Binding("FontLineHeight") { Source = this };
             this.PublicationLineSizeBinding = new Binding("FontPublicationLineSize") { Source = this };
             this.MainPageNewsItemMarginBinding = new Binding("MainPageNewsItemMargin") { Source = this };
+            this.NewsItemStyleBinding = new Binding("NewsItemStyle") { Source = this };
         }
 
 
@@ -90,6 +96,16 @@ namespace weave
 
 
 
+        #region When News Item Style changes, propogate change to the Binding
+
+        void RefreshNewsItemStyle()
+        {
+
+        }
+
+        #endregion
+
+
         public FontFamily FontFamily { get; set; }
         internal Binding FontFamilyBinding { get; private set; }
 
@@ -105,6 +121,10 @@ namespace weave
         internal Binding LineHeightBinding { get; private set; }
         internal Binding PublicationLineSizeBinding { get; private set; }
         internal Binding MainPageNewsItemMarginBinding { get; private set; }
+
+
+        public Style NewsItemStyle { get; set; }
+        internal Binding NewsItemStyleBinding { get; private set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
