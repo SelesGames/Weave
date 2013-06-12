@@ -68,7 +68,7 @@
 			
 	</UserControl.Resources>
 
-	<loc:TiltContentControl x:Name="LayoutRoot" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" RenderTransformOrigin="0.5,0.5" d:DataContext="{d:DesignData /SampleData/SampleNewsItem.xaml}">
+	<loc:TiltContentControl x:Name="LayoutRoot" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" RenderTransformOrigin="0.5,0.5" d:DataContext="{d:DesignData /SampleData/NewsItemSampleData.xaml}">
 		<UIElement.RenderTransform>
 			<CompositeTransform/>
 		</UIElement.RenderTransform>

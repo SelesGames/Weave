@@ -7,14 +7,8 @@
 	xmlns:local="clr-namespace:weave" 
 	xmlns:System="clr-namespace:System;assembly=mscorlib" 
 	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleRssFeed" 
-	xmlns:SampleData1="clr-namespace:Expression.Blend.SampleData.SampleFeedSources" 
 	xmlns:SampleData2="clr-namespace:Expression.Blend.SampleData.SampleCategories" 
-	xmlns:SampleData3="clr-namespace:Expression.Blend.SampleData.SampleHomePageTasks" 
-	xmlns:SampleData4="clr-namespace:Expression.Blend.SampleData.SampleFeedSource" 
-	xmlns:SampleData5="clr-namespace:Expression.Blend.SampleData.SampleBrowseFeedsByCategoryViewModel" 
-	xmlns:SampleData6="clr-namespace:Expression.Blend.SampleData.SampleFeedLibraryViewModel" 
 	xmlns:SampleData7="clr-namespace:Expression.Blend.SampleData.SamplePanoramaViewModel" 
-	xmlns:SampleData8="clr-namespace:Expression.Blend.SampleData.SampleThemes" 
 	mc:Ignorable="d" 
 	x:Class="weave.App">
 	<Application.Resources>	
@@ -29,14 +23,8 @@
 					
 					
 			<SampleData:SampleRssFeed x:Key="SampleRssFeed" d:IsDataSource="True"/>    	
-			<SampleData1:SampleFeedSources x:Key="SampleFeedSources" d:IsDataSource="True"/>
 			<SampleData2:SampleCategories x:Key="SampleCategories" d:IsDataSource="True"/>
-			<SampleData3:SampleHomePageTasks x:Key="SampleHomePageTasks" d:IsDataSource="True"/>
-			<SampleData4:SampleFeedSource x:Key="SampleFeedSource" d:IsDataSource="True"/>
-			<SampleData5:SampleBrowseFeedsByCategoryViewModel x:Key="SampleBrowseFeedsByCategoryViewModel" d:IsDataSource="True"/>
-			<SampleData6:SampleFeedLibraryViewModel x:Key="SampleFeedLibraryViewModel" d:IsDataSource="True"/>
 			<SampleData7:SamplePanoramaViewModel x:Key="SamplePanoramaViewModel" d:IsDataSource="True"/>
-			<SampleData8:SampleThemes x:Key="SampleThemes" d:IsDataSource="True"/>
 
 		
 			<SolidColorBrush x:Key="HeaderBrush" Color="White"/>
