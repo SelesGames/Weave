@@ -1,0 +1,22 @@
+﻿<sample:SampleNewsList
+    xmlns:weave="clr-namespace:Weave.ViewModels;assembly=Weave.ViewModels" 
+    xmlns:sample="clr-namespace:weave.SampleData">
+    <weave:NewsItem 
+        Title="Asus Brings new ZenBook Infinity to Computek - we go hands on" 
+        Link="Aliquam sagittis" 
+        UtcPublishDateTime="10/06/2010 20:55:52"
+        ImageUrl="http://static.arstechnica.com/assets/2010/07/sonic4-waterfall-thumb-640xauto-15310.jpg" 
+        FormattedForMainPageSourceAndDate="Engadget . 12:05p" 
+        IsNew="True"  
+        IsFavorite="False" 
+        HasBeenViewed="False"/>
+    <weave:NewsItem 
+        Title="Asus Brings new ZenBook Infinity to Computek - we go hands on" 
+        Link="Aliquam sagittis" 
+        UtcPublishDateTime="10/06/2010 20:55:52"
+        ImageUrl="http://static.arstechnica.com/assets/2010/07/sonic4-waterfall-thumb-640xauto-15310.jpg" 
+        FormattedForMainPageSourceAndDate="Engadget . 12:05p" 
+        IsNew="True"  
+        IsFavorite="False" 
+        HasBeenViewed="False"/>
+</sample:SampleNewsList>

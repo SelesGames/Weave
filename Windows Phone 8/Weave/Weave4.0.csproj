@@ -209,12 +209,10 @@
       <DependentUpon>TileButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WebBrowser\ArticleNotViewableException.cs" />
-    <Compile Include="SampleData\SampleThemes\SampleThemes.xaml.cs">
-      <DependentUpon>SampleThemes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\SelesGamesInfoPage.xaml.cs">
       <DependentUpon>SelesGamesInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\SampleNewsList.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
     <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
     <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
@@ -250,21 +248,6 @@
     <Compile Include="Pages\WebBrowser\ReadabilityPage.xaml.cs">
       <DependentUpon>ReadabilityPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xaml.cs">
-      <DependentUpon>SampleBrowseFeedsByCategoryViewModel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xaml.cs">
-      <DependentUpon>SampleFeedLibraryViewModel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SampleFeedSource\SampleFeedSource.xaml.cs">
-      <DependentUpon>SampleFeedSource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xaml.cs">
-      <DependentUpon>SampleHomePageTasks.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SamplePanoBGs\SamplePanoBGs.xaml.cs">
-      <DependentUpon>SamplePanoBGs.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml.cs">
       <DependentUpon>SamplePanoramaViewModel.xaml</DependentUpon>
     </Compile>
@@ -290,14 +273,8 @@
     <Compile Include="Pages\SelectTheCategoriesThatInterestYouPage.xaml.cs">
       <DependentUpon>SelectTheCategoriesThatInterestYouPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleCategoriesList\SampleCategoriesList.xaml.cs">
-      <DependentUpon>SampleCategoriesList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SampleData\SampleCategories\SampleCategories.xaml.cs">
       <DependentUpon>SampleCategories.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xaml.cs">
-      <DependentUpon>SampleManageFeedsPageData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Services\GlobalNavigationService.cs" />
@@ -311,9 +288,6 @@
     </Compile>
     <Compile Include="ViewModels\MainPage\MainPageViewModel.cs" />
     <Compile Include="Services\PanoramaInjectionService.cs" />
-    <Compile Include="SampleData\SampleFeedSources\SampleFeedSources.xaml.cs">
-      <DependentUpon>SampleFeedSources.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SampleData\SampleRssFeed\SampleRssFeed.xaml.cs">
       <DependentUpon>SampleRssFeed.xaml</DependentUpon>
     </Compile>
@@ -334,12 +308,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <DesignTimeOnly Include="SampleData\SamplePanoBGs\SamplePanoBGs.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleFeedSource\SampleFeedSource.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xsd" />
     <Page Include="Pages\MainPage\Settings\FontAndThemePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -371,6 +340,11 @@
     <Page Include="Pages\WebBrowser\ArticleSpeechControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Properties\DesignTimeResources.xaml" Condition="'$(DesignTime)'=='true' OR ('$(SolutionPath)'!='' AND Exists('$(SolutionPath)') AND '$(BuildingInsideVisualStudio)'!='true' AND '$(BuildingInsideExpressionBlend)'!='true')">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
     </Page>
     <Page Include="Resources\FontSizePopupStyles.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
@@ -440,15 +414,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignTimeOnly Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
     <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </DesignTimeOnly>
@@ -464,6 +430,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignData Include="SampleData\SampleNewsItemList.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignData>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Icons\64x64_google.png" />
@@ -547,7 +517,6 @@
     <Content Include="Assets\Icons\appbar.favs.addto.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <DesignTimeOnly Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xsd" />
     <Content Include="Assets\Icons\fontSizeIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -609,12 +578,7 @@
       <SubType>Designer</SubType>
     </None>
     <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xsd" />
     <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleManageFeedsPageData\SampleManageFeedsPageData.xsd" />
-    <DesignTimeOnly Include="SampleData\SampleCategoriesList\SampleCategoriesList.xsd">
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AlignmentGrid.png" />
@@ -627,43 +591,11 @@
     <Resource Include="Feeds.xml">
       <SubType>Designer</SubType>
     </Resource>
-    <DesignTimeOnly Include="SampleData\SampleCategoriesList\SampleCategoriesList.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignData Include="SampleData\FeedApiResultSampleData.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignData>
-    <DesignTimeOnly Include="SampleData\SampleFeedSource\SampleFeedSource.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleHomePageTasks\SampleHomePageTasks.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
     <Page Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignTimeOnly Include="SampleData\SamplePanoBGs\SamplePanoBGs.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleThemes\SampleThemes.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </DesignTimeOnly>
@@ -684,9 +616,6 @@
   </ItemGroup>
   <ItemGroup>
     <DesignData Include="SampleData\NewsItemSampleData.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-    </DesignData>
-    <DesignData Include="SampleData\SampleNewsItem.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </DesignData>
   </ItemGroup>

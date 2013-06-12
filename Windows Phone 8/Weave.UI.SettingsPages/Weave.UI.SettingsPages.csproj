@@ -107,9 +107,6 @@
     <Compile Include="SampleData\SampleFeedLibraryViewModel\SampleFeedLibraryViewModel.xaml.cs">
       <DependentUpon>SampleFeedLibraryViewModel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleFeedSources\SampleFeedSources.xaml.cs">
-      <DependentUpon>SampleFeedSources.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SampleData\SampleFeedSource\SampleFeedSource.xaml.cs">
       <DependentUpon>SampleFeedSource.xaml</DependentUpon>
     </Compile>
@@ -139,10 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </DesignTimeOnly>
@@ -219,11 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\SampleBrowseFeedsByCategoryViewModel\SampleBrowseFeedsByCategoryViewModel.xsd">
-      <SubType>Designer</SubType>
-    </DesignTimeOnly>
-  </ItemGroup>
-  <ItemGroup>
-    <DesignTimeOnly Include="SampleData\SampleFeedSources\SampleFeedSources.xsd">
       <SubType>Designer</SubType>
     </DesignTimeOnly>
   </ItemGroup>
