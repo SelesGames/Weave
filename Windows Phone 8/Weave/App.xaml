@@ -6,9 +6,9 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:local="clr-namespace:weave" 
 	xmlns:System="clr-namespace:System;assembly=mscorlib" 
-	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleRssFeed" 
+	xmlns:SampleData1="clr-namespace:Expression.Blend.SampleData.SampleRssFeed" 
 	xmlns:SampleData2="clr-namespace:Expression.Blend.SampleData.SampleCategories" 
-	xmlns:SampleData7="clr-namespace:Expression.Blend.SampleData.SamplePanoramaViewModel" 
+	xmlns:SampleData3="clr-namespace:Expression.Blend.SampleData.SamplePanoramaViewModel" 
 	mc:Ignorable="d" 
 	x:Class="weave.App">
 	<Application.Resources>	
@@ -22,9 +22,9 @@
 			</ResourceDictionary.MergedDictionaries>
 					
 					
-			<SampleData:SampleRssFeed x:Key="SampleRssFeed" d:IsDataSource="True"/>    	
+			<SampleData1:SampleRssFeed x:Key="SampleRssFeed" d:IsDataSource="True"/>    	
 			<SampleData2:SampleCategories x:Key="SampleCategories" d:IsDataSource="True"/>
-			<SampleData7:SamplePanoramaViewModel x:Key="SamplePanoramaViewModel" d:IsDataSource="True"/>
+			<SampleData3:SamplePanoramaViewModel x:Key="SamplePanoramaViewModel" d:IsDataSource="True"/>
 
 		
 			<SolidColorBrush x:Key="HeaderBrush" Color="White"/>

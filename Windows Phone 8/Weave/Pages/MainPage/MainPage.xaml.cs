@@ -32,8 +32,6 @@ namespace weave
         MainPageViewModel vm;
         MainPageSourceListViewModel vmSourcesList;
 
-        ImageCache imageCache;
-        ScrollViewer currentListBoxScroller;
         SwitchingAdControl adControl;
 
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, addSourceButton, searchSourceButton;
@@ -312,13 +310,7 @@ namespace weave
         
         void InitializeCustomListAndImageCache()
         {
-            this.cl.CompleteInitialization();
-
-            this.imageCache = new ImageCache();
-            this.cl.SetImageCache(imageCache);
-
-            this.currentListBoxScroller = cl.scroller;
-
+            this.cl.InitializeNewsItemControls();
             SubscribeToNewsItemClicked();
         }
 
@@ -619,13 +611,8 @@ namespace weave
             this.nextPageStartSB.Stop();
             this.previousPageStartSB.Stop();
 
-            if (this.imageCache != null)
-                imageCache.Flush();
-
-            if (this.currentListBoxScroller != null)
-                currentListBoxScroller.ScrollToVerticalOffset(0);
-
-            cl.SetNews(source, direction);
+            cl.AnimationDirection = direction;
+            cl.ItemsSource = source;
             cl.Visibility = Visibility.Visible;
         }
 
@@ -677,17 +664,6 @@ namespace weave
 
             if (swipeHelper != null)
                 swipeHelper.Swipe -= OnSwipe;
-
-            var imageCacheHandle = this.imageCache;
-            this.imageCache = null;
-            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
-            {
-                if (imageCacheHandle != null)
-                {
-                    imageCacheHandle.Flush();
-                    imageCacheHandle = null;
-                }
-            });
 
             Observable.Timer(TimeSpan.FromSeconds(1)).Take(1).SafelySubscribe(() =>
             {

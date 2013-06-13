@@ -44,6 +44,9 @@ namespace weave
         int queueLimit;
         int currentQueueCount = 0;
 
+        public ImageCache()
+            : this(int.MaxValue) { }
+
         public ImageCache(int queueLimit = int.MaxValue)
         {
             this.queueLimit = queueLimit;

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,11 +20,14 @@ namespace weave
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
         PermanentState permState;
+        Subject<Tuple<object, NewsItem>> newsItemSelected = new Subject<Tuple<object, NewsItem>>();
+        Brush transparentBrush;
+        IDisposable tapHandle;
+        IReadOnlyList<NewsItem> displayedNews;
 
-        Brush transparentBrush; 
+        ImageCache imageCache;
 
-
-        public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get; private set; }
+        public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get { return newsItemSelected.AsObservable(); } }
 
         Guid id;
 
@@ -44,24 +49,57 @@ namespace weave
             if (this.IsInDesignMode())
                 return;
 
-            id = Guid.NewGuid();
-            DebugEx.WriteLine("CustomList {0} created", id.ToString());
 
             this.sp.Children.Remove(this.bottomButtons);
 
             scroller.Visibility = Visibility.Collapsed;
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             permState.ArticleListFormat = Weave.Customizability.ArticleListFormatType.Card;
-            ApplyTheme();
+
+            imageCache = Resources["imageCache"] as ImageCache;
+
+            id = Guid.NewGuid();
+            DebugEx.WriteLine("CustomList {0} created", id.ToString());
         }
 
-        internal void CompleteInitialization()
+        public int AnimationDirection { get; set; }
+
+        public void UpdateToCurrentTheme()
         {
+            InitializeNewsItemControls();
+            SetNews(this.displayedNews);
+        }
+
+
+
+
+        #region Draw the BaseNewsItemControls to the StackPanel
+
+        public void InitializeNewsItemControls()
+        {
+            ApplyCurrentTheme();
+
+            // clean up subscription and dispose previous news items
+            if (tapHandle != null)
+                tapHandle.Dispose();
+
+            this.sp.Children.Clear();
+
+            if (newsItemsUI != null)
+            {
+                foreach (var newsItem in newsItemsUI)
+                {
+                    if (newsItem is IDisposable)
+                        ((IDisposable)newsItem).Dispose();
+                }
+            }
+
             newsItemsUI =
                 Enumerable.Range(0, AppSettings.Instance.NumberOfNewsItemsPerMainPage)
                 .Select(notUsed =>
                 {
                     var ui = CreateNewsItemControl();
+                    ui.ImageCache = imageCache;
                     ui.Visibility = Visibility.Collapsed;
                     sp.Children.Add(ui);
                     return (BaseNewsItemControl)ui;
@@ -69,11 +107,12 @@ namespace weave
                 .ToList();
 
             this.sp.Children.Add(this.bottomButtons);
-
-            NewsItemSelected = newsItemsUI.Select(o => o.GetTap().Select(_ => Tuple.Create((object)o, o.NewsItem))).Merge();
+            
+            tapHandle = newsItemsUI.Select(o => o.GetTap().Select(_ => Tuple.Create((object)o, o.NewsItem))).Merge()
+                .Subscribe(newsItemSelected.OnNext, newsItemSelected.OnError, newsItemSelected.OnCompleted);
         }
 
-        public void ApplyTheme()
+        void ApplyCurrentTheme()
         {
             if (permState.ArticleListFormat == ArticleListFormatType.Card)
             {
@@ -105,9 +144,25 @@ namespace weave
             }
         }
 
-        public void SetNews(List<NewsItem> news, int direction)
+        #endregion
+
+
+
+
+        #region Set NewsItem for each BaseNewsItemControl on the screen
+
+        void SetNews(IReadOnlyList<NewsItem> news)
         {
             disp.Disposable = null;
+            this.displayedNews = news;
+
+            if (this.imageCache != null)
+                imageCache.Flush();
+
+            scroller.ScrollToVerticalOffset(0);
+
+            if (this.displayedNews == null)
+                return;
 
             this.IsHitTestVisible = false;
 
@@ -145,7 +200,7 @@ namespace weave
                 {
                     o.ui.NewsItem = o.newsItem;
                     o.ui.Visibility = Visibility.Visible;
-                    PlaySlideAnimation(o.ui, direction);
+                    PlaySlideAnimation(o.ui);
                 },
                 ex =>
                 {
@@ -180,24 +235,20 @@ namespace weave
             #endregion
         }
 
-        void PlaySlideAnimation(BaseNewsItemControl baseNewsItemControl, int direction)
+        #endregion
+
+
+
+
+        void PlaySlideAnimation(BaseNewsItemControl baseNewsItemControl)
         {
-                if (direction == 99)
+                if (AnimationDirection == 99)
                     return;
 
-                if (direction >= 0)
+                if (AnimationDirection >= 0)
                     baseNewsItemControl.PageRight();
                 else
                     baseNewsItemControl.PageLeft();
-        }
-
-        public void SetImageCache(ImageCache cache)
-        {
-            if (newsItemsUI == null)
-                return;
-
-            foreach (var o in newsItemsUI)
-                o.ImageCache = cache;
         }
 
         public void Dispose()
@@ -208,11 +259,59 @@ namespace weave
                     using (var x = o as IDisposable) { }// o.Dispose();
             }
             disp.Dispose();
+
+            if (tapHandle != null)
+                tapHandle.Dispose();
+
+            var imageCacheHandle = this.imageCache;
+            this.imageCache = null;
+            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
+            {
+                if (imageCacheHandle != null)
+                {
+                    imageCacheHandle.Flush();
+                    imageCacheHandle = null;
+                }
+            });
+
+            DebugEx.WriteLine("CustomList {0} disposed", id.ToString());
         }
 
         ~CustomList()
         {
             DebugEx.WriteLine("CustomList {0} destroyed", id.ToString());
         }
+
+
+
+
+        #region Dependency Properties (NewsItem)
+
+        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
+            "ItemsSource",
+            typeof(IList),
+            typeof(CustomList),
+            new PropertyMetadata(OnItemsSourceChanged));
+
+        public IList ItemsSource
+        {
+            get { return (IList)GetValue(ItemsSourceProperty); }
+            set { SetValue(ItemsSourceProperty, value); }
+        }
+
+        static void OnItemsSourceChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            var cl = s as CustomList;
+            if (cl == null)
+                return;
+
+            if (e.NewValue is IReadOnlyList<NewsItem>)
+            {
+                var news = (IReadOnlyList<NewsItem>)e.NewValue;
+                cl.SetNews(news);
+            }
+        }
+
+        #endregion
     }
 }

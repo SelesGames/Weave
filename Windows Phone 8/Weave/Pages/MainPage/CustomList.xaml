@@ -3,28 +3,48 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:ic="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
 	x:Class="weave.CustomList"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
 	mc:Ignorable="d"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 	
-	d:DesignHeight="480" d:DesignWidth="480">
+	d:DesignHeight="680" d:DesignWidth="480">
 	
-	<ScrollViewer x:Name="scroller">
-		<StackPanel x:Name="sp" Margin="0,36,0,44">
-			<Grid x:Name="bottomButtons" Grid.Row="17" toolkit:TiltEffect.IsTiltEnabled="True" Margin="12,24,12,0">
-				<Rectangle x:Name="prevIndicator" Fill="{StaticResource PhoneSubtleBrush}" Width="24" Height="24" HorizontalAlignment="Left" Margin="7,0" >
-					<Rectangle.OpacityMask>
-						<ImageBrush Stretch="Fill" ImageSource="/Assets/Icons/appbar.back.rest.png"/>
-					</Rectangle.OpacityMask>
-				</Rectangle>
-				<Rectangle x:Name="nextIndicator" Fill="{StaticResource PhoneSubtleBrush}" Width="24" Height="24" HorizontalAlignment="Right" Margin="7,0" >
-					<Rectangle.OpacityMask>
-						<ImageBrush Stretch="Fill" ImageSource="/Assets/Icons/appbar.next.rest.png"/>
-					</Rectangle.OpacityMask>
-				</Rectangle>
-			</Grid>
-		</StackPanel>
-	</ScrollViewer>
+	<UserControl.Resources>
+		
+		<!--DataTemplate x:Key="ListItemTemplate">
+			<Button Style="{StaticResource NakedButtonStyle}" Margin="0,0">
+				<local:BigImageNewsItemControl NewsItem="{Binding}" />
+			</Button>
+		</DataTemplate-->
+
+		<ic:ImageCache x:Key="imageCache"/>
+
+	</UserControl.Resources>
+	
+	<Grid d:DataContext="{d:DesignData /SampleData/SampleNewsItemList.xaml}">
+		<ScrollViewer x:Name="scroller">
+			<StackPanel x:Name="sp" Margin="0,36,0,44">
+				<Grid x:Name="bottomButtons" Grid.Row="17" toolkit:TiltEffect.IsTiltEnabled="True" Margin="12,24,12,0">
+					<Rectangle x:Name="prevIndicator" Fill="{StaticResource PhoneSubtleBrush}" Width="24" Height="24" HorizontalAlignment="Left" Margin="7,0" >
+						<Rectangle.OpacityMask>
+							<ImageBrush Stretch="Fill" ImageSource="/Assets/Icons/appbar.back.rest.png"/>
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<Rectangle x:Name="nextIndicator" Fill="{StaticResource PhoneSubtleBrush}" Width="24" Height="24" HorizontalAlignment="Right" Margin="7,0" >
+						<Rectangle.OpacityMask>
+							<ImageBrush Stretch="Fill" ImageSource="/Assets/Icons/appbar.next.rest.png"/>
+						</Rectangle.OpacityMask>
+					</Rectangle>
+				</Grid>
+			</StackPanel>
+		</ScrollViewer>
+
+		<!--phone:LongListSelector ItemsSource="{Binding}" ItemTemplate="{StaticResource ListItemTemplate}">
+			
+		</phone:LongListSelector-->
+	</Grid>
 </UserControl>
