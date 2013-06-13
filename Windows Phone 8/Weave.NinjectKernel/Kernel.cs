@@ -3,7 +3,6 @@ using System;
 using weave.Data;
 using Weave.FeedLibrary;
 using Weave.Mobilizer.Client;
-using Weave.RSS;
 
 namespace Weave.NinjectKernel
 {

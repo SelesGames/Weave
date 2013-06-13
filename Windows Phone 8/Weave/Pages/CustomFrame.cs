@@ -1,5 +1,4 @@
 ﻿using SelesGames.Phone.Controls;
-using System.Reactive.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 using Telerik.Windows.Controls;

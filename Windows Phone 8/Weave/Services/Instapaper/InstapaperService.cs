@@ -1,7 +1,6 @@
 ﻿using SelesGames.Instapaper;
 using System;
 using System.Windows;
-using Weave.ViewModels;
 
 namespace weave.Services.Instapaper
 {

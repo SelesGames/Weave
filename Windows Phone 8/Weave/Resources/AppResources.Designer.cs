@@ -10,7 +10,6 @@
 
 namespace weave.Resources
 {
-    using System;
 
 
     /// <summary>

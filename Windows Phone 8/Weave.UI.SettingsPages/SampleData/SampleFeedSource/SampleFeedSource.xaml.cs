@@ -3,7 +3,6 @@
 //      changes to this file can cause errors.
 namespace Expression.Blend.SampleData.SampleFeedSource
 {
-	using System; 
 
 // To significantly reduce the sample data footprint in your production application, you can set
 // the DISABLE_SAMPLE_DATA conditional compilation constant and disable sample data at runtime.

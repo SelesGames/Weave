@@ -1,9 +1,7 @@
 ﻿using SelesGames.Phone;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Linq;
 using System.Windows.Markup;
 
 namespace SelesGames.WP.PublisherInfoPage

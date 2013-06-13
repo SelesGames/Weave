@@ -1,6 +1,5 @@
 ﻿using Microsoft.Phone.Controls;
 using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
