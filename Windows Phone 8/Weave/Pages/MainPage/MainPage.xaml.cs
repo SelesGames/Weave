@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -43,6 +42,9 @@ namespace weave
 
         SelesGames.PopupService<Unit> fontSizePopupService;
         FontAndThemePopup fontSizePopup;
+
+
+
 
         #region Constructor
 
