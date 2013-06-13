@@ -16,6 +16,7 @@
 	d:DesignHeight="800" d:DesignWidth="480">
 
 	<UserControl.Resources>
+		
 		<Storyboard x:Name="OpenSB">
 			<DoubleAnimation Duration="0:0:0.3" From="300" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="grid" >
 				<DoubleAnimation.EasingFunction>
@@ -30,6 +31,7 @@
 				</DoubleAnimation.EasingFunction>
 			</DoubleAnimation>
 		</Storyboard>
+
 		<DataTemplate x:Key="SlideViewItemTemplate">
 			<Grid CacheMode="BitmapCache">
 				<Grid.RowDefinitions>
@@ -40,13 +42,23 @@
 				<TextBlock Grid.Row="1" Text="{Binding FontName}" HorizontalAlignment="Center" Margin="0,-6,0,0" MaxWidth="96" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeSmall}" FontFamily="{Binding FontFamily}"/>
 			</Grid>
 		</DataTemplate>
+
 		<DataTemplate x:Key="FontPickerItemTemplate">
 			<Grid CacheMode="BitmapCache">
 				<TextBlock Text="{Binding DisplayName}" FontSize="{Binding TitleSize}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilyNormal}" />
 			</Grid>
 		</DataTemplate>
+
+		<DataTemplate x:Key="ArticleListFormatItemTemplate">
+			<Grid CacheMode="BitmapCache">
+				<TextBlock Text="{Binding DisplayName}" FontSize="{StaticResource PhoneFontNormalSize}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilyNormal}" />
+			</Grid>
+		</DataTemplate>
+
 		<weave:FontSizes x:Key="FontSizes" />
 		<weave:ArticleListFontSet x:Key="Fonts" />
+		<weave:ArticleListFormats x:Key="ArticleListFormats" />
+
 		<SolidColorBrush x:Key="SubtleBrush" Color="#BFFFFFFF"/>
 		<SolidColorBrush x:Key="ForegroundBrush" Color="White"/>
 	</UserControl.Resources>
@@ -69,14 +81,15 @@
 			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.RowSpan="2" Grid.ColumnSpan="2" CacheMode="BitmapCache" Visibility="Collapsed"/>
 			<telerikInput:RadListPicker x:Name="fontSizePicker" ItemsSource="{StaticResource FontSizes}" Grid.ColumnSpan="2" Margin="24,44,24,0" VerticalAlignment="Top" SelectionChanged="ListPicker_SelectionChanged" ItemTemplate="{StaticResource FontPickerItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" />
 			<telerikPrimitives:RadSlideView x:Name="fontSelector" Grid.Row="1" ItemsSource="{StaticResource Fonts}" ItemTemplate="{StaticResource SlideViewItemTemplate}" ItemPreviewTemplate="{StaticResource SlideViewItemTemplate}" AdjacentItemsPreviewMode="Both" Padding="32,42,32,0" Margin="24,0,12,0" SelectionChanged="fontSelector_SelectionChanged" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}" />
-			<Button x:Name="themeButton" Grid.Column="1" Grid.Row="1" Width="144" Height="144" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource HeaderBrush}" Style="{StaticResource NakedButtonStyle}" Tap="themeButton_Tap" Margin="0,67,0,0" CacheMode="BitmapCache">
+			<!--Button x:Name="themeButton" Grid.Column="1" Grid.Row="1" Width="144" Height="144" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource HeaderBrush}" Style="{StaticResource NakedButtonStyle}" Tap="themeButton_Tap" Margin="0,67,0,0" CacheMode="BitmapCache">
 				<Button.OpacityMask>
 					<ImageBrush Stretch="Fill" ImageSource="/Assets/Icons/wheel.png"/>
 				</Button.OpacityMask>
 				<Rectangle Fill="White" />
-			</Button>
+			</Button-->
+			<telerikInput:RadListPicker x:Name="articleListFormatPicker" Grid.Column="1" Grid.Row="1" ItemsSource="{StaticResource ArticleListFormats}" VerticalAlignment="Center" Margin="12,12,24,12" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}"/>
 			<Rectangle Fill="{StaticResource OffWhiteBackgroundBrush}" HorizontalAlignment="Center" Margin="0,24" Width="4" Grid.Row="1" Grid.ColumnSpan="2" Opacity="0.5" IsHitTestVisible="False" CacheMode="BitmapCache"/>
-			<TextBlock x:Name="themeName" HorizontalAlignment="Center" Text="metro" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="0,125,0,4" IsHitTestVisible="False" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}"/>
+			<!--TextBlock x:Name="themeName" HorizontalAlignment="Center" Text="metro" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="0,125,0,4" IsHitTestVisible="False" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}"/-->
 			<Rectangle x:Name="leftFade" HorizontalAlignment="Left" Grid.Row="1" Width="47" Margin="24,0,0,0" IsHitTestVisible="False" CacheMode="BitmapCache">
 				<Rectangle.Fill>
 					<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
