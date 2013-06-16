@@ -535,7 +535,10 @@ namespace weave
             if (PopupService.IsOpen)
                 return;
 
-            fontSizePopupService = new SelesGames.PopupService<System.Reactive.Unit>(fontSizePopup);
+            fontSizePopupService = new SelesGames.PopupService<System.Reactive.Unit>(fontSizePopup)
+            {
+                CloseOnNavigation = false,
+            };
             fontSizePopupService.BeginShow();
             //Observable.FromEventPattern<EventArgs<FontSizeProperties>>(fontSizePopup, "FontSizeChanged")
             //    .Subscribe(o => OnFontSizeChanged(fontSizePopup, o.EventArgs)).DisposeWith(disposables);
