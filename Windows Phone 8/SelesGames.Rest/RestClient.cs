@@ -111,7 +111,7 @@ namespace SelesGames.Rest
 
             var response = await request.GetResponseAsync().ConfigureAwait(false);
             var httpResponse = (HttpWebResponse)response;
-            return httpResponse.StatusCode == HttpStatusCode.Created;        
+            return httpResponse.StatusCode == HttpStatusCode.Created;
         }
 
 

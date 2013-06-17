@@ -54,7 +54,6 @@ namespace weave
 
             scroller.Visibility = Visibility.Collapsed;
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
-            permState.ArticleListFormat = Weave.Customizability.ArticleListFormatType.Card;
 
             imageCache = Resources["imageCache"] as ImageCache;
 
@@ -136,6 +135,9 @@ namespace weave
 
                 case ArticleListFormatType.Card:
                     return new CardNewsItemControl();
+
+                case ArticleListFormatType.TextOnly:
+                    return new TextOnlyNewsItemControl();
 
                 default:
                     throw new Exception(string.Format(

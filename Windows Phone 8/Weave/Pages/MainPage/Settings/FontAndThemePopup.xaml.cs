@@ -20,6 +20,7 @@ namespace weave
 
         public event EventHandler<EventArgs<FontSizeProperties>> FontSizeChanged;
         public event EventHandler<EventArgs<FontProperties>> FontChanged;
+        public event EventHandler<EventArgs<ArticleListFormatProperties>> ArticleListFormatChanged;
 
         public FontAndThemePopup()
         {
@@ -79,14 +80,14 @@ namespace weave
             AppSettings.Instance.Themes.NextTheme();
         }
 
-        void ListPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        void FontSizePicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var newItem = e.AddedItems.OfType<FontSizeProperties>().FirstOrDefault();
             if (newItem == null)
                 return;
 
-            FontSizeChanged.Raise(this, newItem);
             permanentState.ArticleListFontSize = newItem.Id;
+            FontSizeChanged.Raise(this, newItem);
         }
 
         void fontSelector_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -95,8 +96,18 @@ namespace weave
             if (newItem == null)
                 return;
 
-            FontChanged.Raise(this, newItem);
             permanentState.ArticleListFontName = newItem.FontName;
+            FontChanged.Raise(this, newItem);
+        }
+
+        void ArticleListFontFormatPicker_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var newItem = e.AddedItems.OfType<ArticleListFormatProperties>().FirstOrDefault();
+            if (newItem == null)
+                return;
+
+            permanentState.ArticleListFormat = newItem.FormatType;
+            ArticleListFormatChanged.Raise(this, newItem);
         }
 
         public void Dispose()

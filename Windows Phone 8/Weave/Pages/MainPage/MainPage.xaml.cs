@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
+using Weave.Customizability;
 using Weave.ViewModels;
 
 
@@ -76,7 +77,13 @@ namespace weave
                 fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
 
             fontSizePopup = ServiceResolver.Get<FontAndThemePopup>();
+            Observable.FromEventPattern<SelesGames.EventArgs<ArticleListFormatProperties>>(fontSizePopup, "ArticleListFormatChanged")
+                .Subscribe(o => OnArticleListFormatChanged(fontSizePopup, o.EventArgs)).DisposeWith(pageLevelDisposables);
+        }
 
+        void OnArticleListFormatChanged(object sender, SelesGames.EventArgs<ArticleListFormatProperties> eventArgs)
+        {
+            cl.UpdateToCurrentTheme();
         }
 
         void CreateMainAppBar()

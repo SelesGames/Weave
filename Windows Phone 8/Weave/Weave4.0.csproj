@@ -164,6 +164,9 @@
     </Compile>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml.cs">
+      <DependentUpon>TextOnlyNewsItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\Settings\FontAndThemePopup.xaml.cs">
       <DependentUpon>FontAndThemePopup.xaml</DependentUpon>
     </Compile>
@@ -307,6 +310,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MainPage\Settings\FontAndThemePopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -563,7 +570,6 @@
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xsd" />
     <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xsd" />
-    
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
@@ -576,7 +582,6 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </DesignTimeOnly>
-    
     <DesignData Include="SampleData\NewsItemSampleData.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </DesignData>
