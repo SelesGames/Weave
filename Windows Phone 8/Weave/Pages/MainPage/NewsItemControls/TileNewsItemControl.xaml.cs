@@ -7,16 +7,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Weave.ViewModels;
 
 namespace weave
 {
-    public partial class TextOnlyNewsItemControl : BaseNewsItemControl, IDisposable
+    public partial class TileNewsItemControl : BaseNewsItemControl, IDisposable
     {
         BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
 
-        public TextOnlyNewsItemControl()
+        public TileNewsItemControl()
         {
             InitializeComponent();
 
@@ -25,18 +26,8 @@ namespace weave
 
             title.Text = null;
             feedName.Text = null;
-            mediaTypesIcon.OpacityMask = null;
-
-            bindingSource = ServiceResolver.Get<BindableMainPageFontStyle>();
-
-            this.title.SetBinding(TextBlock.FontSizeProperty, bindingSource.TitleSizeBinding);
-            this.title.SetBinding(TextBlock.FontFamilyProperty, bindingSource.FontFamilyBinding);
-
-            this.feedName.SetBinding(TextBlock.FontSizeProperty, bindingSource.PublicationLineSizeBinding);
-            this.feedName.SetBinding(TextBlock.FontFamilyProperty, bindingSource.FontFamilyBinding);
-
-            //this.SetBinding(FrameworkElement.MarginProperty, bindingSource.MainPageNewsItemMarginBinding);
-            this.Margin = new Thickness(0, 12, 0, 12);
+            headlineTxt.Text = null;
+            ClearExistingImage();
         }
 
         protected override void SetNewsItem(NewsItem newsItem)
@@ -47,19 +38,31 @@ namespace weave
 
             OnLoadSB.Stop();
             OnLoadBackwardsSB.Stop();
+            ImageFadeInSB.Stop();
 
-            title.Text = newsItem.Title;
-            feedName.Text = newsItem.FormattedForMainPageSourceAndDate;//newsItem.FeedSource.FeedName;
+            ClearExistingImage();
 
-            var mediaTypeImageBrush = newsItem.GetMediaTypeImageBrush();
-            if (mediaTypeImageBrush != null)
+
+            if (newsItem.HasImage)
             {
-                mediaTypesIcon.OpacityMask = mediaTypeImageBrush;
-                mediaTypesIcon.Visibility = Visibility.Visible;
+                headlineTxt.Text = newsItem.Title;
+
+                image.Opacity = 0;
+                noImageGrid.Visibility = Visibility.Collapsed;
+                withImageGrid.Visibility = Visibility.Visible;
+
+                ImageCache
+                    .GetImageAsync(newsItem.ImageUrl)
+                    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
+                    .DisposeWith(disposables);
             }
             else
             {
-                mediaTypesIcon.Visibility = Visibility.Collapsed;
+                title.Text = newsItem.Title;
+                feedName.Text = newsItem.FormattedForMainPageSourceAndDate;
+
+                withImageGrid.Visibility = Visibility.Collapsed;
+                noImageGrid.Visibility = Visibility.Visible;
             }
 
             Binding b = new Binding("DisplayState")
@@ -73,7 +76,7 @@ namespace weave
                 Source = newsItem
             };
 
-            this.grid.SetBinding(UIElement.OpacityProperty, b);
+            this.stack.SetBinding(UIElement.OpacityProperty, b);
 
             ColorByline(newsItem);
 
@@ -85,7 +88,7 @@ namespace weave
 
         void ColorByline(NewsItem newsItem)
         {
-            if (newsItem == null || feedName == null || mediaTypesIcon == null)
+            if (newsItem == null || feedName == null)
                 return;
 
             Brush brush;
@@ -98,7 +101,24 @@ namespace weave
                 brush = AppSettings.Instance.Themes.CurrentTheme.SubtleBrush;
 
             feedName.Foreground = brush;
-            mediaTypesIcon.Fill = brush;
+        }
+
+        void ClearExistingImage()
+        {
+            if (image.Source != null && image.Source is BitmapImage)
+            {
+                var bi = (BitmapImage)image.Source;
+                bi.UriSource = null;
+                bi = null;
+                image.Source = null;
+            }
+        }
+
+        void SetImage(ImageSource image)
+        {
+            this.ImageFadeInSB.Stop();
+            this.image.Source = image;
+            this.ImageFadeInSB.Begin();
         }
 
         public override void PageRight()

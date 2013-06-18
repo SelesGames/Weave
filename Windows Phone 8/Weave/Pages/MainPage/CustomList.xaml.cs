@@ -63,12 +63,6 @@ namespace weave
 
         public int AnimationDirection { get; set; }
 
-        public void UpdateToCurrentTheme()
-        {
-            InitializeNewsItemControls();
-            SetNews(this.displayedNews);
-        }
-
 
 
 
@@ -123,6 +117,12 @@ namespace weave
             }
         }
 
+        public void UpdateToCurrentTheme()
+        {
+            InitializeNewsItemControls();
+            SetNews(this.displayedNews);
+        }
+
         BaseNewsItemControl CreateNewsItemControl()
         {
             switch (permState.ArticleListFormat)
@@ -138,6 +138,9 @@ namespace weave
 
                 case ArticleListFormatType.TextOnly:
                     return new TextOnlyNewsItemControl();
+
+                case ArticleListFormatType.Tiles:
+                    return new TileNewsItemControl();
 
                 default:
                     throw new Exception(string.Format(

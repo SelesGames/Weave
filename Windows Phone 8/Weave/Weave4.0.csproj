@@ -164,6 +164,9 @@
     </Compile>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
+      <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml.cs">
       <DependentUpon>TextOnlyNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -310,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
