@@ -65,8 +65,6 @@
 				<RowDefinition Height="Auto" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
-
-			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.RowSpan="2" Grid.ColumnSpan="2" CacheMode="BitmapCache" Visibility="Collapsed"/>
 			<telerikInput:RadListPicker x:Name="fontSizePicker" ItemsSource="{StaticResource FontSizes}" Grid.ColumnSpan="2" Margin="24,44,24,0" VerticalAlignment="Top" SelectionChanged="ListPicker_SelectionChanged" ItemTemplate="{StaticResource FontPickerItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" />
 			<telerikPrimitives:RadSlideView x:Name="fontSelector" Grid.Row="1" ItemsSource="{StaticResource Fonts}" ItemTemplate="{StaticResource SlideViewItemTemplate}" ItemPreviewTemplate="{StaticResource SlideViewItemTemplate}" AdjacentItemsPreviewMode="Both" Padding="32,42,32,0" Margin="24,0,12,0" SelectionChanged="fontSelector_SelectionChanged" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}" />
 			<Button x:Name="themeButton" Grid.Column="1" Grid.Row="1" Width="144" Height="144" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource HeaderBrush}" Style="{StaticResource NakedButtonStyle}" Tap="themeButton_Tap" Margin="0,67,0,0" CacheMode="BitmapCache">

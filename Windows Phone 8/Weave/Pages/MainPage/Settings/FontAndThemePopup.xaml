@@ -6,7 +6,6 @@
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
 	xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
-	xmlns:Telerik_Windows_Controls_SlideView="clr-namespace:Telerik.Windows.Controls.SlideView;assembly=Telerik.Windows.Controls.Primitives" 
 	xmlns:weave="clr-namespace:weave"
 	x:Class="weave.FontAndThemePopup"
 	mc:Ignorable="d"
@@ -55,12 +54,12 @@
 			</Grid>
 		</DataTemplate>
 
-		<DataTemplate x:Key="ArticleListFormatExpandedItemTemplate">
+		<!--DataTemplate x:Key="ArticleListFormatExpandedItemTemplate">
 			<StackPanel CacheMode="BitmapCache">
 				<TextBlock Text="{Binding DisplayName}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
 				<TextBlock Text="{Binding Description}" TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeNormal}" />
 			</StackPanel>
-		</DataTemplate>
+		</DataTemplate-->
 
 		<weave:FontSizes x:Key="FontSizes" />
 		<weave:ArticleListFontSet x:Key="Fonts" />
@@ -72,55 +71,41 @@
 
 	<Grid x:Name="LayoutRoot">
 		<Grid Background="{StaticResource TransparentBrush}" MouseLeftButtonDown="OnOutsideTap"/>
-		<Grid x:Name="grid"  Margin="0" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,0.5" Background="#FF1F1F1F" MaxWidth="480" Height="342">
+		<Grid x:Name="grid" RenderTransformOrigin="0.5,0.5" Background="#FF1F1F1F" MaxWidth="480" VerticalAlignment="Bottom" Height="440">
 			<Grid.RenderTransform>
 				<CompositeTransform/>
 			</Grid.RenderTransform>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition />
-			</Grid.RowDefinitions>
+						
+			<StackPanel>
+				<TextBlock Text="List format" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" IsHitTestVisible="False" CacheMode="BitmapCache" Margin="24,20,24,0"/>
+				<telerikInput:RadListPicker x:Name="articleListFormatPicker" ItemsSource="{StaticResource ArticleListFormats}" SelectionChanged="ArticleListFontFormatPicker_SelectionChanged" ItemTemplate="{StaticResource ArticleListFormatItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" InlineModeThreshold="8" Margin="24,-2,24,0" />
+				
+				<TextBlock Text="List item font size" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,20,24,0" IsHitTestVisible="False" CacheMode="BitmapCache"/>
+				<telerikInput:RadListPicker x:Name="fontSizePicker" ItemsSource="{StaticResource FontSizes}" Margin="24,-2,24,0" SelectionChanged="FontSizePicker_SelectionChanged" ItemTemplate="{StaticResource FontPickerItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" />
+				
+				<TextBlock Text="List item font" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,20,24,0" IsHitTestVisible="False" CacheMode="BitmapCache" Foreground="{StaticResource SubtleBrush}"/>
+				<Grid Height="184">
+					<telerikPrimitives:RadSlideView x:Name="fontSelector" ItemsSource="{StaticResource Fonts}" ItemTemplate="{StaticResource SlideViewItemTemplate}" ItemPreviewTemplate="{StaticResource SlideViewItemTemplate}" AdjacentItemsPreviewMode="Both" Padding="145,0" Margin="24,-8,24,0" SelectionChanged="fontSelector_SelectionChanged" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}" />
 
-			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.RowSpan="2" Grid.ColumnSpan="2" CacheMode="BitmapCache" Visibility="Collapsed"/>
-			<telerikInput:RadListPicker x:Name="fontSizePicker" ItemsSource="{StaticResource FontSizes}" Grid.ColumnSpan="2" Margin="24,44,24,0" VerticalAlignment="Top" SelectionChanged="FontSizePicker_SelectionChanged" ItemTemplate="{StaticResource FontPickerItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" />
-			<telerikPrimitives:RadSlideView x:Name="fontSelector" Grid.Row="1" ItemsSource="{StaticResource Fonts}" ItemTemplate="{StaticResource SlideViewItemTemplate}" ItemPreviewTemplate="{StaticResource SlideViewItemTemplate}" AdjacentItemsPreviewMode="Both" Padding="32,42,32,0" Margin="24,0,12,0" SelectionChanged="fontSelector_SelectionChanged" CacheMode="BitmapCache" Foreground="{StaticResource ForegroundBrush}" />
-			
-			<Grid Grid.Column="1" Margin="12,17,24,0" Grid.Row="1">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition />
-				</Grid.RowDefinitions>
-				<TextBlock Text="List format" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" VerticalAlignment="Top" HorizontalAlignment="Right" IsHitTestVisible="False" CacheMode="BitmapCache"/>
-				<telerikInput:RadListPicker x:Name="articleListFormatPicker" Grid.Column="1" Grid.Row="1" ItemsSource="{StaticResource ArticleListFormats}" SelectionChanged="ArticleListFontFormatPicker_SelectionChanged" ItemTemplate="{StaticResource ArticleListFormatItemTemplate}" Foreground="Black" BorderBrush="#BFFFFFFF" Background="#BFFFFFFF" Style="{StaticResource FontSizePopupRadListPickerStyle}" HorizontalContentAlignment="Stretch" PopupItemTemplate="{StaticResource ArticleListFormatExpandedItemTemplate}" InlineModeThreshold="8" Margin="0,-2,0,0" FlowDirection="RightToLeft"/>
-			</Grid>
-
-
-			
-			<Rectangle Fill="{StaticResource OffWhiteBackgroundBrush}" HorizontalAlignment="Center" Margin="0,24" Width="4" Grid.Row="1" Grid.ColumnSpan="2" Opacity="0.5" IsHitTestVisible="False" CacheMode="BitmapCache"/>
-
-			<Rectangle x:Name="leftFade" HorizontalAlignment="Left" Grid.Row="1" Width="47" Margin="24,0,0,0" IsHitTestVisible="False" CacheMode="BitmapCache">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-						<GradientStop Color="#E51F1F1F" Offset="0.187"/>
-						<GradientStop Color="#001F1F1F" Offset="1"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-			<Rectangle x:Name="rightFade" HorizontalAlignment="Right" Grid.Row="1" Width="47" Margin="0,0,12,0" IsHitTestVisible="False" CacheMode="BitmapCache">
-				<Rectangle.Fill>
-					<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-						<GradientStop Color="#E51F1F1F" Offset="0.813"/>
-						<GradientStop Color="#001F1F1F"/>
-					</LinearGradientBrush>
-				</Rectangle.Fill>
-			</Rectangle>
-
-			<TextBlock Text="List item font size" Foreground="{StaticResource SubtleBrush}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,20,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" IsHitTestVisible="False" CacheMode="BitmapCache"/>
-			<TextBlock Text="List item font" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="24,17,0,0" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" IsHitTestVisible="False" CacheMode="BitmapCache" Foreground="{StaticResource SubtleBrush}"/>
+					<Rectangle x:Name="leftFade" HorizontalAlignment="Left" Width="47" Margin="24,0,0,0" IsHitTestVisible="False" CacheMode="BitmapCache">
+						<Rectangle.Fill>
+							<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+								<GradientStop Color="#E51F1F1F" Offset="0.187"/>
+								<GradientStop Color="#001F1F1F" Offset="1"/>
+							</LinearGradientBrush>
+						</Rectangle.Fill>
+					</Rectangle>
+					<Rectangle x:Name="rightFade" HorizontalAlignment="Right" Grid.Row="1" Width="47" Margin="0,0,24,0" IsHitTestVisible="False" CacheMode="BitmapCache">
+						<Rectangle.Fill>
+							<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+								<GradientStop Color="#E51F1F1F" Offset="0.813"/>
+								<GradientStop Color="#001F1F1F"/>
+							</LinearGradientBrush>
+						</Rectangle.Fill>
+					</Rectangle>
+					<Ellipse Fill="{StaticResource PhoneAccentBrush}" Width="9" Height="9" Margin="0,12,0,150" VerticalAlignment="Top" IsHitTestVisible="False" />
+				</Grid>
+			</StackPanel>
 		</Grid>
 	</Grid>
 </UserControl>
