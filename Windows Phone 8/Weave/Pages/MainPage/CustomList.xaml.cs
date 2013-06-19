@@ -6,7 +6,6 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -19,7 +18,6 @@ namespace weave
     {
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
-        PermanentState permState;
         Subject<Tuple<object, NewsItem>> newsItemSelected = new Subject<Tuple<object, NewsItem>>();
         Brush transparentBrush;
         IDisposable tapHandle;
@@ -53,7 +51,6 @@ namespace weave
             this.sp.Children.Remove(this.bottomButtons);
 
             scroller.Visibility = Visibility.Collapsed;
-            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
 
             imageCache = Resources["imageCache"] as ImageCache;
 
@@ -68,10 +65,8 @@ namespace weave
 
         #region Draw the BaseNewsItemControls to the StackPanel
 
-        public void InitializeNewsItemControls()
+        void InitializeNewsItemControls()
         {
-            ApplyCurrentTheme();
-
             // clean up subscription and dispose previous news items
             if (tapHandle != null)
                 tapHandle.Dispose();
@@ -105,9 +100,16 @@ namespace weave
                 .Subscribe(newsItemSelected.OnNext, newsItemSelected.OnError, newsItemSelected.OnCompleted);
         }
 
-        void ApplyCurrentTheme()
+        void ApplyCurrentArticleTheme()
         {
-            if (permState.ArticleListFormat == ArticleListFormatType.Card)
+            ApplyThemeToControl();
+            InitializeNewsItemControls();
+            SetNews(this.displayedNews);
+        }
+
+        void ApplyThemeToControl()
+        {
+            if (ArticleTheme == ArticleListFormatType.Card)
             {
                 scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
             }
@@ -117,15 +119,9 @@ namespace weave
             }
         }
 
-        public void UpdateToCurrentTheme()
-        {
-            InitializeNewsItemControls();
-            SetNews(this.displayedNews);
-        }
-
         BaseNewsItemControl CreateNewsItemControl()
         {
-            switch (permState.ArticleListFormat)
+            switch (ArticleTheme)
             {
                 case ArticleListFormatType.BigImage:
                     return new BigImageNewsItemControl();
@@ -145,7 +141,7 @@ namespace weave
                 default:
                     throw new Exception(string.Format(
                         "Selected ArticleListFormat is not currently supported: {0}", 
-                        permState.ArticleListFormat.ToString()));
+                        ArticleTheme.ToString()));
             }
         }
 
@@ -314,6 +310,30 @@ namespace weave
             {
                 var news = (IReadOnlyList<NewsItem>)e.NewValue;
                 cl.SetNews(news);
+            }
+        }
+
+        public static readonly DependencyProperty ArticleThemeProperty = DependencyProperty.Register(
+            "ArticleTheme",
+            typeof(ArticleListFormatType),
+            typeof(CustomList),
+            new PropertyMetadata(OnArticleThemeChanged));
+
+        public ArticleListFormatType ArticleTheme
+        {
+            get { return (ArticleListFormatType)GetValue(ArticleThemeProperty); }
+            set { SetValue(ArticleThemeProperty, value); }
+        }
+
+        static void OnArticleThemeChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            var cl = s as CustomList;
+            if (cl == null)
+                return;
+
+            if (e.NewValue is ArticleListFormatType && e.NewValue != e.OldValue)
+            {
+                cl.ApplyCurrentArticleTheme();
             }
         }
 

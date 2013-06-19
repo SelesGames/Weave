@@ -29,6 +29,8 @@ namespace weave
         string mode = null;
         Guid? feedId = null;
 
+        PermanentState permState;
+
         MainPageViewModel vm;
         MainPageSourceListViewModel vmSourcesList;
 
@@ -64,7 +66,7 @@ namespace weave
             this.Loaded += OnLoaded;
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumAndSlideTransition());
 
-            var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             var isAppBarMinimized = permState.IsHideAppBarOnArticleListPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
@@ -83,7 +85,7 @@ namespace weave
 
         void OnArticleListFormatChanged(object sender, SelesGames.EventArgs<ArticleListFormatProperties> eventArgs)
         {
-            cl.UpdateToCurrentTheme();
+            cl.ArticleTheme = permState.ArticleListFormat;
         }
 
         void CreateMainAppBar()
@@ -319,7 +321,8 @@ namespace weave
         
         void InitializeCustomListAndImageCache()
         {
-            this.cl.InitializeNewsItemControls();
+            cl.ArticleTheme = permState.ArticleListFormat;
+            //cl.InitializeNewsItemControls();
             SubscribeToNewsItemClicked();
         }
 

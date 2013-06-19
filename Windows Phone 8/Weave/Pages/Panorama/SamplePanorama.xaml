@@ -86,7 +86,7 @@
 			<phone:PanoramaItem x:Name="Featured_News" Orientation="Horizontal" CacheMode="{x:Null}" Header="latest articles" Style="{StaticResource PanoramaItemStyle}" >
 				<Grid>
 					<local:CategoryDisplayGrid x:Name="cat1" Height="460" Width="828" VerticalAlignment="Top" Margin="12,0,0,0" News="{Binding LatestNews}" />			
-					<Button Content="all news" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource TrueTextButtonStyle}" Margin="0,448,-12,0" Tap="allNewsButtonTap" toolkit:TiltEffect.IsTiltEnabled="True" />
+					<Button Content="all news" Foreground="{StaticResource PanoramaForegroundBrush}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource TrueTextButtonStyle}" Margin="0,448,-12,0" Tap="allNewsButtonTap" toolkit:TiltEffect.IsTiltEnabled="True" />
 				</Grid>
 			</phone:PanoramaItem>
 

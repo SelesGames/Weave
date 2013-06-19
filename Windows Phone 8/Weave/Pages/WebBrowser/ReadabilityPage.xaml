@@ -37,7 +37,7 @@
 	</Grid>
 
 	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneBackgroundColor}" ForegroundColor="White">
+		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneChromeColor}" ForegroundColor="{StaticResource PhoneForegroundColor}">
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.heart.png" Text="favorite" Click="favoriteButton_Click" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.share.png" Text="send to" Click="shareButton_Click" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/fontSizeIcon.png" Text="font" Click="fontButton_Click" />

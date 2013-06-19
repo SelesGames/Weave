@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Telerik.Windows.Controls;
 using Weave.Customizability;
 
 namespace weave
@@ -16,6 +17,7 @@ namespace weave
         PermanentState permanentState;
         FontSizes fontSizes;
         ArticleListFontSet fonts;
+        ArticleListFormats formats;
         CompositeDisposable disposables = new CompositeDisposable();
 
         public event EventHandler<EventArgs<FontSizeProperties>> FontSizeChanged;
@@ -30,14 +32,27 @@ namespace weave
                 return;
 
             //themeName.SetBinding(TextBlock.TextProperty, new Binding("CurrentTheme.Name") { Source = AppSettings.Instance.Themes });
-            permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+
             fontSizes = Resources["FontSizes"] as FontSizes;
             fonts = Resources["Fonts"] as ArticleListFontSet;
+            formats = Resources["ArticleListFormats"] as ArticleListFormats;
+
+            permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+
             fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleListFontSize);
             fontSelector.SelectedItem = fonts.GetByFontName(permanentState.ArticleListFontName);
+            articleListFormatPicker.SelectedItem = formats.GetArticleListFormatByFormatType(permanentState.ArticleListFormat);
 #if DEBUG
             grid.SizeChanged += new System.Windows.SizeChangedEventHandler(grid_SizeChanged);
 #endif
+            //var formatBinding = new Binding("ArticleListFormat") 
+            //{ 
+            //    Source = permanentState, 
+            //    Converter = new DelegateValueConverter<ArticleListFormatType, ArticleListFormatProperties>(
+            //        o => formats.GetArticleListFormatByFormatType(o), 
+            //        o => o.FormatType)
+            //};
+            //articleListFormatPicker.SetBinding(RadListPicker.SelectedItemProperty, formatBinding);
         }
 
         void grid_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)

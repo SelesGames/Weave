@@ -168,7 +168,7 @@
 					<CompositeTransform/>
 				</UIElement.RenderTransform>
 			</local:CustomList>
-			<Rectangle x:Name="fade" Height="24" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" />
+			<Rectangle x:Name="fade" Height="24" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" Visibility="Collapsed" />
 		</Grid>
 		<local:MainPageNavigationDropDownList x:Name="SourcesList" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed">
 			<local:MainPageNavigationDropDownList.RenderTransform>
@@ -181,7 +181,7 @@
 	</Grid>
 	
 	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneChromeColor}" ForegroundColor="White">
+		<shell:ApplicationBar IsMenuEnabled="True" Mode="Minimized" Opacity="0.99" BackgroundColor="{StaticResource PhoneChromeColor}" ForegroundColor="{StaticResource PhoneForegroundColor}">
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.check.rest.png" Text="page read" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/appbar.refresh.png" Text="refresh" />
 			<shell:ApplicationBarIconButton IconUri="/Assets/Icons/fontSizeIcon.png" Text="font" />
