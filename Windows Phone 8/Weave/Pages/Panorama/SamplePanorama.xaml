@@ -14,6 +14,8 @@
 	x:Class="weave.SamplePanorama"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
 	Orientation="Portrait"
+	Foreground="{StaticResource PanoramaForegroundBrush}"
+	FontFamily="{StaticResource AppSpecificFontFamily}"
 	shell:SystemTray.IsVisible="False">
 	<weave:WeavePage.Resources>
 		<ResourceDictionary>
@@ -92,25 +94,24 @@
 
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
 				<Grid x:Name="accountRoot">
-					<toolkit:WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top">
-						<sg:ImageWithLabelButton Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,-12.3,12,12" Tap="OnLoginButtonTap" />				
-					</toolkit:WrapPanel>
-					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" Margin="0,172,0,0">
-						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap"/>
-						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap"/>
+					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
+						<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
+						<toolkit:WrapPanel Margin="0,0,0,24" HorizontalAlignment="Center">
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
+							<sg:ImageWithLabelButton Visibility="Collapsed" Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,12,12,12" Tap="OnLoginButtonTap" />				
+						</toolkit:WrapPanel>
+						<TextBlock Text="or" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
+						<TextBox Text="email or username" />
+						<TextBox Text="password" />
+						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
+						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
 						<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
 					</StackPanel>
 				</Grid>
 			</phone:PanoramaItem>
-			
-			<!--controls:PanoramaItem x:Name="Categories" Header="{x:Null}" Margin="0,-14,0,0">
-				<ScrollViewer Style="{StaticResource ScrollViewerWithScrollBarOnLeftStyle}" Margin="0,-24,0,0">
-					<StackPanel Margin="0,24,0,96">
-						<TextBlock Text="sources" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}" FontFamily="{StaticResource AppSpecificFontFamily}" Margin="10,-40,0,8" />
-						<ItemsControl x:Name="categoriesContainer" ItemsSource="{Binding Sources}" ItemTemplate="{StaticResource CategoryItemTemplate}" />
-					</StackPanel>
-				</ScrollViewer>
-			</controls:PanoramaItem-->
 					
 		</phone:Panorama>
 		<ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/>
