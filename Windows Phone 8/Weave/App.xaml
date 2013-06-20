@@ -11,13 +11,12 @@
 	xmlns:SampleData3="clr-namespace:Expression.Blend.SampleData.SamplePanoramaViewModel" 
 	mc:Ignorable="d" 
 	x:Class="weave.App">
-	<Application.Resources>	
+	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/weave;component/Resources/ListBoxStyles.xaml" />
-				<ResourceDictionary Source="/weave;component/Resources/LongListSelectorStyles.xaml"/>
+				<!--ResourceDictionary Source="/weave;component/Resources/LongListSelectorStyles.xaml"/-->
 				<ResourceDictionary Source="/weave;component/Resources/ButtonStyles.xaml" />
-				<ResourceDictionary Source="/weave;component/Resources/PanoramaPageHubTileStyles.xaml"/>
 				<ResourceDictionary Source="/weave;component/Resources/FontSizePopupStyles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 					
@@ -47,7 +46,7 @@
 			<Thickness x:Key="PanoramaTitleMargin">10,-76,0,9</Thickness>
 			<System:String x:Key="ChangelogUrl">http://www.selesgames.com/windowsphone/weave/changelog.html</System:String>
 
-			<local:LocalizedStrings x:Key="LocalizedStrings"/>
+			<!--local:LocalizedStrings x:Key="LocalizedStrings"/-->
 
 	</ResourceDictionary>
 								

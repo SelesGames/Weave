@@ -71,7 +71,7 @@ namespace weave
                         Subject: string.Format("{0} problem report (version {1})", AppSettings.Instance.AppName, AppSettings.Instance.VersionNumber),
                         Body: loggedError));
 
-            RefreshFeedsAndStartListeningToNewNews();
+            //RefreshFeedsAndStartListeningToNewNews();
             InitializeExtraPanoramaItems();
 
             await Task.Yield();
@@ -87,9 +87,13 @@ namespace weave
 
         void OnSubsequentNavigatedTo()
         {
-            //ApplicationBar.IsVisible = (pano.SelectedItem == Categories);
-            //vm.LoadSourcesAsync();
             mosaicHubTile.IsFrozen = false;
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            mosaicHubTile.IsFrozen = true;
+            base.OnNavigatedFrom(e);
         }
 
         void OnPanoSelectionChanged()
@@ -102,43 +106,6 @@ namespace weave
             await TimeSpan.FromSeconds(0.3);
             this.cat1.NewsItemClicked.Subscribe(ShowDetailed);
             vm.LoadLatestNews();
-            //await vm2.RefreshNewsAsync();
-
-            //if (currentRefreshListener == null)
-            //    InitializeCurrentRefreshListener();
-
-            //await currentRefreshListener.GetRefreshed();
-            //await vm2.RefreshNewsAsync();
-        }
-
-        async Task RefreshFeedsAndStartListeningToNewNews()
-        {
-            if (AppSettings.Instance.StartupMode == StartupMode.Launch)
-            {
-                if (!AppSettings.Instance.IsNetworkAvailable)
-                    MessageBox.Show("You currently  have no network connection. \r\n\r\nYou can still view the headlines and teasers for previously downloaded articles!", "Cached Mode", MessageBoxButton.OK);
-                else
-                {
-                    progressBar.IsIndeterminate = true;
-                    progressBar.Visibility = Visibility.Visible;
-
-                    //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                    //var feeds = await dal.Feeds.Get();
-
-                    //FeedSource.NewsServer.BeginFeedUpdateBatch();
-                    //foreach (var feed in feeds)
-                    //    feed.RefreshNews();
-                    //FeedSource.NewsServer.EndFeedUpdateBatch();
-
-
-                    //if (currentRefreshListener == null)
-                    //    InitializeCurrentRefreshListener();
-                    //await currentRefreshListener.GetRefreshed();
-
-                    progressBar.IsIndeterminate = false;
-                    progressBar.Visibility = Visibility.Collapsed;
-                }
-            }
         }
 
 

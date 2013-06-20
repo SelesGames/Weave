@@ -4,7 +4,6 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
 	xmlns:local="clr-namespace:weave"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
@@ -22,6 +21,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/MosaicHubTileStyles.xaml" />
 				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/PanoButtonStyles.xaml" />
+				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/PanoramaPageHubTileStyles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		
 			<Style x:Key="PanoramaItemStyle" TargetType="phone:PanoramaItem">
@@ -114,7 +114,7 @@
 			</phone:PanoramaItem>
 					
 		</phone:Panorama>
-		<ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/>
+		<!--ProgressBar x:Name="progressBar" Margin="0,164,0,0" VerticalAlignment="Top" IsHitTestVisible="False" Visibility="Collapsed" Background="{StaticResource TransparentBrush}"/-->
 		<TextBlock IsHitTestVisible="False" HorizontalAlignment="Left" TextWrapping="Wrap" Text="weave" VerticalAlignment="Top" Foreground="{StaticResource PanoramaForegroundBrush}" Margin="24,0,0,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Style="{StaticResource PanoramaItemHeaderTextStyle}" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
 		<TextBlock IsHitTestVisible="False" HorizontalAlignment="Left" TextWrapping="Wrap" Text="NEWS READER" VerticalAlignment="Top" Foreground="{StaticResource PanoramaForegroundBrush}" Margin="25,44,0,0" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Style="{StaticResource PanoramaItemHeaderTextStyle}" FontSize="18.667" Opacity="0.5" CharacterSpacing="-76"/>
 	</Grid>
