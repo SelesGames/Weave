@@ -21,7 +21,6 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/MosaicHubTileStyles.xaml" />
 				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/PanoButtonStyles.xaml" />
-				<ResourceDictionary Source="/weave;component/Pages/Panorama/Resources/PanoramaPageHubTileStyles.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		
 			<Style x:Key="PanoramaItemStyle" TargetType="phone:PanoramaItem">
@@ -95,17 +94,10 @@
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
 				<Grid x:Name="accountRoot">
 					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
-						<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
-						<toolkit:WrapPanel Margin="0,0,0,24" HorizontalAlignment="Center">
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
-							<sg:ImageWithLabelButton Visibility="Collapsed" Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,12,12,12" Tap="OnLoginButtonTap" />				
-						</toolkit:WrapPanel>
-						<TextBlock Text="or" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
-						<TextBox Text="email or username" />
-						<TextBox Text="password" />
+						<Grid>
+							<Button Content="Sign-in or sign-up for an account" Foreground="Red" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" />
+							<TextBlock Text="Sign-in or sign-up for an account" Margin="12,-4,12,0" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
+						</Grid>
 						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
 						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
 						<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
