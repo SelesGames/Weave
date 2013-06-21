@@ -164,6 +164,9 @@
     </Compile>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Business Objects\FeedSourceExtensions.cs" />
+    <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
+      <DependentUpon>AccountSignInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -313,6 +316,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\Accounts\AccountSignInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -354,10 +361,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\FontSizePopupStyles.xaml">
-      <Generator>MSBuild:MarkupCompilePass1</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Panorama\Resources\PanoramaPageHubTileStyles.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>

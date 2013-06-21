@@ -9,7 +9,7 @@
 	<local:StringToLocalImageBrushConverter x:Key="imageBrushConverter2" />
 
 	<Style x:Key="MetroCircleButtonStyle" TargetType="ButtonBase">
-		<Setter Property="Background" Value="{StaticResource PhoneBackgroundBrush}"/>
+		<Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
 		<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
 		<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 		<Setter Property="Padding" Value="{StaticResource PhoneTouchTargetOverhang}"/>
@@ -23,11 +23,9 @@
 								<VisualState x:Name="MouseOver"/>
 								<VisualState x:Name="Pressed">
 									<Storyboard>
-									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ButtonBackground" />
-									<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="IconCopy" />
-									<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Icon" />
-								</Storyboard>
-							</VisualState>
+										<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ButtonBackground" />
+									</Storyboard>
+								</VisualState>
 								<VisualState x:Name="Disabled">
 									<Storyboard>
 										<DoubleAnimation Duration="0" To="0.4" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
@@ -42,17 +40,9 @@
 						<Grid x:Name="grid" CacheMode="BitmapCache">
 							<Ellipse x:Name="ButtonBackground" 
 								Margin="{TemplateBinding Padding}" 
-								Fill="{TemplateBinding Foreground}" 
-								Opacity="0" 
-								CacheMode="BitmapCache"/>
-							<Rectangle 
-								x:Name="IconCopy" Opacity="0"
 								Fill="{TemplateBinding Background}" 
-								DataContext="{TemplateBinding Content}"
-								OpacityMask="{Binding Converter={StaticResource imageBrushConverter2}}" 
-								Margin="{TemplateBinding Padding}" 
-								CacheMode="BitmapCache">
-							</Rectangle>    								
+								Opacity="0" 
+								CacheMode="BitmapCache"/>   								
 							<Rectangle 
 								x:Name="Icon"
 								Fill="{TemplateBinding Foreground}" 
@@ -68,7 +58,7 @@
 								Stroke="{TemplateBinding BorderBrush}" 
 								CacheMode="BitmapCache" />
 							<TextBlock Margin="0,0,0,-18" TextWrapping="Wrap" Text="{TemplateBinding Tag}" VerticalAlignment="Bottom" FontSize="13.333" HorizontalAlignment="Center"/>
-							<Rectangle Fill="{StaticResource TransparentBrush}" CacheMode="BitmapCache" Margin="0,0,0,-30" />
+							<Rectangle Fill="{StaticResource TransparentBrush}" CacheMode="BitmapCache" />
 						</Grid>
 					</ContentControl>
 				</ControlTemplate>

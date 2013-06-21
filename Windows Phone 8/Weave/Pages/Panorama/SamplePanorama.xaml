@@ -97,10 +97,10 @@
 					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
 						<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 						<toolkit:WrapPanel Margin="0,0,0,24" HorizontalAlignment="Center">
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" />
-							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
+							<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Foreground="{StaticResource PanoramaForegroundBrush}" BorderBrush="{StaticResource WhiteForegroundBrush}" Background="{StaticResource PhoneAccentBrush}" />
 							<sg:ImageWithLabelButton Visibility="Collapsed" Background="{StaticResource PhoneAccentBrush}" Width="384" Height="72" Margin="0,12,12,12" Tap="OnLoginButtonTap" />				
 						</toolkit:WrapPanel>
 						<TextBlock Text="or" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
