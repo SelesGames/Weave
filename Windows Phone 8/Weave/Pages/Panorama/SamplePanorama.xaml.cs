@@ -210,19 +210,20 @@ namespace weave
             GlobalNavigationService.ToSelesGamesInfoPage();
         }
 
-        async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            try
-            {
-                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
-                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                var userId = mobileUser.UserId;
-            }
-            catch (InvalidOperationException)
-            {
-                //message = "You must log in. Login Required";
-            }
-            var accountClient = new Weave.Services.Account.Client();    
+            GlobalNavigationService.ToAccountSignInPage();
+            //try
+            //{
+            //    var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
+            //    var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+            //    var userId = mobileUser.UserId;
+            //}
+            //catch (InvalidOperationException)
+            //{
+            //    //message = "You must log in. Login Required";
+            //}
+            //var accountClient = new Weave.Services.Account.Client();    
         }
 
         #endregion

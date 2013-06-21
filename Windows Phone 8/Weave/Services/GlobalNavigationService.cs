@@ -118,5 +118,10 @@ namespace weave
         {
             SafelyNavigateTo("/weave;component/Pages/SelesGamesInfoPage.xaml");
         }
+
+        public static void ToAccountSignInPage()
+        {
+            SafelyNavigateTo("/weave;component/Pages/Accounts/AccountSignInPage.xaml");
+        }
     }
 }

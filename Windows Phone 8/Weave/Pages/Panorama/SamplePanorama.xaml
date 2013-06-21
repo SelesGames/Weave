@@ -95,8 +95,8 @@
 				<Grid x:Name="accountRoot">
 					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
 						<Grid>
-							<Button Content="Sign-in or sign-up for an account" Foreground="Red" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" />
 							<TextBlock Text="Sign-in or sign-up for an account" Margin="12,-4,12,0" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
+							<Button Content="Sign-in or sign-up for an account" Foreground="Red" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" />
 						</Grid>
 						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
 						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
