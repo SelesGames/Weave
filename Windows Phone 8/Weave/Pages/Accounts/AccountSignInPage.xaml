@@ -10,7 +10,6 @@
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
-	SupportedOrientations="PortraitOrLandscape"
 	mc:Ignorable="d">
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
@@ -30,12 +29,12 @@
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
 				<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
-				<toolkit:WrapPanel Margin="0,12,0,24" HorizontalAlignment="Center">
+				<StackPanel Orientation="Horizontal" Margin="0,12,0,24" HorizontalAlignment="Center">
 					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
 					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" />
 					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
-				</toolkit:WrapPanel>
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Visibility="Collapsed" />
+				</StackPanel>
 				<TextBlock Text="or" Margin="12" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 				<toolkit:PhoneTextBox Hint="email or username" />
 				<toolkit:PhoneTextBox Hint="password" />

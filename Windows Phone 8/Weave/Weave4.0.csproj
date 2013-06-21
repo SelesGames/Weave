@@ -742,10 +742,6 @@
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>Weave.RSS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.Services.Account\Weave.Services.Account.csproj">
-      <Project>{27ADDDF2-61C8-482C-9E85-188BEB61C738}</Project>
-      <Name>Weave.Services.Account</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
       <Name>Weave.UI.SettingsPages</Name>
