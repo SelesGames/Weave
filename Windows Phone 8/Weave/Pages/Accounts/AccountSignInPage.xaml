@@ -30,17 +30,17 @@
 			<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
 				<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 				<StackPanel Orientation="Horizontal" Margin="0,12,0,24" HorizontalAlignment="Center">
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Tap="OnFacebookButtonTap" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" Tap="OnTwitterButtonTap" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" Tap="OnGoogleButtonTap" />
 					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Visibility="Collapsed" />
 				</StackPanel>
 				<TextBlock Text="or" Margin="12" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 				<toolkit:PhoneTextBox Hint="email or username" />
 				<toolkit:PhoneTextBox Hint="password" />
 				<Grid>
-					<Button Content="sign-in" HorizontalAlignment="Left" Padding="24,5,24,6"/>
-					<Button Content="or create an account" HorizontalAlignment="Right" Style="{StaticResource TrueTextButtonStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Padding="11,5,11,6" />
+					<Button Content="sign-in" HorizontalAlignment="Left" Padding="24,5,24,6" Tap="OnLoginButtonTap"/>
+					<Button Content="or create an account" HorizontalAlignment="Right" Style="{StaticResource TrueTextButtonStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Padding="11,5,11,6" Tap="OnCreateAccountButtonTap" />
 				</Grid>
 			</StackPanel>
 		</Grid>

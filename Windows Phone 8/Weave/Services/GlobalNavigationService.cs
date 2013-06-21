@@ -123,5 +123,10 @@ namespace weave
         {
             SafelyNavigateTo("/weave;component/Pages/Accounts/AccountSignInPage.xaml");
         }
+
+        public static void ToCreateAccountPage()
+        {
+            SafelyNavigateTo("/weave;component/Pages/Accounts/CreateAccountPage.xaml");
+        }
     }
 }

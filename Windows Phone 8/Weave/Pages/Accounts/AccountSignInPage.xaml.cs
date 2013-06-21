@@ -31,7 +31,25 @@ namespace weave.Pages.Accounts
                 var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
                 var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
                 var userId = mobileUser.UserId;
-                var identityInfo = identityService.GetUserFromFacebookToken(userId);
+                var identityInfo = await identityService.GetUserFromFacebookToken(userId);
+
+                bool error = false;
+
+                // if error, create new identityInfo, then upload
+                if (error)
+                {
+                    var user = userCache.Get();
+                    identityInfo = new IdentityInfo
+                    {
+                        UserId = user.Id,
+                        FacebookAuthToken = userId,
+                    };
+                    await identityService.Add(identityInfo);
+                }
+                else
+                {
+                    // replace userId of cached user with the userId returned from identityInfo
+                }
             }
             catch (InvalidOperationException)
             {
@@ -72,19 +90,66 @@ namespace weave.Pages.Accounts
             }
         }
 
-        void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        async void OnGoogleButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //try
-            //{
-            //    var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
-            //    var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-            //    var userId = mobileUser.UserId;
-            //}
-            //catch (InvalidOperationException)
-            //{
-            //    //message = "You must log in. Login Required";
-            //}
-            //var accountClient = new Weave.Services.Account.Client();    
+            try
+            {
+                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
+                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Google);
+                var userId = mobileUser.UserId;
+                var identityInfo = await identityService.GetUserFromGoogleToken(userId);
+
+                bool error = false;
+
+                // if error, create new identityInfo, then upload
+                if (error)
+                {
+                    var user = userCache.Get();
+                    identityInfo = new IdentityInfo
+                    {
+                        UserId = user.Id,
+                        GoogleAuthToken = userId,
+                    };
+                    await identityService.Add(identityInfo);
+                }
+                else
+                {
+                    // replace userId of cached user with the userId returned from identityInfo
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                //message = "You must log in. Login Required";
+            }
+        }
+
+        async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            try
+            {
+                var identityInfo = await identityService.GetUserFromUserNameAndPassword(null, null);
+
+                bool error = false;
+
+                // if error, create new identityInfo, then upload
+                if (error)
+                {
+                    // alert user that username/password didn't work
+                }
+                else
+                {
+                    // replace userId of cached user with the userId returned from identityInfo
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                //message = "You must log in. Login Required";
+            }  
+        }
+
+        void OnCreateAccountButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            GlobalNavigationService.ToCreateAccountPage();  
         }
     }
 }
