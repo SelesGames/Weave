@@ -36,8 +36,8 @@
 					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Visibility="Collapsed" />
 				</StackPanel>
 				<TextBlock Text="or" Margin="12" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
-				<toolkit:PhoneTextBox Hint="email or username" />
-				<toolkit:PhoneTextBox Hint="password" />
+				<toolkit:PhoneTextBox x:Name="userNameTB" Hint="email or username" />
+				<toolkit:PhoneTextBox x:Name="passwordTB" Hint="password" />
 				<Grid>
 					<Button Content="sign-in" HorizontalAlignment="Left" Padding="24,5,24,6" Tap="OnLoginButtonTap"/>
 					<Button Content="or create an account" HorizontalAlignment="Right" Style="{StaticResource TrueTextButtonStyle}" FontSize="{StaticResource PhoneFontSizeMedium}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Padding="11,5,11,6" Tap="OnCreateAccountButtonTap" />

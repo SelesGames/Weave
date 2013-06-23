@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+﻿using Microsoft.Phone.Controls;
 using Microsoft.WindowsAzure.MobileServices;
-using Weave.Identity.Contracts;
-using Weave.Identity.DTOs;
+using System;
+using System.Windows;
+using Weave.Identity.Service.Contracts;
+using Weave.Identity.Service.DTOs;
 using Weave.ViewModels.Contracts.Client;
 
 namespace weave.Pages.Accounts
@@ -127,7 +121,21 @@ namespace weave.Pages.Accounts
         {
             try
             {
-                var identityInfo = await identityService.GetUserFromUserNameAndPassword(null, null);
+                var username = userNameTB.Text;
+                var password = passwordTB.Text;
+
+                if (string.IsNullOrWhiteSpace(username))
+                {
+                    MessageBox.Show("You must enter a username to sign-in");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    MessageBox.Show("You must enter a password to sign-in");
+                    return;
+                } 
+                
+                var identityInfo = await identityService.GetUserFromUserNameAndPassword(username, password);
 
                 bool error = false;
 

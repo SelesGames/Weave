@@ -167,6 +167,9 @@
     <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
       <DependentUpon>AccountSignInPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Accounts\CreateAccountPage.xaml.cs">
+      <DependentUpon>CreateAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -317,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Pages\Accounts\AccountSignInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Accounts\CreateAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -658,13 +665,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Contracts\Weave.Identity.Contracts.csproj">
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.Contracts\Weave.Identity.Service.Contracts.csproj">
       <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
-      <Name>Weave.Identity.Contracts</Name>
+      <Name>Weave.Identity.Service.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.DTOs\Weave.Identity.DTOs.csproj">
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.DTOs\Weave.Identity.Service.DTOs.csproj">
       <Project>{6FA5AC47-653A-4634-8BCA-CF68BA33F884}</Project>
-      <Name>Weave.Identity.DTOs</Name>
+      <Name>Weave.Identity.Service.DTOs</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
       <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
