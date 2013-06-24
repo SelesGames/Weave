@@ -5,6 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:ic="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
+	xmlns:local="clr-namespace:weave"
 	x:Class="weave.CustomList"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,14 +15,20 @@
 	d:DesignHeight="680" d:DesignWidth="480">
 	
 	<UserControl.Resources>
-		
-		<!--DataTemplate x:Key="ListItemTemplate">
-			<Button Style="{StaticResource NakedButtonStyle}" Margin="0,0">
-				<local:BigImageNewsItemControl NewsItem="{Binding}" />
-			</Button>
-		</DataTemplate-->
 
 		<ic:ImageCache x:Key="imageCache"/>
+
+		<!--DataTemplate x:Key="BigImageTemplate">
+			<Button Style="{StaticResource NakedButtonStyle}" Margin="0,0">
+				<local:BigImageNewsItemControl NewsItem="{Binding}" ImageCache="{StaticResource imageCache}" />
+			</Button>
+		</DataTemplate>
+
+		<DataTemplate x:Key="ClassicListItemTemplate">
+			<Button Style="{StaticResource NakedButtonStyle}" Margin="0,0">
+				<local:BigImageNewsItemControl NewsItem="{Binding}" ImageCache="{StaticResource imageCache}" />
+			</Button>
+		</DataTemplate-->
 
 	</UserControl.Resources>
 	
@@ -43,7 +50,7 @@
 			</StackPanel>
 		</ScrollViewer>
 
-		<!--phone:LongListSelector ItemsSource="{Binding}" ItemTemplate="{StaticResource ListItemTemplate}">
+		<!--phone:LongListSelector x:Name="lls" ItemsSource="{Binding}" ItemTemplate="{StaticResource BigImageTemplate}">
 			
 		</phone:LongListSelector-->
 	</Grid>

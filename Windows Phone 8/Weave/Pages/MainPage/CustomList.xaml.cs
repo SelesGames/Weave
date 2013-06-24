@@ -56,6 +56,8 @@ namespace weave
 
             id = Guid.NewGuid();
             DebugEx.WriteLine("CustomList {0} created", id.ToString());
+
+            //lls.ItemRealized += lls_ItemRealized;
         }
 
         public int AnimationDirection { get; set; }
@@ -152,6 +154,31 @@ namespace weave
 
         #region Set NewsItem for each BaseNewsItemControl on the screen
 
+        //void SetNews(IReadOnlyList<NewsItem> news)
+        //{
+        //    disp.Disposable = null;
+        //    this.displayedNews = news;
+
+        //    if (this.imageCache != null)
+        //        imageCache.Flush();
+
+        //    if (this.displayedNews == null)
+        //        return;
+
+        //    this.IsHitTestVisible = false;
+
+        //    var animationDelay = TimeSpan.FromSeconds(0.08);
+        //    var animationBuffer = 4;
+
+        //    lls.ItemsSource = (IList)news;
+        //}
+
+        //void lls_ItemRealized(object sender, Microsoft.Phone.Controls.ItemRealizationEventArgs e)
+        //{
+        //    DebugEx.WriteLine(e);
+        //}
+
+
         void SetNews(IReadOnlyList<NewsItem> news)
         {
             disp.Disposable = null;
@@ -162,7 +189,7 @@ namespace weave
 
             scroller.ScrollToVerticalOffset(0);
 
-            if (this.displayedNews == null)
+            if (this.displayedNews == null || newsItemsUI == null)
                 return;
 
             this.IsHitTestVisible = false;

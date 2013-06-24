@@ -1,7 +1,9 @@
 ﻿using Microsoft.Phone.Controls;
 using Microsoft.WindowsAzure.MobileServices;
+using SelesGames;
 using System;
 using System.Windows;
+using Weave.Identity.Service.Client;
 using Weave.Identity.Service.Contracts;
 using Weave.Identity.Service.DTOs;
 using Weave.ViewModels.Contracts.Client;
@@ -10,12 +12,17 @@ namespace weave.Pages.Accounts
 {
     public partial class AccountSignInPage : PhoneApplicationPage
     {
-        IIdentityService identityService;
+        IIdentityService identityService = new ServiceClient();
         IUserCache userCache;
 
         public AccountSignInPage()
         {
             InitializeComponent();
+
+            if (this.IsInDesignMode())
+                return;
+
+            userCache = ServiceResolver.Get<IUserCache>();
         }
 
         async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -48,6 +55,10 @@ namespace weave.Pages.Accounts
             catch (InvalidOperationException)
             {
                 //message = "You must log in. Login Required";
+            }
+            catch(Exception ex)
+            {
+                DebugEx.WriteLine(ex);               
             }
         }
 

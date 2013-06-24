@@ -16,7 +16,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/weave;component/Resources/ListBoxStyles.xaml" />
 				<ResourceDictionary Source="/weave;component/Resources/ButtonStyles.xaml" />
-				<ResourceDictionary Source="/weave;component/Resources/FontSizePopupStyles.xaml"/>
+				<ResourceDictionary Source="/weave;component/Resources/FontSizePopupStyles.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 					
 					

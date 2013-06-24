@@ -105,7 +105,7 @@ namespace weave
             {
                 BackgroundColor = mainAppBar.BackgroundColor,
                 ForegroundColor = mainAppBar.ForegroundColor,
-                Mode = mainAppBar.Mode,
+                Mode = ApplicationBarMode.Default,
                 Opacity = mainAppBar.Opacity,
                 IsMenuEnabled = mainAppBar.IsMenuEnabled,
                 IsVisible = mainAppBar.IsVisible,
@@ -322,7 +322,6 @@ namespace weave
         void InitializeCustomListAndImageCache()
         {
             cl.ArticleTheme = permState.ArticleListFormat;
-            //cl.InitializeNewsItemControls();
             SubscribeToNewsItemClicked();
         }
 
