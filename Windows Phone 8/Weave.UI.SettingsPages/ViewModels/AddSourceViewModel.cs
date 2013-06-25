@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Weave.FeedLibrary;
 using Weave.FeedSearchService;
-using Weave.GoogleReader;
+//using Weave.GoogleReader;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
@@ -246,52 +246,52 @@ namespace weave
 
 
 
-        #region Import related
+        #region Import related GOOGLE READER SHUTTERED JULY 1ST
 
-        GoogleReader gReaderClient;
-        List<Source> gReaderFeeds;
+        //GoogleReader gReaderClient;
+        //List<Source> gReaderFeeds;
 
-        public string GReaderUserName { get; set; }
-        public string GReaderPassword { get; set; }
+        //public string GReaderUserName { get; set; }
+        //public string GReaderPassword { get; set; }
 
-        public async Task<GoogleReader.AuthenticationResult> AuthenticateGoogleReader()
-        {
-            gReaderClient = new GoogleReader(GReaderUserName, GReaderPassword);
-            await gReaderClient.Authenticate();
-            return gReaderClient.AuthResult;
-        }
+        //public async Task<GoogleReader.AuthenticationResult> AuthenticateGoogleReader()
+        //{
+        //    gReaderClient = new GoogleReader(GReaderUserName, GReaderPassword);
+        //    await gReaderClient.Authenticate();
+        //    return gReaderClient.AuthResult;
+        //}
 
-        public async Task LoadGReaderFeeds()
-        {
-            await gReaderClient.LoadSubscriptionList();
-            gReaderFeeds = gReaderClient.Feeds.Select(Parse).ToList();
-        }
+        //public async Task LoadGReaderFeeds()
+        //{
+        //    await gReaderClient.LoadSubscriptionList();
+        //    gReaderFeeds = gReaderClient.Feeds.Select(Parse).ToList();
+        //}
 
-        public async Task SaveGReaderFeeds()
-        {
-            if (gReaderFeeds == null || !gReaderFeeds.Any())
-                return;
+        //public async Task SaveGReaderFeeds()
+        //{
+        //    if (gReaderFeeds == null || !gReaderFeeds.Any())
+        //        return;
 
-            var existingFeeds = userCache.Get().Feeds;
-            var newFeeds = gReaderFeeds.Select(Parse).Except(existingFeeds).ToList();
+        //    var existingFeeds = userCache.Get().Feeds;
+        //    var newFeeds = gReaderFeeds.Select(Parse).Except(existingFeeds).ToList();
 
-            await userCache.Get().BatchChange(added: newFeeds);
-        }
+        //    await userCache.Get().BatchChange(added: newFeeds);
+        //}
 
-        Source Parse(FeedInfo feed)
-        {
-            string category = null;
-            if (feed.Categories != null && feed.Categories.Any())
-                category = feed.Categories.First();
+        //Source Parse(FeedInfo feed)
+        //{
+        //    string category = null;
+        //    if (feed.Categories != null && feed.Categories.Any())
+        //        category = feed.Categories.First();
 
-            return new Source
-            {
-                Category = category,
-                Name = feed.Name,
-                Url = feed.Uri,
-                ViewType = ArticleViewingType.Mobilizer,
-            };
-        }
+        //    return new Source
+        //    {
+        //        Category = category,
+        //        Name = feed.Name,
+        //        Url = feed.Uri,
+        //        ViewType = ArticleViewingType.Mobilizer,
+        //    };
+        //}
 
         #endregion
 

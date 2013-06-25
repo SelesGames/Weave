@@ -133,6 +133,7 @@ namespace weave
             addSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.add.rest.png", UriKind.Relative)) { Text = "add" };
             searchSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.feature.search.rest.png", UriKind.Relative)) { Text = "search" };
 
+            manageSourceButton.GetClick().Subscribe(o => OnManageSourceButtonClick()).DisposeWith(this.pageLevelDisposables);
             addSourceButton.GetClick().Subscribe(o => OnAddSourceButtonClick()).DisposeWith(this.pageLevelDisposables);
             searchSourceButton.GetClick().Subscribe(o => OnSearchSourceClick()).DisposeWith(this.pageLevelDisposables);
 

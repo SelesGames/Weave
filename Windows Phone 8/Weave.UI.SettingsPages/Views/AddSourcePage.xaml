@@ -97,7 +97,7 @@
 
 	<Grid x:Name="LayoutRoot" d:DataContext="{Binding Source={StaticResource SampleFeedLibraryViewModel}}">
 		<!--Pivot Control-->
-		<controls:Pivot Title="ADD SOURCE">
+		<controls:Pivot x:Name="pivot" Title="ADD SOURCE">
 			<!--BROWSE-->
 			<controls:PivotItem Header="browse">
 				<ListBox ItemTemplate="{StaticResource CategoriesItemTemplate}" ItemsSource="{Binding Categories}" Margin="0,0,-12,0"/>
@@ -118,7 +118,8 @@
 			</controls:PivotItem>
 			
 			<!--IMPORT-->
-			<controls:PivotItem Header="import">
+			<!-- GOOGLE READER SHUTTERING SERVICES JULY 1ST -->
+			<!--controls:PivotItem Header="import">
 				<StackPanel>
 					<TextBlock Text="Add your sources from a Google Reader account!  Don't worry, we don't save your username or password on your phone." Style="{StaticResource PhoneTextAccentStyle}" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeMedium}" Margin="12,12,12,48" />
 					<TextBlock Text="Username" Style="{StaticResource PhoneTextSubtleStyle}"/>
@@ -128,7 +129,7 @@
 					<Button x:Name="importButton" Content="import" Margin="0,24,0,0" Tap="importButton_Tap" />
 					<TextBlock x:Name="statusText" Margin="12,24,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" Style="{StaticResource PhoneTextAccentStyle}" TextWrapping="Wrap" />
 				</StackPanel>
-			</controls:PivotItem>
+			</controls:PivotItem-->
 
 		</controls:Pivot>
 	</Grid>

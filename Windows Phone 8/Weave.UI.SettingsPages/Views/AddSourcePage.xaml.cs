@@ -26,6 +26,19 @@ namespace weave.Pages.Settings
 
         protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
+            string section = null;
+
+            if (NavigationContext.QueryString.ContainsKey("section"))
+            {
+                section = NavigationContext.QueryString["section"];
+            }
+
+            if (section == null || section == "browse")
+                pivot.SelectedIndex = 0;
+            else if (section == "search")
+                pivot.SelectedIndex = 1;
+
+
             if (areCategoriesLoaded)
                 return;
 
@@ -113,43 +126,43 @@ namespace weave.Pages.Settings
 
 
 
-        #region Import (Google Reader)
+        #region Import (Google Reader) SHUTTERED JULY 1ST
 
-        async void importButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            EnableGReaderInput(false);
+        //async void importButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    EnableGReaderInput(false);
 
-            try
-            {
-                statusText.Text = "Authenticating...";
+        //    try
+        //    {
+        //        statusText.Text = "Authenticating...";
 
-                var authResult = await viewModel.AuthenticateGoogleReader();
-                if (authResult == Weave.GoogleReader.GoogleReader.AuthenticationResult.InvalidCredentials)
-                {
-                    statusText.Text = "Invalid username/password.";
-                }
-                else
-                {
-                    statusText.Text = "Authenticated!  Downloading feeds...";
-                    await viewModel.LoadGReaderFeeds();
-                    statusText.Text = "SUCCESS!  Feeds added.";
-                }
-            }
-            catch(Exception ex)
-            {
-                statusText.Text = "Unspecified error.  Make sure you have a internet connection, and try again.";
-                DebugEx.WriteLine(ex);
-            }
+        //        var authResult = await viewModel.AuthenticateGoogleReader();
+        //        if (authResult == Weave.GoogleReader.GoogleReader.AuthenticationResult.InvalidCredentials)
+        //        {
+        //            statusText.Text = "Invalid username/password.";
+        //        }
+        //        else
+        //        {
+        //            statusText.Text = "Authenticated!  Downloading feeds...";
+        //            await viewModel.LoadGReaderFeeds();
+        //            statusText.Text = "SUCCESS!  Feeds added.";
+        //        }
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        statusText.Text = "Unspecified error.  Make sure you have a internet connection, and try again.";
+        //        DebugEx.WriteLine(ex);
+        //    }
 
-            EnableGReaderInput(true);
-        }
+        //    EnableGReaderInput(true);
+        //}
 
-        void EnableGReaderInput(bool isEnabled)
-        {
-            gReaderUsername.IsEnabled = isEnabled;
-            gReaderPassword.IsEnabled = isEnabled;
-            importButton.IsEnabled = isEnabled;
-        }
+        //void EnableGReaderInput(bool isEnabled)
+        //{
+        //    gReaderUsername.IsEnabled = isEnabled;
+        //    gReaderPassword.IsEnabled = isEnabled;
+        //    importButton.IsEnabled = isEnabled;
+        //}
 
         #endregion
 
@@ -158,7 +171,7 @@ namespace weave.Pages.Settings
 
         async Task SaveAllNewFeeds()
         {
-            await viewModel.SaveGReaderFeeds();
+            //await viewModel.SaveGReaderFeeds();
         }
 
         protected async override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
