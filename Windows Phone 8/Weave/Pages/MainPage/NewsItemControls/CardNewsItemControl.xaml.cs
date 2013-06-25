@@ -16,6 +16,7 @@ namespace weave
     {
         BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
+        static Brush defaultHeaderBackgroundBrush;
 
         public CardNewsItemControl()
         {
@@ -37,8 +38,10 @@ namespace weave
             //this.feedName.SetBinding(TextBlock.FontSizeProperty, bindingSource.PublicationLineSizeBinding);
             //this.feedName.SetBinding(TextBlock.FontFamilyProperty, bindingSource.ThicknessBinding);
 
-            //this.SetBinding(FrameworkElement.MarginProperty, bindingSource.MainPageNewsItemMarginBinding);
             this.Margin = new Thickness(0, 12, 0, 12);
+
+            if (defaultHeaderBackgroundBrush == null)
+                defaultHeaderBackgroundBrush = Resources["DefaultHeaderBackgroundBrush"] as Brush;
         }
 
         protected override void SetNewsItem(NewsItem newsItem)
@@ -71,8 +74,6 @@ namespace weave
             {
                 image.Opacity = 0;
                 imageWrapper.Visibility = Visibility.Visible;
-                imageTilt.Visibility = Visibility.Visible;
-
 
                 ImageCache
                     .GetImageAsync(newsItem.ImageUrl)
@@ -82,7 +83,6 @@ namespace weave
             else
             {
                 imageWrapper.Visibility = Visibility.Collapsed;
-                imageTilt.Visibility = Visibility.Collapsed;
             }
 
             Binding b = new Binding("DisplayState")
@@ -90,14 +90,14 @@ namespace weave
                 Converter = new DelegateValueConverter(value =>
                 {
                     var displayState = (NewsItem.ColoringDisplayState)value;
-                    return (displayState == NewsItem.ColoringDisplayState.Viewed) ? 0.6d : 1d;
+                    return (displayState == NewsItem.ColoringDisplayState.Viewed) ? 0.5d : 1d;
                 },
                     null),
                 Source = newsItem
             };
 
-            this.grid.SetBinding(UIElement.OpacityProperty, b);
-            this.imageWrapper.SetBinding(UIElement.OpacityProperty, b);
+            this.pack.SetBinding(UIElement.OpacityProperty, b);
+            //this.imageWrapper.SetBinding(UIElement.OpacityProperty, b);
 
             ColorByline(newsItem);
 
@@ -119,10 +119,9 @@ namespace weave
             else if (newsItem.IsDisplayedAsNew)
                 brush = AppSettings.Instance.Themes.CurrentTheme.AccentBrush;
             else
-                brush = AppSettings.Instance.Themes.CurrentTheme.SubtleBrush;
+                brush = defaultHeaderBackgroundBrush;
 
-            //feedName.Foreground = brush;
-            mediaTypesIcon.Fill = brush;
+            headerBorder.Background = brush;
         }
 
         void ClearExistingImage()

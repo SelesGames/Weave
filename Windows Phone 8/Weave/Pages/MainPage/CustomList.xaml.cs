@@ -113,11 +113,11 @@ namespace weave
         {
             if (ArticleTheme == ArticleListFormatType.Card)
             {
-                scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
+                //scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
             }
             else
             {
-                scroller.Background = transparentBrush;
+                //scroller.Background = transparentBrush;
             }
         }
 
@@ -313,7 +313,7 @@ namespace weave
 
 
 
-        #region Dependency Properties (NewsItem)
+        #region Dependency Properties
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
             "ItemsSource",
@@ -344,7 +344,7 @@ namespace weave
             "ArticleTheme",
             typeof(ArticleListFormatType),
             typeof(CustomList),
-            new PropertyMetadata(OnArticleThemeChanged));
+            new PropertyMetadata(ArticleListFormatType.SpecialNoneSelectedFormatType, OnArticleThemeChanged));
 
         public ArticleListFormatType ArticleTheme
         {

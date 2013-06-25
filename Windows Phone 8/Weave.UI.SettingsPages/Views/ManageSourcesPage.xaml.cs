@@ -109,7 +109,7 @@ namespace weave
 
         void AddFeedButton_Click(object sender, EventArgs e)
         {
-            NavigationService.ToAddSourcePage();
+            NavigationService.ToAddSourcePage("browse");
         }
 
         #endregion

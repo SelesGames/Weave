@@ -36,7 +36,7 @@ namespace weave
 
         SwitchingAdControl adControl;
 
-        ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, addSourceButton, searchSourceButton;
+        ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, manageSourceButton, addSourceButton, searchSourceButton;
         ApplicationBarMenuItem lockOrientationButton, openNavMenuButton, pinToStartScreenButton; 
         CompositeDisposable pageLevelDisposables = new CompositeDisposable();
         SwipeGestureHelper swipeHelper;
@@ -45,6 +45,7 @@ namespace weave
 
         SelesGames.PopupService<Unit> fontSizePopupService;
         FontAndThemePopup fontSizePopup;
+        Brush transparentBrush;
 
 
 
@@ -54,6 +55,8 @@ namespace weave
         public MainPage()
         {
             InitializeComponent();
+            transparentBrush = ContentGrid.Background;
+
             SourcesList.Visibility = Visibility.Visible;
             MinTitlePanel.RenderTransform = new CompositeTransform();
             ContentGrid.RenderTransform = new CompositeTransform();
@@ -83,9 +86,24 @@ namespace weave
                 .Subscribe(o => OnArticleListFormatChanged(fontSizePopup, o.EventArgs)).DisposeWith(pageLevelDisposables);
         }
 
+        void ApplyThemeToControl()
+        {
+            var theme = permState.ArticleListFormat;
+
+            if (theme == ArticleListFormatType.Card)
+            {
+                ContentGrid.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
+            }
+            else
+            {
+                ContentGrid.Background = transparentBrush;
+            }
+            cl.ArticleTheme = theme;
+        }
+
         void OnArticleListFormatChanged(object sender, SelesGames.EventArgs<ArticleListFormatProperties> eventArgs)
         {
-            cl.ArticleTheme = permState.ArticleListFormat;
+            ApplyThemeToControl();
         }
 
         void CreateMainAppBar()
@@ -111,23 +129,29 @@ namespace weave
                 IsVisible = mainAppBar.IsVisible,
             };
 
-            searchSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.feature.search.rest.png", UriKind.Relative)) { Text = "search" };
+            manageSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.rss.png", UriKind.Relative)) { Text = "manage" };
             addSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.add.rest.png", UriKind.Relative)) { Text = "add" };
+            searchSourceButton = new ApplicationBarIconButton(new Uri("/Assets/Icons/appbar.feature.search.rest.png", UriKind.Relative)) { Text = "search" };
 
-            searchSourceButton.GetClick().Subscribe(o => OnSearchSourceClick()).DisposeWith(this.pageLevelDisposables);
             addSourceButton.GetClick().Subscribe(o => OnAddSourceButtonClick()).DisposeWith(this.pageLevelDisposables);
+            searchSourceButton.GetClick().Subscribe(o => OnSearchSourceClick()).DisposeWith(this.pageLevelDisposables);
 
-            sourcesListAppBar.Buttons.Add(searchSourceButton);
+            sourcesListAppBar.Buttons.Add(manageSourceButton);
             sourcesListAppBar.Buttons.Add(addSourceButton);
+            sourcesListAppBar.Buttons.Add(searchSourceButton);
         }
 
+        void OnManageSourceButtonClick()
+        {
+            NavigationService.ToManageSourcesPage();
+        }
         void OnSearchSourceClick()
         {
-            NavigationService.ToAddSourcePage();
+            NavigationService.ToAddSourcePage("search");
         }
         void OnAddSourceButtonClick()
         {
-            NavigationService.ToAddSourcePage();
+            NavigationService.ToAddSourcePage("browse");
         }
 
         void OnLoaded(object sender, RoutedEventArgs e)
@@ -321,7 +345,7 @@ namespace weave
         
         void InitializeCustomListAndImageCache()
         {
-            cl.ArticleTheme = permState.ArticleListFormat;
+            ApplyThemeToControl();
             SubscribeToNewsItemClicked();
         }
 

@@ -126,7 +126,16 @@
 			<GradientStop Offset="0" Color="#FFFFFFFF"/>
 			<GradientStop Offset="1" Color="#00FFFFFF"/>
 		</LinearGradientBrush>
-				
+
+		<Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+			<Setter Property="Margin" Value="0,-5,0,0"/>
+			<Setter Property="Opacity" Value="0.75"/>
+			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyLight}" />
+			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
+			<Setter Property="VerticalAlignment" Value="Top" />
+			<Setter Property="CacheMode" Value="BitmapCache" />
+		</Style>				
 	</phone:PhoneApplicationPage.Resources>
 
 
@@ -147,16 +156,16 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		
-		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="48">
+		<Grid x:Name="MinTitlePanel" Grid.Row="1" Grid.Column="1" Height="24">
 			<UIElement.RenderTransform>
 				<CompositeTransform/>
 			</UIElement.RenderTransform>
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition /></Grid.ColumnDefinitions>
 			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.ColumnSpan="3" CacheMode="BitmapCache"/>
-			<TextBlock Text="{Binding Header}" Margin="24,0,0,0" TextTrimming="WordEllipsis" FontFamily="Segoe WP Black" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}" HorizontalAlignment="Left" CacheMode="BitmapCache"/>
+			<TextBlock Text="{Binding Header}" Margin="24,-5,0,0" TextTrimming="WordEllipsis" HorizontalAlignment="Left" Style="{StaticResource HeaderTextStyle}"/>
 			<TextBlock Grid.Column="1" Text="{Binding NewItemCount}" FontSize="{StaticResource PhoneFontSizeNormal}" CacheMode="BitmapCache" Margin="12,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Collapsed" />
-			<TextBlock Grid.Column="2" Text="{Binding CurrentPageDisplay}" FontSize="{StaticResource PhoneFontSizeNormal}" CacheMode="BitmapCache" Margin="0,0,24,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneSubtleBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" />
-			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0,0,0,6" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
+			<TextBlock Grid.Column="2" Text="{Binding CurrentPageDisplay}" Margin="0,-5,24,0" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" />
+			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
 
 		<Grid x:Name="ContentGrid" Grid.Column="1" Grid.Row="2" Background="{StaticResource TransparentBrush}">

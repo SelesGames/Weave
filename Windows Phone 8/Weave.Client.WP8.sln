@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.Identity.Service.DTOs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weave.Identity.Service.Client", "Weave.Identity.Service.Client\Weave.Identity.Service.Client.csproj", "{138ABB5D-6F58-4D53-840A-9B02A3A11AC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneNugetPackageLoader", "PhoneNugetPackageLoader\PhoneNugetPackageLoader.csproj", "{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -763,6 +765,24 @@ Global
 		{138ABB5D-6F58-4D53-840A-9B02A3A11AC5}.Release|ARM.Build.0 = Release|ARM
 		{138ABB5D-6F58-4D53-840A-9B02A3A11AC5}.Release|x86.ActiveCfg = Release|x86
 		{138ABB5D-6F58-4D53-840A-9B02A3A11AC5}.Release|x86.Build.0 = Release|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|ARM.ActiveCfg = Debug|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|ARM.Build.0 = Debug|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|x86.ActiveCfg = Debug|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Debug|x86.Build.0 = Debug|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|Any CPU.Build.0 = Release|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|ARM.ActiveCfg = Release|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|ARM.Build.0 = Release|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|x86.ActiveCfg = Release|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.LiveTileTest|x86.Build.0 = Release|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|ARM.ActiveCfg = Release|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|ARM.Build.0 = Release|ARM
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|x86.ActiveCfg = Release|x86
+		{4DE08ED8-9EBD-4295-B36D-3A785805C2E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

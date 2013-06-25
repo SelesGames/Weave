@@ -8,6 +8,7 @@ namespace Weave.Customizability
         TextOnly,
         Tiles,
         Card,
-        Flip
+        Flip,
+        SpecialNoneSelectedFormatType  //never use this, stritcly for the default value of dependencyobject binding
     }
 }
