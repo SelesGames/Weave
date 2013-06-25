@@ -2,6 +2,7 @@
 using Microsoft.WindowsAzure.MobileServices;
 using SelesGames;
 using System;
+using System.Net;
 using System.Windows;
 using Weave.Identity.Service.Client;
 using Weave.Identity.Service.Contracts;
@@ -27,38 +28,42 @@ namespace weave.Pages.Accounts
 
         async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            bool error = false;
+            IdentityInfo identityInfo;
+            string identityUserId = null;
+
             try
             {
                 var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
                 var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                var userId = mobileUser.UserId;
-                var identityInfo = await identityService.GetUserFromFacebookToken(userId);
-
-                bool error = false;
-
-                // if error, create new identityInfo, then upload
-                if (error)
-                {
-                    var user = userCache.Get();
-                    identityInfo = new IdentityInfo
-                    {
-                        UserId = user.Id,
-                        FacebookAuthToken = userId,
-                    };
-                    await identityService.Add(identityInfo);
-                }
-                else
-                {
-                    // replace userId of cached user with the userId returned from identityInfo
-                }
+                identityUserId = mobileUser.UserId;
+                identityInfo = await identityService.GetUserFromFacebookToken(identityUserId);
             }
-            catch (InvalidOperationException)
+            catch (WebException webException)
             {
-                //message = "You must log in. Login Required";
+                var response = (HttpWebResponse)webException.Response;
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                    error = true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                DebugEx.WriteLine(ex);               
+                DebugEx.WriteLine(ex);
+            }
+
+            // if error, create new identityInfo, then upload
+            if (error)
+            {
+                var user = userCache.Get();
+                identityInfo = new IdentityInfo
+                {
+                    UserId = user.Id,
+                    FacebookAuthToken = identityUserId,
+                };
+                await identityService.Add(identityInfo);
+            }
+            else
+            {
+                // replace userId of cached user with the userId returned from identityInfo
             }
         }
 

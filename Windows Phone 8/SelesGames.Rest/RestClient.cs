@@ -1,13 +1,9 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.GZip;
+using System;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-#if NET40
-using System.IO.Compression;
-#else
-using ICSharpCode.SharpZipLib.GZip;
-#endif
 
 namespace SelesGames.Rest
 {
@@ -20,44 +16,42 @@ namespace SelesGames.Rest
 
         public Task GetAsync(string url, CancellationToken cancellationToken)
         {
-#if NET40
-            var request = (HttpWebRequest)HttpWebRequest.Create(url);
-#else
             var request = HttpWebRequest.CreateHttp(url);
-#endif
             return request.GetResponseAsync();
         }
 
-        public Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
+        public async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
         {
-#if NET40
-            var request = (HttpWebRequest)HttpWebRequest.Create(url);
-#else
             var request = HttpWebRequest.CreateHttp(url);
-#endif
+
             if (!string.IsNullOrEmpty(Headers.Accept))
                 request.Accept = Headers.Accept;
 
             if (UseGzip)
                 request.Headers[HttpRequestHeader.AcceptEncoding] = "gzip";
 
-            return request
-                .GetResponseAsync()
-                .ContinueWith(
-                    task =>
-                    {
-                        var response = (HttpWebResponse)task.Result;
-                        if (response.StatusCode == HttpStatusCode.OK)
-                            return ReadObjectFromWebResponse<T>(response);
-                        else
-                            return default(T);
+            HttpWebResponse response = null;
+
+            try
+            {
+                response = (HttpWebResponse)await request.GetResponseAsync().ConfigureAwait(false);
+            }
+            catch (WebException webException)
+            {
+                response = (HttpWebResponse)webException.Response;
+                throw webException;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            if (response.StatusCode == HttpStatusCode.OK)
+                return ReadObjectFromWebResponse<T>(response);
+            //else
+            //    return default(T);
                         
-                        throw new WebException(string.Format("Status code: {0}", response.StatusCode), null, WebExceptionStatus.UnknownError, response);
-                    },
-                    cancellationToken,
-                    TaskContinuationOptions.OnlyOnRanToCompletion, 
-                    TaskScheduler.Default
-                );
+            throw new WebException(string.Format("Status code: {0}", response.StatusCode), null, WebExceptionStatus.UnknownError, response);
         }
 
         public async Task<TResult> PostAsync<TPost, TResult>(string url, TPost obj, CancellationToken cancelToken)

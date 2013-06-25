@@ -34,6 +34,34 @@
 			<DataTemplate x:Key="MostViewedItemTemplate">
 				<Button Style="{StaticResource MostViewedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnMostViewedTapped" />
 			</DataTemplate>
+			<Style x:Key="SignInButtonStyle" TargetType="Button">
+				<Setter Property="CacheMode" Value="BitmapCache"/>
+				<Setter Property="HorizontalContentAlignment" Value="Left"/>
+				<Setter Property="Background" Value="Transparent"/>
+				<Setter Property="Padding" Value="{StaticResource PhoneTouchTargetOverhang}"/>
+				<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraLarge}"/>
+				<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+				<Setter Property="Padding" Value="11,4,11,11"/>
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Button">
+							<Grid Background="Transparent">
+								<VisualStateManager.VisualStateGroups>
+									<VisualStateGroup x:Name="CommonStates">
+										<VisualState x:Name="Normal"/>
+										<VisualState x:Name="MouseOver"/>
+										<VisualState x:Name="Pressed"/>
+										<VisualState x:Name="Disabled"/>
+									</VisualStateGroup>
+								</VisualStateManager.VisualStateGroups>
+								<Border Background="{StaticResource TransparentBrush}">
+									<TextBlock x:Name="ContentContainer" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.95" LineStackingStrategy="BlockLineHeight" LineHeight="29.333"/>
+								</Border>
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
 
 			<!--DataTemplate x:Key="CategoryItemTemplate">
 				<Button Style="{StaticResource CategoryOrFeedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnCategoryTapped" />
@@ -92,17 +120,12 @@
 			</phone:PanoramaItem>
 
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
-				<Grid x:Name="accountRoot">
-					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
-						<Grid>
-							<TextBlock Text="Sign-in or sign-up for an account" Margin="12,-4,12,0" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" />
-							<Button Content="Sign-in or sign-up for an account" Foreground="Red" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" />
-						</Grid>
-						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
-						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
-						<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
-					</StackPanel>
-				</Grid>
+				<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
+					<Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" />
+					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
+					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
+					<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
+				</StackPanel>
 			</phone:PanoramaItem>
 					
 		</phone:Panorama>
