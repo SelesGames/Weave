@@ -16,12 +16,12 @@ namespace weave
                     DisplayName = "Cards",
                     Description = "Beautiful card view.  The recommended way to view news."
                 },
-                new ArticleListFormatProperties
-                {
-                    FormatType = ArticleListFormatType.Tiles,
-                    DisplayName = "Tiles",
-                    Description = "Tile view - same as what you see on the home screen under the \"latest news\" section.",
-                },
+                //new ArticleListFormatProperties
+                //{
+                //    FormatType = ArticleListFormatType.Tiles,
+                //    DisplayName = "Tiles",
+                //    Description = "Tile view - same as what you see on the home screen under the \"latest news\" section.",
+                //},
                 new ArticleListFormatProperties
                 {
                     FormatType = ArticleListFormatType.BigImage,
