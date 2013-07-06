@@ -24,10 +24,10 @@ namespace weave
             NumberOfPagesToTakeAtATime = numberOfPagesToTakeAtATime;
         }
 
-        public async Task Refresh(bool refresh, bool markEntry)
+        public async Task Refresh(EntryType entry)
         {
             var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
-            var currentNewsList = await vm.GetNewsList(refresh, markEntry, 0, takeAmount);
+            var currentNewsList = await vm.GetNewsList(entry, 0, takeAmount);
             PageCount = currentNewsList.GetPageCount(PageSize);
             TotalNewsCount = currentNewsList.TotalArticleCount;
             NewNewsCount = currentNewsList.NewArticleCount;
@@ -52,7 +52,7 @@ namespace weave
             {
                 var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
                 var skipAmount = i * PageSize;
-                var load = Lazy.Create(() => vm.GetNewsList(false, false, skipAmount, takeAmount));
+                var load = Lazy.Create(() => vm.GetNewsList(EntryType.Peek, skipAmount, takeAmount));
 
                 for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
                 {

@@ -695,9 +695,9 @@
       <Project>{6FA5AC47-653A-4634-8BCA-CF68BA33F884}</Project>
       <Name>Weave.Identity.Service.DTOs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.UserFeedAggregator.Contracts\Weave.UserFeedAggregator.Contracts.csproj">
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
       <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
-      <Name>Weave.UserFeedAggregator.Contracts</Name>
+      <Name>Weave.User.Service.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels.Repository\Weave.ViewModels.Repository.csproj">
       <Project>{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}</Project>
@@ -787,9 +787,9 @@
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
       <Name>Weave.UI.SettingsPages</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.UserFeedAggregator.Client\Weave.UserFeedAggregator.Client.csproj">
+    <ProjectReference Include="..\Weave.UserFeedAggregator.Client\Weave.User.Service.Client.csproj">
       <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
-      <Name>Weave.UserFeedAggregator.Client</Name>
+      <Name>Weave.User.Service.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.User\Weave.User.csproj">
       <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>

@@ -85,15 +85,19 @@ namespace weave
         public PermanentState()
         {
             IsFirstTime = true; // start off as true
+
+            // DEFAULT ARTICLE LIST SETTINGS
+            IsHideAppBarOnArticleListPageEnabled = true;
             ArticleListFormat = ArticleListFormatType.Card;
             ArticleListFontSize = FontSize.Large;
-            ArticleListFontName = "Segoe WP";
-            //mainPageArticleListFontThickness = FontThickness.Regular;
+            ArticleListFontName = "Segoe WP SemiLight";
+            
+            // DEFAULT READER SETTINGS
+            IsHideAppBarOnArticleViewerPageEnabled = false;
             CurrentTheme = "Day";
             ArticleViewFontSize = FontSize.Medium;
             ArticleViewFontName = "Segoe WP";
-            IsHideAppBarOnArticleListPageEnabled = false;
-            IsHideAppBarOnArticleViewerPageEnabled = false;
+
             IsSystemTrayVisibleWhenPossible = false;
             RunHistory = new Services.MostViewedHistory.RunHistory();
             User = UserInfo.CreateNewUser();

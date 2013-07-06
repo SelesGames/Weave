@@ -107,7 +107,7 @@ namespace weave
             if (navMode == NavigationMode.Forward || navMode == NavigationMode.New)
             {
                 InitializeNewsCollectionVM();
-                await pageNews.Refresh(refresh: true, markEntry: true);
+                await pageNews.Refresh(EntryType.Mark);
                 await UpdateNewsList();
             }
         }
@@ -291,7 +291,7 @@ namespace weave
         async Task refresh()
         {
             ShowProgressBar();
-            await pageNews.Refresh(refresh: true, markEntry: false);
+            await pageNews.Refresh(EntryType.ExtendRefresh);
             HideProgressBar();
             await Task.Yield();
             await UpdateNewsList();

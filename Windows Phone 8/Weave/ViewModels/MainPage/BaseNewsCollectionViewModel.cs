@@ -9,6 +9,6 @@ namespace weave
     {
         protected IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
-        public abstract Task<NewsList> GetNewsList(bool refresh, bool markEntry, int skip, int take);
+        public abstract Task<NewsList> GetNewsList(EntryType entry, int skip, int take);
     }
 }

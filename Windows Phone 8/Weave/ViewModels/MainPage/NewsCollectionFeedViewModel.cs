@@ -13,10 +13,10 @@ namespace weave
             this.feedId = feedId;
         }
 
-        public override Task<NewsList> GetNewsList(bool refresh, bool markEntry, int skip, int take)
+        public override Task<NewsList> GetNewsList(EntryType entry, int skip, int take)
         {
             var user = userCache.Get();
-            return user.GetNewsForFeed(feedId, refresh, markEntry, skip, take);
+            return user.GetNewsForFeed(feedId, entry, skip, take);
         }
     }
 }

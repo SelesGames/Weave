@@ -12,10 +12,10 @@ namespace weave
             this.category = category;
         }
 
-        public override Task<NewsList> GetNewsList(bool refresh, bool markEntry, int skip, int take)
+        public override Task<NewsList> GetNewsList(EntryType entry, int skip, int take)
         {
             var user = userCache.Get();
-            return user.GetNewsForCategory(category, refresh, markEntry, skip, take);
+            return user.GetNewsForCategory(category, entry, skip, take);
         }
     }
 }
