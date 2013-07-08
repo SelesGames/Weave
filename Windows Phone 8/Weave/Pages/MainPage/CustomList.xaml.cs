@@ -19,7 +19,7 @@ namespace weave
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
         Subject<Tuple<object, NewsItem>> newsItemSelected = new Subject<Tuple<object, NewsItem>>();
-        Brush transparentBrush;
+        Brush transparentBrush, subtleBrush;
         IDisposable tapHandle;
         IReadOnlyList<NewsItem> displayedNews;
 
@@ -43,6 +43,7 @@ namespace weave
         {
             InitializeComponent();
             transparentBrush = scroller.Background;
+            subtleBrush = prevIndicator.Fill;
 
             if (this.IsInDesignMode())
                 return;
@@ -67,6 +68,29 @@ namespace weave
 
         #region Draw the BaseNewsItemControls to the StackPanel
 
+        void ApplyCurrentArticleTheme()
+        {
+            ApplyThemeToControl();
+            InitializeNewsItemControls();
+            SetNews(this.displayedNews);
+        }
+
+        void ApplyThemeToControl()
+        {
+            if (ArticleTheme == ArticleListFormatType.Card)
+            {
+                var cardIndicatorBrush =
+                    //scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
+                prevIndicator.Fill = subtleBrush;
+                nextIndicator.Fill = subtleBrush;
+            }
+            else
+            {
+                prevIndicator.Fill = subtleBrush;
+                nextIndicator.Fill = subtleBrush;
+            }
+        }
+
         void InitializeNewsItemControls()
         {
             // clean up subscription and dispose previous news items
@@ -75,14 +99,7 @@ namespace weave
 
             this.sp.Children.Clear();
 
-            if (newsItemsUI != null)
-            {
-                foreach (var newsItem in newsItemsUI)
-                {
-                    if (newsItem is IDisposable)
-                        ((IDisposable)newsItem).Dispose();
-                }
-            }
+            DisposeNewsItemControls();
 
             newsItemsUI =
                 Enumerable.Range(0, AppSettings.Instance.NumberOfNewsItemsPerMainPage)
@@ -102,22 +119,15 @@ namespace weave
                 .Subscribe(newsItemSelected.OnNext, newsItemSelected.OnError, newsItemSelected.OnCompleted);
         }
 
-        void ApplyCurrentArticleTheme()
+        void DisposeNewsItemControls()
         {
-            ApplyThemeToControl();
-            InitializeNewsItemControls();
-            SetNews(this.displayedNews);
-        }
-
-        void ApplyThemeToControl()
-        {
-            if (ArticleTheme == ArticleListFormatType.Card)
+            if (newsItemsUI != null)
             {
-                //scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
-            }
-            else
-            {
-                //scroller.Background = transparentBrush;
+                foreach (var newsItem in newsItemsUI)
+                {
+                    if (newsItem is IDisposable)
+                        ((IDisposable)newsItem).Dispose();
+                }
             }
         }
 
@@ -142,7 +152,7 @@ namespace weave
 
                 default:
                     throw new Exception(string.Format(
-                        "Selected ArticleListFormat is not currently supported: {0}", 
+                        "Selected ArticleListFormat is not currently supported: {0}",
                         ArticleTheme.ToString()));
             }
         }
@@ -279,32 +289,6 @@ namespace weave
                     baseNewsItemControl.PageLeft();
         }
 
-        public void Dispose()
-        {
-            if (newsItemsUI != null)
-            {
-                foreach (var o in newsItemsUI)
-                    using (var x = o as IDisposable) { }// o.Dispose();
-            }
-            disp.Dispose();
-
-            if (tapHandle != null)
-                tapHandle.Dispose();
-
-            var imageCacheHandle = this.imageCache;
-            this.imageCache = null;
-            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
-            {
-                if (imageCacheHandle != null)
-                {
-                    imageCacheHandle.Flush();
-                    imageCacheHandle = null;
-                }
-            });
-
-            DebugEx.WriteLine("CustomList {0} disposed", id.ToString());
-        }
-
         ~CustomList()
         {
             DebugEx.WriteLine("CustomList {0} destroyed", id.ToString());
@@ -362,6 +346,35 @@ namespace weave
             {
                 cl.ApplyCurrentArticleTheme();
             }
+        }
+
+        #endregion
+
+
+
+
+        #region IDisposable implementation
+
+        public void Dispose()
+        {
+            DisposeNewsItemControls();
+            disp.Dispose();
+
+            if (tapHandle != null)
+                tapHandle.Dispose();
+
+            var imageCacheHandle = this.imageCache;
+            this.imageCache = null;
+            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
+            {
+                if (imageCacheHandle != null)
+                {
+                    imageCacheHandle.Flush();
+                    imageCacheHandle = null;
+                }
+            });
+
+            DebugEx.WriteLine("CustomList {0} disposed", id.ToString());
         }
 
         #endregion

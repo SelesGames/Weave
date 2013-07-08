@@ -121,7 +121,8 @@ namespace weave
             else
                 brush = defaultHeaderBackgroundBrush;
 
-            headerBorder.Background = brush;
+            //headerBorder.Background = brush;
+            accent.Fill = brush;
         }
 
         void ClearExistingImage()

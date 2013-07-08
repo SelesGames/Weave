@@ -49,7 +49,7 @@
 		</DataTemplate>
 
 		<DataTemplate x:Key="ListFooterTemplate">
-			<Grid Height="24"/>
+			<Grid Height="96"/>
 		</DataTemplate>
 		
 	</UserControl.Resources>
