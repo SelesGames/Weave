@@ -791,10 +791,6 @@
       <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
       <Name>Weave.User.Service.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.User\Weave.User.csproj">
-      <Project>{F3B0DBB8-1002-43A3-9013-FE6AD16D1D13}</Project>
-      <Name>Weave.User</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
