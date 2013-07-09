@@ -33,24 +33,6 @@ namespace weave
             articleListToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleListPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });
             articleViewerToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleViewerPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });
             systemTrayToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsSystemTrayVisibleWhenPossible") { Source = permState, Mode = BindingMode.TwoWay });
-
-            Binding b = new Binding("ArticleListFormat")
-            {
-                Converter = new DelegateValueConverter(
-                    value =>
-                    {
-                        var format = (ArticleListFormatType)value;
-                        return format == ArticleListFormatType.SmallImage;
-                    },
-                    value =>
-                    {
-                        var boolValue = (bool)value;
-                        return boolValue ? ArticleListFormatType.SmallImage : ArticleListFormatType.BigImage;
-                    }),
-                Source = permState,
-                Mode = BindingMode.TwoWay,
-            };
-            classicArticleListToggle.SetBinding(ToggleSwitch.IsCheckedProperty, b);
             
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumTransition());
             SetValue(RadSlideContinuumAnimation.ApplicationHeaderElementProperty, this.PageTitle);

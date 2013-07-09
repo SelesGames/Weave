@@ -44,11 +44,10 @@
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="960"/>
+				<RowDefinition Height="849"/>
 				<RowDefinition Height="*"/>     	
 			</Grid.RowDefinitions>
 			<StackPanel VerticalAlignment="Bottom" toolkit:TiltEffect.IsTiltEnabled="True">
-				<toolkit:ToggleSwitch x:Name="classicArticleListToggle" Header="Enable classic article list format"/>
 
 				<toolkit:ToggleSwitch x:Name="articleListToggle">
 					<toolkit:ToggleSwitch.Header>
