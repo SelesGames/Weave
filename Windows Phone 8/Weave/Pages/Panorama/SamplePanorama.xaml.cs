@@ -140,8 +140,14 @@ namespace weave
 
         void OnMostViewedTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            SetValue(RadTileAnimation.ContainerToAnimateProperty, this.mostViewed);
+            SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menuTileWrapper);
             ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
+        }
+
+        void allSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menuTileWrapper);
+            GlobalNavigationService.ToMainPage(null, "sources");
         }
 
         void OnCategoryTapped(object sender, System.Windows.Input.GestureEventArgs e)
@@ -190,12 +196,6 @@ namespace weave
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, sender);
             GlobalNavigationService.ToMainPage("all news", "category");
-        }
-
-        void allSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            SetValue(RadTileAnimation.ContainerToAnimateProperty, mosaicHubTile);
-            GlobalNavigationService.ToMainPage(null, "sources");
         }
 
         void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)

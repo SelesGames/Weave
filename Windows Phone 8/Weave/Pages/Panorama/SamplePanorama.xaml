@@ -62,21 +62,22 @@
 							<CompositeTransform Rotation="90"/>
 						</TextBlock.RenderTransform>
 					</TextBlock>
-					<ItemsControl x:Name="mostViewed" Margin="46,0,-12,0" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" VerticalAlignment="Top" HorizontalAlignment="Left" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
-					<telerikPrimitives:RadMosaicHubTile 
-						x:Name="mosaicHubTile" 
-						Title="all sources" 
-						ImageSources="{Binding Feeds}" 
-						HorizontalAlignment="Left" 
-						Height="156" 
-						VerticalAlignment="Top" 
-						Margin="46,336,0,0" 
-						Width="324" 
-						Style="{StaticResource RadMosaicHubTileStyle1}" 
-						FontFamily="Segoe WP Black" 
-						FontSize="45.333" 
-						Foreground="#F4FFFFFF"
-						Tap="allSourcesButtonTap"/>
+					<StackPanel x:Name="menuTileWrapper" Margin="46,0,0,0" VerticalAlignment="Top">
+						<ItemsControl x:Name="mostViewed" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
+						<telerikPrimitives:RadMosaicHubTile 
+							x:Name="mosaicHubTile" 
+							Title="all sources" 
+							ImageSources="{Binding Feeds}" 
+							HorizontalAlignment="Left"
+							Height="156" 
+							Margin="0" 
+							Width="324" 
+							Style="{StaticResource RadMosaicHubTileStyle1}" 
+							FontFamily="{StaticResource PhoneFontFamilySemiLight}" 
+							FontSize="{StaticResource PhoneFontSizeLarge}" 
+							Foreground="#F4FFFFFF"
+							Tap="allSourcesButtonTap" />
+					</StackPanel>
 				</Grid>
 			</phone:PanoramaItem>
 					

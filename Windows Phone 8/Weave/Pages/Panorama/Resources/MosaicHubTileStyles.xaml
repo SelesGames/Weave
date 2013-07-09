@@ -110,7 +110,7 @@
 								<Rectangle Fill="{TemplateBinding Background}" Grid.Column="4" Grid.Row="2" />
 								<Rectangle Fill="{TemplateBinding Background}" Grid.Column="5" Grid.Row="2" />						
 							</Grid>
-							<TextBlock x:Name="PART_Title" HorizontalAlignment="Right" Text="{TemplateBinding Title}" VerticalAlignment="Bottom" Margin="5,0,6,6" FontFamily="{StaticResource PhoneFontFamilySemiLight}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+							<TextBlock x:Name="PART_Title" HorizontalAlignment="Right" Text="{TemplateBinding Title}" VerticalAlignment="Bottom" Margin="5,0,6,6" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}"/>
 						</Grid>
 						<ContentPresenter x:Name="PART_BackContent" ContentTemplate="{TemplateBinding BackContentTemplate}" Content="{TemplateBinding BackContent}" Visibility="Collapsed">
 							<ContentPresenter.Projection>
