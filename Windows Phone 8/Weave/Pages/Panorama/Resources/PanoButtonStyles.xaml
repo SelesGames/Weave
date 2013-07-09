@@ -303,4 +303,34 @@
 		</Setter>
 	</Style>
 
+
+	<Style x:Key="SignInButtonStyle" TargetType="Button">
+		<Setter Property="CacheMode" Value="BitmapCache"/>
+		<Setter Property="HorizontalContentAlignment" Value="Left"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="Padding" Value="{StaticResource PhoneTouchTargetOverhang}"/>
+		<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeExtraLarge}"/>
+		<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
+		<Setter Property="Padding" Value="11,4,11,11"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid Background="Transparent">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal"/>
+								<VisualState x:Name="MouseOver"/>
+								<VisualState x:Name="Pressed"/>
+								<VisualState x:Name="Disabled"/>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Border Background="{StaticResource TransparentBrush}">
+							<TextBlock x:Name="ContentContainer" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.95" LineStackingStrategy="BlockLineHeight" LineHeight="29.333"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 </ResourceDictionary>

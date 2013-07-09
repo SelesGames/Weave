@@ -246,7 +246,6 @@
     <Compile Include="Pages\SelesGamesInfoPage.xaml.cs">
       <DependentUpon>SelesGamesInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleNewsList.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
     <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
     <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
@@ -282,9 +281,6 @@
     <Compile Include="Pages\WebBrowser\ReadabilityPage.xaml.cs">
       <DependentUpon>ReadabilityPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml.cs">
-      <DependentUpon>SamplePanoramaViewModel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Services\ShareArticleExtensionMethods.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Library\Value Converters\UppercaseConverter.cs" />
@@ -304,9 +300,6 @@
     <Compile Include="Pages\SelectTheCategoriesThatInterestYouPage.xaml.cs">
       <DependentUpon>SelectTheCategoriesThatInterestYouPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SampleData\SampleCategories\SampleCategories.xaml.cs">
-      <DependentUpon>SampleCategories.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Settings\AppSettings.cs" />
     <Compile Include="Services\GlobalNavigationService.cs" />
     <Compile Include="Services\Instapaper\InstapaperAccount.cs" />
@@ -319,9 +312,6 @@
     </Compile>
     <Compile Include="ViewModels\MainPage\MainPageViewModel.cs" />
     <Compile Include="Services\PanoramaInjectionService.cs" />
-    <Compile Include="SampleData\SampleRssFeed\SampleRssFeed.xaml.cs">
-      <DependentUpon>SampleRssFeed.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Panorama\SamplePanorama.xaml.cs">
       <DependentUpon>SamplePanorama.xaml</DependentUpon>
     </Compile>
@@ -627,14 +617,24 @@
     <Content Include="Assets\Tiles\CycleTileSmall.png" />
     <Content Include="Assets\Tiles\lock_screen_placeholder.jpg" />
     <Content Include="SplashScreenImage.jpg" />
-    <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  
+  <!-- SAMPLE DATA SECTION -->
   <ItemGroup>
+    <Compile Include="SampleData\SampleNewsList.cs" />
+    <Compile Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xaml.cs">
+      <DependentUpon>SamplePanoramaViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleRssFeed\SampleRssFeed.xaml.cs">
+      <DependentUpon>SampleRssFeed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SampleData\SampleCategories\SampleCategories.xaml.cs">
+      <DependentUpon>SampleCategories.xaml</DependentUpon>
+    </Compile>
     <DesignTimeOnly Include="SampleData\SamplePanoramaViewModel\SamplePanoramaViewModel.xsd" />
     <DesignTimeOnly Include="SampleData\SampleRssFeed\SampleRssFeed.xsd" />
     <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xsd" />
@@ -659,6 +659,8 @@
       <SubType>Designer</SubType>
     </DesignData>
   </ItemGroup>
+  <!-- END SAMPLE DATA SECTION -->
+  
   <ItemGroup>
     <None Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
@@ -802,5 +804,4 @@
   </Target>
   -->
   <ProjectExtensions />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
 </Project>
