@@ -1,15 +1,18 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
-    public class PagedNewsItems : IPagedNewsItems
+    public class PagedFavoriteNewsItems : IPagedNewsItems
     {
+        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
         List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
-        BaseNewsCollectionViewModel vm;
 
         public int PageSize { get; private set; }
         public int NumberOfPagesToTakeAtATime { get; private set; }
@@ -17,27 +20,30 @@ namespace weave
         public int TotalNewsCount { get; private set; }
         public int NewNewsCount { get; private set; }
 
-        public PagedNewsItems(BaseNewsCollectionViewModel vm, int pageSize, int numberOfPagesToTakeAtATime)
+        public PagedFavoriteNewsItems(int pageSize, int numberOfPagesToTakeAtATime)
         {
-            this.vm = vm;
             PageSize = pageSize;
             NumberOfPagesToTakeAtATime = numberOfPagesToTakeAtATime;
+
+            user = userCache.Get();
         }
 
         public async Task Refresh(EntryType entry)
         {
             var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
-            var currentNewsList = await vm.GetNewsList(entry, 0, takeAmount);
-            PageCount = currentNewsList.GetPageCount(PageSize);
-            TotalNewsCount = currentNewsList.TotalArticleCount;
-            NewNewsCount = currentNewsList.NewArticleCount;
+            var currentNewsList = await user.GetFavorites(0, takeAmount);
+
+            // don't have any of this info when dealing with Favorites
+            PageCount = 0;
+            TotalNewsCount = 0;
+            NewNewsCount = 0;
 
             for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
             {
                 var skipMult = j;
                 var t = new AsyncNewsList
                 {
-                    News = () => Task.FromResult(currentNewsList.News.Skip(skipMult * PageSize).Take(PageSize).ToList()),
+                    News = () => Task.FromResult(currentNewsList.Skip(skipMult * PageSize).Take(PageSize).ToList()),
                 };
 
                 newsLists.Add(t);
@@ -52,14 +58,14 @@ namespace weave
             {
                 var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
                 var skipAmount = i * PageSize;
-                var load = Lazy.Create(() => vm.GetNewsList(EntryType.Peek, skipAmount, takeAmount));
+                var load = Lazy.Create(() => user.GetFavorites(skipAmount, takeAmount));
 
                 for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
                 {
                     var skipMult = j;
                     var t = new AsyncNewsList
                     {
-                        News = async () => (await load.Get()).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
+                        News = async () => (await load.Get()).Skip(skipMult * PageSize).Take(PageSize).ToList(),
                     };
 
                     newsLists.Add(t);

@@ -33,7 +33,7 @@ namespace weave
         TombstoneState tombstoneState;
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
-        PagedNews pageNews;
+        IPagedNewsItems pageNews;
 
         internal OperatingMode currentOperatingMode;
 
@@ -122,23 +122,20 @@ namespace weave
 
         void InitializeNewsCollectionVM()
         {
-            BaseNewsCollectionViewModel newsCollectionVM = null;
-
             if (currentOperatingMode == OperatingMode.Category)
             {
-                newsCollectionVM = new NewsCollectionCategoryViewModel(Header);
+                var newsCollectionVM = new NewsCollectionCategoryViewModel(Header);
+                pageNews = new PagedNewsItems(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
             }
             else if (currentOperatingMode == OperatingMode.Feed)
             {
-                newsCollectionVM = new NewsCollectionFeedViewModel(FeedId);
+                var newsCollectionVM = new NewsCollectionFeedViewModel(FeedId);
+                pageNews = new PagedNewsItems(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
             }
             else if (currentOperatingMode == OperatingMode.Favorites)
             {
-                throw new Exception("shit");
-                //feeds = null;
+                pageNews = new PagedFavoriteNewsItems(AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
             }
-
-            pageNews = new PagedNews(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
         }
 
         void UpdateNewItemCount()

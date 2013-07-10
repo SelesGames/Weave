@@ -91,8 +91,8 @@
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
 				<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" toolkit:TiltEffect.IsTiltEnabled="True">
 					<Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" />
-					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0" IsEnabled="False"/>
-					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap" IsEnabled="False"/>
+					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0"/>
+					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap"/>
 					<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
 				</StackPanel>
 			</phone:PanoramaItem>

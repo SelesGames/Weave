@@ -266,9 +266,12 @@
     <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
     <Compile Include="ViewModels\MainPageSourceListViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\BaseNewsCollectionViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
     <Compile Include="ViewModels\MainPage\NewsCollectionCategoryViewModel.cs" />
     <Compile Include="ViewModels\MainPage\NewsCollectionFeedViewModel.cs" />
+    <Compile Include="ViewModels\MainPage\PagedFavoriteNewsItems.cs" />
     <Compile Include="ViewModels\MainPage\PagedNews.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
@@ -622,7 +625,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  
   <!-- SAMPLE DATA SECTION -->
   <ItemGroup>
     <Compile Include="SampleData\SampleNewsList.cs" />
@@ -660,7 +662,6 @@
     </DesignData>
   </ItemGroup>
   <!-- END SAMPLE DATA SECTION -->
-  
   <ItemGroup>
     <None Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
@@ -689,6 +690,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.Contracts\Weave.Article.Service.Contracts.csproj">
+      <Project>{D727F239-EE96-4B05-8F17-65871B52B260}</Project>
+      <Name>Weave.Article.Service.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.DTOs\Weave.Article.Service.DTOs.csproj">
+      <Project>{2B4D1AF0-8C77-475D-8D14-DB7B506F9450}</Project>
+      <Name>Weave.Article.Service.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.Contracts\Weave.Identity.Service.Contracts.csproj">
       <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
       <Name>Weave.Identity.Service.Contracts</Name>
@@ -756,6 +765,10 @@
     <ProjectReference Include="..\ToastPromptControl\ToastPromptControl.csproj">
       <Project>{09AC45C7-27E8-4A39-B2C4-0031111595D5}</Project>
       <Name>ToastPromptControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Article.Service.Client\Weave.Article.Service.Client.csproj">
+      <Project>{03D3A18C-CD21-403A-8B03-7DAC0DCAF195}</Project>
+      <Name>Weave.Article.Service.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
