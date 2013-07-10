@@ -410,7 +410,10 @@ namespace weave
             userCache = new StandardUserCache(
                 new StandardRepository(
                     Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a"),
-                    new Weave.User.Service.Client.Client()));
+                    new Weave.User.Service.Client.Client(),
+                    new Weave.Article.Service.Client.ServiceClient()
+                )
+            );
 
             kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
 
