@@ -255,9 +255,18 @@ namespace Weave.User.Service.Client
             await client.GetAsync<object>(url, CancellationToken.None);
         }
 
-        public Task RemoveFavorite(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task RemoveFavorite(Guid userId, Guid feedId, Guid newsItemId)
         {
-            throw new NotImplementedException();
+            string append = "remove_favorite";
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddParameter("feedId", feedId)
+                .AddParameter("newsItemId", newsItemId)
+                .AddCacheBuster()
+                .ToString();
+
+            var client = CreateClient();
+            await client.GetAsync<object>(url, CancellationToken.None);
         }
 
         #endregion

@@ -42,6 +42,7 @@ namespace Weave.Article.Service.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("newsItemId", newsItemId)
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -96,6 +97,7 @@ namespace Weave.Article.Service.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("newsItemId", newsItemId)
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
