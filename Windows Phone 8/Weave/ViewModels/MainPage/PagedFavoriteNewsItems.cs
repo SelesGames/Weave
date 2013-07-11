@@ -12,7 +12,7 @@ namespace weave
     {
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
         UserInfo user;
-        List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
+        IEnumerable<AsyncNewsList> newsLists;// = new List<AsyncNewsList>();
 
         public int PageSize { get; private set; }
         public int NumberOfPagesToTakeAtATime { get; private set; }
@@ -30,31 +30,35 @@ namespace weave
 
         public async Task Refresh(EntryType entry)
         {
-            var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
-            var currentNewsList = await user.GetFavorites(0, takeAmount);
+            //var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
+            //var currentNewsList = await user.GetFavorites(0, takeAmount);
 
             // don't have any of this info when dealing with Favorites
-            PageCount = 0;
-            TotalNewsCount = 0;
+            PageCount = 999;
+            TotalNewsCount = 9999;
             NewNewsCount = 0;
 
-            for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
-            {
-                var skipMult = j;
-                var t = new AsyncNewsList
-                {
-                    News = () => Task.FromResult(currentNewsList.Skip(skipMult * PageSize).Take(PageSize).ToList()),
-                };
+            newsLists = DoTheChunka().Memoize();
 
-                newsLists.Add(t);
-            }
+            //for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
+            //{
+            //    var skipMult = j;
+            //    var t = new AsyncNewsList
+            //    {
+            //        News = () => Task.FromResult(currentNewsList.Skip(skipMult * PageSize).Take(PageSize).ToList()),
+            //    };
 
-            Chunk();
+            //    newsLists.Add(t);
+            //}
+
+            //Chunk();
         }
 
-        void Chunk()
+        IEnumerable<AsyncNewsList> DoTheChunka()
         {
-            for (int i = NumberOfPagesToTakeAtATime; i < PageCount; i += NumberOfPagesToTakeAtATime)
+            int i = 0;
+
+            while (true)
             {
                 var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
                 var skipAmount = i * PageSize;
@@ -68,14 +72,38 @@ namespace weave
                         News = async () => (await load.Get()).Skip(skipMult * PageSize).Take(PageSize).ToList(),
                     };
 
-                    newsLists.Add(t);
+                    yield return t;
                 }
+
+                i += NumberOfPagesToTakeAtATime;
             }
         }
 
+        //void Chunk()
+        //{
+        //    for (int i = NumberOfPagesToTakeAtATime; i < PageCount; i += NumberOfPagesToTakeAtATime)
+        //    {
+        //        var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
+        //        var skipAmount = i * PageSize;
+        //        var load = Lazy.Create(() => user.GetFavorites(skipAmount, takeAmount));
+
+        //        for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
+        //        {
+        //            var skipMult = j;
+        //            var t = new AsyncNewsList
+        //            {
+        //                News = async () => (await load.Get()).Skip(skipMult * PageSize).Take(PageSize).ToList(),
+        //            };
+
+        //            newsLists.Add(t);
+        //        }
+        //    }
+        //}
+
         public AsyncNewsList GetNewsFuncForPage(int page)
         {
-            return newsLists[page];
+            //return newsLists[page];
+            return newsLists.Skip(page).First();
         }
     }
 }

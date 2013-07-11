@@ -43,7 +43,7 @@ namespace Weave.User.Service.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("refresh", refresh)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -69,7 +69,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("take", take)
                 .AddParameter("type", (int)type)
                 .AddParameter("requireImage", requireImage)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -89,7 +89,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("take", take)
                 .AddParameter("type", (int)type)
                 .AddParameter("requireImage", requireImage)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -112,7 +112,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("refresh", refresh)
                 .AddParameter("nested", nested)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -127,7 +127,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("category", category)
                 .AddParameter("refresh", refresh)
                 .AddParameter("nested", nested)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -142,7 +142,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("feedId", feedId)
                 .AddParameter("refresh", refresh)
                 .AddParameter("nested", nested)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -166,7 +166,7 @@ namespace Weave.User.Service.Client
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -209,7 +209,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -223,7 +223,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -248,7 +248,7 @@ namespace Weave.User.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
-                .AddParameter("blah", Guid.NewGuid())
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();

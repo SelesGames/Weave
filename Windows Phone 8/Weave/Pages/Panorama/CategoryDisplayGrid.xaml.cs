@@ -43,7 +43,7 @@ namespace weave
         {
             Hide();
 
-            news.Zip(displayers, (newsItem, display) =>
+            System.Linq.Enumerable.Zip(news, displayers, (newsItem, display) =>
                 new Action(() =>
                 {
                     display.NewsItem = newsItem;

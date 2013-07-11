@@ -218,7 +218,7 @@ namespace weave
             this.bottomButtons.Visibility = Visibility.Collapsed;
             this.scroller.Visibility = Visibility.Visible;
 
-            var tuples = newsItemsUI.Zip(news, (ui, newsItem) => new { ui, newsItem }).ToList();
+            var tuples = System.Linq.Enumerable.Zip(newsItemsUI, news, (ui, newsItem) => new { ui, newsItem }).ToList();
 
             CompositeDisposable disposables = new CompositeDisposable();
             disp.Disposable = disposables;

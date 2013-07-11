@@ -57,6 +57,7 @@ namespace Weave.Article.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("take", take)
                 .AddParameter("skip", skip)
+                .AddCacheBuster()
                 .ToString();
 
             var client = CreateClient();
@@ -110,6 +111,7 @@ namespace Weave.Article.Service.Client
                 .AddParameter("userId", userId)
                 .AddParameter("take", take)
                 .AddParameter("skip", skip)
+                .AddCacheBuster()
                 .ToString();
 
 
