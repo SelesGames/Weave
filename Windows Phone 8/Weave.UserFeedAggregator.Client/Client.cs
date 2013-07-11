@@ -73,7 +73,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            System.Diagnostics.Debug.WriteLine("Calling {0}", url);
+
             var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
@@ -93,7 +93,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            System.Diagnostics.Debug.WriteLine("Calling {0}", url);
+
             var result = await client.GetAsync<Outgoing.NewsList>(url, CancellationToken.None);
             return result;
         }
@@ -276,8 +276,8 @@ namespace Weave.User.Service.Client
 
         RestClient CreateClient()
         {
-            //return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
-            return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
+            return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
+            //return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
         }
     }
 }

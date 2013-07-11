@@ -199,7 +199,7 @@ namespace weave
 
             scroller.ScrollToVerticalOffset(0);
 
-            if (this.displayedNews == null || newsItemsUI == null)
+            if (newsItemsUI == null)
                 return;
 
             this.IsHitTestVisible = false;
@@ -217,6 +217,9 @@ namespace weave
 
             this.bottomButtons.Visibility = Visibility.Collapsed;
             this.scroller.Visibility = Visibility.Visible;
+
+            if (news == null)
+                return;
 
             var tuples = System.Linq.Enumerable.Zip(newsItemsUI, news, (ui, newsItem) => new { ui, newsItem }).ToList();
 
@@ -321,6 +324,10 @@ namespace weave
             {
                 var news = (IReadOnlyList<NewsItem>)e.NewValue;
                 cl.SetNews(news);
+            }
+            else
+            {
+                cl.SetNews(null);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.SharpZipLib.GZip;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -17,11 +18,17 @@ namespace SelesGames.Rest
 
         public Task GetAsync(string url, CancellationToken cancellationToken)
         {
+#if DEBUG
+            Debug.WriteLine("HTTP GET : {0}", url);
+#endif
             return new HttpClient().GetAsync(url, cancellationToken);
         }
 
         public async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
         {
+#if DEBUG
+            Debug.WriteLine("HTTP GET : {0}", url);
+#endif
             var response = await CreateClient().GetAsync(url, cancellationToken).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
             return await ReadObjectFromResponseMessage<T>(response);
@@ -29,6 +36,9 @@ namespace SelesGames.Rest
 
         public async Task<TResult> PostAsync<TPost, TResult>(string url, TPost obj, CancellationToken cancelToken)
         {
+#if DEBUG
+            Debug.WriteLine("HTTP POST : {0}", url);
+#endif
             var client = CreateClient();
 
             HttpResponseMessage response;
@@ -51,6 +61,9 @@ namespace SelesGames.Rest
 
         public async Task PostAsync<TPost>(string url, TPost obj, CancellationToken cancelToken)
         {
+#if DEBUG
+            Debug.WriteLine("HTTP POST : {0}", url);
+#endif
             var client = CreateClient();
 
             using (var ms = new MemoryStream())

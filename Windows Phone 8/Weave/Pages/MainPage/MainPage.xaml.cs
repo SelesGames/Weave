@@ -285,6 +285,11 @@ namespace weave
 
         void CreateViewModel()
         {
+            if (this.vm != null)
+            {
+                this.vm.Dispose();
+            }
+
             if (string.IsNullOrWhiteSpace(header))
             {
                 DataContext = null;
@@ -298,14 +303,18 @@ namespace weave
 
             this.vm = new MainPageViewModel(this, header);
             if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
+            {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Category;
-            if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
+            }
+            else if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
             {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Feed;
                 vm.FeedId = feedId.Value;
             }
-            if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
+            else if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
+            {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
+            }
 
             DataContext = this.vm;
         }
@@ -411,6 +420,8 @@ namespace weave
                 this.header = header;
                 this.mode = mode;
                 this.feedId = feedId;
+
+                cl.ItemsSource = null;
 
                 CreateViewModel();
                 vm.InitializeAsync().ContinueWith(_ => Dispatcher.BeginInvoke(() => vmSourcesList.RefreshCategories()));
