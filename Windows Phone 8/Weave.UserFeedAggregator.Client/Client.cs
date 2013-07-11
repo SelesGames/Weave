@@ -170,7 +170,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.GetAsync<object>(url, CancellationToken.None);
+            await client.GetAsync(url, CancellationToken.None);
         }
 
         public async Task UpdateFeed(Guid userId, Incoming.UpdatedFeed feed)
@@ -213,7 +213,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.GetAsync<object>(url, CancellationToken.None);
+            await client.GetAsync(url, CancellationToken.None);
         }
 
         public async Task MarkArticleUnread(Guid userId, Guid feedId, Guid newsItemId)
@@ -227,7 +227,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.GetAsync<object>(url, CancellationToken.None);
+            await client.GetAsync(url, CancellationToken.None);
         }
 
         public async Task MarkArticlesSoftRead(Guid userId, List<Guid> newsItemIds)
@@ -252,7 +252,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.GetAsync<object>(url, CancellationToken.None);
+            await client.GetAsync(url, CancellationToken.None);
         }
 
         public async Task RemoveFavorite(Guid userId, Guid feedId, Guid newsItemId)
@@ -266,7 +266,7 @@ namespace Weave.User.Service.Client
                 .ToString();
 
             var client = CreateClient();
-            await client.GetAsync<object>(url, CancellationToken.None);
+            await client.GetAsync(url, CancellationToken.None);
         }
 
         #endregion
