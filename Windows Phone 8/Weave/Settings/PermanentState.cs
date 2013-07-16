@@ -9,6 +9,7 @@ namespace weave
     {
         public bool IsFirstTime { get; set; }
         //public UserInfo User { get; set; }
+        public Guid? UserId { get; set; }
         public DateTime PreviousLoginTime { get; set; }
         public DateTime CurrentLoginTime { get; set; }
         public string ArticleDeletionTimeForMarkedRead { get; set; }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Info;
 using Microsoft.Phone.Shell;
 using SelesGames;
+using SelesGames.Common.Hashing;
 using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
@@ -303,6 +305,13 @@ namespace weave
             settings.LastLoginTime = permanentState.PreviousLoginTime;
             permanentState.RunHistory.CreateNewLog();
             FinishInitialization();
+
+            if (!permanentState.UserId.HasValue)
+            {
+                var anid2 = (string)UserExtendedProperties.GetValue("ANID2");
+                permanentState.UserId = anid2 == null ? (Guid?)null : CryptoHelper.ComputeHash(anid2);
+            }
+
 
             permanentState.IsFirstTime = false;
 
