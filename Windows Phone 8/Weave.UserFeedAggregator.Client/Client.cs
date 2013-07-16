@@ -202,12 +202,11 @@ namespace Weave.User.Service.Client
 
         #region Article management
 
-        public async Task MarkArticleRead(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task MarkArticleRead(Guid userId, Guid newsItemId)
         {
             string append = "mark_read";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
-                .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
                 .AddCacheBuster()
                 .ToString();
@@ -216,12 +215,11 @@ namespace Weave.User.Service.Client
             await client.GetAsync(url, CancellationToken.None);
         }
 
-        public async Task MarkArticleUnread(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task MarkArticleUnread(Guid userId, Guid newsItemId)
         {
             string append = "mark_unread";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
-                .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
                 .AddCacheBuster()
                 .ToString();
@@ -241,12 +239,11 @@ namespace Weave.User.Service.Client
             await client.PostAsync(url, newsItemIds, CancellationToken.None);
         }
 
-        public async Task AddFavorite(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task AddFavorite(Guid userId, Guid newsItemId)
         {
             string append = "add_favorite";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
-                .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
                 .AddCacheBuster()
                 .ToString();
@@ -255,12 +252,11 @@ namespace Weave.User.Service.Client
             await client.GetAsync(url, CancellationToken.None);
         }
 
-        public async Task RemoveFavorite(Guid userId, Guid feedId, Guid newsItemId)
+        public async Task RemoveFavorite(Guid userId, Guid newsItemId)
         {
             string append = "remove_favorite";
             var url = new UriBuilder(SERVICE_URL + append)
                 .AddParameter("userId", userId)
-                .AddParameter("feedId", feedId)
                 .AddParameter("newsItemId", newsItemId)
                 .AddCacheBuster()
                 .ToString();
