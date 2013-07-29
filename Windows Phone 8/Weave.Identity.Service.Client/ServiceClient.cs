@@ -10,6 +10,17 @@ namespace Weave.Identity.Service.Client
     {
         const string SERVICE_URL = "http://weave-identity.cloudapp.net/api/identity";
 
+        public async Task<DTOs.IdentityInfo> GetUserById(Guid userId)
+        {
+            var url = new UriBuilder(SERVICE_URL)
+                .AddParameter("userId", userId)
+                .ToString();
+
+            var client = CreateClient();
+            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
+            return result;
+        }
+
         public async Task<DTOs.IdentityInfo> GetUserFromFacebookToken(string facebookToken)
         {
             var url = new UriBuilder(SERVICE_URL)

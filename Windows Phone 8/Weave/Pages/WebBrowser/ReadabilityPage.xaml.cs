@@ -119,23 +119,23 @@ namespace weave
             bindingAdapter.DisposeWith(disposables);
         }
 
-        void BindIsMarkedReadToAppBar()
-        {
-            if (viewModel == null || viewModel.NewsItem == null)
-                return;
+        //void BindIsMarkedReadToAppBar()
+        //{
+        //    if (viewModel == null || viewModel.NewsItem == null)
+        //        return;
 
-            var markedReadButton = ApplicationBar.MenuItems[3] as ApplicationBarMenuItem;
+        //    var markedReadButton = ApplicationBar.MenuItems[3] as ApplicationBarMenuItem;
 
-            var bindingAdapter = new ApplicationBarToggleMenuItemAdapter(markedReadButton)
-            {
-                CheckedText = "mark unread",
-                UncheckedText = "mark read",
-                IsChecked = viewModel.NewsItem.HasBeenViewed,
-            };
-            bindingAdapter.SetBinding(ApplicationBarToggleMenuItemAdapter.IsCheckedProperty,
-                 new Binding("HasBeenViewed") { Source = viewModel.NewsItem, Mode = BindingMode.TwoWay });
-            bindingAdapter.DisposeWith(disposables);
-        }
+        //    var bindingAdapter = new ApplicationBarToggleMenuItemAdapter(markedReadButton)
+        //    {
+        //        CheckedText = "mark unread",
+        //        UncheckedText = "mark read",
+        //        IsChecked = viewModel.NewsItem.HasBeenViewed,
+        //    };
+        //    bindingAdapter.SetBinding(ApplicationBarToggleMenuItemAdapter.IsCheckedProperty,
+        //         new Binding("HasBeenViewed") { Source = viewModel.NewsItem, Mode = BindingMode.TwoWay });
+        //    bindingAdapter.DisposeWith(disposables);
+        //}
 
         // change the margins on the webBrowser on page orientation changed
         void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
@@ -293,7 +293,7 @@ namespace weave
         {
             BindIsFavoriteToAppBar();
             BindIsOrientationLockedToAppBar();
-            BindIsMarkedReadToAppBar();
+            //BindIsMarkedReadToAppBar();
         }
 
         bool UserSwitchedViewingType
