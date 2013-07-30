@@ -4,17 +4,20 @@ using SelesGames;
 using System;
 using System.Net;
 using System.Windows;
-using Weave.Identity.Service.Client;
-using Weave.Identity.Service.Contracts;
-using Weave.Identity.Service.DTOs;
+using Weave.ViewModels;
+//using Weave.Identity.Service.Client;
+//using Weave.Identity.Service.Contracts;
+//using Weave.Identity.Service.DTOs;
 using Weave.ViewModels.Contracts.Client;
+using System.Threading.Tasks;
 
 namespace weave.Pages.Accounts
 {
     public partial class AccountSignInPage : PhoneApplicationPage
     {
-        IIdentityService identityService = new ServiceClient();
+        //IIdentityService identityService = new ServiceClient();
         IUserCache userCache;
+        IdentityInfo viewModel;
 
         public AccountSignInPage()
         {
@@ -24,20 +27,22 @@ namespace weave.Pages.Accounts
                 return;
 
             userCache = ServiceResolver.Get<IUserCache>();
+            viewModel = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient());
+            viewModel.UserId = AppSettings.Instance.PermanentState.Get().WaitOnResult().UserId.Value;
+            DataContext = viewModel;
+            viewModel.LoadFromUserId().Wait();
         }
 
         async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             bool error = false;
-            IdentityInfo identityInfo;
-            string identityUserId = null;
 
             try
             {
                 var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
                 var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                identityUserId = mobileUser.UserId;
-                identityInfo = await identityService.GetUserFromFacebookToken(identityUserId);
+                viewModel.FacebookAuthToken = mobileUser.UserId;
+                await viewModel.LoadFromFacebook();
             }
             catch (WebException webException)
             {
