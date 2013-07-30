@@ -6,8 +6,6 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Data;
-using Telerik.Windows.Controls;
 using Weave.Customizability;
 
 namespace weave

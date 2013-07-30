@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Weave.ViewModels.Contracts.Client;
 
 namespace Weave.ViewModels.Cache

@@ -2,11 +2,10 @@
 using Microsoft.WindowsAzure.MobileServices;
 using SelesGames;
 using System;
-using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
-using System.Threading.Tasks;
 
 namespace weave.Pages.Accounts
 {

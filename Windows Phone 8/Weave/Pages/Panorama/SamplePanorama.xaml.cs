@@ -1,12 +1,10 @@
 ﻿using Microsoft.Phone.Shell;
-using Microsoft.WindowsAzure.MobileServices;
 using SelesGames.Phone;
 using System;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
