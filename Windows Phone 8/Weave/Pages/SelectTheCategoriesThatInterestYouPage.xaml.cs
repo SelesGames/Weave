@@ -3,11 +3,13 @@ using SelesGames;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Weave.FeedLibrary;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -57,6 +59,11 @@ namespace weave
 
                 //// TODO: SHOW SOME PROGRESS BAR OR SOMETHING
                 //await dal.SaveFeeds();
+
+                var userCache = ServiceResolver.Get<IUserCache>();
+                var user = userCache.Get();
+                user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
+                await user.Save();
 
                 GlobalNavigationService.ToPanoramaPage();
             }

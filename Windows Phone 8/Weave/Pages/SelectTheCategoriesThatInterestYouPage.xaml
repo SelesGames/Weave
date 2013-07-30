@@ -82,7 +82,6 @@
 			<TextBlock x:Name="ApplicationTitle" Text="welcome to weave" Style="{StaticResource PhoneTextNormalStyle}" d:LayoutOverrides="Height" Margin="24,20,24,0" FontSize="{StaticResource PhoneFontSizeMedium}" FontFamily="Segoe WP Black" Foreground="{StaticResource PhoneSubtleBrush}"/>
 			<TextBlock FontSize="{StaticResource PhoneFontSizeLarge}" Text="What are your interests?" Margin="24,-4,0,12" Grid.Row="1" Foreground="{StaticResource PhoneAccentBrush}" FontWeight="Bold" />	
 			<phone:LongListSelector x:Name="list" 
-				Style="{StaticResource OptimizedLongListSelectorStyle}"
 				ItemTemplate="{StaticResource CategoriesItemTemplate}" 
 				ItemsSource="{Binding Categories}"
 				HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" 

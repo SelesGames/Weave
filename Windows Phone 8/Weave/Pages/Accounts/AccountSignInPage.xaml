@@ -30,10 +30,10 @@
 			<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top">
 				<TextBlock Text="Sign-in using" Margin="12,-4,12,0" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 				<StackPanel Orientation="Horizontal" Margin="0,12,0,24" HorizontalAlignment="Center">
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Tap="OnFacebookButtonTap" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" Tap="OnTwitterButtonTap" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" Tap="OnGoogleButtonTap" />
-					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" Visibility="Collapsed" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="facebook" IsEnabled="{Binding IsFacebookLoginEnabled}" Tap="OnFacebookButtonTap" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_twitter.png" Tag="twitter" IsEnabled="{Binding IsTwitterLoginEnabled}" Tap="OnTwitterButtonTap" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/64x64_google.png" Tag="google" IsEnabled="{Binding IsGoogleLoginEnabled}" Tap="OnGoogleButtonTap" />
+					<Button Height="72" Width="72" Style="{StaticResource MetroCircleButtonStyle}" Content="/Assets/Icons/facebook.png" Tag="microsoft" IsEnabled="{Binding IsMicrosoftLoginEnabled}" Visibility="Collapsed" />
 				</StackPanel>
 				<TextBlock Text="or" Margin="12" FontSize="{StaticResource PhoneFontSizeMedium}" TextWrapping="Wrap" HorizontalAlignment="Center" />
 				<toolkit:PhoneTextBox x:Name="userNameTB" Hint="email or username" />

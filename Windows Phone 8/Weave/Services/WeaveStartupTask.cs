@@ -1,8 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
-using Microsoft.Phone.Info;
 using Microsoft.Phone.Shell;
 using SelesGames;
-using SelesGames.Common.Hashing;
 using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
@@ -16,10 +14,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-//using weave.Data;
 using weave.Resources;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
+using Weave.ViewModels;
 using Weave.ViewModels.Cache;
 using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Helpers;
@@ -120,7 +118,7 @@ namespace weave
 
         async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
-            permanentState.IsFirstTime = false;
+            //permanentState.IsFirstTime = false;
 
             initialNavigationUri = args.EventArgs.Uri;
 
@@ -136,6 +134,8 @@ namespace weave
                 //dataAccessLayer.IsFirstTime = true;
                 return;
             }
+
+
 
             frame.IsHitTestVisible = false;
 
@@ -169,14 +169,29 @@ namespace weave
             var dummyPage = frame.Content as DummyPage;
             await dummyPage.LayoutPopups();
 
+
+
+            var user = userCache.Get();
+            bool wasUserFound = false;
             try
             {
-                await userCache.RefreshUser(true);
+                await user.Load(true);
+                wasUserFound = true;
             }
             catch (Exception ex)
             {
                 DebugEx.WriteLine(ex);
             }
+
+            if (!wasUserFound)
+            {
+                //var result = MessageBox.Show("We apologize for this, but we are unable to recover your categories and sources from your phone's memory.  Tap the back button twice to exit the app.  The next time you start, you can reselect your categories and sources.", "SERIOUS ERROR", MessageBoxButton.OK);
+                permanentState.IsFirstTime = true;
+                frame.IsLoading = false;
+                return;
+            }
+
+
 
             //dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
 
@@ -186,22 +201,11 @@ namespace weave
             //dataAccessLayer.OldMarkedReadNewsElapsedThreshold = markedReadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForMarkedRead).Span;
             //dataAccessLayer.OldUnreadNewsElapsedThreshold = unreadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForUnread).Span;
 
-            bool wereFeedsRecovered = false;
             bool areThereTooManyFeeds = false;
-            try
-            {
-                //var feeds = await dataAccessLayer.Feeds.Get();
-                wereFeedsRecovered = true;
-               // areThereTooManyFeeds = feeds.AreThereTooManyFeeds();
-            }
-            catch { }
+            if (userCache.Get().Feeds != null)
+                areThereTooManyFeeds = userCache.Get().Feeds.Count > 100;
 
-            if (!wereFeedsRecovered)
-            {
-                var result = MessageBox.Show("We apologize for this, but we are unable to recover your categories and sources from your phone's memory.  Tap the back button twice to exit the app.  The next time you start, you can reselect your categories and sources.", "SERIOUS ERROR", MessageBoxButton.OK);
-                permanentState.IsFirstTime = true;
-                return;
-            }
+
 
             if (areThereTooManyFeeds)
             {
@@ -304,16 +308,21 @@ namespace weave
             permanentState.CurrentLoginTime = DateTime.UtcNow;
             settings.LastLoginTime = permanentState.PreviousLoginTime;
             permanentState.RunHistory.CreateNewLog();
-            FinishInitialization();
 
+
+#if DEBUG
+            if (!permanentState.UserId.HasValue)
+                permanentState.UserId = Guid.NewGuid();// Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a");
+#else
             if (!permanentState.UserId.HasValue)
             {
                 var anid2 = (string)UserExtendedProperties.GetValue("ANID2");
-                permanentState.UserId = anid2 == null ? (Guid?)null : CryptoHelper.ComputeHash(anid2);
+                permanentState.UserId = anid2 == null ? Guid.NewGuid() : CryptoHelper.ComputeHash(anid2);
             }
+#endif
 
-
-            permanentState.IsFirstTime = false;
+            FinishInitialization();
+            //permanentState.IsFirstTime = false;
 
             if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
             {
@@ -416,13 +425,18 @@ namespace weave
                 new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
                 .InSingletonScope();
 
-            userCache = new StandardUserCache(
-                new StandardRepository(
-                    Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a"),
-                    new Weave.User.Service.Client.Client(),
-                    new Weave.Article.Service.Client.ServiceClient()
-                )
-            );
+            var user = new UserInfo(
+                    new StandardRepository(
+                        permanentState.UserId.Value,
+                        new Weave.User.Service.Client.Client(),
+                        new Weave.Article.Service.Client.ServiceClient()
+                    )
+                ) 
+                { 
+                    Id = permanentState.UserId.Value 
+                };
+
+            userCache = new StandardUserCache(user);
 
             kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
 

@@ -7,16 +7,10 @@ namespace Weave.ViewModels.Cache
     public class StandardUserCache : IUserCache
     {
         UserInfo user;
-        IViewModelRepository viewModelRepo;
 
-        public StandardUserCache(IViewModelRepository viewModelRepo)
+        public StandardUserCache(UserInfo user)
         {
-            this.viewModelRepo = viewModelRepo;
-        }
-
-        public async Task RefreshUser(bool refreshNews = false)
-        {
-            user = await viewModelRepo.GetUserInfo(refreshNews);
+            this.user = user;
         }
 
         public UserInfo Get()

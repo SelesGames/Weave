@@ -5,9 +5,6 @@ using System;
 using System.Net;
 using System.Windows;
 using Weave.ViewModels;
-//using Weave.Identity.Service.Client;
-//using Weave.Identity.Service.Contracts;
-//using Weave.Identity.Service.DTOs;
 using Weave.ViewModels.Contracts.Client;
 using System.Threading.Tasks;
 
@@ -15,9 +12,8 @@ namespace weave.Pages.Accounts
 {
     public partial class AccountSignInPage : PhoneApplicationPage
     {
-        //IIdentityService identityService = new ServiceClient();
-        IUserCache userCache;
         IdentityInfo viewModel;
+        bool isViewModelInitialized = false;
 
         public AccountSignInPage()
         {
@@ -26,49 +22,56 @@ namespace weave.Pages.Accounts
             if (this.IsInDesignMode())
                 return;
 
-            userCache = ServiceResolver.Get<IUserCache>();
+            var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            var userCache = ServiceResolver.Get<IUserCache>();
+            var user = userCache.Get();
             viewModel = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient());
-            viewModel.UserId = AppSettings.Instance.PermanentState.Get().WaitOnResult().UserId.Value;
+            viewModel.UserId =  permState.UserId.Value;
             DataContext = viewModel;
-            viewModel.LoadFromUserId().Wait();
+            viewModel.UserIdChanged += async (s, e) =>
+            {
+                permState.UserId = viewModel.UserId;
+                user.Id = viewModel.UserId;
+                // refresh user news?
+                await user.Load(refreshNews: true);
+            };
         }
 
-        async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            bool error = false;
+            base.OnNavigatedTo(e);
+
+            if (isViewModelInitialized)
+                return;
+
+            isViewModelInitialized = true;
 
             try
             {
-                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
-                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                viewModel.FacebookAuthToken = mobileUser.UserId;
-                await viewModel.LoadFromFacebook();
-            }
-            catch (WebException webException)
-            {
-                var response = (HttpWebResponse)webException.Response;
-                if (response.StatusCode == HttpStatusCode.NotFound)
-                    error = true;
+                await viewModel.LoadFromUserId();
             }
             catch (Exception ex)
             {
                 DebugEx.WriteLine(ex);
             }
+        }
 
-            // if error, create new identityInfo, then upload
-            if (error)
+        MobileServiceClient CreateMobileServiceClient()
+        {
+            return new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
+        }
+
+        async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            try
             {
-                var user = userCache.Get();
-                identityInfo = new IdentityInfo
-                {
-                    UserId = user.Id,
-                    FacebookAuthToken = identityUserId,
-                };
-                await identityService.Add(identityInfo);
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                viewModel.FacebookAuthToken = mobileUser.UserId;
+                await viewModel.LoadFromFacebook();
             }
-            else
+            catch (Exception ex)
             {
-                // replace userId of cached user with the userId returned from identityInfo
+                DebugEx.WriteLine(ex);
             }
         }
 
@@ -76,32 +79,27 @@ namespace weave.Pages.Accounts
         {
             try
             {
-                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
-                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Twitter);
-                var userId = mobileUser.UserId;
-                var identityInfo = await identityService.GetUserFromTwitterToken(userId);
-
-                bool error = false;
-
-                // if error, create new identityInfo, then upload
-                if (error)
-                {
-                    var user = userCache.Get();
-                    identityInfo = new IdentityInfo
-                    {
-                        UserId = user.Id,
-                        TwitterAuthToken = userId,
-                    };
-                    await identityService.Add(identityInfo);
-                }
-                else
-                {
-                    // replace userId of cached user with the userId returned from identityInfo
-                }
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Twitter);
+                viewModel.TwitterAuthToken = mobileUser.UserId;
+                await viewModel.LoadFromTwitter();
             }
-            catch (InvalidOperationException)
+            catch (Exception ex)
             {
-                //message = "You must log in. Login Required";
+                DebugEx.WriteLine(ex);
+            }
+        }
+
+        async void OnMicrosoftButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            try
+            {
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                viewModel.MicrosoftAuthToken = mobileUser.UserId;
+                await viewModel.LoadFromMicrosoft();
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
             }
         }
 
@@ -109,71 +107,44 @@ namespace weave.Pages.Accounts
         {
             try
             {
-                var mobileService = new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
-                var mobileUser = await mobileService.LoginAsync(MobileServiceAuthenticationProvider.Google);
-                var userId = mobileUser.UserId;
-                var identityInfo = await identityService.GetUserFromGoogleToken(userId);
-
-                bool error = false;
-
-                // if error, create new identityInfo, then upload
-                if (error)
-                {
-                    var user = userCache.Get();
-                    identityInfo = new IdentityInfo
-                    {
-                        UserId = user.Id,
-                        GoogleAuthToken = userId,
-                    };
-                    await identityService.Add(identityInfo);
-                }
-                else
-                {
-                    // replace userId of cached user with the userId returned from identityInfo
-                }
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Google);
+                viewModel.GoogleAuthToken = mobileUser.UserId;
+                await viewModel.LoadFromGoogle();
             }
-            catch (InvalidOperationException)
+            catch (Exception ex)
             {
-                //message = "You must log in. Login Required";
+                DebugEx.WriteLine(ex);
             }
         }
 
         async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            var username = userNameTB.Text;
+            var password = passwordTB.Text;
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show("You must enter a username to sign-in");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("You must enter a password to sign-in");
+                return;
+            }
+
+            viewModel.UserName = username;
+            viewModel.PasswordHash = password;
+
             try
             {
-                var username = userNameTB.Text;
-                var password = passwordTB.Text;
-
-                if (string.IsNullOrWhiteSpace(username))
-                {
-                    MessageBox.Show("You must enter a username to sign-in");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(password))
-                {
-                    MessageBox.Show("You must enter a password to sign-in");
-                    return;
-                } 
-                
-                var identityInfo = await identityService.GetUserFromUserNameAndPassword(username, password);
-
-                bool error = false;
-
-                // if error, create new identityInfo, then upload
-                if (error)
-                {
-                    // alert user that username/password didn't work
-                }
-                else
-                {
-                    // replace userId of cached user with the userId returned from identityInfo
-                }
+                await viewModel.LoadFromUsernameAndPassword();
             }
-            catch (InvalidOperationException)
+            catch (Exception ex)
             {
+                DebugEx.WriteLine(ex);
                 //message = "You must log in. Login Required";
-            }  
+            }
         }
 
         void OnCreateAccountButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
