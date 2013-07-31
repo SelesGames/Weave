@@ -4,8 +4,8 @@ using SelesGames;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
+using Weave.ViewModels.Identity;
 
 namespace weave.Pages.Accounts
 {

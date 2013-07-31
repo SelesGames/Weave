@@ -11,12 +11,7 @@ namespace SelesGames.Rest
             : base()
         {
             Response = response;
-        }        
-        
-        public ResponseException(HttpResponseMessage response) : base()
-        {
-            Response = response;
-        }        
+        }            
         
         public ResponseException(Exception innerException, HttpResponseMessage response) 
             : base(null, innerException)
