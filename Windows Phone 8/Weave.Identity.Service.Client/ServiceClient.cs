@@ -1,5 +1,6 @@
 ﻿using SelesGames.Rest;
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Weave.Identity.Service.Contracts;
@@ -16,9 +17,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("userId", userId)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public async Task<DTOs.IdentityInfo> GetUserFromFacebookToken(string facebookToken)
@@ -27,9 +26,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("facebookToken", facebookToken)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public async Task<DTOs.IdentityInfo> GetUserFromTwitterToken(string twitterToken)
@@ -38,9 +35,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("twitterToken", twitterToken)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public async Task<DTOs.IdentityInfo> GetUserFromMicrosoftToken(string microsoftToken)
@@ -49,9 +44,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("microsoftToken", microsoftToken)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public async Task<DTOs.IdentityInfo> GetUserFromGoogleToken(string googleToken)
@@ -60,9 +53,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("googleToken", googleToken)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public async Task<DTOs.IdentityInfo> GetUserFromUserNameAndPassword(string username, string password)
@@ -72,9 +63,7 @@ namespace Weave.Identity.Service.Client
                 .AddParameter("password", password)
                 .ToString();
 
-            var client = CreateClient();
-            var result = await client.GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
-            return result;
+            return await GetIdentityInfo(url);
         }
 
         public Task Add(DTOs.IdentityInfo user)
@@ -89,10 +78,32 @@ namespace Weave.Identity.Service.Client
             return client.PostAsync(SERVICE_URL, user, CancellationToken.None);
         }
 
+
+
+
+        #region Private Helper methods
+
+        async Task<DTOs.IdentityInfo> GetIdentityInfo(string url)
+        {
+            try
+            {
+                return await CreateClient().GetAsync<DTOs.IdentityInfo>(url, CancellationToken.None);
+            }
+            catch (ResponseException responseException)
+            {
+                if (responseException.Response.StatusCode == HttpStatusCode.NotFound)
+                    throw new NoMatchingUserException();
+                else
+                    throw responseException;
+            }
+        }
+
         RestClient CreateClient()
         {
             //return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
             return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
         }
+
+        #endregion
     }
 }

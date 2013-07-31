@@ -30,7 +30,6 @@ namespace SelesGames.Rest
             Debug.WriteLine("HTTP GET : {0}", url);
 #endif
             var response = await CreateClient().GetAsync(url, cancellationToken).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
             return await ReadObjectFromResponseMessage<T>(response);
         }
 
@@ -55,7 +54,6 @@ namespace SelesGames.Rest
                 ms.Close();
             }
 
-            response.EnsureSuccessStatusCode();
             return await ReadObjectFromResponseMessage<TResult>(response);
         }
 
@@ -99,26 +97,35 @@ namespace SelesGames.Rest
 
         async Task<T> ReadObjectFromResponseMessage<T>(HttpResponseMessage response)
         {
-            T result;
-
-            using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
+            try
             {
-                var contentEncoding = response.Content.Headers.ContentEncoding.FirstOrDefault();
-                if (UseGzip || "gzip".Equals(contentEncoding, StringComparison.OrdinalIgnoreCase))
+                response.EnsureSuccessStatusCode();
+
+                T result;
+
+                using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    using (var gzip = new GZipInputStream(stream))
+                    var contentEncoding = response.Content.Headers.ContentEncoding.FirstOrDefault();
+                    if (UseGzip || "gzip".Equals(contentEncoding, StringComparison.OrdinalIgnoreCase))
                     {
-                        result = ReadObject<T>(gzip);
-                        gzip.Close();
+                        using (var gzip = new GZipInputStream(stream))
+                        {
+                            result = ReadObject<T>(gzip);
+                            gzip.Close();
+                        }
                     }
+                    else
+                    {
+                        result = ReadObject<T>(stream);
+                    }
+                    stream.Close();
                 }
-                else
-                {
-                    result = ReadObject<T>(stream);
-                }
-                stream.Close();
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                throw new ResponseException(ex, response);
+            }
         }
 
         #endregion
