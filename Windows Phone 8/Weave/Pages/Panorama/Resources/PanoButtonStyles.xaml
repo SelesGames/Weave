@@ -297,7 +297,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
-					<toolkit:HubTile Source="{Binding Source}" Title="{Binding Name}" Notification="{Binding NewCount}" GroupTag="mostviewed" Style="{StaticResource HomePageHubTileStyle}"/>
+					<toolkit:HubTile Source="{Binding ImageSource}" Title="{Binding Name}" Notification="{Binding NewCount}" GroupTag="mostviewed" Style="{StaticResource HomePageHubTileStyle}"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

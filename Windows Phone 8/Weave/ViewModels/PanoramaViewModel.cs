@@ -97,7 +97,7 @@ namespace weave
                 {
                     pic = feeds.Where(x => x.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Select(z=> z.TeaserImageUrl).FirstOrDefault();
                 }
-                o.Source = pic;
+                o.ImageSource = pic;
 
                 MostViewed.Add(o);
             }

@@ -33,7 +33,7 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
-            var news = await serviceClient.GetNews(categoryName, take: 15, type: Weave.ViewModels.NewsItemType.New, requireImage: true);
+            var news = await serviceClient.GetNews(Guid.Empty, categoryName, take: 15, type: Weave.ViewModels.NewsItemType.New, requireImage: true);
 
             var imagePrefix = CreateImagePrefix();
             var imageUrls = await news.News.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));

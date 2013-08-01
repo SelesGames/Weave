@@ -35,7 +35,7 @@ namespace weave
         public string Name { get; set; }
         public Guid FeedId { get; set; }
         public int NewArticleCount { get; set; }
-        public string Source { get; set; }
+        public string ImageSource { get; set; }
         public CategoryOrFeedType Type { get; set; }
 
         public string NewArticleCountText

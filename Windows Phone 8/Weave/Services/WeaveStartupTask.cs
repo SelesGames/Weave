@@ -312,7 +312,9 @@ namespace weave
 
 #if DEBUG
             if (!permanentState.UserId.HasValue)
-                permanentState.UserId = Guid.NewGuid();// Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a");
+                permanentState.UserId = Guid.NewGuid();
+                //permanentState.UserId = Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a");
+            //permanentState.IsFirstTime = false;
 #else
             if (!permanentState.UserId.HasValue)
             {
@@ -427,7 +429,6 @@ namespace weave
 
             var user = new UserInfo(
                     new StandardRepository(
-                        permanentState.UserId.Value,
                         new Weave.User.Service.Client.Client(),
                         new Weave.Article.Service.Client.ServiceClient()
                     )

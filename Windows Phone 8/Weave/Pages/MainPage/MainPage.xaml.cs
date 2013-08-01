@@ -18,6 +18,7 @@ using System.Windows.Media;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 
 namespace weave
@@ -32,7 +33,7 @@ namespace weave
         PermanentState permState;
 
         MainPageViewModel vm;
-        MainPageSourceListViewModel vmSourcesList;
+        //MainPageSourceListViewModel vmSourcesList;
 
         SwitchingAdControl adControl;
 
@@ -265,15 +266,15 @@ namespace weave
                     FinishPageInitialization();
 
                     CreateViewModel();
-                    vmSourcesList = new MainPageSourceListViewModel();
-                    SourcesList.DataContext = vmSourcesList;
+                    //vmSourcesList = new MainPageSourceListViewModel();
+                    SourcesList.DataContext = ServiceResolver.Get<IUserCache>().Get();// vmSourcesList;
 
                     //await TimeSpan.FromSeconds(0.4);
 
                     if (vm != null)
                         await vm.InitializeAsync();
 
-                    vmSourcesList.RefreshCategories();
+                    //vmSourcesList.RefreshCategories();
                 }
             }
             catch (Exception exception)
@@ -424,7 +425,7 @@ namespace weave
                 cl.ItemsSource = null;
 
                 CreateViewModel();
-                vm.InitializeAsync().ContinueWith(_ => Dispatcher.BeginInvoke(() => vmSourcesList.RefreshCategories()));
+                vm.InitializeAsync();//.ContinueWith(_ => Dispatcher.BeginInvoke(() => vmSourcesList.RefreshCategories()));
                 HideMenu();
             }
         }
