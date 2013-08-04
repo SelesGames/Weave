@@ -28,30 +28,4 @@ namespace weave
             throw new System.NotImplementedException();
         }
     }
-
-    //public class MainPageSourceListViewModel
-    //{
-    //    IUserCache userCache = ServiceResolver.Get<IUserCache>();
-
-    //    public ObservableCollection<CategoryOrLooseFeedViewModel> Categories { get; private set; }
-
-    //    public MainPageSourceListViewModel()
-    //    {
-    //        Categories = new ObservableCollection<CategoryOrLooseFeedViewModel>();
-    //    }
-
-    //    public void RefreshCategories()
-    //    {
-    //        var feeds = userCache.Get().Feeds;
-    //        var sources = feeds.GetAllSources(o => o.ToUpper(), o => o).ToList();
-    //        Merge(sources);
-    //    }
-
-    //    void Merge(List<CategoryOrLooseFeedViewModel> sources)
-    //    {
-    //        Categories.Clear();
-    //        foreach (var source in sources)
-    //            Categories.Add(source);
-    //    }
-    //}
 }

@@ -312,9 +312,10 @@ namespace weave
 
 #if DEBUG
             if (!permanentState.UserId.HasValue)
-                permanentState.UserId = Guid.NewGuid();
+                //permanentState.UserId = Guid.NewGuid();
+                permanentState.UserId = Guid.Parse("b41e8972-60cd-43cb-9974-0ec028bedf68");
                 //permanentState.UserId = Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a");
-            //permanentState.IsFirstTime = false;
+            permanentState.IsFirstTime = false;
 #else
             if (!permanentState.UserId.HasValue)
             {
