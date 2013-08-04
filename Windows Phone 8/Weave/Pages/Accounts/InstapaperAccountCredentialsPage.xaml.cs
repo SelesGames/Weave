@@ -1,6 +1,7 @@
 ﻿using Microsoft.Phone.Controls;
 using SelesGames.Instapaper;
 using System.Net;
+using System.Net.Http;
 using System.Windows;
 using weave.Services.Instapaper;
 
@@ -30,12 +31,12 @@ namespace weave
                 Password = password 
             };
             string verifyUrl = account.CreateVerificationString();
-            var request = HttpWebRequest.CreateHttp(verifyUrl);
+            var client = new HttpClient();
 
             try
             {
-                var temp = await request.GetResponseAsync();
-                var response = temp as HttpWebResponse;
+                var temp = await client.GetAsync(verifyUrl);
+                var response = temp as HttpResponseMessage;
                 if (response == null) return;
 
                 if (response.StatusCode == HttpStatusCode.Forbidden) // 403
