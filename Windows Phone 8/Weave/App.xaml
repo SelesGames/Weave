@@ -35,14 +35,10 @@
 
 			<!-- weave settings -->
 			<FontFamily x:Key="AppSpecificFontFamily">Segoe WP SemiLight</FontFamily>
-			<FontFamily x:Key="PanoramaTitleFontFamily">Segoe WP Light</FontFamily>	
 			<System:String x:Key="PanoramaTitle">weave</System:String>
 			<System:String x:Key="AppNameUppercase">WEAVE</System:String>
-			<System:Double x:Key="PanoramaTitleVerticalOffset">-76</System:Double>
-			<System:Double x:Key="PanoramaTitleFontSize">187</System:Double>		
 			<SolidColorBrush x:Key="PanoramaForegroundBrush" Color="White" />
 			<SolidColorBrush x:Key="PanoramaBackgroundBrush" Color="#FF282828" />
-			<Thickness x:Key="PanoramaTitleMargin">10,-76,0,9</Thickness>
 			<System:String x:Key="ChangelogUrl">http://www.selesgames.com/windowsphone/weave/changelog.html</System:String>
 
 			<local:LocalizedStrings x:Key="LocalizedStrings"/>
