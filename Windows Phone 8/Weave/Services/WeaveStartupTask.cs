@@ -1,6 +1,8 @@
 ﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Info;
 using Microsoft.Phone.Shell;
 using SelesGames;
+using SelesGames.Common.Hashing;
 using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
