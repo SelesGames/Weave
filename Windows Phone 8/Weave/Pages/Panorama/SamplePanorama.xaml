@@ -57,12 +57,12 @@
 		<phone:Panorama x:Name="pano" Foreground="{StaticResource PanoramaForegroundBrush}" Background="{StaticResource PanoramaBackgroundBrush}" FontFamily="{StaticResource AppSpecificFontFamily}" Title=" " Margin="0,-24,0,0">										
 			<phone:PanoramaItem x:Name="Menu" Margin="0,-60,0,0" Style="{StaticResource PanoramaItemStyle}" >
 				<Grid Margin="12,0">
-					<TextBlock HorizontalAlignment="Left" Text="MOST VIEWED" VerticalAlignment="Top" FontFamily="Segoe WP Black" RenderTransformOrigin="0,0.5" Margin="19,-33,0,0" FontSize="45.333" Foreground="#F4FFFFFF">
+					<TextBlock HorizontalAlignment="Left" Text="MOST VIEWED" VerticalAlignment="Top" FontFamily="Segoe WP Black" RenderTransformOrigin="0,0.5" Margin="19,-33,0,0" FontSize="45.333" Foreground="{StaticResource PanoramaForegroundBrush}" Opacity="0.96">
 						<TextBlock.RenderTransform>
 							<CompositeTransform Rotation="90"/>
 						</TextBlock.RenderTransform>
 					</TextBlock>
-					<StackPanel x:Name="menuTileWrapper" Margin="46,0,0,0" VerticalAlignment="Top">
+					<StackPanel x:Name="menuTileWrapper" Margin="46,0,-24,0" VerticalAlignment="Top">
 						<ItemsControl x:Name="mostViewed" ItemsPanel="{StaticResource WrapPanelTemplate}" ItemsSource="{Binding MostViewed}" ItemTemplate="{StaticResource MostViewedItemTemplate}"/>
 						<telerikPrimitives:RadMosaicHubTile 
 							x:Name="mosaicHubTile" 
