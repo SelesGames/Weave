@@ -238,13 +238,13 @@
     <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
     <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
     <Compile Include="Services\MostViewedHistory\RunLog.cs" />
+    <Compile Include="Services\Startup\IState.cs" />
+    <Compile Include="Services\Startup\StartupIdentityStateMachine.cs" />
     <Compile Include="Services\Startup\Transition_GetMicrosoftId.cs" />
     <Compile Include="Services\Startup\Transition_GetRandomId.cs" />
     <Compile Include="Services\Startup\Transition_GetUserById.cs" />
     <Compile Include="Services\SwipeGestureHelper.cs" />
     <Compile Include="Services\SystemTrayNavigationSetter.cs" />
-    <Compile Include="Settings\ArticleDeleteTimesForMarkedRead.cs" />
-    <Compile Include="Settings\ArticleDeleteTimesForUnread.cs" />
     <Compile Include="Settings\ArticleListFormats.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
     <Compile Include="Settings\FontSets\ArticleListFontSet.cs" />
@@ -728,6 +728,10 @@
     <ProjectReference Include="..\SelesGames.Phone\SelesGames.Phone.csproj">
       <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
       <Name>SelesGames.Phone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
+      <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
+      <Name>SelesGames.Rest</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.UI.Advertising\SelesGames.UI.Advertising.csproj">
       <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>

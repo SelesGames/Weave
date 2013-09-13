@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Weave.ViewModels.Identity;
+using Weave.ViewModels;
 
 namespace weave.Services.Startup
 {
-    public class Transition_GetRandomId
+    public class Transition_GetRandomId : IState
     {
-        IdentityInfo identityInfo;
+        UserInfo user;
 
         public enum State
         {
@@ -16,15 +16,15 @@ namespace weave.Services.Startup
 
         public State? CurrentState { get; private set; }
 
-        public Transition_GetRandomId(IdentityInfo identityInfo)
+        public Transition_GetRandomId(UserInfo user)
         {
-            this.identityInfo = identityInfo;
+            this.user = user;
         }
 
         public Task Transition()
         {
             var newId = Guid.NewGuid();
-            identityInfo.UserId = newId;
+            user.Id = newId;
             CurrentState = State.Success;
 
             return Task.FromResult<object>(null);
