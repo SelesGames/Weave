@@ -256,7 +256,7 @@
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
-    <Compile Include="ViewModels\FeedsToCategoryOrLooseFeedViewModelConverter.cs" />
+    <Compile Include="ViewModels\FeedsListenerViewModel.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\BaseNewsCollectionViewModel.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
