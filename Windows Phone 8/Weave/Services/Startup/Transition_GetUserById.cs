@@ -33,7 +33,8 @@ namespace weave.Services.Startup
             {
                 if (responseException.Response.StatusCode == HttpStatusCode.NotFound)
                     CurrentState = State.Fail;
-                throw;
+                else
+                    throw;
             }
             catch
             {

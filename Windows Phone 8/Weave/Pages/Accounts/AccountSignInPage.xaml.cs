@@ -21,15 +21,13 @@ namespace weave.Pages.Accounts
             if (this.IsInDesignMode())
                 return;
 
-            var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             var userCache = ServiceResolver.Get<IUserCache>();
             var user = userCache.Get();
             viewModel = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient());
-            viewModel.UserId =  permState.UserId.Value;
+            viewModel.UserId = user.Id;
             DataContext = viewModel;
             viewModel.UserIdChanged += async (s, e) =>
             {
-                permState.UserId = viewModel.UserId;
                 user.Id = viewModel.UserId;
                 // refresh user news?
                 await user.Load(refreshNews: true);

@@ -2,10 +2,11 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using Weave.ViewModels;
 
 namespace weave
 {
-    public class CategoryOrLooseFeedViewModel : INotifyPropertyChanged
+    public class CategoryOrLooseFeedViewModel : ViewModelBase
     {
         #region static media values that come from App.Resources
 
@@ -34,7 +35,18 @@ namespace weave
 
         public string Name { get; set; }
         public Guid FeedId { get; set; }
-        public int NewArticleCount { get; set; }
+
+        public int NewArticleCount
+        {
+            get { return newArticleCount; }
+            set
+            {
+                newArticleCount = value;
+                Raise("NewArticleCount", "NewArticleCountText", "NewArticleCountBrush");
+            }
+        }
+        int newArticleCount;
+
         public string ImageSource { get; set; }
         public CategoryOrFeedType Type { get; set; }
 
@@ -107,7 +119,5 @@ namespace weave
             Category,
             Feed
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

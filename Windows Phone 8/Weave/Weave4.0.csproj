@@ -171,7 +171,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnimationHelper.cs" />
-    <Compile Include="Business Objects\FeedSourceExtensions.cs" />
     <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
       <DependentUpon>AccountSignInPage.xaml</DependentUpon>
     </Compile>

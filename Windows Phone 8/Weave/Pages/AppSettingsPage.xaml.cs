@@ -14,20 +14,14 @@ namespace weave
     public partial class AppSettingsPage : PhoneApplicationPage, IDisposable
     {
         PermanentState permState;
-        ArticleDeleteTimesForMarkedRead markedReadTimes;
-        ArticleDeleteTimesForUnread unreadTimes;
         SpeakArticleVoices voices;
 
         public AppSettingsPage()
         {
             InitializeComponent();
-            markedReadTimes = Resources["MarkedReadTimes"] as ArticleDeleteTimesForMarkedRead;
-            unreadTimes = Resources["UnreadTimes"] as ArticleDeleteTimesForUnread;
             voices = Resources["Voices"] as SpeakArticleVoices;
 
             permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
-            markedReadList.SelectedItem = markedReadTimes.GetByDisplayName(permState.ArticleDeletionTimeForMarkedRead);
-            unreadList.SelectedItem = unreadTimes.GetByDisplayName(permState.ArticleDeletionTimeForUnread);
             voicesList.SelectedItem = voices.GetByDisplayName(permState.SpeakTextVoice);
 
             articleListToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleListPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });
@@ -37,8 +31,6 @@ namespace weave
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumTransition());
             SetValue(RadSlideContinuumAnimation.ApplicationHeaderElementProperty, this.PageTitle);
 
-            markedReadList.SelectionChanged += OnMarkedReadSelectionChanged;
-            unreadList.SelectionChanged += OnUnreadSelectionChanged;
             voicesList.SelectionChanged += OnVoicesListSelectionChanged;
             enableLockScreenButton.Tap += OnRequestLiveLockScreenButtonTapped;
             Loaded += OnPageLoaded;
@@ -48,24 +40,6 @@ namespace weave
 
 
         #region Event Handlers
-
-        void OnMarkedReadSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
-            if (selected == null)
-                return;
-
-            permState.ArticleDeletionTimeForMarkedRead = selected.Display;
-        }
-
-        void OnUnreadSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
-            if (selected == null)
-                return;
-
-            permState.ArticleDeletionTimeForUnread = selected.Display;
-        }
 
         void OnVoicesListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -112,8 +86,6 @@ namespace weave
 
         public void Dispose()
         {
-            markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
-            unreadList.SelectionChanged -= OnUnreadSelectionChanged;
             voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
             enableLockScreenButton.Tap -= OnRequestLiveLockScreenButtonTapped;
             Loaded -= OnPageLoaded;

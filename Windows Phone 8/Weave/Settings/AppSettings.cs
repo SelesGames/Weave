@@ -31,7 +31,6 @@ namespace weave
         public string AppName { get; set; }
         public string VersionNumber { get; set; }
         public bool IsTrial { get; set; }
-        public bool CanSelectInitialCategories { get; set; }
         public int NumberOfNewsItemsPerMainPage { get; set; }
         public IsoStorageLocker<PermanentState> PermanentState { get; private set; }
         public IsoStorageLocker<TombstoneState> TombstoneState { get; private set; }
@@ -44,7 +43,6 @@ namespace weave
         public StandardThemeSet Themes { get; set; }
         public Application CurrentApplication { get; set; }
         public StartupMode StartupMode { get; set; }
-        public DateTime LastLoginTime { get; set; }
         public string ExpandedFeedLibraryUrl { get; set; }
 
         public static AppSettings Instance { get; set; }

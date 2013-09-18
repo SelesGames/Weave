@@ -14,8 +14,6 @@
 	SupportedOrientations="Portrait" Orientation="Portrait"
 	mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480">
 	<UserControl.Resources>
-		<local:ArticleDeleteTimesForMarkedRead x:Key="MarkedReadTimes" />
-		<local:ArticleDeleteTimesForUnread x:Key="UnreadTimes" />
 		<local:SpeakArticleVoices x:Key="Voices" />
 		<DataTemplate x:Key="ListPickerItemTemplate">
 			<TextBlock Text="{Binding Display}"/>
@@ -44,7 +42,7 @@
 
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="849"/>
+				<RowDefinition Height="639"/>
 				<RowDefinition Height="*"/>     	
 			</Grid.RowDefinitions>
 			<StackPanel VerticalAlignment="Bottom" toolkit:TiltEffect.IsTiltEnabled="True">
@@ -76,8 +74,6 @@
 					</toolkit:ToggleSwitch.Header>    		
 				</toolkit:ToggleSwitch>
 				
-				<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemsSource="{StaticResource MarkedReadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12,0,12,12"/>
-				<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemsSource="{StaticResource UnreadTimes}" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12"/>
 				<toolkit:ListPicker x:Name="voicesList" Header="Speak Article voice" ItemsSource="{StaticResource Voices}" Margin="12" ItemTemplate="{StaticResource ListPickerSpeechItemTemplate}" ExpansionMode="ExpansionAllowed" FullModeHeader="'Speak Article' preferred voice" FullModeItemTemplate="{StaticResource ListPickerSpeechFullModeTemplate}" />
 				<Button x:Name="enableLockScreenButton" Content="enable live lock screen" Margin="0,24,0,36" />
 			</StackPanel>      

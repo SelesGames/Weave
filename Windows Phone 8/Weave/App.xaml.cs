@@ -34,7 +34,6 @@ namespace weave
                 AppName = "Weave",
                 VersionNumber = "8.0.3",
                 IsTrial = false,//new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
-                CanSelectInitialCategories = true,
                 AssemblyName = "weave",
                 LogExceptions = true,
 

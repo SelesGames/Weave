@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Weave.ViewModels;
-using Weave.ViewModels.Identity;
 
 namespace weave.Services.Startup
 {
@@ -14,7 +10,6 @@ namespace weave.Services.Startup
 
     public class StartupIdentityStateMachine
     {
-        PermanentState permState;
         UserInfo user;
         IState currentState;
         bool isComplete = false;
@@ -27,12 +22,9 @@ namespace weave.Services.Startup
 
         public State? FinalState { get; private set; }
 
-        public StartupIdentityStateMachine(PermanentState permState, UserInfo user)
+        public StartupIdentityStateMachine(UserInfo user)
         {
-            this.permState = permState;
             this.user = user;
-
-            var currentUserId = permState.UserId;
         }
 
         public async Task Begin()
@@ -43,8 +35,6 @@ namespace weave.Services.Startup
             {
                 await ChooseNextState();
             }
-
-            permState.UserId = user.Id;
         }
 
         Task ChooseNextState()
@@ -74,7 +64,7 @@ namespace weave.Services.Startup
 
         void Init()
         {
-            if (permState.UserId.HasValue && permState.UserId.Value != Guid.Empty)
+            if (user.Id != Guid.Empty)
             {
                 currentState = new Transition_GetUserById(user);
             }
