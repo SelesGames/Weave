@@ -28,6 +28,24 @@ namespace weave
             RefreshFeeds();
         }
 
+        public void SetNewCountToZero(CategoryOrLooseFeedViewModel catVM)
+        {
+            if (catVM.Name.Equals("all news", StringComparison.OrdinalIgnoreCase))
+            {
+                catVM.NewArticleCount = 0;
+                return;
+            }
+            else
+            {
+                var allNewsCatVM = Feeds.FirstOrDefault(o => o.Name.Equals("all news", StringComparison.OrdinalIgnoreCase));
+                if (allNewsCatVM != null)
+                {
+                    allNewsCatVM.NewArticleCount -= catVM.NewArticleCount;
+                }
+                catVM.NewArticleCount = 0;
+            }
+        }
+
         void RefreshFeeds()
         {
             Feeds.Clear();

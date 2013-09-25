@@ -33,6 +33,7 @@ namespace weave
         PermanentState permState;
 
         MainPageViewModel vm;
+        FeedsListenerViewModel feedsListenerVM;
         SwitchingAdControl adControl;
 
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, manageSourceButton, addSourceButton, searchSourceButton;
@@ -264,8 +265,8 @@ namespace weave
                     FinishPageInitialization();
 
                     CreateViewModel();
-                    //vmSourcesList = new MainPageSourceListViewModel();
-                    var feedsListenerVM = new FeedsListenerViewModel(ServiceResolver.Get<IUserCache>().Get());
+
+                    feedsListenerVM = new FeedsListenerViewModel(ServiceResolver.Get<IUserCache>().Get());
                     SourcesList.DataContext = feedsListenerVM;
                     feedsListenerVM.DisposeWith(pageLevelDisposables);
 
@@ -398,7 +399,7 @@ namespace weave
             if (catVM == null)
                 return;
 
-            catVM.NewArticleCount = 0;
+            feedsListenerVM.SetNewCountToZero(catVM);
 
             string header = null;
             string mode = null;
