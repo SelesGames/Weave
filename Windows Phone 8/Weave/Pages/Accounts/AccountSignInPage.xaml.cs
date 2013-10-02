@@ -63,8 +63,7 @@ namespace weave.Pages.Accounts
             try
             {
                 var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                viewModel.FacebookAuthToken = mobileUser.UserId;
-                await viewModel.LoadFromFacebook();
+                await viewModel.SyncFacebook(mobileUser.UserId);
             }
             catch (Exception ex)
             {
@@ -77,8 +76,7 @@ namespace weave.Pages.Accounts
             try
             {
                 var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Twitter);
-                viewModel.TwitterAuthToken = mobileUser.UserId;
-                await viewModel.LoadFromTwitter();
+                await viewModel.SyncTwitter(mobileUser.UserId);
             }
             catch (Exception ex)
             {
@@ -91,8 +89,7 @@ namespace weave.Pages.Accounts
             try
             {
                 var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
-                viewModel.MicrosoftAuthToken = mobileUser.UserId;
-                await viewModel.LoadFromMicrosoft();
+                await viewModel.SyncMicrosoft(mobileUser.UserId);
             }
             catch (Exception ex)
             {
@@ -105,8 +102,7 @@ namespace weave.Pages.Accounts
             try
             {
                 var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Google);
-                viewModel.GoogleAuthToken = mobileUser.UserId;
-                await viewModel.LoadFromGoogle();
+                await viewModel.SyncGoogle(mobileUser.UserId);
             }
             catch (Exception ex)
             {
@@ -114,39 +110,39 @@ namespace weave.Pages.Accounts
             }
         }
 
-        async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            var username = userNameTB.Text;
-            var password = passwordTB.Text;
+        //async void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    var username = userNameTB.Text;
+        //    var password = passwordTB.Text;
 
-            if (string.IsNullOrWhiteSpace(username))
-            {
-                MessageBox.Show("You must enter a username to sign-in");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                MessageBox.Show("You must enter a password to sign-in");
-                return;
-            }
+        //    if (string.IsNullOrWhiteSpace(username))
+        //    {
+        //        MessageBox.Show("You must enter a username to sign-in");
+        //        return;
+        //    }
+        //    if (string.IsNullOrWhiteSpace(password))
+        //    {
+        //        MessageBox.Show("You must enter a password to sign-in");
+        //        return;
+        //    }
 
-            viewModel.UserName = username;
-            viewModel.PasswordHash = password;
+        //    viewModel.UserName = username;
+        //    viewModel.PasswordHash = password;
 
-            try
-            {
-                await viewModel.LoadFromUsernameAndPassword();
-            }
-            catch (Exception ex)
-            {
-                DebugEx.WriteLine(ex);
-                //message = "You must log in. Login Required";
-            }
-        }
+        //    try
+        //    {
+        //        await viewModel.LoadFromUsernameAndPassword();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        DebugEx.WriteLine(ex);
+        //        //message = "You must log in. Login Required";
+        //    }
+        //}
 
-        void OnCreateAccountButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            GlobalNavigationService.ToCreateAccountPage();  
-        }
+        //void OnCreateAccountButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    GlobalNavigationService.ToCreateAccountPage();  
+        //}
     }
 }
