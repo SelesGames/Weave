@@ -65,6 +65,8 @@ namespace Weave.UI.Frame
 
         void ShowLoadingIndicator()
         {
+            IsHitTestVisible = false;
+
             if (ShowLoadingSB == null)
                 return;
 
@@ -74,6 +76,8 @@ namespace Weave.UI.Frame
 
         async void HideLoadingIndicator()
         {
+            IsHitTestVisible = true;
+
             if (HideLoadingSB == null)
                 return;
 
