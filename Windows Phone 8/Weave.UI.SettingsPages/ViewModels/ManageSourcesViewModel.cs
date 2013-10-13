@@ -12,25 +12,24 @@ namespace weave
 {
     public class ManageSourcesViewModel : INotifyPropertyChanged
     {
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
         UserInfo user;
 
         public ObservableCollection<ObservableGroup<Feed, string>> FeedGroups { get; private set; }
         public string SourcesCount { get; set; }
-        public bool AreThereTooManyFeeds { get; set; }
-        public string Warning { get; set; }
-        public Visibility WarningVisibility { get; set; }
+        //public bool AreThereTooManyFeeds { get; set; }
+        //public string Warning { get; set; }
+        //public Visibility WarningVisibility { get; set; }
 
         public ManageSourcesViewModel()
         {
-            WarningVisibility = Visibility.Collapsed;
-            Warning = string.Format(
-                "You have more than {0} feeds.  For performance reasons, there is a limit of {1} sources.  Please delete some now.",
-                100,//Weave4DataAccessLayer.MaxAllowedSources,
-                100);//Weave4DataAccessLayer.MaxAllowedSources);
+            //WarningVisibility = Visibility.Collapsed;
+            //Warning = string.Format(
+                //"You have more than {0} feeds.  For performance reasons, there is a limit of {1} sources.  Please delete some now.",
+                //100,//Weave4DataAccessLayer.MaxAllowedSources,
+                //100);//Weave4DataAccessLayer.MaxAllowedSources);
 
             FeedGroups = new ObservableCollection<ObservableGroup<Feed, string>>();
-            user = userCache.Get();
+            user = ServiceResolver.Get<IUserCache>().Get();
         }
 
         public async Task LoadFeeds()
@@ -66,10 +65,10 @@ namespace weave
         {
             var feedCount = FeedGroups.SelectMany(o => o).Count();
             SourcesCount = string.Format("({0})", feedCount);
-            AreThereTooManyFeeds = feedCount > 100;// feeds.AreThereTooManyFeeds();
-            WarningVisibility = AreThereTooManyFeeds ? Visibility.Visible : Visibility.Collapsed;
+            //AreThereTooManyFeeds = feedCount > 100;// feeds.AreThereTooManyFeeds();
+            //WarningVisibility = AreThereTooManyFeeds ? Visibility.Visible : Visibility.Collapsed;
             PropertyChanged.Raise(this, "SourcesCount");
-            PropertyChanged.Raise(this, "WarningVisibility");
+            //PropertyChanged.Raise(this, "WarningVisibility");
         }
 
         string Uppercase(string p)
@@ -82,7 +81,7 @@ namespace weave
 
         public async Task DeleteSource(Feed feed)
         {
-            await userCache.Get().RemoveFeed(feed);
+            await user.RemoveFeed(feed);
             foreach (var group in FeedGroups)
                 group.Remove(feed);
             ReevaluateNumberOfFeeds();

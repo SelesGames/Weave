@@ -45,11 +45,11 @@ namespace weave
                 return;
             }
 
-            if (viewModel.AreThereTooManyFeeds)
-            {
-                e.Cancel = true;
-                MessageBox.Show("You need to delete some sources before exiting this page", "TOO MANY SOURCES", MessageBoxButton.OK);
-            }
+            //if (viewModel.AreThereTooManyFeeds)
+            //{
+            //    e.Cancel = true;
+            //    MessageBox.Show("You need to delete some sources before exiting this page", "TOO MANY SOURCES", MessageBoxButton.OK);
+            //}
         }
 
 

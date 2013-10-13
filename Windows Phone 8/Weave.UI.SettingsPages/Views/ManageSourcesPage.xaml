@@ -79,7 +79,7 @@
 			<TextBlock x:Name="PageTitle" Text="manage" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 		
-		<TextBlock Text="{Binding Warning}" TextWrapping="Wrap" Grid.Row="1" Margin="24,-4,24,22" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" FontFamily="{StaticResource PhoneFontFamilySemiBold}" LineHeight="20.667" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding WarningVisibility}" />
+		<!--TextBlock Text="{Binding Warning}" TextWrapping="Wrap" Grid.Row="1" Margin="24,-4,24,22" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" FontFamily="{StaticResource PhoneFontFamilySemiBold}" LineHeight="20.667" Foreground="{StaticResource PhoneAccentBrush}" Visibility="{Binding WarningVisibility}" /-->
 		
 		<phone:LongListSelector x:Name="lls" 
 			Grid.Row="2" 
