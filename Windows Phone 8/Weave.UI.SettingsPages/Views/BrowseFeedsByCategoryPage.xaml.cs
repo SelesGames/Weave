@@ -1,7 +1,9 @@
 ﻿using Microsoft.Phone.Controls;
+using SelesGames;
 using SelesGames.Phone;
 using System.Threading.Tasks;
 using Telerik.Windows.Controls;
+using Weave.UI.Frame;
 
 namespace weave.Pages.Settings
 {
@@ -42,7 +44,15 @@ namespace weave.Pages.Settings
             else
             {
                 e.Cancel = true;
+
+                var frame = ServiceResolver.Get<OverlayFrame>();
+                frame.OverlayText = "Saving...";
+                frame.IsLoading = true;
+
                 await t;
+
+                frame.IsLoading = false;
+
                 NavigationService.TryGoBack();
             }
         }

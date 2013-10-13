@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
+using Weave.UI.Frame;
 using Weave.ViewModels.Helpers;
 
 namespace weave
@@ -58,7 +59,15 @@ namespace weave
             else
             {
                 e.Cancel = true;
+
+                var frame = ServiceResolver.Get<OverlayFrame>();
+                frame.OverlayText = "Saving...";
+                frame.IsLoading = true;
+
                 await t;
+
+                frame.IsLoading = false; 
+                
                 if (NavigationService.TryGoBack() == null)
                     viewModelLocator.Pop();
             }

@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="ViewModels\AddSourceViewModel.cs" />
     <Compile Include="ViewModels\BrowseFeedsByCategoryViewModel.cs" />
+    <Compile Include="ViewModels\DisplayableCategory.cs" />
     <Compile Include="ViewModels\EditSourceViewModel.cs" />
     <Compile Include="ViewModels\ManageSourcesViewModel.cs" />
     <Compile Include="Views\AddSourcePage.xaml.cs">
@@ -204,6 +205,10 @@
     <ProjectReference Include="..\Weave.FeedSearchService\Weave.FeedSearchService.csproj">
       <Project>{E685135B-C889-4F51-96F9-69B968BEDF29}</Project>
       <Name>Weave.FeedSearchService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UI.Frame\Weave.UI.Frame.csproj">
+      <Project>{DB0F523A-80F0-4903-94FF-B1134F2E81BF}</Project>
+      <Name>Weave.UI.Frame</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

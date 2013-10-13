@@ -26,7 +26,6 @@ namespace Weave.UI.Frame
             base.OnApplyTemplate();
 
             ClientArea = base.GetTemplateChild("ClientArea") as FrameworkElement;
-            //PageHost = base.GetTemplateChild("PageHost") as ContentPresenter;
             LoadingOverlay = base.GetTemplateChild("LoadingOverlay") as UIElement;
             BusyIndicator = base.GetTemplateChild("BusyIndicator") as RadialBusyIndicator;
             ShowLoadingSB = ClientArea.Resources["ShowLoadingSB"] as Storyboard;

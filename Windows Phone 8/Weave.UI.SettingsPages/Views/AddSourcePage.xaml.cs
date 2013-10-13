@@ -126,49 +126,6 @@ namespace weave.Pages.Settings
 
 
 
-        #region Import (Google Reader) SHUTTERED JULY 1ST
-
-        //async void importButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        //{
-        //    EnableGReaderInput(false);
-
-        //    try
-        //    {
-        //        statusText.Text = "Authenticating...";
-
-        //        var authResult = await viewModel.AuthenticateGoogleReader();
-        //        if (authResult == Weave.GoogleReader.GoogleReader.AuthenticationResult.InvalidCredentials)
-        //        {
-        //            statusText.Text = "Invalid username/password.";
-        //        }
-        //        else
-        //        {
-        //            statusText.Text = "Authenticated!  Downloading feeds...";
-        //            await viewModel.LoadGReaderFeeds();
-        //            statusText.Text = "SUCCESS!  Feeds added.";
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        statusText.Text = "Unspecified error.  Make sure you have a internet connection, and try again.";
-        //        DebugEx.WriteLine(ex);
-        //    }
-
-        //    EnableGReaderInput(true);
-        //}
-
-        //void EnableGReaderInput(bool isEnabled)
-        //{
-        //    gReaderUsername.IsEnabled = isEnabled;
-        //    gReaderPassword.IsEnabled = isEnabled;
-        //    importButton.IsEnabled = isEnabled;
-        //}
-
-        #endregion
-
-
-
-
         async Task SaveAllNewFeeds()
         {
             //await viewModel.SaveGReaderFeeds();

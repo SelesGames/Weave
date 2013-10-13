@@ -12,16 +12,40 @@ namespace weave
 {
     public class EditSourceViewModel : INotifyPropertyChanged
     {
+        #region private member variables
+
         const string ARTICLEVIEWMODE_MOBILIZER = "Mobilizer";
         const string ARTICLEVIEWMODE_IE = "Internet Explorer";
 
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
         ViewModelLocator viewModelLocator = ServiceResolver.Get<ViewModelLocator>();
 
         bool suppressShittyJeffWilcoxCode = false;
 
         // prevents the SelectedArticleViewingMode Property from changing the underlying ArticleViewingMode of the feed
         bool suppressMyOwnShittyCode = false;
+
+        #endregion
+
+
+
+
+        #region Constructor
+
+        public EditSourceViewModel()
+        {
+            Categories = new ObservableCollection<DisplayableCategory>();
+            ArticleViewingModes = new ObservableCollection<string>(new[] { ARTICLEVIEWMODE_MOBILIZER, ARTICLEVIEWMODE_IE });
+            IsArticleViewingSelectorEnabled = false;
+            user = ServiceResolver.Get<IUserCache>().Get();
+        }
+
+        #endregion
+
+
+
+
+        #region Public properties
 
         public Feed Feed { get; set; }
         public ObservableCollection<DisplayableCategory> Categories { get; private set; }
@@ -70,12 +94,10 @@ namespace weave
             set { isArticleViewingSelectorEnabled = value; PropertyChanged.Raise(this, "IsArticleViewingSelectorEnabled"); }
         }
 
-        public EditSourceViewModel()
-        {
-            Categories = new ObservableCollection<DisplayableCategory>();
-            ArticleViewingModes = new ObservableCollection<string>(new[] { ARTICLEVIEWMODE_MOBILIZER, ARTICLEVIEWMODE_IE});
-            IsArticleViewingSelectorEnabled = false;
-        }
+        #endregion
+
+
+
 
         public void LoadDataAsync(Guid feedId)
         {
@@ -83,7 +105,7 @@ namespace weave
             Categories.Clear();
             suppressShittyJeffWilcoxCode = false;
 
-            var feeds = userCache.Get().Feeds;
+            var feeds = user.Feeds;
 
             var feed = (Feed)viewModelLocator.Get(feedId.ToString());// feeds.Where(o => o.Id == feedId).SingleOrDefault();
             if (feed == null)
@@ -119,22 +141,9 @@ namespace weave
 
         public async Task SaveChanges()
         {
-            await userCache.Get().UpdateFeed(Feed);
+            await user.UpdateFeed(Feed);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-    }
-
-    public class DisplayableCategory
-    {
-        public static DisplayableCategory NONE = new DisplayableCategory { Name = null, DisplayName = "None" };
-
-        public string Name { get; set; }
-        public string DisplayName { get; set; }
-
-        public override string ToString()
-        {
-            return DisplayName;
-        }
     }
 }
