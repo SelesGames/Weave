@@ -88,10 +88,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="Themes\Generic.xaml">
+    <ApplicationDefinition Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </CodeAnalysisDictionary>
+    </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Reactive.Core">

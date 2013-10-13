@@ -7,8 +7,6 @@ namespace Weave.UI.Frame
 {
     public class OverlayFrame : RadPhoneApplicationFrame
     {
-        public static OverlayFrame Instance;
-
         bool isLoading;
         FrameworkElement ClientArea;
 
@@ -19,7 +17,6 @@ namespace Weave.UI.Frame
         public OverlayFrame() : base()
         {
             DefaultStyleKey = typeof(OverlayFrame);
-            Instance = this;
             HoldNavigationUntilExitTransitionIsFinished = true;
             this.Transition = new RadEmptyTransition();
         }
