@@ -64,6 +64,7 @@ namespace weave
                 var user = userCache.Get();
                 user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
                 await user.Save();
+                await user.Load();
 
                 GlobalNavigationService.ToPanoramaPage();
             }
