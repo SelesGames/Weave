@@ -3,11 +3,11 @@ using System.Windows;
 using System.Windows.Media.Animation;
 using Telerik.Windows.Controls;
 
-namespace weave
+namespace Weave.UI.Frame
 {
-    public class CustomFrame : RadPhoneApplicationFrame
+    public class OverlayFrame : RadPhoneApplicationFrame
     {
-        public static CustomFrame Instance;
+        public static OverlayFrame Instance;
 
         bool isLoading;
         FrameworkElement ClientArea;
@@ -16,9 +16,9 @@ namespace weave
         RadialBusyIndicator BusyIndicator;
         Storyboard ShowLoadingSB, HideLoadingSB;
 
-        public CustomFrame() : base()
+        public OverlayFrame() : base()
         {
-            DefaultStyleKey = typeof(CustomFrame);
+            DefaultStyleKey = typeof(OverlayFrame);
             Instance = this;
             HoldNavigationUntilExitTransitionIsFinished = true;
             this.Transition = new RadEmptyTransition();
@@ -91,7 +91,7 @@ namespace weave
         #region Dependency Properties
 
         public static readonly DependencyProperty OverlayTextProperty =
-            DependencyProperty.Register("OverlayText", typeof(string), typeof(CustomFrame), new PropertyMetadata("Loading news from memory"));
+            DependencyProperty.Register("OverlayText", typeof(string), typeof(OverlayFrame), new PropertyMetadata("Loading news from memory"));
 
         public string OverlayText
         {

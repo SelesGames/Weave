@@ -200,7 +200,6 @@
       <DependentUpon>BigImageNewsItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\BaseNewsItemControl.cs" />
-    <Compile Include="Pages\CustomFrame.cs" />
     <Compile Include="Pages\DummyPage.xaml.cs">
       <DependentUpon>DummyPage.xaml</DependentUpon>
     </Compile>
@@ -430,10 +429,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <ApplicationDefinition Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
     <Page Include="Pages\SelesGamesInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -787,6 +782,10 @@
     <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>Weave.RSS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UI.Frame\Weave.UI.Frame.csproj">
+      <Project>{DB0F523A-80F0-4903-94FF-B1134F2E81BF}</Project>
+      <Name>Weave.UI.Frame</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>

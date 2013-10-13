@@ -5,13 +5,14 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using Weave.UI.Frame;
 using Weave.ViewModels;
 
 namespace weave
 {
     public static class GlobalNavigationService
     {
-        public static PhoneApplicationFrame CurrentFrame { get; set; }
+        public static OverlayFrame CurrentFrame { get; set; }
 
         static void SafelyNavigateTo(string uri)
         {         
