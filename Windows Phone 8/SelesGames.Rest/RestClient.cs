@@ -106,7 +106,7 @@ namespace SelesGames.Rest
                 using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
                     var contentEncoding = response.Content.Headers.ContentEncoding.FirstOrDefault();
-                    if (UseGzip || "gzip".Equals(contentEncoding, StringComparison.OrdinalIgnoreCase))
+                    if ("gzip".Equals(contentEncoding, StringComparison.OrdinalIgnoreCase))
                     {
                         using (var gzip = new GZipInputStream(stream))
                         {
