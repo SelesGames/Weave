@@ -14,12 +14,10 @@ namespace weave
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
         public ObservableCollection<CategoryOrLooseFeedViewModel> MostViewed { get; private set; }
-        public ObservableCollection<Feed> Feeds { get; private set; }
 
         public PanoramaViewModel()
         {
             MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
-            Feeds = new ObservableCollection<Feed>();
         }
 
         static Random r = new Random();
@@ -84,15 +82,6 @@ namespace weave
 
             sw.Stop();
             DebugEx.WriteLine("most viewed took {0} ms to figure out", sw.ElapsedMilliseconds);
-        }
-
-        public void LoadFeeds()
-        {
-            var feeds = userCache.Get().Feeds;
-
-            Feeds.Clear();
-            foreach (var feed in feeds.Where(o => !string.IsNullOrWhiteSpace(o.TeaserImageUrl)))
-                Feeds.Add(feed);
         }
     }
 }

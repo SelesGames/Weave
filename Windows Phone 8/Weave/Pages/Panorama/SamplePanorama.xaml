@@ -90,11 +90,30 @@
 
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
 				<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" toolkit:TiltEffect.IsTiltEnabled="True">
-					<Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" />
-					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="favoritesButtonTap" Margin="0,51,0,0"/>
-					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="readButtonTap"/>
-					<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" toolkit:TiltEffect.IsTiltEnabled="True" Tap="manageSourcesButtonTap"/>
+					<!--Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" /-->
+					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" Tap="favoritesButtonTap"/>
+					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" Tap="readButtonTap"/>
+					<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" Tap="manageSourcesButtonTap"/>
 				</StackPanel>
+			</phone:PanoramaItem>
+
+			<phone:PanoramaItem x:Name="Login" Header="login &amp; sync" Style="{StaticResource PanoramaItemStyle}">
+				<Grid x:Name="loginMenu" toolkit:TiltEffect.IsTiltEnabled="True" VerticalAlignment="Top">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Rectangle Fill="Black" Visibility="Collapsed" />
+					<Rectangle Grid.Row="1" Grid.RowSpan="4" Fill="#FF303030" Stroke="White" Visibility="Collapsed" />
+					<TextBlock Foreground="#99FFFFFF" Text="Login via one of the services below if you'd like to sync your feeds and preferences with another device" Margin="12,0,12,12" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" LineHeight="21.333"/>
+					<sg:ImageWithLabelButton Grid.Row="1" Content="Microsoft" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Microsoft.png" Tap="OnMicrosoftButtonTap" Margin="0,12,0,0" Height="72" />
+					<sg:ImageWithLabelButton Grid.Row="2" Content="Facebook" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Facebook.png" Tap="OnFacebookButtonTap" Height="72" />
+					<sg:ImageWithLabelButton Grid.Row="3" Content="Twitter" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Twitter.png" Tap="OnTwitterButtonTap" Height="72" />
+					<sg:ImageWithLabelButton Grid.Row="4" Content="Google" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Google.png" Tap="OnGoogleButtonTap" Height="72" />
+				</Grid>
 			</phone:PanoramaItem>
 					
 		</phone:Panorama>

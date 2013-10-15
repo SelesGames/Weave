@@ -174,9 +174,6 @@
     <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
       <DependentUpon>AccountSignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Accounts\CreateAccountPage.xaml.cs">
-      <DependentUpon>CreateAccountPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -303,7 +300,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MainPage\MainPageViewModel.cs" />
-    <Compile Include="Services\PanoramaInjectionService.cs" />
     <Compile Include="Pages\Panorama\SamplePanorama.xaml.cs">
       <DependentUpon>SamplePanorama.xaml</DependentUpon>
     </Compile>
@@ -321,10 +317,6 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Pages\Accounts\AccountSignInPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Accounts\CreateAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -597,6 +589,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Assets\imageDownloadFailed.jpg" />
+    <Content Include="Assets\Login\Facebook.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Login\Google.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Login\Microsoft.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Login\Twitter.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\pancake-bunny.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

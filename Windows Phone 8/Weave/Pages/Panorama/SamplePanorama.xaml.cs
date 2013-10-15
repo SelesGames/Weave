@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using Microsoft.WindowsAzure.MobileServices;
 using SelesGames;
 using SelesGames.Phone;
 using System;
@@ -10,14 +11,20 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
+using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
+using Weave.ViewModels.Identity;
 
 namespace weave
 {
     public partial class SamplePanorama : WeavePage
     {
         PanoramaViewModel vm;
+        IdentityInfo identity;
+        OverlayFrame frame;
+        UserInfo user;
+        bool isIdentityInitialized = false;
 
         public SamplePanorama()
         {
@@ -25,6 +32,33 @@ namespace weave
 
             if (this.IsInDesignMode())
                 return;
+
+            frame = ServiceResolver.Get<OverlayFrame>();
+            user = ServiceResolver.Get<UserInfo>();
+            identity = ServiceResolver.Get<IdentityInfo>();
+
+            identity.UserIdChanged += async (s, e) =>
+            {
+                bool updateFailed = false;
+                try
+                {
+                    frame.OverlayText = "Updating user...";
+                    frame.IsLoading = true;
+                    user.Id = identity.UserId;
+                    // refresh user news?
+                    await user.Load(refreshNews: true);
+                }
+                catch
+                {
+                    updateFailed = true;
+                }
+                if (updateFailed)
+                {
+                    frame.OverlayText = "Failed to update user";
+                    await Task.Delay(2000);
+                }
+                frame.IsLoading = false;
+            };
 
             vm = new PanoramaViewModel();
             this.DataContext = vm;
@@ -47,8 +81,6 @@ namespace weave
             this.IsHitTestVisible = false;
 
             vm.LoadMostViewedAsync();
-            vm.LoadFeeds();
-            //vm.LoadSourcesAsync();
             SetValue(RadTransitionControl.TransitionProperty, new RadTileTransition { PlayMode = TransitionPlayMode.Manual });
 
             mosaicHubTile.CreateImageSource = o => CreateImageSourceFromFeed(o as Feed);
@@ -72,7 +104,6 @@ namespace weave
                         Body: loggedError));
 
             //RefreshFeedsAndStartListeningToNewNews();
-            InitializeExtraPanoramaItems();
 
             await Task.Yield();
 
@@ -82,7 +113,26 @@ namespace weave
             panoSelectionChanged.Where(_ => pano.SelectedItem == Featured_News).Take(1).Subscribe(_ => OnFirstFeaturedNewsPanoItemLoad());
             panoSelectionChanged.Subscribe(_ => OnPanoSelectionChanged());
 
+            InitializeIdentity();
+
             this.NavigatedTo.Subscribe(OnSubsequentNavigatedTo);
+        }
+
+        async void InitializeIdentity()
+        {
+            if (isIdentityInitialized)
+                return;
+
+            isIdentityInitialized = true;
+
+            try
+            {
+                await identity.LoadFromUserId();
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
         }
 
         void OnSubsequentNavigatedTo()
@@ -112,22 +162,6 @@ namespace weave
 
 
 
-        #region Page Initialization
-
-        void InitializeExtraPanoramaItems()
-        {
-            int insertionIndex = 2;
-            foreach (var item in PanoramaInjectionService.GetAll())
-            {
-                pano.Items.Insert(insertionIndex++, item);
-            }
-        }
-
-        #endregion Initialize Page
-
-
-
-
         #region Button and event handling (article tapped, category tapped, most viewed tapped, appbar buttons tapped)
 
         void ShowDetailed(NewsItem newsItem)
@@ -151,12 +185,12 @@ namespace weave
             GlobalNavigationService.ToMainPage(null, "sources");
         }
 
-        void OnCategoryTapped(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            //SetValue(RadTileAnimation.ContainerToAnimateProperty, this.categoriesContainer);
-            ApplicationBar.IsVisible = false;
-            ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
-        }
+        //void OnCategoryTapped(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    //SetValue(RadTileAnimation.ContainerToAnimateProperty, this.categoriesContainer);
+        //    ApplicationBar.IsVisible = false;
+        //    ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
+        //}
 
         void ToArticleList(CategoryOrLooseFeedViewModel o)
         {
@@ -211,9 +245,97 @@ namespace weave
             GlobalNavigationService.ToSelesGamesInfoPage();
         }
 
-        void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //void OnLoginButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        //{
+        //    GlobalNavigationService.ToAccountSignInPage(); 
+        //}
+
+        #endregion
+
+
+
+
+        #region Account login/sync
+
+        MobileServiceClient CreateMobileServiceClient()
         {
-            GlobalNavigationService.ToAccountSignInPage(); 
+            return new MobileServiceClient("https://weaveuser.azure-mobile.net/", "AItWGBDhTNmoHYvcCvixuYgxSvcljU97");
+        }
+
+        async void OnFacebookButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!isIdentityInitialized)
+                return;
+
+            try
+            {
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                frame.OverlayText = "Syncing account...";
+                frame.IsLoading = true;
+                await identity.SyncFacebook(mobileUser.UserId);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+            frame.IsLoading = false;
+        }
+
+        async void OnTwitterButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!isIdentityInitialized)
+                return;
+
+            try
+            {
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Twitter);
+                frame.OverlayText = "Syncing account...";
+                frame.IsLoading = true;
+                await identity.SyncTwitter(mobileUser.UserId);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+            frame.IsLoading = false;
+        }
+
+        async void OnMicrosoftButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!isIdentityInitialized)
+                return;
+
+            try
+            {
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.MicrosoftAccount);
+                frame.OverlayText = "Syncing account...";
+                frame.IsLoading = true;
+                await identity.SyncMicrosoft(mobileUser.UserId);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+            frame.IsLoading = false;
+        }
+
+        async void OnGoogleButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            if (!isIdentityInitialized)
+                return;
+
+            try
+            {
+                var mobileUser = await CreateMobileServiceClient().LoginAsync(MobileServiceAuthenticationProvider.Google);
+                frame.OverlayText = "Syncing account...";
+                frame.IsLoading = true;
+                await identity.SyncGoogle(mobileUser.UserId);
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+            frame.IsLoading = false;
         }
 
         #endregion

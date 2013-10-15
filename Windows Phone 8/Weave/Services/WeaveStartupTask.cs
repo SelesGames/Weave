@@ -1,8 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
-using Microsoft.Phone.Info;
 using Microsoft.Phone.Shell;
 using SelesGames;
-using SelesGames.Common.Hashing;
 using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
@@ -17,12 +15,15 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using weave.Resources;
+using weave.Services.Startup;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
+using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Cache;
 using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Helpers;
+using Weave.ViewModels.Identity;
 using Weave.ViewModels.Repository;
 
 namespace weave
@@ -31,10 +32,10 @@ namespace weave
     {
         AppSettings settings;
         PermanentState permanentState;
-        CustomFrame frame;
+        OverlayFrame frame;
         Kernel kernel;
         //Weave4DataAccessLayer dataAccessLayer;
-        bool hasBeenInitialized = false;
+        bool isFullyInitialized = false;
         Uri initialNavigationUri = null;
         StandardUserCache userCache;
 
@@ -49,8 +50,8 @@ namespace weave
             var phoneAppService = PhoneApplicationService.Current;
             phoneAppService.ApplicationIdleDetectionMode = IdleDetectionMode.Disabled;
 
-            phoneAppService.Launching += (s, e) => OnLaunching();
-            phoneAppService.Activated += (s, e) => OnActivated();
+            phoneAppService.Launching += (s, e) => settings.StartupMode = StartupMode.Launch;
+            phoneAppService.Activated += (s, e) => settings.StartupMode = StartupMode.Activate;
             phoneAppService.Deactivated += (s, e) => Stop();
             phoneAppService.Closing += (s, e) => Stop();
 
@@ -70,7 +71,7 @@ namespace weave
             if (phoneApplicationInitialized)
                 return;
 
-            frame = new CustomFrame();
+            frame = new OverlayFrame();
             GlobalNavigationService.CurrentFrame = frame;
 
             Observable
@@ -101,6 +102,13 @@ namespace weave
             }
         }
 
+        #endregion
+
+
+
+
+        #region On first Navigation event
+
         async void OnInitialNavigatingWrapper(EventPattern<NavigatingCancelEventArgs> args)
         {
             try
@@ -120,26 +128,12 @@ namespace weave
 
         async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
-            //permanentState.IsFirstTime = false;
-
             initialNavigationUri = args.EventArgs.Uri;
 
-            await RecoverPermanentStateAsync();
             ClearUpdateCountOnAllTiles();
 
-            new SystemTrayNavigationSetter(frame, permanentState);
-
-            if (permanentState.IsFirstTime)
-            {
-                frame.IsLoading = false;
-                //dataAccessLayer = ServiceResolver.Get<Weave4DataAccessLayer>();
-                //dataAccessLayer.IsFirstTime = true;
-                return;
-            }
-
-
-
             frame.IsHitTestVisible = false;
+            frame.IsLoading = true;
 
             var originalTargetUri = args.EventArgs.Uri;
 
@@ -152,71 +146,56 @@ namespace weave
                 args.EventArgs.Cancel = true;
 
                 await frame.NavigationStoppedAsync();
-
-                frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             }
             else
             {
                 backStackRemovalCount = 2;
                 await frame.NavigatedAsync();
-                frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             }
 
+            frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             await frame.NavigatedAsync();
 
-            frame.IsLoading = true;
+            //frame.IsLoading = true;
 
             await frame.GetLayoutUpdated().Take(1).ToTask();
 
             var dummyPage = frame.Content as DummyPage;
+
+
+            // at this point, the loading screen is being shown
+
+            if (permanentState == null)
+                permanentState = await settings.PermanentState.Get();
+
+            new SystemTrayNavigationSetter(frame, permanentState);
+
+            if (settings.StartupMode == StartupMode.Launch)
+            {
+                permanentState.RunHistory.CreateNewLog();
+            }
+
+            FinishInitialization();
+
             await dummyPage.LayoutPopups();
 
 
-
             var user = userCache.Get();
-            bool wasUserFound = false;
-            try
-            {
-                await user.Load(true);
-                wasUserFound = true;
-            }
-            catch (Exception ex)
-            {
-                DebugEx.WriteLine(ex);
-            }
+            var stateMachine = new StartupIdentityStateMachine(user);
+            await stateMachine.Begin();
 
-            if (!wasUserFound)
+            if (stateMachine.FinalState == StartupIdentityStateMachine.State.UserExists)
             {
-                //var result = MessageBox.Show("We apologize for this, but we are unable to recover your categories and sources from your phone's memory.  Tap the back button twice to exit the app.  The next time you start, you can reselect your categories and sources.", "SERIOUS ERROR", MessageBoxButton.OK);
-                permanentState.IsFirstTime = true;
-                frame.IsLoading = false;
-                return;
+                originalTargetUri = new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative);
             }
-
-
+            else if (stateMachine.FinalState == StartupIdentityStateMachine.State.NoUserFound)
+            {
+                originalTargetUri = new Uri("/weave;component/Pages/SelectTheCategoriesThatInterestYouPage.xaml", UriKind.Relative);
+            }
 
             //dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
 
-            var markedReadTimes = new ArticleDeleteTimesForMarkedRead();
-            var unreadTimes = new ArticleDeleteTimesForUnread();
-
-            //dataAccessLayer.OldMarkedReadNewsElapsedThreshold = markedReadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForMarkedRead).Span;
-            //dataAccessLayer.OldUnreadNewsElapsedThreshold = unreadTimes.GetByDisplayName(permanentState.ArticleDeletionTimeForUnread).Span;
-
-            bool areThereTooManyFeeds = false;
-            if (userCache.Get().Feeds != null)
-                areThereTooManyFeeds = userCache.Get().Feeds.Count > 100;
-
-
-
-            if (areThereTooManyFeeds)
-            {
-                frame.TryNavigate("/Weave.UI.SettingsPages;component/Views/ManageSourcesPage.xaml");
-            }
-            else
-            {
-                frame.TryNavigate(originalTargetUri);
-            }
+            frame.TryNavigate(originalTargetUri);
             await frame.NavigatedAsync();
 
             var page = frame.Content as PhoneApplicationPage;
@@ -228,7 +207,6 @@ namespace weave
             await pageLayoutComplete;
 
             frame.IsLoading = false;
-
             frame.IsHitTestVisible = true;
         }
 
@@ -300,72 +278,15 @@ namespace weave
 
 
 
-        void OnLaunching()
-        {
-            settings.StartupMode = StartupMode.Launch;
-
-            Task.Run(() => RecoverPermanentStateAsync().Wait()).Wait();
-
-            permanentState.PreviousLoginTime = permanentState.CurrentLoginTime;
-            permanentState.CurrentLoginTime = DateTime.UtcNow;
-            settings.LastLoginTime = permanentState.PreviousLoginTime;
-            permanentState.RunHistory.CreateNewLog();
-
-
-#if DEBUG
-            if (!permanentState.UserId.HasValue)
-                //permanentState.UserId = Guid.NewGuid();
-                permanentState.UserId = Guid.Parse("b41e8972-60cd-43cb-9974-0ec028bedf68");
-                //permanentState.UserId = Guid.Parse("0d13bf82-0f14-475f-9725-f97e5a123d5a");
-            permanentState.IsFirstTime = false;
-#else
-            if (!permanentState.UserId.HasValue)
-            {
-                var anid2 = (string)UserExtendedProperties.GetValue("ANID2");
-                permanentState.UserId = anid2 == null ? Guid.NewGuid() : CryptoHelper.ComputeHash(anid2);
-            }
-#endif
-
-            FinishInitialization();
-            //permanentState.IsFirstTime = false;
-
-            if (permanentState.IsFirstTime && settings.CanSelectInitialCategories)
-            {
-                GlobalNavigationService.ToWelcomePage();
-            }
-            else
-            {
-                GlobalNavigationService.ToPanoramaPage();
-            }
-        }
-
-        void OnActivated()
-        {
-            settings.StartupMode = StartupMode.Activate;
-
-            if (!hasBeenInitialized)
-            {
-                Task.Run(() => RecoverPermanentStateAsync().Wait()).Wait();
-                settings.LastLoginTime = permanentState.PreviousLoginTime;
-                FinishInitialization();
-            }
-            else
-                settings.LastLoginTime = permanentState.PreviousLoginTime;
-        }
-
-        async Task RecoverPermanentStateAsync()
-        {
-            if (permanentState == null)
-                permanentState = await settings.PermanentState.Get();
-        }
-
-
-
-
         #region finish Initialization of the app
 
         void FinishInitialization()
         {
+            if (isFullyInitialized)
+                return;
+
+            isFullyInitialized = true;
+
             settings.Themes = new StandardThemeSet(settings.CurrentApplication, permanentState);
             settings.Themes.UpdateCurrentThemeFromPermanentState();
 
@@ -390,7 +311,6 @@ namespace weave
                 settings.IsNetworkAvailable = Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
             };
 
-
             if (settings.StartupMode == StartupMode.Launch)
                 settings.TombstoneState.IgnoreIsolatedStorage = true;
 
@@ -398,7 +318,6 @@ namespace weave
             InitializeNinjectKernel();
             InitializeGarbageCollectionOnNavigateToPanorama();
             InitializeOrientationChangeService();
-            hasBeenInitialized = true;
         }
 
         void InitializeAdSettings()
@@ -435,16 +354,34 @@ namespace weave
                         new Weave.User.Service.Client.Client(),
                         new Weave.Article.Service.Client.ServiceClient()
                     )
-                ) 
-                { 
-                    Id = permanentState.UserId.Value 
-                };
+                );
+
+            user.Id = permanentState.UserId;
+
+            kernel.Bind<UserInfo>().ToConstant(user).InSingletonScope();
+
+            var identity = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient()) { UserId = user.Id };
+            kernel.Bind<IdentityInfo>().ToConstant(identity).InSingletonScope();
 
             userCache = new StandardUserCache(user);
+
+            user.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Id")
+                {
+                    permanentState.UserId = user.Id;
+                }
+            };
+
+            var feedsListener = new FeedsListenerViewModel(user);
 
             kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
 
             kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
+            kernel.Bind<FeedsListenerViewModel>().ToConstant(feedsListener).InSingletonScope();
+
+            kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
+            kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
 
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
         }
@@ -537,8 +474,6 @@ namespace weave
 
         async Task StopAsync()
         {
-            permanentState.CurrentLoginTime = DateTime.UtcNow;
-
             bool stoppedSuccessfully = false;
             try
             {
