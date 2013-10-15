@@ -81,8 +81,13 @@ namespace weave
 
             if (e.NewValue is IEnumerable<NewsItem>)
             {
-                var news = (IEnumerable<NewsItem>)e.NewValue;
-                control.SetNews(news);
+                var newNews = (IEnumerable<NewsItem>)e.NewValue;
+                var oldNews = e.OldValue as IEnumerable<NewsItem>;
+
+                if (oldNews == null || !Enumerable.SequenceEqual(newNews, oldNews))
+                {
+                    control.SetNews(newNews);
+                }
             }
         }
 

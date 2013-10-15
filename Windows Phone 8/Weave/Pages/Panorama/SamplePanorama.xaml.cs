@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
 using Weave.ViewModels;
+using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -26,7 +28,7 @@ namespace weave
 
             vm = new PanoramaViewModel();
             this.DataContext = vm;
-            this.cat1.DataContext = vm.LatestNews;
+            //this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
 
             if (AppSettings.Instance.StartupMode == StartupMode.Launch)
             {
@@ -103,7 +105,8 @@ namespace weave
         {
             await TimeSpan.FromSeconds(0.3);
             this.cat1.NewsItemClicked.Subscribe(ShowDetailed);
-            vm.LoadLatestNews();
+            //vm.LoadLatestNews();
+            this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
         }
 
 

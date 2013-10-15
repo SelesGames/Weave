@@ -12,35 +12,15 @@ namespace weave
     public class PanoramaViewModel
     {
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
-        //IEnumerable<CategoryOrLooseFeedViewModel> previousSources = new List<CategoryOrLooseFeedViewModel>();
 
-        //public ObservableCollection<CategoryOrLooseFeedViewModel> Sources { get; private set; }
         public ObservableCollection<CategoryOrLooseFeedViewModel> MostViewed { get; private set; }
         public ObservableCollection<Feed> Feeds { get; private set; }
-        public LatestNewsViewModel LatestNews { get; private set; }
 
         public PanoramaViewModel()
         {
-            //Sources = new ObservableCollection<CategoryOrLooseFeedViewModel>();
             MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
             Feeds = new ObservableCollection<Feed>();
-            LatestNews = new LatestNewsViewModel();
         }
-
-        //public void LoadSourcesAsync()
-        //{
-        //    var feeds = userCache.Get().Feeds;
-        //    var sources = feeds.GetAllSources().ToList();
-
-        //    bool areItemsNew = !Enumerable.SequenceEqual(sources, previousSources);
-
-        //    if (areItemsNew)
-        //    {
-        //        Sources.Clear();
-        //        foreach (var source in sources)
-        //            Sources.Add(source);
-        //    }
-        //}
 
         static Random r = new Random();
 
@@ -113,12 +93,6 @@ namespace weave
             Feeds.Clear();
             foreach (var feed in feeds.Where(o => !string.IsNullOrWhiteSpace(o.TeaserImageUrl)))
                 Feeds.Add(feed);
-        }
-
-        public void LoadLatestNews()
-        {
-            var user = userCache.Get();
-            LatestNews.LatestNews = user.LatestNews;
         }
     }
 }

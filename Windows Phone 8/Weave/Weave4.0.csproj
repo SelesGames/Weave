@@ -307,7 +307,6 @@
     <Compile Include="Pages\Panorama\SamplePanorama.xaml.cs">
       <DependentUpon>SamplePanorama.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LatestNewsViewModel.cs" />
     <Compile Include="Settings\TombstoneState.cs" />
     <Compile Include="Services\WeaveStartupTask.cs" />
     <Compile Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml.cs">
