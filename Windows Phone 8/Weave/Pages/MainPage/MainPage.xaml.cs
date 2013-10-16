@@ -405,16 +405,16 @@ namespace weave
             string mode = null;
             Guid? feedId = null;
 
-            header = catVM.Name;
+            header = catVM.DisplayName;
 
-            if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
+            if (catVM is CategoryGroup)
             {
                 mode = "category";
             }
-            else if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
+            else if (catVM is FeedGroup)
             {
                 mode = "feed";
-                feedId = catVM.FeedId;
+                feedId = ((FeedGroup)catVM).Feed.Id;
             }
 
             if (mode == this.mode && header == this.header)

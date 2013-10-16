@@ -35,8 +35,10 @@ namespace weave
             SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}", urlEncodedHeader, mode));
         }
 
-        public static void ToMainPage(string header, Guid feedId)
+        public static void ToMainPage(Feed feed)
         {
+            string header = feed.Name;
+            Guid feedId = feed.Id;
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
             SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}", urlEncodedHeader, feedId));
         }

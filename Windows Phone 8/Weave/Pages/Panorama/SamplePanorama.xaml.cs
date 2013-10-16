@@ -176,7 +176,7 @@ namespace weave
         void OnMostViewedTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menuTileWrapper);
-            ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
+            ToArticleList(((Button)sender).DataContext as NewsItemGroup);
         }
 
         void allSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -192,20 +192,20 @@ namespace weave
         //    ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
         //}
 
-        void ToArticleList(CategoryOrLooseFeedViewModel o)
+        void ToArticleList(NewsItemGroup o)
         {
             if (o == null)
                 return;
 
-            if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
+            if (o is CategoryGroup)
             {
-                var category = o.Name;
-                GlobalNavigationService.ToMainPage(category, "category");
+                var category = (CategoryGroup)o;
+                GlobalNavigationService.ToMainPage(category.DisplayName, "category");
             }
-            else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
+            else if (o is FeedGroup)
             {
-                var feed = o.Name;
-                GlobalNavigationService.ToMainPage(feed, o.FeedId);
+                var feed = (FeedGroup)o;
+                GlobalNavigationService.ToMainPage(feed.Feed);
             }
         }
 

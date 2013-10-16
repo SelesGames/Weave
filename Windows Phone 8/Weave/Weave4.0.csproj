@@ -171,6 +171,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
       <DependentUpon>AccountSignInPage.xaml</DependentUpon>
     </Compile>
@@ -250,7 +251,8 @@
     <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="StandardUserCache.cs" />
-    <Compile Include="ViewModels\CategoryOrLooseFeedViewModel.cs" />
+    <Compile Include="ViewModels\Grouped News\NewsItemGroup.cs" />
+    <Compile Include="ViewModels\Grouped News\FeedGroup.cs" />
     <Compile Include="ViewModels\FeedsListenerViewModel.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\BaseNewsCollectionViewModel.cs" />

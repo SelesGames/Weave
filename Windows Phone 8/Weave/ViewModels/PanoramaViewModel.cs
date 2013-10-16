@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
 namespace weave
@@ -13,11 +12,11 @@ namespace weave
     {
         IUserCache userCache = ServiceResolver.Get<IUserCache>();
 
-        public ObservableCollection<CategoryOrLooseFeedViewModel> MostViewed { get; private set; }
+        public ObservableCollection<NewsItemGroup> MostViewed { get; private set; }
 
         public PanoramaViewModel()
         {
-            MostViewed = new ObservableCollection<CategoryOrLooseFeedViewModel>();
+            MostViewed = new ObservableCollection<NewsItemGroup>();
         }
 
         static Random r = new Random();
@@ -27,7 +26,7 @@ namespace weave
             var user = userCache.Get();
             var feeds = user.Feeds;
 
-            var temp = new List<CategoryOrLooseFeedViewModel>();
+            var temp = new List<NewsItemGroup>();
 
             var sources = feeds.GetAllSources().ToList();
             
@@ -36,7 +35,7 @@ namespace weave
             while (temp.Count < 4 && historyEnumerator.MoveNext())
             {
                 var mostViewed = historyEnumerator.Current;
-                var matching = sources.FirstOrDefault(o => o.Name == mostViewed.Label);
+                var matching = sources.FirstOrDefault(o => o.DisplayName == mostViewed.Label);
                 if (matching != null)
                 {
                     temp.Add(matching);
@@ -57,26 +56,7 @@ namespace weave
 
             foreach (var o in temp)
             {
-                string pic = null;
-
-                if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
-                {
-                    List<Feed> eligibleFeeds;
-
-                    if (o.Name != null && o.Name.Equals("all news", StringComparison.OrdinalIgnoreCase))
-                        eligibleFeeds = feeds.ToList();
-                    else
-                        eligibleFeeds = feeds.OfCategory(o.Name).ToList();
-
-                    // TODO: RANDOMLY SELECT ONE FEED TO DISPLAY
-                    pic = eligibleFeeds.First().TeaserImageUrl;
-                }
-                else if (o.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
-                {
-                    pic = feeds.Where(x => x.Name.Equals(o.Name, StringComparison.OrdinalIgnoreCase)).Select(z=> z.TeaserImageUrl).FirstOrDefault();
-                }
-                o.ImageSource = pic;
-
+                o.ImageSource = o.GetTeaserPicImageUrl();
                 MostViewed.Add(o);
             }
 

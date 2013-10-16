@@ -14,7 +14,7 @@ namespace weave
 
         void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            var vm  = (sender as Button).DataContext as CategoryOrLooseFeedViewModel;
+            var vm  = (sender as Button).DataContext as NewsItemGroup;
             //OnCategorySelected(vm);
             if (ItemSelected != null && vm != null)
                 ItemSelected(this, new CategoryOrFeedEventArgs(vm));
@@ -38,9 +38,9 @@ namespace weave
 
     public class CategoryOrFeedEventArgs : EventArgs
     {
-        public CategoryOrLooseFeedViewModel Selected { get; private set; }
+        public NewsItemGroup Selected { get; private set; }
 
-        public CategoryOrFeedEventArgs(CategoryOrLooseFeedViewModel selected)
+        public CategoryOrFeedEventArgs(NewsItemGroup selected)
         {
             Selected = selected;
         }
