@@ -399,7 +399,7 @@ namespace weave
             if (catVM == null)
                 return;
 
-            feedsListenerVM.SetNewCountToZero(catVM);
+            catVM.MarkEntry();
 
             string header = null;
             string mode = null;
