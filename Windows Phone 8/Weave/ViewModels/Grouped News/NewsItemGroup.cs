@@ -31,13 +31,16 @@ namespace weave
         #endregion
 
 
-        string displayName;
+
+
+        #region Private member variables
+
+        string displayName, imageSource;
         int feedCount, newArticleCount, unreadArticleCount, totalArticleCount;
 
+        #endregion
 
 
-        //public string Name { get; set; }
-        //public Guid FeedId { get; set; }
 
 
         #region Properties
@@ -72,7 +75,11 @@ namespace weave
             set { totalArticleCount = value; Raise("TotalArticleCount"); }
         }
 
-        public string ImageSource { get; set; }
+        public string ImageSource
+        {
+            get { return imageSource; }
+            set { imageSource = value; Raise("ImageSource"); }
+        }
 
         #endregion
 
@@ -121,7 +128,6 @@ namespace weave
         public abstract void MarkEntry();
         public abstract string GetTeaserPicImageUrl();
 
-        //public CategoryOrFeedType Type { get; set; }
 
 
         //public FontFamily NameFontFamily
@@ -135,44 +141,9 @@ namespace weave
         //    }
         //}
 
-        //public override bool Equals(object obj)
-        //{
-        //    if (Name == null)
-        //        return false;
-
-        //    if (obj is NewsItemGroup)
-        //    {
-        //        var vm = (NewsItemGroup)obj;
-
-        //        // if they are both Categories, compare them by name
-        //        if (Type == CategoryOrFeedType.Category && vm.Type == CategoryOrFeedType.Category)
-        //        {
-        //            return Name.Equals(vm.Name) && Type.Equals(vm.Type);
-        //        }
-        //        // if they are both Feeds, compare them by FeedId
-        //        else if (Type == CategoryOrFeedType.Feed && vm.Type == CategoryOrFeedType.Feed)
-        //        {
-        //            return FeedId.Equals(vm.FeedId);
-        //        }
-        //    }
-
-        //    return false;
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    return Name == null ? -1 : Name.GetHashCode();
-        //}
-
         public override string ToString()
         {
             return DisplayName.ToString();
         }
-
-        //public enum CategoryOrFeedType
-        //{
-        //    Category,
-        //    Feed
-        //}
     }
 }

@@ -62,6 +62,8 @@ namespace weave
 
             vm = new PanoramaViewModel();
             this.DataContext = vm;
+
+            mosaicHubTile.DataContext = user;
             //this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
 
             if (AppSettings.Instance.StartupMode == StartupMode.Launch)
@@ -88,7 +90,7 @@ namespace weave
 
         ImageSource CreateImageSourceFromFeed(Feed feed)
         {
-            if (feed == null)
+            if (feed == null || string.IsNullOrWhiteSpace(feed.TeaserImageUrl))
                 return null;
 
             return new BitmapImage(new Uri(feed.TeaserImageUrl, UriKind.Absolute));

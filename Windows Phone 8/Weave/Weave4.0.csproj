@@ -255,10 +255,7 @@
     <Compile Include="ViewModels\Grouped News\FeedGroup.cs" />
     <Compile Include="ViewModels\FeedsListenerViewModel.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
-    <Compile Include="ViewModels\MainPage\BaseNewsCollectionViewModel.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
-    <Compile Include="ViewModels\MainPage\NewsCollectionCategoryViewModel.cs" />
-    <Compile Include="ViewModels\MainPage\NewsCollectionFeedViewModel.cs" />
     <Compile Include="ViewModels\MainPage\PagedFavoriteNewsItems.cs" />
     <Compile Include="ViewModels\MainPage\PagedNews.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
@@ -310,7 +307,6 @@
     <Compile Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml.cs">
       <DependentUpon>SocialShareContextMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\NewsItemViewModel.cs" />
     <Compile Include="ViewModels\PanoramaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

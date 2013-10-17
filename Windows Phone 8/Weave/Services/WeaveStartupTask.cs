@@ -328,6 +328,7 @@ namespace weave
         void InitializeNinjectKernel()
         {
             kernel = new Kernel(settings.AssemblyName);
+            ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
 
             //kernel.Bind<MainPageSettingsPopup>().ToSelf().InSingletonScope();
             kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
@@ -382,8 +383,6 @@ namespace weave
 
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
-
-            ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
         }
 
         void InitializeGarbageCollectionOnNavigateToPanorama()

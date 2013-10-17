@@ -1,5 +1,4 @@
-﻿using SelesGames;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,6 +12,16 @@ namespace weave
         UserInfo user;
 
         public ObservableCollection<NewsItemGroup> Feeds { get; private set; }
+
+        public NewsItemGroup FindByCategory(string categoryName)
+        {
+            return Feeds.OfType<CategoryGroup>().FirstOrDefault(o => o.DisplayName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public NewsItemGroup FindByFeedId(Guid feedId)
+        {
+            return Feeds.OfType<FeedGroup>().FirstOrDefault(o => o.Feed.Id.Equals(feedId));
+        }
 
         public FeedsListenerViewModel(UserInfo user)
         {
@@ -29,25 +38,6 @@ namespace weave
             RefreshFeeds();
         }
 
-        public void SetNewCountToZero(NewsItemGroup catVM)
-        {
-            catVM.MarkEntry();
-            //if (catVM.Name.Equals("all news", StringComparison.OrdinalIgnoreCase))
-            //{
-            //    catVM.NewArticleCount = 0;
-            //    return;
-            //}
-            //else
-            //{
-            //    var allNewsCatVM = Feeds.FirstOrDefault(o => o.Name.Equals("all news", StringComparison.OrdinalIgnoreCase));
-            //    if (allNewsCatVM != null)
-            //    {
-            //        allNewsCatVM.NewArticleCount -= catVM.NewArticleCount;
-            //    }
-            //    catVM.NewArticleCount = 0;
-            //}
-        }
-
         void RefreshFeeds()
         {
             Feeds.Clear();
@@ -55,9 +45,7 @@ namespace weave
             if (user.Feeds == null)
                 return;
 
-            var feeds = user.Feeds;
-            var sources = feeds.GetAllSources(o => o.ToUpper(), o => o).ToList();
-            foreach (var source in sources)
+            foreach (var source in GetAllSources(user.Feeds))
                 Feeds.Add(source);
         }
 
@@ -84,6 +72,41 @@ namespace weave
 
 
 
+        #region Helper methods
+
+        IEnumerable<NewsItemGroup> GetAllSources (IEnumerable<Feed> feeds)
+        {
+            var groupedFeeds = feeds.GroupBy(o => o.Category).ToList();
+
+            var categories = groupedFeeds
+                .Where(o => !string.IsNullOrEmpty(o.Key))
+                .Select(o => new CategoryGroup(user, o.Key, o))
+                .OrderBy(o => o.DisplayName)
+                .ToList();
+
+            var looseFeeds = groupedFeeds
+                .Where(o => string.IsNullOrEmpty(o.Key))
+                .SelectMany(o => o)
+                .Where(o => o.Name != null)
+                .Select(o => new FeedGroup(user, o, null))
+                .OrderBy(o => o.DisplayName)
+                .ToList();
+
+            var sources = new List<NewsItemGroup>();
+
+            sources.Add(new CategoryGroup(user, "all news", categories.SelectMany(o => o.Feeds).Union(looseFeeds)));
+
+            var all = (categories.Cast<NewsItemGroup>()).Union(looseFeeds.Cast<NewsItemGroup>());
+            sources.AddRange(all);
+
+            return sources;
+        }
+
+        #endregion
+
+
+
+
         #region IDisposable
 
         public void Dispose()
@@ -93,41 +116,5 @@ namespace weave
         }
 
         #endregion
-    }
-
-    internal static class FeedSourceExtensions
-    {
-        public static IEnumerable<NewsItemGroup> GetAllSources(this IEnumerable<Feed> feeds, Func<string, string> categoryCasing, Func<string, string> feedCasing)
-        {
-            var user = ServiceResolver.Get<UserInfo>();
-
-            var groupedFeeds = feeds.GroupBy(o => o.Category).ToList();
-
-            var categories = groupedFeeds
-                .Where(o => !string.IsNullOrEmpty(o.Key))
-                .Select(o => new CategoryGroup(user, o.Key, o))
-                .OrderBy(o => o.DisplayName);
-
-            var looseFeeds = groupedFeeds
-                .Where(o => string.IsNullOrEmpty(o.Key))
-                .SelectMany(o => o)
-                .Where(o => o.Name != null)
-                .Select(o => new FeedGroup(user, o, null))
-                .OrderBy(o => o.DisplayName);
-
-            var sources = new List<NewsItemGroup>();
-
-            sources.Add(new CategoryGroup(user, "all news", feeds));
-
-            var all = (categories.Cast<NewsItemGroup>()).Union(looseFeeds.Cast<NewsItemGroup>());
-            sources.AddRange(all);
-
-            return sources;
-        }
-
-        public static IEnumerable<NewsItemGroup> GetAllSources(this IEnumerable<Feed> feeds)
-        {
-            return GetAllSources(feeds, null, null);
-        }
     }
 }

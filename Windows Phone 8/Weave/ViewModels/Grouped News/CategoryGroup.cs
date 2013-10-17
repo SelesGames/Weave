@@ -10,7 +10,8 @@ namespace weave
     {
         UserInfo user;
         string category;
-        IEnumerable<FeedGroup> feeds;
+
+        public IReadOnlyList<FeedGroup> Feeds { get; private set; }
 
 
 
@@ -25,7 +26,7 @@ namespace weave
 
             this.user = user;
             this.category = category;
-            this.feeds = feeds ?? new List<FeedGroup>();
+            this.Feeds = new List<FeedGroup>(feeds);
 
             DisplayName = category;
         }
@@ -38,7 +39,9 @@ namespace weave
 
             this.user = user;
             this.category = category;
-            this.feeds = feeds.Select(o => new FeedGroup(user, o, this));
+            this.Feeds = new List<FeedGroup>(feeds.Select(o => new FeedGroup(user, o, this)));
+
+            DisplayName = category;
         }
 
         #endregion
@@ -54,7 +57,7 @@ namespace weave
         public override void MarkEntry()
         {
             NewArticleCount = 0;
-            foreach (var feed in feeds)
+            foreach (var feed in Feeds)
                 feed.MarkEntry();
         }
 
@@ -66,11 +69,11 @@ namespace weave
 
             if (category != null && category.Equals("all news", StringComparison.OrdinalIgnoreCase))
             {
-                eligibleFeeds = feeds;
+                eligibleFeeds = Feeds;
             }
             else
             {
-                eligibleFeeds = feeds.Where(o => category.Equals(o.Feed.Category, StringComparison.OrdinalIgnoreCase));
+                eligibleFeeds = Feeds.Where(o => category.Equals(o.Feed.Category, StringComparison.OrdinalIgnoreCase));
             }
             
             // TODO: RANDOMLY SELECT ONE FEED TO DISPLAY

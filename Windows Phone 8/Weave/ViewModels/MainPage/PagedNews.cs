@@ -9,7 +9,7 @@ namespace weave
     public class PagedNewsItems : IPagedNewsItems
     {
         List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
-        BaseNewsCollectionViewModel vm;
+        NewsItemGroup vm;
 
         public int PageSize { get; private set; }
         public int NumberOfPagesToTakeAtATime { get; private set; }
@@ -17,7 +17,7 @@ namespace weave
         public int TotalNewsCount { get; private set; }
         public int NewNewsCount { get; private set; }
 
-        public PagedNewsItems(BaseNewsCollectionViewModel vm, int pageSize, int numberOfPagesToTakeAtATime)
+        public PagedNewsItems(NewsItemGroup vm, int pageSize, int numberOfPagesToTakeAtATime)
         {
             this.vm = vm;
             PageSize = pageSize;

@@ -123,17 +123,18 @@ namespace weave
         void InitializeNewsCollectionVM()
         {
             var tombstoneState = AppSettings.Instance.TombstoneState.Get().WaitOnResult();
+            var feedListener = ServiceResolver.Get<FeedsListenerViewModel>();
 
             if (currentOperatingMode == OperatingMode.Category)
             {
-                var newsCollectionVM = new NewsCollectionCategoryViewModel(Header);
-                pageNews = new PagedNewsItems(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                var vm = feedListener.FindByCategory(Header);
+                pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Category;
             }
             else if (currentOperatingMode == OperatingMode.Feed)
             {
-                var newsCollectionVM = new NewsCollectionFeedViewModel(FeedId);
-                pageNews = new PagedNewsItems(newsCollectionVM, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                var vm = feedListener.FindByFeedId(FeedId);
+                pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Feed;
             }
             else if (currentOperatingMode == OperatingMode.Favorites)
