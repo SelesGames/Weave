@@ -20,10 +20,12 @@ namespace weave
 {
     public partial class SamplePanorama : WeavePage
     {
-        PanoramaViewModel vm;
+        NewsItemGroupToMostViewedAdapter vm;
         IdentityInfo identity;
         OverlayFrame frame;
         UserInfo user;
+        FeedsToNewsItemGroupAdapter feedsToNewsItemGroupAdapter;
+
         bool isIdentityInitialized = false;
 
         public SamplePanorama()
@@ -36,6 +38,7 @@ namespace weave
             frame = ServiceResolver.Get<OverlayFrame>();
             user = ServiceResolver.Get<UserInfo>();
             identity = ServiceResolver.Get<IdentityInfo>();
+            feedsToNewsItemGroupAdapter = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
 
             identity.UserIdChanged += async (s, e) =>
             {
@@ -60,7 +63,7 @@ namespace weave
                 frame.IsLoading = false;
             };
 
-            vm = new PanoramaViewModel();
+            vm = new NewsItemGroupToMostViewedAdapter(feedsToNewsItemGroupAdapter);
             this.DataContext = vm;
 
             mosaicHubTile.DataContext = user;
@@ -82,7 +85,6 @@ namespace weave
             Debug.WriteLine("\r\n*******************\r\nMAIN GUI THREAD HAPPENING ON {0}\r\n*******************\r\n", Thread.CurrentThread.ManagedThreadId);
             this.IsHitTestVisible = false;
 
-            vm.LoadMostViewedAsync();
             SetValue(RadTransitionControl.TransitionProperty, new RadTileTransition { PlayMode = TransitionPlayMode.Manual });
 
             mosaicHubTile.CreateImageSource = o => CreateImageSourceFromFeed(o as Feed);

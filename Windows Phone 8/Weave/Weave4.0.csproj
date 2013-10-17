@@ -250,7 +250,7 @@
     <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\Grouped News\NewsItemGroup.cs" />
     <Compile Include="ViewModels\Grouped News\FeedGroup.cs" />
-    <Compile Include="ViewModels\FeedsListenerViewModel.cs" />
+    <Compile Include="ViewModels\FeedsToNewsItemGroupAdapter.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
     <Compile Include="ViewModels\MainPage\PagedFavoriteNewsItems.cs" />
@@ -304,7 +304,7 @@
     <Compile Include="Pages\WebBrowser\SocialShareContextMenuControl.xaml.cs">
       <DependentUpon>SocialShareContextMenuControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\PanoramaViewModel.cs" />
+    <Compile Include="ViewModels\NewsItemGroupToMostViewedAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

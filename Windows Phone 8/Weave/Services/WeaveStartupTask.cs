@@ -374,12 +374,12 @@ namespace weave
                 }
             };
 
-            var feedsListener = new FeedsListenerViewModel(user);
+            var feedsListener = new FeedsToNewsItemGroupAdapter(user);
 
             kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
 
             kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
-            kernel.Bind<FeedsListenerViewModel>().ToConstant(feedsListener).InSingletonScope();
+            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(feedsListener).InSingletonScope();
 
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();

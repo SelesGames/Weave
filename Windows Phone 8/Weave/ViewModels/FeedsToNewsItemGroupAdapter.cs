@@ -7,23 +7,13 @@ using Weave.ViewModels;
 
 namespace weave
 {
-    public class FeedsListenerViewModel : IDisposable
+    public class FeedsToNewsItemGroupAdapter : IDisposable
     {
         UserInfo user;
 
         public ObservableCollection<NewsItemGroup> Feeds { get; private set; }
 
-        public NewsItemGroup FindByCategory(string categoryName)
-        {
-            return Feeds.OfType<CategoryGroup>().FirstOrDefault(o => o.DisplayName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public NewsItemGroup FindByFeedId(Guid feedId)
-        {
-            return Feeds.OfType<FeedGroup>().FirstOrDefault(o => o.Feed.Id.Equals(feedId));
-        }
-
-        public FeedsListenerViewModel(UserInfo user)
+        public FeedsToNewsItemGroupAdapter(UserInfo user)
         {
             this.user = user;
 
@@ -36,6 +26,16 @@ namespace weave
             Feeds = new ObservableCollection<NewsItemGroup>();
 
             RefreshFeeds();
+        }
+
+        public NewsItemGroup FindByCategory(string categoryName)
+        {
+            return Feeds.OfType<CategoryGroup>().FirstOrDefault(o => o.DisplayName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public NewsItemGroup FindByFeedId(Guid feedId)
+        {
+            return Feeds.OfType<FeedGroup>().FirstOrDefault(o => o.Feed.Id.Equals(feedId));
         }
 
         void RefreshFeeds()

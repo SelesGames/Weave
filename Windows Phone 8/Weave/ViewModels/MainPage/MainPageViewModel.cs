@@ -123,7 +123,7 @@ namespace weave
         void InitializeNewsCollectionVM()
         {
             var tombstoneState = AppSettings.Instance.TombstoneState.Get().WaitOnResult();
-            var feedListener = ServiceResolver.Get<FeedsListenerViewModel>();
+            var feedListener = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
 
             if (currentOperatingMode == OperatingMode.Category)
             {

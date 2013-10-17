@@ -17,6 +17,10 @@ namespace weave
             this.category = category;
 
             DisplayName = feed.Name;
+            NewArticleCount = feed.NewArticleCount;
+            UnreadArticleCount = feed.UnreadArticleCount;
+            TotalArticleCount = feed.TotalArticleCount;
+            FeedCount = 1;
         }
 
         public override Task<NewsList> GetNewsList(EntryType entryType, int skip, int take)

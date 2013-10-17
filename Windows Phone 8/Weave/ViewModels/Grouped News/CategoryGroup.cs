@@ -24,11 +24,7 @@ namespace weave
             if (category == null) throw new ArgumentNullException("category");
             if (feeds == null) throw new ArgumentNullException("feeds");
 
-            this.user = user;
-            this.category = category;
-            this.Feeds = new List<FeedGroup>(feeds);
-
-            DisplayName = category;
+            Initialize(user, category, feeds);
         }
 
         public CategoryGroup(UserInfo user, string category, IEnumerable<Feed> feeds)
@@ -37,11 +33,21 @@ namespace weave
             if (category == null) throw new ArgumentNullException("category");
             if (feeds == null) throw new ArgumentNullException("feeds");
 
+            Initialize(user, category, feeds.Select(o => new FeedGroup(user, o, this)));
+        }
+
+        void Initialize(UserInfo user, string category, IEnumerable<FeedGroup> feeds)
+        {
             this.user = user;
             this.category = category;
-            this.Feeds = new List<FeedGroup>(feeds.Select(o => new FeedGroup(user, o, this)));
+            this.Feeds = new List<FeedGroup>(feeds);
 
             DisplayName = category;
+
+            NewArticleCount = Feeds.Sum(o => o.NewArticleCount);
+            UnreadArticleCount = Feeds.Sum(o => o.UnreadArticleCount);
+            TotalArticleCount = Feeds.Sum(o => o.TotalArticleCount);
+            FeedCount = Feeds.Count;
         }
 
         #endregion

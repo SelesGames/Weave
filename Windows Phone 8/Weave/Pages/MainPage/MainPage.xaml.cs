@@ -33,7 +33,7 @@ namespace weave
         PermanentState permState;
 
         MainPageViewModel vm;
-        FeedsListenerViewModel feedsListenerVM;
+        FeedsToNewsItemGroupAdapter feedsListenerVM;
         SwitchingAdControl adControl;
 
         ApplicationBarIconButton refreshButton, fontButton, markPageReadButton, manageSourceButton, addSourceButton, searchSourceButton;
@@ -266,9 +266,8 @@ namespace weave
 
                     CreateViewModel();
 
-                    feedsListenerVM = new FeedsListenerViewModel(ServiceResolver.Get<IUserCache>().Get());
+                    feedsListenerVM = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
                     SourcesList.DataContext = feedsListenerVM;
-                    feedsListenerVM.DisposeWith(pageLevelDisposables);
 
                     //await TimeSpan.FromSeconds(0.4);
 

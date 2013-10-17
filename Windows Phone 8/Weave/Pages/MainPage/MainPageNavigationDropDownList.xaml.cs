@@ -19,21 +19,6 @@ namespace weave
             if (ItemSelected != null && vm != null)
                 ItemSelected(this, new CategoryOrFeedEventArgs(vm));
         }
-        
-        //void OnCategorySelected(CategoryOrLooseFeedViewModel catVM)
-        //{
-        //    if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Category)
-        //    {
-        //        var category = catVM.Name;
-
-        //        GlobalNavigationService.ToMainPage(category, "category");
-        //    }
-        //    else if (catVM.Type == CategoryOrLooseFeedViewModel.CategoryOrFeedType.Feed)
-        //    {
-        //        var feed = catVM.Name;
-        //        GlobalNavigationService.ToMainPage(feed, catVM.FeedId);
-        //    }
-        //}
     }
 
     public class CategoryOrFeedEventArgs : EventArgs
