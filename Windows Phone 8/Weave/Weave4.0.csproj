@@ -172,9 +172,6 @@
     </Compile>
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
-    <Compile Include="Pages\Accounts\AccountSignInPage.xaml.cs">
-      <DependentUpon>AccountSignInPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -314,10 +311,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Page Include="Pages\Accounts\AccountSignInPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
