@@ -63,7 +63,7 @@ namespace weave
                 var userCache = ServiceResolver.Get<IUserCache>();
                 var user = userCache.Get();
                 user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
-                await user.Save();
+                await user.Create();
                 await user.Load();
 
                 GlobalNavigationService.ToPanoramaPage();

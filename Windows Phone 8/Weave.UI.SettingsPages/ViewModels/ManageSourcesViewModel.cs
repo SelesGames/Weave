@@ -25,7 +25,7 @@ namespace weave
 
         public async Task LoadFeeds()
         {
-            if (user.ShouldRefreshFeedsInfo())
+            if (user.AreFeedsModified)
                 await user.LoadFeeds();
 
             FeedGroups.Clear();
