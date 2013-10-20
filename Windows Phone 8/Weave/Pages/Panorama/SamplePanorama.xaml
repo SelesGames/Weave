@@ -7,6 +7,7 @@
 	xmlns:local="clr-namespace:weave"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
 	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
+	xmlns:wc="clr-namespace:Weave.UI.Controls;assembly=Weave.UI.Controls"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
@@ -109,10 +110,10 @@
 					<Rectangle Fill="Black" Visibility="Collapsed" />
 					<Rectangle Grid.Row="1" Grid.RowSpan="4" Fill="#FF303030" Stroke="White" Visibility="Collapsed" />
 					<TextBlock Foreground="#99FFFFFF" Text="Login via one of the services below if you'd like to sync your feeds and preferences with another device" Margin="12,0,12,12" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" LineHeight="21.333"/>
-					<sg:ImageWithLabelButton Grid.Row="1" Content="Microsoft" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Microsoft.png" Tap="OnMicrosoftButtonTap" Margin="0,12,0,0" Height="72" />
-					<sg:ImageWithLabelButton Grid.Row="2" Content="Facebook" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Facebook.png" Tap="OnFacebookButtonTap" Height="72" />
-					<sg:ImageWithLabelButton Grid.Row="3" Content="Twitter" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Twitter.png" Tap="OnTwitterButtonTap" Height="72" />
-					<sg:ImageWithLabelButton Grid.Row="4" Content="Google" Tag="logged in" Style="{StaticResource LoginButtonStyle}" Source="/Assets/Login/Google.png" Tap="OnGoogleButtonTap" Height="72" />
+					<wc:LoginButton Grid.Row="1" IsLoggedIn="{Binding IsMicrosoftSynced}" Content="Microsoft" Source="/Assets/Login/Microsoft.png" Tap="OnMicrosoftButtonTap" Margin="0,12,0,0" Height="72" />
+					<wc:LoginButton Grid.Row="2" IsLoggedIn="{Binding IsFacebookSynced}" Content="Facebook" Source="/Assets/Login/Facebook.png" Tap="OnFacebookButtonTap" Height="72" />
+					<wc:LoginButton Grid.Row="3" IsLoggedIn="{Binding IsTwitterSynced}" Content="Twitter" Source="/Assets/Login/Twitter.png" Tap="OnTwitterButtonTap" Height="72" />
+					<wc:LoginButton Grid.Row="4" IsLoggedIn="{Binding IsGoogleSynced}" Content="Google" Source="/Assets/Login/Google.png" Tap="OnGoogleButtonTap" Height="72" />
 				</Grid>
 			</phone:PanoramaItem>
 					

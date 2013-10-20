@@ -1,13 +1,6 @@
-﻿using System;
-using System.Net;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 
 namespace Weave.UI.Controls
 {
@@ -16,7 +9,6 @@ namespace Weave.UI.Controls
     [TemplateVisualState(GroupName = "LoginStates", Name = "LoggedOut")]
     public class LoginButton : Button
     {
-        Image image;
         TextBlock loginStateText;
 
         public LoginButton()
@@ -29,7 +21,6 @@ namespace Weave.UI.Controls
             base.OnApplyTemplate();
 
             loginStateText = GetTemplateChild("LoginStateText") as TextBlock;
-
             SetLoginVisualState();
         }
 
@@ -82,26 +73,15 @@ namespace Weave.UI.Controls
         }
 
         public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(
-            "Source", 
-            typeof(ImageSource), 
-            typeof(LoginButton), 
-            new PropertyMetadata(OnSourceChanged));
+            "Source",
+            typeof(ImageSource),
+            typeof(LoginButton),
+            null);
 
         public ImageSource Source
         {
             get { return (ImageSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
-        }
-
-        static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            var button = (LoginButton)obj;
-
-            if (e.NewValue is ImageSource && button.image != null)
-            {
-                var image = (ImageSource)e.NewValue;
-                button.image.Source = image;
-            }
         }
 
         public static readonly DependencyProperty IsLoggedInProperty = DependencyProperty.Register(

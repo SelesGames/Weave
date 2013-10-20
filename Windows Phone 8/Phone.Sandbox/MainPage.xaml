@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+	xmlns:wl="clr-namespace:Weave.UI.Controls;assembly=Weave.UI.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -47,7 +48,11 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+			<wl:LoginButton 
+				Content="Sample" 
+				VerticalAlignment="Top" 
+				Source="/Assets/Tiles/FlipCycleTileMedium.png" 
+				 />
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

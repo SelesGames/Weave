@@ -147,6 +147,16 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
+      <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
+      <Name>SelesGames.Phone.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UI.Controls\Weave.UI.Controls.csproj">
+      <Project>{DD62BFA1-A863-4A18-8D93-6BDD222EEF27}</Project>
+      <Name>Weave.UI.Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
