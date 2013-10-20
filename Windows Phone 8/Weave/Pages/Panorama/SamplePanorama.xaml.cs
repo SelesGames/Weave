@@ -65,6 +65,7 @@ namespace weave
 
             vm = new NewsItemGroupToMostViewedAdapter(feedsToNewsItemGroupAdapter);
             this.DataContext = vm;
+            loginMenu.DataContext = identity;
 
             mosaicHubTile.DataContext = user;
             //this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
