@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -78,6 +79,7 @@ namespace Weave.UI.Controls
             typeof(LoginButton),
             null);
 
+        [Category("Appearance")]
         public ImageSource Source
         {
             get { return (ImageSource)GetValue(SourceProperty); }
