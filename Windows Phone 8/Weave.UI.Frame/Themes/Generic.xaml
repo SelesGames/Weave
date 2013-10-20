@@ -9,7 +9,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
 
-    <Style TargetType="local:OverlayFrame">
+	<Style TargetType="local:OverlayFrame">
 		<Setter Property="IsTabStop" Value="False"/>
 		<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 		<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
@@ -24,7 +24,7 @@
 		<Setter Property="Padding" Value="0"/>
 		<Setter Property="Template">
 			<Setter.Value>
-                <ControlTemplate TargetType="local:OverlayFrame">
+				<ControlTemplate TargetType="local:OverlayFrame">
 					<Border x:Name="ClientArea" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" d:DesignHeight="800" d:DesignWidth="480" >
 						<Border.Resources>
 							<Storyboard x:Name="ShowLoadingSB">
