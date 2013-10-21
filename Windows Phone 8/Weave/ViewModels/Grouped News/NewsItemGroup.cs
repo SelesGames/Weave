@@ -8,31 +8,6 @@ namespace weave
 {
     public abstract class NewsItemGroup : ViewModelBase
     {
-        #region static media values that come from App.Resources
-
-        static bool areArticleBrushesSet = false, areFontFamiliesSet = false;
-        static Brush newArticleBrush, noNewArticleBrush;
-        static FontFamily categoryFont, feedFont;
-
-        static void SetArticleBrushes()
-        {
-            newArticleBrush = Application.Current.Resources["PhoneAccentBrush"] as Brush;
-            noNewArticleBrush = Application.Current.Resources["PhoneSubtleBrush"] as Brush;
-            areArticleBrushesSet = true;
-        }
-
-        static void SetFontFamilies()
-        {
-            categoryFont = Application.Current.Resources["PhoneFontFamilyBlack"] as FontFamily;
-            feedFont = Application.Current.Resources["PhoneFontFamilyNormal"] as FontFamily;
-            areFontFamiliesSet = true;
-        }
-
-        #endregion
-
-
-
-
         #region Private member variables
 
         string displayName, imageSource;
@@ -96,15 +71,14 @@ namespace weave
             }
         }
 
-        public Brush NewArticleCountBrush
+        public string DisplayNameUppercase
         {
-            get
-            {
-                if (!areArticleBrushesSet)
-                    SetArticleBrushes();
+            get { return DisplayName == null ? null : DisplayName.ToUpper(); }
+        }
 
-                return NewArticleCount > 0 ? newArticleBrush : noNewArticleBrush;
-            }
+        public string DisplayNameLowercase
+        {
+            get { return DisplayName == null ? null : DisplayName.ToLower(); }
         }
 
         #endregion
@@ -127,19 +101,6 @@ namespace weave
         public abstract Task<NewsList> GetNewsList(EntryType entryType, int skip, int take);
         public abstract void MarkEntry();
         public abstract string GetTeaserPicImageUrl();
-
-
-
-        //public FontFamily NameFontFamily
-        //{
-        //    get
-        //    {
-        //        if (!areFontFamiliesSet)
-        //            SetFontFamilies();
-
-        //        return Type == CategoryOrFeedType.Category ? categoryFont : feedFont;
-        //    }
-        //}
 
         public override string ToString()
         {

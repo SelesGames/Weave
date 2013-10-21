@@ -316,6 +316,10 @@ namespace weave
             {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
             }
+            else if (mode.Equals("read", StringComparison.OrdinalIgnoreCase))
+            {
+                vm.currentOperatingMode = MainPageViewModel.OperatingMode.Read;
+            }
 
             DataContext = this.vm;
         }

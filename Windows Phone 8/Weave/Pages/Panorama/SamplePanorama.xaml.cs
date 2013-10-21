@@ -223,7 +223,7 @@ namespace weave
         void readButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menu);
-            GlobalNavigationService.ToMainPage("favorites", "favorites");
+            GlobalNavigationService.ToMainPage("previously read", "read");
         }
 
         void manageSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)

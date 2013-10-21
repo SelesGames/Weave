@@ -31,7 +31,7 @@ namespace weave
         SerialDisposable progressBarVisHandle = new SerialDisposable();
         CompositeDisposable disposables = new CompositeDisposable();
         TombstoneState tombstoneState;
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
 
         IPagedNewsItems pageNews;
 
@@ -41,7 +41,8 @@ namespace weave
         {
             Category,
             Feed,
-            Favorites
+            Favorites,
+            Read
         }
 
         static IScheduler scheduler = ViewModelBackgroundScheduler.Instance;
@@ -63,6 +64,7 @@ namespace weave
             //view.IsPreviousButtonEnabled = HasPrevious = false;
             //view.IsNextButtonEnabled = HasNext = false;
             NewItemCount = "0 NEW";
+            user = ServiceResolver.Get<UserInfo>();
         }
 
         public async Task InitializeAsync()
@@ -139,8 +141,13 @@ namespace weave
             }
             else if (currentOperatingMode == OperatingMode.Favorites)
             {
-                pageNews = new PagedFavoriteNewsItems(AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                pageNews = new PagedNewsItems(new FavoriteArticlesGroup(user), AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Favorites;
+            }
+            else if (currentOperatingMode == OperatingMode.Read)
+            {
+                pageNews = new PagedNewsItems(new ReadArticlesGroup(user), AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                tombstoneState.CurrentArticleListContext = ArticleListContext.Read;
             }
         }
 
@@ -272,7 +279,7 @@ namespace weave
             if (displayedNews == null)
                 return;
 
-            await userCache.Get().MarkArticlesSoftRead(displayedNews);
+            await user.MarkArticlesSoftRead(displayedNews);
             UpdateNewItemCount();
         }
 

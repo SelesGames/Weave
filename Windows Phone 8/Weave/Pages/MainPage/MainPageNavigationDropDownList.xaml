@@ -14,6 +14,9 @@
 	d:DesignHeight="800" d:DesignWidth="480">
 	
 	<UserControl.Resources>
+
+		<local:NewsItemGroupTypeFontFamilyConverter x:Key="FontConverter" />
+		<local:NewsItemGroupTypeCaseConverter x:Key="CaseConverter" />
 	
 		<Style x:Key="ButtonStyle" TargetType="Button">
 			<Setter Property="Template">
@@ -31,8 +34,8 @@
 							<Border Padding="0,20,0,15" Background="{TemplateBinding Background}">
 								<Grid x:Name="ContentContainer" HorizontalAlignment="Left">
 									<Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-									<TextBlock Text="{Binding DisplayName}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="12,0" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" FontFamily="{Binding NameFontFamily}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
-									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{Binding NewArticleCountBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-2,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
+									<TextBlock Text="{Binding Converter={StaticResource CaseConverter}}" Foreground="{TemplateBinding Foreground}" TextWrapping="Wrap" Margin="12,0" LineStackingStrategy="BlockLineHeight" LineHeight="23.333" FontFamily="{Binding Converter={StaticResource FontConverter}}" FontSize="{StaticResource PhoneFontSizeMediumLarge}"/>
+									<TextBlock Text="{Binding NewArticleCountText}" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" Margin="12,-2,12,0" Grid.Column="1" FontSize="18.667" LineHeight="23.333" VerticalAlignment="Top"/>
 								</Grid>
 							</Border>
 						</Grid>

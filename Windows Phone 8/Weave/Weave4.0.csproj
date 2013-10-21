@@ -171,6 +171,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
+    <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
@@ -248,12 +250,13 @@
     <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="StandardUserCache.cs" />
+    <Compile Include="ViewModels\Grouped News\ReadArticlesGroup.cs" />
+    <Compile Include="ViewModels\Grouped News\FavoriteArticlesGroup.cs" />
     <Compile Include="ViewModels\Grouped News\NewsItemGroup.cs" />
     <Compile Include="ViewModels\Grouped News\FeedGroup.cs" />
     <Compile Include="ViewModels\FeedsToNewsItemGroupAdapter.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
-    <Compile Include="ViewModels\MainPage\PagedFavoriteNewsItems.cs" />
     <Compile Include="ViewModels\MainPage\PagedNews.cs" />
     <Compile Include="ViewModels\ReadabilityPageViewModel.cs" />
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
