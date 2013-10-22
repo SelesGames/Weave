@@ -76,11 +76,13 @@ namespace weave
 
         IEnumerable<NewsItemGroup> GetAllSources (IEnumerable<Feed> feeds)
         {
+            var allNews = new AllNewsGroup(user);
+
             var groupedFeeds = feeds.GroupBy(o => o.Category).ToList();
 
             var categories = groupedFeeds
                 .Where(o => !string.IsNullOrEmpty(o.Key))
-                .Select(o => new CategoryGroup(user, o.Key, o))
+                .Select(o => new CategoryGroup(user, o.Key, o, allNews))
                 .OrderBy(o => o.DisplayName)
                 .ToList();
 
@@ -88,17 +90,17 @@ namespace weave
                 .Where(o => string.IsNullOrEmpty(o.Key))
                 .SelectMany(o => o)
                 .Where(o => o.Name != null)
-                .Select(o => new FeedGroup(user, o, null))
+                .Select(o => new FeedGroup(user, o, null, allNews))
                 .OrderBy(o => o.DisplayName)
                 .ToList();
 
-            var sources = new List<NewsItemGroup>();
+            allNews.Subgroups = categories.SelectMany(o => o.Feeds).Union(looseFeeds).ToList();
 
-            sources.Add(new CategoryGroup(user, "all news", categories.SelectMany(o => o.Feeds).Union(looseFeeds)));
+            var sources = new List<NewsItemGroup>();
+            sources.Add(allNews);
 
             var all = (categories.Cast<NewsItemGroup>()).Union(looseFeeds.Cast<NewsItemGroup>());
             sources.AddRange(all);
-
             return sources;
         }
 

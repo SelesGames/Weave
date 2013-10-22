@@ -15,7 +15,7 @@ namespace weave
             if (string.IsNullOrWhiteSpace(val.DisplayName))
                 return null;
 
-            if (value is CategoryGroup)
+            if (value is CategoryGroup || value is AllNewsGroup)
                 return val.DisplayNameUppercase;
 
             else if (value is FeedGroup)

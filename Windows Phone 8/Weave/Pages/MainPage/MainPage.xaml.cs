@@ -78,9 +78,6 @@ namespace weave
             CreateSourcesListAppBar();
             BindIsOrientationLockedToAppBar();
 
-            if (OSThemeHelper.GetCurrentTheme() == OSTheme.Light)
-                fade.Fill = Resources["LightThemeFade"] as System.Windows.Media.Brush;
-
             fontSizePopup = ServiceResolver.Get<FontAndThemePopup>();
             Observable.FromEventPattern<SelesGames.EventArgs<ArticleListFormatProperties>>(fontSizePopup, "ArticleListFormatChanged")
                 .Subscribe(o => OnArticleListFormatChanged(fontSizePopup, o.EventArgs)).DisposeWith(pageLevelDisposables);
@@ -300,25 +297,30 @@ namespace weave
 
             var permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
             var tallyer = permstate.RunHistory.GetActiveLog();
-            tallyer.Tally(header);
 
             this.vm = new MainPageViewModel(this, header);
             if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
             {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Category;
+                tbPageCount.Visibility = Visibility.Visible;
+                tallyer.Tally(header);
             }
             else if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
             {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Feed;
                 vm.FeedId = feedId.Value;
+                tbPageCount.Visibility = Visibility.Visible;
+                tallyer.Tally(header);
             }
             else if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
             {
                 vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
+                tbPageCount.Visibility = Visibility.Collapsed;
             }
             else if (mode.Equals("read", StringComparison.OrdinalIgnoreCase))
             {
                 vm.currentOperatingMode = MainPageViewModel.OperatingMode.Read;
+                tbPageCount.Visibility = Visibility.Collapsed;
             }
 
             DataContext = this.vm;
@@ -398,26 +400,26 @@ namespace weave
 
         void SourcesList_ItemSelected(object sender, CategoryOrFeedEventArgs e)
         {
-            var catVM = e.Selected;
-            if (catVM == null)
+            var niGroup = e.Selected;
+            if (niGroup == null)
                 return;
 
-            catVM.MarkEntry();
+            niGroup.MarkEntry();
 
             string header = null;
             string mode = null;
             Guid? feedId = null;
 
-            header = catVM.DisplayName;
+            header = niGroup.DisplayName;
 
-            if (catVM is CategoryGroup)
+            if (niGroup is CategoryGroup)
             {
                 mode = "category";
             }
-            else if (catVM is FeedGroup)
+            else if (niGroup is FeedGroup)
             {
                 mode = "feed";
-                feedId = ((FeedGroup)catVM).Feed.Id;
+                feedId = ((FeedGroup)niGroup).Feed.Id;
             }
 
             if (mode == this.mode && header == this.header)

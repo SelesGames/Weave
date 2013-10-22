@@ -27,13 +27,13 @@ namespace weave
             Initialize(user, category, feeds);
         }
 
-        public CategoryGroup(UserInfo user, string category, IEnumerable<Feed> feeds)
+        public CategoryGroup(UserInfo user, string category, IEnumerable<Feed> feeds, AllNewsGroup allNews)
         {
             if (user == null) throw new ArgumentNullException("user");
             if (category == null) throw new ArgumentNullException("category");
             if (feeds == null) throw new ArgumentNullException("feeds");
 
-            Initialize(user, category, feeds.Select(o => new FeedGroup(user, o, this)));
+            Initialize(user, category, feeds.Select(o => new FeedGroup(user, o, this, allNews)));
         }
 
         void Initialize(UserInfo user, string category, IEnumerable<FeedGroup> feeds)
@@ -62,28 +62,18 @@ namespace weave
 
         public override void MarkEntry()
         {
-            NewArticleCount = 0;
             foreach (var feed in Feeds)
                 feed.MarkEntry();
+
+            NewArticleCount = 0;
         }
 
         static Random r = new Random();
 
         public override string GetTeaserPicImageUrl()
-        {
-            IEnumerable<FeedGroup> eligibleFeeds;
-
-            if (category != null && category.Equals("all news", StringComparison.OrdinalIgnoreCase))
-            {
-                eligibleFeeds = Feeds;
-            }
-            else
-            {
-                eligibleFeeds = Feeds.Where(o => category.Equals(o.Feed.Category, StringComparison.OrdinalIgnoreCase));
-            }
-            
-            // TODO: RANDOMLY SELECT ONE FEED TO DISPLAY
-            var teaserPics = eligibleFeeds.Select(o => o.GetTeaserPicImageUrl()).OfType<string>().ToList();
+        {     
+            // RANDOMLY SELECT ONE FEED TO DISPLAY
+            var teaserPics = Feeds.Select(o => o.GetTeaserPicImageUrl()).OfType<string>().ToList();
             if (teaserPics.Any())
             {
                 int index = r.Next(0, teaserPics.Count);

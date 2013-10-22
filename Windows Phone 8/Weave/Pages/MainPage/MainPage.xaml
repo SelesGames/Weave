@@ -116,16 +116,6 @@
 				</DoubleAnimation.EasingFunction>
 			</DoubleAnimation>
 		</Storyboard>
-		
-		<LinearGradientBrush x:Key="DarkThemeFade" EndPoint="0.5,1" StartPoint="0.5,0">
-			<GradientStop Offset="0" Color="#FF000000"/>
-			<GradientStop Offset="1" Color="#00000000"/>
-		</LinearGradientBrush>
-				
-		<LinearGradientBrush x:Key="LightThemeFade" EndPoint="0.5,1" StartPoint="0.5,0">
-			<GradientStop Offset="0" Color="#FFFFFFFF"/>
-			<GradientStop Offset="1" Color="#00FFFFFF"/>
-		</LinearGradientBrush>
 
 		<Style x:Key="HeaderTextStyle" TargetType="TextBlock">
 			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
@@ -163,8 +153,7 @@
 			<Grid.ColumnDefinitions><ColumnDefinition /><ColumnDefinition Width="Auto"/><ColumnDefinition /></Grid.ColumnDefinitions>
 			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.ColumnSpan="3" CacheMode="BitmapCache"/>
 			<TextBlock Text="{Binding Header}" Margin="24,-5,0,0" TextTrimming="WordEllipsis" HorizontalAlignment="Left" Style="{StaticResource HeaderTextStyle}"/>
-			<TextBlock Grid.Column="1" Text="{Binding NewItemCount}" FontSize="{StaticResource PhoneFontSizeNormal}" CacheMode="BitmapCache" Margin="12,0" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontWeight="Bold" Foreground="{StaticResource PhoneAccentBrush}" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Collapsed" />
-			<TextBlock Grid.Column="2" Text="{Binding CurrentPageDisplay}" Margin="0,-5,24,0" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" />
+			<TextBlock x:Name="tbPageCount" Grid.Column="2" Text="{Binding CurrentPageDisplay}" Margin="0,-5,24,0" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" />
 			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
 
@@ -177,7 +166,6 @@
 					<CompositeTransform/>
 				</UIElement.RenderTransform>
 			</local:CustomList>
-			<Rectangle x:Name="fade" Height="24" VerticalAlignment="Top" IsHitTestVisible="False" CacheMode="BitmapCache" Fill="{StaticResource DarkThemeFade}" Visibility="Collapsed" />
 		</Grid>
 		<local:MainPageNavigationDropDownList x:Name="SourcesList" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed">
 			<local:MainPageNavigationDropDownList.RenderTransform>

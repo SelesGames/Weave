@@ -8,7 +8,6 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:Phone.Sandbox" x:Key="LocalizedStrings"/>
     	<Style x:Key="LoginButtonStyle1" TargetType="Controls:LoginButton">
     		<Setter Property="CacheMode" Value="BitmapCache"/>
     		<Setter Property="Padding" Value="12,6"/>

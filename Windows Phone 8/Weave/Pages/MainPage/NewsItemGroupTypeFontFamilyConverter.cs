@@ -29,13 +29,13 @@ namespace weave
             if (!areFontFamiliesSet)
                 SetFontFamilies();
 
-            if (value is CategoryGroup)
+            if (value is CategoryGroup || value is AllNewsGroup)
                 return categoryFont;
 
             else if (value is FeedGroup)
                 return feedFont;
 
-            return null;
+            return categoryFont;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

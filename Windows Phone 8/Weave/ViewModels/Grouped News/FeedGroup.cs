@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Weave.ViewModels;
 
 namespace weave
@@ -7,14 +8,20 @@ namespace weave
     {
         UserInfo user;
         CategoryGroup category;
+        AllNewsGroup allNews;
 
         public Feed Feed { get; private set; }
 
-        public FeedGroup(UserInfo user, Feed feed, CategoryGroup category)
+        public FeedGroup(UserInfo user, Feed feed, CategoryGroup category, AllNewsGroup allNews)
         {
+            if (user == null) throw new ArgumentNullException("user");
+            if (feed == null) throw new ArgumentNullException("feed");
+            if (allNews == null) throw new ArgumentNullException("allNews");
+
             this.user = user;
             this.Feed = feed;
             this.category = category;
+            this.allNews = allNews;
 
             DisplayName = feed.Name;
             NewArticleCount = feed.NewArticleCount;
@@ -37,6 +44,7 @@ namespace weave
             {
                 category.NewArticleCount -= prevNewArticleCount;
             }
+            allNews.NewArticleCount -= prevNewArticleCount;
         }
 
         public override string GetTeaserPicImageUrl()
