@@ -4,6 +4,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Weave.LiveTile.ScheduledAgent.Storage;
+using Weave.SavedState;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
@@ -80,7 +82,11 @@ namespace Weave.LiveTile.ScheduledAgent
         async Task LoadViewModelsAsync()
         {
             var randomTile = SelectTileAtRandom();
-            var negotiator = LiveTileNegotiatorFactory.CreateFromShellTile(appName, randomTile);
+            var permanentState = await new DataStorageClient().GetPermanentState();
+            var userId = permanentState.UserId;
+            var userClient = new Weave.User.Service.Client.Client();
+            var negotiator = LiveTileNegotiatorFactory.CreateFromShellTile(
+                userId, userClient, appName, randomTile);
 
             var motherfucker = new TaskCompletionSource<object>();
             Deployment.Current.Dispatcher.BeginInvoke(() => DoUpdate(negotiator, motherfucker));

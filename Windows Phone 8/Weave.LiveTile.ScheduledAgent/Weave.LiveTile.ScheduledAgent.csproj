@@ -95,23 +95,36 @@
     <Compile Include="Helpers\TileNegotiatorBase.cs" />
     <Compile Include="Helpers\LiveTileNegotiatorFactory.cs" />
     <Compile Include="Library\Trace.cs" />
+    <Compile Include="Storage\DataStorageClient.cs" />
     <Compile Include="ViewModels\CycleTileViewModel.cs" />
     <Compile Include="ViewModels\ITileViewModel.cs" />
     <Compile Include="LiveTileUpdatingAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
-      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
-      <Name>Weave.ViewModels</Name>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
+      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
+      <Name>Weave.User.Service.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.DTOs\Weave.User.Service.DTOs.csproj">
+      <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
+      <Name>Weave.User.Service.DTOs</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
-      <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
-      <Name>Weave.RSS</Name>
+    <ProjectReference Include="..\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
+      <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
+      <Name>SelesGames.WP.IsoStorage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
+      <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
+      <Name>Weave.SavedState</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UserFeedAggregator.Client\Weave.User.Service.Client.csproj">
+      <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
+      <Name>Weave.User.Service.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

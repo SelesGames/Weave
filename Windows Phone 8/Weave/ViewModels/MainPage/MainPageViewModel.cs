@@ -340,7 +340,7 @@ namespace weave
                 throw new InvalidOperationException("image count");
 
             var temp = Guid.NewGuid().ToString() + "photo";
-            var imageUris = await newsWithImages.CreateImageUrisFromNews(temp, TimeSpan.FromSeconds(3));
+            var imageUris = await newsWithImages.Select(o => o.ImageUrl).CreateImageUrisFromNews(temp, TimeSpan.FromSeconds(3));
 
             return new CycleTileViewModel
             {

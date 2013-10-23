@@ -4,19 +4,29 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
-using Weave.ViewModels.Contracts.Client;
+using Weave.User.Service.Contracts;
+using Weave.User.Service.DTOs;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
     public class CycleTileFeedNegotiator : TileNegotiatorBase
     {
+        Guid userId;
         Guid feedId;
         string appName;
-        IViewModelRepository serviceClient;
+        IWeaveUserService serviceClient;
 
-        public CycleTileFeedNegotiator(Guid feedId, string appName, ShellTile tile) 
+        public CycleTileFeedNegotiator(
+            Guid userId, 
+            IWeaveUserService serviceClient, 
+            Guid feedId, 
+            string appName, 
+            ShellTile tile)
+
             : base(appName, tile)
         {
+            this.userId = userId;
+            this.serviceClient = serviceClient;
             this.appName = appName;
             this.feedId = feedId;
         }
@@ -30,14 +40,16 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
-            var news = await serviceClient.GetNews(Guid.Empty, feedId, take: 15, type: Weave.ViewModels.NewsItemType.New, requireImage: true);
+            var news = await serviceClient.GetNews(userId, feedId, take: 15, type: NewsItemType.New, requireImage: true);
 
             var imagePrefix = CreateImagePrefix();
-            var imageUrls = await news.News.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
+            var imageUrls = await news.News.Select(o => o.ImageUrl).CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
             Uri preferredLockScreen = null;
             var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
             if (attempt.Item1)
                 preferredLockScreen = attempt.Item2;
+
+            var feedName = news.Feeds.FirstOrDefault().Name.ToTitleCase();
 
             Trace.Output("image downloads complete");
 
@@ -46,7 +58,7 @@ namespace Weave.LiveTile.ScheduledAgent
                 ImageIsoStorageUris = imageUrls,
                 NewCount = news.NewArticleCount,
                 RecommendedLockScreenImageUri = preferredLockScreen,
-                AppName = appName + " " + "temp",//feedName.ToTitleCase(),
+                AppName = appName + " " + feedName,
             };
         }
     }

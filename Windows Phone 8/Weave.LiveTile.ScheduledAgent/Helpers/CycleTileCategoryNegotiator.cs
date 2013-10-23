@@ -4,24 +4,41 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
-using Weave.ViewModels.Contracts.Client;
+using Weave.User.Service.Contracts;
+using Weave.User.Service.DTOs;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
     public class CycleTileCategoryNegotiator : TileNegotiatorBase
     {
+        Guid userId;
         string categoryName;
         string appName;
         string tileTitle;
-        IViewModelRepository serviceClient;
+        IWeaveUserService serviceClient;
 
-        public CycleTileCategoryNegotiator(string categoryName, string appName, ShellTile tile)
+        public CycleTileCategoryNegotiator(
+            Guid userId, 
+            IWeaveUserService serviceClient, 
+            string categoryName, 
+            string appName, 
+            ShellTile tile)
+
             : base(appName, tile)
         {
+            this.userId = userId;
+            this.serviceClient = serviceClient;
             this.categoryName = System.Net.HttpUtility.UrlDecode(categoryName);
             this.appName = appName;
-            this.tileTitle = categoryName == null ?
-                appName : appName + " " + this.categoryName.ToTitleCase();
+
+            if (categoryName == null || categoryName.Equals("all news"))
+            {
+                this.tileTitle = appName;
+            }
+            else
+            { 
+                this.tileTitle = appName + " " + this.categoryName.ToTitleCase();
+            }
         }
 
         string CreateImagePrefix()
@@ -33,10 +50,10 @@ namespace Weave.LiveTile.ScheduledAgent
 
         protected async override Task InitializeViewModelAsync()
         {
-            var news = await serviceClient.GetNews(Guid.Empty, categoryName, take: 15, type: Weave.ViewModels.NewsItemType.New, requireImage: true);
+            var news = await serviceClient.GetNews(userId, categoryName, take: 15, type: NewsItemType.New, requireImage: true);
 
             var imagePrefix = CreateImagePrefix();
-            var imageUrls = await news.News.CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
+            var imageUrls = await news.News.Select(o => o.ImageUrl).CreateImageUrisFromNews(imagePrefix, TimeSpan.FromSeconds(15));
             Uri preferredLockScreen = null;
             var attempt = await new LockScreenSavingClient().TryGetLocalStorageUri(imageUrls.First());
             if (attempt.Item1)
@@ -52,21 +69,5 @@ namespace Weave.LiveTile.ScheduledAgent
                 AppName = tileTitle,
             };
         }
-
-        //async Task<Tuple<bool, Uri>> SaveImageAndReturnUri(string imageUrl, int index)
-        //{
-        //    try
-        //    {
-        //        var image = await ImageHelper.GetImageAsync(imageUrl);
-        //        var bmp = (WriteableBitmap)image;
-        //        if (bmp.PixelHeight > 99 && bmp.PixelWidth > 99)
-        //        {
-        //            var url = bmp.SaveToIsoStorage("photo" + index);
-        //            return Tuple.Create(true, url);
-        //        }
-        //    }
-        //    catch { }
-        //    return Tuple.Create(false, default(Uri));
-        //}
     }
 }

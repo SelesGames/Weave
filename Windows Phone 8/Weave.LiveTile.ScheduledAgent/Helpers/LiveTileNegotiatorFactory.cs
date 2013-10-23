@@ -1,25 +1,26 @@
 ﻿using Microsoft.Phone.Shell;
 using System;
 using System.Linq;
+using Weave.User.Service.Contracts;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
     public static class LiveTileNegotiatorFactory
     {
-        public static TileNegotiatorBase CreateFromShellTile(string appName, ShellTile tile)
+        public static TileNegotiatorBase CreateFromShellTile(Guid userId, IWeaveUserService userService, string appName, ShellTile tile)
         {
             var uri = tile.NavigationUri.OriginalString;
 
             if (string.IsNullOrEmpty(uri) || !uri.Contains("?"))
                 //return new StandardTileCategoryNegotiator(null, appName, tile);
-                return new CycleTileCategoryNegotiator(null, appName, tile);
+                return new CycleTileCategoryNegotiator(userId, userService, "all news", appName, tile);
 
             var query = uri.Split('?')[1];
 
             if (query.Contains("feedId"))
             {
                 var feedId = query.Split(new string[] { "feedId=" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                return new CycleTileFeedNegotiator(Guid.Parse(feedId), appName, tile);
+                return new CycleTileFeedNegotiator(userId, userService, Guid.Parse(feedId), appName, tile);
             }
 
             else if (query.Contains("mode"))
@@ -32,7 +33,7 @@ namespace Weave.LiveTile.ScheduledAgent
                     .SingleOrDefault();
 
                 //return new StandardTileCategoryNegotiator(category, appName, tile);
-                return new CycleTileCategoryNegotiator(category, appName, tile);
+                return new CycleTileCategoryNegotiator(userId, userService, category, appName, tile);
             }
 
             else

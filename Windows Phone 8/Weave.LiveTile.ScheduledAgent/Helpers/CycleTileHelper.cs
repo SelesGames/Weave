@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Weave.ViewModels;
+using Weave.User.Service.DTOs.ServerOutgoing;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
     public static class CycleTileHelper
     {
-        public static async Task<Uri[]> CreateImageUrisFromNews(this IEnumerable<NewsItem> news, string imagePrefix, TimeSpan downloadTimeLimit)
+        public static async Task<Uri[]> CreateImageUrisFromNews(this IEnumerable<string> urls, string imagePrefix, TimeSpan downloadTimeLimit)
         {
             var imageUrls = new List<Uri>();
             var startTime = DateTime.Now;
 
-            foreach (var newsItem in news.Where(o => o.HasImage))
+            foreach (var url in urls.Where(o => !string.IsNullOrWhiteSpace(o)))
             {
-                var attempt = await SaveImageStreamAndReturnUri(newsItem.ImageUrl, imagePrefix, imageUrls.Count + 1);
+                var attempt = await SaveImageStreamAndReturnUri(url, imagePrefix, imageUrls.Count + 1);
                 
                 // after we download the image and saved it to isoStorage, check to see if we've gone over the total downloadTimeLimit
                 var elapsed = DateTime.Now - startTime;
