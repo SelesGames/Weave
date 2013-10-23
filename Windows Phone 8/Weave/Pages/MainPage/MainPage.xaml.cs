@@ -17,6 +17,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Weave.SavedState;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
@@ -69,7 +70,7 @@ namespace weave
             this.Loaded += OnLoaded;
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumAndSlideTransition());
 
-            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = ServiceResolver.Get<PermanentState>();
             var isAppBarMinimized = permState.IsHideAppBarOnArticleListPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
@@ -295,8 +296,7 @@ namespace weave
                 return;
             }
 
-            var permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
-            var tallyer = permstate.RunHistory.GetActiveLog();
+            var tallyer = permState.RunHistory.GetActiveLog();
 
             this.vm = new MainPageViewModel(this, header);
             if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
@@ -412,7 +412,7 @@ namespace weave
 
             header = niGroup.DisplayName;
 
-            if (niGroup is CategoryGroup)
+            if (niGroup is CategoryGroup || niGroup is AllNewsGroup)
             {
                 mode = "category";
             }
@@ -585,7 +585,6 @@ namespace weave
 
         void LaunchLocalSettingsPopup()
         {
-            //GlobalNavigationService.ToMainPageSettingsPage();
             if (PopupService.IsOpen)
                 return;
 
@@ -594,10 +593,6 @@ namespace weave
                 CloseOnNavigation = false,
             };
             fontSizePopupService.BeginShow();
-            //Observable.FromEventPattern<EventArgs<FontSizeProperties>>(fontSizePopup, "FontSizeChanged")
-            //    .Subscribe(o => OnFontSizeChanged(fontSizePopup, o.EventArgs)).DisposeWith(disposables);
-            //Observable.FromEventPattern<EventArgs<FontProperties>>(fontSizePopup, "FontChanged")
-            //    .Subscribe(o => OnFontChanged(fontSizePopup, o.EventArgs)).DisposeWith(disposables);
         }
 
 

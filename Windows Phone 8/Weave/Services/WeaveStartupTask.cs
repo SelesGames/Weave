@@ -34,8 +34,11 @@ namespace weave
     {
         AppSettings settings;
         PermanentState permanentState;
+        TombstoneState tombstoneState;
         OverlayFrame frame;
         Kernel kernel;
+        DataStorageClient storageClient;
+
         //Weave4DataAccessLayer dataAccessLayer;
         bool isFullyInitialized = false;
         Uri initialNavigationUri = null;
@@ -45,6 +48,8 @@ namespace weave
         {
             this.settings = settings;
             AppSettings.Instance = settings;
+
+            storageClient = new DataStorageClient();
 
             InitializeNewFrame();
             InitializeLanguage();
@@ -168,7 +173,18 @@ namespace weave
             // at this point, the loading screen is being shown
 
             if (permanentState == null)
-                permanentState = await new DataStorageClient().Get<PermanentState>();// settings.PermanentState.Get();
+            {
+                permanentState = await storageClient.GetPermanentState();
+            }
+
+            if (settings.StartupMode == StartupMode.Launch)
+            {
+                tombstoneState = new TombstoneState();
+            }
+            else
+            {
+                tombstoneState = await storageClient.GetTombstoneState();
+            }
 
             new SystemTrayNavigationSetter(frame, permanentState);
 
@@ -306,15 +322,11 @@ namespace weave
                     LittleWatson.LogException(ex, string.Empty);
             };
 
-
             settings.IsNetworkAvailable = Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
             NetworkChange.NetworkAddressChanged += (s, e) =>
             {
                 settings.IsNetworkAvailable = Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
             };
-
-            if (settings.StartupMode == StartupMode.Launch)
-                settings.TombstoneState.IgnoreIsolatedStorage = true;
 
             InitializeAdSettings();
             InitializeNinjectKernel();
@@ -331,6 +343,9 @@ namespace weave
         {
             kernel = new Kernel(settings.AssemblyName);
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
+
+            kernel.Bind<PermanentState>().ToConstant(permanentState).InSingletonScope();
+            kernel.Bind<TombstoneState>().ToConstant(tombstoneState).InSingletonScope();
 
             //kernel.Bind<MainPageSettingsPopup>().ToSelf().InSingletonScope();
             kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
@@ -479,15 +494,10 @@ namespace weave
             try
             {
                 DebugEx.WriteLine("******************* STOPPING WEAVE");
-                await AppSettings.Instance.TombstoneState.Save();
+                await storageClient.Save(tombstoneState);
                 DebugEx.WriteLine("******************* SAVED TOMBSTONESTATE");
-                await AppSettings.Instance.PermanentState.Save();
+                await storageClient.Save(permanentState);
                 DebugEx.WriteLine("******************* SAVED PERMANENTSTATE");
-
-                //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                //await dal.SaveOnExit();
-                DebugEx.WriteLine("******************* SAVED FEEDS AND NEWS");
-
                 stoppedSuccessfully = true;
             }
             catch (Exception e)

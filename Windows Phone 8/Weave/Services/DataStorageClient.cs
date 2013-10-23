@@ -1,37 +1,69 @@
 ﻿using SelesGames.IsoStorage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Weave.SavedState;
 using Weave.SavedState.MostViewedHistory;
+using Weave.ViewModels;
 
 namespace weave.Services
 {
     public class DataStorageClient
     {
-        const string TOMBSTONE_STATE = "tmbstt";
         const string PERMA_STATE = "permstt";
+        const string TOMBSTONE_STATE = "tmbstt";
 
-        public Task<PermanentState> Get<T>() where T : PermanentState
+
+
+
+        #region PermanentState
+
+        public Task<PermanentState> GetPermanentState()
         {
-            var isoLocker = new IsoStorageLocker<PermanentState>(
-                PERMA_STATE,
-                new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally) }),
-                () => new PermanentState());
-
-            return isoLocker.Get();
+            return CreatePermStateClient()
+                .GetOrDefaultAsync(PERMA_STATE, () => new PermanentState());
         }
 
-        //public Task<TombstoneState> Get<T>() where T : TombstoneState
-        //{
-        //    var isoLocker = new IsoStorageLocker<TombstoneState>(
-        //        TOMBSTONE_STATE,
-        //        new JsonIsoStorageClient<TombstoneState>(new[] { typeof(ReadabilityPageViewModel), typeof(NewsItem) }),
-        //        () => new TombstoneState());
+        public Task Save(PermanentState permanentState)
+        {
+            return CreatePermStateClient()
+                .SaveAsync(PERMA_STATE, permanentState);
+        }
 
-        //    return isoLocker.Get();
-        //}
+        #endregion
+
+
+
+
+        #region TombstoneState
+
+        public Task<TombstoneState> GetTombstoneState()
+        {
+            return CreateTombstoneStateClient()
+                .GetOrDefaultAsync(TOMBSTONE_STATE, () => new TombstoneState());
+        }
+
+        public Task Save(TombstoneState tombstoneState)
+        {
+            return CreateTombstoneStateClient()
+                .SaveAsync(TOMBSTONE_STATE, tombstoneState);
+        }
+
+        #endregion
+
+
+
+
+        #region Helper methods
+
+        IsoStorageClient<PermanentState> CreatePermStateClient()
+        {
+            return new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally) });
+        }
+
+        IsoStorageClient<TombstoneState> CreateTombstoneStateClient()
+        {
+            return new JsonIsoStorageClient<TombstoneState>(new[] { typeof(ReadabilityPageViewModel), typeof(NewsItem) });
+        }
+
+        #endregion
     }
 }

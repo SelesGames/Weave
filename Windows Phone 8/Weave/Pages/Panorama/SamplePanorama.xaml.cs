@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
+using weave.Services;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
@@ -78,7 +79,7 @@ namespace weave
                 if (permState.IsFirstTime)
                 {
                     permState.IsFirstTime = false;
-                    AppSettings.Instance.PermanentState.Save();
+                    new DataStorageClient().Save(permState);
                 }
             }
 
@@ -205,8 +206,7 @@ namespace weave
 
             if (o is CategoryGroup || o is AllNewsGroup)
             {
-                var category = (CategoryGroup)o;
-                GlobalNavigationService.ToMainPage(category.DisplayName, "category");
+                GlobalNavigationService.ToMainPage(o.DisplayName, "category");
             }
             else if (o is FeedGroup)
             {

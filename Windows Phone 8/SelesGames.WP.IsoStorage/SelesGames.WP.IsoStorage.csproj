@@ -86,9 +86,8 @@
     <Compile Include="DataContractIsoStorageClient.cs" />
     <Compile Include="DelegateIsoStorageClient.cs" />
     <Compile Include="IsoStorageClient.cs" />
-    <Compile Include="IsoStorageLocker.cs" />
+    <Compile Include="IsoStorageClientExtensions.cs" />
     <Compile Include="JsonIsoStorageClient.cs" />
-    <Compile Include="Lazy.cs" />
     <Compile Include="NLevelRolloverIsoStorageClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlSerializerIsoStorageClient.cs" />

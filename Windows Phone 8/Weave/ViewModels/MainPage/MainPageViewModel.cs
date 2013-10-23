@@ -69,7 +69,7 @@ namespace weave
 
         public async Task InitializeAsync()
         {
-            await RecoverSavedTombstoneState();
+            RecoverSavedTombstoneState();
             await OnNavigatedTo();
         }
 
@@ -78,9 +78,9 @@ namespace weave
 
         #region Getting and Saving TombstoneState
 
-        async Task RecoverSavedTombstoneState()
+        void RecoverSavedTombstoneState()
         {
-            tombstoneState = await AppSettings.Instance.TombstoneState.Get();
+            tombstoneState = ServiceResolver.Get<TombstoneState>();
             if (tombstoneState == null)
                 return;
 
@@ -124,18 +124,18 @@ namespace weave
 
         void InitializeNewsCollectionVM()
         {
-            var tombstoneState = AppSettings.Instance.TombstoneState.Get().WaitOnResult();
+            var tombstoneState = ServiceResolver.Get<TombstoneState>();
             var feedListener = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
 
             if (currentOperatingMode == OperatingMode.Category)
             {
-                var vm = feedListener.FindByCategory(Header);
+                var vm = feedListener.Find(Header);
                 pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Category;
             }
             else if (currentOperatingMode == OperatingMode.Feed)
             {
-                var vm = feedListener.FindByFeedId(FeedId);
+                var vm = feedListener.Find(FeedId);
                 pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Feed;
             }

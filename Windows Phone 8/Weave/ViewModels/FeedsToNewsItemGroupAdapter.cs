@@ -28,12 +28,14 @@ namespace weave
             RefreshFeeds();
         }
 
-        public NewsItemGroup FindByCategory(string categoryName)
+        public NewsItemGroup Find(string categoryName)
         {
-            return Feeds.OfType<CategoryGroup>().FirstOrDefault(o => o.DisplayName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+            return Feeds
+                .Where(o => o is CategoryGroup || o is AllNewsGroup)
+                .FirstOrDefault(o => o.DisplayName.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
         }
 
-        public NewsItemGroup FindByFeedId(Guid feedId)
+        public NewsItemGroup Find(Guid feedId)
         {
             return Feeds.OfType<FeedGroup>().FirstOrDefault(o => o.Feed.Id.Equals(feedId));
         }

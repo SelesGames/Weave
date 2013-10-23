@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Net;
@@ -59,7 +60,7 @@ namespace weave
             //if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
             //    vm.PreLoadMobilizedHtml();
 
-            var ts = AppSettings.Instance.TombstoneState.Get().WaitOnResult();
+            var ts = ServiceResolver.Get<TombstoneState>();
             ts.ActiveWebBrowserPageViewModel = vm;
             SafelyNavigateTo(string.Format("/weave;component/Pages/WebBrowser/ReadabilityPage.xaml"));
         }

@@ -253,7 +253,7 @@ namespace weave
 
                 if (viewModel == null)
                 {
-                    var isViewModelInit = await InitializeViewModelAsync();
+                    var isViewModelInit = InitializeViewModel();
                     if (!isViewModelInit)
                     {
                         NavigationService.TryGoBack();
@@ -305,9 +305,9 @@ namespace weave
             }
         }
 
-        async Task<bool> InitializeViewModelAsync()
+        bool InitializeViewModel()
         {
-            var ts = await AppSettings.Instance.TombstoneState.Get();
+            var ts = ServiceResolver.Get<TombstoneState>();
             var vm = ts.ActiveWebBrowserPageViewModel;
             if (vm == null || vm.NewsItem == null)
                 return false;
