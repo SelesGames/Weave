@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Weave.FeedLibrary;
+using Weave.SavedState;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
@@ -33,7 +34,7 @@ namespace weave
             library = ServiceResolver.Get<BundledLibrary>();
             categories = library.Feeds.Get().UniqueCategoryNames().OrderBy(o => o).Select(o => new Category { Name = o }).ToList();
 
-            var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            var permState = ServiceResolver.Get<PermanentState>();
             if (permState.IsFirstTime)
             {
                 foreach (var category in categories)

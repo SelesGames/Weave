@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
+using Weave.SavedState;
 
 namespace weave
 {
@@ -17,7 +19,7 @@ namespace weave
 
         public BindableMainPageFontStyle()
         {
-            permstate = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permstate = ServiceResolver.Get<PermanentState>();
             fontSizes = new FontSizes();
             fontSet = new ArticleListFontSet();
 

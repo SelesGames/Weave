@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Weave.Customizability;
+using Weave.SavedState;
 
 namespace weave
 {
@@ -35,7 +36,7 @@ namespace weave
             fonts = Resources["Fonts"] as ArticleListFontSet;
             formats = Resources["ArticleListFormats"] as ArticleListFormats;
 
-            permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permanentState = ServiceResolver.Get<PermanentState>();
 
             fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleListFontSize);
             fontSelector.SelectedItem = fonts.GetByFontName(permanentState.ArticleListFontName);

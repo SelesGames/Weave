@@ -1,7 +1,9 @@
-﻿using System;
+﻿using SelesGames;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Weave.SavedState;
 
 namespace weave
 {
@@ -32,7 +34,7 @@ namespace weave
 
             var sources = feedsToNewsItemGroupAdapter.Feeds;
             
-            var history = AppSettings.Instance.PermanentState.Get().WaitOnResult().RunHistory.GetTallies();
+            var history = ServiceResolver.Get<PermanentState>().RunHistory.GetTallies();
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
 

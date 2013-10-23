@@ -15,9 +15,11 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
 using weave.Resources;
+using weave.Services;
 using weave.Services.Startup;
 using Weave.FeedLibrary;
 using Weave.NinjectKernel;
+using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Cache;
@@ -166,7 +168,7 @@ namespace weave
             // at this point, the loading screen is being shown
 
             if (permanentState == null)
-                permanentState = await settings.PermanentState.Get();
+                permanentState = await new DataStorageClient().Get<PermanentState>();// settings.PermanentState.Get();
 
             new SystemTrayNavigationSetter(frame, permanentState);
 

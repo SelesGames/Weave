@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
+using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
@@ -72,7 +73,7 @@ namespace weave
 
             if (AppSettings.Instance.StartupMode == StartupMode.Launch)
             {
-                var permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+                var permState = ServiceResolver.Get<PermanentState>();
 
                 if (permState.IsFirstTime)
                 {
@@ -202,7 +203,7 @@ namespace weave
             if (o == null)
                 return;
 
-            if (o is CategoryGroup)
+            if (o is CategoryGroup || o is AllNewsGroup)
             {
                 var category = (CategoryGroup)o;
                 GlobalNavigationService.ToMainPage(category.DisplayName, "category");

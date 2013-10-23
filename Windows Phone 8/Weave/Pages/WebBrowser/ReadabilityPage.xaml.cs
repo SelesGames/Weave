@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Weave.SavedState;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
@@ -53,7 +54,7 @@ namespace weave
             fontSizePopup = ServiceResolver.Get<FontSizePopup>();
             socialSharePopup = ServiceResolver.Get<SocialShareContextMenuControl>("accent");
 
-            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = ServiceResolver.Get<PermanentState>();
             var isAppBarMinimized = permState.IsHideAppBarOnArticleViewerPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;

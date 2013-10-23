@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Controls;
+using SelesGames;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Weave.SavedState;
 using Windows.Phone.System.UserProfile;
 
 namespace weave
@@ -21,7 +23,7 @@ namespace weave
             InitializeComponent();
             voices = Resources["Voices"] as SpeakArticleVoices;
 
-            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = ServiceResolver.Get<PermanentState>();
             voicesList.SelectedItem = voices.GetByDisplayName(permState.SpeakTextVoice);
 
             articleListToggle.SetBinding(ToggleSwitch.IsCheckedProperty, new Binding("IsHideAppBarOnArticleListPageEnabled") { Source = permState, Mode = BindingMode.TwoWay });

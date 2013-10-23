@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Weave.Customizability;
+using Weave.SavedState;
 
 namespace weave
 {
@@ -25,7 +26,7 @@ namespace weave
         {
             InitializeComponent();
             themeName.SetBinding(TextBlock.TextProperty, new Binding("CurrentTheme.Name") { Source = AppSettings.Instance.Themes });
-            permanentState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permanentState = ServiceResolver.Get<PermanentState>();
             fontSizes = Resources["FontSizes"] as FontSizes;
             fonts = Resources["Fonts"] as ArticleFontSet;
             fontSizePicker.SelectedItem = fontSizes.GetById(permanentState.ArticleViewFontSize);

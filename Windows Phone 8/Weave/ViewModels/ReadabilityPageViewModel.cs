@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Weave.Mobilizer.Client;
+using Weave.SavedState;
 using Weave.ViewModels;
 
 namespace weave
@@ -26,7 +27,7 @@ namespace weave
             formatter = ServiceResolver.Get<Formatter>();
             themes = AppSettings.Instance.Themes;
             fontSizes = new FontSizes();
-            permState = AppSettings.Instance.PermanentState.Get().WaitOnResult();
+            permState = ServiceResolver.Get<PermanentState>();
         }
 
         public async Task<string> GetMobilizedArticleHtml()

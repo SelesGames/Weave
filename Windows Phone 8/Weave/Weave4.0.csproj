@@ -173,6 +173,7 @@
     <Compile Include="AnimationHelper.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
+    <Compile Include="Services\DataStorageClient.cs" />
     <Compile Include="ViewModels\Grouped News\AllNewsGroup.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
@@ -231,9 +232,6 @@
       <DependentUpon>SelesGamesInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
-    <Compile Include="Services\MostViewedHistory\LabelTally.cs" />
-    <Compile Include="Services\MostViewedHistory\RunHistory.cs" />
-    <Compile Include="Services\MostViewedHistory\RunLog.cs" />
     <Compile Include="Services\Startup\IState.cs" />
     <Compile Include="Services\Startup\StartupIdentityStateMachine.cs" />
     <Compile Include="Services\Startup\Transition_GetMicrosoftId.cs" />
@@ -246,7 +244,6 @@
     <Compile Include="Settings\FontSets\ArticleListFontSet.cs" />
     <Compile Include="Settings\FontSets\FontSet.cs" />
     <Compile Include="Settings\FontSizes.cs" />
-    <Compile Include="Settings\PermanentState.cs" />
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
@@ -780,6 +777,10 @@
     <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
       <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
       <Name>Weave.RSS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
+      <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
+      <Name>Weave.SavedState</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.UI.Controls\Weave.UI.Controls.csproj">
       <Project>{DD62BFA1-A863-4A18-8D93-6BDD222EEF27}</Project>
