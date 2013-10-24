@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:Controls="clr-namespace:Weave.UI.Controls;assembly=Weave.UI.Controls"
 	>
 
 	<Style x:Key="MenuTextStyle" TargetType="TextBlock">
@@ -310,5 +311,54 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
+
+
+	<SolidColorBrush x:Key="DarkThemeSubtleBrush" Color="#99FFFFFF"/>
+	<Style x:Key="LoginButtonStyle" TargetType="Controls:LoginButton">
+		<Setter Property="CacheMode" Value="BitmapCache"/>
+		<Setter Property="Padding" Value="12,6"/>
+		<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Controls:LoginButton">
+					<Border Background="{StaticResource TransparentBrush}" HorizontalAlignment="Left">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal"/>
+								<VisualState x:Name="MouseOver"/>
+								<VisualState x:Name="Pressed"/>
+								<VisualState x:Name="Disabled"/>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="LoginStates">
+								<VisualState x:Name="LoggedOut"/>
+								<VisualState x:Name="LoggedIn">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Foreground)" Storyboard.TargetName="glyph">
+											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Foreground)" Storyboard.TargetName="LoginStateText">
+											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid x:Name="ContentContainer" CacheMode="BitmapCache" Margin="{TemplateBinding Padding}">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<sg:Glyph x:Name="glyph" Foreground="{StaticResource DarkThemeSubtleBrush}" Height="48" Source="{TemplateBinding Source}" Width="48"/>
+							<StackPanel Grid.Column="1" Margin="18,0,0,0" Orientation="Vertical" VerticalAlignment="Center">
+								<TextBlock Foreground="{StaticResource WhiteForegroundBrush}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Margin="0,-4,0,-2" Text="{TemplateBinding Content}"/>
+								<TextBlock x:Name="LoginStateText" FontSize="18.667" FontFamily="{StaticResource PhoneFontFamilyNormal}" Margin="0,-2,0,0" Foreground="{StaticResource DarkThemeSubtleBrush}"/>
+							</StackPanel>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 
 </ResourceDictionary>

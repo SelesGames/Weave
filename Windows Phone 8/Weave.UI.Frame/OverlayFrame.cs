@@ -1,5 +1,7 @@
 ﻿using SelesGames.Phone.Controls;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Telerik.Windows.Controls;
 
@@ -93,10 +95,31 @@ namespace Weave.UI.Frame
         public static readonly DependencyProperty OverlayTextProperty =
             DependencyProperty.Register("OverlayText", typeof(string), typeof(OverlayFrame), new PropertyMetadata("Loading news from memory"));
 
+        [Category("Overlay")]
         public string OverlayText
         {
             get { return (string)GetValue(OverlayTextProperty); }
             set { SetValue(OverlayTextProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverlayForegroundProperty =
+            DependencyProperty.Register("OverlayForeground", typeof(Brush), typeof(OverlayFrame), null);
+
+        [Category("Overlay")]
+        public Brush OverlayForeground
+        {
+            get { return (Brush)GetValue(OverlayForegroundProperty); }
+            set { SetValue(OverlayForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty OverlayBackgroundProperty =
+            DependencyProperty.Register("OverlayBackground", typeof(Brush), typeof(OverlayFrame), null);
+
+        [Category("Overlay")]
+        public Brush OverlayBackground
+        {
+            get { return (Brush)GetValue(OverlayBackgroundProperty); }
+            set { SetValue(OverlayBackgroundProperty, value); }
         }
 
         #endregion

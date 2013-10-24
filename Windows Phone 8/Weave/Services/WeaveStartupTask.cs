@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using weave.Resources;
 using weave.Services;
@@ -78,7 +79,11 @@ namespace weave
             if (phoneApplicationInitialized)
                 return;
 
-            frame = new OverlayFrame();
+            frame = new OverlayFrame
+            {
+                OverlayBackground = new SolidColorBrush(Color.FromArgb(255, 31, 31, 31)),
+                OverlayForeground = new SolidColorBrush(Colors.White)
+            };
             GlobalNavigationService.CurrentFrame = frame;
 
             Observable

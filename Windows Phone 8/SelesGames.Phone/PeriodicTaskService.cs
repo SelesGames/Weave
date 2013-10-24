@@ -47,7 +47,7 @@ namespace SelesGames.Phone
             {
                 ScheduledActionService.Add(periodicTask);
 #if BGTASKTEST 
-                ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(5));
+                ScheduledActionService.LaunchForTest(agentName, TimeSpan.FromSeconds(10));
 #endif
             }
             catch (InvalidOperationException exception)

@@ -19,7 +19,7 @@ namespace weave
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
         Subject<Tuple<object, NewsItem>> newsItemSelected = new Subject<Tuple<object, NewsItem>>();
-        Brush transparentBrush, subtleBrush;
+        Brush transparentBrush, subtleBrush, cardViewIndicatorBrush;
         IDisposable tapHandle;
         IReadOnlyList<NewsItem> displayedNews;
 
@@ -44,6 +44,7 @@ namespace weave
             InitializeComponent();
             transparentBrush = scroller.Background;
             subtleBrush = prevIndicator.Fill;
+            cardViewIndicatorBrush = new SolidColorBrush(Colors.DarkGray);
 
             if (this.IsInDesignMode())
                 return;
@@ -79,10 +80,8 @@ namespace weave
         {
             if (ArticleTheme == ArticleListFormatType.Card)
             {
-                var cardIndicatorBrush =
-                    //scroller.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
-                prevIndicator.Fill = subtleBrush;
-                nextIndicator.Fill = subtleBrush;
+                prevIndicator.Fill = cardViewIndicatorBrush;
+                nextIndicator.Fill = cardViewIndicatorBrush;
             }
             else
             {

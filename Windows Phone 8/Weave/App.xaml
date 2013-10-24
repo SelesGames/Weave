@@ -29,6 +29,7 @@
 			<SolidColorBrush x:Key="OffWhiteBackgroundBrush" Color="#FFF7F9FE"/>
 			<SolidColorBrush x:Key="BlackForegroundBrush" Color="Black"/>
 			<SolidColorBrush x:Key="WhiteForegroundBrush" Color="White"/>
+			<SolidColorBrush x:Key="DarkThemeChromeBrush" Color="#FF1F1F1F"/>
 
 			<FontFamily x:Key="PhoneFontFamilyBlack">Segoe WP Black</FontFamily>
 

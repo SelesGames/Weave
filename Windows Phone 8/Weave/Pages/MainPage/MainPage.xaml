@@ -120,7 +120,7 @@
 		<Style x:Key="HeaderTextStyle" TargetType="TextBlock">
 			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 			<Setter Property="Margin" Value="0,-5,0,0"/>
-			<Setter Property="Opacity" Value="0.75"/>
+			<!--Setter Property="Opacity" Value="0.75"/-->
 			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyLight}" />
 			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}" />
 			<Setter Property="VerticalAlignment" Value="Top" />

@@ -22,6 +22,8 @@
 		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="BorderBrush" Value="{x:Null}"/>
 		<Setter Property="Padding" Value="0"/>
+		<Setter Property="OverlayForeground" Value="{StaticResource PhoneForegroundBrush}"/>
+		<Setter Property="OverlayBackground" Value="{StaticResource PhoneChromeBrush}"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="local:OverlayFrame">
@@ -50,9 +52,9 @@
 						</Border.Resources>
 						<Grid>
 							<telerikPrimitives:RadTransitionControl x:Name="TransitionControl" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Transition="{TemplateBinding Transition}" />
-							<StackPanel x:Name="LoadingOverlay" IsHitTestVisible="False" VerticalAlignment="Center" Background="{StaticResource PhoneChromeBrush}">
-								<TextBlock TextWrapping="Wrap" Foreground="{StaticResource PanoramaForegroundBrush}" FontFamily="{StaticResource PhoneFontFamilyNormal}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="-3,24,0,0" Text="{TemplateBinding OverlayText}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
-								<sglib:RadialBusyIndicator x:Name="BusyIndicator" VerticalAlignment="Center" Foreground="{StaticResource PanoramaForegroundBrush}" Width="48" Height="48" Margin="0,12,0,24" NumberOfItems="7" IsPlaying="True"/>
+							<StackPanel x:Name="LoadingOverlay" IsHitTestVisible="False" VerticalAlignment="Center" Background="{TemplateBinding OverlayBackground}">
+								<TextBlock TextWrapping="Wrap" Foreground="{TemplateBinding OverlayForeground}" FontFamily="{StaticResource PhoneFontFamilyNormal}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="-3,24,0,0" Text="{TemplateBinding OverlayText}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+								<sglib:RadialBusyIndicator x:Name="BusyIndicator" VerticalAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" Width="48" Height="48" Margin="0,12,0,24" NumberOfItems="7" IsPlaying="True"/>
 							</StackPanel>
 						</Grid>
 					</Border>
