@@ -6,6 +6,7 @@
 	xmlns:local="clr-namespace:weave"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:sglib="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	x:Class="weave.MainPage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -166,6 +167,8 @@
 					<CompositeTransform/>
 				</UIElement.RenderTransform>
 			</local:CustomList>
+			<TextBlock x:Name="loadingText" Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,0,60" FontSize="{StaticResource PhoneFontSizeLarge}" Opacity="0.8" Visibility="Collapsed" />
+			<sglib:RadialBusyIndicator x:Name="loadingIndicator" VerticalAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" Width="48" Height="48" Margin="0,60,0,0" NumberOfItems="7" IsPlaying="False" Visibility="Collapsed"/>
 		</Grid>
 		<local:MainPageNavigationDropDownList x:Name="SourcesList" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed">
 			<local:MainPageNavigationDropDownList.RenderTransform>

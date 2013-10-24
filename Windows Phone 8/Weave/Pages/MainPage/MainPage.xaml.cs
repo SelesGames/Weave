@@ -725,5 +725,23 @@ namespace weave
                 GC.WaitForPendingFinalizers();
             });
         }
+
+        internal void ShowRadialProgressBar()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                loadingIndicator.IsPlaying = true;
+                loadingIndicator.Visibility = Visibility.Visible;
+            });
+        }
+
+        internal void HideRadialProgressBar()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                loadingIndicator.IsPlaying = false;
+                loadingIndicator.Visibility = Visibility.Collapsed;
+            });
+        }
     }
 }

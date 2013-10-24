@@ -109,7 +109,13 @@ namespace weave
             if (navMode == NavigationMode.Forward || navMode == NavigationMode.New)
             {
                 InitializeNewsCollectionVM();
+
+                view.ShowRadialProgressBar();
+
                 await pageNews.Refresh(EntryType.Mark);
+
+                view.HideRadialProgressBar();
+
                 await UpdateNewsList();
             }
         }
@@ -181,9 +187,9 @@ namespace weave
 
         async Task InitializeNewsForCurrentPage()
         {
-            var x = pageNews.GetNewsFuncForPage(currentPage);
+            var newsTask = pageNews.GetNewsFuncForPage(currentPage).News();
 
-            var refreshedNews = await x.News();
+            var refreshedNews = await newsTask;
 
             bool areItemsNew = !Enumerable.SequenceEqual(refreshedNews, previouslyDisplayedNews, NewsItemComparer.Instance);
 
@@ -233,6 +239,11 @@ namespace weave
                         if (!z.IsCompleted)
                             showProgressBars = true;
 
+                        if (showProgressBars)
+                        {
+                            view.ShowRadialProgressBar();
+                        }
+
                         List<NewsItem> news = new List<NewsItem>();
                         try
                         {
@@ -242,6 +253,12 @@ namespace weave
                         {
                             DebugEx.WriteLine(ex);
                         }
+
+                        if (showProgressBars)
+                        {
+                            view.HideRadialProgressBar();
+                        }
+
                         displayedNews = news;
                         previouslyDisplayedNews = displayedNews;
 
