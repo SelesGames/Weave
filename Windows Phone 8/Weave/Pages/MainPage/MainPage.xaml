@@ -155,7 +155,6 @@
 			<Rectangle Fill="{StaticResource PhoneChromeBrush}" Grid.ColumnSpan="3" CacheMode="BitmapCache"/>
 			<TextBlock Text="{Binding Header}" Margin="24,-5,0,0" TextTrimming="WordEllipsis" HorizontalAlignment="Left" Style="{StaticResource HeaderTextStyle}"/>
 			<TextBlock x:Name="tbPageCount" Grid.Column="2" Text="{Binding CurrentPageDisplay}" Margin="0,-5,24,0" HorizontalAlignment="Right" Style="{StaticResource HeaderTextStyle}" />
-			<ProgressBar x:Name="progressBar" VerticalAlignment="Bottom" Margin="0" Visibility="{Binding ProgressBarVisibility}" IsIndeterminate="{Binding IsProgressBarVisible}" Grid.ColumnSpan="3" Background="{StaticResource TransparentBrush}"/>
 		</Grid>
 
 		<Grid x:Name="ContentGrid" Grid.Column="1" Grid.Row="2" Background="{StaticResource TransparentBrush}">
@@ -167,7 +166,6 @@
 					<CompositeTransform/>
 				</UIElement.RenderTransform>
 			</local:CustomList>
-			<TextBlock x:Name="loadingText" Text="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" Margin="6,0,0,60" FontSize="{StaticResource PhoneFontSizeLarge}" Opacity="0.8" Visibility="Collapsed" />
 			<sglib:RadialBusyIndicator x:Name="loadingIndicator" VerticalAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" Width="48" Height="48" Margin="0,60,0,0" NumberOfItems="7" IsPlaying="False" Visibility="Collapsed"/>
 		</Grid>
 		<local:MainPageNavigationDropDownList x:Name="SourcesList" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Visibility="Collapsed">

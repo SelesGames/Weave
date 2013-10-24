@@ -6,10 +6,11 @@ using Weave.ViewModels;
 
 namespace weave
 {
-    public class PagedNewsItems : IPagedNewsItems
+    public class PagedNewsItems
     {
-        List<AsyncNewsList> newsLists = new List<AsyncNewsList>();
         NewsItemGroup vm;
+
+        public event EventHandler CountChanged;
 
         public int PageSize { get; private set; }
         public int NumberOfPagesToTakeAtATime { get; private set; }
@@ -22,54 +23,42 @@ namespace weave
             this.vm = vm;
             PageSize = pageSize;
             NumberOfPagesToTakeAtATime = numberOfPagesToTakeAtATime;
+            PageCount = 1;
         }
 
-        public async Task Refresh(EntryType entry)
+        public IEnumerable<AsyncNewsList> GetNewsLists(EntryType initialEntryType)
         {
-            var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
-            var currentNewsList = await vm.GetNewsList(entry, 0, takeAmount);
-            PageCount = currentNewsList.GetPageCount(PageSize);
-            TotalNewsCount = currentNewsList.TotalArticleCount;
-            NewNewsCount = currentNewsList.NewArticleCount;
-
-            for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
+            for (int i = 0; i < PageCount; i += NumberOfPagesToTakeAtATime)
             {
-                var skipMult = j;
-                var t = new AsyncNewsList
-                {
-                    News = () => Task.FromResult(currentNewsList.News.Skip(skipMult * PageSize).Take(PageSize).ToList()),
-                };
+                var entryType = i == 0 ? initialEntryType : EntryType.Peek;
 
-                newsLists.Add(t);
-            }
-
-            Chunk();
-        }
-
-        void Chunk()
-        {
-            for (int i = NumberOfPagesToTakeAtATime; i < PageCount; i += NumberOfPagesToTakeAtATime)
-            {
                 var takeAmount = PageSize * NumberOfPagesToTakeAtATime;
                 var skipAmount = i * PageSize;
-                var load = Lazy.Create(() => vm.GetNewsList(EntryType.Peek, skipAmount, takeAmount));
+                var load = Lazy.Create(() => GetChunk(entryType, skipAmount, takeAmount));
 
                 for (int j = 0; j < NumberOfPagesToTakeAtATime; j++)
                 {
                     var skipMult = j;
-                    var t = new AsyncNewsList
+                    yield return new AsyncNewsList
                     {
                         News = async () => (await load.Get()).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
                     };
-
-                    newsLists.Add(t);
                 }
-            }
+            }        
         }
 
-        public AsyncNewsList GetNewsFuncForPage(int page)
+        async Task<NewsList> GetChunk(EntryType entryType, int skip, int take)
         {
-            return newsLists[page];
+            var currentNewsList = await vm.GetNewsList(entryType, skip, take);
+
+            PageCount = currentNewsList.GetPageCount(PageSize);
+            TotalNewsCount = currentNewsList.TotalArticleCount;
+            NewNewsCount = currentNewsList.NewArticleCount;
+
+            if (CountChanged != null)
+                CountChanged(this, EventArgs.Empty);
+
+            return currentNewsList;
         }
     }
 }

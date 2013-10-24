@@ -270,7 +270,10 @@ namespace weave
                     //await TimeSpan.FromSeconds(0.4);
 
                     if (vm != null)
-                        await vm.InitializeAsync();
+                    {
+                        vm.RecoverSavedTombstoneState();
+                        await vm.OnNavigatedTo();
+                    }
 
                     //vmSourcesList.RefreshCategories();
                 }
@@ -433,7 +436,8 @@ namespace weave
                 cl.ItemsSource = null;
 
                 CreateViewModel();
-                vm.InitializeAsync();//.ContinueWith(_ => Dispatcher.BeginInvoke(() => vmSourcesList.RefreshCategories()));
+                vm.RecoverSavedTombstoneState();
+                vm.OnNavigatedTo();
                 HideMenu();
             }
         }

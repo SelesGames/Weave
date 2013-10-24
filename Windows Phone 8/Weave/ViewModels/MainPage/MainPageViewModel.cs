@@ -7,33 +7,39 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Navigation;
 using Weave.LiveTile.ScheduledAgent;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
     public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     {
-        static string lastCategory;
+        #region Private member variables
 
-        public int currentPage = 0;
-        //int pageSize = AppSettings.Instance.NumberOfNewsItemsPerMainPage;
+        static string lastCategory;
+        static IScheduler scheduler = ViewModelBackgroundScheduler.Instance;
+
+        int currentPage = 0;
         int numberOfPages = 1;
 
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
         MainPage view;
-        SerialDisposable subscriptionHandle = new SerialDisposable();
-        SerialDisposable progressBarVisHandle = new SerialDisposable();
-        CompositeDisposable disposables = new CompositeDisposable();
         TombstoneState tombstoneState;
         UserInfo user;
+        int lastPageLastTimeItWasSet = -1;
+        SerialDisposable pageChangeHandle = new SerialDisposable();
 
-        IPagedNewsItems pageNews;
+
+        PagedNewsItems pagedNews;
+        IEnumerable<AsyncNewsList> newsLists;
+
+        #endregion
+
+
+
 
         internal OperatingMode currentOperatingMode;
 
@@ -45,40 +51,48 @@ namespace weave
             Read
         }
 
-        static IScheduler scheduler = ViewModelBackgroundScheduler.Instance;
 
+
+
+        #region Public Properties
 
         public string Header { get; private set; }
-        public bool IsProgressBarVisible { get; private set; }
-        public Visibility ProgressBarVisibility { get; private set; }
         public Guid FeedId { get; set; }
 
+        #endregion
+
+
+
+
+        #region Public Derived Properties
+
+        public string CurrentPageDisplay
+        {
+            get { return string.Format("PAGE {0} OF {1}", currentPage + 1, numberOfPages); }
+        }
+
+        #endregion
+
+
+
+
+        #region Constructor
 
         public MainPageViewModel(MainPage view, string header)
         {
             this.view = view;
             Header = header;
-
-            IsProgressBarVisible = false;
-            ProgressBarVisibility = Visibility.Collapsed;
-            //view.IsPreviousButtonEnabled = HasPrevious = false;
-            //view.IsNextButtonEnabled = HasNext = false;
-            NewItemCount = "0 NEW";
             user = ServiceResolver.Get<UserInfo>();
         }
 
-        public async Task InitializeAsync()
-        {
-            RecoverSavedTombstoneState();
-            await OnNavigatedTo();
-        }
+        #endregion
 
 
 
 
         #region Getting and Saving TombstoneState
 
-        void RecoverSavedTombstoneState()
+        internal void RecoverSavedTombstoneState()
         {
             tombstoneState = ServiceResolver.Get<TombstoneState>();
             if (tombstoneState == null)
@@ -104,102 +118,135 @@ namespace weave
 
 
 
+        #region OnNavigatedTo
+
         public async Task OnNavigatedTo(NavigationMode navMode = NavigationMode.New)
         {
             if (navMode == NavigationMode.Forward || navMode == NavigationMode.New)
             {
-                InitializeNewsCollectionVM();
+                InitializePagedNews();
 
-                view.ShowRadialProgressBar();
+                newsLists = pagedNews.GetNewsLists(EntryType.Mark).Memoize();
 
-                await pageNews.Refresh(EntryType.Mark);
-
-                view.HideRadialProgressBar();
-
-                await UpdateNewsList();
+                ReevaluateNextAndPreviousButtonsVisibilities();
+                await GetNewsForCurrentPage();
+                lastCategory = Header;
             }
         }
 
-        async Task UpdateNewsList()
-        {
-            UpdateNewItemCount();
-            InitializePageCountDisplay();
-            ReevaluateNextAndPreviousButtonsVisibilities();
-            await InitializeNewsForCurrentPage();
-        }
+        #endregion
 
-        void InitializeNewsCollectionVM()
+
+
+
+        #region PagedNews Initialization
+
+        void InitializePagedNews()
         {
             var tombstoneState = ServiceResolver.Get<TombstoneState>();
             var feedListener = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
 
+            NewsItemGroup niGroup = null;
+
             if (currentOperatingMode == OperatingMode.Category)
             {
-                var vm = feedListener.Find(Header);
-                pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                niGroup = feedListener.Find(Header);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Category;
             }
             else if (currentOperatingMode == OperatingMode.Feed)
             {
-                var vm = feedListener.Find(FeedId);
-                pageNews = new PagedNewsItems(vm, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                niGroup = feedListener.Find(FeedId);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Feed;
             }
             else if (currentOperatingMode == OperatingMode.Favorites)
             {
-                pageNews = new PagedNewsItems(new FavoriteArticlesGroup(user), AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                niGroup = new FavoriteArticlesGroup(user);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Favorites;
             }
             else if (currentOperatingMode == OperatingMode.Read)
             {
-                pageNews = new PagedNewsItems(new ReadArticlesGroup(user), AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+                niGroup = new ReadArticlesGroup(user);
                 tombstoneState.CurrentArticleListContext = ArticleListContext.Read;
             }
+
+            if (niGroup == null)
+                throw new Exception("Unable to initialize niGroup in InitializeNewsCollectionVM");
+
+            if (pagedNews != null)
+            {
+                pagedNews.CountChanged -= pageNews_CountChanged;
+            }
+            pagedNews = new PagedNewsItems(niGroup, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+            pagedNews.CountChanged += pageNews_CountChanged;
         }
 
-        void UpdateNewItemCount()
+        void pageNews_CountChanged(object sender, EventArgs e)
         {
-            var newItemCount = pageNews.NewNewsCount;
-            GlobalDispatcher.Current.BeginInvoke(() => NewItemCount = newItemCount.ToString() + " NEW");
-        }
-
-        void InitializePageCountDisplay()
-        {
-            numberOfPages = pageNews.PageCount;
+            numberOfPages = pagedNews.PageCount;
             if (currentPage >= numberOfPages || Header != lastCategory)
                 currentPage = 0;
 
-            lastCategory = Header;
             GlobalDispatcher.Current.BeginInvoke(() => PropertyChanged.Raise(this, "CurrentPageDisplay"));
+
+            ReevaluateNextAndPreviousButtonsVisibilities();
         }
 
-        public string CurrentPageDisplay
+        #endregion
+
+
+
+
+        #region Get News for Current Page
+
+        async Task GetNewsForCurrentPage()
         {
-            get { return string.Format("PAGE {0} OF {1}", currentPage + 1, numberOfPages); }
-        }
+            int pageToRetrieve = currentPage;
 
-        public string NewItemCount
-        {
-            get { return newItemCount; }
-            set { newItemCount = value; PropertyChanged.Raise(this, "NewItemCount"); }
-        }
-        string newItemCount;
+            bool showProgressBars = false;
+            var newsTask = newsLists.Skip(pageToRetrieve).First().News();
 
-        async Task InitializeNewsForCurrentPage()
-        {
-            var newsTask = pageNews.GetNewsFuncForPage(currentPage).News();
+            if (!newsTask.IsCompleted)
+                showProgressBars = true;
 
-            var refreshedNews = await newsTask;
-
-            bool areItemsNew = !Enumerable.SequenceEqual(refreshedNews, previouslyDisplayedNews, NewsItemComparer.Instance);
-
-            if (areItemsNew)
+            if (showProgressBars)
             {
-                displayedNews = refreshedNews;
-                GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews));
-                previouslyDisplayedNews = displayedNews;
+                view.ShowRadialProgressBar();
             }
+
+            List<NewsItem> news = null;
+            try
+            {
+                news = await newsTask;
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+            news = news ?? new List<NewsItem>();
+
+            if (pageToRetrieve != currentPage)
+                return;
+
+            if (showProgressBars)
+            {
+                view.HideRadialProgressBar();
+            }
+
+            if (Enumerable.SequenceEqual(news, previouslyDisplayedNews, NewsItemComparer.Instance))
+                return;
+            
+            previouslyDisplayedNews = displayedNews = news;
+
+            if (currentPage >= lastPageLastTimeItWasSet) // we moved forward
+                GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, 1));
+
+            else
+                GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, -1));
+
+            lastPageLastTimeItWasSet = currentPage;
         }
+
+        #endregion
 
 
 
@@ -209,16 +256,11 @@ namespace weave
         void ReevaluateNextAndPreviousButtonsVisibilities()
         {
             HasPrevious = (currentPage - 1) >= 0;
-            HasNext = currentPage + 1 < Math.Ceiling((double)pageNews.TotalNewsCount / (double)pageNews.PageSize);
+            HasNext = currentPage + 1 < Math.Ceiling((double)pagedNews.TotalNewsCount / (double)pagedNews.PageSize);
         }
-
 
         internal bool HasPrevious { get; private set; }
         internal bool HasNext { get; private set; }
-
-
-        int lastPageLastTimeItWasSet = -1;
-        SerialDisposable pageChangeHandle = new SerialDisposable();
 
         public int CurrentPage
         {
@@ -230,46 +272,10 @@ namespace weave
                     currentPage = value;
                     ReevaluateNextAndPreviousButtonsVisibilities();
                     PropertyChanged.Raise(this, "CurrentPageDisplay");
-                    pageChangeHandle.Disposable = Observable.Timer(TimeSpan.FromMilliseconds(200), scheduler).Take(1).Subscribe(async notUsed =>
-                    {
-                        bool showProgressBars = false;
-                        var x = pageNews.GetNewsFuncForPage(currentPage);
-                        var z = x.News();
-
-                        if (!z.IsCompleted)
-                            showProgressBars = true;
-
-                        if (showProgressBars)
-                        {
-                            view.ShowRadialProgressBar();
-                        }
-
-                        List<NewsItem> news = new List<NewsItem>();
-                        try
-                        {
-                            news = await z;
-                        }
-                        catch (Exception ex)
-                        {
-                            DebugEx.WriteLine(ex);
-                        }
-
-                        if (showProgressBars)
-                        {
-                            view.HideRadialProgressBar();
-                        }
-
-                        displayedNews = news;
-                        previouslyDisplayedNews = displayedNews;
-
-                        if (currentPage >= lastPageLastTimeItWasSet) // we moved forward
-                            GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, 1));
-
-                        else
-                            GlobalDispatcher.Current.BeginInvoke(() => view.CompletePageChangeAnimation(displayedNews, -1));
-
-                        lastPageLastTimeItWasSet = currentPage;
-                    });
+                    pageChangeHandle.Disposable = Observable
+                        .Timer(TimeSpan.FromMilliseconds(200), scheduler)
+                        .Take(1)
+                        .Subscribe(async _ => await GetNewsForCurrentPage());
                 }
             }
         }
@@ -279,16 +285,11 @@ namespace weave
 
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-
-
-
         #region Mark Page Read
 
         internal void MarkCurrentPageRead()
         {
-            scheduler.SafelySchedule(() => markCurrentPageRead());
+            scheduler.SafelySchedule(async () => await markCurrentPageRead());
         }
 
         async Task markCurrentPageRead()
@@ -297,54 +298,29 @@ namespace weave
                 return;
 
             await user.MarkArticlesSoftRead(displayedNews);
-            UpdateNewItemCount();
         }
 
         #endregion
 
 
+
+
+        #region Refresh
+
         internal void ManualRefresh()
         {
-            scheduler.SafelySchedule(() => refresh());//_ => true));
+            scheduler.SafelySchedule(async () => await refresh());
         }
-
-        //internal void AutoRefresh()
-        //{
-        //    ManualRefresh();
-        //    //var now = DateTime.UtcNow;
-        //    //scheduler.SafelySchedule(() => refresh(o => (now - o.LastRefreshedOn) > FeedSource.RefreshThreshold));
-        //}
 
         async Task refresh()
         {
-            ShowProgressBar();
-            await pageNews.Refresh(EntryType.ExtendRefresh);
-            HideProgressBar();
-            await Task.Yield();
-            await UpdateNewsList();
+            newsLists = pagedNews.GetNewsLists(EntryType.ExtendRefresh).Memoize();
+            ReevaluateNextAndPreviousButtonsVisibilities();
+            await GetNewsForCurrentPage();
         }
 
-        void ShowProgressBar()
-        {
-            IsProgressBarVisible = true;
-            ProgressBarVisibility = Visibility.Visible;
-            GlobalDispatcher.Current.BeginInvoke(() =>
-            {
-                PropertyChanged.Raise(this, "IsProgressBarVisible");
-                PropertyChanged.Raise(this, "ProgressBarVisibility");
-            });
-        }
+        #endregion
 
-        void HideProgressBar()
-        {
-            IsProgressBarVisible = false;
-            ProgressBarVisibility = Visibility.Collapsed;
-            GlobalDispatcher.Current.BeginInvoke(() =>
-            {
-                PropertyChanged.Raise(this, "IsProgressBarVisible");
-                PropertyChanged.Raise(this, "ProgressBarVisibility");
-            });
-        }
 
 
 
@@ -373,23 +349,33 @@ namespace weave
 
 
 
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
+
+
+
+        #region IDisposable and class Destructor
+
         public void Dispose()
         {
-            disposables.Dispose();
-
             if (this.pageChangeHandle != null)
                 this.pageChangeHandle.Dispose();
 
-            if (this.subscriptionHandle != null)
-                this.subscriptionHandle.Dispose();
-
-            if (this.progressBarVisHandle != null)
-                this.progressBarVisHandle.Dispose();
+            if (pagedNews != null)
+            {
+                pagedNews.CountChanged -= pageNews_CountChanged;
+            }
         }
 
         ~MainPageViewModel()
         {
             DebugEx.WriteLine("MainPageViewModel {0} was finalized", this.Header);
         }
+
+        #endregion
     }
 }
