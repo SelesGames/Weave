@@ -171,6 +171,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="Library\Value Converters\UserIdConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\DataStorageClient.cs" />
@@ -580,6 +581,7 @@
     <Content Include="Assets\Icons\wheel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Weave4.0_2013_10_24_18_00_04.sap" />
     <Resource Include="Assets\imageDownloadFailed.jpg" />
     <Content Include="Assets\Login\Facebook.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

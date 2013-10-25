@@ -38,7 +38,8 @@
 			</DataTemplate>
 			
 			<sgcore:InverseBooleanValueConverter x:Key="InverseBool" />
-
+			<local:UserIdConverter x:Key="IdConverter" />
+			<SolidColorBrush x:Key="TextSubtleBrush" Color="#99FFFFFF"/>
 		</ResourceDictionary>
 
 	</weave:WeavePage.Resources>
@@ -93,12 +94,15 @@
 			</phone:PanoramaItem>
 
 			<phone:PanoramaItem x:Name="Account" Header="account" Style="{StaticResource PanoramaItemStyle}">
-				<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" toolkit:TiltEffect.IsTiltEnabled="True">
-					<!--Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" /-->
-					<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" Tap="favoritesButtonTap"/>
-					<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" Tap="readButtonTap"/>
-					<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" Tap="manageSourcesButtonTap"/>
-				</StackPanel>
+				<Grid>
+					<TextBlock Text="{Binding Id, Converter={StaticResource IdConverter}}" Margin="12,-50,0,0" FontSize="{StaticResource PhoneFontSizeSmall}" Foreground="{StaticResource TextSubtleBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" />
+					<StackPanel x:Name="menu" Orientation="Vertical" VerticalAlignment="Top" toolkit:TiltEffect.IsTiltEnabled="True">
+						<!--Button Content="Sign-in or sign-up for an account" Foreground="{StaticResource PanoramaForegroundBrush}" FontSize="{StaticResource PhoneFontSizeLarge}" FontFamily="{StaticResource PhoneFontFamilySemiLight}" Tap="OnLoginButtonTap" Style="{StaticResource SignInButtonStyle}" HorizontalAlignment="Left" Padding="11,8,11,5" /-->
+						<sg:ImageWithLabelButton Content="favorites" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/tiny_heart.png" Tap="favoritesButtonTap" Margin="0,-5,0,0"/>
+						<sg:ImageWithLabelButton Content="previously read" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.eye.png" Tap="readButtonTap"/>
+						<sg:ImageWithLabelButton Content="manage sources" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/Assets/Icons/appbar.rss.png" Tap="manageSourcesButtonTap"/>
+					</StackPanel>
+				</Grid>
 			</phone:PanoramaItem>
 
 			<phone:PanoramaItem x:Name="Login" Header="login &amp; sync" Style="{StaticResource PanoramaItemStyle}">
@@ -112,7 +116,7 @@
 					</Grid.RowDefinitions>
 					<Rectangle Fill="Black" Visibility="Collapsed" />
 					<Rectangle Grid.Row="1" Grid.RowSpan="4" Fill="#FF303030" Stroke="White" Visibility="Collapsed" />
-					<TextBlock Foreground="#99FFFFFF" Text="Link your Weave account to any of the social networks below if you'd like to access your feeds and preferences on multiple devices" Margin="12,0,12,12" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" LineHeight="21.333"/>
+					<TextBlock Foreground="{StaticResource TextSubtleBrush}" Text="Link your Weave account to any of the social networks below if you'd like to access your feeds and preferences on multiple devices" Margin="12,0,12,12" TextWrapping="Wrap" FontSize="{StaticResource PhoneFontSizeNormal}" LineStackingStrategy="BlockLineHeight" LineHeight="21.333"/>
 					<wc:LoginButton Grid.Row="1" IsLoggedIn="{Binding IsMicrosoftSynced}" IsEnabled="{Binding IsMicrosoftSynced, Converter={StaticResource InverseBool}}" LoggedOutText="Login via Microsoft account" Content="Microsoft" Source="/Assets/Login/Microsoft.png" Tap="OnMicrosoftButtonTap" Margin="0,12,0,0" Height="72" Style="{StaticResource LoginButtonStyle}" />
 					<wc:LoginButton Grid.Row="2" IsLoggedIn="{Binding IsFacebookSynced}" IsEnabled="{Binding IsFacebookSynced, Converter={StaticResource InverseBool}}" LoggedOutText="Login via Facebook account" Content="Facebook" Source="/Assets/Login/Facebook.png" Tap="OnFacebookButtonTap" Height="72" Style="{StaticResource LoginButtonStyle}" />
 					<wc:LoginButton Grid.Row="3" IsLoggedIn="{Binding IsTwitterSynced}" IsEnabled="{Binding IsTwitterSynced, Converter={StaticResource InverseBool}}" LoggedOutText="Login via Twitter account" Content="Twitter" Source="/Assets/Login/Twitter.png" Tap="OnTwitterButtonTap" Height="72" Style="{StaticResource LoginButtonStyle}" />

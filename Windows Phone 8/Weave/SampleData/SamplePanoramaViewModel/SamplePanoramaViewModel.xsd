@@ -12,6 +12,7 @@
       <xs:element name="MostViewed" type="tns:MostViewed" />
       <xs:element name="Feeds" type="tns:Feeds" />
     </xs:sequence>
+    <xs:attribute name="Id" type="xs:string" />
   </xs:complexType>
   <xs:complexType name="Sources">
     <xs:sequence>

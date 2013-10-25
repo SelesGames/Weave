@@ -3,6 +3,7 @@
 //      changes to this file can cause errors.
 namespace Expression.Blend.SampleData.SamplePanoramaViewModel
 {
+	using System; 
 
 // To significantly reduce the sample data footprint in your production application, you can set
 // the DISABLE_SAMPLE_DATA conditional compilation constant and disable sample data at runtime.
@@ -64,6 +65,25 @@ namespace Expression.Blend.SampleData.SamplePanoramaViewModel
 			get
 			{
 				return this._Feeds;
+			}
+		}
+
+		private string _Id = string.Empty;
+
+		public string Id
+		{
+			get
+			{
+				return this._Id;
+			}
+
+			set
+			{
+				if (this._Id != value)
+				{
+					this._Id = value;
+					this.OnPropertyChanged("Id");
+				}
 			}
 		}
 	}
