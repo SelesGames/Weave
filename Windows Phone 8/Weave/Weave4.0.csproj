@@ -18,7 +18,7 @@
     <SupportedCultures />
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Weave4.0_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>Weave8.5_Release_AnyCPU.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>weave.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
