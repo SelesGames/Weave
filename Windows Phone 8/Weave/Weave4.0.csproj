@@ -248,7 +248,6 @@
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
-    <Compile Include="StandardUserCache.cs" />
     <Compile Include="ViewModels\Grouped News\ReadArticlesGroup.cs" />
     <Compile Include="ViewModels\Grouped News\FavoriteArticlesGroup.cs" />
     <Compile Include="ViewModels\Grouped News\NewsItemGroup.cs" />

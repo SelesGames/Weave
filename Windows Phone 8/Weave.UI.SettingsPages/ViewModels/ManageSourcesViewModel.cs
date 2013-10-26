@@ -20,7 +20,7 @@ namespace weave
         public ManageSourcesViewModel()
         {
             FeedGroups = new ObservableCollection<ObservableGroup<Feed, string>>();
-            user = ServiceResolver.Get<IUserCache>().Get();
+            user = ServiceResolver.Get<UserInfo>();
         }
 
         public async Task LoadFeeds()

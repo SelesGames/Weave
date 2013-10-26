@@ -25,7 +25,7 @@ namespace weave
 {
     public partial class ReadabilityPage : PhoneApplicationPage, IDisposable
     {
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
         ReadabilityPageViewModel viewModel;
         bool isHtmlDisplayed = false;
         bool isArticleNonDisplayable = false;
@@ -58,6 +58,8 @@ namespace weave
             var isAppBarMinimized = permState.IsHideAppBarOnArticleViewerPageEnabled;
             ApplicationBar.Mode = isAppBarMinimized ? ApplicationBarMode.Minimized : ApplicationBarMode.Default;
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
+
+            user = ServiceResolver.Get<UserInfo>();
         }
 
 
@@ -96,11 +98,11 @@ namespace weave
             var adapter = (ApplicationBarToggleIconButtonAdapter)sender;
             if (adapter.IsChecked)
             {
-                await userCache.Get().AddFavorite(viewModel.NewsItem);
+                await user.AddFavorite(viewModel.NewsItem);
             }
             else
             {
-                await userCache.Get().RemoveFavorite(viewModel.NewsItem);
+                await user.RemoveFavorite(viewModel.NewsItem);
             }
         }
 
@@ -283,7 +285,7 @@ namespace weave
             {
                 try
                 {
-                    await userCache.Get().MarkArticleRead(viewModel.NewsItem);
+                    await user.MarkArticleRead(viewModel.NewsItem);
                 }
                 catch { }
             })
@@ -314,7 +316,7 @@ namespace weave
 
             if (vm.NewsItem.Feed == null)
             {
-                var feeds = userCache.Get().Feeds;
+                var feeds = user.Feeds;
                 vm.NewsItem.Feed = feeds.Single(o => o.Id.Equals(vm.NewsItem.Feed.Id));
             }
 
@@ -378,7 +380,7 @@ namespace weave
         {
             try
             {
-                userCache.Get().MarkArticleRead(viewModel.NewsItem);
+                user.MarkArticleRead(viewModel.NewsItem);
                 SelesGames.Phone.TaskService.ToInternetExplorerTask(viewModel.NewsItem.Link);
             }
             catch { }

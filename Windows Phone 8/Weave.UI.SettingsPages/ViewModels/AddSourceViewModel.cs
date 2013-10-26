@@ -15,13 +15,14 @@ namespace weave
 {
     public class AddSourceViewModel : INotifyPropertyChanged
     {
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
 
         public AddSourceViewModel()
         {
             Categories = new ObservableCollection<Category>();
             SearchResults = new ObservableCollection<Source>();
             SearchPrompt = "Search by a topic, or a website name, or even type in the RSS url directly (don't forget the http://)!";
+            user = ServiceResolver.Get<UserInfo>();
         }
 
 
@@ -134,7 +135,7 @@ namespace weave
                 var sources = response.responseData.entries.Select(Parse).ToList();
 
                 // load the users enabled feeds that match the search string
-                var enabledFeeds = userCache.Get().Feeds;
+                var enabledFeeds = user.Feeds;
                 var enabledSources = enabledFeeds
                     .Where(o => o.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
                     .Select(ParseEnabledFeed)
@@ -168,7 +169,7 @@ namespace weave
         {
             source.IsAdded = true;
             var feed = Parse(source);
-            await userCache.Get().AddFeed(feed);
+            await user.AddFeed(feed);
             source.Feed = feed;
         }
 
@@ -179,7 +180,7 @@ namespace weave
             if (feed == null)
                 return;
 
-            await userCache.Get().RemoveFeed(feed);
+            await user.RemoveFeed(feed);
             source.Feed = null;
         }
 

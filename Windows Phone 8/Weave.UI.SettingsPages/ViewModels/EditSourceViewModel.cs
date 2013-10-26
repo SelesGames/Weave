@@ -37,7 +37,7 @@ namespace weave
             Categories = new ObservableCollection<DisplayableCategory>();
             ArticleViewingModes = new ObservableCollection<string>(new[] { ARTICLEVIEWMODE_MOBILIZER, ARTICLEVIEWMODE_IE });
             IsArticleViewingSelectorEnabled = false;
-            user = ServiceResolver.Get<IUserCache>().Get();
+            user = ServiceResolver.Get<UserInfo>();
         }
 
         #endregion

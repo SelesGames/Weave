@@ -61,8 +61,7 @@ namespace weave
                 //// TODO: SHOW SOME PROGRESS BAR OR SOMETHING
                 //await dal.SaveFeeds();
 
-                var userCache = ServiceResolver.Get<IUserCache>();
-                var user = userCache.Get();
+                var user = ServiceResolver.Get<UserInfo>();
                 user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
                 await user.Create();
                 await user.Load();

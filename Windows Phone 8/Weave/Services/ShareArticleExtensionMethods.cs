@@ -52,7 +52,7 @@ namespace weave
 
             if (newsItem is NewsItem)
             {
-                ServiceResolver.Get<IUserCache>().Get().MarkArticleRead(((NewsItem)newsItem));
+                ServiceResolver.Get<UserInfo>().MarkArticleRead(((NewsItem)newsItem));
             }
 
             GlobalNavigationService.ToInternetExplorer(newsItem);

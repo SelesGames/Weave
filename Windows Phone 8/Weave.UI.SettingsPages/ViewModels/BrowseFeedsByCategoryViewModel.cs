@@ -12,7 +12,7 @@ namespace weave
 {
     public class BrowseFeedsByCategoryViewModel
     {
-        IUserCache userCache = ServiceResolver.Get<IUserCache>();
+        UserInfo user;
         string category;
         IEnumerable<Weave.ViewModels.Feed> existingFeeds;
         List<Feed> snapshotOfEnabledFeeds;
@@ -47,14 +47,14 @@ namespace weave
         {
             this.category = category;
             Feeds = new ObservableCollection<Feed>();
-            //dataRepo = ServiceResolver.Get<weave.Data.Weave4DataAccessLayer>();
+            user = ServiceResolver.Get<UserInfo>();
         }
 
         public async Task LoadFeedsAsync()
         {
             Feeds.Clear();
 
-            existingFeeds = userCache.Get().Feeds;
+            existingFeeds = user.Feeds;
 
             var library = ServiceResolver.Get<ExpandedLibrary>();
             var temp = await library.Feeds.Get();
@@ -87,7 +87,7 @@ namespace weave
                 .OfType<Weave.ViewModels.Feed>()
                 .ToList();
 
-            await userCache.Get().BatchChange(newlyEnabledFeeds, newlyDisabledFeedSources);
+            await user.BatchChange(newlyEnabledFeeds, newlyDisabledFeedSources);
         }
 
 
