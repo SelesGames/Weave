@@ -42,36 +42,11 @@ namespace weave
             identity = ServiceResolver.Get<IdentityInfo>();
             feedsToNewsItemGroupAdapter = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
 
-            identity.UserIdChanged += async (s, e) =>
-            {
-                bool updateFailed = false;
-                try
-                {
-                    frame.OverlayText = "Updating user...";
-                    frame.IsLoading = true;
-                    user.Id = identity.UserId;
-                    // refresh user news?
-                    await user.Load(refreshNews: true);
-                }
-                catch
-                {
-                    updateFailed = true;
-                }
-                if (updateFailed)
-                {
-                    frame.OverlayText = "Failed to update user";
-                    await Task.Delay(2000);
-                }
-                frame.IsLoading = false;
-            };
-
             vm = new NewsItemGroupToMostViewedAdapter(feedsToNewsItemGroupAdapter);
             this.DataContext = vm;
             loginMenu.DataContext = identity;
             Account.DataContext = user;
-
             mosaicHubTile.DataContext = user;
-            //this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
 
             if (AppSettings.Instance.StartupMode == StartupMode.Launch)
             {
@@ -164,7 +139,7 @@ namespace weave
             await TimeSpan.FromSeconds(0.3);
             this.cat1.NewsItemClicked.Subscribe(ShowDetailed);
             //vm.LoadLatestNews();
-            this.cat1.DataContext = ServiceResolver.Get<IUserCache>().Get();
+            this.cat1.DataContext = user;
         }
 
 
