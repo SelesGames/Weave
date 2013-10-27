@@ -297,6 +297,11 @@ namespace weave
             if (displayedNews == null)
                 return;
 
+            GlobalDispatcher.Current.BeginInvoke(() =>
+            {
+                foreach (var newsItem in displayedNews)
+                    newsItem.HasBeenViewed = true;
+            }); 
             await user.MarkArticlesSoftRead(displayedNews);
         }
 

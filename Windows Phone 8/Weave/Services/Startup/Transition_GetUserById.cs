@@ -31,7 +31,8 @@ namespace weave.Services.Startup
             }
             catch (ResponseException responseException)
             {
-                if (responseException.Response.StatusCode == HttpStatusCode.NotFound)
+                var response = responseException.Response;
+                if (response != null && response.StatusCode == HttpStatusCode.NotFound && !string.IsNullOrWhiteSpace(response.ReasonPhrase))
                     CurrentState = State.Fail;
                 else
                     throw;

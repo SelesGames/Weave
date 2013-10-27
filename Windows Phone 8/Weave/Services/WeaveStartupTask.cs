@@ -4,6 +4,7 @@ using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -23,27 +24,42 @@ using Weave.NinjectKernel;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
-using Weave.ViewModels.Cache;
-using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Helpers;
 using Weave.ViewModels.Identity;
 using Weave.ViewModels.Repository;
+using ArticleService = Weave.Article.Service.Client;
+using UserService = Weave.User.Service.Client;
 
 namespace weave
 {
     public class WeaveStartupTask
     {
+        #region private member variables
+
         AppSettings settings;
         PermanentState permanentState;
         TombstoneState tombstoneState;
+        UserInfo user;
+        IdentityInfo identity; 
         OverlayFrame frame;
         Kernel kernel;
         DataStorageClient storageClient;
-
-        //Weave4DataAccessLayer dataAccessLayer;
-        bool isFullyInitialized = false;
         Uri initialNavigationUri = null;
-        StandardUserCache userCache;
+
+        bool 
+            isFrameInit,
+            isFirstNavInit,
+            isAppLevelExceptionHandlerInitialized,
+            isNetworkStatusChangeListenerInit,
+            isGConPanoInit,
+            isOrientationChangeServiceInit;
+
+        #endregion
+
+
+
+
+        #region Constructor
 
         public WeaveStartupTask(AppSettings settings)
         {
@@ -52,6 +68,7 @@ namespace weave
 
             storageClient = new DataStorageClient();
 
+            InitializeApplicationLevelExceptionHandler();
             InitializeNewFrame();
             InitializeLanguage();
 
@@ -66,63 +83,20 @@ namespace weave
             EnableLiveTileUpdatingBackgroundTask();
         }
 
-
-
-
-        #region Initialize the new PhoneApplicationFrame
-
-        // Avoid double-initialization
-        private bool phoneApplicationInitialized = false;
-
-        void InitializeNewFrame()
-        {
-            if (phoneApplicationInitialized)
-                return;
-
-            frame = new OverlayFrame
-            {
-                OverlayBackground = new SolidColorBrush(Color.FromArgb(255, 31, 31, 31)),
-                OverlayForeground = new SolidColorBrush(Colors.White)
-            };
-            GlobalNavigationService.CurrentFrame = frame;
-
-            Observable
-                .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
-                .Take(1)
-                .Subscribe(_ => settings.CurrentApplication.RootVisual = frame);
-
-            Observable
-               .FromEventPattern<NavigatingCancelEventArgs>(frame, "Navigating")
-               .Take(1)
-               .Subscribe(OnInitialNavigatingWrapper);
-
-            new ArticleListNavigationCorrector(frame);
-            frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
-            frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
-            frame.NavigationFailed += RootFrame_NavigationFailed;
-
-            // Ensure we don't initialize again
-            phoneApplicationInitialized = true;
-        }
-
-        void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            if (Debugger.IsAttached)
-            {
-                // A navigation has failed; break into the debugger
-                Debugger.Break();
-            }
-        }
-
         #endregion
 
 
 
 
-        #region On first Navigation event
+        #region Initial Navigation
 
         async void OnInitialNavigatingWrapper(EventPattern<NavigatingCancelEventArgs> args)
         {
+            if (isFirstNavInit)
+                return;
+
+            isFirstNavInit = true;
+
             try
             {
                 await OnInitialNavigating(args);
@@ -167,45 +141,49 @@ namespace weave
 
             frame.TryNavigate("/weave;component/Pages/DummyPage.xaml");
             await frame.NavigatedAsync();
-
-            //frame.IsLoading = true;
-
             await frame.GetLayoutUpdated().Take(1).ToTask();
 
             var dummyPage = frame.Content as DummyPage;
 
-
             // at this point, the loading screen is being shown
 
-            if (permanentState == null)
+            await InitializePermanentState();
+            await InitializeTombstoneState();
+
+            InitializeNetworkStatusChangeListener();
+            var isInternetAvailable = await CheckForInternetConnection();
+            if (!isInternetAvailable)
             {
-                permanentState = await storageClient.GetPermanentState();
+                MessageBox.Show("Please check your internet connection and re-open the app", "No internet connection", MessageBoxButton.OK);
+                App.Current.Terminate();
+                return;
             }
 
-            if (settings.StartupMode == StartupMode.Launch)
+            InitializeUser();
+
+            var stateMachine = new StartupIdentityStateMachine(user);
+            try
             {
-                tombstoneState = new TombstoneState();
+                await stateMachine.Begin();
             }
-            else
+            catch
             {
-                tombstoneState = await storageClient.GetTombstoneState();
+                MessageBox.Show("Unable to initialize user.  Please check your internet connection and re-open the app", "Internet error", MessageBoxButton.OK);
+                App.Current.Terminate();
+                return;
             }
 
+            InitializeIdentity();
+
+            InitializeAdSettings();
+            InitializeNinjectKernel();
+            InitializeGarbageCollectionOnNavigateToPanorama();
+            InitializeOrientationChangeService();
+            InitializeThemes();
             new SystemTrayNavigationSetter(frame, permanentState);
 
-            if (settings.StartupMode == StartupMode.Launch)
-            {
-                permanentState.RunHistory.CreateNewLog();
-            }
-
-            FinishInitialization();
 
             await dummyPage.LayoutPopups();
-
-
-            var user = userCache.Get();
-            var stateMachine = new StartupIdentityStateMachine(user);
-            await stateMachine.Begin();
 
             if (stateMachine.FinalState == StartupIdentityStateMachine.State.UserExists)
             {
@@ -215,8 +193,6 @@ namespace weave
             {
                 originalTargetUri = new Uri("/weave;component/Pages/SelectTheCategoriesThatInterestYouPage.xaml", UriKind.Relative);
             }
-
-            //dataAccessLayer = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
 
             frame.TryNavigate(originalTargetUri);
             await frame.NavigatedAsync();
@@ -231,6 +207,339 @@ namespace weave
 
             frame.IsLoading = false;
             frame.IsHitTestVisible = true;
+        }
+
+
+
+        #endregion
+
+
+
+
+        #region Check for Internet Connection
+
+        async Task<bool> CheckForInternetConnection()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (settings.IsNetworkAvailable)
+                    return true;
+
+                await Task.Delay(100);
+            }
+
+            return false;
+        }
+
+        #endregion
+
+
+
+
+        #region Initialization functions
+
+
+
+
+        #region Initialize New PhoneApplicationFrame
+
+        void InitializeNewFrame()
+        {
+            if (isFrameInit)
+                return;
+
+            isFrameInit = true;
+
+            frame = new OverlayFrame
+            {
+                OverlayBackground = new SolidColorBrush(Color.FromArgb(255, 31, 31, 31)),
+                OverlayForeground = new SolidColorBrush(Colors.White)
+            };
+            GlobalNavigationService.CurrentFrame = frame;
+
+            Observable
+                .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
+                .Take(1)
+                .Subscribe(_ => settings.CurrentApplication.RootVisual = frame);
+
+            Observable
+               .FromEventPattern<NavigatingCancelEventArgs>(frame, "Navigating")
+               .Take(1)
+               .Subscribe(OnInitialNavigatingWrapper);
+
+            new ArticleListNavigationCorrector(frame);
+            frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
+            frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
+            frame.NavigationFailed += RootFrame_NavigationFailed;
+        }
+
+        void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            if (Debugger.IsAttached)
+            {
+                // A navigation has failed; break into the debugger
+                Debugger.Break();
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Network Status changes listener
+
+        void InitializeNetworkStatusChangeListener()
+        {
+            if (isNetworkStatusChangeListenerInit)
+                return;
+
+            isNetworkStatusChangeListenerInit = true;
+
+            NetworkChange.NetworkAddressChanged += (s, e) =>
+            {
+                settings.IsNetworkAvailable = NetworkInterface.GetIsNetworkAvailable();
+            };
+            settings.IsNetworkAvailable = NetworkInterface.GetIsNetworkAvailable();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize App-Level Exception Handler
+
+        void InitializeApplicationLevelExceptionHandler()
+        {
+            if (isAppLevelExceptionHandlerInitialized)
+                return;
+
+            isAppLevelExceptionHandlerInitialized = true;
+
+            settings.CurrentApplication.UnhandledException += (s, e) =>
+            {
+                var ex = e.ExceptionObject;
+
+                if (ex == null)
+                    return;
+
+                if (ex is InvalidOperationException && ex.Message == "Navigation is not allowed when the task is not in the foreground.")
+                    return;
+
+                if (settings.LogExceptions)
+                    LittleWatson.LogException(ex, string.Empty);
+            };
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize PermanentState
+
+        async Task InitializePermanentState()
+        {
+            if (permanentState != null)
+                return;
+
+            permanentState = await storageClient.GetPermanentState();
+            if (settings.StartupMode == StartupMode.Launch)
+                permanentState.RunHistory.CreateNewLog();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize TombstoneState
+
+        async Task InitializeTombstoneState()
+        {
+            if (settings.StartupMode == StartupMode.Launch)
+                tombstoneState = new TombstoneState();
+            else
+                tombstoneState = await storageClient.GetTombstoneState();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize User
+
+        void InitializeUser()
+        {
+            if (user != null)
+                return;
+
+            var repo = new StandardRepository(new UserService.Client(), new ArticleService.ServiceClient());
+            user = new UserInfo(repo);
+            user.Id = permanentState.UserId;
+            user.PropertyChanged += OnUserInfoUserIdChanged;
+        }
+
+        void OnUserInfoUserIdChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Id")
+            {
+                permanentState.UserId = user.Id;
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Identity
+
+        void InitializeIdentity()
+        {
+            if (identity != null)
+                return;
+
+            identity = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient()) { UserId = user.Id };
+            identity.UserIdChanged += OnIdentityUserIdChanged;
+        }
+
+        async void OnIdentityUserIdChanged(object sender, EventArgs e)
+        {
+            bool updateFailed = false;
+            try
+            {
+                frame.OverlayText = "Updating user...";
+                frame.IsLoading = true;
+                user.Id = identity.UserId;
+                // refresh user news?
+                await user.Load(refreshNews: true);
+            }
+            catch
+            {
+                updateFailed = true;
+            }
+            if (updateFailed)
+            {
+                frame.OverlayText = "Failed to update user";
+                await Task.Delay(2000);
+            }
+            frame.IsLoading = false;
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Ad Settings
+
+        void InitializeAdSettings()
+        {
+            SelesGames.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Ninject Kernel
+
+        void InitializeNinjectKernel()
+        {
+            if (kernel != null)
+                return;
+
+            kernel = new Kernel(settings.AssemblyName);
+            ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
+
+            kernel.Bind<SocialShareContextMenuControl>().ToSelf().InSingletonScope().Named("accent")
+                .OnActivation((_, o) =>
+                {
+                    o.HideCloseButtonForAppBarSetup();
+                    o.Background = settings.Themes.CurrentTheme.AccentBrush;
+                });
+            kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
+                new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
+                .InSingletonScope();
+            kernel.Bind<PermanentState>().ToConstant(permanentState).InSingletonScope();
+            kernel.Bind<TombstoneState>().ToConstant(tombstoneState).InSingletonScope();
+            kernel.Bind<UserInfo>().ToConstant(user).InSingletonScope();
+            kernel.Bind<IdentityInfo>().ToConstant(identity).InSingletonScope();
+            kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
+            kernel.Bind<FontSizePopup>().ToSelf().InSingletonScope();
+            kernel.Bind<FontAndThemePopup>().ToSelf().InSingletonScope();
+            kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
+            kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
+            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(new FeedsToNewsItemGroupAdapter(user)).InSingletonScope();
+            kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
+            kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize GarbageCollection handler when navigating to Panorama (home page)
+
+        void InitializeGarbageCollectionOnNavigateToPanorama()
+        {
+            if (isGConPanoInit)
+                return;
+
+            isGConPanoInit = true;
+
+            Observable
+                .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
+                .Where(e =>
+                    e.EventArgs != null &&
+                    e.EventArgs.Content != null &&
+                    e.EventArgs.Content.GetType() == typeof(SamplePanorama))
+                .Subscribe(() =>
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                });
+        }
+
+        #endregion
+
+
+
+
+        #region Initialze Orientation Change Service
+
+        void InitializeOrientationChangeService()
+        {
+            if (isOrientationChangeServiceInit)
+                return;
+
+            isOrientationChangeServiceInit = true;
+
+            var orientationService = new OrientationLockService(frame);
+            orientationService.Start();
+            kernel.Bind<OrientationLockService>().ToConstant(orientationService).InSingletonScope();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Themes
+
+        void InitializeThemes()
+        {
+
+            if (settings.Themes != null)
+                return;
+
+            settings.Themes = new StandardThemeSet(settings.CurrentApplication, permanentState);
+            settings.Themes.UpdateCurrentThemeFromPermanentState();
         }
 
         #endregion
@@ -300,134 +609,6 @@ namespace weave
 
 
 
-
-        #region finish Initialization of the app
-
-        void FinishInitialization()
-        {
-            if (isFullyInitialized)
-                return;
-
-            isFullyInitialized = true;
-
-            settings.Themes = new StandardThemeSet(settings.CurrentApplication, permanentState);
-            settings.Themes.UpdateCurrentThemeFromPermanentState();
-
-            settings.CurrentApplication.UnhandledException += (s, e) =>
-            {
-                var ex = e.ExceptionObject;
-
-                if (ex == null)
-                    return;
-
-                if (ex is InvalidOperationException && ex.Message == "Navigation is not allowed when the task is not in the foreground.")
-                    return;
-
-                if (settings.LogExceptions)
-                    LittleWatson.LogException(ex, string.Empty);
-            };
-
-            settings.IsNetworkAvailable = Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-            NetworkChange.NetworkAddressChanged += (s, e) =>
-            {
-                settings.IsNetworkAvailable = Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-            };
-
-            InitializeAdSettings();
-            InitializeNinjectKernel();
-            InitializeGarbageCollectionOnNavigateToPanorama();
-            InitializeOrientationChangeService();
-        }
-
-        void InitializeAdSettings()
-        {
-            SelesGames.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
-        }
-
-        void InitializeNinjectKernel()
-        {
-            kernel = new Kernel(settings.AssemblyName);
-            ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
-
-            kernel.Bind<PermanentState>().ToConstant(permanentState).InSingletonScope();
-            kernel.Bind<TombstoneState>().ToConstant(tombstoneState).InSingletonScope();
-
-            //kernel.Bind<MainPageSettingsPopup>().ToSelf().InSingletonScope();
-            kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
-
-            kernel.Bind<SocialShareContextMenuControl>().ToSelf().InSingletonScope().Named("accent")
-                .OnActivation((_, o) =>
-                {
-                    o.HideCloseButtonForAppBarSetup();
-                    o.Background = settings.Themes.CurrentTheme.AccentBrush;
-                });
-            kernel.Bind<FontSizePopup>().ToSelf().InSingletonScope();
-            kernel.Bind<FontAndThemePopup>().ToSelf().InSingletonScope();
-
-            kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
-
-            //kernel.Bind<MainPageNavigationDropDownList>().ToSelf().InSingletonScope();
-
-            kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
-                new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
-                .InSingletonScope();
-
-            var user = new UserInfo(
-                    new StandardRepository(
-                        new Weave.User.Service.Client.Client(),
-                        new Weave.Article.Service.Client.ServiceClient()
-                    )
-                );
-
-            user.Id = permanentState.UserId;
-
-            kernel.Bind<UserInfo>().ToConstant(user).InSingletonScope();
-
-            var identity = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient()) { UserId = user.Id };
-            kernel.Bind<IdentityInfo>().ToConstant(identity).InSingletonScope();
-
-            userCache = new StandardUserCache(user);
-
-            user.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == "Id")
-                {
-                    permanentState.UserId = user.Id;
-                }
-            };
-
-            var feedsListener = new FeedsToNewsItemGroupAdapter(user);
-
-            kernel.Bind<IUserCache>().ToConstant(userCache).InSingletonScope();
-
-            kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
-            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(feedsListener).InSingletonScope();
-
-            kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
-            kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
-        }
-
-        void InitializeGarbageCollectionOnNavigateToPanorama()
-        {
-            Observable
-                .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
-                .Where(e =>
-                    e.EventArgs != null &&
-                    e.EventArgs.Content != null &&
-                    e.EventArgs.Content.GetType() == typeof(SamplePanorama))
-                .Subscribe(() =>
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                });
-        }
-
-        void InitializeOrientationChangeService()
-        {
-            var orientationService = new OrientationLockService(frame);
-            orientationService.Start();
-            kernel.Bind<OrientationLockService>().ToConstant(orientationService).InSingletonScope();
-        }
 
         #endregion
 
