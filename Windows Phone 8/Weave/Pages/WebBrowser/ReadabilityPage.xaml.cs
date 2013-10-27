@@ -285,6 +285,7 @@ namespace weave
             {
                 try
                 {
+                    viewModel.NewsItem.HasBeenViewed = true;
                     await user.MarkArticleRead(viewModel.NewsItem);
                 }
                 catch { }
@@ -380,6 +381,7 @@ namespace weave
         {
             try
             {
+                viewModel.NewsItem.HasBeenViewed = true;
                 user.MarkArticleRead(viewModel.NewsItem);
                 SelesGames.Phone.TaskService.ToInternetExplorerTask(viewModel.NewsItem.Link);
             }

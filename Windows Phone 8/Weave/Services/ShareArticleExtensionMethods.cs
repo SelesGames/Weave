@@ -52,7 +52,9 @@ namespace weave
 
             if (newsItem is NewsItem)
             {
-                ServiceResolver.Get<UserInfo>().MarkArticleRead(((NewsItem)newsItem));
+                var ni = (NewsItem)newsItem;
+                ni.HasBeenViewed = true;
+                ServiceResolver.Get<UserInfo>().MarkArticleRead(ni);
             }
 
             GlobalNavigationService.ToInternetExplorer(newsItem);

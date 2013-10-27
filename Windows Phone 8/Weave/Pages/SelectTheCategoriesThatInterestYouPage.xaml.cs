@@ -5,12 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Weave.FeedLibrary;
 using Weave.SavedState;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -61,10 +59,17 @@ namespace weave
                 //// TODO: SHOW SOME PROGRESS BAR OR SOMETHING
                 //await dal.SaveFeeds();
 
+                var frame = GlobalNavigationService.CurrentFrame;
+
+                frame.OverlayText = "Creating user...";
+                frame.IsLoading = true;
+
                 var user = ServiceResolver.Get<UserInfo>();
                 user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
                 await user.Create();
                 await user.Load();
+
+                frame.IsLoading = false;
 
                 GlobalNavigationService.ToPanoramaPage();
             }

@@ -119,6 +119,7 @@ namespace weave
             ClearUpdateCountOnAllTiles();
 
             frame.IsHitTestVisible = false;
+            frame.OverlayText = "Getting your news...";
             frame.IsLoading = true;
 
             var originalTargetUri = args.EventArgs.Uri;
