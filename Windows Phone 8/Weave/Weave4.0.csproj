@@ -669,6 +669,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
+      <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
+      <Name>Portable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.Contracts\Weave.Article.Service.Contracts.csproj">
       <Project>{D727F239-EE96-4B05-8F17-65871B52B260}</Project>
       <Name>Weave.Article.Service.Contracts</Name>

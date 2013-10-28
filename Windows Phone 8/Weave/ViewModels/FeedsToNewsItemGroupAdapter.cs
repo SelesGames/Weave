@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Portable.Common.Collections;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Weave.ViewModels;
@@ -11,7 +13,7 @@ namespace weave
     {
         UserInfo user;
 
-        public ObservableCollection<NewsItemGroup> Feeds { get; private set; }
+        public ObservableCollectionEx<NewsItemGroup> Feeds { get; private set; }
 
         public FeedsToNewsItemGroupAdapter(UserInfo user)
         {
@@ -23,7 +25,7 @@ namespace weave
             user.PropertyChanged += user_PropertyChanged;
             user.Feeds.CollectionChanged += Feeds_CollectionChanged;
 
-            Feeds = new ObservableCollection<NewsItemGroup>();
+            Feeds = new ObservableCollectionEx<NewsItemGroup>();
 
             RefreshFeeds();
         }
@@ -42,13 +44,14 @@ namespace weave
 
         void RefreshFeeds()
         {
-            Feeds.Clear();
 
             if (user.Feeds == null)
+            {
+                Feeds.Clear();
                 return;
+            }
 
-            foreach (var source in GetAllSources(user.Feeds))
-                Feeds.Add(source);
+            Feeds.ClearAndAddRange(GetAllSources(user.Feeds));
         }
 
         

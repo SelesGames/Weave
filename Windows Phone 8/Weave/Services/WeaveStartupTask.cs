@@ -409,7 +409,9 @@ namespace weave
 
         async void OnIdentityUserIdChanged(object sender, EventArgs e)
         {
+            await Task.Yield();
             bool updateFailed = false;
+
             try
             {
                 frame.OverlayText = "Updating user...";

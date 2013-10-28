@@ -65,6 +65,11 @@ namespace Weave.UI.Frame
             }
         }
 
+
+
+
+        #region Helper methods
+
         void ShowLoadingIndicator()
         {
             IsHitTestVisible = false;
@@ -86,6 +91,8 @@ namespace Weave.UI.Frame
             await HideLoadingSB.BeginWithNotification().ToTask();
             BusyIndicator.IsPlaying = false;
         }
+
+        #endregion
 
 
 
