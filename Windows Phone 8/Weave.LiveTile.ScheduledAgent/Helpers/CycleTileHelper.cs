@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Weave.User.Service.DTOs.ServerOutgoing;
 
@@ -42,7 +43,7 @@ namespace Weave.LiveTile.ScheduledAgent
         {
             try
             {
-                using (var stream = await ImageHelper.GetImageStreamAsync(imageUrl))
+                using (var stream = await new HttpClient().GetStreamAsync(imageUrl))
                 {
                     if (stream.Length > 4096)
                     {

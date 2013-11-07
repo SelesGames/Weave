@@ -18,8 +18,8 @@ using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
+using Weave.UI.Frame;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {
@@ -38,6 +38,7 @@ namespace weave
         SocialShareContextMenuControl socialSharePopup;
         PermanentState permState;
         SwipeGestureHelper swipeHelper;
+        OverlayFrame frame;
 
         public ReadabilityPage()
         {
@@ -60,6 +61,7 @@ namespace weave
             bottomBarFill.Height = isAppBarMinimized ? 30d : 72d;
 
             user = ServiceResolver.Get<UserInfo>();
+            frame = GlobalNavigationService.CurrentFrame;
         }
 
 
@@ -121,24 +123,6 @@ namespace weave
                  new Binding("IsLocked") { Source = orientationLockService, Mode = BindingMode.TwoWay });
             bindingAdapter.DisposeWith(disposables);
         }
-
-        //void BindIsMarkedReadToAppBar()
-        //{
-        //    if (viewModel == null || viewModel.NewsItem == null)
-        //        return;
-
-        //    var markedReadButton = ApplicationBar.MenuItems[3] as ApplicationBarMenuItem;
-
-        //    var bindingAdapter = new ApplicationBarToggleMenuItemAdapter(markedReadButton)
-        //    {
-        //        CheckedText = "mark unread",
-        //        UncheckedText = "mark read",
-        //        IsChecked = viewModel.NewsItem.HasBeenViewed,
-        //    };
-        //    bindingAdapter.SetBinding(ApplicationBarToggleMenuItemAdapter.IsCheckedProperty,
-        //         new Binding("HasBeenViewed") { Source = viewModel.NewsItem, Mode = BindingMode.TwoWay });
-        //    bindingAdapter.DisposeWith(disposables);
-        //}
 
         // change the margins on the webBrowser on page orientation changed
         void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
@@ -297,7 +281,6 @@ namespace weave
         {
             BindIsFavoriteToAppBar();
             BindIsOrientationLockedToAppBar();
-            //BindIsMarkedReadToAppBar();
         }
 
         bool UserSwitchedViewingType
@@ -311,69 +294,105 @@ namespace weave
         bool InitializeViewModel()
         {
             var ts = ServiceResolver.Get<TombstoneState>();
-            var vm = ts.ActiveWebBrowserPageViewModel;
-            if (vm == null || vm.NewsItem == null)
+            var newsItem = ts.CurrentlyViewedNewsItem;
+            if (newsItem == null || newsItem.Feed == null)
                 return false;
 
-            if (vm.NewsItem.Feed == null)
-            {
-                var feeds = user.Feeds;
-                vm.NewsItem.Feed = feeds.Single(o => o.Id.Equals(vm.NewsItem.Feed.Id));
-            }
+            //if (newsItem.Feed == null)
+            //{
+            //    var feeds = user.Feeds;
+            //    newsItem.Feed = feeds.Single(o => o.Id.Equals(newsItem.Feed.Id));
+            //}
 
-            viewModel = new ReadabilityPageViewModel { NewsItem = vm.NewsItem };
+            viewModel = new ReadabilityPageViewModel { NewsItem = newsItem };
             return true;
         }
 
         async Task DisplayArticleContent()
         {
-            //IsHitTestVisible = false;
+            bool isMobilizerFaulted = false, isWebViewFaulted = false;
+
             browser.SoftCollapse();
             browser.OpacityMask = opacityMask;
             ShowLoadingIndicators();
             setArticleHandle.Disposable = null;
 
-            try
+            if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.Feed == null)
+                return;
+
+            var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
+
+
+            if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
             {
-                if (viewModel == null || viewModel.NewsItem == null || viewModel.NewsItem.Feed == null)
-                    return;
-
-                var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
-
-                if (articleViewType == ArticleViewingType.InternetExplorer || articleViewType == ArticleViewingType.InternetExplorerOnly)
+                isMobilizerFaulted = !(await TryDisplayMobilized());
+            }
+            
+            if (articleViewType == ArticleViewingType.InternetExplorer || articleViewType == ArticleViewingType.InternetExplorerOnly || isMobilizerFaulted)
+            {
+                if (isMobilizerFaulted)
                 {
-                    viewModel.LastViewingType = ArticleViewingType.InternetExplorer;
-                    await browser.NavigateAsync(new Uri(viewModel.NewsItem.Link, UriKind.Absolute), null, "User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0");//User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)
-                                                                                                                                                                                                         //User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 900)
-                }
-                else if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
-                {
-                    var html = await viewModel.GetMobilizedArticleHtml();
-                    await browser.NavigateToStringAsync(html);
+                    frame.OverlayText = "Switching to webview...";
+                    frame.IsLoading = true;
+                    isWebViewFaulted = !(await TryDisplayWebView());
+                    frame.IsLoading = false;
                 }
                 else
-                    throw new Exception("articleViewType has an invalid value");
-
-                isHtmlDisplayed = true;
-                browser.OpacityMask = null;
-                browser.IsHitTestVisible = true;
-
-                await LoadingOutSB.BeginWithNotification().ToTask();
-                setArticleHandle.Disposable = browser.GetNavigating().Subscribe(OnBrowserNavigating);
-                //IsHitTestVisible = true;
-                HideLoadingIndicators();
+                {
+                    isWebViewFaulted = !(await TryDisplayWebView());
+                }
             }
-            catch (Exception ex)
+            else if (isWebViewFaulted)
             {
                 isArticleNonDisplayable = true;
-                DebugEx.WriteLine(ex);
                 DisplayInInternetExplorer();
 
                 try
                 {
                     if (NavigationService.CanGoBack)
                         NavigationService.GoBack();
-                }catch { }
+                }
+                catch { }
+            }
+            else
+                throw new Exception("articleViewType has an invalid value");
+
+            isHtmlDisplayed = true;
+            browser.OpacityMask = null;
+            browser.IsHitTestVisible = true;
+
+            await LoadingOutSB.BeginWithNotification().ToTask();
+            setArticleHandle.Disposable = browser.GetNavigating().Subscribe(OnBrowserNavigating);
+            HideLoadingIndicators();
+        }
+
+        async Task<bool> TryDisplayMobilized()
+        {
+            try
+            {
+                var html = await viewModel.GetMobilizedArticleHtml();
+                await browser.NavigateToStringAsync(html);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                return false;
+            }
+        }
+
+        async Task<bool> TryDisplayWebView()
+        {
+            try
+            {
+                viewModel.LastViewingType = ArticleViewingType.InternetExplorer;
+                await browser.NavigateAsync(new Uri(viewModel.NewsItem.Link, UriKind.Absolute), null, "User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0");//User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)                                                                                                                                                                               //User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 900)
+                return true;
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                return false;
             }
         }
 
@@ -400,13 +419,6 @@ namespace weave
             new FrameworkElement[] { fill, BusyIndicator }.ToList().ForEach(o => o.Visibility = Visibility.Collapsed);
             BusyIndicator.IsPlaying = false;
         }
-
-        //void browser_Navigated(object sender, NavigationEventArgs e)
-        //{
-        //    browser.Navigating += browser_Navigating;
-        //    //await TaskEx.Delay(100);
-        //    //browser.Opacity = 1d;
-        //}
 
         void OnBrowserNavigating(NavigatingEventArgs e)
         {

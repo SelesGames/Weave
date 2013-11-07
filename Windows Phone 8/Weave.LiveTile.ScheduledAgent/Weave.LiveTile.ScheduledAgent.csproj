@@ -88,7 +88,6 @@
     <Compile Include="Helpers\CycleTileFeedNegotiator.cs" />
     <Compile Include="Helpers\CycleTileHelper.cs" />
     <Compile Include="Helpers\LockScreenSavingClient.cs" />
-    <Compile Include="Library\ImageHelper.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
     <Compile Include="Library\TaskExtensions.cs" />
     <Compile Include="Library\ToastHelper.cs" />
@@ -134,8 +133,8 @@
     <Reference Include="Microsoft.Phone.Interop">
       <HintPath>.\Microsoft.Phone.Interop</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions">
-      <HintPath>..\lib\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\lib\System.Net.Http.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

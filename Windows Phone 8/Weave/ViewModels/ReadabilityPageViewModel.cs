@@ -57,7 +57,7 @@ namespace weave
             catch 
             {
                 CurrentMobilizedArticle = null;
-                html = GetExceptionHtml();
+                throw;
             }
 
             var convertedHtml = ConvertExtendedASCII(html);
@@ -88,25 +88,6 @@ namespace weave
             var html = formatter.CreateHtml(source, title, link, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
             return html;
         }
-
-        string GetExceptionHtml()
-        {
-            var theme = themes.CurrentTheme;
-
-            var foreground = theme.Text;
-            var background = theme.Background;
-            var linkColor = theme.Accent;
-
-            var source = NewsItem.FormattedForMainPageSourceAndDate;
-            var title = NewsItem.Title;
-            var link = NewsItem.Link;
-            var content = string.Format("<b>Unable to mobilize this article.  Tap the link below to open the article in Internet Explorer.</b>");
-
-            var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
-            var html = formatter.CreateHtml(source, title, link, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
-            return html;
-        }
-
 
         /// <summary>
         /// Converts UTF-8 to Unicode

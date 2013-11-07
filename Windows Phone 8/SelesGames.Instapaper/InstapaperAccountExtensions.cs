@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SelesGames.Instapaper
@@ -14,10 +15,8 @@ namespace SelesGames.Instapaper
             try
             {
                 var url = account.CreateAddToInstapaperUrlString(link, title, description);
-                var request = HttpWebRequest.CreateHttp(url);
 
-                var o = await request.GetResponseAsync().ConfigureAwait(false);
-                var response = (HttpWebResponse)o;
+                var response = await new HttpClient().GetAsync(url).ConfigureAwait(false);
 
                 if (response.StatusCode == HttpStatusCode.Forbidden) // 403
                     return new InstapaperResult { ResultType = InstapaperResultType.InvalidCredentials };
