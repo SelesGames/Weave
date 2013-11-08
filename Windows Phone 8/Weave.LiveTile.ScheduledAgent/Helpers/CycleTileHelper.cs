@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,12 +44,25 @@ namespace Weave.LiveTile.ScheduledAgent
         {
             try
             {
-                using (var stream = await new HttpClient().GetStreamAsync(imageUrl))
+                var response = await new HttpClient().GetAsync(imageUrl);
+                response.EnsureSuccessStatusCode();
+
+                if (
+                    response.Content != null &&
+                    response.Content.Headers != null &&
+                    response.Content.Headers.ContentLength.HasValue &&
+                    response.Content.Headers.ContentLength > 4096)
                 {
-                    if (stream.Length > 4096)
+                    using (var stream = new MemoryStream())
                     {
-                        var url = await stream.SaveToIsoStorage(imagePrefix + index);
-                        return Tuple.Create(true, url);
+                        await response.Content.CopyToAsync(stream);
+                        stream.Position = 0;
+
+                        if (stream.Length > 4096)
+                        {
+                            var url = await stream.SaveToIsoStorage(imagePrefix + index);
+                            return Tuple.Create(true, url);
+                        }
                     }
                 }
             }
