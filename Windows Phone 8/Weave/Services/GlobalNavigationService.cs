@@ -54,14 +54,9 @@ namespace weave
             if (newsItem == null || newsItem.Feed == null)
                 return;
 
-            var vm = new ReadabilityPageViewModel { NewsItem = newsItem };
-
-            //var articleViewType = newsItem.FeedSource.ArticleViewingType;
-            //if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
-            //    vm.PreLoadMobilizedHtml();
-
             var ts = ServiceResolver.Get<TombstoneState>();
-            ts.ActiveWebBrowserPageViewModel = vm;
+            ts.CurrentlyViewedNewsItem = newsItem;
+
             SafelyNavigateTo(string.Format("/weave;component/Pages/WebBrowser/ReadabilityPage.xaml"));
         }
 

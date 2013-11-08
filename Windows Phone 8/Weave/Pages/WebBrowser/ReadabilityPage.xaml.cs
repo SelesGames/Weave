@@ -342,7 +342,7 @@ namespace weave
                     isWebViewFaulted = !(await TryDisplayWebView());
                 }
             }
-            else if (isWebViewFaulted)
+            if (isWebViewFaulted)
             {
                 isArticleNonDisplayable = true;
                 DisplayInInternetExplorer();
@@ -354,8 +354,6 @@ namespace weave
                 }
                 catch { }
             }
-            else
-                throw new Exception("articleViewType has an invalid value");
 
             isHtmlDisplayed = true;
             browser.OpacityMask = null;
