@@ -32,7 +32,7 @@ namespace weave
             var settings = new AppSettings
             {
                 AppName = "Weave",
-                VersionNumber = "8.5.3",
+                VersionNumber = "8.5.5",
                 IsTrial = false,//new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
                 AssemblyName = "weave",
                 LogExceptions = true,
