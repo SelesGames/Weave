@@ -4,6 +4,7 @@ using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ using weave.Services;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Identity;
 
 namespace weave
@@ -180,6 +180,8 @@ namespace weave
             if (o == null)
                 return;
 
+            o.MarkEntry();
+
             if (o is CategoryGroup || o is AllNewsGroup)
             {
                 GlobalNavigationService.ToMainPage(o.DisplayName, "category");
@@ -211,8 +213,14 @@ namespace weave
 
         void allNewsButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            if (feedsToNewsItemGroupAdapter == null ||
+                feedsToNewsItemGroupAdapter.Feeds == null ||
+                !feedsToNewsItemGroupAdapter.Feeds.Any())
+                return;
+
             SetValue(RadTileAnimation.ContainerToAnimateProperty, sender);
-            GlobalNavigationService.ToMainPage("all news", "category");
+            var ni = feedsToNewsItemGroupAdapter.Feeds.First();
+            ToArticleList(ni);
         }
 
         void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)

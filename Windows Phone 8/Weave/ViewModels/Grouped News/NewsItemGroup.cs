@@ -100,7 +100,15 @@ namespace weave
         public void MarkEntry()
         {
             OnMarkEntry();
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
             var shellTile = GetShellTile();
+            sw.Stop();
+            if (shellTile != null)
+            {
+                DebugEx.WriteLine("Took {0} ms to find relevant shellTile for {1}", sw.ElapsedMilliseconds, DisplayName);
+            }
+
             if (shellTile != null)
             {
                 shellTile.Update(new CycleTileData { Count = this.NewArticleCount });
