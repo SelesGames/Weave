@@ -60,7 +60,7 @@ namespace weave
             return user.GetNewsForCategory(category, entryType, skip, take);
         }
 
-        public override void MarkEntry()
+        protected override void OnMarkEntry()
         {
             foreach (var feed in Feeds)
                 feed.MarkEntry();
@@ -108,5 +108,10 @@ namespace weave
         }
 
         #endregion
+
+        protected override Microsoft.Phone.Shell.ShellTile GetShellTile()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

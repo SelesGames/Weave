@@ -40,7 +40,7 @@ namespace weave
             return user.GetNewsForCategory("all news", entryType, skip, take);
         }
 
-        public override void MarkEntry()
+        protected override void OnMarkEntry()
         {
             if (Subgroups == null)
                 return;
@@ -67,6 +67,11 @@ namespace weave
             }
 
             return null;
+        }
+
+        protected override Microsoft.Phone.Shell.ShellTile GetShellTile()
+        {
+            throw new NotImplementedException();
         }
     }
 }

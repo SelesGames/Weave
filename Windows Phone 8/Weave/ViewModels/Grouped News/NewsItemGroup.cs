@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Phone.Shell;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
 using Weave.ViewModels;
 
 namespace weave
@@ -98,9 +97,20 @@ namespace weave
             return news.News;
         }
 
+        public void MarkEntry()
+        {
+            OnMarkEntry();
+            var shellTile = GetShellTile();
+            if (shellTile != null)
+            {
+                shellTile.Update(new CycleTileData { Count = this.NewArticleCount });
+            }
+        }
+
         public abstract Task<NewsList> GetNewsList(EntryType entryType, int skip, int take);
-        public abstract void MarkEntry();
         public abstract string GetTeaserPicImageUrl();
+        protected abstract void OnMarkEntry();
+        protected abstract ShellTile GetShellTile();
 
         public override string ToString()
         {

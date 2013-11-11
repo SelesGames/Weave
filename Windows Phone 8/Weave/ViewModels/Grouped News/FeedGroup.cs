@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using System;
 using System.Threading.Tasks;
 using Weave.ViewModels;
+using System.Linq;
+using Portable.Common;
 
 namespace weave
 {
@@ -35,7 +38,12 @@ namespace weave
             return user.GetNewsForFeed(Feed.Id, entryType, skip, take);
         }
 
-        public override void MarkEntry()
+        public override string GetTeaserPicImageUrl()
+        {
+            return Feed.TeaserImageUrl;
+        }
+
+        protected override void OnMarkEntry()
         {
             int prevNewArticleCount = NewArticleCount;
             NewArticleCount = 0;
@@ -47,10 +55,31 @@ namespace weave
             allNews.NewArticleCount -= prevNewArticleCount;
         }
 
-        public override string GetTeaserPicImageUrl()
+        protected override ShellTile GetShellTile()
         {
-            return Feed.TeaserImageUrl;
+            var shellTiles = ShellTile.ActiveTiles;
+            return shellTiles.FirstOrDefault(DoesTileMatch);
         }
+
+        bool DoesTileMatch(ShellTile tile)
+        {
+            if (tile == null || tile.NavigationUri == null || tile.NavigationUri.OriginalString == null)
+                return false;
+
+            var uri = tile.NavigationUri;
+            var queryParams = uri.ParseQueryString();
+
+            var feedQuery = queryParams
+                .Where(o => o.Key.Equals("feedId", StringComparison.OrdinalIgnoreCase))
+                .Select(o => new { Query = o.Key, Value = o.Value })
+                .FirstOrDefault();
+
+            if (feedQuery == null)
+                return false;
+
+            return Guid.Parse(feedQuery.Value) == this.Feed.Id;
+        }
+
 
 
 

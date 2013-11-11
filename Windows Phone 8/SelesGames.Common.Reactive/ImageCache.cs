@@ -221,7 +221,7 @@ namespace weave
                         }
 
 
-                        var request = url.ToUri().ToWebRequest() as HttpWebRequest;
+                        var request = HttpWebRequest.CreateHttp(url);
                         if (request == null)
                             observer.OnError(new Exception("failed to load image"));
 
