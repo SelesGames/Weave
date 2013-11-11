@@ -69,15 +69,10 @@ namespace weave
             var uri = tile.NavigationUri;
             var queryParams = uri.ParseQueryString();
 
-            var feedQuery = queryParams
-                .Where(o => o.Key.Equals("feedId", StringComparison.OrdinalIgnoreCase))
-                .Select(o => new { Query = o.Key, Value = o.Value })
-                .FirstOrDefault();
-
-            if (feedQuery == null)
-                return false;
-
-            return Guid.Parse(feedQuery.Value) == this.Feed.Id;
+            return queryParams.Any(o =>
+                o.Key.Equals("feedId", StringComparison.OrdinalIgnoreCase) 
+                &&
+                Guid.Parse(o.Value) == this.Feed.Id);
         }
 
 

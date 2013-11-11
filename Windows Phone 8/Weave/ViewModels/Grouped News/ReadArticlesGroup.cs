@@ -37,16 +37,17 @@ namespace weave
             return newsList;
         }
 
-        protected override void OnMarkEntry() { }
 
         public override string GetTeaserPicImageUrl()
         {
             return null;
         }
 
+        protected override void OnMarkEntry() { }
+
         protected override Microsoft.Phone.Shell.ShellTile GetShellTile()
         {
-            throw new System.NotImplementedException();
+            return null;
         }
     }
 }

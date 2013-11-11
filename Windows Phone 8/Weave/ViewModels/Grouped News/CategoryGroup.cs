@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Phone.Shell;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.ViewModels;
+using Portable.Common;
 
 namespace weave
 {
@@ -60,14 +62,6 @@ namespace weave
             return user.GetNewsForCategory(category, entryType, skip, take);
         }
 
-        protected override void OnMarkEntry()
-        {
-            foreach (var feed in Feeds)
-                feed.MarkEntry();
-
-            NewArticleCount = 0;
-        }
-
         static Random r = new Random();
 
         public override string GetTeaserPicImageUrl()
@@ -81,6 +75,38 @@ namespace weave
             }
 
             return null;
+        }
+
+        protected override void OnMarkEntry()
+        {
+            foreach (var feed in Feeds)
+                feed.MarkEntry();
+
+            NewArticleCount = 0;
+        }
+
+        protected override ShellTile GetShellTile()
+        {
+            var shellTiles = ShellTile.ActiveTiles;
+            return shellTiles.FirstOrDefault(DoesTileMatch);
+        }
+
+        bool DoesTileMatch(ShellTile tile)
+        {
+            if (tile == null || tile.NavigationUri == null || tile.NavigationUri.OriginalString == null)
+                return false;
+
+            var uri = tile.NavigationUri;
+            var queryParams = uri.ParseQueryString().Memoize();
+
+            if (queryParams.Any(o => o.Key.Equals("mode", StringComparison.OrdinalIgnoreCase)))
+            {
+                return queryParams.Any(o =>
+                    o.Key.Equals("header", StringComparison.OrdinalIgnoreCase)
+                    &&
+                    o.Value.Equals(this.category, StringComparison.OrdinalIgnoreCase));
+            }
+            return false;
         }
 
 
@@ -108,10 +134,5 @@ namespace weave
         }
 
         #endregion
-
-        protected override Microsoft.Phone.Shell.ShellTile GetShellTile()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

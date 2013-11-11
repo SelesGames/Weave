@@ -116,8 +116,6 @@ namespace weave
         {
             initialNavigationUri = args.EventArgs.Uri;
 
-            ClearUpdateCountOnAllTiles();
-
             frame.IsHitTestVisible = false;
             frame.OverlayText = "Getting your news...";
             frame.IsLoading = true;
@@ -635,23 +633,6 @@ namespace weave
             var regResult = taskService.TryRegister();
             if (!regResult)
                 DebugEx.WriteLine(taskService.RegistrationException);
-        }
-
-        void ClearUpdateCountOnAllTiles()
-        {
-            if (initialNavigationUri == null)
-                return;
-
-            var tiles = (IEnumerable<ShellTile>)ShellTile.ActiveTiles.ToList();
-
-            if (!initialNavigationUri.Equals(new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative)))
-                tiles = tiles.Where(o => o.NavigationUri.Equals(initialNavigationUri));
-
-            foreach (var tile in tiles)
-            {
-                var tileData = new CycleTileData { Count = 0 };
-                tile.TryUpdate(tileData);
-            }
         }
 
         #endregion
