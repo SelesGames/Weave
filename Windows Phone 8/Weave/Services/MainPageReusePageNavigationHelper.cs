@@ -22,7 +22,8 @@ namespace weave
             var uri = e.Uri;
             if (activeMainPage != null && 
                 e.IsCancelable &&
-                uri.OriginalString.StartsWith("/weave;component/Pages/MainPage/MainPage.xaml"))
+                uri.OriginalString.StartsWith("/weave;component/Pages/MainPage/MainPage.xaml") &&
+                e.NavigationMode == NavigationMode.New)
             {
                 e.Cancel = true;
                 await activeMainPage.OnNavigatedTo(uri, NavigationMode.Refresh);
