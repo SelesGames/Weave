@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using SelesGames.Rest;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SelesGames.UI.Advertising.Common
@@ -40,8 +41,8 @@ namespace SelesGames.UI.Advertising.Common
         {
             List<AdSettingsBase> adSettingsVals = new List<AdSettingsBase>();
 
-            var client = new RestStringClient();
-            var stringResult = await client.GetAsync(adSettingsUrl, System.Threading.CancellationToken.None);
+            var client = new HttpClient();
+            var stringResult = await client.GetStringAsync(adSettingsUrl);
 
             JObject jo = JObject.Parse(stringResult);
             foreach (var item in jo)

@@ -95,10 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MobFox.Ads">
-      <HintPath>..\lib\MobFox.Ads.dll</HintPath>
+      <HintPath>..\lib\Advertising\MobFox.Ads.dll</HintPath>
     </Reference>
     <Reference Include="MobFox.Ads.LocationAware">
-      <HintPath>..\lib\MobFox.Ads.LocationAware.dll</HintPath>
+      <HintPath>..\lib\Advertising\MobFox.Ads.LocationAware.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

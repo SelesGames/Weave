@@ -95,14 +95,6 @@
       <Project>{2B4D1AF0-8C77-475D-8D14-DB7B506F9450}</Project>
       <Name>Weave.Article.Service.DTOs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Rest.JsonDotNet\SelesGames.Rest.JsonDotNet.csproj">
-      <Project>{753AE27A-87EB-4C38-827B-8202FD0903FA}</Project>
-      <Name>SelesGames.Rest.JsonDotNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Rest.Protobuf\SelesGames.Rest.Protobuf.csproj">
-      <Project>{92538D48-A044-4BD6-A969-2CB5C0A2169A}</Project>
-      <Name>SelesGames.Rest.Protobuf</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>

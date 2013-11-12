@@ -100,10 +100,6 @@
       <Project>{0A9019E4-E76F-4FAC-A5C7-70F32CF5E2C1}</Project>
       <Name>Weave.Mobilizer.DTOs</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Rest.JsonDotNet\SelesGames.Rest.JsonDotNet.csproj">
-      <Project>{753AE27A-87EB-4C38-827B-8202FD0903FA}</Project>
-      <Name>SelesGames.Rest.JsonDotNet</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>

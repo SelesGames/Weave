@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MillennialMedia.WP7.SDK">
-      <HintPath>..\lib\MillennialMedia.WP7.SDK.dll</HintPath>
+      <HintPath>..\lib\Advertising\MillennialMedia.WP7.SDK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

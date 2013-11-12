@@ -84,22 +84,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdDuplex.WindowsPhone">
-      <HintPath>..\lib\AdDuplex.WindowsPhone.dll</HintPath>
+      <HintPath>..\lib\Advertising\AdDuplex.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="Inneractive.Ad">
-      <HintPath>..\lib\Inneractive.Ad.dll</HintPath>
+      <HintPath>..\lib\Advertising\Inneractive.Ad.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Advertising.Mobile">
-      <HintPath>..\lib\Microsoft.Advertising.Mobile</HintPath>
+      <HintPath>..\lib\Advertising\Microsoft.Advertising.Mobile</HintPath>
     </Reference>
     <Reference Include="Microsoft.Advertising.Mobile.UI">
-      <HintPath>..\lib\Microsoft.Advertising.Mobile.UI</HintPath>
+      <HintPath>..\lib\Advertising\Microsoft.Advertising.Mobile.UI</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SOMAWP8">
-      <HintPath>..\lib\SOMAWP8.dll</HintPath>
+      <HintPath>..\lib\Advertising\SOMAWP8.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\lib\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Core">
       <HintPath>..\lib\System.Reactive.Core.dll</HintPath>
