@@ -221,7 +221,7 @@ namespace weave
                         }
 
 
-                        var request = HttpWebRequest.CreateHttp(url);
+                        var request = (HttpWebRequest)HttpWebRequest.Create(url);
                         if (request == null)
                             observer.OnError(new Exception("failed to load image"));
 
@@ -267,17 +267,6 @@ namespace weave
                                                 observer.OnError(result.Item2);
                                         },
                                         observer.OnError);
-
-                                    //Observable.FromEventPattern<RoutedEventArgs>(newBitmap, "ImageOpened")
-                                    //    .SafelySubscribe(() => observer.OnNext(newBitmap), observer.OnError)
-                                    //    .DisposeWith(disposables);
-
-                                    //Observable.FromEventPattern<ExceptionRoutedEventArgs>(newBitmap, "ImageFailed")
-                                    //    .SafelySubscribe(o => observer.OnError(o.EventArgs.ErrorException), observer.OnError)
-                                    //    .DisposeWith(disposables);
-                                    
-                                    //observer.OnNext(newBitmap);
-                                    //observer.OnCompleted();
                                 }
                                 catch (Exception ex)
                                 {

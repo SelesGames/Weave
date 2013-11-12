@@ -44,7 +44,6 @@ namespace weave
         OverlayFrame frame;
         Kernel kernel;
         DataStorageClient storageClient;
-        Uri initialNavigationUri = null;
 
         bool 
             isFrameInit,
@@ -114,13 +113,14 @@ namespace weave
 
         async Task OnInitialNavigating(EventPattern<NavigatingCancelEventArgs> args)
         {
-            initialNavigationUri = args.EventArgs.Uri;
+            Uri originalTargetUri = null, destinationUri = null;
+
+            originalTargetUri = args.EventArgs.Uri;
 
             frame.IsHitTestVisible = false;
             frame.OverlayText = "Getting your news...";
             frame.IsLoading = true;
 
-            var originalTargetUri = args.EventArgs.Uri;
 
             bool shouldReroutNavigation = args.EventArgs.IsCancelable;
             int backStackRemovalCount = 0;
@@ -186,14 +186,14 @@ namespace weave
 
             if (stateMachine.FinalState == StartupIdentityStateMachine.State.UserExists)
             {
-                originalTargetUri = new Uri("/weave;component/Pages/Panorama/SamplePanorama.xaml", UriKind.Relative);
+                destinationUri = originalTargetUri;
             }
             else if (stateMachine.FinalState == StartupIdentityStateMachine.State.NoUserFound)
             {
-                originalTargetUri = new Uri("/weave;component/Pages/SelectTheCategoriesThatInterestYouPage.xaml", UriKind.Relative);
+                destinationUri = new Uri("/weave;component/Pages/SelectTheCategoriesThatInterestYouPage.xaml", UriKind.Relative);
             }
 
-            frame.TryNavigate(originalTargetUri);
+            frame.TryNavigate(destinationUri);
             await frame.NavigatedAsync();
 
             var page = frame.Content as PhoneApplicationPage;
