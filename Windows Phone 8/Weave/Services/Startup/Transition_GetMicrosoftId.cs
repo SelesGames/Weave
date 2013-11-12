@@ -1,5 +1,5 @@
 ﻿using Microsoft.Phone.Info;
-using SelesGames.Common.Hashing;
+using Common.Hashing;
 using System.Threading.Tasks;
 using Weave.ViewModels;
 

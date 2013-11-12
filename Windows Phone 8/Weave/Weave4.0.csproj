@@ -696,13 +696,13 @@
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Hashing\Common.Hashing.csproj">
+      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
+      <Name>Common.Hashing</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
       <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
       <Name>SelesGames.Common.Reactive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.Instapaper\SelesGames.Instapaper.csproj">
       <Project>{60A15747-8A97-4E97-8130-132D9A1B8036}</Project>

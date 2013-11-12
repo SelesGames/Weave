@@ -1,5 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
-using SelesGames.Common.Hashing;
+using Common.Hashing;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

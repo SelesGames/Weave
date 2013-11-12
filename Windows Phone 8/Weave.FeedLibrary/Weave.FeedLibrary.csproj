@@ -97,10 +97,6 @@
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Rest\SelesGames.Rest.csproj">
       <Project>{DBC9F99C-29A8-4362-AD9D-BD1DE0597529}</Project>
       <Name>SelesGames.Rest</Name>

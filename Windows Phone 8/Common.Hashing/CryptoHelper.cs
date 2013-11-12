@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SelesGames.Common.Hashing
+namespace Common.Hashing
 {
     public class CryptoHelper
     {

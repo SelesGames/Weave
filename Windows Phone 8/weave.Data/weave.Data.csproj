@@ -101,10 +101,6 @@
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>SelesGames.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.IsoStorage.Protobuf\SelesGames.WP.IsoStorage.Protobuf.csproj">
       <Project>{E097DBFA-C911-49ED-9189-0ACEB2AE2976}</Project>
       <Name>SelesGames.WP.IsoStorage.Protobuf</Name>
