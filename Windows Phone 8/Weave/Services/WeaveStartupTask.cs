@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Ninject;
 using SelesGames;
 using SelesGames.Phone;
 using System;
@@ -42,7 +43,7 @@ namespace weave
         UserInfo user;
         IdentityInfo identity; 
         OverlayFrame frame;
-        Kernel kernel;
+        IKernel kernel;
         DataStorageClient storageClient;
 
         bool 
@@ -454,7 +455,7 @@ namespace weave
             if (kernel != null)
                 return;
 
-            kernel = new Kernel(settings.AssemblyName);
+            kernel = new StandardKernel();
             ServiceResolver.SetInternalResolver(new NinjectToServiceResolverAdapter(kernel));
 
             kernel.Bind<SocialShareContextMenuControl>().ToSelf().InSingletonScope().Named("accent")
@@ -478,6 +479,9 @@ namespace weave
             kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(new FeedsToNewsItemGroupAdapter(user)).InSingletonScope();
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
+            kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
+            kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
+            kernel.Bind<ILogger>().ToConstant(new DummyLogger()).InSingletonScope();
         }
 
         #endregion

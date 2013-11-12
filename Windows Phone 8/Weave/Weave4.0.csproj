@@ -178,6 +178,8 @@
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\DataStorageClient.cs" />
+    <Compile Include="Services\DummyLogger.cs" />
+    <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="ViewModels\Grouped News\AllNewsGroup.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
@@ -771,10 +773,6 @@
     <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
       <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>
       <Name>Weave.Mobilizer.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.NinjectKernel\Weave.NinjectKernel.csproj">
-      <Project>{BABE4E4F-1FE3-4F0E-A378-03F979EB6208}</Project>
-      <Name>Weave.NinjectKernel</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
       <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
