@@ -108,10 +108,6 @@
       <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>
       <Name>Weave.Mobilizer.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
-      <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
-      <Name>Weave.RSS</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Ninject">

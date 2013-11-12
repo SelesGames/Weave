@@ -776,10 +776,6 @@
       <Project>{BABE4E4F-1FE3-4F0E-A378-03F979EB6208}</Project>
       <Name>Weave.NinjectKernel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\weave.RSS\Weave.RSS.csproj">
-      <Project>{25CD2B58-6F01-49F3-ACE6-492029C05E3B}</Project>
-      <Name>Weave.RSS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
       <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
       <Name>Weave.SavedState</Name>
