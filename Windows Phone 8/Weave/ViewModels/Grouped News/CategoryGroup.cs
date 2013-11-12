@@ -62,6 +62,14 @@ namespace weave
             return user.GetNewsForCategory(category, entryType, skip, take);
         }
 
+        public override void MarkEntry()
+        {
+            foreach (var feed in Feeds)
+                feed.MarkEntry();
+
+            NewArticleCount = 0;
+        }
+
         static Random r = new Random();
 
         public override string GetTeaserPicImageUrl()
@@ -77,15 +85,7 @@ namespace weave
             return null;
         }
 
-        protected override void OnMarkEntry()
-        {
-            foreach (var feed in Feeds)
-                feed.MarkEntry();
-
-            NewArticleCount = 0;
-        }
-
-        protected override ShellTile GetShellTile()
+        public override ShellTile GetShellTile()
         {
             var shellTiles = ShellTile.ActiveTiles;
             return shellTiles.FirstOrDefault(DoesTileMatch);

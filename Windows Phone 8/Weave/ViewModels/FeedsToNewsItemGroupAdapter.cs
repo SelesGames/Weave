@@ -1,4 +1,5 @@
-﻿using Portable.Common.Collections;
+﻿using Microsoft.Phone.Shell;
+using Portable.Common.Collections;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,6 +53,34 @@ namespace weave
             }
 
             Feeds.ClearAndAddRange(GetAllSources(user.Feeds));
+        }
+
+        public void UpdateTileData()
+        {
+            var tiles = from feed in Feeds
+                        let tile = GetShellTile(feed)
+                        where tile is ShellTile
+                        select new { feed, tile };
+
+            foreach (var o in tiles)
+            {
+                var shellTile = o.tile;
+                var ni = o.feed;
+
+                shellTile.Update(new CycleTileData { Count = ni.NewArticleCount });
+            }
+        }
+
+        ShellTile GetShellTile(NewsItemGroup o)
+        {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var shellTile = o.GetShellTile();
+            sw.Stop();
+            if (shellTile != null)
+            {
+                DebugEx.WriteLine("Took {0} ms to find relevant shellTile for {1}", sw.ElapsedMilliseconds, o.DisplayName);
+            }
+            return shellTile;
         }
 
         

@@ -41,6 +41,17 @@ namespace weave
             return user.GetNewsForCategory("all news", entryType, skip, take);
         }
 
+        public override void MarkEntry()
+        {
+            if (Subgroups == null)
+                return;
+
+            foreach (var group in Subgroups)
+                group.MarkEntry();
+
+            NewArticleCount = 0;
+        }
+
         static Random r = new Random();
 
         public override string GetTeaserPicImageUrl()
@@ -58,19 +69,8 @@ namespace weave
 
             return null;
         }
-
-        protected override void OnMarkEntry()
-        {
-            if (Subgroups == null)
-                return;
-
-            foreach (var group in Subgroups)
-                group.MarkEntry();
-
-            NewArticleCount = 0;
-        }
         
-        protected override ShellTile GetShellTile()
+        public override ShellTile GetShellTile()
         {
             var shellTiles = ShellTile.ActiveTiles;
             return shellTiles.FirstOrDefault(DoesTileMatch);

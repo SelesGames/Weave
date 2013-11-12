@@ -285,10 +285,6 @@ namespace weave
                     ShowMenu();
                 return;
             }
-            //else
-            //{
-            //    HideMenuNoAnimation();
-            //}
 
             if (mode == this.mode && header == this.header)
                 if (navigationMode == NavigationMode.New)
@@ -312,6 +308,9 @@ namespace weave
 
                 if (vm != null)
                     await vm.OnNavigatedTo();
+
+                if (feedsListenerVM != null)
+                    feedsListenerVM.UpdateTileData();
             }
         }
 

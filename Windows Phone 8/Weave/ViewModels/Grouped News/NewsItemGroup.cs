@@ -97,28 +97,10 @@ namespace weave
             return news.News;
         }
 
-        public void MarkEntry()
-        {
-            OnMarkEntry();
-
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            var shellTile = GetShellTile();
-            sw.Stop();
-            if (shellTile != null)
-            {
-                DebugEx.WriteLine("Took {0} ms to find relevant shellTile for {1}", sw.ElapsedMilliseconds, DisplayName);
-            }
-
-            if (shellTile != null)
-            {
-                shellTile.Update(new CycleTileData { Count = this.NewArticleCount });
-            }
-        }
-
         public abstract Task<NewsList> GetNewsList(EntryType entryType, int skip, int take);
+        public abstract void MarkEntry();
         public abstract string GetTeaserPicImageUrl();
-        protected abstract void OnMarkEntry();
-        protected abstract ShellTile GetShellTile();
+        public abstract ShellTile GetShellTile();
 
         public override string ToString()
         {

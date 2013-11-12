@@ -51,15 +51,15 @@ namespace weave
         public static void ToMainPage(string header, string mode)
         {
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}", urlEncodedHeader, mode));
+            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}&cb={2}", urlEncodedHeader, mode, Guid.NewGuid().ToString("N")));
         }
 
-        public static void ToMainPage(Feed feed)
+        static void ToMainPage(Feed feed)
         {
             string header = feed.Name;
             Guid feedId = feed.Id;
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}", urlEncodedHeader, feedId));
+            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}&cb={2}", urlEncodedHeader, feedId, Guid.NewGuid().ToString("N")));
         }
 
         public static void ToInstapaperAccountCredentialsPage()

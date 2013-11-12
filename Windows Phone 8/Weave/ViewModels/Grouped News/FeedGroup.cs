@@ -38,12 +38,7 @@ namespace weave
             return user.GetNewsForFeed(Feed.Id, entryType, skip, take);
         }
 
-        public override string GetTeaserPicImageUrl()
-        {
-            return Feed.TeaserImageUrl;
-        }
-
-        protected override void OnMarkEntry()
+        public override void MarkEntry()
         {
             int prevNewArticleCount = NewArticleCount;
             NewArticleCount = 0;
@@ -54,8 +49,13 @@ namespace weave
             }
             allNews.NewArticleCount -= prevNewArticleCount;
         }
+        
+        public override string GetTeaserPicImageUrl()
+        {
+            return Feed.TeaserImageUrl;
+        }
 
-        protected override ShellTile GetShellTile()
+        public override ShellTile GetShellTile()
         {
             var shellTiles = ShellTile.ActiveTiles;
             return shellTiles.FirstOrDefault(DoesTileMatch);
