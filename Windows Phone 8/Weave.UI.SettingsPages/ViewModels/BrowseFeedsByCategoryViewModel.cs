@@ -57,7 +57,7 @@ namespace weave
             existingFeeds = user.Feeds;
 
             var library = ServiceResolver.Get<ExpandedLibrary>();
-            var temp = await library.Feeds.Get();
+            var temp = await library.Feeds.Value;
             var feeds = temp           
                 .OfCategory(category)
                 .OrderBy(o => o.Name)

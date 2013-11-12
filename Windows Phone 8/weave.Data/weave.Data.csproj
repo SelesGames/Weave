@@ -97,6 +97,10 @@
     <Compile Include="Weave4DataAccessLayer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
+      <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
+      <Name>Portable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common\SelesGames.Common.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>SelesGames.Common</Name>

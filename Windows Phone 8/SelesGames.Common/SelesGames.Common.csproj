@@ -85,18 +85,7 @@
   <ItemGroup>
     <Compile Include="Hashing\CryptoHelper.cs" />
     <Compile Include="DebugEx.cs" />
-    <Compile Include="EventArgs.cs" />
-    <Compile Include="Extension Methods\ICollectionExtensions.cs" />
-    <Compile Include="Extension Methods\IListExtensions.cs" />
-    <Compile Include="Extension Methods\StreamExtensionMethods.cs" />
-    <Compile Include="Extension Methods\StringExtensionMethods.cs" />
-    <Compile Include="Extension Methods\StringReaderExtensions.cs" />
-    <Compile Include="Extension Methods\UriExtensionMethods.cs" />
-    <Compile Include="Extension Methods\WebResponseExtensionMethods.cs" />
-    <Compile Include="IAnalyticsService.cs" />
-    <Compile Include="Lazy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceResolver.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

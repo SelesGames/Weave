@@ -178,6 +178,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
+      <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
+      <Name>Portable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>

@@ -30,7 +30,7 @@ namespace weave
             warning.Visibility = Visibility.Collapsed;
 
             library = ServiceResolver.Get<BundledLibrary>();
-            categories = library.Feeds.Get().UniqueCategoryNames().OrderBy(o => o).Select(o => new Category { Name = o }).ToList();
+            categories = library.Feeds.Value.UniqueCategoryNames().OrderBy(o => o).Select(o => new Category { Name = o }).ToList();
 
             var permState = ServiceResolver.Get<PermanentState>();
             if (permState.IsFirstTime)
@@ -51,7 +51,7 @@ namespace weave
             if (atLeast1Selected)
             {
                 var enabledCategories = categories.Where(o => o.IsEnabled).Select(o => o.Name).ToList();
-                var feedsToAdd = library.Feeds.Get().Where(o => enabledCategories.Contains(o.Category)).ToList();
+                var feedsToAdd = library.Feeds.Value.Where(o => enabledCategories.Contains(o.Category)).ToList();
                 //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
                 //foreach (var feed in feedsToAdd)
                 //    await dal.AddCustomFeed(feed);

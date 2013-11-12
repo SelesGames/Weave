@@ -41,7 +41,7 @@ namespace weave
                     var skipMult = j;
                     yield return new AsyncNewsList
                     {
-                        News = async () => (await load.Get()).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
+                        News = async () => (await load.Value).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
                     };
                 }
             }        

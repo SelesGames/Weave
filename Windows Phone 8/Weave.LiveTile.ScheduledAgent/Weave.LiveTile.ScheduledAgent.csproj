@@ -101,6 +101,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
+      <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
+      <Name>Portable.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
       <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
       <Name>Weave.User.Service.Contracts</Name>

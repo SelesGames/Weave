@@ -43,7 +43,7 @@ namespace weave
             Categories.Clear();
 
             var library = ServiceResolver.Get<ExpandedLibrary>();
-            var temp = await library.Feeds.Get();
+            var temp = await library.Feeds.Value;
             var categories = temp.UniqueCategoryNames().OrderBy(o => o).Select(o => new Category { Name = o }).ToList();
 
             foreach (var category in categories)
@@ -143,7 +143,7 @@ namespace weave
 
                 // load the feeds from the library that match the search string
                 var library = ServiceResolver.Get<ExpandedLibrary>();
-                var temp = await library.Feeds.Get();
+                var temp = await library.Feeds.Value;
                 var librarySources = temp
                     .Where(o => o.Name.IndexOf(SearchString, StringComparison.OrdinalIgnoreCase) > -1)
                     .Select(ParseLibraryFeed)
