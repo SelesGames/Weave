@@ -159,7 +159,7 @@ namespace weave
         void OnMostViewedTapped(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SetValue(RadTileAnimation.ContainerToAnimateProperty, this.menuTileWrapper);
-            ToArticleList(((Button)sender).DataContext as NewsItemGroup);
+            GlobalNavigationService.ToMainPage(((Button)sender).DataContext as NewsItemGroup);
         }
 
         void allSourcesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -174,24 +174,6 @@ namespace weave
         //    ApplicationBar.IsVisible = false;
         //    ToArticleList(((Button)sender).DataContext as CategoryOrLooseFeedViewModel);
         //}
-
-        void ToArticleList(NewsItemGroup o)
-        {
-            if (o == null)
-                return;
-
-            o.MarkEntry();
-
-            if (o is CategoryGroup || o is AllNewsGroup)
-            {
-                GlobalNavigationService.ToMainPage(o.DisplayName, "category");
-            }
-            else if (o is FeedGroup)
-            {
-                var feed = (FeedGroup)o;
-                GlobalNavigationService.ToMainPage(feed.Feed);
-            }
-        }
 
         void favoritesButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -220,7 +202,7 @@ namespace weave
 
             SetValue(RadTileAnimation.ContainerToAnimateProperty, sender);
             var ni = feedsToNewsItemGroupAdapter.Feeds.First();
-            ToArticleList(ni);
+            GlobalNavigationService.ToMainPage(ni);
         }
 
         void OnSettingsAppBarButtonClicked(object sender, System.EventArgs e)

@@ -30,6 +30,24 @@ namespace weave
             SafelyNavigateTo("/weave;component/Pages/SelectTheCategoriesThatInterestYouPage.xaml");
         }
 
+        public static void ToMainPage(NewsItemGroup o)
+        {
+            if (o == null)
+                return;
+
+            o.MarkEntry();
+
+            if (o is CategoryGroup || o is AllNewsGroup)
+            {
+                ToMainPage(o.DisplayName, "category");
+            }
+            else if (o is FeedGroup)
+            {
+                var feed = (FeedGroup)o;
+                ToMainPage(feed.Feed);
+            }
+        }
+
         public static void ToMainPage(string header, string mode)
         {
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);

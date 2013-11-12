@@ -129,8 +129,8 @@ namespace Weave.Article.Service.Client
 
         RestClient CreateClient()
         {
-            return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
-            //return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
+            //return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };
+            return new SelesGames.Rest.JsonDotNet.JsonDotNetRestClient { UseGzip = true };
         }
     }
 }

@@ -268,8 +268,11 @@ namespace weave
                .Subscribe(OnInitialNavigatingWrapper);
 
             new ArticleListNavigationCorrector(frame);
+            new MainPageReusePageNavigationHelper(frame);
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
             frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
+            frame.NavigationStopped += (s, e) => frame.IsHitTestVisible = true;
+            frame.NavigationFailed += (s, e) => frame.IsHitTestVisible = true;
             frame.NavigationFailed += RootFrame_NavigationFailed;
         }
 

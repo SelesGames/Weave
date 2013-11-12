@@ -20,6 +20,9 @@ using Weave.Customizability;
 using Weave.SavedState;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
+using Portable.Common;
+using System.Net;
+using System.Windows.Navigation;
 
 
 namespace weave
@@ -30,6 +33,7 @@ namespace weave
         string header = null;
         string mode = null;
         Guid? feedId = null;
+        Uri currentUri = null;
 
         PermanentState permState;
 
@@ -216,7 +220,9 @@ namespace weave
 
 
 
-        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        #region OnNavigatedTo (overloaded)
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             try
             {
@@ -232,50 +238,12 @@ namespace weave
                 else
                 {
                     isPageInitialized = true;
-
-                    if (NavigationContext.QueryString.ContainsKey("header"))
-                    {
-                        header = NavigationContext.QueryString["header"];
-                    }
-                    if (NavigationContext.QueryString.ContainsKey("mode"))
-                    {
-                        mode = NavigationContext.QueryString["mode"];
-                    }
-                    if (NavigationContext.QueryString.ContainsKey("feedId"))
-                    {
-                        mode = "feed";
-                        feedId = Guid.Parse(NavigationContext.QueryString["feedId"]);
-                    }
-
-                    if (mode == "sources")
-                    {
-                        ShowMenuNoAnimation();
-                    }
-                    else
-                    {
-                        HideMenuNoAnimation();
-                    }
-
-
-                    //CreateViewModel();
-                    //await Task.Yield();
-
                     FinishPageInitialization();
-
-                    CreateViewModel();
 
                     feedsListenerVM = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
                     SourcesList.DataContext = feedsListenerVM;
 
-                    //await TimeSpan.FromSeconds(0.4);
-
-                    if (vm != null)
-                    {
-                        vm.RecoverSavedTombstoneState();
-                        await vm.OnNavigatedTo();
-                    }
-
-                    //vmSourcesList.RefreshCategories();
+                    await OnNavigatedTo(e.Uri, e.NavigationMode);
                 }
             }
             catch (Exception exception)
@@ -284,6 +252,75 @@ namespace weave
                 NavigationService.TryGoBack();
             }
         }
+
+        public async Task OnNavigatedTo(Uri navUri, NavigationMode navigationMode)
+        {
+            string header = null;
+            string mode = null;
+            Guid? feedId = null;
+
+            currentUri = navUri;
+
+            var lookup = currentUri.ParseQueryString().ToDictionary(o => o.Key, o => o.Value);
+
+            if (lookup.ContainsKey("header"))
+            {
+                header = HttpUtility.UrlDecode(lookup["header"]);
+            }
+            if (lookup.ContainsKey("mode"))
+            {
+                mode = lookup["mode"];
+            }
+            if (lookup.ContainsKey("feedId"))
+            {
+                mode = "feed";
+                feedId = Guid.Parse(lookup["feedId"]);
+            }
+
+            if (mode == "sources")
+            {
+                if (navigationMode == NavigationMode.New)
+                    ShowMenuNoAnimation();
+                else
+                    ShowMenu();
+                return;
+            }
+            //else
+            //{
+            //    HideMenuNoAnimation();
+            //}
+
+            if (mode == this.mode && header == this.header)
+                if (navigationMode == NavigationMode.New)
+                    HideMenuNoAnimation();
+                else
+                    HideMenu();
+            else
+            {
+                this.header = header;
+                this.mode = mode;
+                this.feedId = feedId;
+
+                cl.ItemsSource = null;
+
+                CreateViewModel();
+                if (navigationMode == NavigationMode.New)
+                    HideMenuNoAnimation();
+                else
+                    HideMenu(); 
+                pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
+
+                if (vm != null)
+                    await vm.OnNavigatedTo();
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region Create the VIEWMODEL
 
         void CreateViewModel()
         {
@@ -327,7 +364,11 @@ namespace weave
             }
 
             DataContext = this.vm;
+
+            vm.RecoverSavedTombstoneState();
         }
+
+        #endregion
 
 
 
@@ -341,7 +382,6 @@ namespace weave
             InitializeTouchSwipingHandling();
             InitializeApplicationBarButtonEventHandlers();
             InitializeNavMenuHandlers();
-            pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
         }
 
         async void InitializeAdControl()
@@ -396,6 +436,18 @@ namespace weave
             openNavMenuButton.GetClick().Subscribe(ShowMenu).DisposeWith(pageLevelDisposables);
         }
 
+        void LaunchLocalSettingsPopup()
+        {
+            if (PopupService.IsOpen)
+                return;
+
+            fontSizePopupService = new SelesGames.PopupService<System.Reactive.Unit>(fontSizePopup)
+            {
+                CloseOnNavigation = false,
+            };
+            fontSizePopupService.BeginShow();
+        }
+
         void InitializeNavMenuHandlers()
         {
             SourcesList.ItemSelected += SourcesList_ItemSelected;
@@ -408,38 +460,7 @@ namespace weave
                 return;
 
             niGroup.MarkEntry();
-
-            string header = null;
-            string mode = null;
-            Guid? feedId = null;
-
-            header = niGroup.DisplayName;
-
-            if (niGroup is CategoryGroup || niGroup is AllNewsGroup)
-            {
-                mode = "category";
-            }
-            else if (niGroup is FeedGroup)
-            {
-                mode = "feed";
-                feedId = ((FeedGroup)niGroup).Feed.Id;
-            }
-
-            if (mode == this.mode && header == this.header)
-                HideMenu();
-            else
-            {
-                this.header = header;
-                this.mode = mode;
-                this.feedId = feedId;
-
-                cl.ItemsSource = null;
-
-                CreateViewModel();
-                vm.RecoverSavedTombstoneState();
-                vm.OnNavigatedTo();
-                HideMenu();
-            }
+            GlobalNavigationService.ToMainPage(niGroup);
         }
 
         #endregion
@@ -447,7 +468,7 @@ namespace weave
 
 
 
-        #region DropDown menu event handling
+        #region Sources/Categories list show/hide menu
 
         void ShowMenuNoAnimation()
         {
@@ -475,7 +496,7 @@ namespace weave
         void HideMenuNoAnimation()
         {
             currentMenuMode = MenuMode.Hidden;
-            SourcesList.SoftCollapse();;
+            SourcesList.SoftCollapse();
             MinTitlePanel.SoftMakeVisible();
             ContentGrid.SoftMakeVisible();
             ApplicationBar = mainAppBar;
@@ -541,8 +562,7 @@ namespace weave
 
         bool IsPinToStartButtonEnabled()
         {
-            var currentSource = this.NavigationService.CurrentSource;
-            return !ShellTile.ActiveTiles.Any(x => x.NavigationUri.Equals(currentSource));
+            return !ShellTile.ActiveTiles.Any(x => x.NavigationUri.Equals(currentUri));
         }
 
         async void OnPinToStartButtonPressed()
@@ -583,21 +603,6 @@ namespace weave
         }
 
         #endregion
-
-
-
-
-        void LaunchLocalSettingsPopup()
-        {
-            if (PopupService.IsOpen)
-                return;
-
-            fontSizePopupService = new SelesGames.PopupService<System.Reactive.Unit>(fontSizePopup)
-            {
-                CloseOnNavigation = false,
-            };
-            fontSizePopupService.BeginShow();
-        }
 
 
 
@@ -706,29 +711,7 @@ namespace weave
 
 
 
-        ~MainPage()
-        {
-            DebugEx.WriteLine("MainPage {0} was finalized", header);
-        }
-
-        public void Dispose()
-        {
-            this.pageLevelDisposables.Dispose();
-
-            using (this.cl)
-            using (this.vm)
-            using (this.adControl)
-            { }
-
-            if (swipeHelper != null)
-                swipeHelper.Swipe -= OnSwipe;
-
-            Observable.Timer(TimeSpan.FromSeconds(1)).Take(1).SafelySubscribe(() =>
-            {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-            });
-        }
+        #region Show/Hide Radial ProgressBar
 
         internal void ShowRadialProgressBar()
         {
@@ -747,5 +730,38 @@ namespace weave
                 loadingIndicator.Visibility = Visibility.Collapsed;
             });
         }
+
+        #endregion
+
+
+
+
+        #region Finalizer and IDisposable
+
+        ~MainPage()
+        {
+            DebugEx.WriteLine("MainPage {0} was finalized", header);
+        }
+
+        public void Dispose()
+        {
+            this.pageLevelDisposables.Dispose();
+
+            using (this.cl)
+            using (this.vm)
+            using (this.adControl)
+            { }
+
+            if (swipeHelper != null)
+                swipeHelper.Swipe -= OnSwipe;
+
+            //Observable.Timer(TimeSpan.FromSeconds(1)).Take(1).SafelySubscribe(() =>
+            //{
+            //    GC.Collect();
+            //    GC.WaitForPendingFinalizers();
+            //});
+        }
+
+        #endregion
     }
 }
