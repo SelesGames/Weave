@@ -40,6 +40,7 @@ namespace weave
         PermanentState permanentState;
         TombstoneState tombstoneState;
         UserInfo user;
+        FeedsToNewsItemGroupAdapter feedsToNewsItemGroupAdapter;
         IdentityInfo identity; 
         OverlayFrame frame;
         IKernel kernel;
@@ -101,7 +102,6 @@ namespace weave
 
             InitializeAdSettings();
             InitializeNinjectKernel();
-            InitializeGarbageCollectionOnNavigateToPanorama();
             InitializeOrientationChangeService();
             InitializeThemes();
             new SystemTrayNavigationSetter(frame, permanentState);
@@ -277,7 +277,7 @@ namespace weave
                .Take(1)
                .Subscribe(OnInitialNavigatingWrapper);
 
-            new ArticleListNavigationCorrector(frame);
+            new DisposeAndGCCleanupNavHelper(frame);
             new MainPageReusePageNavigationHelper(frame);
 
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
@@ -412,6 +412,8 @@ namespace weave
             user = new UserInfo(repo);
             user.Id = permanentState.UserId;
             user.PropertyChanged += OnUserInfoUserIdChanged;
+
+            feedsToNewsItemGroupAdapter = new FeedsToNewsItemGroupAdapter(user);
         }
 
         void OnUserInfoUserIdChanged(object sender, PropertyChangedEventArgs e)
@@ -502,45 +504,18 @@ namespace weave
             kernel.Bind<PermanentState>().ToConstant(permanentState).InSingletonScope();
             kernel.Bind<TombstoneState>().ToConstant(tombstoneState).InSingletonScope();
             kernel.Bind<UserInfo>().ToConstant(user).InSingletonScope();
+            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(feedsToNewsItemGroupAdapter).InSingletonScope();
             kernel.Bind<IdentityInfo>().ToConstant(identity).InSingletonScope();
             kernel.Bind<BindableMainPageFontStyle>().ToSelf().InSingletonScope();
             kernel.Bind<FontSizePopup>().ToSelf().InSingletonScope();
             kernel.Bind<FontAndThemePopup>().ToSelf().InSingletonScope();
             kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
             kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
-            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToMethod(_ => new FeedsToNewsItemGroupAdapter(user)).InSingletonScope();
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
             kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
             kernel.Bind<ILogger>().ToConstant(new DummyLogger()).InSingletonScope();
-        }
-
-        #endregion
-
-
-
-
-        #region Initialize GarbageCollection handler when navigating to Panorama (home page)
-
-        void InitializeGarbageCollectionOnNavigateToPanorama()
-        {
-            if (isGConPanoInit)
-                return;
-
-            isGConPanoInit = true;
-
-            Observable
-                .FromEventPattern<NavigationEventArgs>(frame, "Navigated")
-                .Where(e =>
-                    e.EventArgs != null &&
-                    e.EventArgs.Content != null &&
-                    e.EventArgs.Content.GetType() == typeof(SamplePanorama))
-                .Subscribe(() =>
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                });
         }
 
         #endregion

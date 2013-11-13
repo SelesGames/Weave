@@ -238,7 +238,7 @@
     <Compile Include="Pages\SelesGamesInfoPage.xaml.cs">
       <DependentUpon>SelesGamesInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\ArticleListNavigationCorrector.cs" />
+    <Compile Include="Services\DisposeAndGCCleanupNavHelper.cs" />
     <Compile Include="Services\Startup\IState.cs" />
     <Compile Include="Services\Startup\StartupIdentityStateMachine.cs" />
     <Compile Include="Services\Startup\Transition_GetMicrosoftId.cs" />

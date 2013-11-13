@@ -753,12 +753,6 @@ namespace weave
 
             if (swipeHelper != null)
                 swipeHelper.Swipe -= OnSwipe;
-
-            //Observable.Timer(TimeSpan.FromSeconds(1)).Take(1).SafelySubscribe(() =>
-            //{
-            //    GC.Collect();
-            //    GC.WaitForPendingFinalizers();
-            //});
         }
 
         #endregion
