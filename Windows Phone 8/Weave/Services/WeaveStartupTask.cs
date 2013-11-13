@@ -4,7 +4,6 @@ using Ninject;
 using SelesGames;
 using SelesGames.Phone;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -71,16 +70,42 @@ namespace weave
             InitializeApplicationLevelExceptionHandler();
             InitializeNewFrame();
             InitializeLanguage();
+            InitializePhoneApplicationService();
+        }
 
-            var phoneAppService = PhoneApplicationService.Current;
-            phoneAppService.ApplicationIdleDetectionMode = IdleDetectionMode.Disabled;
+        #endregion
 
-            phoneAppService.Launching += (s, e) => settings.StartupMode = StartupMode.Launch;
-            phoneAppService.Activated += (s, e) => settings.StartupMode = StartupMode.Activate;
-            phoneAppService.Deactivated += (s, e) => Stop();
-            phoneAppService.Closing += (s, e) => Stop();
 
-            EnableLiveTileUpdatingBackgroundTask();
+
+
+        #region Launching or Activating the app
+
+        void OnLaunching()
+        {
+            settings.StartupMode = StartupMode.Launch;
+            InitializeAll();
+        }
+
+        void OnActivated()
+        {
+            settings.StartupMode = StartupMode.Activate;
+            InitializeAll();
+        }
+
+        void InitializeAll()
+        {
+            //Task.Run(() => InitializePermanentState().Wait()).Wait();
+            Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
+            InitializeUser();
+            InitializeIdentity();
+
+            InitializeAdSettings();
+            InitializeNinjectKernel();
+            InitializeGarbageCollectionOnNavigateToPanorama();
+            InitializeOrientationChangeService();
+            InitializeThemes();
+            new SystemTrayNavigationSetter(frame, permanentState);
+            InitializeLiveTileUpdatingBackgroundTask();
         }
 
         #endregion
@@ -147,9 +172,6 @@ namespace weave
 
             // at this point, the loading screen is being shown
 
-            await InitializePermanentState();
-            await InitializeTombstoneState();
-
             InitializeNetworkStatusChangeListener();
             var isInternetAvailable = await CheckForInternetConnection();
             if (!isInternetAvailable)
@@ -158,8 +180,6 @@ namespace weave
                 App.Current.Terminate();
                 return;
             }
-
-            InitializeUser();
 
             var stateMachine = new StartupIdentityStateMachine(user);
             try
@@ -172,16 +192,6 @@ namespace weave
                 App.Current.Terminate();
                 return;
             }
-
-            InitializeIdentity();
-
-            InitializeAdSettings();
-            InitializeNinjectKernel();
-            InitializeGarbageCollectionOnNavigateToPanorama();
-            InitializeOrientationChangeService();
-            InitializeThemes();
-            new SystemTrayNavigationSetter(frame, permanentState);
-
 
             await dummyPage.LayoutPopups();
 
@@ -269,6 +279,7 @@ namespace weave
 
             new ArticleListNavigationCorrector(frame);
             new MainPageReusePageNavigationHelper(frame);
+
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
             frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
             frame.NavigationStopped += (s, e) => frame.IsHitTestVisible = true;
@@ -283,6 +294,24 @@ namespace weave
                 // A navigation has failed; break into the debugger
                 Debugger.Break();
             }
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize PhoneApplicationService (detect Launching/Activated/Deactivated/Closing events)
+
+        void InitializePhoneApplicationService()
+        {
+            var phoneAppService = PhoneApplicationService.Current;
+            phoneAppService.ApplicationIdleDetectionMode = IdleDetectionMode.Disabled;
+
+            phoneAppService.Launching += (s, e) => OnLaunching();
+            phoneAppService.Activated += (s, e) => OnActivated();
+            phoneAppService.Deactivated += (s, e) => Stop();
+            phoneAppService.Closing += (s, e) => Stop();
         }
 
         #endregion
@@ -479,7 +508,7 @@ namespace weave
             kernel.Bind<FontAndThemePopup>().ToSelf().InSingletonScope();
             kernel.Bind<ExpandedLibrary>().ToMethod(_ => new ExpandedLibrary(AppSettings.Instance.ExpandedFeedLibraryUrl)).InSingletonScope();
             kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
-            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToConstant(new FeedsToNewsItemGroupAdapter(user)).InSingletonScope();
+            kernel.Bind<FeedsToNewsItemGroupAdapter>().ToMethod(_ => new FeedsToNewsItemGroupAdapter(user)).InSingletonScope();
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
@@ -542,7 +571,6 @@ namespace weave
 
         void InitializeThemes()
         {
-
             if (settings.Themes != null)
                 return;
 
@@ -618,14 +646,9 @@ namespace weave
 
 
 
-        #endregion
+        #region Initialize the Background Task that updates the Live Tiles
 
-
-
-
-        #region Turn on Background Task that updates the Live Tiles
-
-        void EnableLiveTileUpdatingBackgroundTask()
+        void InitializeLiveTileUpdatingBackgroundTask()
         {
             var appName = settings.AppName;
             var taskService = new PeriodicTaskService(string.Format("pts:{0}", appName.ToUpperInvariant()))
@@ -641,6 +664,11 @@ namespace weave
             if (!regResult)
                 DebugEx.WriteLine(taskService.RegistrationException);
         }
+
+        #endregion
+
+
+
 
         #endregion
 
