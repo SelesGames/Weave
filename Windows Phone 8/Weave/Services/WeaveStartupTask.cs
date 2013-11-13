@@ -278,7 +278,8 @@ namespace weave
                .Subscribe(OnInitialNavigatingWrapper);
 
             new DisposeAndGCCleanupNavHelper(frame);
-            new MainPageReusePageNavigationHelper(frame);
+            //new MainPageReusePageNavigationHelper(frame);
+            new ArticleListNavigationCorrector(frame);
 
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
             frame.Navigated += (s, e) => frame.IsHitTestVisible = true;

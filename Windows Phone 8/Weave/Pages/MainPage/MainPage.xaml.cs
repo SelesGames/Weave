@@ -261,6 +261,8 @@ namespace weave
 
             currentUri = navUri;
 
+            pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
+
             var lookup = currentUri.ParseQueryString().ToDictionary(o => o.Key, o => o.Value);
 
             if (lookup.ContainsKey("header"))
@@ -304,7 +306,6 @@ namespace weave
                     HideMenuNoAnimation();
                 else
                     HideMenu(); 
-                pinToStartScreenButton.IsEnabled = IsPinToStartButtonEnabled();
 
                 if (vm != null)
                     await vm.OnNavigatedTo();
@@ -571,7 +572,7 @@ namespace weave
 
             try
             {
-                var currentSource = this.NavigationService.CurrentSource;
+                var currentSource = currentUri;
 
                 // Look to see if the tile already exists and if so, don't try to create again.
                 ShellTile TileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.Equals(currentSource));

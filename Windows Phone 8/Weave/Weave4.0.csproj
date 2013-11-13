@@ -177,6 +177,7 @@
     <Compile Include="Library\Value Converters\UserIdConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
+    <Compile Include="Services\ArticleListNavigationCorrector.cs" />
     <Compile Include="Services\DataStorageClient.cs" />
     <Compile Include="Services\DummyLogger.cs" />
     <Compile Include="Services\MainPageReusePageNavigationHelper.cs" />
