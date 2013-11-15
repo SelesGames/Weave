@@ -1,10 +1,8 @@
-﻿using Microsoft.Phone.Controls;
-using Microsoft.Phone.Tasks;
+﻿using Microsoft.Phone.Tasks;
 using SelesGames;
 using SelesGames.Phone;
 using System;
 using System.Net;
-using System.Threading.Tasks;
 using System.Windows;
 using Weave.UI.Frame;
 using Weave.ViewModels;
@@ -51,7 +49,7 @@ namespace weave
         public static void ToMainPage(string header, string mode)
         {
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}&cb={2}", urlEncodedHeader, mode, Guid.NewGuid().ToString("N")));
+            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}", urlEncodedHeader, mode));
         }
 
         static void ToMainPage(Feed feed)
@@ -59,7 +57,7 @@ namespace weave
             string header = feed.Name;
             Guid feedId = feed.Id;
             var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}&cb={2}", urlEncodedHeader, feedId, Guid.NewGuid().ToString("N")));
+            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}", urlEncodedHeader, feedId));
         }
 
         public static void ToInstapaperAccountCredentialsPage()

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,16 +97,28 @@ namespace weave
         void InitializeAll()
         {
             //Task.Run(() => InitializePermanentState().Wait()).Wait();
-            Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
-            InitializeUser();
-            InitializeIdentity();
 
-            InitializeAdSettings();
-            InitializeNinjectKernel();
-            InitializeOrientationChangeService();
-            InitializeThemes();
-            new SystemTrayNavigationSetter(frame, permanentState);
-            InitializeLiveTileUpdatingBackgroundTask();
+            try
+            {
+                Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
+                InitializeUser();
+                InitializeIdentity();
+
+                InitializeAdSettings();
+                InitializeNinjectKernel();
+                InitializeOrientationChangeService();
+                InitializeThemes();
+                new SystemTrayNavigationSetter(frame, permanentState);
+                InitializeLiveTileUpdatingBackgroundTask();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(
+                    string.Format(
+                    "Critical error while initializing the app:/r/n{0}",
+                    e.FormatAsString()));
+                App.Current.Terminate();
+            }
         }
 
         #endregion
@@ -132,7 +145,13 @@ namespace weave
                 if (ex.Message == "Navigation is not allowed when the task is not in the foreground.")
                     return;
                 else
-                    throw ex;
+                {
+                    MessageBox.Show(
+                        string.Format(
+                        "Critical initial navigation error:/r/n{0}",
+                        ex.FormatAsString()));
+                    App.Current.Terminate();
+                }
             }
         }
 
