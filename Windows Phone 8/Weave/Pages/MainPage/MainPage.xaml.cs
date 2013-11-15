@@ -36,6 +36,7 @@ namespace weave
         Uri currentUri = null;
 
         PermanentState permState;
+        UserInfo user;
 
         MainPageViewModel vm;
         FeedsToNewsItemGroupAdapter feedsListenerVM;
@@ -86,6 +87,8 @@ namespace weave
             fontSizePopup = ServiceResolver.Get<FontAndThemePopup>();
             Observable.FromEventPattern<SelesGames.EventArgs<ArticleListFormatProperties>>(fontSizePopup, "ArticleListFormatChanged")
                 .Subscribe(o => OnArticleListFormatChanged(fontSizePopup, o.EventArgs)).DisposeWith(pageLevelDisposables);
+
+            user = ServiceResolver.Get<UserInfo>();
         }
 
         void ApplyThemeToControl()
@@ -281,18 +284,12 @@ namespace weave
 
             if (mode == "sources")
             {
-                if (navigationMode == NavigationMode.New)
-                    ShowMenuNoAnimation();
-                else
-                    ShowMenu();
+                ShowMenuNoAnimation();
                 return;
             }
 
             if (mode == this.mode && header == this.header)
-                if (navigationMode == NavigationMode.New)
-                    HideMenuNoAnimation();
-                else
-                    HideMenu();
+                HideMenuNoAnimation();
             else
             {
                 this.header = header;
@@ -302,10 +299,7 @@ namespace weave
                 cl.ItemsSource = null;
 
                 CreateViewModel();
-                if (navigationMode == NavigationMode.New)
-                    HideMenuNoAnimation();
-                else
-                    HideMenu(); 
+                HideMenuNoAnimation();
 
                 if (vm != null)
                     await vm.OnNavigatedTo();
@@ -338,31 +332,31 @@ namespace weave
 
             var tallyer = permState.RunHistory.GetActiveLog();
 
-            this.vm = new MainPageViewModel(this, header);
+            NewsItemGroup group = null;
             if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
             {
-                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Category;
+                group = feedsListenerVM.Find(header);
                 tbPageCount.Visibility = Visibility.Visible;
                 tallyer.Tally(header);
             }
             else if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
             {
-                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Feed;
-                vm.FeedId = feedId.Value;
+                group = feedsListenerVM.Find(feedId.Value);
                 tbPageCount.Visibility = Visibility.Visible;
                 tallyer.Tally(header);
             }
             else if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
             {
-                vm.currentOperatingMode = weave.MainPageViewModel.OperatingMode.Favorites;
+                group = new FavoriteArticlesGroup(user);
                 tbPageCount.Visibility = Visibility.Collapsed;
             }
             else if (mode.Equals("read", StringComparison.OrdinalIgnoreCase))
             {
-                vm.currentOperatingMode = MainPageViewModel.OperatingMode.Read;
+                group = new ReadArticlesGroup(user);
                 tbPageCount.Visibility = Visibility.Collapsed;
             }
 
+            this.vm = new MainPageViewModel(this, header, group);
             DataContext = this.vm;
 
             vm.RecoverSavedTombstoneState();
@@ -458,6 +452,24 @@ namespace weave
             var niGroup = e.Selected;
             if (niGroup == null)
                 return;
+
+            if (niGroup is AllNewsGroup || niGroup is CategoryGroup)
+            {
+                if (this.mode == "category" && header.Equals(niGroup.DisplayName, StringComparison.OrdinalIgnoreCase))
+                {
+                    HideMenu();
+                    return;
+                }
+            }
+            else if (niGroup is FeedGroup)
+            {
+                var feedGroup = (FeedGroup)niGroup;
+                if (feedGroup.Feed.Id.Equals(this.feedId))
+                {
+                    HideMenu();
+                    return;
+                }
+            }
 
             niGroup.MarkEntry();
             GlobalNavigationService.ToMainPage(niGroup);

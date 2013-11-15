@@ -32,24 +32,11 @@ namespace weave
         int lastPageLastTimeItWasSet = -1;
         SerialDisposable pageChangeHandle = new SerialDisposable();
 
-
+        NewsItemGroup group;
         PagedNewsItems pagedNews;
         IEnumerable<AsyncNewsList> newsLists;
 
         #endregion
-
-
-
-
-        internal OperatingMode currentOperatingMode;
-
-        internal enum OperatingMode
-        {
-            Category,
-            Feed,
-            Favorites,
-            Read
-        }
 
 
 
@@ -78,10 +65,11 @@ namespace weave
 
         #region Constructor
 
-        public MainPageViewModel(MainPage view, string header)
+        public MainPageViewModel(MainPage view, string header, NewsItemGroup group)
         {
             this.view = view;
             Header = header;
+            this.group = group;
             user = ServiceResolver.Get<UserInfo>();
         }
 
@@ -143,40 +131,14 @@ namespace weave
 
         void InitializePagedNews()
         {
-            var tombstoneState = ServiceResolver.Get<TombstoneState>();
-            var feedListener = ServiceResolver.Get<FeedsToNewsItemGroupAdapter>();
-
-            NewsItemGroup niGroup = null;
-
-            if (currentOperatingMode == OperatingMode.Category)
-            {
-                niGroup = feedListener.Find(Header);
-                tombstoneState.CurrentArticleListContext = ArticleListContext.Category;
-            }
-            else if (currentOperatingMode == OperatingMode.Feed)
-            {
-                niGroup = feedListener.Find(FeedId);
-                tombstoneState.CurrentArticleListContext = ArticleListContext.Feed;
-            }
-            else if (currentOperatingMode == OperatingMode.Favorites)
-            {
-                niGroup = new FavoriteArticlesGroup(user);
-                tombstoneState.CurrentArticleListContext = ArticleListContext.Favorites;
-            }
-            else if (currentOperatingMode == OperatingMode.Read)
-            {
-                niGroup = new ReadArticlesGroup(user);
-                tombstoneState.CurrentArticleListContext = ArticleListContext.Read;
-            }
-
-            if (niGroup == null)
+            if (group == null)
                 throw new Exception("Unable to initialize niGroup in InitializeNewsCollectionVM");
 
             if (pagedNews != null)
             {
                 pagedNews.CountChanged -= pageNews_CountChanged;
             }
-            pagedNews = new PagedNewsItems(niGroup, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+            pagedNews = new PagedNewsItems(group, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
             pagedNews.CountChanged += pageNews_CountChanged;
         }
 
