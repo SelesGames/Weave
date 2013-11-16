@@ -47,13 +47,13 @@ namespace weave
         IKernel kernel;
         DataStorageClient storageClient;
 
-        bool 
+        bool
             isFrameInit,
             isFirstNavInit,
             isAppLevelExceptionHandlerInitialized,
             isNetworkStatusChangeListenerInit,
-            isGConPanoInit,
-            isOrientationChangeServiceInit;
+            isOrientationChangeServiceInit,
+            suppressIdentityUserIdChanged;
 
         #endregion
 
@@ -96,8 +96,6 @@ namespace weave
 
         void InitializeAll()
         {
-            //Task.Run(() => InitializePermanentState().Wait()).Wait();
-
             try
             {
                 Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
@@ -211,6 +209,9 @@ namespace weave
                 App.Current.Terminate();
                 return;
             }
+            suppressIdentityUserIdChanged = true;
+            identity.UserId = user.Id;
+            suppressIdentityUserIdChanged = false;
 
             await dummyPage.LayoutPopups();
 
@@ -462,6 +463,9 @@ namespace weave
 
         async void OnIdentityUserIdChanged(object sender, EventArgs e)
         {
+            if (suppressIdentityUserIdChanged)
+                return;
+
             await Task.Yield();
             bool updateFailed = false;
 
