@@ -14,62 +14,8 @@
 	mc:Ignorable="d"
 	d:DesignHeight="800" d:DesignWidth="480">
 	<UserControl.Resources>
-		<SampleData:SampleViewModel x:Key="SampleViewModel" d:IsDataSource="True"/>
-
-		<Style x:Key="AppButtonTemplate" TargetType="Button">
-			<Setter Property="Width" Value="456" />
-			<Setter Property="Height" Value="105" />
-			<Setter Property="CacheMode" Value="BitmapCache" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="Button">
-						<Grid Margin="12,7,0,0" CacheMode="BitmapCache" Background="{StaticResource TransparentBrush}">
-							<Image Width="90" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" CacheMode="BitmapCache">
-								<Image.Source>
-									<BitmapImage UriSource="{Binding MediumImageUrl}" sg:BitmapImageHelper.IsBackgroundCreationEnabled="True" />
-								</Image.Source>
-							</Image>
-							<TextBlock x:Name="appname" Text="{Binding AppName}" FontFamily="{StaticResource PhoneFontFamilyLight}" FontSize="33.333" TextTrimming="WordEllipsis" Foreground="{TemplateBinding Foreground}" Margin="101,-7,-12,0" VerticalAlignment="Top" CacheMode="BitmapCache"/>
-							<TextBlock x:Name="category" Text="{Binding Category}" FontWeight="Bold" FontSize="18.667" FontFamily="{StaticResource PhoneFontFamilyLight}" Foreground="{TemplateBinding Foreground}" Margin="101,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="182" CacheMode="BitmapCache"/>
-							<TextBlock x:Name="price" Text="{Binding FormattedPrice}" Height="30" Foreground="{TemplateBinding Foreground}" Margin="0,38,11,0" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="22.667" FontFamily="{StaticResource PhoneFontFamilyLight}" CacheMode="BitmapCache"/>
-							<Image x:Name="rating" Source="{Binding RatingStars}" HorizontalAlignment="Right" Margin="0,62,-2,0" VerticalAlignment="Top" Stretch="None" Width="164" Height="31" CacheMode="BitmapCache" />
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-	
-		<DataTemplate x:Key="AppTemplate">
-			<Button Style="{StaticResource AppButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="AppTap" />
-		</DataTemplate>
-
-		<Storyboard x:Name="OnPageLoadSB">
-			<DoubleAnimation Duration="0:0:0.5" From="288" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="list">
-				<DoubleAnimation.EasingFunction>
-					<ExponentialEase EasingMode="EaseOut" Exponent="4"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-			<DoubleAnimation Duration="0:0:0.5" From="0" To="2" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="list">
-				<DoubleAnimation.EasingFunction>
-					<ExponentialEase EasingMode="EaseOut" Exponent="4"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-		</Storyboard>
-		
-		<Storyboard x:Name="OnPageExitSB">
-			<DoubleAnimation To="256" Duration="0:0:0.25" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="LayoutRoot">
-				<DoubleAnimation.EasingFunction>
-					<ExponentialEase EasingMode="EaseIn" Exponent="4"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-			<DoubleAnimation Duration="0:0:0.25" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LayoutRoot">
-				<DoubleAnimation.EasingFunction>
-					<ExponentialEase EasingMode="EaseIn" Exponent="4.5"/>
-				</DoubleAnimation.EasingFunction>
-			</DoubleAnimation>
-		</Storyboard>
-		
-		
+        <SampleData:SampleViewModel x:Key="SampleViewModel" d:IsDataSource="True"/>
+			
 		<Style x:Key="ImageWithLabelButtonStyle" TargetType="sg:ImageWithLabelButton">
 			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
 			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiLight}"/>
@@ -103,7 +49,7 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="MORE FROM" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="ApplicationTitle" Text="ABOUT" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<TextBlock x:Name="PageTitle" Text="seles games" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
@@ -111,8 +57,6 @@
 			<ScrollViewer>
 				<StackPanel>
 					<StackPanel x:Name="buttonHeader" Margin="0,-12,0,24" toolkit:TiltEffect.IsTiltEnabled="True">
-						<sg:ImageWithLabelButton x:Name="changelogButton" Content="changelog blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/appbar.calendar.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
-						<sg:ImageWithLabelButton x:Name="buyButton" Content="buy app blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/purchase.png" Margin="12,0,0,0" Tap="OnHeaderButtonTap" />
 						<sg:ImageWithLabelButton x:Name="rateButton" Content="rate/review  blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/heart.png" Tap="OnHeaderButtonTap" />
 						<sg:ImageWithLabelButton x:Name="twitterButton" Content="twitter blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/twitter.png" Tap="OnHeaderButtonTap" />
 						<sg:ImageWithLabelButton x:Name="facebookButton" Content="facebook blurb" Style="{StaticResource ImageWithLabelButtonStyle}" Source="/SelesGames.WP.PublisherInfoPage;component/Assets/facebook.png" Tap="OnHeaderButtonTap" />

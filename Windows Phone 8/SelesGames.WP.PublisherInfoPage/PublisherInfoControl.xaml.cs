@@ -11,7 +11,6 @@ namespace SelesGames.WP.PublisherInfoPage
     {
         Task<string> getPaidAppId;
         string publisherName;
-        PublisherInfoViewModel viewModel;
 
         public string PublisherName
         {
@@ -20,30 +19,19 @@ namespace SelesGames.WP.PublisherInfoPage
             {
                 publisherName = value;
                 PageTitle.Text = publisherName.ToLowerInvariant();
-                viewModel = new PublisherInfoViewModel(publisherName);
-                DataContext = viewModel;
             }
         }
 
         public string TwitterUserName { get; set; }
         public string FacebookUserName { get; set; }
-        public string ChangeLogUrl { get; set; }
-
-        public async Task LoadDataAsync()
-        {
-            await viewModel.GetAppsForPublisherAsync();
-        }
 
         public PublisherInfoControl()
         {
             InitializeComponent();
-            //footer.Loaded += footer_Loaded;
         }
 
         public override void OnApplyTemplate()
         {
-            SetChangelogButton();
-            SetBuyButton();
             SetRateButton();
             SetTwitterButton();
             SetFacebookButton();
@@ -55,33 +43,11 @@ namespace SelesGames.WP.PublisherInfoPage
 
         #region Event Handler for button taps
 
-        void AppTap(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //var app = ((Button)sender).DataContext as ZuneAppViewModel;
-            //TaskService.ToMarketplaceDetailTask(app.AppId);
-        }
-
-        async void OnHeaderButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
+        void OnHeaderButtonTap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var button = (sender as Button);
 
-            if (button == buyButton)
-            {
-                try
-                {
-                    if (getPaidAppId != null)
-                    {
-                        var appId = await getPaidAppId;
-                        TaskService.ToMarketplaceDetailTask(appId);
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show("Unable to get the link for the paid version of AppVegas.  Please try again later!");
-                }
-            }
-
-            else if (button == rateButton)
+            if (button == rateButton)
                 TaskService.ToMarketplaceDetailTask();
 
             else if (button == twitterButton)
@@ -89,9 +55,6 @@ namespace SelesGames.WP.PublisherInfoPage
 
             else if (button == facebookButton)
                 TaskService.ToInternetExplorerTask("http://touch.facebook.com/" + FacebookUserName);
-
-            else if (button == changelogButton)
-                TaskService.ToInternetExplorerTask(ChangeLogUrl);
         }
 
         void OnEmailLinkTap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -105,32 +68,6 @@ namespace SelesGames.WP.PublisherInfoPage
 
 
         #region Button Text Functions
-
-        void SetChangelogButton()
-        {
-            if (changelogButton == null)
-                return;
-
-            changelogButton.Content = ChangelogText;
-
-            if (string.IsNullOrEmpty(ChangelogText))
-                changelogButton.Visibility = Visibility.Collapsed;
-            else
-                changelogButton.Visibility = Visibility.Visible;
-        }
-
-        void SetBuyButton()
-        {
-            if (buyButton == null)
-                return;
-
-            buyButton.Content = BuyText;
-
-            if (string.IsNullOrEmpty(BuyText))
-                buyButton.Visibility = Visibility.Collapsed;
-            else
-                buyButton.Visibility = Visibility.Visible;
-        }
 
         void SetRateButton()
         {
@@ -185,50 +122,6 @@ namespace SelesGames.WP.PublisherInfoPage
 
 
         #region Dependency Properties
-
-
-
-
-        #region ChangelogText
-
-        public static readonly DependencyProperty ChangelogTextProperty = DependencyProperty.Register(
-            "ChangelogText", typeof(string), typeof(PublisherInfoControl), new PropertyMetadata(OnChangelogTextChanged));
-
-        public string ChangelogText
-        {
-            get { return (string)GetValue(ChangelogTextProperty); }
-            set { SetValue(ChangelogTextProperty, value); }
-        }
-
-        static void OnChangelogTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            var c = (PublisherInfoControl)obj;
-            c.SetChangelogButton();
-        }
-
-        #endregion
-
-
-
-
-        #region BuyText
-
-        public static readonly DependencyProperty BuyTextProperty = DependencyProperty.Register(
-            "BuyText", typeof(string), typeof(PublisherInfoControl), new PropertyMetadata(OnBuyTextChanged));
-
-        public string BuyText
-        {
-            get { return (string)GetValue(BuyTextProperty); }
-            set { SetValue(BuyTextProperty, value); }
-        }
-
-        static void OnBuyTextChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            var c = (PublisherInfoControl)obj;
-            c.SetBuyButton();
-        }
-
-        #endregion
 
 
 

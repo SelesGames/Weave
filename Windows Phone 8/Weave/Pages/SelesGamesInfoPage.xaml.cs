@@ -6,29 +6,11 @@ namespace weave
 {
     public partial class SelesGamesInfoPage : PhoneApplicationPage
     {
-        bool isPageLoaded = false;
-
         public SelesGamesInfoPage()
         {
             InitializeComponent();
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumTransition());
-        }
-
-        protected async override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            if (isPageLoaded)
-                return;
-
-            publisherControl.PublisherName = "Seles Games";
-
-            try
-            {
-                await publisherControl.LoadDataAsync();
-            }
-            catch { }
-
-            DebugEx.WriteLine("page loaded");
-            isPageLoaded = true;
+            publisherControl.PublisherName = "Seles Games";       
         }
 
         void OnEmailLinkTap(object sender, System.Windows.Input.GestureEventArgs e)

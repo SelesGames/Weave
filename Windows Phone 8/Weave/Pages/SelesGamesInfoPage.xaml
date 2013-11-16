@@ -15,7 +15,7 @@
 	mc:Ignorable="d" d:DesignHeight="3000" d:DesignWidth="480">
 
 	<Grid x:Name="LayoutRoot">
-		<sgp:PublisherInfoControl x:Name="publisherControl" PublisherName="Seles Games" RateText="rate/review" TwitterText="follow us on twitter" FacebookText="follow us on facebook" FacebookUserName="SelesGames" TwitterUserName="SelesGames" ChangelogText="changelog &amp; faq" ChangeLogUrl="{StaticResource ChangelogUrl}">
+		<sgp:PublisherInfoControl x:Name="publisherControl" PublisherName="Seles Games" RateText="rate/review" TwitterText="follow us on twitter" FacebookText="follow us on facebook" FacebookUserName="SelesGames" TwitterUserName="SelesGames">
 			<sgp:PublisherInfoControl.FooterTemplate>
 				<DataTemplate>
 					<StackPanel Margin="0,48,0,24" Width="480">
