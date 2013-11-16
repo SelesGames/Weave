@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using SelesGames;
+using SelesGames.Rest;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -66,7 +67,15 @@ namespace weave
 
                 var user = ServiceResolver.Get<UserInfo>();
                 user.Feeds = new ObservableCollection<Feed>(feedsToAdd);
-                await user.Create();
+                try
+                {
+                    await user.Create();
+                }
+                catch(ResponseException ex)
+                {
+                    if (ex.Response.ReasonPhrase != "A user with that Id already exists")
+                        throw;
+                }
                 await user.Load();
 
                 frame.IsLoading = false;
