@@ -76,7 +76,7 @@ namespace weave
                     if (ex.Response.ReasonPhrase != "A user with that Id already exists")
                         throw;
                 }
-                await user.Load();
+                await user.Load(refreshNews: true);
 
                 frame.IsLoading = false;
 

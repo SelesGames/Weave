@@ -90,7 +90,6 @@
     <Compile Include="Extension Methods\ReactiveExtensions.cs" />
     <Compile Include="Extension Methods\ReactiveExtensions.Timers.cs" />
     <Compile Include="Extension Methods\StoryboardExtensions.cs" />
-    <Compile Include="Extension Methods\TaskExtensions.cs" />
     <Compile Include="Extension Methods\UIElementExtensions.cs" />
     <Compile Include="Extension Methods\WebRequestExtensionMethods.cs" />
     <Compile Include="GlobalDispatcher.cs" />

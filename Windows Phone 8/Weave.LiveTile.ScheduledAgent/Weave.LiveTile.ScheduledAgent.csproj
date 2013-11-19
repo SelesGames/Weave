@@ -89,7 +89,6 @@
     <Compile Include="Helpers\CycleTileHelper.cs" />
     <Compile Include="Helpers\LockScreenSavingClient.cs" />
     <Compile Include="Library\LiveTileExtensionMethods.cs" />
-    <Compile Include="Library\TaskExtensions.cs" />
     <Compile Include="Library\ToastHelper.cs" />
     <Compile Include="Helpers\TileNegotiatorBase.cs" />
     <Compile Include="Helpers\LiveTileNegotiatorFactory.cs" />

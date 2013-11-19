@@ -213,6 +213,11 @@ namespace weave
             identity.UserId = user.Id;
             suppressIdentityUserIdChanged = false;
 
+            if (settings.StartupMode == StartupMode.Launch)
+            {
+                user.Load(refreshNews: true).Fire();
+            }
+
             await dummyPage.LayoutPopups();
 
             if (stateMachine.FinalState == StartupIdentityStateMachine.State.UserExists)

@@ -26,7 +26,7 @@ namespace weave.Services.Startup
         {
             try
             {
-                await user.Load(true);
+                await user.Load(refreshNews: false);
                 CurrentState = State.Success;
             }
             catch (ResponseException responseException)
