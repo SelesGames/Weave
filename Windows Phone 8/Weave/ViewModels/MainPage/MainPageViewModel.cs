@@ -219,10 +219,12 @@ namespace weave
         {
             HasPrevious = (currentPage - 1) >= 0;
             HasNext = currentPage + 1 < Math.Ceiling((double)pagedNews.TotalNewsCount / (double)pagedNews.PageSize);
+            PropertyChanged.Raise(this, "HasPrevious");
+            PropertyChanged.Raise(this, "HasNext");
         }
 
-        internal bool HasPrevious { get; private set; }
-        internal bool HasNext { get; private set; }
+        public bool HasPrevious { get; private set; }
+        public bool HasNext { get; private set; }
 
         public int CurrentPage
         {

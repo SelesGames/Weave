@@ -16,6 +16,8 @@ namespace weave
 {
     public partial class CustomList : UserControl, IDisposable
     {
+        #region Private member variables
+
         List<BaseNewsItemControl> newsItemsUI;
         SerialDisposable disp = new SerialDisposable();
         Subject<Tuple<object, NewsItem>> newsItemSelected = new Subject<Tuple<object, NewsItem>>();
@@ -25,26 +27,33 @@ namespace weave
 
         ImageCache imageCache;
 
-        public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get { return newsItemSelected.AsObservable(); } }
-
         Guid id;
 
-        public bool IsPreviousIndicatorEnabled
-        {
-            set { prevIndicator.Opacity = value ? 1d : 0.5d; }
-        }
+        static readonly double DISABLED_INDICATOR_OPACITY = 0.33d;
 
-        public bool IsNextIndicatorEnabled
-        {
-            set { nextIndicator.Opacity = value ? 1d : 0.5d; }
-        }
+        #endregion
+
+
+
+
+        #region Public Properties
+
+        public int AnimationDirection { get; set; }
+        public IObservable<Tuple<object, NewsItem>> NewsItemSelected { get { return newsItemSelected.AsObservable(); } }
+
+        #endregion
+
+
+
+
+        #region Constructor
 
         public CustomList()
         {
             InitializeComponent();
             transparentBrush = scroller.Background;
             subtleBrush = prevIndicator.Fill;
-            cardViewIndicatorBrush = new SolidColorBrush(Colors.DarkGray);
+            cardViewIndicatorBrush = new SolidColorBrush(Colors.Black);
 
             if (this.IsInDesignMode())
                 return;
@@ -56,13 +65,13 @@ namespace weave
 
             imageCache = Resources["imageCache"] as ImageCache;
 
+            prevIndicator.Opacity = nextIndicator.Opacity = DISABLED_INDICATOR_OPACITY;
+
             id = Guid.NewGuid();
             DebugEx.WriteLine("CustomList {0} created", id.ToString());
-
-            //lls.ItemRealized += lls_ItemRealized;
         }
 
-        public int AnimationDirection { get; set; }
+        #endregion
 
 
 
@@ -187,7 +196,6 @@ namespace weave
         //    DebugEx.WriteLine(e);
         //}
 
-
         void SetNews(IReadOnlyList<NewsItem> news)
         {
             disp.Disposable = null;
@@ -275,31 +283,28 @@ namespace weave
             #endregion
         }
 
+        void PlaySlideAnimation(BaseNewsItemControl baseNewsItemControl)
+        {
+            if (AnimationDirection == 99)
+                return;
+
+            if (AnimationDirection >= 0)
+                baseNewsItemControl.PageRight();
+            else
+                baseNewsItemControl.PageLeft();
+        }
+
         #endregion
 
 
 
 
-        void PlaySlideAnimation(BaseNewsItemControl baseNewsItemControl)
-        {
-                if (AnimationDirection == 99)
-                    return;
-
-                if (AnimationDirection >= 0)
-                    baseNewsItemControl.PageRight();
-                else
-                    baseNewsItemControl.PageLeft();
-        }
-
-        ~CustomList()
-        {
-            DebugEx.WriteLine("CustomList {0} destroyed", id.ToString());
-        }
-
-
-
-
         #region Dependency Properties
+
+
+
+
+        #region ItemsSource
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
             "ItemsSource",
@@ -330,6 +335,13 @@ namespace weave
             }
         }
 
+        #endregion
+
+
+
+
+        #region ArticleTheme
+
         public static readonly DependencyProperty ArticleThemeProperty = DependencyProperty.Register(
             "ArticleTheme",
             typeof(ArticleListFormatType),
@@ -359,7 +371,68 @@ namespace weave
 
 
 
-        #region IDisposable implementation
+        #region IsPreviousIndicatorEnabled
+
+        public static readonly DependencyProperty IsPreviousIndicatorEnabledProperty = DependencyProperty.Register(
+            "IsPreviousIndicatorEnabled",
+            typeof(bool),
+            typeof(CustomList),
+            new PropertyMetadata(OnIsPreviousIndicatorEnabledChanged));
+
+        public bool IsPreviousIndicatorEnabled
+        {
+            get { return (bool)GetValue(IsPreviousIndicatorEnabledProperty); }
+            set { SetValue(IsPreviousIndicatorEnabledProperty, value); }
+        }
+
+        static void OnIsPreviousIndicatorEnabledChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            var cl = s as CustomList;
+            if (cl == null)
+                return;
+
+            cl.prevIndicator.Opacity = (bool)e.NewValue ? 1d : DISABLED_INDICATOR_OPACITY; 
+        }
+
+        #endregion
+
+
+
+
+        #region IsNextIndicatorEnabled
+
+        public static readonly DependencyProperty IsNextIndicatorEnabledProperty = DependencyProperty.Register(
+            "IsNextIndicatorEnabled",
+            typeof(bool),
+            typeof(CustomList),
+            new PropertyMetadata(OnIsNextIndicatorEnabledChanged));
+
+        public bool IsNextIndicatorEnabled
+        {
+            get { return (bool)GetValue(IsNextIndicatorEnabledProperty); }
+            set { SetValue(IsNextIndicatorEnabledProperty, value); }
+        }
+
+        static void OnIsNextIndicatorEnabledChanged(DependencyObject s, DependencyPropertyChangedEventArgs e)
+        {
+            var cl = s as CustomList;
+            if (cl == null)
+                return;
+
+            cl.nextIndicator.Opacity = (bool)e.NewValue ? 1d : DISABLED_INDICATOR_OPACITY;
+        }
+
+        #endregion
+
+
+
+
+        #endregion
+
+
+
+
+        #region IDisposable implementation and Finalizer
 
         public void Dispose()
         {
@@ -381,6 +454,11 @@ namespace weave
             });
 
             DebugEx.WriteLine("CustomList {0} disposed", id.ToString());
+        }
+
+        ~CustomList()
+        {
+            DebugEx.WriteLine("CustomList {0} destroyed", id.ToString());
         }
 
         #endregion

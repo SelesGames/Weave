@@ -161,7 +161,7 @@
 			<UIElement.RenderTransform>
 				<CompositeTransform/>
 			</UIElement.RenderTransform>
-			<local:CustomList x:Name="cl" Visibility="Collapsed">
+			<local:CustomList x:Name="cl" Visibility="Collapsed" IsPreviousIndicatorEnabled="{Binding HasPrevious}" IsNextIndicatorEnabled="{Binding HasNext}">
 				<UIElement.RenderTransform>
 					<CompositeTransform/>
 				</UIElement.RenderTransform>
