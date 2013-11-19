@@ -101,7 +101,7 @@ namespace weave
                 Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
                 InitializeUser();
                 InitializeIdentity();
-
+                InitializePhoneApplicationFrameNavigationHelpers();
                 InitializeAdSettings();
                 InitializeNinjectKernel();
                 InitializeOrientationChangeService();
@@ -302,10 +302,6 @@ namespace weave
                .Take(1)
                .Subscribe(OnInitialNavigatingWrapper);
 
-            new DisposeAndGCCleanupNavHelper(frame);
-            //new MainPageReusePageNavigationHelper(frame);
-            new ArticleListNavigationCorrector(frame);
-
             frame.Navigating += (s, e) => frame.IsHitTestVisible = false;
             frame.Navigated += (s, e) => frame.IsHitTestVisible = true;
             frame.NavigationStopped += (s, e) => frame.IsHitTestVisible = true;
@@ -492,6 +488,21 @@ namespace weave
                 await Task.Delay(2000);
             }
             frame.IsLoading = false;
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize PhoneFrame navigation helpers
+
+        void InitializePhoneApplicationFrameNavigationHelpers()
+        {
+            new DisposeAndGCCleanupNavHelper(frame);
+            //new MainPageReusePageNavigationHelper(frame);
+            new ArticleListNavigationCorrector(frame);
+            new MainPageSourcesRefresher(frame, user);
         }
 
         #endregion

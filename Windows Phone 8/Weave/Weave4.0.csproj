@@ -181,7 +181,6 @@
     <Compile Include="Services\DataStorageClient.cs" />
     <Compile Include="Services\DummyLogger.cs" />
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
-    <Compile Include="Services\MainPageReusePageNavigationHelper.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="ViewModels\Grouped News\AllNewsGroup.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />

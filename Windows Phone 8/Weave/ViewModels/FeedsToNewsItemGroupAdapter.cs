@@ -52,7 +52,7 @@ namespace weave
                 return;
             }
 
-            Feeds.ClearAndAddRange(GetAllSources(user.Feeds));
+            Feeds.Reset(GetAllSources(user.Feeds));
         }
 
         public void UpdateTileData()
