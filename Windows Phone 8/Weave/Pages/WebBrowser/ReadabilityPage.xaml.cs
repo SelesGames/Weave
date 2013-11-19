@@ -25,10 +25,13 @@ namespace weave
 {
     public partial class ReadabilityPage : PhoneApplicationPage, IDisposable
     {
+        #region Private member variables
+
         UserInfo user;
         ReadabilityPageViewModel viewModel;
         bool isHtmlDisplayed = false;
         bool isArticleNonDisplayable = false;
+        bool isPageClosed = false;
         CompositeDisposable disposables = new CompositeDisposable();
         SerialDisposable setArticleHandle = new SerialDisposable();
         Brush opacityMask;
@@ -39,6 +42,13 @@ namespace weave
         PermanentState permState;
         SwipeGestureHelper swipeHelper;
         OverlayFrame frame;
+
+        #endregion
+
+
+
+
+        #region Constructor
 
         public ReadabilityPage()
         {
@@ -63,6 +73,8 @@ namespace weave
             user = ServiceResolver.Get<UserInfo>();
             frame = GlobalNavigationService.CurrentFrame;
         }
+
+        #endregion
 
 
 
@@ -252,6 +264,9 @@ namespace weave
                 if (!isHtmlDisplayed || UserSwitchedViewingType)
                 {
                     await DisplayArticleContent();
+                    if (isPageClosed)
+                        return;
+
                     SetValue(RadTransitionControl.TransitionProperty, new RadContinuumAndSlideTransition { PlayMode = TransitionPlayMode.Simultaneously });
                     BeginMarkReadTimer();
                 }
@@ -298,12 +313,6 @@ namespace weave
             if (newsItem == null || newsItem.Feed == null)
                 return false;
 
-            //if (newsItem.Feed == null)
-            //{
-            //    var feeds = user.Feeds;
-            //    newsItem.Feed = feeds.Single(o => o.Id.Equals(newsItem.Feed.Id));
-            //}
-
             viewModel = new ReadabilityPageViewModel { NewsItem = newsItem };
             return true;
         }
@@ -322,11 +331,13 @@ namespace weave
 
             var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
 
-
             if (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
             {
                 isMobilizerFaulted = !(await TryDisplayMobilized());
             }
+
+            if (isPageClosed)
+                return;
             
             if (articleViewType == ArticleViewingType.InternetExplorer || articleViewType == ArticleViewingType.InternetExplorerOnly || isMobilizerFaulted)
             {
@@ -342,6 +353,10 @@ namespace weave
                     isWebViewFaulted = !(await TryDisplayWebView());
                 }
             }
+
+            if (isPageClosed)
+                return;
+
             if (isWebViewFaulted)
             {
                 isArticleNonDisplayable = true;
@@ -369,6 +384,10 @@ namespace weave
             try
             {
                 var html = await viewModel.GetMobilizedArticleHtml();
+
+                if (isPageClosed)
+                    return false;
+
                 await browser.NavigateToStringAsync(html);
                 return true;
             }
@@ -399,23 +418,10 @@ namespace weave
             try
             {
                 viewModel.NewsItem.HasBeenViewed = true;
-                user.MarkArticleRead(viewModel.NewsItem);
+                user.MarkArticleRead(viewModel.NewsItem).Fire();
                 SelesGames.Phone.TaskService.ToInternetExplorerTask(viewModel.NewsItem.Link);
             }
             catch { }
-        }
-
-        void ShowLoadingIndicators()
-        {
-            new FrameworkElement[] { fill, BusyIndicator }.ToList().ForEach(o => o.Visibility = Visibility.Visible);
-            BusyIndicator.Opacity = 1d;
-            BusyIndicator.IsPlaying = true;
-        }
-
-        void HideLoadingIndicators()
-        {
-            new FrameworkElement[] { fill, BusyIndicator }.ToList().ForEach(o => o.Visibility = Visibility.Collapsed);
-            BusyIndicator.IsPlaying = false;
         }
 
         void OnBrowserNavigating(NavigatingEventArgs e)
@@ -432,6 +438,26 @@ namespace weave
             e.Cancel = true;
             SelesGames.Phone.TaskService.ToInternetExplorerTask(uri);
         }
+
+
+
+
+        #region Show/Hide loading indicators
+
+        void ShowLoadingIndicators()
+        {
+            new FrameworkElement[] { fill, BusyIndicator }.ToList().ForEach(o => o.Visibility = Visibility.Visible);
+            BusyIndicator.Opacity = 1d;
+            BusyIndicator.IsPlaying = true;
+        }
+
+        void HideLoadingIndicators()
+        {
+            new FrameworkElement[] { fill, BusyIndicator }.ToList().ForEach(o => o.Visibility = Visibility.Collapsed);
+            BusyIndicator.IsPlaying = false;
+        }
+
+        #endregion
 
 
 
@@ -636,14 +662,31 @@ namespace weave
 
 
 
+        #region OnBackKeyPress
+
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            if (PopupService.IsOpen)
+            if (PopupService.IsOpen || isPageClosed)
+            {
+                e.Cancel = true;
                 return;
+            }
+
+            isPageClosed = true;
+
+            if (frame.IsLoading)
+                frame.IsLoading = false;
 
             IsHitTestVisible = false;
             base.OnBackKeyPress(e);
         }
+
+        #endregion
+
+
+
+
+        #region IDisposable
 
         public void Dispose()
         {
@@ -653,6 +696,8 @@ namespace weave
             if (swipeHelper != null)
                 swipeHelper.Swipe -= OnSwipe;
         }
+
+        #endregion
     }
 }
 
