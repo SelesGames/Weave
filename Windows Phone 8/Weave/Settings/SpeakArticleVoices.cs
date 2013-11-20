@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Weave.Customizability;
+using Windows.Phone.Speech.Synthesis;
 
 namespace weave
 {
@@ -26,7 +27,7 @@ namespace weave
             }
             else
             {
-                var voices = Windows.Phone.Speech.Synthesis.InstalledVoices.All
+                var voices = InstalledVoices.All
                     .GetCultureFilteredVoices(nameHint: "Mark")
                     .Select(SpeakArticleVoice.Create);
 

@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Net;
+using System.Text.RegularExpressions;
 
 namespace weave
 {
@@ -12,7 +13,7 @@ namespace weave
         public string CreateSpokenRepresentation()
         {
             var title = Title.Trim();
-            var content = Sanitize(Content).Trim();
+            var content = HttpUtility.HtmlDecode(Sanitize(Content).Trim()).Trim();
 
             var fullText = string.Format(
                 "{0}.\r\n\r\nPublished by {1}.\r\n\r\n{2}",
