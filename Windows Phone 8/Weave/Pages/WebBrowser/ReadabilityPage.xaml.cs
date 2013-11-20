@@ -655,6 +655,16 @@ namespace weave
             //        await text2speech.SpeakTextAsync("Hello world! I'm " + voice.DisplayName + ".");
             //    }
             //}
+
+            /*
+             * courtesy andras
+             var ssml = new StringBuilder(string.Format(@"<?xml version=""1.0"" encoding=""ISO-8859-1""?>
+<speak version=""1.0"" xmlns=""http://www.w3.org/2001/10/synthesis"" xml:lang=""{0}"">", voice.Voice.Language));
+
+            ssml.Append(" <![CDATA[" + articleText + "]]> ");
+            ssml.AppendLine("<mark name=\"end\" /></speak>");
+
+            var formattedText = ssml.ToString();*/
         }
 
         #endregion
