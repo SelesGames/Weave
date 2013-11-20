@@ -587,7 +587,6 @@
     <Content Include="Assets\Icons\wheel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Weave4.0_2013_10_24_18_00_04.sap" />
     <Resource Include="Assets\imageDownloadFailed.jpg" />
     <Content Include="Assets\Login\Facebook.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
