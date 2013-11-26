@@ -242,7 +242,6 @@
     <Compile Include="Services\DisposeAndGCCleanupNavHelper.cs" />
     <Compile Include="Services\Startup\IState.cs" />
     <Compile Include="Services\Startup\StartupIdentityStateMachine.cs" />
-    <Compile Include="Services\Startup\Transition_GetMicrosoftId.cs" />
     <Compile Include="Services\Startup\Transition_GetRandomId.cs" />
     <Compile Include="Services\Startup\Transition_GetUserById.cs" />
     <Compile Include="Services\SwipeGestureHelper.cs" />

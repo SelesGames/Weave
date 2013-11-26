@@ -10,7 +10,6 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -161,7 +160,7 @@ namespace weave
             originalTargetUri = args.EventArgs.Uri;
 
             frame.IsHitTestVisible = false;
-            frame.OverlayText = "Getting your news...";
+            frame.OverlayText = "Loading...";
             frame.IsLoading = true;
 
 
@@ -198,7 +197,7 @@ namespace weave
                 return;
             }
 
-            var stateMachine = new StartupIdentityStateMachine(user);
+            var stateMachine = new StartupIdentityStateMachine(user, permanentState);
             try
             {
                 await stateMachine.Begin();
@@ -213,16 +212,17 @@ namespace weave
             identity.UserId = user.Id;
             suppressIdentityUserIdChanged = false;
 
-            if (settings.StartupMode == StartupMode.Launch)
-            {
-                user.Load(refreshNews: true).Fire();
-            }
-
             await dummyPage.LayoutPopups();
 
             if (stateMachine.FinalState == StartupIdentityStateMachine.State.UserExists)
             {
                 destinationUri = originalTargetUri;
+
+                if (settings.StartupMode == StartupMode.Launch)
+                {
+                    frame.OverlayText = "Getting your news...";
+                    user.Load(refreshNews: true).Fire();
+                }
             }
             else if (stateMachine.FinalState == StartupIdentityStateMachine.State.NoUserFound)
             {

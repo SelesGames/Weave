@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Weave.SavedState;
 using Weave.ViewModels;
 
 namespace weave.Services.Startup
@@ -11,6 +12,7 @@ namespace weave.Services.Startup
     public class StartupIdentityStateMachine
     {
         UserInfo user;
+        PermanentState permState;
         IState currentState;
         bool isComplete = false;
 
@@ -22,9 +24,10 @@ namespace weave.Services.Startup
 
         public State? FinalState { get; private set; }
 
-        public StartupIdentityStateMachine(UserInfo user)
+        public StartupIdentityStateMachine(UserInfo user, PermanentState permState)
         {
             this.user = user;
+            this.permState = permState;
         }
 
         public async Task Begin()
@@ -39,12 +42,12 @@ namespace weave.Services.Startup
 
         Task ChooseNextState()
         {
-            if (currentState is Transition_GetMicrosoftId)
-            {
-                return TransitionGetMicrosoftId();
-            }
+            //if (currentState is Transition_GetMicrosoftId)
+            //{
+            //    return TransitionGetMicrosoftId();
+            //}
 
-            else if (currentState is Transition_GetRandomId)
+            if (currentState is Transition_GetRandomId)
             {
                 return TransitionGetRandomId();
             }
@@ -66,25 +69,26 @@ namespace weave.Services.Startup
         {
             if (user.Id != Guid.Empty)
             {
-                currentState = new Transition_GetUserById(user);
+                currentState = new Transition_GetUserById(user, permState);
             }
             else
             {
-                currentState = new Transition_GetMicrosoftId(user);
+                //currentState = new Transition_GetMicrosoftId(user);
+                currentState = new Transition_GetRandomId(user);
             }
         }
 
-        async Task TransitionGetMicrosoftId()
-        {
-            var state = (Transition_GetMicrosoftId)currentState;
-            await state.Transition();
+        //async Task TransitionGetMicrosoftId()
+        //{
+        //    var state = (Transition_GetMicrosoftId)currentState;
+        //    await state.Transition();
 
-            if (state.CurrentState == Transition_GetMicrosoftId.State.Success)
-                currentState = new Transition_GetUserById(user);
+        //    if (state.CurrentState == Transition_GetMicrosoftId.State.Success)
+        //        currentState = new Transition_GetUserById(user);
 
-            else if (state.CurrentState == Transition_GetMicrosoftId.State.Fail)
-                currentState = new Transition_GetRandomId(user);
-        }
+        //    else if (state.CurrentState == Transition_GetMicrosoftId.State.Fail)
+        //        currentState = new Transition_GetRandomId(user);
+        //}
 
         async Task TransitionGetRandomId()
         {
@@ -92,7 +96,7 @@ namespace weave.Services.Startup
             await state.Transition();
 
             if (state.CurrentState == Transition_GetRandomId.State.Success)
-                currentState = new Transition_GetUserById(user);
+                currentState = new Transition_GetUserById(user, permState);
 
             else if (state.CurrentState == Transition_GetRandomId.State.Fail)
                 throw new CriticalApplicationException();

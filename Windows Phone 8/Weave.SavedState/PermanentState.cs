@@ -83,7 +83,7 @@ namespace Weave.SavedState
             IsFirstTime = true; // start off as true
 
             // DEFAULT ARTICLE LIST SETTINGS
-            IsHideAppBarOnArticleListPageEnabled = true;
+            IsHideAppBarOnArticleListPageEnabled = false;
             ArticleListFormat = ArticleListFormatType.Card;
             ArticleListFontSize = FontSize.Large;
             ArticleListFontName = "Segoe WP SemiLight";
