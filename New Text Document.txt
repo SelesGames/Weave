@@ -1,0 +1,45 @@
+Dear Nick,
+
+I hope all is well!  
+
+I am writing you to let you know that Weave News Reader for Windows 8 is now available in the marketplace.  It can be downloaded here: 
+http://apps.microsoft.com/windows/app/weave-news-reader/62531195-816b-4a42-8962-bce669036645
+
+As you are aware, it uses Windows Azure to power it's REST-based web API.  It uses pretty much every facet of Azure, including the new Azure Cache Service.  Which is incredibly awesome btw.  I saw the other day you were doing a video presentation regarding Azure Caching, which I have bookmarked to watch :)  If you are ever looking for feedback/case studies of someone using the new Cache Service in a production app, I would be happy to provide that!
+
+I also wanted to thank you again for your help with Mobile Services (plus your invaluable help with some other Azure-related stuff).  It was a great experience for myself to be able to talk weekly and to have that level of help!
+
+For this Win8 client, I partnered with Lazyworm Apps (creators of Metrotube and Tweetro for WP/Win8).  They have done an amazing job delivering an visually appealing, elegant, and streamlined news-reading experience that works well on both desktop and tablet!
+
+I hope you try it out :)
+
+Best,
+
+Arash
+
+
+
+Dear Reza,
+
+We haven't spoken in a while, I hope all is well!  Kevin told me that you moved to the L.A. office?
+
+I am writing you to let you know that Weave News Reader for Windows 8 is now available in the marketplace.  It can be downloaded here: 
+http://apps.microsoft.com/windows/app/weave-news-reader/62531195-816b-4a42-8962-bce669036645
+
+The new Weave offers an Azure-based REST API that is designed to replace Google Reader's services.  It offers a similar feature, including the ability to sync article state among multiple devices.  The new Win8 app is the first client to use these new services.  The phone app will be updated soon to use the new services as well.
+
+For the Win8 client, I partnered with Lazyworm Apps (creators of Metrotube and Tweetro for WP/Win8).  They have done an amazing job delivering a visually appealing, elegant, and streamlined news-reading experience that works well on both desktop and tablet!  I hope you try it out :)
+
+Warm regards,
+
+Arash
+
+
+
+
+
+
+
+
+
+
