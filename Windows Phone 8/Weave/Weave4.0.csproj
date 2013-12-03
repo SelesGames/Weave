@@ -182,6 +182,7 @@
     <Compile Include="Services\DummyLogger.cs" />
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
+    <Compile Include="Services\Startup\Transition_MigrateLocalFeedsToCloud.cs" />
     <Compile Include="ViewModels\Grouped News\AllNewsGroup.cs" />
     <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
@@ -682,6 +683,10 @@
       <Project>{D727F239-EE96-4B05-8F17-65871B52B260}</Project>
       <Name>Weave.Article.Service.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.DTOs\Weave.Article.Service.DTOs.csproj">
+      <Project>{2B4D1AF0-8C77-475D-8D14-DB7B506F9450}</Project>
+      <Name>Weave.Article.Service.DTOs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.Contracts\Weave.Identity.Service.Contracts.csproj">
       <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
       <Name>Weave.Identity.Service.Contracts</Name>
@@ -757,6 +762,10 @@
     <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
       <Name>Weave.Customizability</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
+      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
+      <Name>Weave.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>

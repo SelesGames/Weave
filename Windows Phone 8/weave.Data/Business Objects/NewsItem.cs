@@ -42,39 +42,7 @@ namespace weave
         }
         bool hasBeenViewed;
 
-        public enum ColoringDisplayState
-        {
-            Normal,
-            Viewed,
-            Favorited
-        }
-
-        public ColoringDisplayState DisplayState
-        {
-            get
-            {
-                if (IsFavorite)
-                    return ColoringDisplayState.Favorited;
-                else
-                    return HasBeenViewed ? ColoringDisplayState.Viewed : ColoringDisplayState.Normal;
-            }
-        }
-
         public FeedSource FeedSource { get; set; }
-
-        public double SortRating 
-        {
-            get { return CalculateSortRating(PublishDateTime); } 
-        }
-
-        static double CalculateSortRating(DateTime dateTime)
-        {
-            double elapsedHours = (DateTime.Now - dateTime).TotalHours;
-            if (elapsedHours <= 0)
-                elapsedHours = 0.0001;
-            double value = 1d / elapsedHours;
-            return value;
-        }
 
         public string OriginalSource
         {
@@ -84,28 +52,6 @@ namespace weave
         public string OriginalFeedUri
         {
             get { return FeedSource.FeedUri; }
-        }
-
-        public string PublishDate
-        {
-            get { return PublishDateTime.ElapsedTime(); }
-        }
-
-        public string FormattedForMainPageSourceAndDate
-        {
-            get
-            {
-                return string.Format("{0} • {1}", FeedSource.FeedName, PublishDateTime.ElapsedTime());
-            }
-        }
-
-        public bool HasImage
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(ImageUrl) &&
-                    Uri.IsWellFormedUriString(ImageUrl, UriKind.Absolute);
-            }
         }
 
         public override string ToString()

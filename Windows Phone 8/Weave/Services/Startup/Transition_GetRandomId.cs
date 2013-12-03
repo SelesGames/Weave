@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Weave.ViewModels;
 
-namespace weave.Services.Startup
+namespace Weave.Services.Startup
 {
     public class Transition_GetRandomId : IState
     {

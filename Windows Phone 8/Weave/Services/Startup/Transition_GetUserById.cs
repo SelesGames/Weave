@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Weave.SavedState;
 using Weave.ViewModels;
 
-namespace weave.Services.Startup
+namespace Weave.Services.Startup
 {
     public class Transition_GetUserById : IState
     {
