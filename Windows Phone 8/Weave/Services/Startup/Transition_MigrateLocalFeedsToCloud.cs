@@ -5,6 +5,10 @@ using Weave.Article.Service.Contracts;
 using Weave.SavedState;
 using Weave.ViewModels;
 using Weave.Article.Service.DTOs.ServerIncoming;
+using Weave.UI.Frame;
+using SelesGames;
+using System.Collections.Generic;
+using System.Windows;
 
 
 namespace Weave.Services.Startup
@@ -14,11 +18,15 @@ namespace Weave.Services.Startup
         UserInfo user;
         PermanentState permState;
         IWeaveArticleService articleService;
+        OverlayFrame frame;
+        List<weave.NewsItem> failedFavorites;
 
         public Transition_MigrateLocalFeedsToCloud(UserInfo user, PermanentState permState)
         {
             this.user = user;
             this.permState = permState;
+            frame = ServiceResolver.Get<OverlayFrame>();
+            failedFavorites = new List<weave.NewsItem>();
         }
 
         public async Task Transition()
@@ -30,11 +38,12 @@ namespace Weave.Services.Startup
             else
             {
                 var dal = new weave.Data.Weave4DataAccessLayer();
+                List<weave.FeedSource> existingFeeds = null;
 
                 try
                 {
                     // migrate the feeds
-                    var existingFeeds = await dal.Feeds.Value;
+                    existingFeeds = await dal.Feeds.Value;
                     user.Feeds = new ObservableCollection<Feed>(existingFeeds.Select(o =>
                         new Feed
                         {
@@ -44,31 +53,50 @@ namespace Weave.Services.Startup
                             Category = o.Category,
                         }));
                     await user.Create();
+                }
+                catch
+                {
+                    MessageBox.Show("Unable to import your existing feeds.  Please ensure you have an internet connection, and relaunch the app to try again.", "Whoops!", MessageBoxButton.OK);
+                    Application.Current.Terminate();
+                }
 
-                    // migrate any favorited articles
-                    var favorites = existingFeeds.SelectMany(o => o.News).Where(o => o.IsFavorite);
+                // migrate any favorited articles
+                var favorites = existingFeeds.SelectMany(o => o.News).Where(o => o.IsFavorite).ToList();
 
-                    foreach (var o in favorites)
+                var totalNumberOfFavorites = favorites.Count;
+                int index = 0;
+
+                foreach (var o in favorites)
+                {
+                    frame.OverlayText = string.Format(
+                        "Adding favorite articles ({0} remaining)", totalNumberOfFavorites - index++);
+                    await TrySaveFavoriteArticle(o);
+                }
+            }
+        }
+
+        async Task TrySaveFavoriteArticle(weave.NewsItem o)
+        {
+            try
+            {
+                await articleService.AddFavorite(
+                    user.Id,
+                    new SavedNewsItem
                     {
-                        await articleService.AddFavorite(
-                            user.Id,
-                            new SavedNewsItem
-                            {
-                                SourceName = o.OriginalSource,
-                                Link = o.Link,
-                                ImageUrl = o.ImageUrl,
-                                UtcPublishDateTime = o.PublishDateTime.ToString(),
-                                Title = o.Title,
-                                PodcastUri = o.PodcastUri,
-                                ZuneAppId = o.ZuneAppId,
-                                VideoUri = o.VideoUri,
-                                YoutubeId = o.YoutubeId,
-                            });
-                    }
-                }
-                catch 
-                { 
-                }
+                        SourceName = o.OriginalSource,
+                        Link = o.Link,
+                        ImageUrl = o.ImageUrl,
+                        UtcPublishDateTime = o.PublishDateTime.ToString(),
+                        Title = o.Title,
+                        PodcastUri = o.PodcastUri,
+                        ZuneAppId = o.ZuneAppId,
+                        VideoUri = o.VideoUri,
+                        YoutubeId = o.YoutubeId,
+                    });
+            }
+            catch
+            {
+                failedFavorites.Add(o);
             }
         }
     }
