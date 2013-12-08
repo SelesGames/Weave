@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Navigation;
 using Weave.LiveTile.ScheduledAgent;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
+using Weave.Settings;
 using Weave.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
 
-namespace weave
+namespace Weave.WP.ViewModels.MainPage
 {
     public class MainPageViewModel : INotifyPropertyChanged, IDisposable
     {
@@ -26,7 +28,7 @@ namespace weave
 
         List<NewsItem> displayedNews;
         List<NewsItem> previouslyDisplayedNews = new List<NewsItem>();
-        MainPage view;
+        weave.MainPage view;
         TombstoneState tombstoneState;
         UserInfo user;
         int lastPageLastTimeItWasSet = -1;
@@ -65,7 +67,7 @@ namespace weave
 
         #region Constructor
 
-        public MainPageViewModel(MainPage view, string header, NewsItemGroup group)
+        public MainPageViewModel(weave.MainPage view, string header, NewsItemGroup group)
         {
             this.view = view;
             Header = header;

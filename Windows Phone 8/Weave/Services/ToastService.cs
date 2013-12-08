@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using ToastPromptControl;
 
-namespace weave
+namespace Weave.Services
 {
     public static class ToastService
     {

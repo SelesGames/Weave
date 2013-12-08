@@ -4,9 +4,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Weave.Mobilizer.Client;
 using Weave.SavedState;
+using Weave.Settings;
 using Weave.ViewModels;
 
-namespace weave
+namespace Weave.WP.ViewModels
 {
     public class ReadabilityPageViewModel
     {

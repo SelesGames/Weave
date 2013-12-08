@@ -1,7 +1,7 @@
 ﻿using Microsoft.Phone.Controls;
 using Weave.ViewModels;
 
-namespace weave
+namespace Weave.Settings
 {
     public class TombstoneState
     {

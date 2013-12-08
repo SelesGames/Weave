@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
+using Weave.Settings;
 
 namespace weave
 {

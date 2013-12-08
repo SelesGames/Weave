@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Weave.Customizability;
+using Weave.Settings;
 using Weave.ViewModels;
 
 namespace weave

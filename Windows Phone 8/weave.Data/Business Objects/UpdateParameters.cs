@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using System;
 
-namespace weave
+namespace Weave.Data
 {
     [ProtoContract] 
     public class UpdateParameters

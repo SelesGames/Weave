@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace weave.Services
+namespace Weave.Services
 {
     internal class DummyLogger : ILogger
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace weave
+namespace Weave.Settings
 {
     public class AppSettings
     {

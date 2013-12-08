@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace weave
+namespace Weave.Data
 {
     public static class ExtensionMethods
     {
@@ -29,9 +29,9 @@ namespace weave
         //    return feeds.AllNews().OrderByDescending(o => o.PublishDateTime);
         //}
 
-        public static bool AreThereTooManyFeeds(this IEnumerable<FeedSource> feeds)
-        {
-            return feeds.Count() > weave.Data.Weave4DataAccessLayer.MaxAllowedSources;
-        }
+        //public static bool AreThereTooManyFeeds(this IEnumerable<FeedSource> feeds)
+        //{
+        //    return feeds.Count() > Weave.Data.Weave4DataAccessLayer.MaxAllowedSources;
+        //}
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace weave
+namespace Weave.Data
 {
     internal static class DateTimeDisplayFormattingExtensions
     {

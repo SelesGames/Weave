@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using Weave.Customizability;
 
-namespace weave
+namespace Weave.Settings
 {
     /// <summary>
     /// Used to set FontSize for both the Article List text and the Article text

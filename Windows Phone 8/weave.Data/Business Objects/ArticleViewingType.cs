@@ -1,5 +1,5 @@
 ﻿
-namespace weave
+namespace Weave.Data
 {
     public enum ArticleViewingType
     {

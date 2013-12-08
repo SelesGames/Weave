@@ -9,6 +9,8 @@ using System.Linq;
 using System.Windows;
 using Weave.FeedLibrary;
 using Weave.SavedState;
+using Weave.Services;
+using Weave.Settings;
 using Weave.ViewModels;
 
 namespace weave
@@ -53,12 +55,6 @@ namespace weave
             {
                 var enabledCategories = categories.Where(o => o.IsEnabled).Select(o => o.Name).ToList();
                 var feedsToAdd = library.Feeds.Value.Where(o => enabledCategories.Contains(o.Category)).ToList();
-                //var dal = ServiceResolver.Get<Data.Weave4DataAccessLayer>();
-                //foreach (var feed in feedsToAdd)
-                //    await dal.AddCustomFeed(feed);
-
-                //// TODO: SHOW SOME PROGRESS BAR OR SOMETHING
-                //await dal.SaveFeeds();
 
                 var frame = GlobalNavigationService.CurrentFrame;
 
@@ -75,6 +71,10 @@ namespace weave
                 {
                     if (ex.Response.ReasonPhrase != "A user with that Id already exists")
                         throw;
+                }
+                catch(Exception ex)
+                {
+                    DebugEx.WriteLine(ex);
                 }
                 await user.Load(refreshNews: true);
 

@@ -3,11 +3,11 @@ using System;
 using System.ComponentModel;
 using System.Runtime.Serialization;
 
-namespace weave
+namespace Weave.Data
 {
     [DataContract]
     [ProtoContract]
-    public class NewsItem : INotifyPropertyChanged, INewsItem
+    public class NewsItem : INotifyPropertyChanged//, INewsItem
     {
         [DataMember][ProtoMember(1)]    public Guid FeedId { get; set; }
         [DataMember][ProtoMember(2)]    public string Title { get; set; }

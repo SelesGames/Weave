@@ -221,7 +221,7 @@
       <DependentUpon>CustomList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
-    <Compile Include="Business Objects\NewsItemComparer.cs">
+    <Compile Include="ViewModels\NewsItemComparer.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Library\Extension Methods\EventHandlerExtensions.cs">
@@ -232,7 +232,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Library\Value Converters\StringToLocalImageBrushConverter.cs" />
-    <Compile Include="Pages\WebBrowser\MobilizedArticle.cs" />
+    <Compile Include="ViewModels\MobilizedArticle.cs" />
     <Compile Include="Pages\WebBrowser\TileButton.xaml.cs">
       <DependentUpon>TileButton.xaml</DependentUpon>
     </Compile>
@@ -249,11 +249,11 @@
     <Compile Include="Services\SystemTrayNavigationSetter.cs" />
     <Compile Include="Settings\ArticleListFormats.cs" />
     <Compile Include="Settings\BindableMainPageFontStyle.cs" />
-    <Compile Include="Settings\FontSets\ArticleListFontSet.cs" />
-    <Compile Include="Settings\FontSets\FontSet.cs" />
+    <Compile Include="Settings\ArticleListFontSet.cs" />
+    <Compile Include="Settings\FontSet.cs" />
     <Compile Include="Settings\FontSizes.cs" />
     <Compile Include="Settings\SpeakArticleVoices.cs" />
-    <Compile Include="Settings\FontSets\ArticleFontSet.cs" />
+    <Compile Include="Settings\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
     <Compile Include="ViewModels\Grouped News\ReadArticlesGroup.cs" />
     <Compile Include="ViewModels\Grouped News\FavoriteArticlesGroup.cs" />

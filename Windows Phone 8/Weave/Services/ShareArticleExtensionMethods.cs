@@ -1,13 +1,14 @@
 ﻿using SelesGames;
-using weave.Services.Instapaper;
+using Weave.Services.Instapaper;
+using Weave.Settings;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 
-namespace weave
+namespace Weave.Services
 {
     public static class ShareArticleExtensionMethods
     {
-        public static void ShareToEmail(this INewsItem newsItem)
+        public static void ShareToEmail(this NewsItem newsItem)
         {
             if (newsItem == null)
                 return;
@@ -21,7 +22,7 @@ namespace weave
                     AppSettings.Instance.AppName));
         }
 
-        public static void ShareToSocial(this INewsItem newsItem)
+        public static void ShareToSocial(this NewsItem newsItem)
         {
             if (newsItem == null)
                 return;
@@ -29,7 +30,7 @@ namespace weave
             SelesGames.Phone.TaskService.ToShareLinkTask(newsItem.Link, newsItem.Title, newsItem.Title);
         }
 
-        public static void ShareToSms(this INewsItem newsItem)
+        public static void ShareToSms(this NewsItem newsItem)
         {
             if (newsItem == null)
                 return;
@@ -37,7 +38,7 @@ namespace weave
             SelesGames.Phone.TaskService.ToSmsComposeTask(string.Format("{0} {1}", newsItem.Title, newsItem.Link));
         }
 
-        public static void SendToInstapaper(this INewsItem newsItem)
+        public static void SendToInstapaper(this NewsItem newsItem)
         {
             if (newsItem == null)
                 return;
@@ -45,7 +46,7 @@ namespace weave
             InstapaperService.SendToInstapaper(newsItem);
         }
 
-        public static void SendToInternetExplorer(this INewsItem newsItem)
+        public static void SendToInternetExplorer(this NewsItem newsItem)
         {
             if (newsItem == null)
                 return;

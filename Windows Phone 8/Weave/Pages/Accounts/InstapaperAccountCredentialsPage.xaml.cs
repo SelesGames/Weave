@@ -3,7 +3,7 @@ using SelesGames.Instapaper;
 using System.Net;
 using System.Net.Http;
 using System.Windows;
-using weave.Services.Instapaper;
+using Weave.Services.Instapaper;
 
 namespace weave
 {

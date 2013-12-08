@@ -1,9 +1,10 @@
 ﻿using Microsoft.Phone.Controls;
 using System;
 using System.Windows.Navigation;
+using weave;
 using Weave.ViewModels;
 
-namespace weave
+namespace Weave.Services
 {
     public class MainPageSourcesRefresher : IDisposable
     {

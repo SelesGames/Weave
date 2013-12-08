@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Weave.ViewModels;
 
-namespace weave
+namespace Weave.WP.ViewModels.GroupedNews
 {
     public class FavoriteArticlesGroup : NewsItemGroup
     {

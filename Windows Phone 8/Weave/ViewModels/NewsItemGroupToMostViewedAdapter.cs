@@ -4,8 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.SavedState;
+using Weave.WP.ViewModels.GroupedNews;
 
-namespace weave
+namespace Weave.WP.ViewModels
 {
     public class NewsItemGroupToMostViewedAdapter : IDisposable
     {

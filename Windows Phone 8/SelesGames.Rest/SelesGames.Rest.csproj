@@ -85,7 +85,6 @@
   <ItemGroup>
     <Compile Include="BaseRestClient.cs" />
     <Compile Include="Clients\JsonDotNetRestClient.cs" />
-    <Compile Include="Clients\ProtobufRestClient.cs" />
     <Compile Include="Clients\DelegateRestClient.cs" />
     <Compile Include="Headers.cs" />
     <Compile Include="Clients\LinqToXmlRestClient.cs" />
@@ -97,9 +96,6 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\lib\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib.WindowsPhone7">
       <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>

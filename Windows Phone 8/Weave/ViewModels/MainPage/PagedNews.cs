@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
 
-namespace weave
+namespace Weave.WP.ViewModels.MainPage
 {
     public class PagedNewsItems
     {

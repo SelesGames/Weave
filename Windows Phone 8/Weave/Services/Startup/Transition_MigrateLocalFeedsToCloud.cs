@@ -19,14 +19,14 @@ namespace Weave.Services.Startup
         PermanentState permState;
         IWeaveArticleService articleService;
         OverlayFrame frame;
-        List<weave.NewsItem> failedFavorites;
+        List<Weave.Data.NewsItem> failedFavorites;
 
         public Transition_MigrateLocalFeedsToCloud(UserInfo user, PermanentState permState)
         {
             this.user = user;
             this.permState = permState;
             frame = ServiceResolver.Get<OverlayFrame>();
-            failedFavorites = new List<weave.NewsItem>();
+            failedFavorites = new List<Weave.Data.NewsItem>();
         }
 
         public async Task Transition()
@@ -37,8 +37,8 @@ namespace Weave.Services.Startup
             }
             else
             {
-                var dal = new weave.Data.Weave4DataAccessLayer();
-                List<weave.FeedSource> existingFeeds = null;
+                var dal = new Weave.Data.Weave4DataAccessLayer();
+                List<Weave.Data.FeedSource> existingFeeds = null;
 
                 try
                 {
@@ -75,7 +75,7 @@ namespace Weave.Services.Startup
             }
         }
 
-        async Task TrySaveFavoriteArticle(weave.NewsItem o)
+        async Task TrySaveFavoriteArticle(Weave.Data.NewsItem o)
         {
             try
             {

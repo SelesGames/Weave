@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Weave.ViewModels;
 
-namespace weave
+namespace Weave.WP.ViewModels
 {
     public class NewsItemComparer : IEqualityComparer<NewsItem>
     {

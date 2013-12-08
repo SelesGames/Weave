@@ -2,7 +2,7 @@
 using SelesGames.IsoStorage;
 using System.Threading.Tasks;
 
-namespace weave.Services.Instapaper
+namespace Weave.Services.Instapaper
 {
     public class InstapaperAccount2
     {

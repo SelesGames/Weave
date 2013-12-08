@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.RegularExpressions;
 
-namespace weave
+namespace Weave.WP.ViewModels
 {
     internal class MobilizedArticle
     {

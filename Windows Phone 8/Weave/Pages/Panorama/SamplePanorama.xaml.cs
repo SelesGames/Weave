@@ -12,11 +12,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
-using weave.Services;
+using Weave.Services;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Identity;
+using Weave.Settings;
+using Weave.WP.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
 
 namespace weave
 {

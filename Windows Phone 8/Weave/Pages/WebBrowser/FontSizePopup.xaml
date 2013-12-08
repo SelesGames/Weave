@@ -7,6 +7,7 @@
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
 	xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
 	xmlns:Telerik_Windows_Controls_SlideView="clr-namespace:Telerik.Windows.Controls.SlideView;assembly=Telerik.Windows.Controls.Primitives" 
+    xmlns:settings="clr-namespace:Weave.Settings"
 	xmlns:weave="clr-namespace:weave"
 	x:Class="weave.FontSizePopup"
 	mc:Ignorable="d"
@@ -45,8 +46,8 @@
 				<TextBlock Text="{Binding DisplayName}" FontSize="{Binding TitleSize}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource PhoneFontFamilyNormal}" />
 			</Grid>
 		</DataTemplate>
-		<weave:FontSizes x:Key="FontSizes" />
-		<weave:ArticleFontSet x:Key="Fonts" />
+		<settings:FontSizes x:Key="FontSizes" />
+		<settings:ArticleFontSet x:Key="Fonts" />
 		<SolidColorBrush x:Key="SubtleBrush" Color="#BFFFFFFF"/>
 		<SolidColorBrush x:Key="ForegroundBrush" Color="White"/>
 	</UserControl.Resources>

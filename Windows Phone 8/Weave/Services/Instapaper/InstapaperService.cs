@@ -1,14 +1,15 @@
 ﻿using SelesGames.Instapaper;
 using System;
 using System.Windows;
+using Weave.ViewModels;
 
-namespace weave.Services.Instapaper
+namespace Weave.Services.Instapaper
 {
     public static class InstapaperService
     {
-        static INewsItem pendingRequest;
+        static NewsItem pendingRequest;
 
-        public static async void SendToInstapaper(INewsItem newsItem)
+        public static async void SendToInstapaper(NewsItem newsItem)
         {
             InstapaperAccount account = null;
 

@@ -5,7 +5,7 @@ using Weave.ViewModels;
 using System.Linq;
 using Portable.Common;
 
-namespace weave
+namespace Weave.WP.ViewModels.GroupedNews
 {
     public class FeedGroup : NewsItemGroup
     {

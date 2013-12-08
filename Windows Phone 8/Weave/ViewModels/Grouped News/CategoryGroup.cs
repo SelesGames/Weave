@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Weave.ViewModels;
 using Portable.Common;
 
-namespace weave
+namespace Weave.WP.ViewModels.GroupedNews
 {
     public class CategoryGroup : NewsItemGroup
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using Weave.WP.ViewModels.GroupedNews;
 
 namespace weave
 {

@@ -7,7 +7,7 @@ using System.Windows.Media;
 using Weave.Customizability;
 using Weave.SavedState;
 
-namespace weave
+namespace Weave.Settings
 {
     public class StandardThemeSet : List<ReadingTheme>, INotifyPropertyChanged
     {

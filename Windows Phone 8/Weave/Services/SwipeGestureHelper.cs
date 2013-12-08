@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace weave
+namespace Weave.Services
 {
     internal class SwipeGestureHelper : IDisposable
     {

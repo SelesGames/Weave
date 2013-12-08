@@ -1,8 +1,9 @@
 ﻿using Microsoft.Phone.Controls;
 using System;
 using System.Linq;
+using weave;
 
-namespace weave
+namespace Weave.Services
 {
     public class ArticleListNavigationCorrector : IDisposable
     {

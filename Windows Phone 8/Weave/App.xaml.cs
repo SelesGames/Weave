@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using Weave.Services;
+using Weave.Settings;
 
 namespace weave
 {

@@ -2,7 +2,7 @@
 using System.Linq;
 using Weave.Customizability;
 
-namespace weave
+namespace Weave.Settings
 {
     public class FontSet : List<FontProperties>
     {

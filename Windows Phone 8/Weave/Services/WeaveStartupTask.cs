@@ -17,10 +17,8 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using weave.Resources;
-using weave.Services;
-using weave.Services.Startup;
+using Weave.Services.Startup;
 using Weave.FeedLibrary;
-using Weave.NinjectKernel;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
@@ -29,8 +27,11 @@ using Weave.ViewModels.Identity;
 using Weave.ViewModels.Repository;
 using ArticleService = Weave.Article.Service.Client;
 using UserService = Weave.User.Service.Client;
+using Weave.Settings;
+using Weave.WP.ViewModels;
+using weave;
 
-namespace weave
+namespace Weave.Services
 {
     public class WeaveStartupTask
     {

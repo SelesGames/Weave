@@ -23,6 +23,10 @@ using Weave.ViewModels.Contracts.Client;
 using Portable.Common;
 using System.Net;
 using System.Windows.Navigation;
+using Weave.WP.ViewModels.MainPage;
+using Weave.WP.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
+using Weave.Services;
 
 
 namespace weave

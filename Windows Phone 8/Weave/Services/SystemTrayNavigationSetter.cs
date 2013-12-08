@@ -1,7 +1,8 @@
 ﻿using Microsoft.Phone.Controls;
+using weave;
 using Weave.SavedState;
 
-namespace weave
+namespace Weave.Services
 {
     public class SystemTrayNavigationSetter
     {

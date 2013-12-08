@@ -4,10 +4,12 @@ using SelesGames.Phone;
 using System;
 using System.Net;
 using System.Windows;
+using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
 
-namespace weave
+namespace Weave.Services
 {
     public static class GlobalNavigationService
     {
@@ -76,7 +78,7 @@ namespace weave
             SafelyNavigateTo(string.Format("/weave;component/Pages/WebBrowser/ReadabilityPage.xaml"));
         }
 
-        public static void ToInternetExplorer(INewsItem newsItem)
+        public static void ToInternetExplorer(NewsItem newsItem)
         {
             //new WebBrowserTask { Uri = Uri.EscapeDataString(newsItem.Link).ToUri() }.Show();
             if (newsItem != null && newsItem.Link != null)

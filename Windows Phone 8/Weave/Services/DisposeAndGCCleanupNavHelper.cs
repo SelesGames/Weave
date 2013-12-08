@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
 
-namespace weave
+namespace Weave.Services
 {
     /// <summary>
     /// Class that detects BackNavigation events, disposes the page being navigated away from, and calls Garbage Collection

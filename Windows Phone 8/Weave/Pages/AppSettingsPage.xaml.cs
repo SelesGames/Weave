@@ -9,6 +9,7 @@ using System.Windows.Data;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
+using Weave.Settings;
 using Windows.Phone.System.UserProfile;
 
 namespace weave

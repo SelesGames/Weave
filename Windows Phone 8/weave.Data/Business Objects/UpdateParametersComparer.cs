@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace weave
+namespace Weave.Data
 {
     internal class UpdateParametersComparer : IEqualityComparer<UpdateParameters>
     {

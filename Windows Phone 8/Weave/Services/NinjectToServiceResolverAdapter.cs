@@ -2,7 +2,7 @@
 using SelesGames;
 using System;
 
-namespace Weave.NinjectKernel
+namespace Weave.Services
 {
     public class NinjectToServiceResolverAdapter : IServiceResolver
     {

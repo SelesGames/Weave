@@ -7,8 +7,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using Weave.ViewModels;
+using Weave.WP.ViewModels.GroupedNews;
 
-namespace weave
+namespace Weave.WP.ViewModels
 {
     public class FeedsToNewsItemGroupAdapter : IDisposable
     {

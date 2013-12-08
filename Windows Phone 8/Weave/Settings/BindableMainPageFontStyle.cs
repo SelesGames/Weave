@@ -8,8 +8,9 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using Weave.SavedState;
+using Weave.Settings;
 
-namespace weave
+namespace Weave.Settings
 {
     public class BindableMainPageFontStyle : INotifyPropertyChanged
     {

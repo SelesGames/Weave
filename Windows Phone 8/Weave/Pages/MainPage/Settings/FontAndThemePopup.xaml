@@ -7,6 +7,7 @@
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
 	xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
 	xmlns:weave="clr-namespace:weave"
+    xmlns:settings="clr-namespace:Weave.Settings"
 	x:Class="weave.FontAndThemePopup"
 	mc:Ignorable="d"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -61,9 +62,9 @@
 			</StackPanel>
 		</DataTemplate-->
 
-		<weave:FontSizes x:Key="FontSizes" />
-		<weave:ArticleListFontSet x:Key="Fonts" />
-		<weave:ArticleListFormats x:Key="ArticleListFormats" />
+		<settings:FontSizes x:Key="FontSizes" />
+        <settings:ArticleListFontSet x:Key="Fonts" />
+        <settings:ArticleListFormats x:Key="ArticleListFormats" />
 
 		<SolidColorBrush x:Key="SubtleBrush" Color="#BFFFFFFF"/>
 		<SolidColorBrush x:Key="ForegroundBrush" Color="White"/>

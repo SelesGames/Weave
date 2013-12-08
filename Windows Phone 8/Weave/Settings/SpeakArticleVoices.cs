@@ -6,7 +6,7 @@ using System.Linq;
 using Weave.Customizability;
 using Windows.Phone.Speech.Synthesis;
 
-namespace weave
+namespace Weave.Settings
 {
     public class SpeakArticleVoices : List<SpeakArticleVoice>
     {

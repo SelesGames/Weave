@@ -18,8 +18,11 @@ using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
+using Weave.Services;
+using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
+using Weave.WP.ViewModels;
 
 namespace weave
 {
