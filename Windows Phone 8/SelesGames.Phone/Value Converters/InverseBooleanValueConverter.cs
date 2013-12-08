@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace SelesGames.Phone
+namespace SelesGames.Phone.ValueConverters
 {
     public class InverseBooleanValueConverter : IValueConverter
     {

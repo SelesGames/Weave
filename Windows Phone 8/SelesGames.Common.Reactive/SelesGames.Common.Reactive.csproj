@@ -86,7 +86,7 @@
     <Compile Include="EventPattern.cs" />
     <Compile Include="Extension Methods\ControlsExtensions.cs" />
     <Compile Include="Extension Methods\ISchedulerExtensions.cs" />
-    <Compile Include="Extension Methods\ObservableExtensions.cs" />
+    <Compile Include="Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Extension Methods\ReactiveExtensions.cs" />
     <Compile Include="Extension Methods\ReactiveExtensions.Timers.cs" />
     <Compile Include="Extension Methods\StoryboardExtensions.cs" />

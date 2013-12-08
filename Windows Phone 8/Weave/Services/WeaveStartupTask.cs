@@ -556,7 +556,6 @@ namespace Weave.Services
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
             kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
-            kernel.Bind<ILogger>().ToConstant(new DummyLogger()).InSingletonScope();
         }
 
         #endregion

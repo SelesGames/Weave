@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SelesGames.Phone.ValueConverters;
+using System;
 using System.ComponentModel;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;

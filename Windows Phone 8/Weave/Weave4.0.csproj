@@ -179,7 +179,6 @@
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
     <Compile Include="Services\DataStorageClient.cs" />
-    <Compile Include="Services\DummyLogger.cs" />
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="Services\Startup\Transition_MigrateLocalFeedsToCloud.cs" />
@@ -197,10 +196,7 @@
     <Compile Include="Pages\MainPage\NewsItemControls\CardNewsItemControl.xaml.cs">
       <DependentUpon>CardNewsItemControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Library\Extension Methods\ICollectionExtensions.cs" />
-    <Compile Include="Library\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Library\Extension Methods\SilverlightToolkitExtensions.cs" />
-    <Compile Include="Library\Extension Methods\VoiceInformationExtensions.cs" />
     <Compile Include="Pages\AppSettingsPage.xaml.cs">
       <DependentUpon>AppSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -227,7 +223,6 @@
     <Compile Include="Library\Extension Methods\EventHandlerExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Library\Extension Methods\PerformanceProgressBarExtensions.cs" />
     <Compile Include="Library\TiltContentControl.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -267,7 +262,6 @@
     <Compile Include="Pages\MainPage\MainPageNavigationDropDownList.xaml.cs">
       <DependentUpon>MainPageNavigationDropDownList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Library\Value Converters\DelegateValueConverter.cs" />
     <Compile Include="Pages\Accounts\InstapaperAccountCredentialsPage.xaml.cs">
       <DependentUpon>InstapaperAccountCredentialsPage.xaml</DependentUpon>
     </Compile>

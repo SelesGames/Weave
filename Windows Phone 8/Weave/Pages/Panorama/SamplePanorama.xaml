@@ -9,6 +9,7 @@
 	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
 	xmlns:wc="clr-namespace:Weave.UI.Controls;assembly=Weave.UI.Controls"
 	xmlns:sgcore="clr-namespace:SelesGames.Phone;assembly=SelesGames.Phone"
+	xmlns:sgConverters="clr-namespace:SelesGames.Phone.ValueConverters;assembly=SelesGames.Phone"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
@@ -36,8 +37,8 @@
 			<DataTemplate x:Key="MostViewedItemTemplate">
 				<Button Style="{StaticResource MostViewedButtonTemplate}" toolkit:TiltEffect.IsTiltEnabled="True" Tap="OnMostViewedTapped" />
 			</DataTemplate>
-			
-			<sgcore:InverseBooleanValueConverter x:Key="InverseBool" />
+
+            <sgConverters:InverseBooleanValueConverter x:Key="InverseBool" />
 			<local:UserIdConverter x:Key="IdConverter" />
 			<SolidColorBrush x:Key="TextSubtleBrush" Color="#99FFFFFF"/>
 		</ResourceDictionary>

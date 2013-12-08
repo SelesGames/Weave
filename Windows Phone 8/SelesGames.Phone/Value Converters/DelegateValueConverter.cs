@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Data;
 
-namespace SelesGames.Phone
+namespace SelesGames.Phone.ValueConverters
 {
     public class DelegateValueConverter : IValueConverter
     {
@@ -13,7 +14,7 @@ namespace SelesGames.Phone
             this.convertBack = convertBack;
         }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (convert != null)
                 return convert(value);
@@ -21,7 +22,7 @@ namespace SelesGames.Phone
                 return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (convertBack != null)
                 return convertBack(value);
@@ -41,7 +42,7 @@ namespace SelesGames.Phone
             this.convertBack = convertBack;
         }
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (convert != null && value is TInput)
                 return convert((TInput)value);
@@ -49,7 +50,7 @@ namespace SelesGames.Phone
                 return null;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (convertBack != null && value is TOutput)
                 return convertBack((TOutput)value);
