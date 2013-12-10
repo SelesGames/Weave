@@ -38,6 +38,16 @@ namespace Weave.Services
                 }
                 catch { }
             }
+
+            else if (currentPage is MainPage)
+            {
+                DebugEx.WriteLine("getting latest feeds for user, no refresh");
+                try
+                {
+                    await user.LoadFeeds(refresh: false);
+                }
+                catch { }
+            }
         }
 
         public void Dispose()
