@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
-using Weave.Article.Service.Contracts;
-using Weave.Article.Service.DTOs.ServerIncoming;
 using Weave.SavedState;
 using Weave.UI.Frame;
 using Weave.ViewModels;
@@ -65,8 +62,7 @@ namespace Weave.Services.Startup
             catch
             {
                 CurrentState = State.Fail;
-                MessageBox.Show("Unable to import your existing feeds.  Please ensure you have an internet connection, and relaunch the app to try again.", "Whoops!", MessageBoxButton.OK);
-                Application.Current.Terminate();
+                return;
             }
 
             // migrate any favorited articles
@@ -95,20 +91,6 @@ namespace Weave.Services.Startup
             try
             {
                 await user.Bookmark(Convert(o), BookmarkType.Favorite);
-                //await articleService.AddFavorite(
-                //    user.Id,
-                //    new SavedNewsItem
-                //    {
-                //        SourceName = o.OriginalSource,
-                //        Link = o.Link,
-                //        ImageUrl = o.ImageUrl,
-                //        UtcPublishDateTime = o.PublishDateTime.ToString(),
-                //        Title = o.Title,
-                //        PodcastUri = o.PodcastUri,
-                //        ZuneAppId = o.ZuneAppId,
-                //        VideoUri = o.VideoUri,
-                //        YoutubeId = o.YoutubeId,
-                //    });
             }
             catch
             {

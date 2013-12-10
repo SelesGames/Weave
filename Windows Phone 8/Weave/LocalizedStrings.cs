@@ -1,6 +1,6 @@
-﻿using weave.Resources;
+﻿using Weave.Resources;
 
-namespace weave
+namespace Weave
 {
     /// <summary>
     /// Provides access to string resources.

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using Weave.SavedState;
 using Weave.ViewModels;
 
 namespace Weave.Services.Startup
 {
-    public class CriticalApplicationException : Exception
-    {
-    }
-
     public class StartupIdentityStateMachine
     {
         UserInfo user;
@@ -40,26 +37,6 @@ namespace Weave.Services.Startup
             }
         }
 
-        Task ChooseNextState()
-        {
-            //if (currentState is Transition_GetMicrosoftId)
-            //{
-            //    return TransitionGetMicrosoftId();
-            //}
-
-            if (currentState is Transition_GetRandomId)
-            {
-                return TransitionGetRandomId();
-            }
-
-            else if (currentState is Transition_GetUserById)
-            {
-                return TransitionGetUserById();
-            }
-
-            else throw new Exception("unidentified transition state");
-        }
-
 
 
 
@@ -76,6 +53,31 @@ namespace Weave.Services.Startup
                 //currentState = new Transition_GetMicrosoftId(user);
                 currentState = new Transition_GetRandomId(user);
             }
+        }
+
+        Task ChooseNextState()
+        {
+            //if (currentState is Transition_GetMicrosoftId)
+            //{
+            //    return TransitionGetMicrosoftId();
+            //}
+
+            if (currentState is Transition_GetRandomId)
+            {
+                return TransitionGetRandomId();
+            }
+
+            else if (currentState is Transition_MigrateLocalFeedsToCloud)
+            {
+                return TransitionRecoverLostFeeds();
+            }
+
+            else if (currentState is Transition_GetUserById)
+            {
+                return TransitionGetUserById();
+            }
+
+            else throw new Exception("unidentified transition state");
         }
 
         //async Task TransitionGetMicrosoftId()
@@ -96,10 +98,29 @@ namespace Weave.Services.Startup
             await state.Transition();
 
             if (state.CurrentState == Transition_GetRandomId.State.Success)
-                currentState = new Transition_GetUserById(user, permState);
+                //currentState = new Transition_GetUserById(user, permState);
+                currentState = new Transition_MigrateLocalFeedsToCloud(user, permState);
 
             else if (state.CurrentState == Transition_GetRandomId.State.Fail)
                 throw new CriticalApplicationException();
+        }
+  
+        async Task TransitionRecoverLostFeeds()
+        {
+            var state = (Transition_MigrateLocalFeedsToCloud)currentState;
+            await state.Transition();
+
+            if (state.CurrentState == Transition_MigrateLocalFeedsToCloud.State.Unnecessary)
+                currentState = new Transition_GetUserById(user, permState);
+
+            else if (state.CurrentState == Transition_MigrateLocalFeedsToCloud.State.FeedsMigrated)
+                currentState = new Transition_GetUserById(user, permState);
+
+            else if (state.CurrentState == Transition_MigrateLocalFeedsToCloud.State.Fail)
+            {
+                MessageBox.Show("Unable to import your existing feeds.  Please ensure you have an internet connection, and relaunch the app to try again.", "Whoops!", MessageBoxButton.OK);
+                Application.Current.Terminate();
+            }
         }
 
         async Task TransitionGetUserById()

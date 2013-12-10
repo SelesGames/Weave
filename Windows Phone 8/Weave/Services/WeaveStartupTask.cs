@@ -16,7 +16,6 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using weave.Resources;
 using Weave.Services.Startup;
 using Weave.FeedLibrary;
 using Weave.SavedState;
@@ -30,6 +29,7 @@ using UserService = Weave.User.Service.Client;
 using Weave.Settings;
 using Weave.WP.ViewModels;
 using weave;
+using Weave.Resources;
 
 namespace Weave.Services
 {
