@@ -41,7 +41,7 @@ namespace SelesGames.UI.Advertising.Common
         {
             List<AdSettingsBase> adSettingsVals = new List<AdSettingsBase>();
 
-            var client = new HttpClient();
+            var client = new AutoCompressionHttpClient();
             var stringResult = await client.GetStringAsync(adSettingsUrl);
 
             JObject jo = JObject.Parse(stringResult);
