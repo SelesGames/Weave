@@ -1,8 +1,6 @@
-﻿using ICSharpCode.SharpZipLib.GZip;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +19,7 @@ namespace SelesGames.Rest
 #if DEBUG
             Debug.WriteLine("HTTP GET : {0}", url);
 #endif
-            return new HttpClient().GetAsync(url, cancellationToken);
+            return CreateClient().GetAsync(url, cancellationToken);
         }
 
         public async Task<T> GetAsync<T>(string url, CancellationToken cancellationToken)
@@ -84,7 +82,7 @@ namespace SelesGames.Rest
 
         HttpClient CreateClient()
         {
-            var client = new HttpClient();
+            var client = new AutoCompressionHttpClient();
 
             if (!string.IsNullOrEmpty(Headers.Accept))
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", Headers.Accept);
@@ -105,19 +103,7 @@ namespace SelesGames.Rest
 
                 using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                 {
-                    var contentEncoding = response.Content.Headers.ContentEncoding.FirstOrDefault();
-                    if ("gzip".Equals(contentEncoding, StringComparison.OrdinalIgnoreCase))
-                    {
-                        using (var gzip = new GZipInputStream(stream))
-                        {
-                            result = ReadObject<T>(gzip);
-                            gzip.Close();
-                        }
-                    }
-                    else
-                    {
-                        result = ReadObject<T>(stream);
-                    }
+                    result = ReadObject<T>(stream);
                     stream.Close();
                 }
                 return result;
