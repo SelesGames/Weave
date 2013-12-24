@@ -42,7 +42,7 @@ namespace Weave.WP.ViewModels.MainPage
                     var skipMult = j;
                     yield return new AsyncNewsList
                     {
-                        News = async () => (await load.Value).News.Skip(skipMult * PageSize).Take(PageSize).ToList(),
+                        News = () => SafelyGetNewsList(load, skipMult),
                     };
                 }
             }        
@@ -60,6 +60,19 @@ namespace Weave.WP.ViewModels.MainPage
                 CountChanged(this, EventArgs.Empty);
 
             return currentNewsList;
+        }
+
+        async Task<List<NewsItem>> SafelyGetNewsList(Lazy<Task<NewsList>> load, int skipMult)
+        {
+            try
+            {
+                var newsList = await load.Value;
+                return newsList.News.Skip(skipMult * PageSize).Take(PageSize).ToList();
+            }
+            catch
+            {
+                return new List<NewsItem>();
+            }
         }
     }
 }
