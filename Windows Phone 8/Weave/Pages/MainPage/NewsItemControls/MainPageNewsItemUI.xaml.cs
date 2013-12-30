@@ -1,4 +1,5 @@
 ﻿using SelesGames;
+using SelesGames.Phone;
 using SelesGames.Phone.ValueConverters;
 using System;
 using System.ComponentModel;

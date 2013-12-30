@@ -296,6 +296,22 @@ namespace Weave.User.Service.Client
 
 
 
+        #region Article Expiry times (Marked Read and Unread Deletion times)
+
+        public Task SetArticleDeleteTimes(Guid userId, Incoming.ArticleDeleteTimes articleDeleteTimes)
+        {
+            string append = "set_delete_times";
+            var url = SERVICE_URL + append;
+
+            var client = CreateClient();
+            return client.PostAsync(url, articleDeleteTimes, CancellationToken.None);
+        }
+
+        #endregion
+
+
+
+
         RestClient CreateClient()
         {
             //return new SelesGames.Rest.Protobuf.ProtobufRestClient { UseGzip = true };

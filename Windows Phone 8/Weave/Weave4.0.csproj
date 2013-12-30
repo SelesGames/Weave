@@ -173,7 +173,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AnimationHelper.cs" />
     <Compile Include="Library\Value Converters\UserIdConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
@@ -183,8 +182,6 @@
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="Services\Startup\CriticalApplicationException.cs" />
     <Compile Include="Services\Startup\Transition_MigrateLocalFeedsToCloud.cs" />
-    <Compile Include="ViewModels\Grouped News\AllNewsGroup.cs" />
-    <Compile Include="ViewModels\Grouped News\CategoryGroup.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -251,10 +248,6 @@
     <Compile Include="Settings\SpeakArticleVoices.cs" />
     <Compile Include="Settings\ArticleFontSet.cs" />
     <Compile Include="Settings\StandardThemeSet.cs" />
-    <Compile Include="ViewModels\Grouped News\ReadArticlesGroup.cs" />
-    <Compile Include="ViewModels\Grouped News\FavoriteArticlesGroup.cs" />
-    <Compile Include="ViewModels\Grouped News\NewsItemGroup.cs" />
-    <Compile Include="ViewModels\Grouped News\FeedGroup.cs" />
     <Compile Include="ViewModels\FeedsToNewsItemGroupAdapter.cs" />
     <Compile Include="ViewModels\MainPage\AsyncNewsList.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
@@ -797,6 +790,10 @@
     <ProjectReference Include="..\Weave.UserFeedAggregator.Client\Weave.User.Service.Client.csproj">
       <Project>{4F5D363A-1F0F-4B12-8859-2A083E8ACBAF}</Project>
       <Name>Weave.User.Service.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.WP.ViewModels.GroupedNews\Weave.WP.ViewModels.GroupedNews.csproj">
+      <Project>{D1C88ACF-464D-46E8-89C0-C6F9C4B78156}</Project>
+      <Name>Weave.WP.ViewModels.GroupedNews</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

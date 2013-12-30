@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media.Animation;
 
-namespace weave
+namespace SelesGames.Phone
 {
     public static class TimespanExtensions
     {
