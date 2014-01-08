@@ -17,9 +17,6 @@
 	mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480">
 	<UserControl.Resources>
 		<settings:SpeakArticleVoices x:Key="Voices" />
-		<DataTemplate x:Key="ListPickerItemTemplate">
-			<TextBlock Text="{Binding Display}"/>
-		</DataTemplate>
 		<DataTemplate x:Key="ListPickerSpeechItemTemplate">
 			<TextBlock Text="{Binding DisplayName}"/>
 		</DataTemplate>
@@ -50,13 +47,13 @@
 				<StackPanel VerticalAlignment="Bottom" toolkit:TiltEffect.IsTiltEnabled="True">
 					<TextBlock Text="cloud settings" Style="{StaticResource LongListSelectorGroupHeaderLetterTileStyle}" Margin="10,0,12,0" />
 
-					<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12">
+					<toolkit:ListPicker x:Name="markedReadList" Header="Delete &quot;marked read&quot; articles after" Margin="12">
 						<System:String>30 minutes</System:String>
 						<System:String>2 hours</System:String>
 						<System:String>6 hours</System:String>
 						<System:String>12 hours</System:String>
 					</toolkit:ListPicker>
-					<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" ItemTemplate="{StaticResource ListPickerItemTemplate}" Margin="12">
+					<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" Margin="12">
 						<System:String>12 hours</System:String>
 						<System:String>1 day</System:String>
 						<System:String>2 days</System:String>

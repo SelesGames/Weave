@@ -1,6 +1,8 @@
 ﻿using Microsoft.Phone.Controls;
 using SelesGames;
+using SelesGames.Phone;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,6 +12,7 @@ using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
 using Weave.Settings;
+using Weave.UI.Frame;
 using Weave.ViewModels;
 using Windows.Phone.System.UserProfile;
 
@@ -65,20 +68,20 @@ namespace weave
 
         void OnMarkedReadSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
+            var selected = e.AddedItems.OfType<string>().FirstOrDefault();
             if (selected == null)
                 return;
 
-            user.ArticleDeletionTimeForMarkedRead = selected.Display;
+            user.ArticleDeletionTimeForMarkedRead = selected;
         }
 
         void OnUnreadSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
+            var selected = e.AddedItems.OfType<string>().FirstOrDefault();
             if (selected == null)
                 return;
 
-            user.ArticleDeletionTimeForUnread = selected.Display;
+            user.ArticleDeletionTimeForUnread = selected;
         }
 
         void OnVoicesListSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -124,6 +127,38 @@ namespace weave
 
 
 
+        #region Page Navigation (OnBackKeyPress)
+
+        protected async override void OnBackKeyPress(CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+
+            var t = SaveChanges();
+            if (t.IsCompleted)
+                return;
+            else
+            {
+                e.Cancel = true;
+
+                var frame = ServiceResolver.Get<OverlayFrame>();
+                frame.OverlayText = "Saving...";
+                frame.IsLoading = true;
+
+                await t;
+
+                frame.IsLoading = false;
+
+                NavigationService.TryGoBack();
+            }
+        }
+
+        #endregion
+
+
+
+
+        #region IDisposable implementation
+
         public void Dispose()
         {
             markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
@@ -132,5 +167,7 @@ namespace weave
             enableLockScreenButton.Tap -= OnRequestLiveLockScreenButtonTapped;
             Loaded -= OnPageLoaded;
         }
+
+        #endregion
     }
 }
