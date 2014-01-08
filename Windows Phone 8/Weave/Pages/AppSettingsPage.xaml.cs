@@ -10,6 +10,7 @@ using Telerik.Windows.Controls;
 using Weave.Customizability;
 using Weave.SavedState;
 using Weave.Settings;
+using Weave.ViewModels;
 using Windows.Phone.System.UserProfile;
 
 namespace weave
@@ -18,6 +19,8 @@ namespace weave
     {
         PermanentState permState;
         SpeakArticleVoices voices;
+        UserInfo user;
+        string entryMarkReadDeleteTime, entryUnreadDeleteTime;
 
         public AppSettingsPage()
         {
@@ -34,15 +37,49 @@ namespace weave
             SetValue(RadTransitionControl.TransitionProperty, new RadContinuumTransition());
             SetValue(RadSlideContinuumAnimation.ApplicationHeaderElementProperty, this.PageTitle);
 
+            user = ServiceResolver.Get<UserInfo>();
+
+            markedReadList.SelectedItem = entryMarkReadDeleteTime = user.ArticleDeletionTimeForMarkedRead;
+            unreadList.SelectedItem = entryUnreadDeleteTime = user.ArticleDeletionTimeForUnread;
+
+            markedReadList.SelectionChanged += OnMarkedReadSelectionChanged;
+            unreadList.SelectionChanged += OnUnreadSelectionChanged;
             voicesList.SelectionChanged += OnVoicesListSelectionChanged;
             enableLockScreenButton.Tap += OnRequestLiveLockScreenButtonTapped;
             Loaded += OnPageLoaded;
+        }
+
+        async Task SaveChanges()
+        {
+            if (user.ArticleDeletionTimeForMarkedRead != entryMarkReadDeleteTime ||
+                user.ArticleDeletionTimeForUnread != entryUnreadDeleteTime)
+            {
+                await user.SetArticleDeleteTimes();
+            }
         }
 
 
 
 
         #region Event Handlers
+
+        void OnMarkedReadSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
+            if (selected == null)
+                return;
+
+            user.ArticleDeletionTimeForMarkedRead = selected.Display;
+        }
+
+        void OnUnreadSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = e.AddedItems.OfType<ArticleDeleteTime>().FirstOrDefault();
+            if (selected == null)
+                return;
+
+            user.ArticleDeletionTimeForUnread = selected.Display;
+        }
 
         void OnVoicesListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,6 +126,8 @@ namespace weave
 
         public void Dispose()
         {
+            markedReadList.SelectionChanged -= OnMarkedReadSelectionChanged;
+            unreadList.SelectionChanged -= OnUnreadSelectionChanged;
             voicesList.SelectionChanged -= OnVoicesListSelectionChanged;
             enableLockScreenButton.Tap -= OnRequestLiveLockScreenButtonTapped;
             Loaded -= OnPageLoaded;
