@@ -301,7 +301,10 @@ namespace Weave.User.Service.Client
         public Task SetArticleDeleteTimes(Guid userId, Incoming.ArticleDeleteTimes articleDeleteTimes)
         {
             string append = "set_delete_times";
-            var url = SERVICE_URL + append;
+            var url = new UriBuilder(SERVICE_URL + append)
+                .AddParameter("userId", userId)
+                .AddCacheBuster()
+                .ToString();
 
             var client = CreateClient();
             return client.PostAsync(url, articleDeleteTimes, CancellationToken.None);

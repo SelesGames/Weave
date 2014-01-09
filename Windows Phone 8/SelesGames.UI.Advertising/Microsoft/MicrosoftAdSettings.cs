@@ -2,6 +2,7 @@
 using Microsoft.Devices;
 using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using MSD = Microsoft.Devices;
 
 namespace SelesGames.UI.Advertising.Microsoft
@@ -40,7 +41,9 @@ namespace SelesGames.UI.Advertising.Microsoft
                 IsAutoCollapseEnabled = true,
                 Width = 480,
                 Height = 80,
-                BorderBrush = null//new SolidColorBrush(Colors.White) 
+                BorderBrush = new SolidColorBrush(Colors.White),
+                Background = new SolidColorBrush(Colors.Black),
+                Foreground = new SolidColorBrush(Colors.White),
             };
 
             if (!string.IsNullOrEmpty(keywords))
