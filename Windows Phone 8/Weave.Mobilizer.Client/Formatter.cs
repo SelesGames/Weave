@@ -33,6 +33,7 @@ namespace Weave.Mobilizer.Client
             string source, 
             string title, 
             string link,
+            string heroImage,
             string body, 
             string foreground, 
             string background, 
@@ -42,6 +43,10 @@ namespace Weave.Mobilizer.Client
         {
             if (!areTemplatesLoaded)
                 ReadHtmlTemplate();
+
+            var heroImageHtml = string.IsNullOrWhiteSpace(heroImage) ? 
+                "" : 
+                string.Format("<a href=\"{0}\"><img src=\"{0}\"/></a>", heroImage);
 
             var sb = new StringBuilder();
                 
@@ -64,6 +69,7 @@ namespace Weave.Mobilizer.Client
                         .Replace("[SOURCE]", source)
                         .Replace("[TITLE]", title)
                         .Replace("[LINK]", link)
+                        .Replace("[HEROIMAGE]", heroImageHtml)
                         .Replace("[BODY]", body)
                         .ToString())
 

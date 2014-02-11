@@ -8,16 +8,17 @@ namespace Weave.Mobilizer.Client
 {
     public class Client
     {
-        const string R_URL_TEMPLATE = "http://mobilizer.cloudapp.net/ipf?url={0}";
+        const string R_URL_TEMPLATE = "http://mobilizer.cloudapp.net/ipf?url={0}&stripLeadImage=true";
 
-        public Task<MobilizerResult> GetAsync(string url)
+        public async Task<MobilizerResult> GetAsync(string url)
         {
             var client = new JsonDotNetRestClient();
             var encodedUrl = HttpUtility.UrlEncode(url);
             var fUrl = string.Format(R_URL_TEMPLATE, encodedUrl);
-            return client
-                .GetAsync<ReadabilityResult>(fUrl, CancellationToken.None)
-                .ContinueWith(t => Parse(t.Result), TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            var result = await client.GetAsync<ReadabilityResult>(fUrl, CancellationToken.None);
+            var parsed = Parse(result);
+            return parsed;
         }
 
         MobilizerResult Parse(ReadabilityResult result)
