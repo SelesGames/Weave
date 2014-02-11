@@ -9,7 +9,7 @@ namespace Weave.Mobilizer.Client
     public class Formatter
     {
         const string HTML_TEMPLATE_PATH1 = "/Weave.Mobilizer.Client;component/Templates/html_template1.txt";
-        const string HTML_TEMPLATE_PATH2 = "/Weave.Mobilizer.Client;component/Templates/html_template2.txt";
+        //const string HTML_TEMPLATE_PATH2 = "/Weave.Mobilizer.Client;component/Templates/html_template2.txt";
         const string HTML_TEMPLATE_PATH3 = "/Weave.Mobilizer.Client;component/Templates/html_template3.txt";
         const string CSS_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_template.txt";
         const string BODY_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/body_template.txt";
@@ -17,10 +17,16 @@ namespace Weave.Mobilizer.Client
         bool areTemplatesLoaded = false;
 
         string htmlTemplate1;
-        string htmlTemplate2;
+        //string htmlTemplate2;
         string htmlTemplate3;
         string cssTemplate;
         string bodyTemplate;
+
+        const string withImageHeaderTemplate =
+"<h2 id=\"sg_source\">{0}</h2><div id=\"sg_herodiv\"><a href=\"{1}\"><img id=\"sg_heroimage\" src=\"{1}\"/></a></div><h1 id=\"sg_title\">{2}</h1><h2 id=\"sg_pubtime\">{3}</h1>";
+
+        const string noImageHeaderTemplate =
+"<h1 id=\"sg_title\">{0}</h1><h2 id=\"sg_pubtime\">{1}</h1>";
 
         public Encoding Encoding { get; set; }
 
@@ -32,6 +38,7 @@ namespace Weave.Mobilizer.Client
         public string CreateHtml(
             string source, 
             string title, 
+            string pubDate,
             string link,
             string heroImage,
             string body, 
@@ -44,9 +51,13 @@ namespace Weave.Mobilizer.Client
             if (!areTemplatesLoaded)
                 ReadHtmlTemplate();
 
-            var heroImageHtml = string.IsNullOrWhiteSpace(heroImage) ? 
-                "" : 
-                string.Format("<a href=\"{0}\"><img src=\"{0}\"/></a>", heroImage);
+            var headerHtml = string.IsNullOrWhiteSpace(heroImage) ? 
+                string.Format(noImageHeaderTemplate, title, source) : 
+                string.Format(withImageHeaderTemplate, 
+                    source,
+                    heroImage,
+                    title,
+                    pubDate);
 
             var sb = new StringBuilder();
                 
@@ -62,14 +73,10 @@ namespace Weave.Mobilizer.Client
                         .Replace("[ACCENT]", linkColor)
                         .ToString())
 
-                .AppendLine(htmlTemplate2)
-
                 .AppendLine(
                     new StringBuilder(bodyTemplate)
-                        .Replace("[SOURCE]", source)
-                        .Replace("[TITLE]", title)
                         .Replace("[LINK]", link)
-                        .Replace("[HEROIMAGE]", heroImageHtml)
+                        .Replace("[HEADER]", headerHtml)
                         .Replace("[BODY]", body)
                         .ToString())
 
@@ -81,7 +88,7 @@ namespace Weave.Mobilizer.Client
         void ReadHtmlTemplate()
         {
             LoadTemplate(HTML_TEMPLATE_PATH1, out htmlTemplate1);
-            LoadTemplate(HTML_TEMPLATE_PATH2, out htmlTemplate2);
+            //LoadTemplate(HTML_TEMPLATE_PATH2, out htmlTemplate2);
             LoadTemplate(HTML_TEMPLATE_PATH3, out htmlTemplate3);
             LoadTemplate(CSS_TEMPLATE_PATH, out cssTemplate);
             LoadTemplate(BODY_TEMPLATE_PATH, out bodyTemplate);

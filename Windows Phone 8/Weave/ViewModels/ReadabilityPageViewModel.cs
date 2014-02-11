@@ -78,16 +78,31 @@ namespace Weave.WP.ViewModels
             var background = theme.Background;
             var linkColor = theme.Accent;
 
-            var source = NewsItem.FormattedForMainPageSourceAndDate;
             var title = NewsItem.Title;
             var link = NewsItem.Link;
             //var result = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
             var content = mobilizerResult.content;
             var heroImage = SelectBestImage();
 
+            string source, pubDate;
+
+            if (string.IsNullOrWhiteSpace(heroImage))
+            {
+                source = NewsItem.FormattedForMainPageSourceAndDate;
+                pubDate = null;
+            }
+            else
+            {
+                source = NewsItem.OriginalSource.ToUpperInvariant();
+                //pubDate = NewsItem.PublishDate;
+                pubDate = NewsItem.LocalDateTime.ToLongDateString();
+            }
+                
+
+
             var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
 
-            var html = formatter.CreateHtml(source, title, link, heroImage, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
+            var html = formatter.CreateHtml(source, title, pubDate, link, heroImage, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
             return html;
         }
 
