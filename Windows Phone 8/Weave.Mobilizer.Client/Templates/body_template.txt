@@ -1,1 +1,1 @@
-﻿<body id="sg_body"><article id="sg_articlewrapper"><header id="sg_header">[HEADER]</header><div id="sg_content">[BODY]</div><footer id="sg_footer"><p><a id="sg_link" href="[LINK]">View in browser</a></p></footer></article></body>
+﻿<body id="sg_body"><article id="sg_articlewrapper"><header id="sg_header">[HEADER]</header><div id="sg_content">[BODY]</div><footer id="sg_footer"><a id="sg_link" href="[LINK]"><div style="margin:0 16px;">view in browser</div></a></footer></article></body>

@@ -23,10 +23,10 @@ namespace Weave.Mobilizer.Client
         string bodyTemplate;
 
         const string withImageHeaderTemplate =
-"<h2 id=\"sg_source\">{0}</h2><div id=\"sg_herodiv\"><a href=\"{1}\"><img id=\"sg_heroimage\" src=\"{1}\"/></a></div><h1 id=\"sg_title\">{2}</h1><h2 id=\"sg_pubtime\">{3}</h1>";
+"<h2 id=\"sg_source\">{0}</h2><div id=\"sg_herodiv\"><a href=\"{1}\"><img id=\"sg_heroimage\" src=\"{1}\"/></a></div><h1 id=\"sg_title\">{2}</h1><h2 id=\"sg_pubtime\">{3}</h2>";
 
         const string noImageHeaderTemplate =
-"<h1 id=\"sg_title\">{0}</h1><h2 id=\"sg_pubtime\">{1}</h1>";
+"<h1 id=\"sg_title\">{0}</h1><h2 id=\"sg_pubtime\">{1}</h2>";
 
         public Encoding Encoding { get; set; }
 
