@@ -95,7 +95,9 @@ namespace Weave.WP.ViewModels
             {
                 source = NewsItem.OriginalSource.ToUpperInvariant();
                 //pubDate = NewsItem.PublishDate;
-                pubDate = NewsItem.LocalDateTime.ToLongDateString();
+                pubDate =
+                    NewsItem.LocalDateTime.ToString("dddd, MMMM dd • hh:mm") +
+                    NewsItem.LocalDateTime.ToString("tt").ToLowerInvariant();
             }
                 
 
