@@ -91,7 +91,8 @@
   <ItemGroup>
     <Resource Include="Templates\body_template.txt" />
     <Resource Include="Templates\html_template3.txt" />
-    <Resource Include="Templates\css_template.txt" />
+    <Resource Include="Templates\css_1_static.txt" />
+    <Resource Include="Templates\css_2_dynamic.txt" />
     <Resource Include="Templates\html_template1.txt" />
   </ItemGroup>
   <ItemGroup>

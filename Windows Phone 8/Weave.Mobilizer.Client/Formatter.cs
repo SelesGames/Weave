@@ -9,18 +9,19 @@ namespace Weave.Mobilizer.Client
     public class Formatter
     {
         const string HTML_TEMPLATE_PATH1 = "/Weave.Mobilizer.Client;component/Templates/html_template1.txt";
-        //const string HTML_TEMPLATE_PATH2 = "/Weave.Mobilizer.Client;component/Templates/html_template2.txt";
         const string HTML_TEMPLATE_PATH3 = "/Weave.Mobilizer.Client;component/Templates/html_template3.txt";
-        const string CSS_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_template.txt";
+        const string CSS_STATIC_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_1_static.txt";
+        const string CSS_DYNAMIC_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_2_dynamic.txt";
         const string BODY_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/body_template.txt";
 
         bool areTemplatesLoaded = false;
 
-        string htmlTemplate1;
-        //string htmlTemplate2;
-        string htmlTemplate3;
-        string cssTemplate;
-        string bodyTemplate;
+        string 
+            htmlTemplate1,
+            htmlTemplate3,
+            cssStatic,
+            cssDynamic,
+            bodyTemplate;
 
         const string withImageHeaderTemplate =
 "<h2 id=\"sg_source\">{0}</h2><div id=\"sg_herodiv\"><a href=\"{1}\"><img id=\"sg_heroimage\" src=\"{1}\"/></a></div><h1 id=\"sg_title\">{2}</h1><h2 id=\"sg_pubtime\">{3}</h2>";
@@ -62,10 +63,15 @@ namespace Weave.Mobilizer.Client
             var sb = new StringBuilder();
                 
             sb
-                .AppendLine(htmlTemplate1)
+                .AppendLine(
+                    new StringBuilder(htmlTemplate1)
+                        .Replace("[TITLE]", title)
+                        .ToString())
+
+                .AppendLine(cssStatic)
 
                 .AppendLine(
-                    new StringBuilder(cssTemplate)
+                    new StringBuilder(cssDynamic)
                         .Replace("[FOREGROUND]", foreground)
                         .Replace("[BACKGROUND]", background)
                         .Replace("[FONT]", fontName)
@@ -88,10 +94,11 @@ namespace Weave.Mobilizer.Client
         void ReadHtmlTemplate()
         {
             LoadTemplate(HTML_TEMPLATE_PATH1, out htmlTemplate1);
-            //LoadTemplate(HTML_TEMPLATE_PATH2, out htmlTemplate2);
             LoadTemplate(HTML_TEMPLATE_PATH3, out htmlTemplate3);
-            LoadTemplate(CSS_TEMPLATE_PATH, out cssTemplate);
+            LoadTemplate(CSS_STATIC_TEMPLATE_PATH, out cssStatic);
+            LoadTemplate(CSS_DYNAMIC_TEMPLATE_PATH, out cssDynamic);
             LoadTemplate(BODY_TEMPLATE_PATH, out bodyTemplate);
+
             areTemplatesLoaded = true;
         }
 
