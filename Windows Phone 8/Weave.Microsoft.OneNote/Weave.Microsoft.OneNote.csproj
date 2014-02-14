@@ -88,6 +88,7 @@
     <Compile Include="OneNoteHtmlFormatter.cs" />
     <Compile Include="OneNoteItemExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Microsoft.OneNote\Common.Microsoft.OneNote.csproj">
