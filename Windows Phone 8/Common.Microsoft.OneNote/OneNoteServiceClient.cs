@@ -13,19 +13,30 @@ namespace Common.Microsoft.OneNote
 {
     public class OneNoteServiceClient
     {
+        #region Private member variables
+
         // v1.0 Endpoints        
         const string PAGESENDPOINT = "https://www.onenote.com/api/v1.0/pages";
-        
+
         const string PRESENTATION = "Presentation";
+
+        LiveAccessToken access;
         string accessToken;
 
-        public OneNoteServiceClient(string accessToken)
+        #endregion
+
+
+
+
+        public OneNoteServiceClient(LiveAccessToken access)
         {
-            this.accessToken = accessToken;
+            this.access = access;
         }
 
         public async Task<BaseResponse> CreateSimple(string html)
         {
+            await UpdateAccessToken();
+
             // Create the request message, which is a multipart/form-data request
             var createMessage = new HttpRequestMessage(HttpMethod.Post, PAGESENDPOINT)
             {
@@ -38,6 +49,8 @@ namespace Common.Microsoft.OneNote
 
         public async Task<BaseResponse> CreateWithImage(string html, string imageName, Stream imageStream)
         {
+            await UpdateAccessToken();
+
             using (var imageContent = new StreamContent(imageStream))
             {
                 imageContent.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
@@ -59,6 +72,8 @@ namespace Common.Microsoft.OneNote
 
         public async Task<BaseResponse> CreateWithHtml(string html, string embeddedPartName, string embeddedHtml)
         {
+            await UpdateAccessToken();
+
             var createMessage = new HttpRequestMessage(HttpMethod.Post, PAGESENDPOINT)
             {
                 Content = 
@@ -77,6 +92,11 @@ namespace Common.Microsoft.OneNote
 
 
         #region Private helper functions
+
+        async Task UpdateAccessToken()
+        {
+            accessToken = await access.GetAccessToken();
+        }
 
         HttpClient CreateClient()
         {

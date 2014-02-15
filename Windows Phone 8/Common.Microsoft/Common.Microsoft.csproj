@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{98B7806A-3B2E-4C15-A8B4-4BE2D49F0A0E}</ProjectGuid>
+    <ProjectGuid>{DFEDC3F3-6D2A-4905-8B15-AFD167FB7E3D}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Microsoft.OneNote</RootNamespace>
-    <AssemblyName>Common.Microsoft.OneNote</AssemblyName>
+    <RootNamespace>Common.Microsoft</RootNamespace>
+    <AssemblyName>Common.Microsoft</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -83,11 +83,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Response\BaseResponse.cs" />
-    <Compile Include="Response\CreateSuccessResponse.cs" />
-    <Compile Include="OneNoteServiceClient.cs" />
+    <Compile Include="LiveAccessToken.cs" />
+    <Compile Include="LiveOfflineAccessToken.cs" />
+    <Compile Include="LiveTransientAccessToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Response\StandardErrorResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -96,12 +95,6 @@
     <Reference Include="System.Net.Http">
       <HintPath>..\lib\System.Net.Http.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Common.Microsoft\Common.Microsoft.csproj">
-      <Project>{DFEDC3F3-6D2A-4905-8B15-AFD167FB7E3D}</Project>
-      <Name>Common.Microsoft</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
