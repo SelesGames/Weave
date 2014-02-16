@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Microsoft;
+using System;
 using System.ComponentModel;
 using Weave.Customizability;
 using Weave.SavedState.MostViewedHistory;
@@ -14,6 +15,7 @@ namespace Weave.SavedState
         public bool IsSystemTrayVisibleWhenPossible { get; set; }
         public RunHistory RunHistory { get; set; }
         public string SpeakTextVoice { get; set; }
+        public LiveAccessToken LiveAccessToken { get; set; }
 
 
 

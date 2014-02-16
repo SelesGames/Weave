@@ -1,0 +1,21 @@
+{
+    "Microsoft": {
+        "FaultToleranceCount": 9,
+        "AppId": "6c6ad14b-3da5-4cbb-acd1-c3c33e6d705b",
+        "AdUnitIds": [ "161333" ]
+    },
+    "AdDuplex": {
+        "AppId": "7379"
+    },
+    "MobFox": {
+        "PublisherId": "fb1d8f5defe82277cd87fbdbf531a235"
+    },
+    "Inneractive": {
+        "AppId": "SelesGames_Weave_WP"
+    },
+    "Smaato": {
+        "DisplayTime": 30,
+        "PublisherId": 923832265,
+        "AdspaceId": 65773159
+    }
+}

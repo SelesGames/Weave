@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Controls;
+﻿using Common.Microsoft.OneNote.Response;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SelesGames;
 using SelesGames.Phone;
@@ -17,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
+using Weave.Microsoft.OneNote;
 using Weave.SavedState;
 using Weave.Services;
 using Weave.Settings;
@@ -45,6 +47,7 @@ namespace weave
         PermanentState permState;
         SwipeGestureHelper swipeHelper;
         OverlayFrame frame;
+        string mobilizedHtml;
 
         #endregion
 
@@ -386,12 +389,12 @@ namespace weave
         {
             try
             {
-                var html = await viewModel.GetMobilizedArticleHtml();
+                mobilizedHtml = await viewModel.GetMobilizedArticleHtml();
 
                 if (isPageClosed)
                     return false;
 
-                await browser.NavigateToStringAsync(html);
+                await browser.NavigateToStringAsync(mobilizedHtml);
                 return true;
             }
             catch (Exception ex)
@@ -669,6 +672,60 @@ namespace weave
 
             var formattedText = ssml.ToString();*/
         }
+
+        async void KeepUnreadMenuItemClick(object sender, System.EventArgs e)
+        {
+            viewModel.NewsItem.HasBeenViewed = false;
+            await user.MarkArticleUnread(viewModel.NewsItem);
+        }
+
+        async void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)
+        {
+            var token = permState.LiveAccessToken;
+
+            if (token == null)
+            {
+                GlobalNavigationService.ToOneNoteSignInPage();
+                return;
+            }
+
+            if (!isHtmlDisplayed)
+            {
+                MessageBox.Show("Please wait until the article has finished downloading");
+                return;
+            }
+
+            var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
+            Func<Task<BaseResponse>> saveTask;
+
+            if ((articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
+                && viewModel.CurrentMobilizedArticle != null 
+                && !string.IsNullOrWhiteSpace(mobilizedHtml))
+            {
+                var oneNoteSave = new MobilizedOneNoteItem
+                {
+                    Html = mobilizedHtml
+                };
+                saveTask = () => oneNoteSave.SendToOneNote(token);
+            }
+
+            else
+            {
+                var oneNoteSave = new HtmlLinkOneNoteItem
+                {
+                    Title = viewModel.NewsItem.Title,
+                    Link = viewModel.NewsItem.Link,
+                    Source = viewModel.NewsItem.FormattedForMainPageSourceAndDate,
+                };
+                saveTask = () => oneNoteSave.SendToOneNote(token);
+            }
+
+            frame.OverlayText = "Saving to OneNote...";
+            frame.IsLoading = true;
+            var response = await saveTask();
+            frame.IsLoading = false;
+        }
+
 
         #endregion
 

@@ -145,5 +145,10 @@ namespace Weave.Services
         {
             SafelyNavigateTo("/weave;component/Pages/Accounts/CreateAccountPage.xaml");
         }
+
+        public static void ToOneNoteSignInPage()
+        {
+            SafelyNavigateTo("/weave;component/Pages/Accounts/OneNoteSignInPage.xaml");
+        }
     }
 }

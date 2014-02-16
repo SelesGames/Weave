@@ -45,7 +45,8 @@
 				<shell:ApplicationBarMenuItem Text="lock rotation" />
 				<shell:ApplicationBarMenuItem Text="edit source" Click="EditSourceAppMenuItemClick"/>
 				<shell:ApplicationBarMenuItem Text="speak article" Click="SpeakArticleAppMenuItemClick"/>
-				<!--shell:ApplicationBarMenuItem Text="mark unread" /-->
+				<shell:ApplicationBarMenuItem Text="keep unread" Click="KeepUnreadMenuItemClick"/>
+				<shell:ApplicationBarMenuItem Text="save to OneNote" Click="SendToOneNoteMenuItemClick"/>
 			</shell:ApplicationBar.MenuItems>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>

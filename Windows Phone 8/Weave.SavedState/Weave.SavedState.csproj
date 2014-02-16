@@ -90,6 +90,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common.Microsoft\Common.Microsoft.csproj">
+      <Project>{DFEDC3F3-6D2A-4905-8B15-AFD167FB7E3D}</Project>
+      <Name>Common.Microsoft</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
       <Name>Weave.Customizability</Name>

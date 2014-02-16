@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using weave;
 using Weave.SavedState;
 
@@ -25,7 +26,7 @@ namespace Weave.Services
             if (currentPage is SamplePanorama)
                 return;
             else
-                Microsoft.Phone.Shell.SystemTray.SetIsVisible(currentPage, permState.IsSystemTrayVisibleWhenPossible);
+                SystemTray.SetIsVisible(currentPage, permState.IsSystemTrayVisibleWhenPossible);
         }
 
         public void Dispose()

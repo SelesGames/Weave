@@ -119,6 +119,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Live">
+      <HintPath>..\packages\LiveSDK.5.5\lib\WindowsPhone8\Microsoft.Live.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live.Controls">
+      <HintPath>..\packages\LiveSDK.5.5\lib\WindowsPhone8\Microsoft.Live.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\lib\Azure Mobile Services\Microsoft.Threading.Tasks.dll</HintPath>
@@ -174,6 +180,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Library\Value Converters\UserIdConverter.cs" />
+    <Compile Include="Pages\Accounts\OneNoteSignInPage.xaml.cs">
+      <DependentUpon>OneNoteSignInPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
@@ -307,6 +316,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\Accounts\OneNoteSignInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -602,6 +615,8 @@
     <Content Include="Assets\Tiles\lock_screen_placeholder.jpg" />
     <Resource Include="Feeds.xml" />
     <Content Include="SplashScreenImage.jpg" />
+    <None Include="Fonts\LiveSymbol.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
@@ -692,6 +707,14 @@
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
       <Name>Common.Hashing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common.Microsoft.OneNote\Common.Microsoft.OneNote.csproj">
+      <Project>{98B7806A-3B2E-4C15-A8B4-4BE2D49F0A0E}</Project>
+      <Name>Common.Microsoft.OneNote</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Microsoft\Common.Microsoft.csproj">
+      <Project>{DFEDC3F3-6D2A-4905-8B15-AFD167FB7E3D}</Project>
+      <Name>Common.Microsoft</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
       <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
       <Name>SelesGames.Common.Reactive</Name>
@@ -731,6 +754,10 @@
     <ProjectReference Include="..\SelesGames.WP.PublisherInfoPage\SelesGames.WP.PublisherInfoPage.csproj">
       <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
       <Name>SelesGames.WP.PublisherInfoPage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.Microsoft.OneNote\Weave.Microsoft.OneNote.csproj">
+      <Project>{876CD6D4-14F3-4A5B-9631-F03DEF486F51}</Project>
+      <Name>Weave.Microsoft.OneNote</Name>
     </ProjectReference>
     <ProjectReference Include="..\WP8Toolkit\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
