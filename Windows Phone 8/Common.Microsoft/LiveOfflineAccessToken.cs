@@ -26,12 +26,12 @@ namespace Common.Microsoft
 
 
 
-        #region Public Read-Only Properties
+        #region Public Properties
 
-        public string ClientId { get; private set; }
-        public string AccessToken { get; private set; }
-        public DateTimeOffset AccessTokenExpiration { get; private set; }
-        public string RefreshToken { get; private set; }
+        public string ClientId { get; set; }
+        public string AccessToken { get; set; }
+        public DateTimeOffset AccessTokenExpiration { get; set; }
+        public string RefreshToken { get; set; }
 
         #endregion
 
@@ -71,7 +71,7 @@ namespace Common.Microsoft
         async Task RefreshAccessTokenIfNecessary()
         {
             var now = DateTime.UtcNow;
-            if (now < AccessTokenExpiration)
+            if (now > AccessTokenExpiration)
                 await AttemptAccessTokenRefresh();
         }
 

@@ -1,4 +1,5 @@
-﻿using Common.Microsoft.OneNote;
+﻿using Common.Microsoft;
+using Common.Microsoft.OneNote;
 using Common.Microsoft.OneNote.Response;
 using System.Threading.Tasks;
 
@@ -6,15 +7,15 @@ namespace Weave.Microsoft.OneNote
 {
     public static class OneNoteItemExtensions
     {
-        public static Task<BaseResponse> SendToOneNote(this MobilizedOneNoteItem oneNoteItem)
+        public static Task<BaseResponse> SendToOneNote(this MobilizedOneNoteItem oneNoteItem, LiveAccessToken token)
         {
-            return CreateClient().CreateSimple(oneNoteItem.Html);
+            return CreateClient(token).CreateSimple(oneNoteItem.Html);
         }
     
-        public static Task<BaseResponse> SendToOneNote(this HtmlLinkOneNoteItem oneNoteItem)
+        public static Task<BaseResponse> SendToOneNote(this HtmlLinkOneNoteItem oneNoteItem, LiveAccessToken token)
         {
             var html = new OneNoteHtmlFormatter().CreateHtml(oneNoteItem);
-            return CreateClient().CreateSimple(html);
+            return CreateClient(token).CreateSimple(html);
         }
 
 
@@ -22,9 +23,9 @@ namespace Weave.Microsoft.OneNote
 
         #region private helper methods
 
-        static OneNoteServiceClient CreateClient()
+        static OneNoteServiceClient CreateClient(LiveAccessToken token)
         {
-            return new OneNoteServiceClient(Settings.AccessToken);
+            return new OneNoteServiceClient(token);
         }
 
         #endregion
