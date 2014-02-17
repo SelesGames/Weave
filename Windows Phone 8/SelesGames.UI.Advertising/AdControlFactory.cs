@@ -6,24 +6,17 @@ namespace SelesGames.UI.Advertising
 {
     internal class AdControlFactory
     {
-        AdSettings adSettings;
         IEnumerator<AdProviderSettingsBase> adSettingsEnumerator;
 
-        public AdControlFactory(AdSettings adSettings)
+        public AdControlFactory(IEnumerable<AdProviderSettingsBase> providers)
         {
-            this.adSettings = adSettings;
-            Initialize();
-        }
-
-        void Initialize()
-        {
-            if (adSettings.Providers == null)
+            if (providers == null)
             {
                 adSettingsEnumerator = new List<AdProviderSettingsBase>().GetEnumerator();
             }
             else
             {
-                adSettingsEnumerator = adSettings.Providers
+                adSettingsEnumerator = providers
                     .Select(o => Tuple.Create(o, o.FaultToleranceCount))
                     .RepeatEnumerable()
                     .Wrap()

@@ -7,7 +7,7 @@ using MSD = Microsoft.Devices;
 
 namespace SelesGames.UI.Advertising.Microsoft
 {
-    internal class MicrosoftAdSettings : AdProviderSettingsBase
+    public class MicrosoftAdSettings : AdProviderSettingsBase
     {
         static Random r = new Random();
 

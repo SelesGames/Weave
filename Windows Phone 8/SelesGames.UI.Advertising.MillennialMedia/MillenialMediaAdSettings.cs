@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace SelesGames.UI.Advertising.MillennialMedia
 {
-    public class MillennialMediaAdSettings : AdSettingsBase
+    public class MillennialMediaAdSettings : AdProviderSettingsBase
     {
         public string Apid { get; set; }
 

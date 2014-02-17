@@ -112,13 +112,14 @@ namespace SelesGames.UI.Advertising
             {
                 var client = new AdSettingsClient(adSettingsUrl);
                 settings = await client.Get();
-                isInitialized = true;
-                controlFactory = new AdControlFactory(Settings);
+                controlFactory = new AdControlFactory(settings.Providers);
             }
-            catch(Exception e)
+            catch
             {
-                System.Diagnostics.Debug.WriteLine(e);
+                settings = new AdSettings { AreAdsActive = false };
+                controlFactory = new AdControlFactory(settings.Providers);
             }
+            isInitialized = true;
         }
 
         #endregion

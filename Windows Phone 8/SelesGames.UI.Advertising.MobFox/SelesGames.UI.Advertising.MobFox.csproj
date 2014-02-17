@@ -88,18 +88,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SelesGames.UI.Advertising\SelesGames.UI.Advertising.csproj">
-      <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>
-      <Name>SelesGames.UI.Advertising</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="MobFox.Ads">
       <HintPath>..\lib\Advertising\MobFox.Ads.dll</HintPath>
     </Reference>
     <Reference Include="MobFox.Ads.LocationAware">
       <HintPath>..\lib\Advertising\MobFox.Ads.LocationAware.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SelesGames.UI.Advertising.Common\SelesGames.UI.Advertising.Common.csproj">
+      <Project>{ABA4BF28-09A4-4DC4-BA6F-741733E03995}</Project>
+      <Name>SelesGames.UI.Advertising.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

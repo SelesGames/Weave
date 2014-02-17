@@ -385,6 +385,9 @@ namespace weave
         async void InitializeAdControl()
         {
             var adService = ServiceResolver.Get<AdService>();
+
+            await adService.Initialization;
+
             if (!adService.ShouldDisplayAds)
                 return;
 

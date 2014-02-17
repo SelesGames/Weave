@@ -1,7 +1,7 @@
 ﻿
 namespace SelesGames.UI.Advertising
 {
-    internal abstract class AdProviderSettingsBase
+    public abstract class AdProviderSettingsBase
     {
         public bool Enabled { get; set; }
         public int FaultToleranceCount { get; set; }

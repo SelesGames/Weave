@@ -41,28 +41,6 @@ namespace SelesGames.UI.Advertising
                 settings.AreAdsActive = responseObject.AreAdsActive;
 
             return settings;
-
-
-            //List<AdProviderSettingsBase> adSettingsVals = new List<AdProviderSettingsBase>();
-
-            //var stringResult = await client.GetStringAsync(adSettingsUrl);
-
-            //JObject jo = JObject.Parse(stringResult);
-            //foreach (var item in jo)
-            //{
-            //    try
-            //    {
-            //        var key = item.Key;
-            //        var stringRep = item.Value.ToString();
-            //        var type = registeredProviders[key];
-            //        var serialized = JsonConvert.DeserializeObject(stringRep, type);
-            //        var asb = (AdProviderSettingsBase)serialized;
-            //        adSettingsVals.Add(asb);
-            //    }
-            //    catch { }
-            //}
-
-            //return adSettingsVals;
         }
 
         void CreateFromDynamic<T>(dynamic d)
@@ -70,8 +48,12 @@ namespace SelesGames.UI.Advertising
             if (d == null)
                 return;
 
-            var settings = JsonConvert.DeserializeObject<T>(d.ToString());
-            providerSettings.Add(settings);
+            try
+            {
+                var settings = JsonConvert.DeserializeObject<T>(d.ToString());
+                providerSettings.Add(settings);
+            }
+            catch { }
         }
     }
 }

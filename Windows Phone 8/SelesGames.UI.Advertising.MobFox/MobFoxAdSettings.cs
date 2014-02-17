@@ -3,7 +3,7 @@ using System;
 
 namespace SelesGames.UI.Advertising.MobFox
 {
-    public class MobFoxAdSettings : AdSettingsBase
+    public class MobFoxAdSettings : AdProviderSettingsBase
     {
         public string PublisherId { get; set; }
 
