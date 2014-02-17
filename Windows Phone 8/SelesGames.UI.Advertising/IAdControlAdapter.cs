@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace SelesGames.UI.Advertising
 {
-    public interface IAdControlAdapter : IDisposable
+    internal interface IAdControlAdapter : IDisposable
     {
         UIElement Control { get; }
         event EventHandler AdClicked;

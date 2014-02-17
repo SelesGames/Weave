@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SelesGames.UI.Advertising.Inneractive
 {
-    public class InneractiveAdSettings : AdSettingsBase
+    internal class InneractiveAdSettings : AdProviderSettingsBase
     {
         public string AppId { get; set; }
 

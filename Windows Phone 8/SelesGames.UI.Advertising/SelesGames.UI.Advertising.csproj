@@ -120,14 +120,15 @@
   <ItemGroup>
     <Compile Include="AdDuplex\AdDuplexAdControlAdapter.cs" />
     <Compile Include="AdDuplex\AdDuplexAdSettings.cs" />
-    <Compile Include="Common\AdControlFactory.cs" />
+    <Compile Include="AdControlFactory.cs" />
+    <Compile Include="AdService.cs" />
+    <Compile Include="AdServiceInitializationException.cs" />
     <Compile Include="AdSettings.cs" />
-    <Compile Include="AdVisibilityService.cs" />
-    <Compile Include="Common\AdSettingsClient.cs" />
-    <Compile Include="Common\IAdControlAdapter.cs" />
+    <Compile Include="AdSettingsClient.cs" />
+    <Compile Include="IAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdControlAdapter.cs" />
     <Compile Include="Inneractive\InneractiveAdSettings.cs" />
-    <Compile Include="Common\AdSettingsBase.cs" />
+    <Compile Include="AdSettingsBase.cs" />
     <Compile Include="Library\DebugEx.cs" />
     <Compile Include="Library\EventArgs.cs" />
     <Compile Include="Library\IEnumerableExtensions.cs" />

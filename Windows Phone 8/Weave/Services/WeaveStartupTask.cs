@@ -30,6 +30,7 @@ using Weave.Settings;
 using Weave.WP.ViewModels;
 using weave;
 using Weave.Resources;
+using SelesGames.UI.Advertising;
 
 namespace Weave.Services
 {
@@ -46,6 +47,7 @@ namespace Weave.Services
         OverlayFrame frame;
         IKernel kernel;
         DataStorageClient storageClient;
+        AdService adService;
 
         bool
             isFrameInit,
@@ -102,8 +104,8 @@ namespace Weave.Services
                 InitializeUser();
                 InitializeIdentity();
                 InitializePhoneApplicationFrameNavigationHelpers();
-                InitializeAdSettings();
                 InitializeNinjectKernel();
+                InitializeAdSettings();
                 InitializeOrientationChangeService();
                 InitializeThemes();
                 new SystemTrayNavigationSetter(frame, permanentState);
@@ -511,18 +513,6 @@ namespace Weave.Services
 
 
 
-        #region Initialize Ad Settings
-
-        void InitializeAdSettings()
-        {
-            SelesGames.UI.Advertising.AdSettings.IsAddSupportedApp = settings.IsAddSupportedApp;
-        }
-
-        #endregion
-
-
-
-
         #region Initialize Ninject Kernel
 
         void InitializeNinjectKernel()
@@ -539,9 +529,7 @@ namespace Weave.Services
                     o.HideCloseButtonForAppBarSetup();
                     o.Background = settings.Themes.CurrentTheme.AccentBrush;
                 });
-            kernel.Bind<SelesGames.UI.Advertising.Common.AdSettingsClient>().ToMethod(_ =>
-                new SelesGames.UI.Advertising.Common.AdSettingsClient(settings.AdUnitsUrl))
-                .InSingletonScope();
+
             kernel.Bind<PermanentState>().ToConstant(permanentState).InSingletonScope();
             kernel.Bind<TombstoneState>().ToConstant(tombstoneState).InSingletonScope();
             kernel.Bind<UserInfo>().ToConstant(user).InSingletonScope();
@@ -556,6 +544,22 @@ namespace Weave.Services
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
             kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
+        }
+
+        #endregion
+
+
+
+
+        #region Initialize Ad Settings
+
+        void InitializeAdSettings()
+        {
+            var adService = new AdService(settings.AdUnitsUrl)
+            {
+                IsAddSupportedApp = settings.IsAddSupportedApp
+            };
+            kernel.Bind<AdService>().ToConstant(adService);
         }
 
         #endregion

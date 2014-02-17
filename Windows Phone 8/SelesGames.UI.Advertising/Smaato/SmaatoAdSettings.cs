@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace SelesGames.UI.Advertising.Smaato
 {
-    public class SmaatoAdSettings : AdSettingsBase
+    internal class SmaatoAdSettings : AdProviderSettingsBase
     {
         public int PublisherId { get; set; }
         public int AdspaceId { get; set; }

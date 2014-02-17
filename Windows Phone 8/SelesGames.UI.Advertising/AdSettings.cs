@@ -1,16 +1,16 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace SelesGames.UI.Advertising
 {
-    public static class AdSettings
+    internal class AdSettings
     {
-        public static bool IsAddSupportedApp { get; set; }
+        public bool AreAdsActive { get; set; }
+        public IEnumerable<AdProviderSettingsBase> Providers { get; set; }
 
-        static int maxAdsPerSession = 1;
-
-        public static int MaxAdsPerSession
+        public AdSettings()
         {
-            get { return maxAdsPerSession; }
-            set { maxAdsPerSession = value; }
+            AreAdsActive = true;
+            Providers = new List<AdProviderSettingsBase>();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace SelesGames.UI.Advertising
         Panel AdContainer;
         Storyboard OnNewAdSB;
         IAdControlAdapter adControl;
-        AdControlFactory factory;
+        //AdControlFactory factory;
+        AdService adService;
         string keywords;
         bool isHidden = false;
         int currentFaultLevel = 0;
@@ -24,14 +25,14 @@ namespace SelesGames.UI.Advertising
         public bool IsAdCurrentlyEngaged { get { return false; } }
         public int MaxFaultLevel { get; set; }
 
-        public SwitchingAdControl(AdControlFactory factory, string keywords)
-            : this(factory)
+        public SwitchingAdControl(AdService adService, string keywords)
+            : this(adService)
         {
-            this.factory = factory;
+            this.adService = adService;
             this.keywords = keywords;
         }
 
-        public SwitchingAdControl(AdControlFactory factory)
+        public SwitchingAdControl(AdService adService)
         {
             DefaultStyleKey = typeof(SwitchingAdControl);
 
@@ -39,10 +40,7 @@ namespace SelesGames.UI.Advertising
             PlayAnimations = true;
             MaxFaultLevel = 10;
 
-            if (DesignerProperties.IsInDesignTool)
-                return;
-
-            AdVisibilityService.AdsNoLongerShown += OnAdsNoLongerShown;
+            adService.AdsNoLongerShown += OnAdsNoLongerShown;
         }
 
         void OnAdsNoLongerShown(object sender, EventArgs e)
@@ -71,7 +69,7 @@ namespace SelesGames.UI.Advertising
                 return;
             }
 
-            if (AdVisibilityService.AreAdsStillBeingShownAtAll)
+            if (adService.ShouldDisplayAds)
             {
                 await Task.Delay(INITIAL_AD_DISPLAY_DELAY);
                 CreateAd();
@@ -87,14 +85,14 @@ namespace SelesGames.UI.Advertising
 
 
 
-        async void CreateAd(bool advanceToNextProvider = false)
+        void CreateAd(bool advanceToNextProvider = false)
         {
             try
             {
                 if (isDisposed)
                     return;
 
-                adControl = await factory.CreateAdControl(keywords);
+                adControl = adService.ControlFactory.CreateAdControl(keywords);
 
                 if (this.isHidden)
                     adControl.Control.Visibility = Visibility.Collapsed;
@@ -140,7 +138,7 @@ namespace SelesGames.UI.Advertising
         {
             Dispatcher.BeginInvoke(() =>
             {
-                AdVisibilityService.AdEngaged();
+                adService.AdEngaged();
             });
         }
 
@@ -217,7 +215,7 @@ namespace SelesGames.UI.Advertising
             {
                 this.Visibility = Visibility.Collapsed;
                 FlushAd();
-                AdVisibilityService.AdsNoLongerShown -= OnAdsNoLongerShown;
+                adService.AdsNoLongerShown -= OnAdsNoLongerShown;
             }
             catch { }
         }

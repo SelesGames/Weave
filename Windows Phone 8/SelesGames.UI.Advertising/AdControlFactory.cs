@@ -1,38 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SelesGames.UI.Advertising
 {
-    public class AdControlFactory
+    internal class AdControlFactory
     {
-        Common.AdSettingsClient client;
-        IEnumerator<AdSettingsBase> adSettingsEnumerator;
+        AdSettings adSettings;
+        IEnumerator<AdProviderSettingsBase> adSettingsEnumerator;
 
-        public AdControlFactory(Common.AdSettingsClient client)
+        public AdControlFactory(AdSettings adSettings)
         {
-            this.client = client;
+            this.adSettings = adSettings;
+            Initialize();
         }
 
-        async Task InitializeAsync()
+        void Initialize()
         {
-            if (adSettingsEnumerator == null)
+            if (adSettings.Providers == null)
             {
-                var adSettings = await client.AdSettings;
-
-                adSettingsEnumerator = adSettings
+                adSettingsEnumerator = new List<AdProviderSettingsBase>().GetEnumerator();
+            }
+            else
+            {
+                adSettingsEnumerator = adSettings.Providers
                     .Select(o => Tuple.Create(o, o.FaultToleranceCount))
                     .RepeatEnumerable()
                     .Wrap()
-                    .GetEnumerator(); 
+                    .GetEnumerator();
             }
         }
 
-        public async Task<IAdControlAdapter> CreateAdControl(string keywords = null)
+        public IAdControlAdapter CreateAdControl(string keywords = null)
         {
-            await InitializeAsync();
-
             if (adSettingsEnumerator == null || !adSettingsEnumerator.MoveNext())
                 throw new InvalidOperationException("no adSettings have been set in AdControlFactory.CreateAdControl");
 

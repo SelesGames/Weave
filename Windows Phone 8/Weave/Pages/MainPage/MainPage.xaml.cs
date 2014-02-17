@@ -384,10 +384,11 @@ namespace weave
 
         async void InitializeAdControl()
         {
-            if (!AdVisibilityService.AreAdsStillBeingShownAtAll)
+            var adService = ServiceResolver.Get<AdService>();
+            if (!adService.ShouldDisplayAds)
                 return;
 
-            adControl = new SwitchingAdControl(ServiceResolver.Get<AdControlFactory>(), this.header);
+            adControl = adService.CreateAdControl(this.header);
             //adControl.AdMargin = new Thickness(0);
             //adControl.AdHeight = 80;
             //adControl.AdWidth = 480;

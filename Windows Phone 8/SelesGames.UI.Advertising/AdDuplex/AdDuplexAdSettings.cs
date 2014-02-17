@@ -2,7 +2,7 @@
 
 namespace SelesGames.UI.Advertising.AdDuplex
 {
-    public class AdDuplexAdSettings : AdSettingsBase
+    internal class AdDuplexAdSettings : AdProviderSettingsBase
     {
         public string AppId { get; set; }
 
