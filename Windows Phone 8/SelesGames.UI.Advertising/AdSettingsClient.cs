@@ -32,11 +32,15 @@ namespace SelesGames.UI.Advertising
             CreateFromDynamic<Microsoft.MicrosoftAdSettings>(responseObject.Microsoft);
             CreateFromDynamic<AdDuplex.AdDuplexAdSettings>(responseObject.AdDuplex);
 
-            return new AdSettings
+            var settings = new AdSettings
             {
-                AreAdsActive = responseObject.AreAdsActive,
                 Providers = providerSettings
             };
+
+            if (responseObject.AreAdsActive != null)
+                settings.AreAdsActive = responseObject.AreAdsActive;
+
+            return settings;
 
 
             //List<AdProviderSettingsBase> adSettingsVals = new List<AdProviderSettingsBase>();

@@ -108,9 +108,17 @@ namespace SelesGames.UI.Advertising
 
         async Task Initialize()
         {
-            var client = new AdSettingsClient(adSettingsUrl);
-            settings = await client.Get();
-            controlFactory = new AdControlFactory(Settings);
+            try
+            {
+                var client = new AdSettingsClient(adSettingsUrl);
+                settings = await client.Get();
+                controlFactory = new AdControlFactory(Settings);
+                isInitialized = true;
+            }
+            catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+            }
         }
 
         #endregion
