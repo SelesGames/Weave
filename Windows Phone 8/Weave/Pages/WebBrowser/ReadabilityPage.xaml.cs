@@ -24,6 +24,7 @@ using Weave.Services;
 using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
+using Weave.ViewModels.Mobilizer;
 using Weave.WP.ViewModels;
 
 namespace weave
@@ -388,12 +389,12 @@ namespace weave
         {
             try
             {
-                var mobilizedHtml = await viewModel.GetMobilizedArticleHtml();
+                await viewModel.LoadMobilizedArticle();
 
                 if (isPageClosed)
                     return false;
 
-                await browser.NavigateToStringAsync(mobilizedHtml);
+                await browser.NavigateToStringAsync(viewModel.FullHtml);
                 return true;
             }
             catch (Exception ex)

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.RegularExpressions;
 
-namespace Weave.ViewModels
+namespace Weave.ViewModels.Mobilizer
 {
     public static class MobilizedArticleExtensions
     {

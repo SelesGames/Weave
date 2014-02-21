@@ -691,6 +691,10 @@
       <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
       <Name>Weave.Identity.Service.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Contracts\Weave.Mobilizer.Contracts.csproj">
+      <Project>{FC776CA4-35B3-4024-8667-CB265805A519}</Project>
+      <Name>Weave.Mobilizer.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
       <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
       <Name>Weave.User.Service.Contracts</Name>

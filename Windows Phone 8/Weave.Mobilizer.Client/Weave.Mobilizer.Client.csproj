@@ -86,7 +86,6 @@
     <Compile Include="Client.cs" />
     <Compile Include="Formatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MobilizerResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Templates\body_template.txt" />
@@ -96,6 +95,10 @@
     <Resource Include="Templates\html_template1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Contracts\Weave.Mobilizer.Contracts.csproj">
+      <Project>{FC776CA4-35B3-4024-8667-CB265805A519}</Project>
+      <Name>Weave.Mobilizer.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.DTOs\Weave.Mobilizer.DTOs.csproj">
       <Project>{0A9019E4-E76F-4FAC-A5C7-70F32CF5E2C1}</Project>
       <Name>Weave.Mobilizer.DTOs</Name>
