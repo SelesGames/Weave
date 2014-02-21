@@ -7,14 +7,15 @@ namespace Weave.Microsoft.OneNote
 {
     public static class OneNoteItemExtensions
     {
-        public static Task<BaseResponse> SendToOneNote(this MobilizedOneNoteItem oneNoteItem, LiveAccessToken token)
-        {
-            return CreateClient(token).CreateSimple(oneNoteItem.Html);
-        }
-    
         public static Task<BaseResponse> SendToOneNote(this HtmlLinkOneNoteItem oneNoteItem, LiveAccessToken token)
         {
-            var html = new OneNoteHtmlFormatter().CreateHtml(oneNoteItem);
+            var html = new Formatter().CreateHtml(oneNoteItem);
+            return CreateClient(token).CreateSimple(html);
+        }
+
+        public static Task<BaseResponse> SendToOneNote(this MobilizedOneNoteItem oneNoteItem, LiveAccessToken token)
+        {
+            var html = new Formatter().CreateHtml(oneNoteItem);
             return CreateClient(token).CreateSimple(html);
         }
 

@@ -6,6 +6,10 @@ namespace Weave.Microsoft.OneNote
     /// </summary>
     public class MobilizedOneNoteItem
     {
-        public string Html { get; set; }
+        public string Title { get; set; }
+        public string Link { get; set; }
+        public string Source { get; set; }
+        public string HeroImage { get; set; }
+        public string BodyHtml { get; set; }
     }
 }
