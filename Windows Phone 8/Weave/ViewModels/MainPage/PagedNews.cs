@@ -29,7 +29,9 @@ namespace Weave.WP.ViewModels.MainPage
 
         public IEnumerable<AsyncNewsList> GetNewsLists(EntryType initialEntryType)
         {
-            for (int i = 0; i < PageCount; i += NumberOfPagesToTakeAtATime)
+            int i = 0;
+
+            while (true)
             {
                 var entryType = i == 0 ? initialEntryType : EntryType.Peek;
 
@@ -45,6 +47,8 @@ namespace Weave.WP.ViewModels.MainPage
                         News = () => SafelyGetNewsList(load, skipMult),
                     };
                 }
+
+                i += NumberOfPagesToTakeAtATime;
             }        
         }
 
