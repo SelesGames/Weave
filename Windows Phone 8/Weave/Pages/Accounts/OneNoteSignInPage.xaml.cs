@@ -2,12 +2,8 @@
 using Microsoft.Live;
 using Microsoft.Phone.Controls;
 using SelesGames;
-using SelesGames.Instapaper;
-using System.Net;
-using System.Net.Http;
-using System.Windows;
+using System.Threading.Tasks;
 using Weave.SavedState;
-using Weave.Services.Instapaper;
 
 namespace weave
 {
@@ -18,7 +14,7 @@ namespace weave
             InitializeComponent();
         }
 
-        void OnSessionChanged(object sender, Microsoft.Live.Controls.LiveConnectSessionChangedEventArgs e)
+        async void OnSessionChanged(object sender, Microsoft.Live.Controls.LiveConnectSessionChangedEventArgs e)
         {
             var permState = ServiceResolver.Get<PermanentState>();
 
@@ -31,17 +27,17 @@ namespace weave
                         accessTokenExpiration: e.Session.Expires,
                         refreshToken: e.Session.RefreshToken);
 
-                    //SetCreateButtonsIsEnabled(true);
-                    //infoTextBlock.Text = "Authentication successful";
+                    infoTextBlock.Text = "Authentication successful";
+                    await Task.Delay(500);
                     NavigationService.GoBack();
                     break;
+
                 case LiveConnectSessionStatus.NotConnected:
-                    //SetCreateButtonsIsEnabled(false);
-                    //infoTextBlock.Text = "Authentication failed.";
+                    infoTextBlock.Text = "Authentication failed.";
                     break;
+
                 default:
-                    //SetCreateButtonsIsEnabled(false);
-                    //infoTextBlock.Text = "Not Authenticated";
+                    infoTextBlock.Text = "Tap the button below to authenticate";
                     break;
             }
         }

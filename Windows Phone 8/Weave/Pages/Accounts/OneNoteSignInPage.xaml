@@ -33,7 +33,8 @@
 
 		<!--ContentPanel - place additional content here-->
 		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<TextBlock Text="Sign-in to OneNote with your Windows Live Id, and you can save articles from Weave to OneNote!" />
+			<TextBlock Text="Sign-in to OneNote with your Windows Live Id, and you can save articles from Weave to OneNote!" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" />
+			<TextBlock x:Name="infoTextBlock" HorizontalAlignment="Center" Margin="0,239,4,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
 			<live:SignInButton Content="SignInButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Scopes="office.onenote_create wl.signin wl.offline_access" Branding="MicrosoftAccount" SessionChanged="OnSessionChanged" Width="192" ClientId="000000004C108B2C"/>
 		</Grid>
 	</Grid>
