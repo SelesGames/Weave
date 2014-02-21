@@ -11,12 +11,10 @@ namespace Weave.WP.ViewModels
 {
     public class ReadabilityPageViewModel
     {
-        Client client;
         Formatter formatter;
         StandardThemeSet themes;
         FontSizes fontSizes;
         PermanentState permState;
-        MobilizerResult mobilizerResult;
 
         public NewsItem NewsItem { get; set; }
         public ArticleViewingType LastViewingType { get; set; }
@@ -24,7 +22,6 @@ namespace Weave.WP.ViewModels
 
         public ReadabilityPageViewModel()
         {
-            client = new Client();
             formatter = ServiceResolver.Get<Formatter>();
             themes = AppSettings.Instance.Themes;
             fontSizes = new FontSizes();
@@ -44,15 +41,9 @@ namespace Weave.WP.ViewModels
                 {
                     var articleViewingType = NewsItem.Feed.ArticleViewingType;
                     LastViewingType = articleViewingType;
-                    await GetMobilizerResult().ConfigureAwait(false);
+
+                    CurrentMobilizedArticle = await new MMMediator(NewsItem).DoStuff();
                     html = GetMobilizedHtml();
-                    CurrentMobilizedArticle = new MobilizedArticle 
-                    { 
-                        Title = NewsItem.Title,
-                        Publication = NewsItem.Feed.Name,
-                        Date = NewsItem.PublishDate,
-                        Content = mobilizerResult.content
-                    };
                 }
             }
             catch 
@@ -61,13 +52,8 @@ namespace Weave.WP.ViewModels
                 throw;
             }
 
-            var convertedHtml = ConvertExtendedASCII(html);
+            var convertedHtml = html.ConvertExtendedASCII();
             return convertedHtml;
-        }
-
-        async Task GetMobilizerResult()
-        {
-            mobilizerResult = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
         }
 
         string GetMobilizedHtml()
@@ -80,32 +66,82 @@ namespace Weave.WP.ViewModels
 
             var title = NewsItem.Title;
             var link = NewsItem.Link;
-            //var result = await client.GetAsync(NewsItem.Link).ConfigureAwait(false);
-            var content = mobilizerResult.content;
-            var heroImage = SelectBestImage();
+
+            var content = CurrentMobilizedArticle.ContentHtml;// mobilizerResult.content;
+            var heroImage = CurrentMobilizedArticle.HeroImageUrl;// SelectBestImage();
 
             string source, pubDate;
 
-            if (string.IsNullOrWhiteSpace(heroImage))
+            if (!CurrentMobilizedArticle.HasImage)
             {
-                source = NewsItem.FormattedForMainPageSourceAndDate;
+                source = CurrentMobilizedArticle.CombinedPublicationAndDate;
                 pubDate = null;
             }
             else
             {
-                source = NewsItem.OriginalSource.ToUpperInvariant();
-                //pubDate = NewsItem.PublishDate;
-                pubDate =
-                    NewsItem.LocalDateTime.ToString("dddd, MMMM dd • hh:mm") +
-                    NewsItem.LocalDateTime.ToString("tt").ToLowerInvariant();
+                source = CurrentMobilizedArticle.Source.ToUpperInvariant();
+                pubDate = CurrentMobilizedArticle.FullDate;
             }
-                
-
 
             var fontSize = fontSizes.GetById(permState.ArticleViewFontSize).HtmlTextSize();
 
             var html = formatter.CreateHtml(source, title, pubDate, link, heroImage, content, foreground, background, permState.ArticleViewFontName, fontSize, linkColor);
             return html;
+        }
+    }
+
+
+    internal class MMMediator
+    {
+        NewsItem newsItem;
+
+        public MMMediator(NewsItem newsItem)
+        {
+            this.newsItem = newsItem;
+        }
+
+        public async Task<MobilizedArticle> DoStuff()
+        {
+            var client = new Client();
+            var mobilizerResult = await client.GetAsync(newsItem.Link);
+            var coalescer = new ResultCombiner(newsItem, mobilizerResult);
+            return coalescer.Combine();
+        }
+    }
+
+    internal class ResultCombiner
+    {
+        NewsItem newsItem;
+        MobilizerResult mobilizerResult;
+
+        public ResultCombiner(NewsItem newsItem, MobilizerResult mobilizerResult)
+        {
+            if (newsItem == null) throw new ArgumentNullException("newsItem");
+            if (mobilizerResult == null) throw new ArgumentNullException("mobilizerResult");
+
+            this.newsItem = newsItem;
+            this.mobilizerResult = mobilizerResult;
+        }
+
+        public MobilizedArticle Combine()
+        {
+            var heroImage = SelectBestImage();
+
+            var fullDate =
+                newsItem.LocalDateTime.ToString("dddd, MMMM dd • h:mm") +
+                newsItem.LocalDateTime.ToString("tt").ToLowerInvariant();
+
+            return new MobilizedArticle
+            {
+                Title = newsItem.Title,
+                HeroImageUrl = heroImage,
+                Link = newsItem.Link,
+                Source = newsItem.OriginalSource,
+                FullDate = fullDate,
+                CombinedPublicationAndDate = newsItem.FormattedForMainPageSourceAndDate,
+                ContentHtml = mobilizerResult.content,
+                Author = mobilizerResult.author,
+            };
         }
 
         string SelectBestImage()
@@ -113,34 +149,10 @@ namespace Weave.WP.ViewModels
             if (!string.IsNullOrWhiteSpace(mobilizerResult.lead_image_url))
                 return mobilizerResult.lead_image_url;
 
-            if (NewsItem.HasImage)
-                return NewsItem.HighestQualityImageUrl;
+            if (newsItem.HasImage)
+                return newsItem.HighestQualityImageUrl;
 
             return null;
-        }
-
-        /// <summary>
-        /// Converts UTF-8 to Unicode
-        /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
-        static string ConvertExtendedASCII(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return text;
-
-            var answer = new StringBuilder();
-            char[] s = text.ToCharArray();
-
-            foreach (char c in s)
-            {
-                if (Convert.ToInt32(c) > 127)
-                    answer.Append("&#" + Convert.ToInt32(c) + ";");
-                else
-                    answer.Append(c);
-            }
-            var result = answer.ToString();
-            return result;
         }
     }
 }

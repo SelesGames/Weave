@@ -224,6 +224,7 @@
       <DependentUpon>CustomList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
+    <Compile Include="ViewModels\MobilizedArticleExtensions.cs" />
     <Compile Include="ViewModels\NewsItemComparer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -234,7 +235,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Library\Value Converters\StringToLocalImageBrushConverter.cs" />
-    <Compile Include="ViewModels\MobilizedArticle.cs" />
     <Compile Include="Pages\WebBrowser\TileButton.xaml.cs">
       <DependentUpon>TileButton.xaml</DependentUpon>
     </Compile>

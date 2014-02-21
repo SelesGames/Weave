@@ -47,7 +47,6 @@ namespace weave
         PermanentState permState;
         SwipeGestureHelper swipeHelper;
         OverlayFrame frame;
-        string mobilizedHtml;
 
         #endregion
 
@@ -389,7 +388,7 @@ namespace weave
         {
             try
             {
-                mobilizedHtml = await viewModel.GetMobilizedArticleHtml();
+                var mobilizedHtml = await viewModel.GetMobilizedArticleHtml();
 
                 if (isPageClosed)
                     return false;
@@ -699,12 +698,17 @@ namespace weave
             Func<Task<BaseResponse>> saveTask;
 
             if ((articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
-                && viewModel.CurrentMobilizedArticle != null 
-                && !string.IsNullOrWhiteSpace(mobilizedHtml))
+                && viewModel.CurrentMobilizedArticle != null)
             {
+                var mobilizedArticle = viewModel.CurrentMobilizedArticle;
+
                 var oneNoteSave = new MobilizedOneNoteItem
                 {
-                    Html = mobilizedHtml
+                    Title = mobilizedArticle.Title,
+                    Link = mobilizedArticle.Link,
+                    Source = mobilizedArticle.CombinedPublicationAndDate,
+                    HeroImage = mobilizedArticle.HeroImageUrl,
+                    BodyHtml = mobilizedArticle.ContentHtml,
                 };
                 saveTask = () => oneNoteSave.SendToOneNote(token);
             }
