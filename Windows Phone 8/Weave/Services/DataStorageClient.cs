@@ -1,4 +1,5 @@
-﻿using SelesGames.IsoStorage;
+﻿using Common.Microsoft;
+using SelesGames.IsoStorage;
 using System.Threading.Tasks;
 using Weave.SavedState;
 using Weave.SavedState.MostViewedHistory;
@@ -58,7 +59,7 @@ namespace Weave.Services
 
         IsoStorageClient<PermanentState> CreatePermStateClient()
         {
-            return new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally) });
+            return new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally), typeof(LiveOfflineAccessToken) });
         }
 
         IsoStorageClient<TombstoneState> CreateTombstoneStateClient()
