@@ -3,6 +3,7 @@ using Microsoft.Phone.Shell;
 using Ninject;
 using SelesGames;
 using SelesGames.Phone;
+using SelesGames.UI.Advertising;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -16,21 +17,20 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using Weave.Services.Startup;
+using weave;
 using Weave.FeedLibrary;
+using Weave.Resources;
 using Weave.SavedState;
+using Weave.Services.Startup;
+using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Helpers;
 using Weave.ViewModels.Identity;
 using Weave.ViewModels.Repository;
+using Weave.WP.ViewModels;
 using ArticleService = Weave.Article.Service.Client;
 using UserService = Weave.User.Service.Client;
-using Weave.Settings;
-using Weave.WP.ViewModels;
-using weave;
-using Weave.Resources;
-using SelesGames.UI.Advertising;
 
 namespace Weave.Services
 {

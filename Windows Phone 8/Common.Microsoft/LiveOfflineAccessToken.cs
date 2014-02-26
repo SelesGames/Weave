@@ -40,6 +40,9 @@ namespace Common.Microsoft
 
         #region Constructor
 
+        // Empty constructor to allow for serialization
+        public LiveOfflineAccessToken() { }
+
         public LiveOfflineAccessToken(string clientId, string accessToken, DateTimeOffset accessTokenExpiration, string refreshToken)
         {
             this.ClientId = clientId;
@@ -104,6 +107,18 @@ namespace Common.Microsoft
                 AccessTokenExpiration = AccessTokenExpiration.AddSeconds((double)responseObject.expires_in);
                 RefreshToken = responseObject.refresh_token;
             }
+        }
+
+        #endregion
+
+
+
+
+        #region Override ToString
+
+        public override string ToString()
+        {
+            return AccessToken;
         }
 
         #endregion
