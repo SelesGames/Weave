@@ -1,32 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.IO;
-using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace SelesGames.IsoStorage
 {
     public class JsonIsoStorageClient<T> : IsoStorageClient<T>
     {
-        DataContractJsonSerializer serializer;
-
-        public JsonIsoStorageClient(IEnumerable<Type> knownTypes)
-        {
-            serializer = new DataContractJsonSerializer(typeof(T), knownTypes);
-        }
+        public Encoding Encoding { get; set; }
+        public JsonSerializerSettings SerializerSettings { get; set; }
 
         public JsonIsoStorageClient()
         {
-            serializer = new DataContractJsonSerializer(typeof(T));
+            Encoding = new UTF8Encoding(false, false);
+            SerializerSettings = new JsonSerializerSettings();
         }
 
         protected override T ReadObject(Stream stream)
         {
-            return (T)serializer.ReadObject(stream);
+            var serializer = JsonSerializer.Create(SerializerSettings);
+            using (var streamReader = new StreamReader(stream, Encoding))
+            using (var jsonTextReader = new JsonTextReader(streamReader))
+            {
+                return serializer.Deserialize<T>(jsonTextReader);
+            }
         }
 
         protected override void WriteObject(T obj, Stream stream)
         {
-            serializer.WriteObject(stream, obj);
+            var serializer = JsonSerializer.Create(SerializerSettings);
+
+            using (var ms = new MemoryStream())
+            using (var streamWriter = new StreamWriter(ms, Encoding))
+            using (var jsonTextWriter = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(jsonTextWriter, obj);
+                jsonTextWriter.Flush();
+
+                ms.Position = 0;
+                ms.CopyTo(stream);
+
+                jsonTextWriter.Close();
+            }
         }
     }
 }

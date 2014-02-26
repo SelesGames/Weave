@@ -36,7 +36,7 @@ namespace Weave.LiveTile.ScheduledAgent.Storage
 
         IsoStorageClient<PermanentState> CreatePermStateClient()
         {
-            return new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally) });
+            return new JsonIsoStorageClient<PermanentState>();
         }
 
         #endregion

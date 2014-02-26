@@ -59,12 +59,12 @@ namespace Weave.Services
 
         IsoStorageClient<PermanentState> CreatePermStateClient()
         {
-            return new JsonIsoStorageClient<PermanentState>(new[] { typeof(RunLog), typeof(LabelTally), typeof(LiveOfflineAccessToken) });
+            return new JsonIsoStorageClient<PermanentState>();
         }
 
         IsoStorageClient<TombstoneState> CreateTombstoneStateClient()
         {
-            return new JsonIsoStorageClient<TombstoneState>(new[] { typeof(ReadabilityPageViewModel), typeof(NewsItem) });
+            return new JsonIsoStorageClient<TombstoneState>();
         }
 
         #endregion
