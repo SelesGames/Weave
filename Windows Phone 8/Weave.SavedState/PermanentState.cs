@@ -15,7 +15,7 @@ namespace Weave.SavedState
         public bool IsSystemTrayVisibleWhenPossible { get; set; }
         public RunHistory RunHistory { get; set; }
         public string SpeakTextVoice { get; set; }
-        public LiveAccessToken LiveAccessToken { get; set; }
+        public LiveOfflineAccessToken LiveAccessToken { get; set; }
 
 
 
