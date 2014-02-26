@@ -22,7 +22,7 @@ namespace weave
             {
                 case LiveConnectSessionStatus.Connected:
                     permState.LiveAccessToken = new LiveOfflineAccessToken(
-                        clientId: (string)Resources["ClientId"],
+                        clientId: signInButton.ClientId,
                         accessToken: e.Session.AccessToken,
                         accessTokenExpiration: e.Session.Expires,
                         refreshToken: e.Session.RefreshToken);
