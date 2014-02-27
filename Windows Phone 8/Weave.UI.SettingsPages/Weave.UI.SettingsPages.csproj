@@ -182,6 +182,10 @@
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
+      <Project>{588B02FC-6BB9-49AE-8ECE-2A4BAC9B470B}</Project>
+      <Name>Weave.FeedLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>
@@ -197,10 +201,6 @@
     <ProjectReference Include="..\WP8Toolkit\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
       <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
-      <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
-      <Name>Weave.FeedLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.FeedSearchService\Weave.FeedSearchService.csproj">
       <Project>{E685135B-C889-4F51-96F9-69B968BEDF29}</Project>
@@ -232,7 +232,9 @@
   <ItemGroup>
     <DesignTimeOnly Include="SampleData\SampleCategories\SampleCategories.xsd" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\check.png" />
   </ItemGroup>

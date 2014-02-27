@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Resources;
 
@@ -34,10 +35,10 @@ namespace Weave.Microsoft.OneNote
             Encoding = new UTF8Encoding(false, false);
         }
 
-        public string CreateHtml(MobilizedOneNoteItem oneNoteItem)
+        public async Task<string> CreateHtml(MobilizedOneNoteItem oneNoteItem)
         {
             if (!areTemplatesLoaded)
-                ReadHtmlTemplate();
+                await ReadHtmlTemplate();
 
             string title, link, sourceAndPubdate, heroImage, body;
 
@@ -63,10 +64,10 @@ namespace Weave.Microsoft.OneNote
             return sb.ToString();
         }
 
-        public string CreateHtml(HtmlLinkOneNoteItem oneNoteItem)
+        public async Task<string> CreateHtml(HtmlLinkOneNoteItem oneNoteItem)
         {
             if (!areTemplatesLoaded)
-                ReadHtmlTemplate();
+                await ReadHtmlTemplate();
 
             string title, link, sourceAndPubdate;
 
@@ -92,21 +93,21 @@ namespace Weave.Microsoft.OneNote
 
         #region Private Helper Methods (read the html from resources)
 
-        void ReadHtmlTemplate()
+        async Task ReadHtmlTemplate()
         {
-            LoadTemplate(MOBILIZED_TEMPLATE_PATH, out mobilizedTemplate);
-            LoadTemplate(UNMOBILIZED_TEMPLATE_PATH, out staticTemplate);
+            mobilizedTemplate = await LoadTemplate(MOBILIZED_TEMPLATE_PATH);
+            staticTemplate = await LoadTemplate(UNMOBILIZED_TEMPLATE_PATH);
 
             areTemplatesLoaded = true;
         }
 
-        void LoadTemplate(string templatePath, out string template)
+        async Task<string> LoadTemplate(string templatePath)
         {
             Uri uri = new Uri(templatePath, UriKind.Relative);
             StreamResourceInfo streamResourceInfo = Application.GetResourceStream(uri);
             using (StreamReader streamReader = new StreamReader(streamResourceInfo.Stream, Encoding))
             {
-                template = streamReader.ReadToEnd();
+                return await streamReader.ReadToEndAsync();
             }
         }
 

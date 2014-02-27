@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SelesGames.Rest;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace SelesGames.UI.Advertising
 
         public async Task<AdSettings> Get()
         {
-            var client = new AutoCompressionHttpClient();
+            var client = new SelesGames.HttpClient.SmartHttpClient();
             var response = await client.GetAsync(adSettingsUrl);
 
             if (!response.IsSuccessStatusCode)

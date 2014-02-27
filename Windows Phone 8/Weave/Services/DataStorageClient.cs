@@ -1,11 +1,7 @@
-﻿using Common.Microsoft;
-using SelesGames.IsoStorage;
+﻿using SelesGames.IsoStorage;
 using System.Threading.Tasks;
 using Weave.SavedState;
-using Weave.SavedState.MostViewedHistory;
 using Weave.Settings;
-using Weave.ViewModels;
-using Weave.WP.ViewModels;
 
 namespace Weave.Services
 {

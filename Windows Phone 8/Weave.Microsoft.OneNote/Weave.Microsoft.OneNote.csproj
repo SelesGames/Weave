@@ -90,18 +90,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Microsoft.OneNote\Common.Microsoft.OneNote.csproj">
-      <Project>{98B7806A-3B2E-4C15-A8B4-4BE2D49F0A0E}</Project>
-      <Name>Common.Microsoft.OneNote</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Microsoft\Common.Microsoft.csproj">
-      <Project>{DFEDC3F3-6D2A-4905-8B15-AFD167FB7E3D}</Project>
-      <Name>Common.Microsoft</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Templates\MobilizedHtml.txt" />
     <Resource Include="Templates\UnmobilizedHtml.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Common.Microsoft.OneNote\Common.Microsoft.OneNote.csproj">
+      <Project>{7B342C99-3758-4FA0-BE6E-576F07286DF7}</Project>
+      <Name>Common.Microsoft.OneNote</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Common.Microsoft\Common.Microsoft.csproj">
+      <Project>{C323425E-3A4B-4A22-9CE5-ACF8D7124897}</Project>
+      <Name>Common.Microsoft</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

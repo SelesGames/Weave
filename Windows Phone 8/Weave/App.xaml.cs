@@ -29,6 +29,9 @@ namespace weave
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
             }
 
+            global::Common.Compression.Settings.CompressionHandlers =
+                new global::Common.WP.Compression.CompressionHandlerCollection();
+
             var r = new System.Random().Next(123, 978);
 
             var settings = new AppSettings

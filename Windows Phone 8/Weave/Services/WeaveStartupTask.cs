@@ -542,8 +542,15 @@ namespace Weave.Services
             kernel.Bind<ViewModelLocator>().ToSelf().InSingletonScope();
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
-            kernel.Bind<BundledLibrary>().ToMethod(_ => new BundledLibrary(settings.AssemblyName)).InTransientScope();
+            kernel.Bind<BundledLibrary>().ToMethod(_ => CreateBundledLibrary()).InTransientScope();
             kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
+        }
+
+        BundledLibrary CreateBundledLibrary()
+        {
+            var fileName = string.Format("/{0};component/{1}", settings.AssemblyName, "Feeds.xml");
+            var reader = System.Xml.XmlReader.Create(fileName);
+            return new BundledLibrary(reader);
         }
 
         #endregion

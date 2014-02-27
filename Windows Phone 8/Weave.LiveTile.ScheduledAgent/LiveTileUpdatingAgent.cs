@@ -21,6 +21,9 @@ namespace Weave.LiveTile.ScheduledAgent
         /// </remarks>
         public LiveTileUpdatingAgent()
         {
+            global::Common.Compression.Settings.CompressionHandlers =
+                new global::Common.WP.Compression.CompressionHandlerCollection();
+
             //InitializeErrorHandler();
         }
 
