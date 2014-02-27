@@ -725,10 +725,21 @@ namespace weave
                 saveTask = () => oneNoteSave.SendToOneNote(token);
             }
 
-            frame.OverlayText = "Saving to OneNote...";
-            frame.IsLoading = true;
+            //frame.OverlayText = "Saving to OneNote...";
+            //frame.IsLoading = true;
+            Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("Sending to OneNote..."));
+
             var response = await saveTask();
-            frame.IsLoading = false;
+            if (response is CreateSuccessResponse)
+            {
+                Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("Saved to OneNote!"));
+            }
+            else
+            {
+                Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("ERROR saving to OneNote"));
+            }
+
+            //frame.IsLoading = false;
         }
 
 
