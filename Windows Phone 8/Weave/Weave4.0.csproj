@@ -706,6 +706,10 @@
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\SelesGames.HttpClient\SelesGames.HttpClient.csproj">
+      <Project>{E93C1441-A175-4D76-9E97-092E9C621E55}</Project>
+      <Name>SelesGames.HttpClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.Client\Weave.Article.Service.Client.csproj">
       <Project>{620200B1-17F4-4C5A-A301-CA9AED702806}</Project>
       <Name>Weave.Article.Service.Client</Name>

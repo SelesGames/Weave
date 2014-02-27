@@ -1,4 +1,5 @@
-﻿using SelesGames.Rest;
+﻿using SelesGames.HttpClient;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Weave.SavedState;
@@ -38,16 +39,25 @@ namespace Weave.Services.Startup
                 await user.Load(refreshNews: false);
                 CurrentState = State.Success;
             }
-            catch (ResponseException responseException)
+            //catch (System.Net.Http.HttpRequestException responseException)
+            //{
+            //    var response = responseException.Response;
+            //    if (response != null && response.StatusCode == HttpStatusCode.NotFound && !string.IsNullOrWhiteSpace(response.ReasonPhrase))
+            //        CurrentState = State.Fail;
+            //    else
+            //        throw;
+            //}
+            catch (ErrorResponseException responseException)
             {
-                var response = responseException.Response;
+                var response = responseException.ResponseMessage;
                 if (response != null && response.StatusCode == HttpStatusCode.NotFound && !string.IsNullOrWhiteSpace(response.ReasonPhrase))
                     CurrentState = State.Fail;
                 else
                     throw;
             }
-            catch
+            catch(Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex);
                 throw;
             }
         }

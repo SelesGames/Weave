@@ -1,6 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using SelesGames;
-using SelesGames.Rest;
+using SelesGames.HttpClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,9 +67,14 @@ namespace weave
                 {
                     await user.Create();
                 }
-                catch(ResponseException ex)
+                //catch(ResponseException ex)
+                //{
+                //    if (ex.Response.ReasonPhrase != "A user with that Id already exists")
+                //        throw;
+                //}
+                catch(ErrorResponseException ex)
                 {
-                    if (ex.Response.ReasonPhrase != "A user with that Id already exists")
+                    if (ex.ResponseMessage.ReasonPhrase != "A user with that Id already exists")
                         throw;
                 }
                 catch(Exception ex)
