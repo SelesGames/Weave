@@ -191,7 +191,6 @@
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="Services\Startup\CriticalApplicationException.cs" />
-    <Compile Include="Services\Startup\Transition_MigrateLocalFeedsToCloud.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -780,10 +779,6 @@
     <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
       <Project>{177CCE16-AABD-4C84-9AC9-FD1E28F489D4}</Project>
       <Name>Weave.Customizability</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.Data\Weave.Data.csproj">
-      <Project>{EC233A10-6022-42DD-9D28-9206535A8EAD}</Project>
-      <Name>Weave.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{9A2E38EF-127D-4A69-885D-AE5EFC7858FC}</Project>
