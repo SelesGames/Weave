@@ -1,5 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
@@ -85,7 +86,7 @@ namespace weave
             NavigationService.ToEditSourcePage(feed);
         }
 
-        async void MenuItem_Click(object sender, RoutedEventArgs e)
+        void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)sender;
             var feed = menuItem.DataContext as Feed;
@@ -96,14 +97,7 @@ namespace weave
 
             else if (selectedOption.Equals("remove", StringComparison.OrdinalIgnoreCase))
             {
-                try
-                {
-                    await viewModel.DeleteSource(feed);
-                }
-                catch 
-                { 
-                    // do something here 
-                }
+                viewModel.DeleteSource(feed).Fire();
             }
         }
 

@@ -113,17 +113,22 @@ namespace weave
             Disposable.Create(() => bindingAdapter.IsCheckedChanged -= bindingAdapter_IsCheckedChanged).DisposeWith(disposables);
         }
 
-        async void bindingAdapter_IsCheckedChanged(object sender, EventArgs e)
+        void bindingAdapter_IsCheckedChanged(object sender, EventArgs e)
         {
             var adapter = (ApplicationBarToggleIconButtonAdapter)sender;
             if (adapter.IsChecked)
             {
-                await user.AddFavorite(viewModel.NewsItem);
+                user.AddFavorite(viewModel.NewsItem).Fire(OnAddFavoriteException);
             }
             else
             {
-                await user.RemoveFavorite(viewModel.NewsItem);
+                user.RemoveFavorite(viewModel.NewsItem).Fire();
             }
+        }
+
+        void OnAddFavoriteException(Exception e)
+        {
+            MessageBox.Show("Add favorite failed - plesae try again");
         }
 
         void BindIsOrientationLockedToAppBar()
@@ -286,14 +291,14 @@ namespace weave
 
         void BeginMarkReadTimer()
         {
-            Observable.Timer(TimeSpan.FromSeconds(3)).ObserveOnDispatcher().Subscribe(async _ =>
-            {
-                try
+            Observable.Timer(TimeSpan.FromSeconds(3)).ObserveOnDispatcher().Subscribe(_ =>
+            {        
+                if (viewModel != null && viewModel.NewsItem != null && user != null)
                 {
-                    viewModel.NewsItem.HasBeenViewed = true;
-                    await user.MarkArticleRead(viewModel.NewsItem);
+                    var newsItem = viewModel.NewsItem;
+                    newsItem.HasBeenViewed = true;
+                    user.MarkArticleRead(newsItem).Fire();
                 }
-                catch { }
             })
             .DisposeWith(disposables);
         }
@@ -673,10 +678,10 @@ namespace weave
             var formattedText = ssml.ToString();*/
         }
 
-        async void KeepUnreadMenuItemClick(object sender, System.EventArgs e)
+        void KeepUnreadMenuItemClick(object sender, System.EventArgs e)
         {
             viewModel.NewsItem.HasBeenViewed = false;
-            await user.MarkArticleUnread(viewModel.NewsItem);
+            user.MarkArticleUnread(viewModel.NewsItem).Fire();
         }
 
         async void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)

@@ -98,13 +98,18 @@ namespace weave.Pages.Settings
             busyIndicator.CollapseAndStopAnimation();
         }
 
-        async void OnSearchToggleTapped(object sender, System.Windows.RoutedEventArgs e)
+        void OnSearchToggleTapped(object sender, System.Windows.RoutedEventArgs e)
         {
             var source = (AddSourceViewModel.Source)((FrameworkElement)sender).DataContext;
             if (!source.IsAdded)
-                await viewModel.AddFeed(source);
+                viewModel.AddFeed(source).Fire(OnAddFeedException);
             else
-                await viewModel.RemoveFeed(source);
+                viewModel.RemoveFeed(source).Fire();
+        }
+
+        void OnAddFeedException(Exception ex)
+        {
+            MessageBox.Show("Unable to add feed");
         }
 
         async void OnSearchResultTextTapped(object sender, System.Windows.Input.GestureEventArgs e)

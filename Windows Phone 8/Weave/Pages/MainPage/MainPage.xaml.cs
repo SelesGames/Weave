@@ -431,11 +431,19 @@ namespace weave
         /// </summary>
         void InitializeApplicationBarButtonEventHandlers()
         {
-            refreshButton.GetClick().Where(_ => vm != null).Subscribe(() => vm.ManualRefresh()).DisposeWith(pageLevelDisposables);
+            refreshButton.GetClick().Where(_ => vm != null)
+                .Subscribe(() => vm.ManualRefresh().Fire(OnManualRefreshException))
+                .DisposeWith(pageLevelDisposables);
+
             fontButton.GetClick().Subscribe(LaunchLocalSettingsPopup).DisposeWith(pageLevelDisposables);
             markPageReadButton.GetClick().Subscribe(OnAllRead).DisposeWith(pageLevelDisposables);
             pinToStartScreenButton.GetClick().Subscribe(OnPinToStartButtonPressed).DisposeWith(pageLevelDisposables);
             openNavMenuButton.GetClick().Subscribe(ShowMenu).DisposeWith(pageLevelDisposables);
+        }
+
+        void OnManualRefreshException(Exception e)
+        {
+            MessageBox.Show("Error refreshing - try going back to Weave's panoramic homepage, then coming back into this category/feed");
         }
 
         void LaunchLocalSettingsPopup()

@@ -7,6 +7,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Navigation;
 using Weave.LiveTile.ScheduledAgent;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
@@ -255,20 +256,29 @@ namespace Weave.WP.ViewModels.MainPage
 
         internal void MarkCurrentPageRead()
         {
-            scheduler.SafelySchedule(async () => await markCurrentPageRead());
-        }
-
-        async Task markCurrentPageRead()
-        {
             if (displayedNews == null)
                 return;
 
             GlobalDispatcher.Current.BeginInvoke(() =>
             {
+                if (displayedNews == null)
+                    return;
+
                 foreach (var newsItem in displayedNews)
                     newsItem.HasBeenViewed = true;
-            }); 
-            await user.MarkArticlesSoftRead(displayedNews);
+            });
+            user.MarkArticlesSoftRead(displayedNews)
+                .Fire(ex => OnMarkPageReadException(ex, displayedNews));
+        }
+
+        void OnMarkPageReadException(Exception e, IEnumerable<NewsItem> displayedNews)
+        {
+            if (displayedNews != null)
+            {
+                foreach (var newsItem in displayedNews)
+                    newsItem.HasBeenViewed = false;
+            }
+            MessageBox.Show("Error marking page read.  You may have an issue with your firewall blocking HTTP POSTs");
         }
 
         #endregion
@@ -278,12 +288,7 @@ namespace Weave.WP.ViewModels.MainPage
 
         #region Refresh
 
-        internal void ManualRefresh()
-        {
-            scheduler.SafelySchedule(async () => await refresh());
-        }
-
-        async Task refresh()
+        internal async Task ManualRefresh()
         {
             newsLists = pagedNews.GetNewsLists(EntryType.ExtendRefresh).Memoize();
             ReevaluateNextAndPreviousButtonsVisibilities();
