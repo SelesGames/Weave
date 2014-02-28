@@ -133,21 +133,31 @@ namespace weave
         {
             base.OnBackKeyPress(e);
 
-            var t = SaveChanges();
-            if (t.IsCompleted)
-                return;
-            else
+            var frame = ServiceResolver.Get<OverlayFrame>();
+
+            try
             {
-                e.Cancel = true;
+                var t = SaveChanges();
+                if (t.IsCompleted)
+                    return;
+                else
+                {
+                    e.Cancel = true;
 
-                var frame = ServiceResolver.Get<OverlayFrame>();
-                frame.OverlayText = "Saving...";
-                frame.IsLoading = true;
+                    frame.OverlayText = "Saving...";
+                    frame.IsLoading = true;
 
-                await t;
-
+                    await t;
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                MessageBox.Show("Error saving your settings.  Check that you have a connection to the internet");
+            }
+            finally
+            {
                 frame.IsLoading = false;
-
                 NavigationService.TryGoBack();
             }
         }
