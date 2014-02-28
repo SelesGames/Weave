@@ -53,21 +53,32 @@ namespace weave
         {
             base.OnBackKeyPress(e);
 
-            var t = viewModel.SaveChanges();
-            if (t.IsCompleted)
-                return;
-            else
+            var frame = ServiceResolver.Get<OverlayFrame>();
+
+            try
             {
-                e.Cancel = true;
+                var t = viewModel.SaveChanges();
+                if (t.IsCompleted)
+                    return;
+                else
+                {
+                    e.Cancel = true;
 
-                var frame = ServiceResolver.Get<OverlayFrame>();
-                frame.OverlayText = "Saving...";
-                frame.IsLoading = true;
+                    frame.OverlayText = "Saving...";
+                    frame.IsLoading = true;
 
-                await t;
+                    await t;
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                MessageBox.Show("Unable to save changes to Feed");
+            }
+            finally
+            {
+                frame.IsLoading = false;
 
-                frame.IsLoading = false; 
-                
                 if (NavigationService.TryGoBack() == null)
                     viewModelLocator.Pop();
             }
