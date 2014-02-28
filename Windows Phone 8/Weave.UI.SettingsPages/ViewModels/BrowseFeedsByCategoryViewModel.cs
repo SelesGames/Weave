@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Weave.FeedLibrary;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {

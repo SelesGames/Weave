@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 using Weave.ViewModels.Helpers;
 
 namespace weave
@@ -139,9 +138,9 @@ namespace weave
                 IsArticleViewingSelectorEnabled = true;
         }
 
-        public async Task SaveChanges()
+        public Task SaveChanges()
         {
-            await user.UpdateFeed(Feed);
+            return user.UpdateFeed(Feed);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
