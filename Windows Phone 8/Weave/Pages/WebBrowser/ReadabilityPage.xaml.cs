@@ -1,6 +1,7 @@
 ﻿using Common.Microsoft.OneNote.Response;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using PocketWP;
 using SelesGames;
 using SelesGames.Phone;
 using System;
@@ -730,8 +731,6 @@ namespace weave
                 saveTask = () => oneNoteSave.SendToOneNote(token);
             }
 
-            //frame.OverlayText = "Saving to OneNote...";
-            //frame.IsLoading = true;
             Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("Sending to OneNote..."));
 
             var response = await saveTask();
@@ -743,9 +742,20 @@ namespace weave
             {
                 Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("ERROR saving to OneNote"));
             }
-
-            //frame.IsLoading = false;
         }
+
+        void SaveToPocketMenuItemClick(object sender, EventArgs e)
+        {
+            if (viewModel != null && viewModel.NewsItem != null && viewModel.NewsItem.Feed != null)
+            {
+                var newsItem = viewModel.NewsItem;
+                PocketHelper.AddItemToPocket(
+                    uri: newsItem.Link, 
+                    title: newsItem.Title,
+                    tags: newsItem.Feed.Category);
+            }
+        }
+
 
 
         #endregion
