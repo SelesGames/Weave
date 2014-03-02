@@ -53,6 +53,8 @@ namespace weave
                 ExpandedFeedLibraryUrl = "http://weave.blob.core.windows.net/settings/masterfeeds.xml?xsf=" + r,
             };
 
+            settings.ThirdParty.Pocket.ConsumerKey = "24489-12d7601130dfdbb4500dcd9b";
+
             new WeaveStartupTask(settings);
         }
 

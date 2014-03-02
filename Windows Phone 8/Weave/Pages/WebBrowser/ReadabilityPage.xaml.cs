@@ -1,7 +1,6 @@
 ﻿using Common.Microsoft.OneNote.Response;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using PocketWP;
 using SelesGames;
 using SelesGames.Phone;
 using System;
@@ -22,6 +21,7 @@ using Weave.Customizability;
 using Weave.Microsoft.OneNote;
 using Weave.SavedState;
 using Weave.Services;
+using Weave.Services.Pocket;
 using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
@@ -687,7 +687,7 @@ namespace weave
 
         async void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)
         {
-            var token = permState.LiveAccessToken;
+            var token = permState.ThirdParty.LiveAccessToken;
 
             if (token == null)
             {
@@ -749,10 +749,7 @@ namespace weave
             if (viewModel != null && viewModel.NewsItem != null && viewModel.NewsItem.Feed != null)
             {
                 var newsItem = viewModel.NewsItem;
-                PocketHelper.AddItemToPocket(
-                    uri: newsItem.Link, 
-                    title: newsItem.Title,
-                    tags: newsItem.Feed.Category);
+                PocketHelper.Current.Save(newsItem).Fire();
             }
         }
 

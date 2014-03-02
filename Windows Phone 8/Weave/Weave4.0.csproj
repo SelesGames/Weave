@@ -128,8 +128,15 @@
       <HintPath>..\packages\LiveSDK.5.5\lib\WindowsPhone8\Microsoft.Live.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Threading.Tasks">
-      <HintPath>..\lib\Azure Mobile Services\Microsoft.Threading.Tasks.dll</HintPath>
+    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\wp8\Microsoft.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\wp8\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
+      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.165\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\lib\Azure Mobile Services\Microsoft.WindowsAzure.Mobile.dll</HintPath>
@@ -149,6 +156,9 @@
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\lib\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PocketSharp">
+      <HintPath>..\packages\PocketSharp.3.1.1.0\lib\portable-win+net403+sl40+wp71\PocketSharp.dll</HintPath>
     </Reference>
     <Reference Include="PocketWP">
       <HintPath>..\packages\PocketWP.1.0.0.8\lib\wp80\PocketWP.dll</HintPath>
@@ -198,6 +208,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Library\Value Converters\UserIdConverter.cs" />
+    <Compile Include="Pages\Accounts\OAuthPage.xaml.cs">
+      <DependentUpon>OAuthPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Accounts\OneNoteSignInPage.xaml.cs">
       <DependentUpon>OneNoteSignInPage.xaml</DependentUpon>
     </Compile>
@@ -207,6 +220,7 @@
     <Compile Include="Services\DataStorageClient.cs" />
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
+    <Compile Include="Services\Pocket\PocketHelper.cs" />
     <Compile Include="Services\Startup\CriticalApplicationException.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
@@ -241,6 +255,8 @@
       <DependentUpon>CustomList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
+    <Compile Include="Settings\PocketSettings.cs" />
+    <Compile Include="Settings\ThirdParty.cs" />
     <Compile Include="ViewModels\MobilizedArticleExtensions.cs" />
     <Compile Include="ViewModels\NewsItemComparer.cs">
       <SubType>Code</SubType>
@@ -333,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Pages\Accounts\OAuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Accounts\OneNoteSignInPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -631,6 +651,7 @@
     <Content Include="Assets\Tiles\CycleTileSmall.png" />
     <Content Include="Assets\Tiles\lock_screen_placeholder.jpg" />
     <Resource Include="Feeds.xml" />
+    <Content Include="FodyWeavers.xml" />
     <Content Include="SplashScreenImage.jpg" />
     <None Include="app.config" />
     <None Include="Fonts\LiveSymbol.ttf" />

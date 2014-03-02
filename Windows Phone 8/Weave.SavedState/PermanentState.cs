@@ -15,8 +15,7 @@ namespace Weave.SavedState
         public bool IsSystemTrayVisibleWhenPossible { get; set; }
         public RunHistory RunHistory { get; set; }
         public string SpeakTextVoice { get; set; }
-        public LiveOfflineAccessToken LiveAccessToken { get; set; }
-
+        public ThirdParty ThirdParty { get; set; }
 
 
 
@@ -98,6 +97,8 @@ namespace Weave.SavedState
 
             IsSystemTrayVisibleWhenPossible = false;
             RunHistory = new RunHistory();
+
+            ThirdParty = new ThirdParty();
         }
 
 

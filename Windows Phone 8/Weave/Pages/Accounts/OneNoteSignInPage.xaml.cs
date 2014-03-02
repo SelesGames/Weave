@@ -21,7 +21,7 @@ namespace weave
             switch (e.Status)
             {
                 case LiveConnectSessionStatus.Connected:
-                    permState.LiveAccessToken = new LiveOfflineAccessToken(
+                    permState.ThirdParty.LiveAccessToken = new LiveOfflineAccessToken(
                         clientId: signInButton.ClientId,
                         accessToken: e.Session.AccessToken,
                         accessTokenExpiration: e.Session.Expires,

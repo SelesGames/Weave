@@ -8,6 +8,7 @@ using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.WP.ViewModels.GroupedNews;
+using System.Linq;
 
 namespace Weave.Services
 {
@@ -15,9 +16,11 @@ namespace Weave.Services
     {
         public static OverlayFrame CurrentFrame { get; set; }
 
-        static void SafelyNavigateTo(string uri)
+        static void SafelyNavigateTo(string uri, params object[] p)
         {         
-            CurrentFrame.TryNavigate(uri);
+            var encodedParameters = p.Select(o => HttpUtility.UrlEncode(o.ToString())).ToArray();
+            var fullUrl = string.Format(uri, encodedParameters);
+            CurrentFrame.TryNavigate(fullUrl);
         }
 
         public static void ToPanoramaPage()
@@ -50,16 +53,14 @@ namespace Weave.Services
 
         public static void ToMainPage(string header, string mode)
         {
-            var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}", urlEncodedHeader, mode));
+            SafelyNavigateTo("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&mode={1}", header, mode);
         }
 
         static void ToMainPage(Feed feed)
         {
             string header = feed.Name;
             Guid feedId = feed.Id;
-            var urlEncodedHeader = System.Net.HttpUtility.UrlEncode(header);
-            SafelyNavigateTo(string.Format("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}", urlEncodedHeader, feedId));
+            SafelyNavigateTo("/weave;component/Pages/MainPage/MainPage.xaml?header={0}&feedId={1}", header, feedId);
         }
 
         public static void ToInstapaperAccountCredentialsPage()
@@ -75,7 +76,7 @@ namespace Weave.Services
             var ts = ServiceResolver.Get<TombstoneState>();
             ts.CurrentlyViewedNewsItem = newsItem;
 
-            SafelyNavigateTo(string.Format("/weave;component/Pages/WebBrowser/ReadabilityPage.xaml"));
+            SafelyNavigateTo("/weave;component/Pages/WebBrowser/ReadabilityPage.xaml");
         }
 
         public static void ToInternetExplorer(NewsItem newsItem)
@@ -149,6 +150,11 @@ namespace Weave.Services
         public static void ToOneNoteSignInPage()
         {
             SafelyNavigateTo("/weave;component/Pages/Accounts/OneNoteSignInPage.xaml");
+        }
+
+        public static void ToOAuthPage(string target)
+        {
+            SafelyNavigateTo("/weave;component/Pages/Accounts/OAuthPage.xaml?target={0}", target);
         }
     }
 }

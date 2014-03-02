@@ -9,6 +9,7 @@ namespace Weave.Settings
         public AppSettings()
         {
             NumberOfNewsItemsPerMainPage = 16;
+            ThirdParty = new ThirdParty();
         }
 
         public string AppName { get; set; }
@@ -25,6 +26,7 @@ namespace Weave.Settings
         public Application CurrentApplication { get; set; }
         public StartupMode StartupMode { get; set; }
         public string ExpandedFeedLibraryUrl { get; set; }
+        public ThirdParty ThirdParty { get; private set; }
 
         public static AppSettings Instance { get; set; }
     }
