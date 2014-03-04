@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Telerik.Windows.Controls;
 using Weave.UI.Frame;
 using Weave.ViewModels.Helpers;
+using SelesGames.Phone;
 
 namespace weave
 {

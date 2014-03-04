@@ -9,6 +9,7 @@ using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.WP.ViewModels.GroupedNews;
 using System.Linq;
+using weave;
 
 namespace Weave.Services
 {
@@ -152,9 +153,12 @@ namespace Weave.Services
             SafelyNavigateTo("/weave;component/Pages/Accounts/OneNoteSignInPage.xaml");
         }
 
-        public static void ToOAuthPage(string target)
+        public static async void ToOAuthPage(string target, Action callback)
         {
             SafelyNavigateTo("/weave;component/Pages/Accounts/OAuthPage.xaml?target={0}", target);
+            var navigated = await CurrentFrame.NavigatedAsync();
+            var page = navigated.Content as OAuthPage;
+            page.Callback = callback;
         }
     }
 }
