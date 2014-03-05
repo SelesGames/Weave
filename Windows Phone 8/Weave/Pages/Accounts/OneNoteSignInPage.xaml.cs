@@ -2,14 +2,16 @@
 using Microsoft.Live;
 using Microsoft.Phone.Controls;
 using SelesGames;
+using System;
 using System.Threading.Tasks;
 using Weave.SavedState;
-using Weave.Services.OneNote;
 
 namespace weave
 {
     public partial class OneNoteSignInPage : PhoneApplicationPage
     {
+        public Action Callback { get; set; }
+
         public OneNoteSignInPage()
         {
             InitializeComponent();
@@ -30,8 +32,9 @@ namespace weave
 
                     infoTextBlock.Text = "Authentication successful";
                     await Task.Delay(500);                
+                    if (Callback != null)
+                        Callback();
                     NavigationService.GoBack();
-                    await OneNoteHelper.Current.OnCallback();
                     break;
 
                 case LiveConnectSessionStatus.NotConnected:

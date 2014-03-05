@@ -39,19 +39,14 @@ namespace Weave.Services.OneNote
         {
             try
             {
-                Task saveTask;
-
                 if (continueOnSaveFailure)
                 {
-                    saveTask = InnerSave()
-                        .ContinueWith(async _ => await Register(), TaskContinuationOptions.OnlyOnFaulted);
+                    await TrySaveRegisterOnFail();
                 }
                 else
                 {
-                    saveTask = InnerSave();
+                    await InnerSave();
                 }
-
-                await saveTask;
             }
             catch (Exception ex)
             {
@@ -59,6 +54,22 @@ namespace Weave.Services.OneNote
                 MessageBox.Show("Unable to save to OneNote");
             }
         }
+
+        async Task TrySaveRegisterOnFail()
+        {
+            try
+            {
+                await InnerSave();
+                return;
+            }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+
+            await Register();
+        }
+
 
         async Task InnerSave()
         {
@@ -114,10 +125,11 @@ namespace Weave.Services.OneNote
 
         async Task Register()
         {
-            await GlobalDispatcher.Current.InvokeAsync(() => GlobalNavigationService.ToOneNoteSignInPage());
+            await GlobalDispatcher.Current.InvokeAsync(() => 
+                GlobalNavigationService.ToOneNoteSignInPage(async () => await OnCallback()));
         }
 
-        public async Task OnCallback()
+        async Task OnCallback()
         {
             await TrySave(continueOnSaveFailure: false);
         }

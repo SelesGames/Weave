@@ -11,13 +11,13 @@ namespace weave
     {
         string target, callbackUri, requestCode;
 
+        public Action Callback { get; set; }
+
         public OAuthPage()
         {
             InitializeComponent();
             browser.IsScriptEnabled = true;
         }
-
-        public Action Callback { get; set; }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

@@ -19,7 +19,7 @@ namespace Weave.Services
 
         static void SafelyNavigateTo(string uri, params object[] p)
         {         
-            var encodedParameters = p.Select(o => HttpUtility.UrlEncode(o.ToString())).ToArray();
+            var encodedParameters = p.Select(o => o == null ? null : HttpUtility.UrlEncode(o.ToString())).ToArray();
             var fullUrl = string.Format(uri, encodedParameters);
             CurrentFrame.TryNavigate(fullUrl);
         }
@@ -148,9 +148,13 @@ namespace Weave.Services
             SafelyNavigateTo("/weave;component/Pages/Accounts/CreateAccountPage.xaml");
         }
 
-        public static void ToOneNoteSignInPage()
+        public static async void ToOneNoteSignInPage(Action callback)
         {
             SafelyNavigateTo("/weave;component/Pages/Accounts/OneNoteSignInPage.xaml");
+            var navigated = await CurrentFrame.NavigatedAsync();
+            var page = navigated.Content as OneNoteSignInPage;
+            if (page != null)
+                page.Callback = callback;
         }
 
         public static async void ToOAuthPage(string target, Action callback)
@@ -158,7 +162,8 @@ namespace Weave.Services
             SafelyNavigateTo("/weave;component/Pages/Accounts/OAuthPage.xaml?target={0}", target);
             var navigated = await CurrentFrame.NavigatedAsync();
             var page = navigated.Content as OAuthPage;
-            page.Callback = callback;
+            if (page != null)
+                page.Callback = callback;
         }
     }
 }

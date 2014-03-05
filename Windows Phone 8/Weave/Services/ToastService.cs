@@ -9,7 +9,7 @@ namespace Weave.Services
         {
             new ToastPrompt
             {
-                MillisecondsUntilHidden = 3000,
+                MillisecondsUntilHidden = 2000,
                 Message = message,
                 FontSize = (double)Application.Current.Resources["PhoneFontSizeMediumLarge"],
                 //TextOrientation = System.Windows.Controls.Orientation.Vertical
