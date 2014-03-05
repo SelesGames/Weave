@@ -26,7 +26,12 @@ namespace Weave.Services.Pocket
             this.consumerKey = AppSettings.Instance.ThirdParty.Pocket.ConsumerKey;
         }
 
-        public async Task Save(NewsItem newsItem)
+        public Task Save(NewsItem newsItem)
+        {
+            return TrySave(newsItem, continueOnSaveFailure: true);
+        }
+
+        async Task TrySave(NewsItem newsItem, bool continueOnSaveFailure)
         {
             if (newsItem == null)
                 return;
@@ -35,14 +40,35 @@ namespace Weave.Services.Pocket
 
             try
             {
-                await InnerSave(newsItem)
-                    .ContinueWith(async _ => await Register(), TaskContinuationOptions.OnlyOnFaulted);
+                if (continueOnSaveFailure)
+                {
+                    await TrySaveRegisterOnFail(newsItem);
+                }
+                else
+                {
+                    await InnerSave(newsItem);
+                }
             }
             catch(Exception ex)
             {
                 DebugEx.WriteLine(ex);
                 MessageBox.Show("Unable to save to Pocket");
             }
+        }
+
+        async Task TrySaveRegisterOnFail(NewsItem newsItem)
+        {
+            try
+            {
+                await InnerSave(newsItem);
+                return;
+            }
+            catch(Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
+
+            await Register();
         }
 
         async Task InnerSave(NewsItem newsItem)
@@ -109,10 +135,11 @@ namespace Weave.Services.Pocket
             catch(Exception ex)
             {
                 DebugEx.WriteLine(ex);
+                isRegSuccessful = false;
             }
 
             if (isRegSuccessful && currentNewsItem != null)
-                await InnerSave(currentNewsItem);
+                await TrySave(currentNewsItem, continueOnSaveFailure: false);
         }
     }
 }
