@@ -15,63 +15,29 @@
 		<Style x:Key="TileStyle" TargetType="local:TileButton">
 			<Setter Property="Background" Value="{StaticResource PhoneAccentBrush}"/>
 			<Setter Property="BorderBrush" Value="{StaticResource PhoneBackgroundBrush}"/>		
-			<Setter Property="Width" Value="75"/>
-			<Setter Property="Height" Value="90"/>	
 		</Style>
 		
 		<BackEase x:Key="BackEaseOut" EasingMode="EaseOut" Amplitude="0.4" />
-		
-		<Storyboard x:Name="VerticalOpenSB">
-			<DoubleAnimation BeginTime="0"        Duration="0:0:0.2" From="96" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="socialShareButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.02" Duration="0:0:0.3" From="96" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="emailButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.04" Duration="0:0:0.3" From="96" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ieButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.2"  Duration="0:0:0.3" From="96" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="instapaperButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.22" Duration="0:0:0.3" From="96" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="smsButton" EasingFunction="{StaticResource BackEaseOut}"/>
 
-			<DoubleAnimation BeginTime="0:0:0.02" Duration="0:0:0.3" To="-87" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="emailButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.04" Duration="0:0:0.3" To="87" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ieButton" EasingFunction="{StaticResource BackEaseOut}"/>	
-			<DoubleAnimation BeginTime="0:0:0.2" Duration="0:0:0.3" To="-174" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="instapaperButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.22" Duration="0:0:0.3" To="174" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="smsButton" EasingFunction="{StaticResource BackEaseOut}"/>
+		<Storyboard x:Name="VerticalOpenSB">
+			<DoubleAnimation BeginTime="0:0:0.05" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="smsButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="emailButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="socialShareButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.05" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ieButton" EasingFunction="{StaticResource BackEaseOut}"/>
 			
-			<DoubleAnimation Duration="0:0:0.1" To="0.7" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
-			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
+			<DoubleAnimation BeginTime="0:0:0.04"  Duration="0:0:0.3" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="instapaperButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.02"  Duration="0:0:0.2" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="pocketButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.04"  Duration="0:0:0.1" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="oneNoteButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			
+			<DoubleAnimation Duration="0:0:0.10" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
+			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonContainer"/>
 		</Storyboard>
 
 
 		<Storyboard x:Name="VerticalCloseSB">
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="instapaperButton">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="emailButton">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="smsButton">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="ieButton">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
-			</DoubleAnimationUsingKeyFrames>
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Projection).(PlaneProjection.RotationY)" Storyboard.TargetName="socialShareButton">
-				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="-90"/>
-			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.2" To="48" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="buttonContainer"/>
 			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle" d:IsOptimized="True"/>
-			<DoubleAnimation BeginTime="0:0:0.1" Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid" d:IsOptimized="True"/>
-			
-			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="instapaperButton" />
-			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="emailButton" />
-			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="smsButton" />
-			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ieButton" />
-
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.08" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="instapaperButton"/>
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.08" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="emailButton"/>
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.08" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="smsButton"/>
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.08" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ieButton"/>
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.08" To="60" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="socialShareButton"/>
+			<DoubleAnimation BeginTime="0:0:0.1" Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonContainer" d:IsOptimized="True"/>
 		</Storyboard>
 		
 		<Storyboard x:Name="HorizontalOpenSB">
@@ -96,94 +62,85 @@
 			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
 		</Storyboard>
 
-		
-		<Style x:Key="ButtonStyle" TargetType="sg:ImageWithLabelButton">
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
-			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
-			<Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
-			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
-			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="sg:ImageWithLabelButton">
-						<Grid Background="Transparent">
-							<VisualStateManager.VisualStateGroups>
-								<VisualStateGroup x:Name="CommonStates">
-									<VisualState x:Name="Normal"/>
-									<VisualState x:Name="MouseOver"/>
-									<VisualState x:Name="Pressed">
-										<Storyboard>
-											 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="icon">
-												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneBackgroundBrush}"/>
-											</ObjectAnimationUsingKeyFrames>
-											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
-												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneContrastBackgroundBrush}"/>
-											</ObjectAnimationUsingKeyFrames>
-										</Storyboard>
-									</VisualState>
-								</VisualStateGroup>
-							</VisualStateManager.VisualStateGroups>
-							<Ellipse x:Name="ButtonBackground" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{StaticResource PhoneStrokeThickness}" />
-							<!--Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0">
-								<Rectangle x:Name="icon" Fill="{TemplateBinding Background}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
-							</Border-->
-							<Rectangle x:Name="icon" Fill="{TemplateBinding Background}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		
 	</UserControl.Resources>
 		
 			
 	<Grid x:Name="LayoutRoot">
-		<Rectangle x:Name="rectangle" Fill="{StaticResource PhoneBackgroundBrush}" Opacity="0" MouseLeftButtonDown="OnOutsideTap"/>
-		<Grid x:Name="grid" VerticalAlignment="Bottom" Margin="0,0,0,96" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-			<Grid.RenderTransform>
+		<Rectangle x:Name="rectangle" MouseLeftButtonDown="OnOutsideTap" Opacity="0">
+			<Rectangle.Fill>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="Transparent" Offset="-0.22"/>
+					<GradientStop Color="{StaticResource PhoneBackgroundColor}" Offset="0.60"/>
+				</LinearGradientBrush>
+			</Rectangle.Fill>
+		</Rectangle>
+		<StackPanel x:Name="buttonContainer" VerticalAlignment="Bottom" Margin="12,0,12,96" RenderTransformOrigin="0.5,0.5">
+			<UIElement.RenderTransform>
 				<CompositeTransform/>
-			</Grid.RenderTransform>
-			<local:TileButton x:Name="instapaperButton" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<UIElement.Projection>
-					<PlaneProjection/>
-				</UIElement.Projection>
-				<UIElement.RenderTransform>
-					<CompositeTransform />
-				</UIElement.RenderTransform>
-			</local:TileButton>
-			<local:TileButton x:Name="emailButton" ImageSource="/Assets/Icons/48x48_email.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<local:TileButton.Projection>
-					<PlaneProjection/>
-				</local:TileButton.Projection>
-				<local:TileButton.RenderTransform>
-					<CompositeTransform />
-				</local:TileButton.RenderTransform>
-			</local:TileButton>
-			<local:TileButton x:Name="smsButton" ImageSource="/Assets/Icons/64x64_sms.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<local:TileButton.Projection>
-					<PlaneProjection/>
-				</local:TileButton.Projection>
-				<local:TileButton.RenderTransform>
-					<CompositeTransform />
-				</local:TileButton.RenderTransform>
-			</local:TileButton>
-			<local:TileButton x:Name="ieButton" ImageSource="/Assets/Icons/64x64_ie.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<local:TileButton.Projection>
-					<PlaneProjection/>
-				</local:TileButton.Projection>
-				<local:TileButton.RenderTransform>
-					<CompositeTransform />
-				</local:TileButton.RenderTransform>
-			</local:TileButton>
-			<local:TileButton x:Name="socialShareButton" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<local:TileButton.Projection>
-					<PlaneProjection/>
-				</local:TileButton.Projection>
-				<local:TileButton.RenderTransform>
-					<CompositeTransform />
-				</local:TileButton.RenderTransform>
-			</local:TileButton>
-		</Grid>
+			</UIElement.RenderTransform>
+		
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
+				<local:TileButton x:Name="instapaperButton" Label="instapaper" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+				<local:TileButton x:Name="pocketButton" Label="pocket" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+				<local:TileButton x:Name="oneNoteButton" Label="onenote" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<local:TileButton x:Name="smsButton" Label="sms" ImageSource="/Assets/Icons/64x64_sms.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+				<local:TileButton x:Name="emailButton" Label="email" ImageSource="/Assets/Icons/48x48_email.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+				<local:TileButton x:Name="socialShareButton" Label="social" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+				<local:TileButton x:Name="ieButton" Label="ie" ImageSource="/Assets/Icons/64x64_ie.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+					<local:TileButton.Projection>
+						<PlaneProjection/>
+					</local:TileButton.Projection>
+					<local:TileButton.RenderTransform>
+						<CompositeTransform />
+					</local:TileButton.RenderTransform>
+				</local:TileButton>
+			</StackPanel>
+
+		</StackPanel>
 	</Grid>
 </UserControl>

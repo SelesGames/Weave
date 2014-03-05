@@ -526,7 +526,7 @@ namespace Weave.Services
             kernel.Bind<SocialShareContextMenuControl>().ToSelf().InSingletonScope().Named("accent")
                 .OnActivation((_, o) =>
                 {
-                    o.HideCloseButtonForAppBarSetup();
+                    //o.HideCloseButtonForAppBarSetup();
                     o.Background = settings.Themes.CurrentTheme.AccentBrush;
                 });
 

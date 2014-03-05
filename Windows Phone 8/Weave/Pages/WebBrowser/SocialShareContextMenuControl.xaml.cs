@@ -27,12 +27,27 @@ namespace weave
         {
             InitializeComponent();
 
-            buttons = new Control[] { instapaperButton, socialShareButton, ieButton, smsButton, emailButton };
+            buttons = new[] { instapaperButton, socialShareButton, ieButton, smsButton, emailButton, pocketButton, oneNoteButton };
 
-            foreach (var button in buttons)
-            {
-                button.SetBinding(TileButton.BackgroundProperty, new System.Windows.Data.Binding("Background") { Source = this });
-            }
+            var topRow = new[] { instapaperButton, pocketButton, oneNoteButton };
+            var bottomRow = new[] { socialShareButton, ieButton, smsButton, emailButton };
+
+            var accent = (Color)Resources["PhoneAccentColor"];
+            var palette = accent.GetComplementary();
+
+            var topRowBrush = new SolidColorBrush(palette.ComplementaryColorDarker);
+            var bottomRowBrush = new SolidColorBrush(accent);
+
+            //foreach (var button in buttons)
+            //{
+            //    SelesGames.
+            //    button.SetBinding(TileButton.BackgroundProperty, new System.Windows.Data.Binding("Background") { Source = this });
+            //}
+            foreach (var button in topRow)
+                button.Background = topRowBrush;
+
+            foreach (var button in bottomRow)
+                button.Background = bottomRowBrush;
         }
 
         internal void SetVerticalMode()
@@ -55,10 +70,10 @@ namespace weave
             }
         }
 
-        internal void HideCloseButtonForAppBarSetup()
-        {
-            grid.Margin = new Thickness(0, 0, 0, 48);
-        }
+        //internal void HideCloseButtonForAppBarSetup()
+        //{
+        //    grid.Margin = new Thickness(0, 0, 0, 48);
+        //}
 
 
 
