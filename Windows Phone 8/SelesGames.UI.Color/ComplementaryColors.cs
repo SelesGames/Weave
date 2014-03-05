@@ -12,5 +12,4 @@ namespace System.Windows.Media
         public Color ComplementaryColorDarker { get; set; }
         public Color ComplementaryColorLighter { get; set; }
     }
-
 }
