@@ -256,7 +256,5 @@ namespace SelesGames
         }
 
         #endregion
-
-
     }
 }
