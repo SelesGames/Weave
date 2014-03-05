@@ -13,7 +13,7 @@ namespace weave
     public partial class SocialShareContextMenuControl : UserControl, IPopup<string>, IDisposable
     {
         CompositeDisposable disposables = new CompositeDisposable();
-        TileButton[] buttons;
+        Control[] buttons;
         Mode currentMode;
 
         enum Mode
@@ -27,7 +27,7 @@ namespace weave
         {
             InitializeComponent();
 
-            buttons = new[] { instapaperButton, socialShareButton, ieButton, smsButton, emailButton };
+            buttons = new Control[] { instapaperButton, socialShareButton, ieButton, smsButton, emailButton };
 
             foreach (var button in buttons)
             {

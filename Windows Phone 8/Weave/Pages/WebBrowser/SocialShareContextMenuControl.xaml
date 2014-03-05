@@ -5,6 +5,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
 	xmlns:local="clr-namespace:weave"
+	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
@@ -94,6 +95,45 @@
 			<DoubleAnimation Duration="0:0:0.1" To="0.7" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
 			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
 		</Storyboard>
+
+		
+		<Style x:Key="ButtonStyle" TargetType="sg:ImageWithLabelButton">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}"/>
+			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+			<Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}"/>
+			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="sg:ImageWithLabelButton">
+						<Grid Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="icon">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneBackgroundBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="ButtonBackground">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneContrastBackgroundBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Ellipse x:Name="ButtonBackground" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{StaticResource PhoneStrokeThickness}" />
+							<!--Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0">
+								<Rectangle x:Name="icon" Fill="{TemplateBinding Background}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
+							</Border-->
+							<Rectangle x:Name="icon" Fill="{TemplateBinding Background}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 		
 	</UserControl.Resources>
 		
@@ -105,12 +145,12 @@
 				<CompositeTransform/>
 			</Grid.RenderTransform>
 			<local:TileButton x:Name="instapaperButton" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
-				<local:TileButton.Projection>
+				<UIElement.Projection>
 					<PlaneProjection/>
-				</local:TileButton.Projection>
-				<local:TileButton.RenderTransform>
+				</UIElement.Projection>
+				<UIElement.RenderTransform>
 					<CompositeTransform />
-				</local:TileButton.RenderTransform>
+				</UIElement.RenderTransform>
 			</local:TileButton>
 			<local:TileButton x:Name="emailButton" ImageSource="/Assets/Icons/48x48_email.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" >
 				<local:TileButton.Projection>

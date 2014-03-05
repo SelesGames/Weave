@@ -42,9 +42,11 @@
 									</VisualState>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
-							<Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0">
-								<Rectangle x:Name="icon" Fill="{StaticResource PhoneForegroundBrush}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
-							</Border>
+							<Ellipse x:Name="ButtonBackground" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{StaticResource PhoneStrokeThickness}" />
+							<!--Border x:Name="ButtonBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="0">
+								<Rectangle x:Name="icon" Fill="{TemplateBinding Background}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
+							</Border-->
+							<Rectangle x:Name="icon" Fill="{StaticResource PhoneForegroundBrush}" OpacityMask="{TemplateBinding Content}" Height="48" Width="48" />
 						</Grid>
 					</ControlTemplate>
 				</Setter.Value>
@@ -54,10 +56,13 @@
 	</UserControl.Resources>
 
 	<Grid Background="Transparent">
-		<Button x:Name="button" 
-			Style="{StaticResource ButtonStyle}" 
-			Background="{StaticResource PhoneAccentBrush}" 
-			BorderBrush="{StaticResource PhoneBackgroundBrush}" 
-			BorderThickness="3" Padding="0" d:DataContext="/Assets/Icons/64x64_twitter.png" Content="{Binding Converter={StaticResource imageBrushConverter2}}" />
+		<StackPanel>
+			<Button x:Name="button" 
+				Style="{StaticResource ButtonStyle}" 
+				Background="{StaticResource PhoneAccentBrush}" 
+				BorderBrush="{StaticResource PhoneBackgroundBrush}" 
+				BorderThickness="3" Padding="0" d:DataContext="/Assets/Icons/64x64_twitter.png" Content="{Binding Converter={StaticResource imageBrushConverter2}}" />
+			<TextBlock Text="button" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</StackPanel>
 	</Grid>
 </UserControl>
