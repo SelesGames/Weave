@@ -21,6 +21,7 @@ using Weave.Customizability;
 using Weave.Microsoft.OneNote;
 using Weave.SavedState;
 using Weave.Services;
+using Weave.Services.OneNote;
 using Weave.Services.Pocket;
 using Weave.Settings;
 using Weave.UI.Frame;
@@ -687,14 +688,6 @@ namespace weave
 
         async void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)
         {
-            var token = permState.ThirdParty.LiveAccessToken;
-
-            if (token == null)
-            {
-                GlobalNavigationService.ToOneNoteSignInPage();
-                return;
-            }
-
             if (!isHtmlDisplayed)
             {
                 MessageBox.Show("Please wait until the article has finished downloading");
@@ -702,46 +695,12 @@ namespace weave
             }
 
             var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
-            Func<Task<BaseResponse>> saveTask;
 
-            if ((articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
-                && viewModel.CurrentMobilizedArticle != null)
-            {
-                var mobilizedArticle = viewModel.CurrentMobilizedArticle;
+            var isMobilized = 
+                (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
+                && viewModel.CurrentMobilizedArticle != null;
 
-                var oneNoteSave = new MobilizedOneNoteItem
-                {
-                    Title = mobilizedArticle.Title,
-                    Link = mobilizedArticle.Link,
-                    Source = mobilizedArticle.CombinedPublicationAndDate,
-                    HeroImage = mobilizedArticle.HeroImageUrl,
-                    BodyHtml = mobilizedArticle.ContentHtml,
-                };
-                saveTask = () => oneNoteSave.SendToOneNote(token);
-            }
-
-            else
-            {
-                var oneNoteSave = new HtmlLinkOneNoteItem
-                {
-                    Title = viewModel.NewsItem.Title,
-                    Link = viewModel.NewsItem.Link,
-                    Source = viewModel.NewsItem.FormattedForMainPageSourceAndDate,
-                };
-                saveTask = () => oneNoteSave.SendToOneNote(token);
-            }
-
-            Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("Sending to OneNote..."));
-
-            var response = await saveTask();
-            if (response is CreateSuccessResponse)
-            {
-                Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("Saved to OneNote!"));
-            }
-            else
-            {
-                Dispatcher.BeginInvoke(() => ToastService.ToastPrompt("ERROR saving to OneNote"));
-            }
+            await OneNoteHelper.Current.Save(viewModel.CurrentMobilizedArticle, viewModel.NewsItem, isMobilized);   
         }
 
         void SaveToPocketMenuItemClick(object sender, EventArgs e)
