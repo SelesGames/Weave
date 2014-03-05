@@ -4,6 +4,7 @@ using Microsoft.Phone.Controls;
 using SelesGames;
 using System.Threading.Tasks;
 using Weave.SavedState;
+using Weave.Services.OneNote;
 
 namespace weave
 {
@@ -28,8 +29,9 @@ namespace weave
                         refreshToken: e.Session.RefreshToken);
 
                     infoTextBlock.Text = "Authentication successful";
-                    await Task.Delay(500);
+                    await Task.Delay(500);                
                     NavigationService.GoBack();
+                    await OneNoteHelper.Current.OnCallback();
                     break;
 
                 case LiveConnectSessionStatus.NotConnected:
