@@ -218,7 +218,9 @@
     <Compile Include="Services\MainPageSourcesRefresher.cs" />
     <Compile Include="Services\NinjectToServiceResolverAdapter.cs" />
     <Compile Include="Services\OneNote\OneNoteHelper.cs" />
+    <Compile Include="Services\OneNote\OneNoteSavingWorkflow.cs" />
     <Compile Include="Services\Pocket\PocketHelper.cs" />
+    <Compile Include="Services\Pocket\PocketSavingWorkflow.cs" />
     <Compile Include="Services\Startup\CriticalApplicationException.cs" />
     <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
       <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
