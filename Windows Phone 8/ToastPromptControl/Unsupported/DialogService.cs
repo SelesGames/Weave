@@ -296,15 +296,18 @@ namespace Clarity.Phone.Extensions
             foreach (Timeline t in showStoryboard.Children)
                 Storyboard.SetTarget(t, overlay);
 
-            Observable.FromEventPattern<EventArgs>(PopupContainer, "LayoutUpdated").Take(1).Subscribe(notUsed =>
+            if (PopupContainer != null)
             {
-                showStoryboard.Begin();
-
-                if (Page != null)
+                Observable.FromEventPattern<EventArgs>(PopupContainer, "LayoutUpdated").Take(1).Subscribe(notUsed =>
                 {
-                    Page.ApplicationBar = AppBar;
-                }
-            });
+                    showStoryboard.Begin();
+
+                    if (Page != null)
+                    {
+                        Page.ApplicationBar = AppBar;
+                    }
+                });
+            }
         }
 
         void OnStoryboardCompleted()

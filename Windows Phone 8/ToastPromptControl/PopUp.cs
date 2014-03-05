@@ -70,7 +70,7 @@ namespace ToastPromptControl
                     BackgroundBrush = Overlay,                                                   
                 };
 
-                if(IsAppBarVisible)
+                if(IsAppBarVisible && _popUp.Page != null)
                     _popUp.AppBar = _popUp.Page.ApplicationBar;
 
                 _popUp.Closed += _popUp_Closed;
