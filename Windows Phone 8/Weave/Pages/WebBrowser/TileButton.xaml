@@ -9,7 +9,7 @@
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
-	d:DesignHeight="90" d:DesignWidth="75">
+	d:DesignHeight="200" d:DesignWidth="200">
 	
 	<UserControl.Resources>
 		
@@ -55,14 +55,19 @@
 
 	</UserControl.Resources>
 
-	<Grid Background="Transparent">
+	<Grid Background="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
 		<StackPanel>
 			<Button x:Name="button" 
 				Style="{StaticResource ButtonStyle}" 
 				Background="{StaticResource PhoneAccentBrush}" 
 				BorderBrush="{StaticResource PhoneBackgroundBrush}" 
-				BorderThickness="3" Padding="0" d:DataContext="/Assets/Icons/64x64_twitter.png" Content="{Binding Converter={StaticResource imageBrushConverter2}}" />
-			<TextBlock Text="button" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+				BorderThickness="3" 
+				Padding="0" 
+				d:DataContext="/Assets/Icons/64x64_twitter.png" 
+				Content="{Binding Converter={StaticResource imageBrushConverter2}}" 
+				Width="72" Height="72" 
+				Margin="{StaticResource PhoneMargin}" />
+			<TextBlock x:Name="ButtonLabel" Text="button" FontSize="{StaticResource PhoneFontSizeSmall}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-12,0,0" />
 		</StackPanel>
 	</Grid>
 </UserControl>

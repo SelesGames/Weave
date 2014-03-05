@@ -22,6 +22,7 @@ namespace weave
 
             this.button.SetBinding(Button.ContentProperty, b);
             this.button.SetBinding(Button.BackgroundProperty, new Binding("Background") { Source = this });
+            this.ButtonLabel.SetBinding(TextBlock.TextProperty, new Binding("Label") { Source = this });
         }
 
         public DependencyProperty LabelProperty = DependencyProperty.Register(
