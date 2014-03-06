@@ -70,7 +70,7 @@
 			<Rectangle.Fill>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="Transparent" Offset="-0.22"/>
-					<GradientStop Color="{StaticResource PhoneBackgroundColor}" Offset="0.60"/>
+					<GradientStop Color="{StaticResource PhoneBackgroundColor}" Offset="0.55"/>
 				</LinearGradientBrush>
 			</Rectangle.Fill>
 		</Rectangle>
@@ -79,7 +79,7 @@
 				<CompositeTransform/>
 			</UIElement.RenderTransform>
 		
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
+			<StackPanel x:Name="topRowContainer" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
 				<local:TileButton x:Name="instapaperButton" Label="instapaper" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
@@ -88,7 +88,7 @@
 						<CompositeTransform />
 					</local:TileButton.RenderTransform>
 				</local:TileButton>
-				<local:TileButton x:Name="pocketButton" Label="pocket" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+				<local:TileButton x:Name="pocketButton" Label="pocket" ImageSource="/Assets/Icons/pocket.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
 					</local:TileButton.Projection>
@@ -106,7 +106,7 @@
 				</local:TileButton>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<StackPanel x:Name="bottomRowContainer" Orientation="Horizontal" HorizontalAlignment="Center">
 				<local:TileButton x:Name="smsButton" Label="sms" ImageSource="/Assets/Icons/64x64_sms.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>

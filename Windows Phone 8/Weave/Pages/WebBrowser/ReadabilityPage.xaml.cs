@@ -579,6 +579,10 @@ namespace weave
                 newsItem.SendToInstapaper();
             else if (menuItem == "ie")
                 newsItem.SendToInternetExplorer();
+            else if (menuItem == "pocket")
+                SaveToPocket().Fire();
+            else if (menuItem == "onenote")
+                SaveToOneNote().Fire();
         }
 
         #endregion
@@ -686,8 +690,11 @@ namespace weave
             user.MarkArticleUnread(viewModel.NewsItem).Fire();
         }
 
-        async void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)
+        async Task SaveToOneNote()
         {
+            if (viewModel == null || viewModel.NewsItem == null)
+                return;
+
             if (!isHtmlDisplayed)
             {
                 MessageBox.Show("Please wait until the article has finished downloading");
@@ -696,20 +703,30 @@ namespace weave
 
             var articleViewType = viewModel.NewsItem.Feed.ArticleViewingType;
 
-            var isMobilized = 
+            var isMobilized =
                 (articleViewType == ArticleViewingType.Mobilizer || articleViewType == ArticleViewingType.MobilizerOnly)
                 && viewModel.CurrentMobilizedArticle != null;
 
             await OneNoteHelper.Current.Save(viewModel.CurrentMobilizedArticle, viewModel.NewsItem, isMobilized);   
         }
 
-        void SaveToPocketMenuItemClick(object sender, EventArgs e)
+        void SendToOneNoteMenuItemClick(object sender, System.EventArgs e)
+        {
+            SaveToOneNote().Fire();
+        }
+
+        async Task SaveToPocket()
         {
             if (viewModel != null && viewModel.NewsItem != null && viewModel.NewsItem.Feed != null)
             {
                 var newsItem = viewModel.NewsItem;
-                PocketHelper.Current.Save(newsItem).Fire();
+                await PocketHelper.Current.Save(newsItem);
             }
+        }
+
+        void SaveToPocketMenuItemClick(object sender, EventArgs e)
+        {
+            SaveToPocket().Fire();
         }
 
 

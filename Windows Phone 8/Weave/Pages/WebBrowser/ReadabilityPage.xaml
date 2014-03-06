@@ -53,8 +53,6 @@
 				<shell:ApplicationBarMenuItem Text="edit source" Click="EditSourceAppMenuItemClick"/>
 				<shell:ApplicationBarMenuItem Text="speak article" Click="SpeakArticleAppMenuItemClick"/>
 				<shell:ApplicationBarMenuItem Text="keep unread" Click="KeepUnreadMenuItemClick"/>
-				<!--shell:ApplicationBarMenuItem Text="save to OneNote" Click="SendToOneNoteMenuItemClick"/-->
-				<shell:ApplicationBarMenuItem Text="save to Pocket" Click="SaveToPocketMenuItemClick" />
 			</shell:ApplicationBar.MenuItems>
 		</shell:ApplicationBar>
 	</phone:PhoneApplicationPage.ApplicationBar>

@@ -48,6 +48,15 @@ namespace weave
 
             foreach (var button in bottomRow)
                 button.Background = bottomRowBrush;
+
+            var now = DateTimeOffset.UtcNow;
+
+#if DEBUG
+            now = new DateTime(2014, 3, 17, 7, 1, 0);
+#endif
+
+            if (now < new DateTimeOffset(2014, 3, 17, 14, 0, 0, TimeSpan.Zero))
+                oneNoteButton.Visibility = Visibility.Collapsed;
         }
 
         internal void SetVerticalMode()
@@ -161,6 +170,12 @@ namespace weave
 
             else if (button == emailButton)
                 RaiseResultCompleted("email");
+
+            else if (button == pocketButton)
+                RaiseResultCompleted("pocket");
+
+            else if (button == oneNoteButton)
+                RaiseResultCompleted("onenote");
         }
 
         void RaiseResultCompleted(string label)
