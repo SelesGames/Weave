@@ -104,8 +104,8 @@ namespace Weave.Services
                 InitializeUser();
                 InitializeIdentity();
                 InitializePhoneApplicationFrameNavigationHelpers();
-                InitializeNinjectKernel();
                 InitializeAdSettings();
+                InitializeNinjectKernel();
                 InitializeOrientationChangeService();
                 InitializeThemes();
                 new SystemTrayNavigationSetter(frame, permanentState);
@@ -513,6 +513,24 @@ namespace Weave.Services
 
 
 
+        #region Initialize Ad Settings
+
+        void InitializeAdSettings()
+        {
+            if (adService != null)
+                return;
+
+            adService = new AdService(settings.AdUnitsUrl)
+            {
+                IsAddSupportedApp = settings.IsAddSupportedApp
+            };
+        }
+
+        #endregion
+
+
+
+
         #region Initialize Ninject Kernel
 
         void InitializeNinjectKernel()
@@ -544,6 +562,7 @@ namespace Weave.Services
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => CreateBundledLibrary()).InTransientScope();
             kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
+            kernel.Bind<AdService>().ToConstant(adService);
         }
 
         BundledLibrary CreateBundledLibrary()
@@ -551,22 +570,6 @@ namespace Weave.Services
             var fileName = string.Format("/{0};component/{1}", settings.AssemblyName, "Feeds.xml");
             var reader = System.Xml.XmlReader.Create(fileName);
             return new BundledLibrary(reader);
-        }
-
-        #endregion
-
-
-
-
-        #region Initialize Ad Settings
-
-        void InitializeAdSettings()
-        {
-            var adService = new AdService(settings.AdUnitsUrl)
-            {
-                IsAddSupportedApp = settings.IsAddSupportedApp
-            };
-            kernel.Bind<AdService>().ToConstant(adService);
         }
 
         #endregion
