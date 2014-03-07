@@ -41,25 +41,23 @@
 		</Storyboard>
 		
 		<Storyboard x:Name="HorizontalOpenSB">
-			<DoubleAnimation BeginTime="0"        Duration="0:0:0.5" From="240" To="-174" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="instapaperButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.05" Duration="0:0:0.3" From="240" To="-87" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="emailButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.1"  Duration="0:0:0.5" From="240" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="socialShareButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.15" Duration="0:0:0.3" From="240" To="87" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ieButton" EasingFunction="{StaticResource BackEaseOut}"/>
-			<DoubleAnimation BeginTime="0:0:0.2"  Duration="0:0:0.2" From="240" To="174" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="smsButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.05" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="smsButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="emailButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="socialShareButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.05" Duration="0:0:0.4" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ieButton" EasingFunction="{StaticResource BackEaseOut}"/>
 			
-			<DoubleAnimation Duration="0:0:0.1" To="0.7" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
-			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
+			<DoubleAnimation BeginTime="0:0:0.04"  Duration="0:0:0.3" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="instapaperButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.02"  Duration="0:0:0.2" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="pocketButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			<DoubleAnimation BeginTime="0:0:0.04"  Duration="0:0:0.1" From="48" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="oneNoteButton" EasingFunction="{StaticResource BackEaseOut}"/>
+			
+			<DoubleAnimation Duration="0:0:0.10" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
+			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonContainer"/>
 		</Storyboard>
 		
 		<Storyboard x:Name="HorizontalCloseSB">
-			<DoubleAnimation BeginTime="0:0:0.16" Duration="0:0:0.2" To="240" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="instapaperButton" />
-			<DoubleAnimation BeginTime="0:0:0.12" Duration="0:0:0.2" To="240" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="emailButton" />
-			<DoubleAnimation BeginTime="0:0:0.08" Duration="0:0:0.2" To="240" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="socialShareButton" />
-			<DoubleAnimation BeginTime="0:0:0.04" Duration="0:0:0.2" To="240" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ieButton" />
-			<DoubleAnimation BeginTime="0"        Duration="0:0:0.2" To="240" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="smsButton" />
-			
-			<DoubleAnimation Duration="0:0:0.1" To="0.7" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle"/>
-			<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grid"/>
+			<DoubleAnimation BeginTime="0:0:0.00" Duration="0:0:0.2" To="48" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="buttonContainer"/>
+			<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle" d:IsOptimized="True"/>
+			<DoubleAnimation BeginTime="0:0:0.1" Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="buttonContainer" d:IsOptimized="True"/>
 		</Storyboard>
 
 	</UserControl.Resources>
