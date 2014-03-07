@@ -117,6 +117,8 @@ namespace Weave.WP.ViewModels.MainPage
             {
                 InitializePagedNews();
 
+                var entryType = (Header != lastCategory) ? EntryType.Mark : EntryType.Peek;
+
                 newsLists = pagedNews.GetNewsLists(EntryType.Mark).Memoize();
 
                 ReevaluateNextAndPreviousButtonsVisibilities();
