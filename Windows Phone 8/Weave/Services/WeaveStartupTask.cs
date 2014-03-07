@@ -50,8 +50,10 @@ namespace Weave.Services
         AdService adService;
 
         bool
+            isInitializeAllStarted,
             isFrameInit,
             isFirstNavInit,
+            isNavHelpersInit,
             isAppLevelExceptionHandlerInitialized,
             isNetworkStatusChangeListenerInit,
             isOrientationChangeServiceInit,
@@ -98,6 +100,11 @@ namespace Weave.Services
 
         void InitializeAll()
         {
+            if (isInitializeAllStarted)
+                return;
+
+            isInitializeAllStarted = true;
+
             try
             {
                 Task.Run(() => Task.WhenAll(new[] { InitializePermanentState(), InitializeTombstoneState() }).Wait()).Wait();
@@ -502,6 +509,11 @@ namespace Weave.Services
 
         void InitializePhoneApplicationFrameNavigationHelpers()
         {
+            if (isNavHelpersInit)
+                return;
+
+            isNavHelpersInit = true;
+
             new DisposeAndGCCleanupNavHelper(frame);
             //new MainPageReusePageNavigationHelper(frame);
             new ArticleListNavigationCorrector(frame);
