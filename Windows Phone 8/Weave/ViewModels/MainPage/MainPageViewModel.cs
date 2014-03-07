@@ -94,8 +94,6 @@ namespace Weave.WP.ViewModels.MainPage
 
             else
                 currentPage = tombstoneState.ArticleListCurrentPage;
-
-            lastCategory = Header;
         }
 
         internal void SaveTransientState()
