@@ -96,7 +96,7 @@ namespace weave
             this.IsHitTestVisible = true;
 
             var panoSelectionChanged = Observable.FromEventPattern<SelectionChangedEventArgs>(pano, "SelectionChanged");
-            panoSelectionChanged.Where(_ => pano.SelectedItem == Featured_News).Take(1).Subscribe(_ => OnFirstFeaturedNewsPanoItemLoad());
+            panoSelectionChanged.Where(_ => pano.SelectedItem == Featured_News).Take(1).Subscribe(_ => OnFirstFeaturedNewsPanoItemLoad().Fire());
             panoSelectionChanged.Subscribe(_ => OnPanoSelectionChanged());
 
             InitializeIdentity();

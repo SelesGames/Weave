@@ -14,7 +14,6 @@ namespace weave
 {
     public partial class TileNewsItemControl : BaseNewsItemControl, IDisposable
     {
-        BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
 
         public TileNewsItemControl()

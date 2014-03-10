@@ -78,7 +78,7 @@
 			</UIElement.RenderTransform>
 		
 			<StackPanel x:Name="topRowContainer" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,24">
-				<local:TileButton x:Name="instapaperButton" Label="instapaper" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+				<local:TileButton x:Name="instapaperButton" Label="Instapaper" ImageSource="/Assets/Icons/64x64_instapaper.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
 					</local:TileButton.Projection>
@@ -86,7 +86,7 @@
 						<CompositeTransform />
 					</local:TileButton.RenderTransform>
 				</local:TileButton>
-				<local:TileButton x:Name="pocketButton" Label="pocket" ImageSource="/Assets/Icons/pocket.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+				<local:TileButton x:Name="pocketButton" Label="Pocket" ImageSource="/Assets/Icons/pocket.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
 					</local:TileButton.Projection>
@@ -94,7 +94,7 @@
 						<CompositeTransform />
 					</local:TileButton.RenderTransform>
 				</local:TileButton>
-				<local:TileButton x:Name="oneNoteButton" Label="onenote" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+				<local:TileButton x:Name="oneNoteButton" Label="OneNote" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
 					</local:TileButton.Projection>
