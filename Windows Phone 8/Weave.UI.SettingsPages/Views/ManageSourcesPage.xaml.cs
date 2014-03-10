@@ -32,7 +32,15 @@ namespace weave
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             isBackLocked = true;
-            await viewModel.LoadFeeds();
+            try
+            {
+                await viewModel.LoadFeeds();
+            }
+            catch(Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+                MessageBox.Show("Error loading feeds");
+            }
             isBackLocked = false;
         }
 
