@@ -1,6 +1,7 @@
 ﻿using SelesGames.HttpClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.ServiceModel.Syndication;
 using System.Threading;
@@ -75,7 +76,10 @@ namespace Weave.FeedSearchService
                 "http://ajax.googleapis.com/ajax/services/feed/find?q={0}&v=1.0",
                 HttpUtility.UrlEncode(searchString));
 
-            var client = new SmartHttpClient();
+            var client = new SmartHttpClient(ContentEncoderSettings.Json);
+            var jsonFormatter = client.Formatters.First();
+            jsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/javascript"));
+
             var result = await client.GetAsync<FeedApiResult>(url, cancelToken);
             return result;
         }
