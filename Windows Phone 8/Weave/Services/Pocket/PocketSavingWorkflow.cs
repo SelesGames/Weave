@@ -1,5 +1,6 @@
 ﻿using PocketSharp;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Weave.SavedState;
@@ -83,10 +84,12 @@ namespace Weave.Services.Pocket
             {
                 ToastService.ToastPrompt("Sending to Pocket...");
 
+                var tags = new[] { newsItem.Feed.Category, newsItem.Feed.Name }.OfType<string>().ToArray();
+
                 var result = await client.Add(
                     uri: new Uri(newsItem.Link),
                     title: newsItem.Title,
-                    tags: new[] { newsItem.Feed.Category, newsItem.Feed.Name });
+                    tags: tags);
 
                 ToastService.ToastPrompt("Saved to Pocket!");
             }

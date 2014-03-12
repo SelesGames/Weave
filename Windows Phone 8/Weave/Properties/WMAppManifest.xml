@@ -11,7 +11,7 @@
     Publisher="Seles Games" 
     RuntimeType="Silverlight" 
     Title="Weave News Reader" 
-    Version="8.6.5" 
+    Version="8.6.6" 
     PublisherID="{2db3f600-58f4-431f-8c87-ec1646af4a73}">
     
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
