@@ -104,16 +104,16 @@ namespace Weave.Services.OneNote
             else 
                 return;
 
-            await GlobalDispatcher.Current.InvokeAsync(() => ToastService.ToastPrompt("Sending to OneNote..."));
+            ToastService.ToastPrompt("Sending to OneNote...");
 
             var response = await saveTask();
             if (response is CreateSuccessResponse)
             {
-                await GlobalDispatcher.Current.InvokeAsync(() => ToastService.ToastPrompt("Saved to OneNote!"));
+                ToastService.ToastPrompt("Saved to OneNote!");
             }
             else
             {
-                await GlobalDispatcher.Current.InvokeAsync(() => ToastService.ToastPrompt("ERROR saving to OneNote"));
+                ToastService.ToastPrompt("ERROR saving to OneNote");
             }
         }
 
