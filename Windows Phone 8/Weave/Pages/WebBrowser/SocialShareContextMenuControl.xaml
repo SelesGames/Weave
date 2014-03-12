@@ -94,7 +94,7 @@
 						<CompositeTransform />
 					</local:TileButton.RenderTransform>
 				</local:TileButton>
-				<local:TileButton x:Name="oneNoteButton" Label="OneNote" ImageSource="/Assets/Icons/64x64_socialshare.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
+				<local:TileButton x:Name="oneNoteButton" Label="OneNote" ImageSource="/Assets/Icons/OneNote.png" Style="{StaticResource TileStyle}" RenderTransformOrigin="0.5,0.5" Margin="6,0" >
 					<local:TileButton.Projection>
 						<PlaneProjection/>
 					</local:TileButton.Projection>
