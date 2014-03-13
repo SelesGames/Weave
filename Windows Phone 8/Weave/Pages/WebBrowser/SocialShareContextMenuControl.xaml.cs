@@ -55,7 +55,7 @@ namespace weave
             now = new DateTime(2014, 3, 17, 7, 1, 0);
 #endif
 
-            if (now < new DateTimeOffset(2014, 3, 17, 14, 0, 0, TimeSpan.Zero))
+            if (now < new DateTimeOffset(2014, 3, 17, 16, 0, 0, TimeSpan.Zero))
                 oneNoteButton.Visibility = Visibility.Collapsed;
         }
 
