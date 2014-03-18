@@ -27,7 +27,7 @@ namespace weave
                     permState.ThirdParty.LiveAccessToken = new LiveOfflineAccessToken(
                         clientId: signInButton.ClientId,
                         accessToken: e.Session.AccessToken,
-                        accessTokenExpiration: e.Session.Expires,
+                        /*accessTokenExpiration: e.Session.Expires,*/
                         refreshToken: e.Session.RefreshToken);
 
                     infoTextBlock.Text = "Authentication successful";
