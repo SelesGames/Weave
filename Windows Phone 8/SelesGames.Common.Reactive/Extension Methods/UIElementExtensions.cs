@@ -27,43 +27,43 @@ namespace System.Windows
                  );
         }
 
-        public static IObservable<EventPattern<MouseButtonEventArgs>> GetSuperMouseLeftButtonDown(this UIElement el)
-        {
-            return Observable.Create<EventPattern<MouseButtonEventArgs>>(observer =>
-            {
-                MouseButtonEventHandler handler = (s, e) => observer.OnNext(EventPattern.Create(s, e));
+        //public static IObservable<EventPattern<MouseButtonEventArgs>> GetSuperMouseLeftButtonDown(this UIElement el)
+        //{
+        //    return Observable.Create<EventPattern<MouseButtonEventArgs>>(observer =>
+        //    {
+        //        MouseButtonEventHandler handler = (s, e) => observer.OnNext(EventPattern.Create(s, e));
 
-                try
-                {
-                    el.AddHandler(UIElement.MouseLeftButtonDownEvent, handler, true);
-                }
-                catch (Exception exception)
-                {
-                    observer.OnError(exception);
-                }
+        //        try
+        //        {
+        //            el.AddHandler(UIElement.MouseLeftButtonDownEvent, handler, true);
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            observer.OnError(exception);
+        //        }
 
-                return () => el.RemoveHandler(UIElement.MouseLeftButtonDownEvent, handler);
-            });
-        }
+        //        return () => el.RemoveHandler(UIElement.MouseLeftButtonDownEvent, handler);
+        //    });
+        //}
 
-        public static IObservable<EventPattern<MouseButtonEventArgs>> GetSuperMouseLeftButtonUp(this UIElement el)
-        {
-            return Observable.Create<EventPattern<MouseButtonEventArgs>>(observer =>
-            {
-                MouseButtonEventHandler handler = (s, e) => observer.OnNext(EventPattern.Create(s, e));
+        //public static IObservable<EventPattern<MouseButtonEventArgs>> GetSuperMouseLeftButtonUp(this UIElement el)
+        //{
+        //    return Observable.Create<EventPattern<MouseButtonEventArgs>>(observer =>
+        //    {
+        //        MouseButtonEventHandler handler = (s, e) => observer.OnNext(EventPattern.Create(s, e));
 
-                try
-                {
-                    el.AddHandler(UIElement.MouseLeftButtonUpEvent, handler, true);
-                }
-                catch (Exception exception)
-                {
-                    observer.OnError(exception);
-                }
+        //        try
+        //        {
+        //            el.AddHandler(UIElement.MouseLeftButtonUpEvent, handler, true);
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            observer.OnError(exception);
+        //        }
 
-                return () => el.RemoveHandler(UIElement.MouseLeftButtonUpEvent, handler);
-            });
-        }
+        //        return () => el.RemoveHandler(UIElement.MouseLeftButtonUpEvent, handler);
+        //    });
+        //}
 
         public static IObservable<EventPattern<MouseButtonEventArgs>> GetMouseLeftButtonDown(this UIElement el)
         {
