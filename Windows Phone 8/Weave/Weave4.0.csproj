@@ -770,6 +770,10 @@
       <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
       <Name>Weave.Identity.Service.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
+      <Project>{3973ECF9-5EDC-47DD-9B65-DBCC93F47F82}</Project>
+      <Name>Weave.Mobilizer.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Contracts\Weave.Mobilizer.Contracts.csproj">
       <Project>{FC776CA4-35B3-4024-8667-CB265805A519}</Project>
       <Name>Weave.Mobilizer.Contracts</Name>
@@ -838,6 +842,10 @@
       <Project>{876CD6D4-14F3-4A5B-9631-F03DEF486F51}</Project>
       <Name>Weave.Microsoft.OneNote</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Weave.WP.Mobilizer.HtmlFormatting\Weave.WP.Mobilizer.HtmlFormatting.csproj">
+      <Project>{BED91E77-4679-43B8-BD43-B0B889616C8D}</Project>
+      <Name>Weave.WP.Mobilizer.HtmlFormatting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WP8Toolkit\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
       <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
@@ -853,10 +861,6 @@
     <ProjectReference Include="..\Weave.LiveTile.ScheduledAgent\Weave.LiveTile.ScheduledAgent.csproj">
       <Project>{099E7718-8767-47F4-AB1C-2DF71362AD06}</Project>
       <Name>Weave.LiveTile.ScheduledAgent</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
-      <Project>{435958BC-0027-4288-94BB-F14F844BE645}</Project>
-      <Name>Weave.Mobilizer.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
       <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>

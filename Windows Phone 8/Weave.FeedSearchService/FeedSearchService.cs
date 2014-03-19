@@ -38,7 +38,7 @@ namespace Weave.FeedSearchService
         // Call the RSS url directly, extract it's name and description
         async Task<FeedApiResult> DirectSearchForFeed(string feedUrl, CancellationToken cancelToken)
         {
-            var client = new SmartHttpClient();
+            var client = new AutoCompressionClient();
             var response = await client.GetAsync(feedUrl, cancelToken);
 
             using (var responseStream = await client.GetStreamAsync(feedUrl))

@@ -573,7 +573,7 @@ namespace Weave.Services
             kernel.Bind<OverlayFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<PhoneApplicationFrame>().ToConstant(frame).InSingletonScope();
             kernel.Bind<BundledLibrary>().ToMethod(_ => CreateBundledLibrary()).InTransientScope();
-            kernel.Bind<Weave.Mobilizer.Client.Formatter>().ToSelf().InSingletonScope();
+            kernel.Bind<Weave.Mobilizer.HtmlFormatting.Formatter>().ToSelf().InSingletonScope();
             kernel.Bind<AdService>().ToConstant(adService);
         }
 

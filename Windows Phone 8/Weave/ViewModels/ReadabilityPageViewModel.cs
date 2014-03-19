@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Weave.Mobilizer.Client;
+using Weave.Mobilizer.HtmlFormatting;
 using Weave.SavedState;
 using Weave.Settings;
 using Weave.ViewModels;

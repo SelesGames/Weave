@@ -4,15 +4,15 @@ using System.Text;
 using System.Windows;
 using System.Windows.Resources;
 
-namespace Weave.Mobilizer.HtmlFormatter
+namespace Weave.Mobilizer.HtmlFormatting
 {
     public class Formatter
     {
-        const string HTML_TEMPLATE_PATH1 = "/Weave.Mobilizer.Client;component/Templates/html_template1.txt";
-        const string HTML_TEMPLATE_PATH3 = "/Weave.Mobilizer.Client;component/Templates/html_template3.txt";
-        const string CSS_STATIC_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_1_static.txt";
-        const string CSS_DYNAMIC_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/css_2_dynamic.txt";
-        const string BODY_TEMPLATE_PATH = "/Weave.Mobilizer.Client;component/Templates/body_template.txt";
+        const string HTML_TEMPLATE_PATH1 = "/Weave.WP.Mobilizer.HtmlFormatting;component/Templates/html_template1.txt";
+        const string HTML_TEMPLATE_PATH3 = "/Weave.WP.Mobilizer.HtmlFormatting;component/Templates/html_template3.txt";
+        const string CSS_STATIC_TEMPLATE_PATH = "/Weave.WP.Mobilizer.HtmlFormatting;component/Templates/css_1_static.txt";
+        const string CSS_DYNAMIC_TEMPLATE_PATH = "/Weave.WP.Mobilizer.HtmlFormatting;component/Templates/css_2_dynamic.txt";
+        const string BODY_TEMPLATE_PATH = "/Weave.WP.Mobilizer.HtmlFormatting;component/Templates/body_template.txt";
 
         bool areTemplatesLoaded = false;
 
