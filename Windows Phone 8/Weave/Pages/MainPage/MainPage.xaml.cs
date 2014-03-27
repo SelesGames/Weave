@@ -103,6 +103,10 @@ namespace weave
             {
                 ContentGrid.Background = new SolidColorBrush(Color.FromArgb(255, 237, 237, 237));
             }
+            else if (theme == ArticleListFormatType.FullBleed)
+            {
+                ContentGrid.Background = new SolidColorBrush(Colors.White);
+            }
             else
             {
                 ContentGrid.Background = transparentBrush;

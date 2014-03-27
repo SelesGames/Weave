@@ -39,7 +39,13 @@ namespace Weave.Settings
                     FormatType = ArticleListFormatType.TextOnly,
                     DisplayName = "Text only",
                     Description = "No images.  When you care only for the headline, this is the way to go.",
-                }
+                },
+                //new ArticleListFormatProperties
+                //{
+                //    FormatType = ArticleListFormatType.FullBleed,
+                //    DisplayName = "Full bleed",
+                //    Description = "Big images that stretch to fit your screen",
+                //},
             });
         }
 

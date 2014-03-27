@@ -215,6 +215,9 @@
     <Compile Include="Pages\Accounts\OneNoteSignInPage.xaml.cs">
       <DependentUpon>OneNoteSignInPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\MainPage\NewsItemControls\FullBleedNewsItemControl.xaml.cs">
+      <DependentUpon>FullBleedNewsItemControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
@@ -358,6 +361,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Accounts\OneNoteSignInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\MainPage\NewsItemControls\FullBleedNewsItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

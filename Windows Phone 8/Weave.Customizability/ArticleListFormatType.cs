@@ -9,6 +9,7 @@ namespace Weave.Customizability
         Tiles,
         Card,
         Flip,
-        SpecialNoneSelectedFormatType  //never use this, stritcly for the default value of dependencyobject binding
+        FullBleed,
+        SpecialNoneSelectedFormatType  //never use this, strictly for the default value of dependencyobject binding
     }
 }

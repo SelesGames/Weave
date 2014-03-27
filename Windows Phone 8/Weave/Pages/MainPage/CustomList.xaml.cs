@@ -159,6 +159,9 @@ namespace weave
                 case ArticleListFormatType.Tiles:
                     return new TileNewsItemControl();
 
+                case ArticleListFormatType.FullBleed:
+                    return new FullBleedNewsItemControl();
+
                 default:
                     throw new Exception(string.Format(
                         "Selected ArticleListFormat is not currently supported: {0}",
@@ -172,30 +175,6 @@ namespace weave
 
 
         #region Set NewsItem for each BaseNewsItemControl on the screen
-
-        //void SetNews(IReadOnlyList<NewsItem> news)
-        //{
-        //    disp.Disposable = null;
-        //    this.displayedNews = news;
-
-        //    if (this.imageCache != null)
-        //        imageCache.Flush();
-
-        //    if (this.displayedNews == null)
-        //        return;
-
-        //    this.IsHitTestVisible = false;
-
-        //    var animationDelay = TimeSpan.FromSeconds(0.08);
-        //    var animationBuffer = 4;
-
-        //    lls.ItemsSource = (IList)news;
-        //}
-
-        //void lls_ItemRealized(object sender, Microsoft.Phone.Controls.ItemRealizationEventArgs e)
-        //{
-        //    DebugEx.WriteLine(e);
-        //}
 
         void SetNews(IReadOnlyList<NewsItem> news)
         {
