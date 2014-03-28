@@ -41,7 +41,7 @@ namespace Weave.Customizability
 
 
 
-        #region String reprsentations of the RGB values - intended for use in HTML
+        #region String representations of the RGB values - intended for use in HTML
 
         public string Text { get; private set; }
         public string Background { get; private set; }
