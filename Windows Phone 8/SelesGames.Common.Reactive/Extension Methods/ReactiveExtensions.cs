@@ -26,10 +26,5 @@ namespace System.Reactive.Linq
         {
             return source.Subscribe(_ => onNext(), onError, onCompleted);
         }
-
-        public static void OnNext(this IObserver<Unit> observer)
-        {
-            observer.OnNext(Unit.Default);
-        }
     }
 }

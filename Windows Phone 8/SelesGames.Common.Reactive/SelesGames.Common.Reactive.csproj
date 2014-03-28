@@ -92,7 +92,6 @@
     <Compile Include="Extension Methods\ReactiveExtensions.Timers.cs" />
     <Compile Include="Extension Methods\StoryboardExtensions.cs" />
     <Compile Include="Extension Methods\UIElementExtensions.cs" />
-    <Compile Include="Extension Methods\WebRequestExtensionMethods.cs" />
     <Compile Include="GlobalDispatcher.cs" />
     <Compile Include="Imaging\ImageCache.cs" />
     <Compile Include="Imaging\ImageStreamCache.cs" />
