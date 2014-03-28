@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace SelesGames.Common.Reactive
@@ -38,12 +39,12 @@ namespace SelesGames.Common.Reactive
         async Task<Stream> GetImageStreamAsync(string imageUrl)
         {
             var client = new HttpClient();
-            var response = await client.GetAsync(imageUrl);
+            var response = await client.GetAsync(imageUrl).ConfigureAwait(false);
 
             EnsureNotDisposed();
             response.EnsureSuccessStatusCode();
 
-            var stream = await response.Content.ReadAsStreamAsync();
+            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             return stream;
         }
 
@@ -52,7 +53,11 @@ namespace SelesGames.Common.Reactive
             if (e == null || e.Value == null)
                 return;
 
-            Dispose(e.Value);
+            Task.Run(() =>
+            {
+                //DebugEx.WriteLine("cleaning image stream: {0}", e.Key);
+                Dispose(e.Value);
+            });
         }
 
 

@@ -52,6 +52,7 @@ namespace SelesGames.Common.Reactive
             if (e == null || e.Value == null)
                 return;
 
+            //DebugEx.WriteLine("cleaning bitmap: {0}", e.Key);
             Dispose(e.Value);
         }
 

@@ -181,8 +181,8 @@ namespace weave
             disp.Disposable = null;
             this.displayedNews = news;
 
-            if (this.imageCache != null)
-                imageCache.Flush();
+            //if (this.imageCache != null)
+            //    imageCache.Flush();
 
             scroller.ScrollToVerticalOffset(0);
 
@@ -422,16 +422,18 @@ namespace weave
             if (tapHandle != null)
                 tapHandle.Dispose();
 
-            var imageCacheHandle = this.imageCache;
-            this.imageCache = null;
-            System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
-            {
-                if (imageCacheHandle != null)
-                {
-                    imageCacheHandle.Flush();
-                    imageCacheHandle = null;
-                }
-            });
+            imageCache.Dispose();
+
+            //var imageCacheHandle = this.imageCache;
+            //this.imageCache = null;
+            //System.Reactive.Concurrency.Scheduler.Default.SafelySchedule(() =>
+            //{
+            //    if (imageCacheHandle != null)
+            //    {
+            //        imageCacheHandle.Flush();
+            //        imageCacheHandle = null;
+            //    }
+            //});
 
             DebugEx.WriteLine("CustomList {0} disposed", id.ToString());
         }
