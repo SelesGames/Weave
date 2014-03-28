@@ -181,15 +181,10 @@ namespace weave
             disp.Disposable = null;
             this.displayedNews = news;
 
-            //if (this.imageCache != null)
-            //    imageCache.Flush();
-
             scroller.ScrollToVerticalOffset(0);
 
             if (newsItemsUI == null)
                 return;
-
-            this.IsHitTestVisible = false;
 
             var animationDelay = TimeSpan.FromSeconds(0.08);
             var animationBuffer = 4;
@@ -200,6 +195,7 @@ namespace weave
             {
                 o.Visibility = Visibility.Collapsed;
                 o.NewsItem = null;
+                o.IsHitTestVisible = false;
             });
 
             this.bottomButtons.Visibility = Visibility.Collapsed;
@@ -229,10 +225,10 @@ namespace weave
                     o.ui.NewsItem = o.newsItem;
                     o.ui.Visibility = Visibility.Visible;
                     PlaySlideAnimation(o.ui);
+                    o.ui.IsHitTestVisible = true;
                 },
                 ex =>
                 {
-                    this.IsHitTestVisible = true;
                 },
                 () =>
                 {
@@ -243,16 +239,15 @@ namespace weave
                             {
                                 o.ui.NewsItem = o.newsItem;
                                 o.ui.Visibility = Visibility.Visible;
+                                o.ui.IsHitTestVisible = true;
                             },
                             ex =>
                             {
                                 this.bottomButtons.Visibility = Visibility.Visible;
-                                this.IsHitTestVisible = true;
                             },
                             () =>
                             {
                                 this.bottomButtons.Visibility = Visibility.Visible;
-                                this.IsHitTestVisible = true;
                             })
                         .DisposeWith(disposables);
                     }
