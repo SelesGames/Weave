@@ -99,7 +99,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reactive\Schedulers\BackgroundTimer.cs" />
     <Compile Include="Reactive\Schedulers\Pool.cs" />
-    <Compile Include="Reactive\Schedulers\Schedulers.cs" />
     <Compile Include="Reactive\Schedulers\SingleThreadScheduler.cs" />
     <Compile Include="Reactive\Schedulers\ViewModelBackgroundScheduler.cs" />
     <Compile Include="WeavePage.cs" />
