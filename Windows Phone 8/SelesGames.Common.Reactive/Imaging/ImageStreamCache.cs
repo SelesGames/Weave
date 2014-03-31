@@ -26,12 +26,12 @@ namespace SelesGames.Common.Reactive
 
             if (cache.ContainsKey(url))
             {
-                return cache.Get(url);
+                return cache[url];
             }
             else
             {
                 var t = GetImageStreamAsync(url);
-                cache.AddOrUpdate(url, t);
+                cache[url] = t;
                 return t;
             }
         }
