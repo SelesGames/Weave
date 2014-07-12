@@ -19,7 +19,7 @@ namespace weave
             if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -37,14 +37,14 @@ namespace weave
             var settings = new AppSettings
             {
                 AppName = "Weave",
-                VersionNumber = "8.6.7.4",
+                VersionNumber = "8.6.7.5",
                 IsTrial = false,//new Microsoft.Phone.Marketplace.LicenseInformation().IsTrial(),
                 AssemblyName = "weave",
                 LogExceptions = true,
 
                 #region Ad Units
 
-                IsAddSupportedApp = false,
+                IsAddSupportedApp = true,
                 AdUnitsUrl = "http://weave.blob.core.windows.net/settings/nuAdSettings.json?xsf=" + r,
 
                 #endregion
