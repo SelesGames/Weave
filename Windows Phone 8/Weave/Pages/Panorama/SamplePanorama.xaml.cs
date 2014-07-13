@@ -12,12 +12,12 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Telerik.Windows.Controls;
-using Weave.Services;
 using Weave.SavedState;
+using Weave.Services;
+using Weave.Settings;
 using Weave.UI.Frame;
 using Weave.ViewModels;
 using Weave.ViewModels.Identity;
-using Weave.Settings;
 using Weave.WP.ViewModels;
 using Weave.WP.ViewModels.GroupedNews;
 
@@ -62,7 +62,7 @@ namespace weave
                 }
             }
 
-            dnp.Counter.EnableMemoryCounter = true;
+            //dnp.Counter.EnableMemoryCounter = true;
 
             Debug.WriteLine("\r\n*******************\r\nMAIN GUI THREAD HAPPENING ON {0}\r\n*******************\r\n", Thread.CurrentThread.ManagedThreadId);
             this.IsHitTestVisible = false;
