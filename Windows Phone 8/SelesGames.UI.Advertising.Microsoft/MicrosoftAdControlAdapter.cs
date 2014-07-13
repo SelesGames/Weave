@@ -1,8 +1,9 @@
 ﻿using Microsoft.Advertising;
 using Microsoft.Advertising.Mobile.UI;
 using System;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
+//using System.Reactive.Disposables;
+//using System.Reactive.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace SelesGames.UI.Advertising.Microsoft
@@ -10,7 +11,9 @@ namespace SelesGames.UI.Advertising.Microsoft
     internal class MicrosoftAdControlAdapter : IAdControlAdapter
     {
         AdControl adControl;
-        SerialDisposable sd = new SerialDisposable();
+        int adRefreshTimeInSeconds;
+        //SerialDisposable sd = new SerialDisposable();
+        bool isTimerStopped;
 
         public MicrosoftAdControlAdapter(AdControl adControl, int adRefreshTimeInSeconds)
         {
@@ -18,21 +21,39 @@ namespace SelesGames.UI.Advertising.Microsoft
                 throw new ArgumentNullException("adControl in MicrosoftAdControlAdapter.contructor");
 
             this.adControl = adControl;
+            this.adRefreshTimeInSeconds = adRefreshTimeInSeconds;
 
             adControl.IsEngagedChanged += OnAdControlIsEngagedChanged;
             adControl.AdRefreshed += OnAdRefreshed;
             adControl.ErrorOccurred += OnAdControlErrorOccurred;
 
-            sd.Disposable = Observable
-                .Interval(TimeSpan.FromSeconds(adRefreshTimeInSeconds))
-                .ObserveOnDispatcher()
-                .Subscribe(
-                    o =>
-                    {
-                        if (adControl != null && adControl.Visibility != Visibility.Collapsed)
-                            adControl.Refresh();
-                    },
-                    exception => { ; });
+            StartTimer();
+            //sd.Disposable = Observable
+            //    .Interval(TimeSpan.FromSeconds(adRefreshTimeInSeconds))
+            //    .ObserveOnDispatcher()
+            //    .Subscribe(
+            //        o =>
+            //        {
+            //            if (adControl != null && adControl.Visibility != Visibility.Collapsed)
+            //                adControl.Refresh();
+            //        },
+            //        exception => { ; });
+        }
+
+        async void StartTimer()
+        {
+            var interval = TimeSpan.FromSeconds(adRefreshTimeInSeconds);
+
+            while (!isTimerStopped)
+            {
+                await Task.Delay(interval);
+
+                if (isTimerStopped)
+                    break;
+
+                if (adControl != null && adControl.Visibility != Visibility.Collapsed)
+                    adControl.Refresh();
+            }
         }
 
 
@@ -77,7 +98,9 @@ namespace SelesGames.UI.Advertising.Microsoft
 
         public void Dispose()
         {
-            sd.Disposable = null;
+            //sd.Disposable = null;
+
+            isTimerStopped = true;
 
             if (adControl == null)
                 return;

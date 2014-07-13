@@ -17,8 +17,7 @@ namespace SelesGames.UI.Advertising
             else
             {
                 adSettingsEnumerator = providers
-                    .Select(o => Tuple.Create(o, o.FaultToleranceCount))
-                    .RepeatEnumerable()
+                    .SelectMany(o => Enumerable.Range(0, o.FaultToleranceCount).Select(x => o))
                     .Wrap()
                     .GetEnumerator();
             }

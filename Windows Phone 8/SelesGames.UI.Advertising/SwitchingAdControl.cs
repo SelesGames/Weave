@@ -13,7 +13,7 @@ namespace SelesGames.UI.Advertising
         Panel AdContainer;
         Storyboard OnNewAdSB;
         IAdControlAdapter adControl;
-        //AdControlFactory factory;
+
         AdService adService;
         string keywords;
         bool isHidden = false;
@@ -85,7 +85,7 @@ namespace SelesGames.UI.Advertising
 
 
 
-        void CreateAd(bool advanceToNextProvider = false)
+        void CreateAd()
         {
             try
             {
@@ -156,12 +156,13 @@ namespace SelesGames.UI.Advertising
 
         void OnAdControlErrorOccurred(object sender, EventArgs<Exception> e)
         {
-            var error = string.Format("Ad Exception: {0}", e.Item);
-            DebugEx.WriteLine(error);
             Dispatcher.BeginInvoke(() =>
             {
                 try
                 {
+                    var error = string.Format("Ad Exception: {0}", e.Item);
+                    DebugEx.WriteLine(error);
+
                     FlushAd();
                 }
                 catch { }
