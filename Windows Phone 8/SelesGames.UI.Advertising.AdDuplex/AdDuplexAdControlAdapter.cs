@@ -59,7 +59,6 @@ namespace SelesGames.UI.Advertising.AdDuplex
             adControl.AdClick -= OnAdClicked;
             adControl.AdLoaded -= OnAdRefreshed;
             adControl.AdLoadingError -= OnAdFailed;
-
         }
     }
 }
