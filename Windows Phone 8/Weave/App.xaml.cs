@@ -44,7 +44,7 @@ namespace weave
 
                 #region Ad Units
 
-                IsAddSupportedApp = true,
+                IsAddSupportedApp = false,
                 AdUnitsUrl = "http://weave.blob.core.windows.net/settings/nuAdSettings.json?xsf=" + r,
 
                 #endregion

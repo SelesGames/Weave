@@ -1,5 +1,5 @@
 ﻿using Common.Compression;
-using ICSharpCode.SharpZipLib.GZip;
+using Ionic.Zlib;
 using System.IO;
 
 namespace Common.WP.Compression
@@ -13,12 +13,12 @@ namespace Common.WP.Compression
 
         public override Stream Compress(Stream inputStream)
         {
-            return new GZipOutputStream(inputStream);
+            return new GZipStream(inputStream, CompressionMode.Compress, true);
         }
 
         public override Stream Decompress(Stream inputStream)
         {
-            return new GZipInputStream(inputStream);
+            return new GZipStream(inputStream, CompressionMode.Decompress, true);
         }
     }
 }

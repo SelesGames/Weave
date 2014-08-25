@@ -11,7 +11,7 @@ namespace SelesGames.UI.Advertising
     public class SwitchingAdControl : Control, IDisposable
     {
         Panel AdContainer;
-        Storyboard OnNewAdSB;
+        //Storyboard OnNewAdSB;
         IAdControlAdapter adControl;
 
         AdService adService;
@@ -58,7 +58,7 @@ namespace SelesGames.UI.Advertising
             base.OnApplyTemplate();
             AdContainer = base.GetTemplateChild("AdContainer") as Panel;
             var fe = base.GetTemplateChild("LayoutRoot") as FrameworkElement;
-            OnNewAdSB = fe.Resources["OnNewAdSB"] as Storyboard;
+            //OnNewAdSB = fe.Resources["OnNewAdSB"] as Storyboard;
 
             if (DesignerProperties.IsInDesignTool)
             {
@@ -147,11 +147,11 @@ namespace SelesGames.UI.Advertising
             adControl.Control.Opacity = 1d;
             currentFaultLevel = Math.Max(currentFaultLevel - 1, 0);
 
-            if (OnNewAdSB == null || !PlayAnimations)
-                return;
+            //if (OnNewAdSB == null || !PlayAnimations)
+            //    return;
 
-            OnNewAdSB.Stop();
-            OnNewAdSB.Begin();
+            //OnNewAdSB.Stop();
+            //OnNewAdSB.Begin();
         }
 
         void OnAdControlErrorOccurred(object sender, EventArgs<Exception> e)
