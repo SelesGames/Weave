@@ -35,8 +35,8 @@ namespace Weave.WP.ViewModels.MainPage
         int lastPageLastTimeItWasSet = -1;
         SerialDisposable pageChangeHandle = new SerialDisposable();
 
-        NewsItemGroup group;
-        PagedNewsItems pagedNews;
+        INewsGrouping group;
+        IPagedNews pagedNews;
         IEnumerable<AsyncNewsList> newsLists;
 
         #endregion
@@ -68,7 +68,7 @@ namespace Weave.WP.ViewModels.MainPage
 
         #region Constructor
 
-        public MainPageViewModel(weave.MainPage view, string header, NewsItemGroup group)
+        public MainPageViewModel(weave.MainPage view, string header, INewsGrouping group)
         {
             this.view = view;
             Header = header;
@@ -141,7 +141,7 @@ namespace Weave.WP.ViewModels.MainPage
             {
                 pagedNews.CountChanged -= pageNews_CountChanged;
             }
-            pagedNews = new PagedNewsItems(group, AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
+            pagedNews = group.CreatePage(AppSettings.Instance.NumberOfNewsItemsPerMainPage, 3);
             pagedNews.CountChanged += pageNews_CountChanged;
         }
 

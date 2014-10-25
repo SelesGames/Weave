@@ -36,9 +36,9 @@ namespace Weave.WP.ViewModels.GroupedNews
             DisplayName = "All News";
         }
 
-        public override Task<NewsList> GetNewsList(EntryType entryType, int skip, int take)
+        public override Task<NewsList> GetNewsList(EntryType entryType, Guid? cursorId, int take)
         {
-            return user.GetNewsForCategory("all news", entryType, skip, take);
+            return user.GetNewsForCategory("all news", entryType, cursorId, take);
         }
 
         public override void MarkEntry()

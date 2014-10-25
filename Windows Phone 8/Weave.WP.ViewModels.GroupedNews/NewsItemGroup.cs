@@ -1,4 +1,5 @@
 ﻿using Microsoft.Phone.Shell;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Weave.ViewModels;
@@ -85,9 +86,9 @@ namespace Weave.WP.ViewModels.GroupedNews
 
 
 
-        public async Task<IEnumerable<NewsItem>> GetNews(EntryType entryType, int skip, int take)
+        public async Task<IEnumerable<NewsItem>> GetNews(EntryType entryType, Guid? cursorId, int take)
         {
-            var news = await GetNewsList(entryType, skip, take);
+            var news = await GetNewsList(entryType, cursorId, take);
 
             FeedCount = news.FeedCount;
             NewArticleCount = news.NewArticleCount;
@@ -97,7 +98,7 @@ namespace Weave.WP.ViewModels.GroupedNews
             return news.News;
         }
 
-        public abstract Task<NewsList> GetNewsList(EntryType entryType, int skip, int take);
+        public abstract Task<NewsList> GetNewsList(EntryType entryType, Guid? cursorId, int take);
         public abstract void MarkEntry();
         public abstract string GetTeaserPicImageUrl();
         public abstract ShellTile GetShellTile();

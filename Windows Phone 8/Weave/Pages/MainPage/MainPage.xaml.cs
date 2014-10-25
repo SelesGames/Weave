@@ -340,31 +340,35 @@ namespace weave
 
             var tallyer = permState.RunHistory.GetActiveLog();
 
-            NewsItemGroup group = null;
+            INewsGrouping grouping = null;
             if (mode.Equals("category", StringComparison.OrdinalIgnoreCase))
             {
-                group = feedsListenerVM.Find(header);
+                var group = feedsListenerVM.Find(header);
+                grouping = new NewsGroupingAdapter(group);
                 tbPageCount.Visibility = Visibility.Visible;
                 tallyer.Tally(header);
             }
             else if (mode.Equals("feed", StringComparison.OrdinalIgnoreCase))
             {
-                group = feedsListenerVM.Find(feedId.Value);
+                var group = feedsListenerVM.Find(feedId.Value);
+                grouping = new NewsGroupingAdapter(group);
                 tbPageCount.Visibility = Visibility.Visible;
                 tallyer.Tally(header);
             }
             else if (mode.Equals("favorites", StringComparison.OrdinalIgnoreCase))
             {
-                group = new FavoriteArticlesGroup(user);
+                var group = new FavoriteArticlesGroup(user);
+                grouping = new ArticleGroupingAdapter(group);
                 tbPageCount.Visibility = Visibility.Collapsed;
             }
             else if (mode.Equals("read", StringComparison.OrdinalIgnoreCase))
             {
-                group = new ReadArticlesGroup(user);
+                var group = new ReadArticlesGroup(user);
+                grouping = new ArticleGroupingAdapter(group);
                 tbPageCount.Visibility = Visibility.Collapsed;
             }
 
-            this.vm = new MainPageViewModel(this, header, group);
+            this.vm = new MainPageViewModel(this, header, grouping);
             DataContext = this.vm;
 
             vm.RecoverSavedTombstoneState();

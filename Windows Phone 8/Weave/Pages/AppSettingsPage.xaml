@@ -50,7 +50,8 @@
 						<System:String>12 hours</System:String>
 					</toolkit:ListPicker>
 					<toolkit:ListPicker x:Name="unreadList" Header="Delete unread articles after" Margin="12">
-						<System:String>12 hours</System:String>
+                        <System:String>never</System:String>
+                        <System:String>12 hours</System:String>
 						<System:String>1 day</System:String>
 						<System:String>2 days</System:String>
 						<System:String>3 days</System:String>

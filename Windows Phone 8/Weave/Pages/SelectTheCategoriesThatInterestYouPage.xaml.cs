@@ -77,9 +77,15 @@ namespace weave
                     if (ex.ResponseMessage.ReasonPhrase != "A user with that Id already exists")
                         throw;
                 }
+                catch(RequestTimeoutException timeout)
+                {
+                    DebugEx.WriteLine(timeout);
+                    return;
+                }
                 catch(Exception ex)
                 {
                     DebugEx.WriteLine(ex);
+                    return;
                 }
                 await user.Load(refreshNews: true);
 

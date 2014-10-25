@@ -3,15 +3,15 @@ using Weave.ViewModels;
 
 namespace Weave.WP.ViewModels.GroupedNews
 {
-    public class ReadArticlesGroup : NewsItemGroup
+    public class FavoriteArticlesGroup : ArticleGroup
     {
         UserInfo user;
 
-        public ReadArticlesGroup(UserInfo user)
+        public FavoriteArticlesGroup(UserInfo user)
         {
             this.user = user;
 
-            DisplayName = "Previously Read";
+            DisplayName = "Favorites";
             NewArticleCount = -1;
             UnreadArticleCount = -1;
             TotalArticleCount = 9999;
@@ -20,7 +20,7 @@ namespace Weave.WP.ViewModels.GroupedNews
 
         public async override Task<NewsList> GetNewsList(EntryType entryType, int skip, int take)
         {
-            var favorites = await user.GetRead(skip, take);
+            var favorites = await user.GetFavorites(skip, take);
 
             var newsList = new NewsList
             {

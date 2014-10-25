@@ -38,7 +38,7 @@ namespace Weave.FeedSearchService
         // Call the RSS url directly, extract it's name and description
         async Task<FeedApiResult> DirectSearchForFeed(string feedUrl, CancellationToken cancelToken)
         {
-            var client = new SmartHttpClient();
+            var client = new SmartHttpClient(compressionSettings: CompressionSettings.None);
             var response = await client.GetAsync(feedUrl, cancelToken);
 
             using (var responseStream = await response.ReadStream())
@@ -76,7 +76,7 @@ namespace Weave.FeedSearchService
                 "http://ajax.googleapis.com/ajax/services/feed/find?q={0}&v=1.0",
                 Uri.EscapeDataString(searchString));
 
-            var client = new SmartHttpClient(ContentEncoderSettings.Json);
+            var client = new SmartHttpClient(ContentEncoderSettings.Json, compressionSettings: CompressionSettings.None);
             var jsonFormatter = client.Formatters.First();
             jsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/javascript"));
 

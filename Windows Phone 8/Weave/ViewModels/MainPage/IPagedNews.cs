@@ -1,16 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using Weave.ViewModels;
 
 namespace Weave.WP.ViewModels.MainPage
 {
-    public interface IPagedNewsItems
+    public interface IPagedNews
     {
+        event EventHandler CountChanged;
+
         int PageSize { get; }
+        int NumberOfPagesToTakeAtATime { get; }
         int PageCount { get; }
         int TotalNewsCount { get; }
         int NewNewsCount { get; }
 
-        Task Refresh(EntryType entry);
-        AsyncNewsList GetNewsFuncForPage(int page);
+        IEnumerable<AsyncNewsList> GetNewsLists(EntryType initialEntryType);
+        //AsyncNewsList GetPage(int desiredPage, EntryType initialEntryType);
     }
 }

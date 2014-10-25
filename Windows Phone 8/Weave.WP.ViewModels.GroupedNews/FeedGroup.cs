@@ -33,9 +33,9 @@ namespace Weave.WP.ViewModels.GroupedNews
             FeedCount = 1;
         }
 
-        public override Task<NewsList> GetNewsList(EntryType entryType, int skip, int take)
+        public override Task<NewsList> GetNewsList(EntryType entryType, Guid? cursorId, int take)
         {
-            return user.GetNewsForFeed(Feed.Id, entryType, skip, take);
+            return user.GetNewsForFeed(Feed.Id, entryType, cursorId, take);
         }
 
         public override void MarkEntry()

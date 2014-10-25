@@ -18,15 +18,15 @@ namespace SelesGames.UI.Advertising
 
         public async Task<AdSettings> Get()
         {
-            var client = new AutoCompressionClient();
+            var client = new SmartHttpClient(compressionSettings: CompressionSettings.None);
             var response = await client.GetAsync(adSettingsUrl);
 
-            if (!response.IsSuccessStatusCode)
+            if (!response.HttpResponseMessage.IsSuccessStatusCode)
                 return new AdSettings { AreAdsActive = false };
 
             providerSettings = new List<AdProviderSettingsBase>();
 
-            var responseString = await response.Content.ReadAsStringAsync();
+            var responseString = await response.HttpResponseMessage.Content.ReadAsStringAsync();
             dynamic responseObject = JsonConvert.DeserializeObject(responseString);
 
             CreateFromDynamic<Microsoft.MicrosoftAdSettings>(responseObject.Microsoft);

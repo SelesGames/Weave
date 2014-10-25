@@ -42,6 +42,14 @@ namespace weave
 
             user = ServiceResolver.Get<UserInfo>();
 
+            if (!markedReadList.Items.Contains(user.ArticleDeletionTimeForMarkedRead))
+            {
+                markedReadList.Items.Add(user.ArticleDeletionTimeForMarkedRead);
+            }
+            if (!unreadList.Items.Contains(user.ArticleDeletionTimeForUnread))
+            {
+                unreadList.Items.Add(user.ArticleDeletionTimeForUnread);
+            }
             markedReadList.SelectedItem = entryMarkReadDeleteTime = user.ArticleDeletionTimeForMarkedRead;
             unreadList.SelectedItem = entryUnreadDeleteTime = user.ArticleDeletionTimeForUnread;
 

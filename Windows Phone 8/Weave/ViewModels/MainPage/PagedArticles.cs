@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Weave.ViewModels;
 using Weave.WP.ViewModels.GroupedNews;
+using Weave.WP.ViewModels.MainPage;
 
 namespace Weave.WP.ViewModels.MainPage
 {
-    public class PagedNewsItems
+    public class PagedArticles : IPagedNews
     {
-        NewsItemGroup vm;
+        ArticleGroup vm;
 
         public event EventHandler CountChanged;
 
@@ -19,7 +20,7 @@ namespace Weave.WP.ViewModels.MainPage
         public int TotalNewsCount { get; private set; }
         public int NewNewsCount { get; private set; }
 
-        public PagedNewsItems(NewsItemGroup vm, int pageSize, int numberOfPagesToTakeAtATime)
+        public PagedArticles(ArticleGroup vm, int pageSize, int numberOfPagesToTakeAtATime)
         {
             this.vm = vm;
             PageSize = pageSize;
@@ -49,7 +50,7 @@ namespace Weave.WP.ViewModels.MainPage
                 }
 
                 i += NumberOfPagesToTakeAtATime;
-            }        
+            }
         }
 
         async Task<NewsList> GetChunk(EntryType entryType, int skip, int take)
@@ -77,6 +78,12 @@ namespace Weave.WP.ViewModels.MainPage
             {
                 return new List<NewsItem>();
             }
+        }
+
+
+        public AsyncNewsList GetPage(int desiredPage, EntryType initialEntryType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -84,12 +84,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AllNewsGroup.cs" />
+    <Compile Include="Articles\ArticleGroup.cs" />
     <Compile Include="CategoryGroup.cs" />
-    <Compile Include="FavoriteArticlesGroup.cs" />
+    <Compile Include="Articles\FavoriteArticlesGroup.cs" />
     <Compile Include="FeedGroup.cs" />
     <Compile Include="NewsItemGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadArticlesGroup.cs" />
+    <Compile Include="Articles\ReadArticlesGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
