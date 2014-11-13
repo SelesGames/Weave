@@ -33,8 +33,8 @@ using Weave.ViewModels.Helpers;
 using Weave.ViewModels.Identity;
 using Weave.ViewModels.Repository;
 using Weave.WP.ViewModels;
-using ArticleService = Weave.Article.Service.Client;
-using UserService = Weave.User.Service.Client;
+using ArticleService = Weave.Services.Article.Client;
+using UserService = Weave.Services.User.Client;
 
 namespace Weave.Services
 {
@@ -444,7 +444,7 @@ namespace Weave.Services
             if (user != null)
                 return;
 
-            var repo = new StandardRepository(new UserService.Client(), new ArticleService.ServiceClient());
+            var repo = new StandardRepository(new Services.User.Client(), new ArticleService.Client());
             user = new UserInfo(repo);
             user.Id = permanentState.UserId;
             user.PropertyChanged += OnUserInfoUserIdChanged;
@@ -472,7 +472,7 @@ namespace Weave.Services
             if (identity != null)
                 return;
 
-            identity = new IdentityInfo(new Weave.Identity.Service.Client.ServiceClient()) { UserId = user.Id };
+            identity = new IdentityInfo(new Weave.Services.Identity.Client()) { UserId = user.Id };
             identity.UserIdChanged += OnIdentityUserIdChanged;
         }
 

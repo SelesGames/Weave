@@ -789,45 +789,13 @@
       <Project>{E93C1441-A175-4D76-9E97-092E9C621E55}</Project>
       <Name>SelesGames.HttpClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.Client\Weave.Article.Service.Client.csproj">
-      <Project>{620200B1-17F4-4C5A-A301-CA9AED702806}</Project>
-      <Name>Weave.Article.Service.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.Contracts\Weave.Article.Service.Contracts.csproj">
-      <Project>{D727F239-EE96-4B05-8F17-65871B52B260}</Project>
-      <Name>Weave.Article.Service.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Article.Service.DTOs\Weave.Article.Service.DTOs.csproj">
-      <Project>{2B4D1AF0-8C77-475D-8D14-DB7B506F9450}</Project>
-      <Name>Weave.Article.Service.DTOs</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
       <Project>{588B02FC-6BB9-49AE-8ECE-2A4BAC9B470B}</Project>
       <Name>Weave.FeedLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.Client\Weave.Identity.Service.Client.csproj">
-      <Project>{42E619BA-2842-44A7-94D4-4B1485C7136B}</Project>
-      <Name>Weave.Identity.Service.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Identity.Service.Contracts\Weave.Identity.Service.Contracts.csproj">
-      <Project>{CCE98720-6054-4EF8-BA8C-14821B35EC1D}</Project>
-      <Name>Weave.Identity.Service.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Client\Weave.Mobilizer.Client.csproj">
-      <Project>{3973ECF9-5EDC-47DD-9B65-DBCC93F47F82}</Project>
-      <Name>Weave.Mobilizer.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Mobilizer.Contracts\Weave.Mobilizer.Contracts.csproj">
-      <Project>{FC776CA4-35B3-4024-8667-CB265805A519}</Project>
-      <Name>Weave.Mobilizer.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Client\Weave.User.Service.Client.csproj">
-      <Project>{3BD5FAB6-6843-4DAD-8846-2033AAF03FD7}</Project>
-      <Name>Weave.User.Service.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
-      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
-      <Name>Weave.User.Service.Contracts</Name>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Services\Weave.Services.csproj">
+      <Project>{2161f2b3-d54d-4294-9497-fafe0c37e77f}</Project>
+      <Name>Weave.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels.Repository\Weave.ViewModels.Repository.csproj">
       <Project>{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}</Project>

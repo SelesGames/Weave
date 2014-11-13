@@ -87,7 +87,7 @@ namespace Weave.LiveTile.ScheduledAgent
             var randomTile = SelectTileAtRandom();
             var permanentState = await new DataStorageClient().GetPermanentState();
             var userId = permanentState.UserId;
-            var userClient = new Weave.User.Service.Client.Client();
+            var userClient = new Weave.Services.User.Client();
             var negotiator = LiveTileNegotiatorFactory.CreateFromShellTile(
                 userId, userClient, appName, randomTile);
 

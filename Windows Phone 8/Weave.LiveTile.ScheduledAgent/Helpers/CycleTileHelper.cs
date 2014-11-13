@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Weave.User.Service.DTOs.ServerOutgoing;
+using Weave.Services.User.DTOs.ServerOutgoing;
 
 namespace Weave.LiveTile.ScheduledAgent
 {

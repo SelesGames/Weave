@@ -1,7 +1,7 @@
 ﻿using SelesGames;
 using System;
 using System.Threading.Tasks;
-using Weave.Mobilizer.Client;
+using Weave.Services.Mobilizer;
 using Weave.Mobilizer.HtmlFormatting;
 using Weave.SavedState;
 using Weave.Settings;

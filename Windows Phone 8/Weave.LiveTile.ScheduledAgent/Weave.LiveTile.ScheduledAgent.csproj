@@ -111,17 +111,9 @@
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Client\Weave.User.Service.Client.csproj">
-      <Project>{3BD5FAB6-6843-4DAD-8846-2033AAF03FD7}</Project>
-      <Name>Weave.User.Service.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.Contracts\Weave.User.Service.Contracts.csproj">
-      <Project>{02F3363F-7B0F-4C5F-9123-B388F2870C35}</Project>
-      <Name>Weave.User.Service.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.User.Service.DTOs\Weave.User.Service.DTOs.csproj">
-      <Project>{75F2F4B1-BEB2-4AC6-A935-5A795C5A79A0}</Project>
-      <Name>Weave.User.Service.DTOs</Name>
+    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Services\Weave.Services.csproj">
+      <Project>{2161f2b3-d54d-4294-9497-fafe0c37e77f}</Project>
+      <Name>Weave.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\Common.Hashing\Common.Hashing.csproj">
       <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>

@@ -4,8 +4,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Weave.LiveTile.ScheduledAgent.ViewModels;
-using Weave.User.Service.Contracts;
-using Weave.User.Service.DTOs;
+using Weave.Services.User.Contracts;
+using Weave.Services.User.DTOs;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
