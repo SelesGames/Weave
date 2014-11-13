@@ -7,16 +7,20 @@ using SelesGames.UI.Advertising;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Resources;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Windows.Resources;
 using weave;
 using Weave.FeedLibrary;
 using Weave.Resources;
@@ -579,8 +583,17 @@ namespace Weave.Services
 
         BundledLibrary CreateBundledLibrary()
         {
-            var fileName = string.Format("/{0};component/{1}", settings.AssemblyName, "Feeds.xml");
-            var reader = System.Xml.XmlReader.Create(fileName);
+            string xmlString;
+            Uri uri = new Uri(string.Format("/{0};component/{1}", settings.AssemblyName, "Feeds.xml"), UriKind.Relative);
+            StreamResourceInfo streamResourceInfo = Application.GetResourceStream(uri);
+            using (StreamReader streamReader = new StreamReader(streamResourceInfo.Stream, Encoding.UTF8))
+            {
+                xmlString = streamReader.ReadToEnd();
+            }
+            //var fileName = string.Format("/{0};component/{1}", settings.AssemblyName, "Feeds.xml");
+            //var reader = System.Xml.XmlReader.Create(fileName);
+            var stringReader = new StringReader(xmlString);
+            var reader = System.Xml.XmlReader.Create(stringReader);
             return new BundledLibrary(reader);
         }
 
