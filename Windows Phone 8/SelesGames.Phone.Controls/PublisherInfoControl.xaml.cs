@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 
-namespace SelesGames.WP.PublisherInfoPage
+namespace SelesGames.Phone.Controls
 {
     [ContentProperty("Footer")]
     public partial class PublisherInfoControl : UserControl

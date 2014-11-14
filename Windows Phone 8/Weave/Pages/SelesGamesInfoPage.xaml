@@ -6,7 +6,6 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:sgp="clr-namespace:SelesGames.WP.PublisherInfoPage;assembly=SelesGames.WP.PublisherInfoPage"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -15,8 +14,8 @@
 	mc:Ignorable="d" d:DesignHeight="3000" d:DesignWidth="480">
 
 	<Grid x:Name="LayoutRoot">
-		<sgp:PublisherInfoControl x:Name="publisherControl" PublisherName="Seles Games" RateText="rate/review" TwitterText="follow us on twitter" FacebookText="follow us on facebook" FacebookUserName="SelesGames" TwitterUserName="SelesGames">
-			<sgp:PublisherInfoControl.FooterTemplate>
+		<sg:PublisherInfoControl x:Name="publisherControl" PublisherName="Seles Games" RateText="rate/review" TwitterText="follow us on twitter" FacebookText="follow us on facebook" FacebookUserName="SelesGames" TwitterUserName="SelesGames">
+			<sg:PublisherInfoControl.FooterTemplate>
 				<DataTemplate>
 					<StackPanel Margin="0,48,0,24" Width="480">
 						<TextBlock Margin="24,0,24,12" VerticalAlignment="Top" Text="SPECIAL THANKS:" Foreground="{StaticResource PhoneSubtleBrush}" FontSize="{StaticResource PhoneFontSizeMediumLarge}" FontFamily="Segoe WP Black"/>
@@ -27,8 +26,8 @@
 						</Grid>
 					</StackPanel>
 				</DataTemplate>
-			</sgp:PublisherInfoControl.FooterTemplate>
-		</sgp:PublisherInfoControl>
+			</sg:PublisherInfoControl.FooterTemplate>
+		</sg:PublisherInfoControl>
 	</Grid>
  
 </phone:PhoneApplicationPage>

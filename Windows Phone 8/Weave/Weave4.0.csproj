@@ -773,10 +773,6 @@
       <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>
       <Name>SelesGames.UI.Advertising</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelesGames.WP.PublisherInfoPage\SelesGames.WP.PublisherInfoPage.csproj">
-      <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
-      <Name>SelesGames.WP.PublisherInfoPage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.Services.Extra\Weave.Services.Extra.csproj">
       <Project>{f04ef709-bb0c-4ef1-a8bf-d4dae55a62da}</Project>
       <Name>Weave.Services.Extra</Name>

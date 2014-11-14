@@ -1,6 +1,6 @@
 ﻿using Microsoft.Phone.Controls;
 
-namespace SelesGames.WP.PublisherInfoPage
+namespace SelesGames.Phone.Controls
 {
     public partial class TestPage : PhoneApplicationPage
     {

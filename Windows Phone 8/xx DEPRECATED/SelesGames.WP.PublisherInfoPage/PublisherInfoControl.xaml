@@ -7,7 +7,7 @@
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"   
 	xmlns:SampleData="clr-namespace:Expression.Blend.SampleData.SampleViewModel" 
-	x:Class="SelesGames.WP.PublisherInfoPage.PublisherInfoControl"
+	x:Class="SelesGames.Phone.Controls.PublisherInfoControl"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
 	Foreground="{StaticResource PhoneForegroundBrush}"
