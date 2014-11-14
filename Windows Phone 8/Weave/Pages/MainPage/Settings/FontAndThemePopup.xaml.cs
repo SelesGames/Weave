@@ -7,7 +7,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Weave.Customizability;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.Settings;
 
 namespace weave

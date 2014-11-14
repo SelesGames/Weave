@@ -136,6 +136,9 @@
     <Compile Include="Extension Methods\PhoneApplicationFrameExtensions.cs" />
     <Compile Include="Extension Methods\ShellTileExtensions.cs" />
     <Compile Include="Extension Methods\VoiceInformationExtensions.cs" />
+    <Compile Include="Imaging\BitmapImageCache.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="LittleWatson.cs" />
     <Compile Include="OrientationLockService.cs" />
     <Compile Include="OSThemeHelper.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="PeriodicTaskService.cs" />
     <Compile Include="Extension Methods\PageOrientationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reactive\Extension Methods\ImageExtensions.cs" />
     <Compile Include="Reactive\Extension Methods\IObservableExtensions.cs" />
     <Compile Include="Reactive\Extension Methods\ISchedulerExtensions.cs" />
     <Compile Include="Reactive\Extension Methods\ReactiveExtensions.cs" />
@@ -152,9 +156,8 @@
     <Compile Include="Reactive\Extension Methods\StoryboardExtensions.cs" />
     <Compile Include="Reactive\Extension Methods\UIElementExtensions.cs" />
     <Compile Include="Reactive\GlobalDispatcher.cs" />
-    <Compile Include="Reactive\Imaging\BitmapImageCache.cs" />
-    <Compile Include="Reactive\Imaging\ImageCache.cs" />
-    <Compile Include="Reactive\Imaging\ImageStreamCache.cs" />
+    <Compile Include="Imaging\ImageCache.cs" />
+    <Compile Include="Imaging\ImageStreamCache.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\BackgroundTimer.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\Pool.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\SingleThreadScheduler.cs" />
@@ -175,8 +178,18 @@
     <Compile Include="Extension Methods\WebBrowserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Common.Caching, Version=1.0.0.21580, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Caching.1.0.0.21580\lib\portable-net45+win+wpa81+wp80\Common.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Net.Http.Compression">
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\Common.Net.Http.Compression.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SelesGames.HttpClient">
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\SelesGames.HttpClient.dll</HintPath>
     </Reference>
     <Reference Include="SharpZipLib.WindowsPhone7">
       <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
@@ -189,6 +202,9 @@
     </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\portable-wp8+netcore45+net45+wp81+wpa81\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
@@ -211,16 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Caching\Common.Caching.csproj">
-      <Project>{9e6c0b86-7787-4d96-a167-cc89afd1b828}</Project>
-      <Name>Common.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Compression\Common.Compression.csproj">
-      <Project>{00617b68-c1f0-4ad8-8307-25c0608d745d}</Project>
-      <Name>Common.Compression</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

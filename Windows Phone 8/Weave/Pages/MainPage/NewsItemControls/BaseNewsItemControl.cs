@@ -16,6 +16,17 @@ namespace weave
             set { failImage = value; }
         }
 
+        protected BitmapSource CreateBitmapSource(string url)
+        {
+            return new BitmapImage(new Uri(url, UriKind.Absolute))
+            {
+                CreateOptions =
+                    BitmapCreateOptions.BackgroundCreation | 
+                    BitmapCreateOptions.DelayCreation |
+                    BitmapCreateOptions.IgnoreImageCache
+            };
+        }
+
         public ImageCache ImageCache { get; set; }
 
         protected abstract void SetNewsItem(NewsItem newsItem);

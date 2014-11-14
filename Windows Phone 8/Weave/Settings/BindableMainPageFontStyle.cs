@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.Settings;
 
 namespace Weave.Settings

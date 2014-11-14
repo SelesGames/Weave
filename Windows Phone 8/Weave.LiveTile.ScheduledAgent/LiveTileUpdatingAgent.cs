@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Weave.LiveTile.ScheduledAgent.Storage;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 
 namespace Weave.LiveTile.ScheduledAgent
 {
@@ -21,7 +21,7 @@ namespace Weave.LiveTile.ScheduledAgent
         /// </remarks>
         public LiveTileUpdatingAgent()
         {
-            global::Common.Compression.Settings.CompressionHandlers =
+            global::Common.Net.Http.Compression.Settings.GlobalCompressionSettings.CompressionHandlers =
                 new global::Common.WP.Compression.CompressionHandlerCollection();
 
             //InitializeErrorHandler();

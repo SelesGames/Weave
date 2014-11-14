@@ -1,7 +1,7 @@
 ﻿using SelesGames.IsoStorage;
 using System.Threading.Tasks;
-using Weave.SavedState;
-using Weave.SavedState.MostViewedHistory;
+using Weave.Customizability.SavedState;
+using Weave.Customizability.SavedState.MostViewedHistory;
 
 namespace Weave.LiveTile.ScheduledAgent.Storage
 {

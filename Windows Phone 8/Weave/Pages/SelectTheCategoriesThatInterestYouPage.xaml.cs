@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using Weave.FeedLibrary;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.Services;
 using Weave.Settings;
 using Weave.ViewModels;

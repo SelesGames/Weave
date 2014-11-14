@@ -4,8 +4,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Telerik.Windows.Controls;
+using System.Reactive.Threading.Tasks;
 
-namespace Weave.UI.Frame
+namespace Weave.UI.Controls
 {
     public class OverlayFrame : RadPhoneApplicationFrame
     {

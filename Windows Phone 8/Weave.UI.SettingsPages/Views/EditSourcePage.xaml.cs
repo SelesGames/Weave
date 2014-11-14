@@ -5,7 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Navigation;
 using Telerik.Windows.Controls;
-using Weave.UI.Frame;
+using Weave.UI.Controls;
 using Weave.ViewModels.Helpers;
 using SelesGames.Phone;
 

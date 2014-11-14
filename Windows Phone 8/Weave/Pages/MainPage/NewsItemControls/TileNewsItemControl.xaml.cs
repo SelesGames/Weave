@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Weave.Settings;
 using Weave.ViewModels;
+using SelesGames.Phone;
 
 namespace weave
 {
@@ -49,11 +50,15 @@ namespace weave
                 image.Opacity = 0;
                 noImageGrid.Visibility = Visibility.Collapsed;
                 withImageGrid.Visibility = Visibility.Visible;
-
-                ImageCache
-                    .GetImageAsync(newsItem.ImageUrl)
-                    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
+                image.Source = CreateBitmapSource(newsItem.ImageUrl);
+                image.GetImageOpened()
+                    .SafelySubscribe(SetImage)
                     .DisposeWith(disposables);
+
+                //ImageCache
+                //    .GetImageAsync(newsItem.ImageUrl)
+                //    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
+                //    .DisposeWith(disposables);
             }
             else
             {
@@ -83,6 +88,12 @@ namespace weave
                 .Where(o => o.EventArgs.PropertyName == "DisplayState")
                 .SafelySubscribe(o => ColorByline(newsItem))
                 .DisposeWith(disposables);
+        }
+
+        void SetImage()
+        {
+            this.ImageFadeInSB.Stop();
+            this.ImageFadeInSB.Begin();
         }
 
         void ColorByline(NewsItem newsItem)

@@ -189,10 +189,6 @@
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
-      <Project>{588B02FC-6BB9-49AE-8ECE-2A4BAC9B470B}</Project>
-      <Name>Weave.FeedLibrary</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>
@@ -205,17 +201,17 @@
       <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
       <Name>SelesGames.Phone</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Weave.Services.Extra\Weave.Services.Extra.csproj">
+      <Project>{f04ef709-bb0c-4ef1-a8bf-d4dae55a62da}</Project>
+      <Name>Weave.Services.Extra</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weave.UI.Controls\Weave.UI.Controls.csproj">
+      <Project>{dd62bfa1-a863-4a18-8d93-6bdd222eef27}</Project>
+      <Name>Weave.UI.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WP8Toolkit\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
       <Name>Microsoft.Phone.Controls.Toolkit.WP8</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.FeedSearchService\Weave.FeedSearchService.csproj">
-      <Project>{E685135B-C889-4F51-96F9-69B968BEDF29}</Project>
-      <Name>Weave.FeedSearchService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.UI.Frame\Weave.UI.Frame.csproj">
-      <Project>{DB0F523A-80F0-4903-94FF-B1134F2E81BF}</Project>
-      <Name>Weave.UI.Frame</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

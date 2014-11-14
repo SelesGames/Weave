@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Weave.Services.Mobilizer;
 using Weave.Mobilizer.HtmlFormatting;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.Settings;
 using Weave.ViewModels;
 using Weave.ViewModels.Mobilizer;

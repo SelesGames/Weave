@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using System.Windows;
 using Weave.Settings;
-using Weave.UI.Frame;
+using Weave.UI.Controls;
 using Weave.ViewModels;
 using Weave.WP.ViewModels.GroupedNews;
 using System.Linq;

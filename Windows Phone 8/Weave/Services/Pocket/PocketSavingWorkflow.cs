@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.ViewModels;
 
 namespace Weave.Services.Pocket

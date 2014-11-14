@@ -135,6 +135,10 @@
     <Reference Include="Common.Microsoft.Services">
       <HintPath>..\packages\Common.Microsoft.Services.1.0.0.25873\lib\portable-net45+win+wpa81+wp80\Common.Microsoft.Services.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Net.Http.Compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\Common.Net.Http.Compression.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Live">
       <HintPath>..\packages\LiveSDK.5.6\lib\WindowsPhone81\Microsoft.Live.dll</HintPath>
     </Reference>
@@ -159,6 +163,10 @@
     </Reference>
     <Reference Include="PocketSharp">
       <HintPath>..\packages\PocketSharp.4.1.6.1\lib\portable-net45+win+wpa81+wp80\PocketSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SelesGames.HttpClient, Version=1.0.0.33816, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\SelesGames.HttpClient.dll</HintPath>
     </Reference>
     <Reference Include="SelesGames.Services.Instapaper">
       <HintPath>..\packages\SelesGames.Services.Instapaper.1.0.0.30186\lib\portable-net45+win+wpa81+wp80\SelesGames.Services.Instapaper.dll</HintPath>
@@ -205,6 +213,10 @@
     <Reference Include="Telerik.Windows.Core">
       <HintPath>..\lib\Telerik\Telerik.Windows.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Weave.Services, Version=1.0.0.33183, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Weave.Services.1.0.0.33183\lib\portable-net45+win+wpa81+wp80\Weave.Services.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -217,9 +229,6 @@
     <Compile Include="Pages\Accounts\OneNoteSignInPage.xaml.cs">
       <DependentUpon>OneNoteSignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainPage\NewsItemControls\FullBleedNewsItemControl.xaml.cs">
-      <DependentUpon>FullBleedNewsItemControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainPage\NewsItemGroupTypeCaseConverter.cs" />
     <Compile Include="Pages\MainPage\NewsItemGroupTypeFontFamilyConverter.cs" />
     <Compile Include="Services\ArticleListNavigationCorrector.cs" />
@@ -231,9 +240,6 @@
     <Compile Include="Services\Pocket\PocketHelper.cs" />
     <Compile Include="Services\Pocket\PocketSavingWorkflow.cs" />
     <Compile Include="Services\Startup\CriticalApplicationException.cs" />
-    <Compile Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml.cs">
-      <DependentUpon>TileNewsItemControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml.cs">
       <DependentUpon>TextOnlyNewsItemControl.xaml</DependentUpon>
     </Compile>
@@ -266,6 +272,13 @@
     <Compile Include="Pages\MainPage\MediaTypeIconsBrushSet.cs" />
     <Compile Include="Settings\PocketSettings.cs" />
     <Compile Include="Settings\ThirdParty.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\AllNewsGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\Articles\ArticleGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\Articles\FavoriteArticlesGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\Articles\ReadArticlesGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\CategoryGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\FeedGroup.cs" />
+    <Compile Include="ViewModels\MainPage\GroupedNews\NewsItemGroup.cs" />
     <Compile Include="ViewModels\MainPage\INewsGrouping.cs" />
     <Compile Include="ViewModels\MainPage\IPagedNews.cs" />
     <Compile Include="ViewModels\MainPage\PagedArticles.cs" />
@@ -368,14 +381,6 @@
     <Page Include="Pages\Accounts\OneNoteSignInPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\MainPage\NewsItemControls\FullBleedNewsItemControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\MainPage\NewsItemControls\TileNewsItemControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage\NewsItemControls\TextOnlyNewsItemControl.xaml">
       <SubType>Designer</SubType>
@@ -684,10 +689,10 @@
     <Content Include="Assets\Tiles\lock_screen_placeholder.jpg" />
     <Resource Include="Feeds.xml" />
     <Content Include="SplashScreenImage.jpg" />
-    <None Include="app.config" />
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="app.config" />
     <None Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\WMAppManifest.xml">
@@ -748,25 +753,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Compression\Common.Compression.csproj">
-      <Project>{00617B68-C1F0-4AD8-8307-25C0608D745D}</Project>
-      <Name>Common.Compression</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\SelesGames.HttpClient\SelesGames.HttpClient.csproj">
-      <Project>{E93C1441-A175-4D76-9E97-092E9C621E55}</Project>
-      <Name>SelesGames.HttpClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.FeedLibrary\Weave.FeedLibrary.csproj">
-      <Project>{588B02FC-6BB9-49AE-8ECE-2A4BAC9B470B}</Project>
-      <Name>Weave.FeedLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Services\Weave.Services.csproj">
-      <Project>{2161f2b3-d54d-4294-9497-fafe0c37e77f}</Project>
-      <Name>Weave.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
@@ -788,13 +777,9 @@
       <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
       <Name>SelesGames.WP.PublisherInfoPage</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.Microsoft.OneNote\Weave.Microsoft.OneNote.csproj">
-      <Project>{876CD6D4-14F3-4A5B-9631-F03DEF486F51}</Project>
-      <Name>Weave.Microsoft.OneNote</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.WP.Mobilizer.HtmlFormatting\Weave.WP.Mobilizer.HtmlFormatting.csproj">
-      <Project>{BED91E77-4679-43B8-BD43-B0B889616C8D}</Project>
-      <Name>Weave.WP.Mobilizer.HtmlFormatting</Name>
+    <ProjectReference Include="..\Weave.Services.Extra\Weave.Services.Extra.csproj">
+      <Project>{f04ef709-bb0c-4ef1-a8bf-d4dae55a62da}</Project>
+      <Name>Weave.Services.Extra</Name>
     </ProjectReference>
     <ProjectReference Include="..\WP8Toolkit\Microsoft.Phone.Controls.Toolkit.WP8\Microsoft.Phone.Controls.Toolkit.WP8.csproj">
       <Project>{486642F0-AB94-4F28-B49C-106CA3134239}</Project>
@@ -812,25 +797,13 @@
       <Project>{099E7718-8767-47F4-AB1C-2DF71362AD06}</Project>
       <Name>Weave.LiveTile.ScheduledAgent</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
-      <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
-      <Name>Weave.SavedState</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.UI.Controls\Weave.UI.Controls.csproj">
       <Project>{DD62BFA1-A863-4A18-8D93-6BDD222EEF27}</Project>
       <Name>Weave.UI.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.UI.Frame\Weave.UI.Frame.csproj">
-      <Project>{DB0F523A-80F0-4903-94FF-B1134F2E81BF}</Project>
-      <Name>Weave.UI.Frame</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Weave.UI.SettingsPages\Weave.UI.SettingsPages.csproj">
       <Project>{F7DD85D6-5809-4D2F-AB5E-1CED0F6A6105}</Project>
       <Name>Weave.UI.SettingsPages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weave.WP.ViewModels.GroupedNews\Weave.WP.ViewModels.GroupedNews.csproj">
-      <Project>{D1C88ACF-464D-46E8-89C0-C6F9C4B78156}</Project>
-      <Name>Weave.WP.ViewModels.GroupedNews</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

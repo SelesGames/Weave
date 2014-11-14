@@ -10,9 +10,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.Settings;
-using Weave.UI.Frame;
+using Weave.UI.Controls;
 using Weave.ViewModels;
 using Windows.Phone.System.UserProfile;
 

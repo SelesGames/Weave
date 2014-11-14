@@ -73,6 +73,7 @@ namespace weave
                 image.Opacity = 0;
                 imageWrapper.Visibility = Visibility.Visible;
                 imageTilt.Visibility = Visibility.Visible;
+                //image.Source = CreateBitmapSource(newsItem.ImageUrl);
 
                 ImageCache
                     .GetImageAsync(newsItem.ImageUrl)
@@ -105,6 +106,12 @@ namespace weave
                 .Where(o => o.EventArgs.PropertyName == "DisplayState")
                 .SafelySubscribe(o => ColorByline(newsItem))
                 .DisposeWith(disposables);
+        }
+
+        void AnimateImage()
+        {
+            this.ImageFadeInSB.Stop();
+            this.ImageFadeInSB.Begin();
         }
 
         void ColorByline(NewsItem newsItem)

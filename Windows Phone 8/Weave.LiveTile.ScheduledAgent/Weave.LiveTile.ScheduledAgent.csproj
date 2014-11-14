@@ -110,39 +110,34 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Caching\Common.Caching.csproj">
-      <Project>{9e6c0b86-7787-4d96-a167-cc89afd1b828}</Project>
-      <Name>Common.Caching</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Compression\Common.Compression.csproj">
-      <Project>{00617B68-C1F0-4AD8-8307-25C0608D745D}</Project>
-      <Name>Common.Compression</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.Services\Weave.Services.csproj">
-      <Project>{2161f2b3-d54d-4294-9497-fafe0c37e77f}</Project>
-      <Name>Weave.Services</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.Phone\SelesGames.Phone.csproj">
       <Project>{4adfa599-2a57-413a-bb47-5428dd9ce365}</Project>
       <Name>SelesGames.Phone</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Weave.SavedState\Weave.SavedState.csproj">
-      <Project>{1704438E-313E-4FC3-9EAC-FB143C390BDF}</Project>
-      <Name>Weave.SavedState</Name>
+    <ProjectReference Include="..\Weave.Customizability\Weave.Customizability.csproj">
+      <Project>{177cce16-aabd-4c84-9ac9-fd1e28f489d4}</Project>
+      <Name>Weave.Customizability</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Common.Net.Http.Compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\Common.Net.Http.Compression.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SelesGames.HttpClient, Version=1.0.0.33816, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\SelesGames.HttpClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -158,6 +153,10 @@
     <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Weave.Services, Version=1.0.0.33183, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Weave.Services.1.0.0.33183\lib\portable-net45+win+wpa81+wp80\Weave.Services.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

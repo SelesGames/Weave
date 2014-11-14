@@ -4,6 +4,8 @@
 	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
 	xmlns:local="clr-namespace:Weave.UI.Controls"
 	xmlns:sg="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
+	xmlns:sglib="clr-namespace:SelesGames.Phone.Controls;assembly=SelesGames.Phone.Controls"
+	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
@@ -55,5 +57,59 @@
 		</Setter>
 	</Style>
 
-	
+    <Style TargetType="local:OverlayFrame">
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeNormal}"/>
+        <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="OverlayForeground" Value="{StaticResource PhoneForegroundBrush}"/>
+        <Setter Property="OverlayBackground" Value="{StaticResource PhoneChromeBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:OverlayFrame">
+                    <Border x:Name="ClientArea" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" d:DesignHeight="800" d:DesignWidth="480" >
+                        <Border.Resources>
+                            <Storyboard x:Name="ShowLoadingSB">
+                                <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoadingOverlay"/>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoadingOverlay">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Visible</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Name="HideLoadingSB">
+                                <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="LoadingOverlay"/>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="LoadingOverlay">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.2">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Collapsed</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+                        <Grid>
+                            <telerikPrimitives:RadTransitionControl x:Name="TransitionControl" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Transition="{TemplateBinding Transition}" />
+                            <StackPanel x:Name="LoadingOverlay" IsHitTestVisible="False" VerticalAlignment="Center" Background="{TemplateBinding OverlayBackground}">
+                                <TextBlock TextWrapping="Wrap" Foreground="{TemplateBinding OverlayForeground}" FontFamily="{StaticResource PhoneFontFamilyNormal}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="-3,24,0,0" Text="{TemplateBinding OverlayText}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                                <sglib:RadialBusyIndicator x:Name="BusyIndicator" VerticalAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" Width="48" Height="48" Margin="0,12,0,24" NumberOfItems="7" IsPlaying="True"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
 </ResourceDictionary>

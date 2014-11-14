@@ -1,4 +1,4 @@
-﻿using Common.Compression;
+﻿using Common.Net.Http.Compression.Settings;
 using System.IO;
 
 namespace Common.WP.Compression

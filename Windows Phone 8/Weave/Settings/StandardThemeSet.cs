@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using Weave.Customizability;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 
 namespace Weave.Settings
 {

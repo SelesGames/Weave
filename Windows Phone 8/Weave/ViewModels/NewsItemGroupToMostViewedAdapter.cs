@@ -3,7 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.WP.ViewModels.GroupedNews;
 
 namespace Weave.WP.ViewModels

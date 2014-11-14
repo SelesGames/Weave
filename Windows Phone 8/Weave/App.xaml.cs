@@ -29,7 +29,7 @@ namespace weave
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
             }
 
-            global::Common.Compression.Settings.CompressionHandlers =
+            global::Common.Net.Http.Compression.Settings.GlobalCompressionSettings.CompressionHandlers =
                 new global::Common.WP.Compression.CompressionHandlerCollection();
 
             var r = new System.Random().Next(123, 978);
@@ -44,7 +44,7 @@ namespace weave
 
                 #region Ad Units
 
-                IsAddSupportedApp = true,
+                IsAddSupportedApp = false,
                 AdUnitsUrl = "http://weave.blob.core.windows.net/settings/nuAdSettings.json?xsf=" + r,
 
                 #endregion

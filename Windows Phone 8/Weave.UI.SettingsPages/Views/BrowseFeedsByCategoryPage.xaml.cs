@@ -5,7 +5,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows;
 using Telerik.Windows.Controls;
-using Weave.UI.Frame;
+using Weave.UI.Controls;
 
 namespace weave.Pages.Settings
 {

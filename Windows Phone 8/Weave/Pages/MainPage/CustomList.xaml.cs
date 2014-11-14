@@ -156,11 +156,11 @@ namespace weave
                 case ArticleListFormatType.TextOnly:
                     return new TextOnlyNewsItemControl();
 
-                case ArticleListFormatType.Tiles:
-                    return new TileNewsItemControl();
+                //case ArticleListFormatType.Tiles:
+                //    return new TileNewsItemControl();
 
-                case ArticleListFormatType.FullBleed:
-                    return new FullBleedNewsItemControl();
+                //case ArticleListFormatType.FullBleed:
+                //    return new FullBleedNewsItemControl();
 
                 default:
                     throw new Exception(string.Format(

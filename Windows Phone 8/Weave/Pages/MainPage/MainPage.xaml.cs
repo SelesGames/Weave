@@ -17,7 +17,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
-using Weave.SavedState;
+using Weave.Customizability.SavedState;
 using Weave.ViewModels;
 using Weave.ViewModels.Contracts.Client;
 using Portable.Common;

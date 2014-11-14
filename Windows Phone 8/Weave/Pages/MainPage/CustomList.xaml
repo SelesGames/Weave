@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-	xmlns:ic="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
+	xmlns:ic="clr-namespace:weave;assembly=SelesGames.Phone"
 	xmlns:local="clr-namespace:weave"
 	x:Class="weave.CustomList"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"

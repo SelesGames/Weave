@@ -6,7 +6,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:weave"
 	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Common.Reactive"
+	xmlns:weave="clr-namespace:weave;assembly=SelesGames.Phone"
 	xmlns:wc="clr-namespace:Weave.UI.Controls;assembly=Weave.UI.Controls"
 	xmlns:sgcore="clr-namespace:SelesGames.Phone;assembly=SelesGames.Phone"
 	xmlns:sgConverters="clr-namespace:SelesGames.Phone.ValueConverters;assembly=SelesGames.Phone"

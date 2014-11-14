@@ -17,21 +17,22 @@ namespace SelesGames.Common.Reactive
         {
             streamCache = new ImageStreamCache(streamCacheLimit);
             cache = new LRUCache<string, Task<BitmapImage>>(limit);
-            cache.ItemEvicted += OnCacheItemEvicted;
         }
 
-        public Task<BitmapImage> Get(string url)
+        internal Task<BitmapImage> Get(string url)
         {
             EnsureNotDisposed();
 
-            if (cache.ContainsKey(url))
+            var existing = cache.Get(url);
+            if (existing.IsSome)
             {
-                return cache[url];
+                return existing.Value;
             }
             else
             {
                 var t = CreateBitmapAsync(url);
-                cache[url] = t;
+                var evicted = cache.AddOrUpdate(url, t);
+                Dispose(evicted);
                 return t;
             }
         }
@@ -47,21 +48,29 @@ namespace SelesGames.Common.Reactive
             return bmp;
         }
 
-        void OnCacheItemEvicted(object sender, LRUEvictionEventArgs<string, Task<BitmapImage>> e)
-        {
-            if (e == null || e.Value == null)
-                return;
-
-            //DebugEx.WriteLine("cleaning bitmap: {0}", e.Key);
-            Dispose(e.Value);
-        }
-
 
 
 
         #region Dispose/Cleanup
 
-        public void Dispose()
+        //public void Dispose()
+        //{
+        //    if (isDisposed)
+        //        return;
+
+        //    isDisposed = true;
+
+        //    streamCache.Dispose();
+
+        //    var existingItems = cache.ToList();
+        //    foreach (var task in existingItems)
+        //    {
+        //        Dispose(task.Value);
+        //    }
+        //    cache.Clear();
+        //}
+
+        public async void Dispose()
         {
             if (isDisposed)
                 return;
@@ -71,26 +80,49 @@ namespace SelesGames.Common.Reactive
             streamCache.Dispose();
 
             var existingItems = cache.ToList();
-            foreach (var task in existingItems)
+            try
             {
-                Dispose(task.Value);
+                await Task.WhenAll(existingItems.Select(DisposeAsync));
+                cache.Clear();
             }
-            cache.Clear();
-
-            cache.ItemEvicted -= OnCacheItemEvicted;
+            catch { }
         }
 
-        void Dispose(Task<BitmapImage> task)
+        async void Dispose(LRUCacheItem<string, Task<BitmapImage>> evicted)
         {
-            if (task == null)
+            await DisposeAsync(evicted);
+        }
+
+        async Task DisposeAsync(LRUCacheItem<string, Task<BitmapImage>> evicted)
+        {
+            if (evicted == null || evicted.Value == null)
                 return;
 
-            if (task.IsCompleted && task.Result != null)
+            try
             {
-                var bmp = task.Result;
+                var bmp = await evicted.Value;
                 bmp.UriSource = null;
             }
+            catch { }
         }
+
+        //async void Dispose(Task<BitmapImage> task)
+        //{
+        //    if (task == null)
+        //        return;
+
+        //    try
+        //    {
+        //        var bmp = await task;
+        //        bmp.UriSource = null;
+        //    }
+        //    catch { }
+        //    //if (task.IsCompleted && task.Result != null)
+        //    //{
+        //    //    var bmp = task.Result;
+        //    //    bmp.UriSource = null;
+        //    //}
+        //}
    
         void EnsureNotDisposed()
         {

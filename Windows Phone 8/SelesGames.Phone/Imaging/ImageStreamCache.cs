@@ -2,8 +2,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
-using System.Reactive.Linq;
 using System.Threading.Tasks;
 
 namespace SelesGames.Common.Reactive
@@ -14,50 +12,44 @@ namespace SelesGames.Common.Reactive
 
         bool isDisposed = false;
 
-        public ImageStreamCache(int limit)
+        internal ImageStreamCache(int limit)
         {
             cache = new LRUCache<string, Task<Stream>>(limit);
-            cache.ItemEvicted += OnCacheItemEvicted;
         }
 
-        public Task<Stream> Get(string url)
+        internal Task<Stream> Get(string url)
         {
             EnsureNotDisposed();
 
-            if (cache.ContainsKey(url))
+            var existing = cache.Get(url);
+            if (existing.IsSome)
             {
-                return cache[url];
+                return existing.Value;
             }
             else
             {
                 var t = GetImageStreamAsync(url);
-                cache[url] = t;
+                var evicted = cache.AddOrUpdate(url, t);
+                Dispose(evicted);
                 return t;
             }
         }
 
         async Task<Stream> GetImageStreamAsync(string imageUrl)
         {
-            var client = new HttpClient();
+            var client = new System.Net.Http.HttpClient();
             var response = await client.GetAsync(imageUrl).ConfigureAwait(false);
 
             EnsureNotDisposed();
             response.EnsureSuccessStatusCode();
 
-            var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            return stream;
-        }
-
-        void OnCacheItemEvicted(object sender, LRUEvictionEventArgs<string, Task<Stream>> e)
-        {
-            if (e == null || e.Value == null)
-                return;
-
-            Task.Run(() =>
+            var ms = new MemoryStream();
+            using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                //DebugEx.WriteLine("cleaning image stream: {0}", e.Key);
-                Dispose(e.Value);
-            });
+                stream.CopyTo(ms);
+            }
+            ms.Position = 0;
+            return ms;
         }
 
 
@@ -65,7 +57,7 @@ namespace SelesGames.Common.Reactive
 
         #region Dispose/Cleanup
 
-        public void Dispose()
+        public async void Dispose()
         {
             if (isDisposed)
                 return;
@@ -73,25 +65,30 @@ namespace SelesGames.Common.Reactive
             isDisposed = true;
 
             var existingItems = cache.ToList();
-            foreach (var task in existingItems)
+            try
             {
-                Dispose(task.Value);
+                await Task.WhenAll(existingItems.Select(DisposeAsync));
+                cache.Clear();
             }
-            cache.Clear();
-
-            cache.ItemEvicted -= OnCacheItemEvicted;
+            catch { }
         }
 
-        void Dispose(Task<Stream> task)
+        async void Dispose(LRUCacheItem<string, Task<Stream>> evicted)
         {
-            if (task == null)
+            await DisposeAsync(evicted);
+        }
+
+        async Task DisposeAsync(LRUCacheItem<string, Task<Stream>> evicted)
+        {
+            if (evicted == null || evicted.Value == null)
                 return;
 
-            if (task.IsCompleted && task.Result != null)
+            try
             {
-                var stream = task.Result;
+                var stream = await evicted.Value;
                 stream.Dispose();
             }
+            catch { }
         }
 
         void EnsureNotDisposed()
