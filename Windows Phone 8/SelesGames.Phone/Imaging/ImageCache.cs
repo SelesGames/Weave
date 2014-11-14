@@ -38,19 +38,21 @@ namespace weave
                 //    // UI thread, switch to UI before creating Bitmap and proccing OnNext
                 //    GlobalDispatcher.Current.BeginInvoke(() =>
                 //    {
-                //        var bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache | BitmapCreateOptions.BackgroundCreation };
+                //        var bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache };
                 //        bmp.SetSource(imageStream);
-                //        observer.OnNext(bmp);
+                //        observer.OnNext((ImageSource)bmp);
                 //        observer.OnCompleted();
                 //    });
                 //}
-                //catch(Exception ex)
+                //catch (Exception ex)
                 //{
                 //    GlobalDispatcher.Current.BeginInvoke(() =>
                 //    {
                 //        observer.OnError(ex);
                 //    });
                 //}
+
+
                 try
                 {
 
@@ -63,7 +65,6 @@ namespace weave
                     observer.OnError(ex);
                 }
             });
-            //return GetImage(url).ToObservable().ObserveOnDispatcher();
         }
 
         public void Dispose()
