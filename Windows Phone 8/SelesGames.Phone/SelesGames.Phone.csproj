@@ -12,12 +12,18 @@
     <RootNamespace>SelesGames.Phone</RootNamespace>
     <AssemblyName>SelesGames.Phone</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
-    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
     <SilverlightApplication>false</SilverlightApplication>
     <ValidateXaml>true</ValidateXaml>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkProfile />
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>a00289d8</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +56,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +67,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +79,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
     <DebugType>pdbonly</DebugType>
@@ -81,6 +90,7 @@
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LiveTileTest|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -114,8 +124,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnimationHelper.cs" />
+    <Compile Include="Extension Methods\ApplicationBarExtensions.cs" />
     <Compile Include="ApplicationBarToggleIconButtonAdapter.cs" />
     <Compile Include="ApplicationBarToggleMenuItemAdapter.cs" />
+    <Compile Include="Compression\CompressionHandlerCollection.cs" />
+    <Compile Include="Compression\GZipHandler.cs" />
+    <Compile Include="CryptoHelper.cs" />
     <Compile Include="Extension Methods\ConvenienceExtensions.cs" />
     <Compile Include="Extension Methods\NavigationServiceExtensions.cs" />
     <Compile Include="Extension Methods\ProgressBarExtensions.cs" />
@@ -131,13 +145,97 @@
     <Compile Include="PeriodicTaskService.cs" />
     <Compile Include="Extension Methods\PageOrientationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reactive\Extension Methods\IObservableExtensions.cs" />
+    <Compile Include="Reactive\Extension Methods\ISchedulerExtensions.cs" />
+    <Compile Include="Reactive\Extension Methods\ReactiveExtensions.cs" />
+    <Compile Include="Reactive\Extension Methods\ReactiveExtensions.Timers.cs" />
+    <Compile Include="Reactive\Extension Methods\StoryboardExtensions.cs" />
+    <Compile Include="Reactive\Extension Methods\UIElementExtensions.cs" />
+    <Compile Include="Reactive\GlobalDispatcher.cs" />
+    <Compile Include="Reactive\Imaging\BitmapImageCache.cs" />
+    <Compile Include="Reactive\Imaging\ImageCache.cs" />
+    <Compile Include="Reactive\Imaging\ImageStreamCache.cs" />
+    <Compile Include="Reactive\Reactive\Schedulers\BackgroundTimer.cs" />
+    <Compile Include="Reactive\Reactive\Schedulers\Pool.cs" />
+    <Compile Include="Reactive\Reactive\Schedulers\SingleThreadScheduler.cs" />
+    <Compile Include="Reactive\Reactive\Schedulers\ViewModelBackgroundScheduler.cs" />
+    <Compile Include="Reactive\WeavePage.cs" />
+    <Compile Include="Storage\DataContractIsoStorageClient.cs" />
+    <Compile Include="Storage\DelegateIsoStorageClient.cs" />
+    <Compile Include="Storage\IsoStorageClient.cs" />
+    <Compile Include="Storage\IsoStorageClientExtensions.cs" />
+    <Compile Include="Storage\JsonIsoStorageClient.cs" />
+    <Compile Include="Storage\NLevelRolloverIsoStorageClient.cs" />
+    <Compile Include="Storage\XmlSerializerIsoStorageClient.cs" />
     <Compile Include="TaskService.cs" />
+    <Compile Include="UI\Color\ColorExtensions.cs" />
+    <Compile Include="UI\Color\ComplementaryColors.cs" />
     <Compile Include="Value Converters\DelegateValueConverter.cs" />
     <Compile Include="Value Converters\InverseBooleanValueConverter.cs" />
+    <Compile Include="Extension Methods\WebBrowserExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpZipLib.WindowsPhone7">
+      <HintPath>..\lib\SharpZipLib.WindowsPhone7.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>..\packages\Microsoft.Bcl.Compression.3.9.85\lib\wp8\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\windowsphone8\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\windowsphone8\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\windowsphone8\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\windowsphone8\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading">
+      <HintPath>..\packages\Rx-XAML.2.2.5\lib\windowsphone8\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Weave.Portable\Common.Caching\Common.Caching.csproj">
+      <Project>{9e6c0b86-7787-4d96-a167-cc89afd1b828}</Project>
+      <Name>Common.Caching</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Weave.Portable\Common.Compression\Common.Compression.csproj">
+      <Project>{00617b68-c1f0-4ad8-8307-25c0608d745d}</Project>
+      <Name>Common.Compression</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets" Condition="Exists('..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

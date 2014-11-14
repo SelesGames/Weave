@@ -1,4 +1,4 @@
-﻿using Common.Microsoft;
+﻿using Common.Microsoft.Services;
 using Microsoft.Live;
 using Microsoft.Phone.Controls;
 using SelesGames;

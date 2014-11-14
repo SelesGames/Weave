@@ -1,4 +1,4 @@
-﻿using Common.Microsoft.OneNote.Response;
+﻿using Common.Microsoft.Services.OneNote.Response;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SelesGames;

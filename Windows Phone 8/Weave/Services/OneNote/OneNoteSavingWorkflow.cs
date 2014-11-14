@@ -1,4 +1,4 @@
-﻿using Common.Microsoft.OneNote.Response;
+﻿using Common.Microsoft.Services.OneNote.Response;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -117,10 +117,15 @@ namespace Weave.Services.OneNote
             }
         }
 
-        async Task Register()
+        Task Register()
         {
-            await GlobalDispatcher.Current.InvokeAsync(() =>
-                GlobalNavigationService.ToOneNoteSignInPage(async () => await OnCallback()));
+            var tcs = new TaskCompletionSource<int>();
+            GlobalDispatcher.Current.BeginInvoke(() =>
+            {
+                GlobalNavigationService.ToOneNoteSignInPage(async () => await OnCallback());
+                tcs.TrySetResult(0);
+            });
+            return tcs.Task;
         }
 
         async Task OnCallback()

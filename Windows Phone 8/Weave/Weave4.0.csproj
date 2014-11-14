@@ -27,7 +27,7 @@
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>b8067007</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>1409eb1d</NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -129,79 +129,68 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Coding4Fun.Toolkit.Controls, Version=2.0.7.0, Culture=neutral, PublicKeyToken=c5fd7b72b1a17ce4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Live, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Microsoft.Services">
+      <HintPath>..\packages\Common.Microsoft.Services.1.0.0.25873\lib\portable-net45+win+wpa81+wp80\Common.Microsoft.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Live">
       <HintPath>..\packages\LiveSDK.5.6\lib\WindowsPhone81\Microsoft.Live.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Live.Controls, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Live.Controls">
       <HintPath>..\packages\LiveSDK.5.6\lib\WindowsPhone81\Microsoft.Live.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.WindowsAzure.Mobile, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.WindowsAzure.Mobile">
       <HintPath>..\packages\WindowsAzure.MobileServices.1.2.5\lib\wp8\Microsoft.WindowsAzure.Mobile.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
       <HintPath>..\packages\WindowsAzure.MobileServices.1.2.5\lib\wp8\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Mobile.UI, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.UI">
       <HintPath>..\packages\WindowsAzure.MobileServices.1.2.5\lib\wp8\Microsoft.WindowsAzure.Mobile.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\lib\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="PocketSharp, Version=4.1.6.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="PocketSharp">
       <HintPath>..\packages\PocketSharp.4.1.6.1\lib\portable-net45+win+wpa81+wp80\PocketSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SelesGames.Services.Instapaper">
+      <HintPath>..\packages\SelesGames.Services.Instapaper.1.0.0.30186\lib\portable-net45+win+wpa81+wp80\SelesGames.Services.Instapaper.dll</HintPath>
     </Reference>
     <Reference Include="System.Interactive">
       <HintPath>..\lib\System.Interactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Compression, Version=3.9.85.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.IO.Compression">
       <HintPath>..\packages\Microsoft.Bcl.Compression.3.9.85\lib\wp8\System.IO.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Extensions, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\portable-wp8+netcore45+net45+wp81+wpa81\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=1.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\windowsphone8\System.Reactive.Core.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.Interfaces">
       <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\windowsphone8\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.Linq">
       <HintPath>..\packages\Rx-Linq.2.2.5\lib\windowsphone8\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="System.Reactive.PlatformServices">
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\windowsphone8\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Windows.Threading">
@@ -763,14 +752,6 @@
       <Project>{00617B68-C1F0-4AD8-8307-25C0608D745D}</Project>
       <Name>Common.Compression</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Microsoft.OneNote\Common.Microsoft.OneNote.csproj">
-      <Project>{7B342C99-3758-4FA0-BE6E-576F07286DF7}</Project>
-      <Name>Common.Microsoft.OneNote</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Common.Microsoft\Common.Microsoft.csproj">
-      <Project>{C323425E-3A4B-4A22-9CE5-ACF8D7124897}</Project>
-      <Name>Common.Microsoft</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
@@ -787,37 +768,13 @@
       <Project>{2161f2b3-d54d-4294-9497-fafe0c37e77f}</Project>
       <Name>Weave.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels.Repository\Weave.ViewModels.Repository.csproj">
-      <Project>{D326F8C2-8DCF-43D4-9BAD-BC07CA6D6CCE}</Project>
-      <Name>Weave.ViewModels.Repository</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
       <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
       <Name>Weave.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Common.Hashing\Common.Hashing.csproj">
-      <Project>{824FCA1A-DCA7-4DF2-AC4A-B91254469261}</Project>
-      <Name>Common.Hashing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.WP.Compression\Common.WP.Compression.csproj">
-      <Project>{F7B1C2AA-D1CC-4463-B580-14658AA7DB67}</Project>
-      <Name>Common.WP.Compression</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Common.Reactive\SelesGames.Common.Reactive.csproj">
-      <Project>{0AB5B0D6-A1C4-4B7E-8C8B-32FFEC480AB3}</Project>
-      <Name>SelesGames.Common.Reactive</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Instapaper\SelesGames.Instapaper.csproj">
-      <Project>{60A15747-8A97-4E97-8130-132D9A1B8036}</Project>
-      <Name>SelesGames.Instapaper</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
       <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
       <Name>SelesGames.Phone.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.Phone.UI\SelesGames.Phone.UI.csproj">
-      <Project>{44789FF4-AC39-4FC8-9998-1F9BFD3F97F2}</Project>
-      <Name>SelesGames.Phone.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.Phone\SelesGames.Phone.csproj">
       <Project>{4ADFA599-2A57-413A-BB47-5428DD9CE365}</Project>
@@ -826,14 +783,6 @@
     <ProjectReference Include="..\SelesGames.UI.Advertising\SelesGames.UI.Advertising.csproj">
       <Project>{E6306A9C-83D5-4C61-89A3-9A6E4BC15C5A}</Project>
       <Name>SelesGames.UI.Advertising</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.UI.Color\SelesGames.UI.Color.csproj">
-      <Project>{416F3DD2-E884-4DB3-AE23-5E77D3E24D87}</Project>
-      <Name>SelesGames.UI.Color</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SelesGames.WP.IsoStorage\SelesGames.WP.IsoStorage.csproj">
-      <Project>{481B8D82-87B3-4E43-B4FB-B81196EBD11D}</Project>
-      <Name>SelesGames.WP.IsoStorage</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.WP.PublisherInfoPage\SelesGames.WP.PublisherInfoPage.csproj">
       <Project>{48F5F213-E352-4B14-8DE9-80415AFA15CE}</Project>
@@ -902,5 +851,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
 </Project>

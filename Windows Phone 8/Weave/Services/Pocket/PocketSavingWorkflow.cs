@@ -110,10 +110,22 @@ namespace Weave.Services.Pocket
             var requestCode = await client.GetRequestCode();
             var authenticationUri = client.GenerateAuthenticationUri(requestCode);
 
-            await GlobalDispatcher.Current.InvokeAsync(() =>
+            await SaveToPocket(authenticationUri, requestCode);
+        }
+
+        Task SaveToPocket(Uri authenticationUri, string requestCode)
+        {
+            var tcs = new TaskCompletionSource<int>();
+
+            GlobalDispatcher.Current.BeginInvoke(() =>
+            {
                 GlobalNavigationService.ToOAuthPage(
                     authenticationUri.OriginalString,
-                    async () => await OnCallback(requestCode)));
+                    async () => await OnCallback(requestCode));
+                tcs.TrySetResult(0);
+            });
+
+            return tcs.Task;
         }
 
         async Task OnCallback(string requestCode)
