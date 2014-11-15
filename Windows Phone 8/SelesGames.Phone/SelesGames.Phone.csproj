@@ -178,8 +178,7 @@
     <Compile Include="Extension Methods\WebBrowserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Common.Caching, Version=1.0.0.21580, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Common.Caching">
       <HintPath>..\packages\Common.Caching.1.0.0.21580\lib\portable-net45+win+wpa81+wp80\Common.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Common.Net.Http.Compression">
