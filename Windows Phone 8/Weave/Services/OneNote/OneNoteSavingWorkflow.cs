@@ -106,15 +106,21 @@ namespace Weave.Services.OneNote
 
             ToastService.ToastPrompt("Sending to OneNote...");
 
-            var response = await saveTask();
-            if (response is CreateSuccessResponse)
-            {
-                ToastService.ToastPrompt("Saved to OneNote!");
+            try
+            { 
+                var response = await saveTask();
+                if (response is CreateSuccessResponse)
+                {
+                    ToastService.ToastPrompt("Saved to OneNote!");
+                    return;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                ToastService.ToastPrompt("ERROR saving to OneNote");
+                DebugEx.WriteLine(ex);
             }
+
+            ToastService.ToastPrompt("ERROR saving to OneNote");
         }
 
         Task Register()

@@ -1,7 +1,5 @@
-﻿using Common.Microsoft.Services;
-using System;
+﻿using System;
 using System.ComponentModel;
-using Weave.Customizability;
 using Weave.Customizability.SavedState.MostViewedHistory;
 
 namespace Weave.Customizability.SavedState
