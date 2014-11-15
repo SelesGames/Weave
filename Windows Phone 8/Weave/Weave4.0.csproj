@@ -132,8 +132,9 @@
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Microsoft.Services">
-      <HintPath>..\packages\Common.Microsoft.Services.1.0.0.32036\lib\portable-net45+win+wpa81+wp80\Common.Microsoft.Services.dll</HintPath>
+    <Reference Include="Common.Microsoft.Services, Version=1.0.0.37566, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Common.Microsoft.Services.1.0.0.37566\lib\portable-net45+win+wpa81+wp80\Common.Microsoft.Services.dll</HintPath>
     </Reference>
     <Reference Include="Common.Net.Http.Compression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -216,6 +217,10 @@
     <Reference Include="Weave.Services, Version=1.0.0.33183, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Weave.Services.1.0.0.33183\lib\portable-net45+win+wpa81+wp80\Weave.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Weave.ViewModels, Version=1.0.0.35732, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Weave.ViewModels.1.0.0.35732\lib\portable-net45+win+wpa81+wp80\Weave.ViewModels.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -756,10 +761,6 @@
     <ProjectReference Include="..\..\..\Weave.Portable\Portable.Common\Portable.Common.csproj">
       <Project>{D18F5A26-3D60-47BC-9EE1-02D44369E6A0}</Project>
       <Name>Portable.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Weave.Portable\Weave.ViewModels\Weave.ViewModels.csproj">
-      <Project>{0F188FC9-D10C-48DB-917A-FF1CB9C8E795}</Project>
-      <Name>Weave.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelesGames.Phone.Controls\SelesGames.Phone.Controls.csproj">
       <Project>{F1427654-CE40-41B2-8BE8-CA195CB334F6}</Project>
