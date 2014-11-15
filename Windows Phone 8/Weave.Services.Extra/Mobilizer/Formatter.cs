@@ -8,11 +8,11 @@ namespace Weave.Mobilizer.HtmlFormatting
 {
     public class Formatter
     {
-        const string HTML_TEMPLATE_PATH1 = "/Weave.Services.Extra;component/Templates/html_template1.txt";
-        const string HTML_TEMPLATE_PATH3 = "/Weave.Services.Extra;component/Templates/html_template3.txt";
-        const string CSS_STATIC_TEMPLATE_PATH = "/Weave.Services.Extra;component/Templates/css_1_static.txt";
-        const string CSS_DYNAMIC_TEMPLATE_PATH = "/Weave.Services.Extra;component/Templates/css_2_dynamic.txt";
-        const string BODY_TEMPLATE_PATH = "/Weave.Services.Extra;component/Templates/body_template.txt";
+        const string HTML_TEMPLATE_PATH1 = "/Weave.Services.Extra;component/Mobilizer/Templates/html_template1.txt";
+        const string HTML_TEMPLATE_PATH3 = "/Weave.Services.Extra;component/Mobilizer/Templates/html_template3.txt";
+        const string CSS_STATIC_TEMPLATE_PATH = "/Weave.Services.Extra;component/Mobilizer/Templates/css_1_static.txt";
+        const string CSS_DYNAMIC_TEMPLATE_PATH = "/Weave.Services.Extra;component/Mobilizer/Templates/css_2_dynamic.txt";
+        const string BODY_TEMPLATE_PATH = "/Weave.Services.Extra;component/Mobilizer/Templates/body_template.txt";
 
         bool areTemplatesLoaded = false;
 

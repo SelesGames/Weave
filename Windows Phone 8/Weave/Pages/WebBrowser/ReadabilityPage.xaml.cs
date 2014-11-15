@@ -1,5 +1,4 @@
-﻿using Common.Microsoft.Services.OneNote.Response;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SelesGames;
 using SelesGames.Phone;
@@ -18,7 +17,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 using Weave.Customizability;
-using Weave.Microsoft.OneNote;
 using Weave.Customizability.SavedState;
 using Weave.Services;
 using Weave.Services.OneNote;

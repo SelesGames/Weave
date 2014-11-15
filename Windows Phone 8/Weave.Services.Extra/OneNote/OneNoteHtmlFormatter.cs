@@ -11,8 +11,8 @@ namespace Weave.Microsoft.OneNote
     {
         #region Private member variables
 
-        const string MOBILIZED_TEMPLATE_PATH = "/Weave.Services.Extra;component/Templates/MobilizedHtml.txt";
-        const string UNMOBILIZED_TEMPLATE_PATH = "/Weave.Services.Extra;component/Templates/UnmobilizedHtml.txt";
+        const string MOBILIZED_TEMPLATE_PATH = "/Weave.Services.Extra;component/OneNote/Templates/MobilizedHtml.txt";
+        const string UNMOBILIZED_TEMPLATE_PATH = "/Weave.Services.Extra;component/OneNote/Templates/UnmobilizedHtml.txt";
         
         const string HERO_IMAGE_HTML_TEMPLATE = 
 "<div><a href=\"{0}\"><img src=\"{0}\"/></a></div>";
