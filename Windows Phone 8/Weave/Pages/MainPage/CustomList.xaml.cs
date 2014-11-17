@@ -26,7 +26,7 @@ namespace weave
         IDisposable tapHandle;
         IReadOnlyList<NewsItem> displayedNews;
 
-        ImageCache imageCache;
+        //ImageCache imageCache;
 
         Guid id;
 
@@ -64,7 +64,7 @@ namespace weave
 
             scroller.Visibility = Visibility.Collapsed;
 
-            imageCache = Resources["imageCache"] as ImageCache;
+            //imageCache = Resources["imageCache"] as ImageCache;
 
             prevIndicator.Opacity = nextIndicator.Opacity = DISABLED_INDICATOR_OPACITY;
 
@@ -115,7 +115,7 @@ namespace weave
                 .Select(notUsed =>
                 {
                     var ui = CreateNewsItemControl();
-                    ui.ImageCache = imageCache;
+                    //ui.ImageCache = imageCache;
                     ui.Visibility = Visibility.Collapsed;
                     sp.Children.Add(ui);
                     return (BaseNewsItemControl)ui;
@@ -417,7 +417,7 @@ namespace weave
             if (tapHandle != null)
                 tapHandle.Dispose();
 
-            imageCache.Dispose();
+            //imageCache.Dispose();
 
             //var imageCacheHandle = this.imageCache;
             //this.imageCache = null;

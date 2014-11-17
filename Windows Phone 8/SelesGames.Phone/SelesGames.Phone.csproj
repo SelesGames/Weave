@@ -136,9 +136,7 @@
     <Compile Include="Extension Methods\PhoneApplicationFrameExtensions.cs" />
     <Compile Include="Extension Methods\ShellTileExtensions.cs" />
     <Compile Include="Extension Methods\VoiceInformationExtensions.cs" />
-    <Compile Include="Imaging\BitmapImageCache.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Imaging\ImageSourceSetterHelper.cs" />
     <Compile Include="LittleWatson.cs" />
     <Compile Include="OrientationLockService.cs" />
     <Compile Include="OSThemeHelper.cs" />
@@ -156,8 +154,6 @@
     <Compile Include="Reactive\Extension Methods\StoryboardExtensions.cs" />
     <Compile Include="Reactive\Extension Methods\UIElementExtensions.cs" />
     <Compile Include="Reactive\GlobalDispatcher.cs" />
-    <Compile Include="Imaging\ImageCache.cs" />
-    <Compile Include="Imaging\ImageStreamCache.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\BackgroundTimer.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\Pool.cs" />
     <Compile Include="Reactive\Reactive\Schedulers\SingleThreadScheduler.cs" />
@@ -178,9 +174,6 @@
     <Compile Include="Extension Methods\WebBrowserExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Common.Caching">
-      <HintPath>..\packages\Common.Caching.1.0.0.21580\lib\portable-net45+win+wpa81+wp80\Common.Caching.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Net.Http.Compression">
       <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\Common.Net.Http.Compression.dll</HintPath>
     </Reference>

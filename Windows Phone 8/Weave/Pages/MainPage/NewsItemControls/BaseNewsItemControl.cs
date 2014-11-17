@@ -27,7 +27,7 @@ namespace weave
             };
         }
 
-        public ImageCache ImageCache { get; set; }
+        //public ImageCache ImageCache { get; set; }
 
         protected abstract void SetNewsItem(NewsItem newsItem);
 

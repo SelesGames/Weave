@@ -7,9 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Weave.FeedLibrary;
 using Weave.FeedSearchService;
-//using Weave.GoogleReader;
 using Weave.ViewModels;
-using Weave.ViewModels.Contracts.Client;
 
 namespace weave
 {

@@ -1,10 +1,10 @@
 ﻿using SelesGames.Phone.Controls;
 using System.ComponentModel;
+using System.Reactive.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using Telerik.Windows.Controls;
-using System.Reactive.Threading.Tasks;
 
 namespace Weave.UI.Controls
 {

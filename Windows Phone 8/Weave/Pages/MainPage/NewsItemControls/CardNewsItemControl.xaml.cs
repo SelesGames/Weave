@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using Weave.Settings;
 using Weave.ViewModels;
 using SelesGames.Phone;
+using SelesGames.Phone.Imaging;
 
 namespace weave
 {
@@ -20,6 +21,7 @@ namespace weave
         BindableMainPageFontStyle bindingSource;
         SerialDisposable disp = new SerialDisposable();
         static Brush defaultHeaderBackgroundBrush;
+        ImageSourceSetterHelper imageHelper;
 
         public CardNewsItemControl()
         {
@@ -49,6 +51,9 @@ namespace weave
 
         protected override void SetNewsItem(NewsItem newsItem)
         {
+            if (imageHelper != null)
+                imageHelper.Dispose();
+
             disp.Disposable = null;
             var disposables = new CompositeDisposable();
             disp.Disposable = disposables;
@@ -82,10 +87,16 @@ namespace weave
                 //    .SafelySubscribe(SetImage)
                 //    .DisposeWith(disposables);
 
-                ImageCache
-                    .GetImageAsync(newsItem.ImageUrl)
-                    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
-                    .DisposeWith(disposables);
+                imageHelper = new ImageSourceSetterHelper(
+                    image,
+                    newsItem.ImageUrl,
+                    () => ImageFadeInSB.Stop(),
+                    () => ImageFadeInSB.Begin());
+
+                //ImageCache
+                //    .GetImageAsync(newsItem.ImageUrl)
+                //    .SafelySubscribe(SetImage, ex => SetImage(FailImage))
+                //    .DisposeWith(disposables);
             }
             else
             {
@@ -114,11 +125,11 @@ namespace weave
                 .DisposeWith(disposables);
         }
 
-        void AnimateImage()
-        {
-            this.ImageFadeInSB.Stop();
-            this.ImageFadeInSB.Begin();
-        }
+        //void AnimateImage()
+        //{
+        //    this.ImageFadeInSB.Stop();
+        //    this.ImageFadeInSB.Begin();
+        //}
 
         void ColorByline(NewsItem newsItem)
         {
@@ -149,12 +160,12 @@ namespace weave
             }
         }
 
-        void SetImage(ImageSource image)
-        {
-            this.ImageFadeInSB.Stop();
-            this.image.Source = image;
-            this.ImageFadeInSB.Begin();
-        }
+        //void SetImage(ImageSource image)
+        //{
+        //    this.ImageFadeInSB.Stop();
+        //    this.image.Source = image;
+        //    this.ImageFadeInSB.Begin();
+        //}
 
         public override void PageRight()
         {
@@ -168,6 +179,8 @@ namespace weave
 
         public void Dispose()
         {
+            if (imageHelper != null)
+                imageHelper.Dispose();
             disp.Dispose();
         }
     }

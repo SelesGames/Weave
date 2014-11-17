@@ -16,7 +16,7 @@
 	
 	<UserControl.Resources>
 
-		<ic:ImageCache x:Key="imageCache"/>
+		<!--ic:ImageCache x:Key="imageCache"/-->
 
 		<!--DataTemplate x:Key="BigImageTemplate">
 			<Button Style="{StaticResource NakedButtonStyle}" Margin="0,0">

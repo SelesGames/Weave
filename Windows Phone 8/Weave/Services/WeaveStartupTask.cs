@@ -444,7 +444,7 @@ namespace Weave.Services
             if (user != null)
                 return;
 
-            var repo = new StandardRepository(new Services.User.Client(), new ArticleService.Client());
+            var repo = new StandardRepository(new Services.User.Client(), new Services.Article.Client());
             user = new UserInfo(repo);
             user.Id = permanentState.UserId;
             user.PropertyChanged += OnUserInfoUserIdChanged;

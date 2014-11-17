@@ -140,6 +140,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\SelesGames.HttpClient.1.0.0.33816\lib\portable-net45+win+wpa81+wp80\Common.Net.Http.Compression.dll</HintPath>
     </Reference>
+    <Reference Include="dnp.Counters">
+      <HintPath>..\lib\dnp.Counters.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Live">
       <HintPath>..\packages\LiveSDK.5.6\lib\WindowsPhone81\Microsoft.Live.dll</HintPath>
     </Reference>
@@ -214,9 +217,9 @@
     <Reference Include="Telerik.Windows.Core">
       <HintPath>..\lib\Telerik\Telerik.Windows.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Weave.Services, Version=1.0.0.33183, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Weave.Services, Version=1.0.0.44000, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Weave.Services.1.0.0.33183\lib\portable-net45+win+wpa81+wp80\Weave.Services.dll</HintPath>
+      <HintPath>..\packages\Weave.Services.1.0.0.44000\lib\portable-net45+win+wpa81+wp80\Weave.Services.dll</HintPath>
     </Reference>
     <Reference Include="Weave.ViewModels, Version=1.0.0.35732, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -697,7 +700,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="app.config" />
     <None Include="Fonts\LiveSymbol.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\WMAppManifest.xml">

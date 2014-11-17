@@ -65,7 +65,6 @@
     <Feed Name="Eurogamer.net">http://www.eurogamer.net/?format=rss</Feed>
     <Feed Name="gamesTM">http://www.gamestm.co.uk/feed</Feed>
     <Feed Name="Joystiq.com">http://www.joystiq.com/rss.xml</Feed>
-    <Feed Name="Kotaku">http://feeds.gawker.com/kotaku/vip</Feed>
     <Feed Name="Rock, Paper, Shotgun">http://feeds.feedburner.com/RockPaperShotgun</Feed>
   </Category>
 
@@ -131,7 +130,6 @@
     <Feed Name="Lifehacker">http://feeds.gawker.com/lifehacker/vip</Feed>
     <Feed Name="Pocketnow">http://feeds.feedburner.com/pocketnow</Feed>
     <Feed Name="The Next Web">http://feeds2.feedburner.com/thenextweb</Feed>
-    <Feed Name="The Verge">http://www.theverge.com/rss/index.xml</Feed>
     <Feed Name="VR-Zone">http://feeds.feedburner.com/vr-zone</Feed>
   </Category>
 

@@ -14,7 +14,7 @@ namespace weave
         //readonly ImageStreamCache cache;
 
         public ImageCache()
-            : this(16, 32) { }
+            : this(32, 48) { }
 
         public ImageCache(int bmpCacheLimit, int streamCacheLimit)
         {
