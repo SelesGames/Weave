@@ -45,7 +45,7 @@ namespace SelesGames.Phone.Imaging
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var ms = new MemoryStream();
+                    ms = new MemoryStream();
                     using (var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false))
                     {
                         if (isDisposed) return;
