@@ -56,15 +56,19 @@ namespace SelesGames.Phone.Imaging
     
                     GlobalDispatcher.Current.BeginInvoke(() =>
                     {
-                        if (isDisposed) return;
+                        try
+                        {
+                            if (isDisposed) return;
 
-                        bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache | BitmapCreateOptions.BackgroundCreation };
-                        //bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache };
-                        bmp.SetSource(ms);
+                            bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache | BitmapCreateOptions.BackgroundCreation };
+                            //bmp = new BitmapImage { CreateOptions = BitmapCreateOptions.IgnoreImageCache };
+                            bmp.SetSource(ms);
 
-                        beforeDownload();
-                        image.Source = bmp;
-                        afterDownload();
+                            beforeDownload();
+                            image.Source = bmp;
+                            afterDownload();
+                        }
+                        catch { }
                     });
                 }
             }
