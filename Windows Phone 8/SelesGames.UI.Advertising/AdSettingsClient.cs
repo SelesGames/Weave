@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SelesGames.HttpClient;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace SelesGames.UI.Advertising
     {
         string adSettingsUrl;
         List<AdProviderSettingsBase> providerSettings;
+        Formatting f = new Formatting();
 
         public AdSettingsClient(string adSettingsUrl)
         {
@@ -27,33 +29,48 @@ namespace SelesGames.UI.Advertising
             providerSettings = new List<AdProviderSettingsBase>();
 
             var responseString = await response.HttpResponseMessage.Content.ReadAsStringAsync();
-            dynamic responseObject = JsonConvert.DeserializeObject(responseString);
-
-            CreateFromDynamic<Microsoft.MicrosoftAdSettings>(responseObject.Microsoft);
-            CreateFromDynamic<AdDuplex.AdDuplexAdSettings>(responseObject.AdDuplex);
+            JObject o = JObject.Parse(responseString);
+            
+            CreateFromToken<Microsoft.MicrosoftAdSettings>(o["Microsoft"]);
+            CreateFromToken<AdDuplex.AdDuplexAdSettings>(o["AdDuplex"]);
 
             var settings = new AdSettings
             {
                 Providers = providerSettings
             };
 
-            if (responseObject.AreAdsActive != null)
-                settings.AreAdsActive = responseObject.AreAdsActive;
+            var adsActiveToken = o["AreAdsActive"];
+            if (adsActiveToken != null)
+                settings.AreAdsActive = (bool)adsActiveToken;// adsActiveToken.Value<bool responseObject.AreAdsActive;
 
             return settings;
         }
 
-        void CreateFromDynamic<T>(dynamic d)
+        void CreateFromToken<T>(JToken token)
+            where T : AdProviderSettingsBase
         {
-            if (d == null)
+            if (token == null)
+                return;
+
+            var stringRep = token.ToString(f);
+            CreateFromString<T>(stringRep);
+        }
+
+        void CreateFromString<T>(string d)
+            where T : AdProviderSettingsBase
+        {
+            if (string.IsNullOrWhiteSpace(d))
                 return;
 
             try
             {
-                var settings = JsonConvert.DeserializeObject<T>(d.ToString());
+                var settings = JsonConvert.DeserializeObject<T>(d);
                 providerSettings.Add(settings);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                DebugEx.WriteLine(ex);
+            }
         }
     }
 }
